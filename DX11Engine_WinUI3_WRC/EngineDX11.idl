@@ -1,0 +1,61 @@
+namespace DX11Engine_WinUI3_WRC
+{
+    [default_interface]
+    runtimeclass EngineDX11
+    {
+        EngineDX11();        
+
+        // Initialization and management       
+        //void Initialize(Windows.Foundation.IReference <Int64> window);        
+        [default_overload]
+        //void Initialize(Windows.UI.Core.CoreWindow window);        
+        void Initialize(Microsoft.UI.Xaml.Controls.SwapChainPanel panel);
+        void UnInitialize();
+
+        // Basic game loop / input
+        void Tick();
+        void StartRenderLoop();
+        void StopRenderLoop();
+        void ProcessInput();
+
+        // IDeviceNotify - 오버라이딩 함수는 IDL runtimeClass안에서 선언안해도됨
+        // Messages
+        void OnActivated();
+        void OnDeactivated();
+        void OnSuspending();
+        void OnResuming();
+        void OnWindowSizeChanged(Single width, Single height);
+        void OnSwapchainXamlChanged(Double rasterizationScale, Windows.Foundation.Size size, Single compositonScaleX, Single compositonScaleY);
+        void OnOrientationChanged(Windows.Graphics.Display.DisplayOrientations orientation);
+        void ValidateDevice();
+
+        //Thread
+        //void LockEngineThread();
+        //void UnLockEngineThread();
+        EngineCriticalSection GetCriticalSection();
+        
+
+        // Properties
+        [noexcept] void GetDefaultSize(out Single width, out Single height);
+    }
+
+    [default_interface]
+    runtimeclass EngineCriticalSection
+    {
+        EngineCriticalSection();
+        void Lock();
+        void UnLock();
+    }
+
+    [default_interface]
+    runtimeclass Engine_Scoped_Lock
+    {
+        [default_overload]
+        Engine_Scoped_Lock();
+        Engine_Scoped_Lock( EngineCriticalSection mutex );
+
+        //EngineCriticalSection Mutex{ get; };
+    }
+
+    
+}

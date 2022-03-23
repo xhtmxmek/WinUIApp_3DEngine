@@ -118,17 +118,22 @@
     <ClInclude Include="Common\EngineHelper.h" />
     <ClInclude Include="Common\Engine_Scoped_Lock.h" />
     <ClInclude Include="Common\StepTimer.h" />
-    <ClInclude Include="Level\Actor.h" />
+    <ClInclude Include="Common\Uncopyable.h" />
+    <ClInclude Include="Level\Actor\Actor.h" />
+    <ClInclude Include="Level\Actor\ActorManager.h" />
+    <ClInclude Include="Level\Actor\PropertyActor.h" />
+    <ClInclude Include="Level\World.h" />
     <ClInclude Include="pch.h" />
     <ClInclude Include="EngineDX11.h">
       <DependentUpon>EngineDX11.cpp</DependentUpon>
     </ClInclude>
-    <ClInclude Include="Scene\World.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Common\DeviceResource.cpp" />
     <ClCompile Include="Common\EngineCriticalSection.cpp" />
     <ClCompile Include="Common\Engine_Scoped_Lock.cpp" />
+    <ClCompile Include="Level\Actor\ActorManager.cpp" />
+    <ClCompile Include="Level\World.cpp" />
     <ClCompile Include="pch.cpp">
       <PrecompiledHeader>Create</PrecompiledHeader>
     </ClCompile>

@@ -14,6 +14,9 @@
     <Filter Include="Level">
       <UniqueIdentifier>{451b7d55-1e71-42d8-8a4e-f40615f54b0f}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Level\Actor">
+      <UniqueIdentifier>{f5b3b08c-3273-4ea6-810c-9876dabbe408}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="pch.cpp" />
@@ -27,6 +30,12 @@
     </ClCompile>
     <ClCompile Include="Common\EngineCriticalSection.cpp">
       <Filter>Common</Filter>
+    </ClCompile>
+    <ClCompile Include="Level\World.cpp">
+      <Filter>Level</Filter>
+    </ClCompile>
+    <ClCompile Include="Level\Actor\ActorManager.cpp">
+      <Filter>Level\Actor</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -46,11 +55,20 @@
     <ClInclude Include="Common\EngineCriticalSection.h">
       <Filter>Common</Filter>
     </ClInclude>
-    <ClInclude Include="Scene\World.h">
+    <ClInclude Include="Level\World.h">
       <Filter>Level</Filter>
     </ClInclude>
-    <ClInclude Include="Level\Actor.h">
-      <Filter>Level</Filter>
+    <ClInclude Include="Common\Uncopyable.h">
+      <Filter>Common</Filter>
+    </ClInclude>
+    <ClInclude Include="Level\Actor\Actor.h">
+      <Filter>Level\Actor</Filter>
+    </ClInclude>
+    <ClInclude Include="Level\Actor\PropertyActor.h">
+      <Filter>Level\Actor</Filter>
+    </ClInclude>
+    <ClInclude Include="Level\Actor\ActorManager.h">
+      <Filter>Level\Actor</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

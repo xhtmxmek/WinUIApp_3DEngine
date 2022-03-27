@@ -95,6 +95,7 @@
   <ItemDefinitionGroup Condition="'$(Configuration)'=='Debug'">
     <ClCompile>
       <PreprocessorDefinitions>_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(ProjectDir);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <AdditionalDependencies Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">d2d1.lib;d3d11.lib;dxgi.lib;dxguid.lib;windowscodecs.lib;dwrite.lib;ole32.lib;%(AdditionalDependencies)</AdditionalDependencies>
@@ -122,6 +123,9 @@
     <ClInclude Include="Level\Actor\Actor.h" />
     <ClInclude Include="Level\Actor\ActorManager.h" />
     <ClInclude Include="Level\Actor\PropertyActor.h" />
+    <ClInclude Include="Level\Component\ActorComponent.h" />
+    <ClInclude Include="Level\Component\ComponentName.h" />
+    <ClInclude Include="Level\Component\TransformGroup.h" />
     <ClInclude Include="Level\World.h" />
     <ClInclude Include="pch.h" />
     <ClInclude Include="EngineDX11.h">
@@ -132,6 +136,7 @@
     <ClCompile Include="Common\DeviceResource.cpp" />
     <ClCompile Include="Common\EngineCriticalSection.cpp" />
     <ClCompile Include="Common\Engine_Scoped_Lock.cpp" />
+    <ClCompile Include="Level\Actor\Actor.cpp" />
     <ClCompile Include="Level\Actor\ActorManager.cpp" />
     <ClCompile Include="Level\World.cpp" />
     <ClCompile Include="pch.cpp">

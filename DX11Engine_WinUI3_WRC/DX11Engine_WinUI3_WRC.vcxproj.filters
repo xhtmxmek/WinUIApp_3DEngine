@@ -17,6 +17,9 @@
     <Filter Include="Level\Actor">
       <UniqueIdentifier>{f5b3b08c-3273-4ea6-810c-9876dabbe408}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Component">
+      <UniqueIdentifier>{a5d85d21-5850-47f8-b4f2-0a9f8ded0ceb}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="pch.cpp" />
@@ -35,6 +38,9 @@
       <Filter>Level</Filter>
     </ClCompile>
     <ClCompile Include="Level\Actor\ActorManager.cpp">
+      <Filter>Level\Actor</Filter>
+    </ClCompile>
+    <ClCompile Include="Level\Actor\Actor.cpp">
       <Filter>Level\Actor</Filter>
     </ClCompile>
   </ItemGroup>
@@ -69,6 +75,15 @@
     </ClInclude>
     <ClInclude Include="Level\Actor\ActorManager.h">
       <Filter>Level\Actor</Filter>
+    </ClInclude>
+    <ClInclude Include="Level\Component\ActorComponent.h">
+      <Filter>Component</Filter>
+    </ClInclude>
+    <ClInclude Include="Level\Component\ComponentName.h">
+      <Filter>Component</Filter>
+    </ClInclude>
+    <ClInclude Include="Level\Component\TransformGroup.h">
+      <Filter>Component</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

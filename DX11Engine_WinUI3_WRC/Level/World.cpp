@@ -17,15 +17,20 @@ namespace Engine
 		{
 			//enable¿Œ Actor∏∏ Update
 			for_each(Actors.begin(), Actors.end(),
-				[=](const std::shared_ptr<Actor>& actor) { if (actor && actor->IsVisible()) actor->Update(fElapsedTime); });
+				[fElapsedTime](auto& element) 
+				{ 
+					std::shared_ptr<Actor> currActor = element.second;
+					if (currActor && currActor->IsVisible())
+						currActor->Update(fElapsedTime);
+				});
 
 			CheckVisibilityActors();
 		}
 
 		void World::Render()
 		{
-			std::for_each(DrawActors.begin(), DrawActors.end(),
-				[](const std::shared_ptr<Actor>& drawActor) { if (drawActor) drawActor->Render(); });
+			//std::for_each(DrawActors.begin(), DrawActors.end(),
+			//	[](std::shared_ptr<Actor>& drawActor) { if (drawActor) drawActor->Render(); });
 		}
 
 		std::shared_ptr<Actor> World::CreateActor(const string& name, UINT layerMask)

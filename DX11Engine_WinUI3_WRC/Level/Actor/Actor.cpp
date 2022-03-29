@@ -13,12 +13,6 @@ namespace Engine
             //TransformGroup이 무조건 setting되어야함
             Components.insert_or_assign(Component::ActorComponentType::TransformGroup, std::shared_ptr<Component::TransformGroup>(new Component::TransformGroup()));
         }
-
-        std::shared_ptr<Component::ActorComponent> Actor::GetActorComponent()
-        {
-            auto iter = Components.find(componentType);
-            return Components.
-        }
     }
 }
 

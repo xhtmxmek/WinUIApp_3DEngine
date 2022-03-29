@@ -30,15 +30,10 @@ namespace DX
         static constexpr unsigned int c_EnableHDR = 0x2;
         static constexpr unsigned int c_UseXAML = 0x3;
                 
-        DeviceResources(DXGI_FORMAT backBufferFormat = DXGI_FORMAT_B8G8R8A8_UNORM,
-            DXGI_FORMAT depthBufferFormat = DXGI_FORMAT_D24_UNORM_S8_UINT,
-            UINT backBufferCount = 2,
-            D3D_FEATURE_LEVEL minFeatureLevel = D3D_FEATURE_LEVEL_9_3,
-            unsigned int flags = 0) noexcept;
         ~DeviceResources() = default;
 
-        DeviceResources(DeviceResources&&) = default;
-        DeviceResources& operator= (DeviceResources&&) = default;
+        DeviceResources(DeviceResources&&) = delete;
+        DeviceResources& operator= (DeviceResources&&) = delete;
 
         DeviceResources(DeviceResources const&) = delete;
         DeviceResources& operator= (DeviceResources const&) = delete;
@@ -112,7 +107,13 @@ namespace DX
             return swapchainPanel;
         }
 
-    private:        
+    private:
+        DeviceResources(DXGI_FORMAT backBufferFormat = DXGI_FORMAT_B8G8R8A8_UNORM,
+            DXGI_FORMAT depthBufferFormat = DXGI_FORMAT_D24_UNORM_S8_UINT,
+            UINT backBufferCount = 2,
+            D3D_FEATURE_LEVEL minFeatureLevel = D3D_FEATURE_LEVEL_9_3,
+            unsigned int flags = 0) noexcept;
+
         //Resource 생성시 helper
         void                    GetHardwareAdapter(IDXGIAdapter1** ppAdapter);  //DeviceResource 생성에 필요한 hardware adapter get 함수
         void                    UpdateColorSpace();                             //HDR 여부 검사하여 swapChain에 colorSpace Set

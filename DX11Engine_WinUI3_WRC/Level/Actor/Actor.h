@@ -29,16 +29,20 @@ namespace Engine
 			virtual ~Actor(){};
 
 			//Draw 관련 함수
-			virtual void Update(float elasedTime) = 0;
-			virtual void Render() = 0;
+			virtual void Update(float elasedTime) = 0;			
 
 			
-			//필수적으로 상속시켜야할 동작들
+			//필수적으로 상속시켜야할 동작들	
 			void Init();
+
 			template<typename T>
-			std::shared_ptr<T> GetActorComponent()
+			std::shared_ptr<T> GetActorComponent(Component::ActorComponentType componentType)
 			{
-				return Components
+				auto iter = Components.find(componentType);
+				if (iter != Components.end())
+					return static_cast<shared_ptr<T>>(iter->second);
+
+				return nullptr;
 			}
 
 			//Properties
@@ -46,16 +50,18 @@ namespace Engine
 			void SetEnable(bool enable) { m_PropActor.Enable = enable; }
 			bool IsVisible() const { return m_PropActor.Visible; }
 			void SetVisible(bool visible) { m_PropActor.Visible = visible; }
-			UINT GetLayerMask() const { return m_PropActor.LayerMask;  }
+			UINT GetLayerMask() const { return m_PropActor.LayerMask; }
 			void SetLayerMask(UINT layerMask) { m_PropActor.LayerMask = layerMask; }
 
+			
 		private:
 			PropertyGroup::PropertyActor m_PropActor;
 			//1. 예약된 인덱스로 들어간다.(벡터의 capacity 낭비가 생김)
 			//2. 맵으로 찾아오게 함(검색시간의 불편함. 근데 컴포넌트 갯수는 많은일이 없어서 이게 맞을거같음)
 			std::map<Component::ActorComponentType, std::shared_ptr<Component::ActorComponent>> Components;
 			//Actor의 component의 Value가 변경되면 delegate로 연결된 함수가 호출됨
-			//ACtor는 기본적으로 TransformGroup을 가지고 있음
+			//Actor는 기본적으로 Actor컴포넌트를 가지고 있음
+			//모든 액터는 drawable이다. 에디터상에서 액터를 나타내려면 sprite를 통해서 나타내기떄문. 게임 모드에서는 visible이 false가 되는 액터들이 있고 아닌 액터들이 있다.
 		};
 	}
 }

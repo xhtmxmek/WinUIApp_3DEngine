@@ -3,9 +3,12 @@
 #include "Common/DeviceResources.h"
 #include "Common/StepTimer.h"
 
-namespace Level
+namespace Engine
 {
-    class World;
+    namespace Level
+    {
+        class World;
+    }
 }
 
 namespace winrt::DX11Engine_WinUI3_WRC::implementation
@@ -70,7 +73,7 @@ namespace winrt::DX11Engine_WinUI3_WRC::implementation
 
         //ResourceManager         
         //World
-        std::unique_ptr<Level::World> m_World;
+        std::unique_ptr<Engine::Level::World> m_World;
 
         //texture
         com_ptr<ID3D11ShaderResourceView> m_texture;

@@ -43,6 +43,15 @@
     <ClCompile Include="Level\Actor\Actor.cpp">
       <Filter>Level\Actor</Filter>
     </ClCompile>
+    <ClCompile Include="Level\Component\TransformGroup.cpp">
+      <Filter>Component</Filter>
+    </ClCompile>
+    <ClCompile Include="Level\Component\ActorComponent.cpp">
+      <Filter>Component</Filter>
+    </ClCompile>
+    <ClCompile Include="Level\Component\StaticMeshComponent.cpp">
+      <Filter>Component</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="pch.h" />
@@ -79,10 +88,19 @@
     <ClInclude Include="Level\Component\ActorComponent.h">
       <Filter>Component</Filter>
     </ClInclude>
-    <ClInclude Include="Level\Component\ComponentName.h">
+    <ClInclude Include="Level\Component\ComponentTypes.h">
       <Filter>Component</Filter>
     </ClInclude>
     <ClInclude Include="Level\Component\TransformGroup.h">
+      <Filter>Component</Filter>
+    </ClInclude>
+    <ClInclude Include="Common\MathHelper.h">
+      <Filter>Common</Filter>
+    </ClInclude>
+    <ClInclude Include="Level\Component\StaticMeshComponent.h">
+      <Filter>Component</Filter>
+    </ClInclude>
+    <ClInclude Include="Level\Component\EngineProperty.h">
       <Filter>Component</Filter>
     </ClInclude>
   </ItemGroup>

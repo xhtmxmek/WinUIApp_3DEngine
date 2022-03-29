@@ -118,13 +118,16 @@
     <ClInclude Include="Common\EngineCriticalSection.h" />
     <ClInclude Include="Common\EngineHelper.h" />
     <ClInclude Include="Common\Engine_Scoped_Lock.h" />
+    <ClInclude Include="Common\MathHelper.h" />
     <ClInclude Include="Common\StepTimer.h" />
     <ClInclude Include="Common\Uncopyable.h" />
     <ClInclude Include="Level\Actor\Actor.h" />
     <ClInclude Include="Level\Actor\ActorManager.h" />
     <ClInclude Include="Level\Actor\PropertyActor.h" />
     <ClInclude Include="Level\Component\ActorComponent.h" />
-    <ClInclude Include="Level\Component\ComponentName.h" />
+    <ClInclude Include="Level\Component\ComponentTypes.h" />
+    <ClInclude Include="Level\Component\EngineProperty.h" />
+    <ClInclude Include="Level\Component\StaticMeshComponent.h" />
     <ClInclude Include="Level\Component\TransformGroup.h" />
     <ClInclude Include="Level\World.h" />
     <ClInclude Include="pch.h" />
@@ -138,6 +141,9 @@
     <ClCompile Include="Common\Engine_Scoped_Lock.cpp" />
     <ClCompile Include="Level\Actor\Actor.cpp" />
     <ClCompile Include="Level\Actor\ActorManager.cpp" />
+    <ClCompile Include="Level\Component\ActorComponent.cpp" />
+    <ClCompile Include="Level\Component\StaticMeshComponent.cpp" />
+    <ClCompile Include="Level\Component\TransformGroup.cpp" />
     <ClCompile Include="Level\World.cpp" />
     <ClCompile Include="pch.cpp">
       <PrecompiledHeader>Create</PrecompiledHeader>

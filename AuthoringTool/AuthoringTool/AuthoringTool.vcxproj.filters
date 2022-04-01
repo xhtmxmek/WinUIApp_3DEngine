@@ -9,14 +9,20 @@
   <ItemGroup>
     <Midl Include="App.idl" />
     <Midl Include="MainWindow.idl" />
+    <Midl Include="Booksku.idl" />
+    <Midl Include="BookStoreViewModel.idl" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="pch.cpp" />
     <ClCompile Include="$(GeneratedFilesDir)module.g.cpp" />
+    <ClCompile Include="BookSku.cpp" />
+    <ClCompile Include="BookstoreViewModel.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="pch.h" />
     <ClInclude Include="resource.h" />
+    <ClInclude Include="BookSku.h" />
+    <ClInclude Include="BookstoreViewModel.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Assets">

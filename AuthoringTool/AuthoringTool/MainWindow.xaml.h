@@ -5,6 +5,7 @@
 #include <d3d11_4.h>
 #include <dxgi1_6.h>
 #include <d2d1_3.h>
+//#include "Bookstore.BookstoreViewModel.h"
 
 namespace winrt::AuthoringTool::implementation
 {
@@ -16,6 +17,8 @@ namespace winrt::AuthoringTool::implementation
 		//void MyProperty(int32_t value);
 
 		void myButton_Click(Windows::Foundation::IInspectable const& sender, Microsoft::UI::Xaml::RoutedEventArgs const& args);
+		void ClickHandler(Windows::Foundation::IInspectable const& sender, Microsoft::UI::Xaml::RoutedEventArgs const& args);
+		AuthoringTool::BookstoreViewModel MainViewModel();
 
 	private:
 		//not projection
@@ -121,6 +124,12 @@ namespace winrt::AuthoringTool::implementation
 
 		// 백그라운드 작업자 스레드에서 독립 입력을 추적합니다.
 		Windows::Foundation::IAsyncAction m_inputLoopWorker;
+
+		//구현이 애플리케이션과 동일한 프로젝트(컴파일 단위)에 있으므로 std::nullptr_t로 초기화 후
+		//winrt::make로 생성자에서 생성할수있음
+		//AuthoringTool::BookstoreViewModel m_mainViewModel{ nullptr };
+		//아니면 균일한생성
+		AuthoringTool::BookstoreViewModel m_mainViewModel;
 	};
 }
 

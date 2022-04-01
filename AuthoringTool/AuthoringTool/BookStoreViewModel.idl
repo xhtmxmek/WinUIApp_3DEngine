@@ -1,0 +1,11 @@
+// BookstoreViewModel.idl
+import "BookSku.idl";
+
+namespace AuthoringTool
+{
+    runtimeclass BookstoreViewModel
+    {
+        BookstoreViewModel();
+        BookSku BookSku{ get; };
+    }
+}

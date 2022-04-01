@@ -1,0 +1,11 @@
+//import "oaidl.idl";
+//import "ocidl.idl";
+
+namespace AuthoringTool
+{
+    runtimeclass BookSku : Microsoft.UI.Xaml.Data.INotifyPropertyChanged
+    {
+        BookSku(String title);
+        String Title;
+    }
+}

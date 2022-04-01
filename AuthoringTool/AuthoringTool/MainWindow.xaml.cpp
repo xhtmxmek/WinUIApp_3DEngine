@@ -16,6 +16,7 @@ namespace winrt::AuthoringTool::implementation
     MainWindow::MainWindow()
         :m_windowVisible(false)
     {
+        //m_mainViewModel = winrt::make<AuthoringTool::implementation::BookstoreViewModel>();
         InitializeComponent();
 
         //Init함수로 빼서 App에서 호출하는 형태로 하자
@@ -48,12 +49,7 @@ namespace winrt::AuthoringTool::implementation
         //if (rotation == DXGI_MODE_ROTATION_ROTATE90 || rotation == DXGI_MODE_ROTATION_ROTATE270)
         //{
         //    std::swap(outputWidth, outputHeight);
-        //}
-
-        //auto factory = winrt::get_activation_factory<winrt::DX11Engine_WinUI3_WRC::EngineDX11>();        
-        //m_Engine = factory.ActivateInstance<winrt::DX11Engine_WinUI3_WRC::EngineDX11>();
-        //winrt::make_self<winrt::DX11Engine_WinUI3_WRC::EngineDX11>();              
-
+        //}                
     }
 
 #pragma region WindowEvent
@@ -197,5 +193,15 @@ namespace winrt::AuthoringTool::implementation
         myButton().Content(box_value(L"Clicked"));
         double test = myButton().XamlRoot().RasterizationScale();
         test = 0.0f;
+    }
+
+    void MainWindow::ClickHandler(Windows::Foundation::IInspectable const& sender, Microsoft::UI::Xaml::RoutedEventArgs const& args)
+    {
+        MainViewModel().BookSku().Title(L"To Kill a Mockingbird");
+    }
+
+    winrt::AuthoringTool::BookstoreViewModel MainWindow::MainViewModel()
+    {
+        return m_mainViewModel;
     }
 }

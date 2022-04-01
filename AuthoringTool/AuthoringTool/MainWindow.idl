@@ -1,8 +1,12 @@
+import "BookstoreViewModel.idl";
+
 namespace AuthoringTool
 {
     [default_interface]
     runtimeclass MainWindow : Microsoft.UI.Xaml.Window
     {
-        MainWindow();        
+        MainWindow();
+        AuthoringTool.BookstoreViewModel MainViewModel{ get; };
+        Microsoft.UI.Xaml.Controls.TextBox myTextBox{ get; }; //읽기전용으로 선언. cpp와 h는 구현하지 않아도됨
     }
 }

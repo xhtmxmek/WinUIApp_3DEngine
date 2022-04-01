@@ -16,7 +16,7 @@ namespace winrt::DX11Engine_WinUI3_WRC::implementation
     struct EngineDX11 : EngineDX11T<EngineDX11>, public DX::IDeviceNotify
     {
         EngineDX11();
-        ~EngineDX11() = default;
+        ~EngineDX11();
 
         EngineDX11(EngineDX11&&) = default;
         EngineDX11& operator= (EngineDX11&&) = default;
@@ -66,7 +66,7 @@ namespace winrt::DX11Engine_WinUI3_WRC::implementation
         void CreateWindowSizeDependentResources();
 
         //// Device resources.
-        std::unique_ptr<DX::DeviceResources>    m_deviceResources;
+        //std::unique_ptr<DX::DeviceResources>    m_deviceResources;
 
         //// Rendering loop timer.
         DX::StepTimer                           m_timer;

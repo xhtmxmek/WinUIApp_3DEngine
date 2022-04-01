@@ -1,5 +1,6 @@
 #include "pch.h"
 #include "StaticMeshComponent.h"
+#include "Common/DeviceResources.h"
 
 namespace Engine
 {
@@ -11,6 +12,7 @@ namespace Engine
 		}
 		void StaticMeshComponent::Init()
 		{
+			auto context = DX::DeviceResourcesUtil::GetDeviceResources()->GetD3DDeviceContext();
 			StaticMeshShape = DirectX::GeometricPrimitive::CreateSphere(context);
 		}
 		void StaticMeshComponent::Update(float elapsedTime)

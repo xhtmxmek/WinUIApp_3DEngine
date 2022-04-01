@@ -24,22 +24,27 @@ using namespace winrt::Windows::System::Threading;
 using namespace winrt::Windows::Storage;
 using namespace winrt::Windows::Storage::Pickers;
 
-
 namespace winrt::DX11Engine_WinUI3_WRC::implementation
 {
     EngineDX11::EngineDX11()
         :m_pointerLocationX(0.0f)
-    {
-        m_deviceResources = std::make_unique<DX::DeviceResources>();
-        m_deviceResources->RegisterDeviceNotify(this);
+    {                
+        //DX::DeviceResourcesUtil::GetDeviceResources() = std::make_unique<DX::DeviceResources>();
+        DX::DeviceResourcesUtil::GetInstance().CreateDeviceResources();        
+        DX::DeviceResourcesUtil::GetDeviceResources()->RegisterDeviceNotify(this);
         m_criticalSection = winrt::make<DX11Engine_WinUI3_WRC::implementation::EngineCriticalSection>();
+    }
+
+    EngineDX11::~EngineDX11()
+    {        
+        DX::DeviceResourcesUtil::GetInstance().ReleaseInstance();
     }
 
 #pragma region Initialize
     //void EngineDX11::Initialize(HWND window)
     //{
     //    CreateDeviceDependentResources();
-    //    m_deviceResources->SetWindow(window, 500, 500);
+    //    DX::DeviceResourcesUtil::GetDeviceResources()->SetWindow(window, 500, 500);
     //    CreateWindowSizeDependentResources();
 
     //    // TODO: Change the timer settings if you want something other than the default variable timestep mode.
@@ -52,9 +57,9 @@ namespace winrt::DX11Engine_WinUI3_WRC::implementation
 
     void EngineDX11::Initialize(Microsoft::UI::Xaml::Controls::SwapChainPanel const& panel)
     {
-        m_deviceResources->SetOption(DX::DeviceResources::c_UseXAML);
+        DX::DeviceResourcesUtil::GetDeviceResources()->SetOption(DX::DeviceResources::c_UseXAML);
         CreateDeviceDependentResources();
-        m_deviceResources->SetSwapChainPanel(panel);
+        DX::DeviceResourcesUtil::GetDeviceResources()->SetSwapChainPanel(panel);
         CreateWindowSizeDependentResources();
 
         // TODO: Change the timer settings if you want something other than the default variable timestep mode.
@@ -69,7 +74,7 @@ namespace winrt::DX11Engine_WinUI3_WRC::implementation
 
     void EngineDX11::UnInitialize()
     {
-        m_deviceResources.reset();
+        DX::DeviceResourcesUtil::GetDeviceResources().reset();
         m_spriteBatch.reset();
     }
 #pragma endregion
@@ -95,7 +100,7 @@ namespace winrt::DX11Engine_WinUI3_WRC::implementation
         float elapsedTime = float(timer.GetElapsedSeconds());
 
         // TODO: Add your game logic here.        
-        m_World->Update(elapsedTime);        
+        //m_World->Update(elapsedTime);        
 
         PIXEndEvent();
     }
@@ -122,7 +127,7 @@ namespace winrt::DX11Engine_WinUI3_WRC::implementation
 
     void EngineDX11::StopRenderLoop()
     {        
-        m_deviceResources->Trim();
+        DX::DeviceResourcesUtil::GetDeviceResources()->Trim();
         m_renderLoopWorker.Cancel();                
     }
 #pragma endregion
@@ -139,7 +144,7 @@ namespace winrt::DX11Engine_WinUI3_WRC::implementation
 
         Clear();
 
-        auto context = m_deviceResources->GetD3DDeviceContext();
+        auto context = DX::DeviceResourcesUtil::GetDeviceResources()->GetD3DDeviceContext();
         PIXBeginEvent(context, PIX_COLOR_DEFAULT, L"Render");
 
 
@@ -156,26 +161,26 @@ namespace winrt::DX11Engine_WinUI3_WRC::implementation
 
         // Show the new frame.
         PIXBeginEvent(PIX_COLOR_DEFAULT, L"Present");
-        m_deviceResources->Present();
+        DX::DeviceResourcesUtil::GetDeviceResources()->Present();
         PIXEndEvent();
     }
 
     // Helper method to clear the back buffers.
     void EngineDX11::Clear()
     {
-        auto context = m_deviceResources->GetD3DDeviceContext();
+        auto context = DX::DeviceResourcesUtil::GetDeviceResources()->GetD3DDeviceContext();
         PIXBeginEvent(context, PIX_COLOR_DEFAULT, L"Clear");
 
         // Clear the views.
-        auto renderTarget = m_deviceResources->GetRenderTargetView();
-        auto depthStencil = m_deviceResources->GetDepthStencilView();
+        auto renderTarget = DX::DeviceResourcesUtil::GetDeviceResources()->GetRenderTargetView();
+        auto depthStencil = DX::DeviceResourcesUtil::GetDeviceResources()->GetDepthStencilView();
 
         context->ClearRenderTargetView(renderTarget, Colors::CornflowerBlue);
         context->ClearDepthStencilView(depthStencil, D3D11_CLEAR_DEPTH | D3D11_CLEAR_STENCIL, 1.0f, 0);
         context->OMSetRenderTargets(1, &renderTarget, depthStencil);
 
         // Set the viewport.
-        auto viewport = m_deviceResources->GetScreenViewport();
+        auto viewport = DX::DeviceResourcesUtil::GetDeviceResources()->GetScreenViewport();
         context->RSSetViewports(1, &viewport);
 
         PIXEndEvent(context);
@@ -204,10 +209,10 @@ namespace winrt::DX11Engine_WinUI3_WRC::implementation
 
     void EngineDX11::OnSuspending()
     {
-        auto context = m_deviceResources->GetD3DDeviceContext();
+        auto context = DX::DeviceResourcesUtil::GetDeviceResources()->GetD3DDeviceContext();
         context->ClearState();
 
-        m_deviceResources->Trim();
+        DX::DeviceResourcesUtil::GetDeviceResources()->Trim();
 
         // TODO: Game is being power-suspended.
     }
@@ -221,7 +226,7 @@ namespace winrt::DX11Engine_WinUI3_WRC::implementation
 
     void EngineDX11::OnWindowSizeChanged(float width, float height)
     {
-        if (!m_deviceResources->SetLogicalSize(Windows::Foundation::Size(width, height)))
+        if (!DX::DeviceResourcesUtil::GetDeviceResources()->SetLogicalSize(Windows::Foundation::Size(width, height)))
             return;
 
         CreateWindowSizeDependentResources();
@@ -231,19 +236,19 @@ namespace winrt::DX11Engine_WinUI3_WRC::implementation
 
     void EngineDX11::OnSwapchainXamlChanged(double rasterizationScale, Windows::Foundation::Size size, float compositionScaleX, float compositionScaleY)
     {
-        if(m_deviceResources->SetSwapchainXamlChanged(rasterizationScale, size, compositionScaleX, compositionScaleY))
+        if(DX::DeviceResourcesUtil::GetDeviceResources()->SetSwapchainXamlChanged(rasterizationScale, size, compositionScaleX, compositionScaleY))
             CreateWindowSizeDependentResources();
     }
 
     void EngineDX11::OnOrientationChanged(winrt::Windows::Graphics::Display::DisplayOrientations const& orientation)
     {
-        m_deviceResources->SetCurrentOrientation(orientation);
+        DX::DeviceResourcesUtil::GetDeviceResources()->SetCurrentOrientation(orientation);
         CreateWindowSizeDependentResources();
     }
 
     void EngineDX11::ValidateDevice()
     {
-        m_deviceResources->ValidateDevice();
+        DX::DeviceResourcesUtil::GetDeviceResources()->ValidateDevice();
     }
 
     // Properties
@@ -259,10 +264,10 @@ namespace winrt::DX11Engine_WinUI3_WRC::implementation
     // These are the resources that depend on the device.
     bool EngineDX11::CreateDeviceDependentResources()
     {
-        auto device = m_deviceResources->GetD3DDevice();
+        auto device = DX::DeviceResourcesUtil::GetDeviceResources()->GetD3DDevice();
 
         // TODO: Initialize device dependent objects here (independent of window size).
-        auto context = m_deviceResources->GetD3DDeviceContext();
+        auto context = DX::DeviceResourcesUtil::GetDeviceResources()->GetD3DDeviceContext();
         m_spriteBatch = std::make_unique<SpriteBatch>(context);        
 
 
@@ -321,10 +326,10 @@ namespace winrt::DX11Engine_WinUI3_WRC::implementation
     void EngineDX11::CreateWindowSizeDependentResources()
     {
         // TODO: Initialize windows-size dependent objects here.
-        Windows::Foundation::Size outputSize = m_deviceResources->GetOutputSize();
+        Windows::Foundation::Size outputSize = DX::DeviceResourcesUtil::GetDeviceResources()->GetOutputSize();
         float aspectRatio = outputSize.Width / outputSize.Height;
         float fovAngleY = 70.0f * XM_PI / 180.0f;
-        //auto size = m_deviceResources->GetOutputSize();
+        //auto size = DX::DeviceResourcesUtil::GetDeviceResources()->GetOutputSize();
         m_screenPos.x = float(outputSize.Width) / 2.f;
         m_screenPos.y = float(outputSize.Height) / 2.f;
     }

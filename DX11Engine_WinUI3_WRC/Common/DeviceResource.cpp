@@ -74,7 +74,7 @@ namespace ScreenRotation
 }
 
 // Constructor for DeviceResources.
-DeviceResources::DeviceResources(
+DX::DeviceResources::DeviceResources(
     DXGI_FORMAT backBufferFormat,
     DXGI_FORMAT depthBufferFormat,
     UINT backBufferCount,

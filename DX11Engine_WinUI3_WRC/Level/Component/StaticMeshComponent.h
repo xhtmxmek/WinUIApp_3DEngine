@@ -5,7 +5,7 @@ namespace Engine
 {
 	namespace Component
 	{
-		class StaticMeshComponent : public ActorComponent
+		class StaticMeshComponent : public DrawableComponent
 		{
 		public:			
 			StaticMeshComponent();			

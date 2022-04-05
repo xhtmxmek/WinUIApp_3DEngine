@@ -52,6 +52,12 @@
     <ClCompile Include="Level\Component\StaticMeshComponent.cpp">
       <Filter>Component</Filter>
     </ClCompile>
+    <ClCompile Include="Level\Actor\Sprite.cpp">
+      <Filter>Level\Actor</Filter>
+    </ClCompile>
+    <ClCompile Include="Level\Component\SpriteComponent.cpp">
+      <Filter>Component</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="pch.h" />
@@ -101,6 +107,12 @@
       <Filter>Component</Filter>
     </ClInclude>
     <ClInclude Include="Level\Component\EngineProperty.h">
+      <Filter>Component</Filter>
+    </ClInclude>
+    <ClInclude Include="Level\Actor\Sprite.h">
+      <Filter>Level\Actor</Filter>
+    </ClInclude>
+    <ClInclude Include="Level\Component\SpriteComponent.h">
       <Filter>Component</Filter>
     </ClInclude>
   </ItemGroup>

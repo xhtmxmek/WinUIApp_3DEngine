@@ -7,6 +7,7 @@
 #include "Common/EngineCriticalSection.h"
 #include "Common/Engine_Scoped_Lock.h"
 #include "Level/World.h"
+#include "Renderer/LevelRenderer.h"
 #include <fstream>
 #include <sstream>
 
@@ -90,6 +91,8 @@ namespace winrt::DX11Engine_WinUI3_WRC::implementation
             });
 
         Render();
+
+        
     }
 
     // Updates the world.
@@ -141,6 +144,8 @@ namespace winrt::DX11Engine_WinUI3_WRC::implementation
         {
             return;
         }
+
+        Engine::Renderer::LevelRenderer::GetInstance().Render();
 
         Clear();
 

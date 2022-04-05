@@ -1,6 +1,5 @@
 #include "pch.h"
 #include "ActorComponent.h"
-
 namespace Engine
 {
 	namespace Component
@@ -16,6 +15,15 @@ namespace Engine
 		void ActorComponent::SetRotation(Vector3 const& rot)
 		{
 			Transform.SetRotation(rot);
+		}
+		void ActorComponent::UpdateComponentTransform(const TransformGroup* parent)
+		{
+			std::for_each(Child.begin(), Child.end(),
+				[](ActorComponent* component) {
+					ActorComponent* child = component;
+					if (child)
+						child->UpdateComponentTransform(&child->GetComponentTransform());
+				});
 		}
 	}
 }

@@ -27,7 +27,12 @@ namespace Engine
 			TypeVector2,
 			TypeVector3,
 			TypeVector4,
+		};
 
+		enum class DrawLayer
+		{
+			Default,
+			UI,
 		};
 	}
 }

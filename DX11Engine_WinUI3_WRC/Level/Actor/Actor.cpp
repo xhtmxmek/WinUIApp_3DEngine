@@ -8,10 +8,9 @@ namespace Engine
 {
     namespace Level
     {
-        void Actor::Init()
+        Component::TransformGroup const& Actor::GetTransform()
         {
-            //TransformGroup이 무조건 setting되어야함
-            //Components.insert_or_assign(Component::ActorComponentType::TransformGroup, std::shared_ptr<Component::TransformGroup>(new Component::TransformGroup()));
+            return (RootComponent ? RootComponent->GetComponentTransform() : Component::TransformGroup::Identity);
         }
     }
 }

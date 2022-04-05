@@ -55,14 +55,17 @@ namespace Engine
 		{
 			UpdateTransform();
 		}
-		void TransformGroup::UpdateTransform()
+		void TransformGroup::UpdateTransform(TransformGroup* parent)
 		{
 			Matrix m1 = Matrix::CreateTranslation(Position());
 			Matrix m2 = Matrix::CreateScale(Scale());
 			
 			Local = Matrix::CreateScale(Scale()) * Matrix::CreateFromYawPitchRoll(Rotation()) * Matrix::CreateTranslation(Position());
-			//부모가 없을경우에
-			World = Local;
+
+			if (parent)
+				World = Local * parent->GetWorld();
+			else
+				World = Local;
 		}
 	}
 }

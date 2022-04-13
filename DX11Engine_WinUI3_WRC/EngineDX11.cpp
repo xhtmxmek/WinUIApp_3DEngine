@@ -151,8 +151,7 @@ namespace winrt::DX11Engine_WinUI3_WRC::implementation
         PIXBeginEvent(context, PIX_COLOR_DEFAULT, L"Render");
 
 
-        //m_World->Render();
-        Engine::Renderer::LevelRenderer::GetInstance().Render();
+        m_World->Render();        
         // TODO: Add your rendering code here.
         m_spriteBatch->Begin();
 

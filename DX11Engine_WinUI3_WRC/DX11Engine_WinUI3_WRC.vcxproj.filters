@@ -64,6 +64,7 @@
     <ClCompile Include="Renderer\LevelRenderer.cpp">
       <Filter>Renderer</Filter>
     </ClCompile>
+    <ClCompile Include="EngineAsset\Material.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="pch.h" />
@@ -124,6 +125,7 @@
     <ClInclude Include="Renderer\LevelRenderer.h">
       <Filter>Renderer</Filter>
     </ClInclude>
+    <ClInclude Include="EngineAsset\Material.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="DX11Engine_WinUI3_WRC.def" />

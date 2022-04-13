@@ -121,6 +121,7 @@
     <ClInclude Include="Common\MathHelper.h" />
     <ClInclude Include="Common\StepTimer.h" />
     <ClInclude Include="Common\Uncopyable.h" />
+    <ClInclude Include="EngineAsset\Material.h" />
     <ClInclude Include="Level\Actor\Actor.h" />
     <ClInclude Include="Level\Actor\ActorManager.h" />
     <ClInclude Include="Level\Actor\PropertyActor.h" />
@@ -142,6 +143,7 @@
     <ClCompile Include="Common\DeviceResource.cpp" />
     <ClCompile Include="Common\EngineCriticalSection.cpp" />
     <ClCompile Include="Common\Engine_Scoped_Lock.cpp" />
+    <ClCompile Include="EngineAsset\Material.cpp" />
     <ClCompile Include="Level\Actor\Actor.cpp" />
     <ClCompile Include="Level\Actor\ActorManager.cpp" />
     <ClCompile Include="Level\Actor\Sprite.cpp" />

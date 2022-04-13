@@ -20,6 +20,7 @@ namespace Engine
 		public:
 			World();
 			void Update(float fElapsedTime);
+			void Render();
 
 		private:
 			void CheckVisibilityActors();	//가시성 판정

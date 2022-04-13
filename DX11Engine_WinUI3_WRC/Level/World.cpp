@@ -1,6 +1,7 @@
 #include "pch.h"
 #include "World.h"
 #include "Actor/Actor.h"
+#include "Renderer/LevelRenderer.h"
 
 using namespace std;
 namespace Engine
@@ -23,9 +24,13 @@ namespace Engine
 			//		if (currActor)
 			//			currActor->Tick(fElapsedTime);
 			//	});
+		}
 
-
+		void World::Render()
+		{
 			CheckVisibilityActors();
+
+			Engine::Renderer::LevelRenderer::GetInstance().Render();
 		}
 
 		void World::CheckVisibilityActors()

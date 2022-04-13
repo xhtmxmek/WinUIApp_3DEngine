@@ -1,0 +1,10 @@
+namespace EngineDataModel_WRC
+{
+    [default_interface]
+    runtimeclass  
+    {
+        Class();
+        Int32 MyProperty;
+        //
+    }
+}

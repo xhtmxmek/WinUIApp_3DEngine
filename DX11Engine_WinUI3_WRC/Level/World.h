@@ -20,13 +20,10 @@ namespace Engine
 		public:
 			World();
 			void Update(float fElapsedTime);
-			void Render();
-			std::shared_ptr<Actor> CreateActor(const std::string& name, UINT layerMask);
 
 		private:
 			void CheckVisibilityActors();	//가시성 판정
-			std::unordered_map<std::wstring, std::shared_ptr<Actor>> Actors; //world에는 수많은 액터들이 존재할것이고, 액터가 추가될때 재정렬을 피하기 위해 Hash를 사용헀음. 
-			std::vector<std::shared_ptr<DrawAbleActor>> DrawActors; 
+			std::unordered_map<std::wstring, std::shared_ptr<Actor>> Actors; //world에는 수많은 액터들이 존재할것이고, 액터가 추가될때 재정렬을 피하기 위해 Hash를 사용헀음. 			
 		};
 	}
 }

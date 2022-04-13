@@ -5,7 +5,9 @@
 namespace Engine
 {
 	namespace Component
-	{		
+	{				
+		const TransformGroup TransformGroup::Identity;
+
 		TransformGroup::TransformGroup()
 			:Position("Position", PropertyType::TypeVector3, Vector3(0, 0, 0)),
 			Rotation("Rotation", PropertyType::TypeVector3, Vector3(0, 0, 0)),

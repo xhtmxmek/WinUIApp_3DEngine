@@ -8,6 +8,8 @@ namespace Engine
 		class SpriteComponent : public DrawableComponent
 		{
 		public:
+			void Init() final;			
+			void Tick(float elasedTime) final;
 			void Draw() final;
 		private:
 			bool		Visible;

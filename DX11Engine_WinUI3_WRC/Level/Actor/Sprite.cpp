@@ -9,6 +9,7 @@ namespace Engine
 		void Sprite::Init()
 		{
 			Batch = std::make_unique<Component::SpriteComponent>();
+			//¾À ·»´õ·¯¿¡ ÄÄÆ÷³ÍÆ® µî·ÏÇÏ±â
 		}
 
 		void Sprite::Tick(float elasedTime)

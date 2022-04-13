@@ -19,8 +19,8 @@ namespace Engine
 		void ActorComponent::UpdateComponentTransform(const TransformGroup* parent)
 		{
 			std::for_each(Child.begin(), Child.end(),
-				[](ActorComponent* component) {
-					ActorComponent* child = component;
+				[](std::shared_ptr<ActorComponent>& component) {
+					ActorComponent* child = component.get();
 					if (child)
 						child->UpdateComponentTransform(&child->GetComponentTransform());
 				});

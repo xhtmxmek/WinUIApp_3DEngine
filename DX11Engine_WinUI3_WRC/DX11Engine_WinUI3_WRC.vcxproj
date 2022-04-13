@@ -136,6 +136,7 @@
     <ClInclude Include="EngineDX11.h">
       <DependentUpon>EngineDX11.cpp</DependentUpon>
     </ClInclude>
+    <ClInclude Include="Renderer\LevelRenderer.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Common\DeviceResource.cpp" />
@@ -154,6 +155,7 @@
     </ClCompile>
     <ClCompile Include="EngineDX11.cpp" />
     <ClCompile Include="$(GeneratedFilesDir)module.g.cpp" />
+    <ClCompile Include="Renderer\LevelRenderer.cpp" />
   </ItemGroup>
   <ItemGroup>
     <Midl Include="EngineDX11.idl">

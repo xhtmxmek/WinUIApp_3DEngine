@@ -17,12 +17,14 @@
     <ClCompile Include="$(GeneratedFilesDir)module.g.cpp" />
     <ClCompile Include="BookSku.cpp" />
     <ClCompile Include="BookstoreViewModel.cpp" />
+    <ClCompile Include="Models\User.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="pch.h" />
     <ClInclude Include="resource.h" />
     <ClInclude Include="BookSku.h" />
     <ClInclude Include="BookstoreViewModel.h" />
+    <ClInclude Include="Models\User.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Assets">

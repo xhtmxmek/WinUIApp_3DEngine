@@ -17,7 +17,7 @@ namespace Engine
 			StaticMeshShape = DirectX::GeometricPrimitive::CreateSphere(context);
 		}
 
-		void StaticMeshComponent::Update(float elapsedTime)
+		void StaticMeshComponent::Tick(float elapsedTime)
 		{
 
 		}

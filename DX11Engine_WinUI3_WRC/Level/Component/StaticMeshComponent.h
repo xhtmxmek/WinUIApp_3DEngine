@@ -10,7 +10,7 @@ namespace Engine
 		public:			
 			StaticMeshComponent();			
 			void Init() final;
-			void Update(float elapsedTime) final;
+			void Tick(float elapsedTime) final;
 			void Draw() final;
 		private:
 			std::unique_ptr<DirectX::GeometricPrimitive> StaticMeshShape;

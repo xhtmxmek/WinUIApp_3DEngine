@@ -103,7 +103,7 @@ namespace winrt::DX11Engine_WinUI3_WRC::implementation
         float elapsedTime = float(timer.GetElapsedSeconds());
 
         // TODO: Add your game logic here.        
-        //m_World->Update(elapsedTime);        
+        m_World->Update(elapsedTime);        
 
         PIXEndEvent();
     }
@@ -144,16 +144,15 @@ namespace winrt::DX11Engine_WinUI3_WRC::implementation
         {
             return;
         }
-
-        Engine::Renderer::LevelRenderer::GetInstance().Render();
-
+        
         Clear();
 
         auto context = DX::DeviceResourcesUtil::GetDeviceResources()->GetD3DDeviceContext();
         PIXBeginEvent(context, PIX_COLOR_DEFAULT, L"Render");
 
 
-        m_World->Render();
+        //m_World->Render();
+        Engine::Renderer::LevelRenderer::GetInstance().Render();
         // TODO: Add your rendering code here.
         m_spriteBatch->Begin();
 

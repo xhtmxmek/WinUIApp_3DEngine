@@ -20,6 +20,9 @@
     <Filter Include="Component">
       <UniqueIdentifier>{a5d85d21-5850-47f8-b4f2-0a9f8ded0ceb}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Renderer">
+      <UniqueIdentifier>{15977910-3e75-4e76-b8ee-ce5ef6abbe08}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="pch.cpp" />
@@ -57,6 +60,9 @@
     </ClCompile>
     <ClCompile Include="Level\Component\SpriteComponent.cpp">
       <Filter>Component</Filter>
+    </ClCompile>
+    <ClCompile Include="Renderer\LevelRenderer.cpp">
+      <Filter>Renderer</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -114,6 +120,9 @@
     </ClInclude>
     <ClInclude Include="Level\Component\SpriteComponent.h">
       <Filter>Component</Filter>
+    </ClInclude>
+    <ClInclude Include="Renderer\LevelRenderer.h">
+      <Filter>Renderer</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

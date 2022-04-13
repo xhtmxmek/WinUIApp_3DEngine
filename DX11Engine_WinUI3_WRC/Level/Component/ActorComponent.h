@@ -12,7 +12,7 @@ namespace Engine
 		{
 		public:
 			virtual void Init() = 0;
-			virtual void Update(float elasedTime) = 0;			
+			virtual void Tick(float elasedTime) = 0;			
 			void SetPosition(Vector3 const& pos);
 			void SetScale(Vector3 const& scale);
 			void SetRotation(Vector3 const& rot);

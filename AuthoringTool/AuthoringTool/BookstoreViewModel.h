@@ -13,6 +13,7 @@ namespace winrt::AuthoringTool::implementation
 
     private:
         AuthoringTool::BookSku m_bookSku{ nullptr };
+        winrt::Windows::Foundation::IAsyncAction GetUserAsync();
     };
 }
 namespace winrt::AuthoringTool::factory_implementation

@@ -103,6 +103,7 @@
   <ItemGroup>
     <ClInclude Include="BookSku.h" />
     <ClInclude Include="BookstoreViewModel.h" />
+    <ClInclude Include="Models\User.h" />
     <ClInclude Include="pch.h" />
     <ClInclude Include="App.xaml.h">
       <DependentUpon>App.xaml</DependentUpon>
@@ -119,6 +120,7 @@
   <ItemGroup>
     <ClCompile Include="BookSku.cpp" />
     <ClCompile Include="BookstoreViewModel.cpp" />
+    <ClCompile Include="Models\User.cpp" />
     <ClCompile Include="pch.cpp">
       <PrecompiledHeader>Create</PrecompiledHeader>
     </ClCompile>

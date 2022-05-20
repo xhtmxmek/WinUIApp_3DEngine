@@ -13,8 +13,7 @@ namespace Engine
 		}
 
 		void Sprite::Tick(float elasedTime)
-		{
-
+		{			
 		}
 	}
 }

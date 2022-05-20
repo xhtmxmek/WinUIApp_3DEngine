@@ -1,4 +1,7 @@
 #pragma once
+//렌더러는 월드에 대한 업데이트와 렌더링을 담당하는 클래스이다. 
+//렌더링 파이프라인을 담당하고 있다.
+//월드가 렌더러를 소유하는가? 렌더러가 월드를 소유하는가?
 
 namespace Engine
 {
@@ -19,6 +22,7 @@ namespace Engine
 			}
 
 			void PushDrawableComponent(std::shared_ptr<Component::DrawableComponent> const& component);
+			void Update(float fElapsedTime);
 			void Render();
 		private:
 			LevelRenderer();

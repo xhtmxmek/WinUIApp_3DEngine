@@ -49,7 +49,7 @@
     <ClCompile Include="Level\Component\TransformGroup.cpp">
       <Filter>Component</Filter>
     </ClCompile>
-    <ClCompile Include="Level\Component\ActorComponent.cpp">
+    <ClCompile Include="Level\Component\ComponentBase.cpp">
       <Filter>Component</Filter>
     </ClCompile>
     <ClCompile Include="Level\Component\StaticMeshComponent.cpp">
@@ -98,7 +98,7 @@
     <ClInclude Include="Level\Actor\ActorManager.h">
       <Filter>Level\Actor</Filter>
     </ClInclude>
-    <ClInclude Include="Level\Component\ActorComponent.h">
+    <ClInclude Include="Level\Component\ComponentBase.h">
       <Filter>Component</Filter>
     </ClInclude>
     <ClInclude Include="Level\Component\ComponentTypes.h">

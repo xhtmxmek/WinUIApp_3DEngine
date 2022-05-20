@@ -126,7 +126,7 @@
     <ClInclude Include="Level\Actor\ActorManager.h" />
     <ClInclude Include="Level\Actor\PropertyActor.h" />
     <ClInclude Include="Level\Actor\Sprite.h" />
-    <ClInclude Include="Level\Component\ActorComponent.h" />
+    <ClInclude Include="Level\Component\ComponentBase.h" />
     <ClInclude Include="Level\Component\ComponentTypes.h" />
     <ClInclude Include="Level\Component\EngineProperty.h" />
     <ClInclude Include="Level\Component\SpriteComponent.h" />
@@ -147,7 +147,7 @@
     <ClCompile Include="Level\Actor\Actor.cpp" />
     <ClCompile Include="Level\Actor\ActorManager.cpp" />
     <ClCompile Include="Level\Actor\Sprite.cpp" />
-    <ClCompile Include="Level\Component\ActorComponent.cpp" />
+    <ClCompile Include="Level\Component\ComponentBase.cpp" />
     <ClCompile Include="Level\Component\SpriteComponent.cpp" />
     <ClCompile Include="Level\Component\StaticMeshComponent.cpp" />
     <ClCompile Include="Level\Component\TransformGroup.cpp" />

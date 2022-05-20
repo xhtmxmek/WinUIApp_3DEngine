@@ -10,7 +10,7 @@ namespace Engine
 {
 	namespace Component
 	{
-		class ActorComponent;
+		class ComponentBase;
 		enum class ActorComponentType;
 		class TransformGroup;
 	}
@@ -51,15 +51,14 @@ namespace Engine
 			//void SetVisible(bool visible) { m_PropActor.Visible = visible; }
 			//UINT GetLayerMask() const { return m_PropActor.LayerMask; }
 			//void SetLayerMask(UINT layerMask) { m_PropActor.LayerMask = layerMask; }
-			Component::TransformGroup const& GetTransform();
-
+			Component::TransformGroup const& GetTransform();			
 			
 		private:
 			//PropertyGroup::PropertyActor m_PropActor;
 			//1. 예약된 인덱스로 들어간다.(벡터의 capacity 낭비가 생김)
 			//2. 맵으로 찾아오게 함(검색시간의 불편함. 근데 컴포넌트 갯수는 많은일이 없어서 이게 맞을거같음)
-			std::shared_ptr<Component::ActorComponent> RootComponent;
-			std::map<std::string, std::shared_ptr<Component::ActorComponent>> Components;
+			std::shared_ptr<Component::ComponentBase> RootComponent;
+			std::map<std::string, std::shared_ptr<Component::ComponentBase>> Components;
 			//Actor의 component의 Value가 변경되면 delegate로 연결된 함수가 호출됨
 			//Actor는 기본적으로 Actor컴포넌트를 가지고 있음
 			//모든 액터는 drawable이다. 에디터상에서 액터를 나타내려면 sprite를 통해서 나타내기떄문. 게임 모드에서는 visible이 false가 되는 액터들이 있고 아닌 액터들이 있다.

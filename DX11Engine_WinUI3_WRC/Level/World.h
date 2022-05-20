@@ -12,19 +12,21 @@ namespace Engine
 	namespace Level
 	{
 		class Actor;
-		class DrawAbleActor;
+		class DrawableComponent;
 
 		//Uncopyable
 		class World
 		{
 		public:
 			World();
-			void Update(float fElapsedTime);
+			void Update(float elapsedTime);
 			void Render();
 
 		private:
 			void CheckVisibilityActors();	//가시성 판정
 			std::unordered_map<std::wstring, std::shared_ptr<Actor>> Actors; //world에는 수많은 액터들이 존재할것이고, 액터가 추가될때 재정렬을 피하기 위해 Hash를 사용헀음. 			
+			std::vector<std::shared_ptr<DrawableComponent>> DrawComponents;
+			std::vector<std::shared_ptr<DrawableComponent>> DrawComponentsThisFrame;
 		};
 	}
 }

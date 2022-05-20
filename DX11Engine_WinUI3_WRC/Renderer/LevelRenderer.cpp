@@ -14,6 +14,10 @@ namespace Engine
 			DrawComponents.push_back(component);
 		}
 
+		void LevelRenderer::Update(float fElapsedTime)
+		{
+		}
+
 		void LevelRenderer::Render()
 		{
 			//3D 액터 먼저그림(포워드, 디퍼드 모드 선택해서 그림)

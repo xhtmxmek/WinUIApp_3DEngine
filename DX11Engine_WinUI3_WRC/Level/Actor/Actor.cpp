@@ -1,5 +1,5 @@
 #include "pch.h"
-#include "Level/Component/ActorComponent.h"
+#include "Level/Component/ComponentBase.h"
 #include "Level/Component/ComponentTypes.h"
 #include "Level/Component/TransformGroup.h"
 #include "Actor.h"

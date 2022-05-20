@@ -21,8 +21,8 @@ namespace Engine
 		class Actor;
 		
 		//액터가 변경되면 ActorManager도 빌드해야 하고 ActorManager빌드하면 이 친구를 포함하는 모든 소스파일들 다시 빌드해야함. ActorManager에서 요청하는 많은 파일들이 있을것인데...
-		//근데 Actor매니저에서 Actor를 요청해서 쓰는 녀석들은 cpp에서는 어차피 Actor를 포함시켜야함. 즉 ActorManager를 직접 자료형으로 들고 있는 최상위 엔진 클래스만 다시 빌드됨.
-		//Actor를 빌드, Actor 매니저를 빌드, Actor매니저를 들고 있는 엔진이 빌드.
+		//근데 Actor매니저에서 Actor를 요청해서 쓰는 녀석들은 cpp에서는 어차피 Actor를 포함시켜야함.
+		//Actor를 빌드, Actor매니저를 빌드, Actor매니저를 들고 있는 엔진이 빌드.
 		//Actor는 인터페이스 구성되면 빌드될일이 거의 없음. 자식들이 빌드되는 것이지.
 		//SingleTon으로 구성했지만, 구조적으로 singleTon이 아니어도 되면 싱글톤으로 만들지 말기.
 		class ActorManager : public Uncopyable

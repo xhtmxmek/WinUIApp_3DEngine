@@ -1,4 +1,4 @@
-#include "pch.h"
+#include "EngineMinimal.h"
 #include "EngineCriticalSection.h"
 #include "EngineCriticalSection.g.cpp"
 

@@ -1,4 +1,4 @@
-#include "pch.h"
+#include "EngineMinimal.h"
 #include "World.h"
 #include "Actor/Actor.h"
 #include "Renderer/LevelRenderer.h"
@@ -11,7 +11,7 @@ namespace Engine
 	{
 		World::World()
 		{
-			Actors.clear();			
+			Actors.clear();
 		}
 
 		void World::Update(float elapsedTime)
@@ -25,8 +25,7 @@ namespace Engine
 		{
 			//컬링 등...
 			CheckVisibilityActors();
-
-			Engine::Renderer::LevelRenderer::GetInstance().Render();
+			Engine::Renderer::LevelRenderer::GetInstance().Render(DrawComponentsThisFrame);
 		}
 
 		void World::CheckVisibilityActors()
@@ -35,17 +34,17 @@ namespace Engine
 			//1. 이곳에서 액터안에 있는 DrawComponent들을 가져와서 검사해서 vector에 집어넣기
 			//2. DrawComponent가 생성되는 즉시 DrawComponent로 넘기기
 			//DrawActors.clear();
-			//DrawActors.reserve(Actors.size());
-			DrawableComponent test;
+			//DrawActors.reserve(Actors.size());			
+			DrawComponentsThisFrame.reserve(DrawComponents.size());
 			for (const auto& elements : DrawComponents)
 			{
-				elements->
-			}
 				//is visible?
-				//
-				//frustom culling
-
+				if (!elements->IsVisible())
+					continue;
+				//frustom culling	
 				//occlusion culling
+				DrawComponentsThisFrame.push_back(elements);				
+			}
 		}
 	}
 }

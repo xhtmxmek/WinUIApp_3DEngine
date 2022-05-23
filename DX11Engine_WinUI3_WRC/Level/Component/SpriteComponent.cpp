@@ -1,10 +1,15 @@
-#include "pch.h"
+#include "EngineMinimal.h"
 #include "SpriteComponent.h"
 
 namespace Engine
 {
-	namespace Component
+	namespace Level
 	{
+		SpriteComponent::SpriteComponent()
+			:Visible(false)		
+		{
+			m_spriteBatch.reset();
+		}
 		void SpriteComponent::Init()
 		{
 		}

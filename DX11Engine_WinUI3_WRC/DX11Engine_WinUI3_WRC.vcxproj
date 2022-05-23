@@ -79,8 +79,8 @@
   <ItemDefinitionGroup>
     <ClCompile>
       <PrecompiledHeader>Use</PrecompiledHeader>
-      <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
-      <PrecompiledHeaderOutputFile>$(IntDir)pch.pch</PrecompiledHeaderOutputFile>
+      <PrecompiledHeaderFile>EngineMinimal.h</PrecompiledHeaderFile>
+      <PrecompiledHeaderOutputFile>$(IntDir)EngineMinimal.pch</PrecompiledHeaderOutputFile>
       <WarningLevel>Level4</WarningLevel>
       <AdditionalOptions>%(AdditionalOptions) /bigobj</AdditionalOptions>
       <PreprocessorDefinitions>_WINRT_DLL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
@@ -133,7 +133,7 @@
     <ClInclude Include="Level\Component\StaticMeshComponent.h" />
     <ClInclude Include="Level\Component\TransformGroup.h" />
     <ClInclude Include="Level\World.h" />
-    <ClInclude Include="pch.h" />
+    <ClInclude Include="EngineMinimal.h" />
     <ClInclude Include="EngineDX11.h">
       <DependentUpon>EngineDX11.cpp</DependentUpon>
     </ClInclude>
@@ -152,7 +152,7 @@
     <ClCompile Include="Level\Component\StaticMeshComponent.cpp" />
     <ClCompile Include="Level\Component\TransformGroup.cpp" />
     <ClCompile Include="Level\World.cpp" />
-    <ClCompile Include="pch.cpp">
+    <ClCompile Include="EngineMinimal.cpp">
       <PrecompiledHeader>Create</PrecompiledHeader>
     </ClCompile>
     <ClCompile Include="EngineDX11.cpp" />

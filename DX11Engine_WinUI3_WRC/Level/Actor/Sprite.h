@@ -2,14 +2,11 @@
 #include "Actor.h"
 
 namespace Engine
-{
-	namespace Component
-	{
-		class SpriteComponent;
-	}
-
+{			
 	namespace Level
 	{
+		class SpriteComponent;
+
 		class Sprite : public Actor
 		{
 		public:
@@ -17,7 +14,7 @@ namespace Engine
 			void Init() final;
 			void Tick(float elasedTime) final;
 		private:
-			std::unique_ptr<Component::SpriteComponent> Batch;
+			std::unique_ptr<SpriteComponent> Batch;
 		};
 	}
 }

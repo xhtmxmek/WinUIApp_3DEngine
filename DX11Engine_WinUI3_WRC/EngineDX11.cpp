@@ -1,4 +1,4 @@
-﻿#include "pch.h"
+﻿#include "EngineMinimal.h"
 #include "EngineDX11.h"
 #if __has_include("EngineDX11.g.cpp")
 #include "EngineDX11.g.cpp"
@@ -8,6 +8,7 @@
 #include "Common/Engine_Scoped_Lock.h"
 #include "Level/World.h"
 #include "Renderer/LevelRenderer.h"
+#include "Level/Actor/ActorManager.h"
 #include <fstream>
 #include <sstream>
 
@@ -34,6 +35,7 @@ namespace winrt::DX11Engine_WinUI3_WRC::implementation
         DX::DeviceResourcesUtil::GetInstance().CreateDeviceResources();        
         DX::DeviceResourcesUtil::GetDeviceResources()->RegisterDeviceNotify(this);
         m_criticalSection = winrt::make<DX11Engine_WinUI3_WRC::implementation::EngineCriticalSection>();
+        m_World = std::make_unique<Engine::Level::World>();
     }
 
     EngineDX11::~EngineDX11()
@@ -63,14 +65,14 @@ namespace winrt::DX11Engine_WinUI3_WRC::implementation
         DX::DeviceResourcesUtil::GetDeviceResources()->SetSwapChainPanel(panel);
         CreateWindowSizeDependentResources();
 
+        //Engine::Level::ActorManager::GetInstance()
+
         // TODO: Change the timer settings if you want something other than the default variable timestep mode.
         // e.g. for 60 FPS fixed timestep update logic, call:
         /*
         m_timer.SetFixedTimeStep(true);
         m_timer.SetTargetElapsedSeconds(1.0 / 60);
         */
-
-
     }
 
     void EngineDX11::UnInitialize()

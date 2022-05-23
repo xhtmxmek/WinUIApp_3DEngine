@@ -1,4 +1,4 @@
-#include "pch.h"
+#include "EngineMinimal.h"
 #include "Level/Component/ComponentBase.h"
 #include "Level/Component/ComponentTypes.h"
 #include "Level/Component/TransformGroup.h"
@@ -8,9 +8,9 @@ namespace Engine
 {
     namespace Level
     {
-        Component::TransformGroup const& Actor::GetTransform()
+        TransformGroup const& Actor::GetTransform()
         {
-            return (RootComponent ? RootComponent->GetComponentTransform() : Component::TransformGroup::Identity);
+            return (RootComponent ? RootComponent->GetComponentTransform() : TransformGroup::Identity);
         }
     }
 }

@@ -1,4 +1,4 @@
-#include "pch.h"
+#include "EngineMinimal.h"
 #include "Material.h"
 #include "Common/DeviceResources.h"
 

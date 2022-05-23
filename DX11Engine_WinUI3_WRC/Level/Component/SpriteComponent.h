@@ -1,13 +1,14 @@
 #pragma once
-#include "ActorComponent.h"
+#include "ComponentBase.h"
 
 namespace Engine
 {
-	namespace Component
+	namespace Level
 	{
 		class SpriteComponent : public DrawableComponent
 		{
 		public:
+			SpriteComponent();
 			void Init() final;			
 			void Tick(float elasedTime) final;
 			void Draw() final;

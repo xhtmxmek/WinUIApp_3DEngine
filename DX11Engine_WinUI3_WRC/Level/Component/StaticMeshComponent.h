@@ -1,9 +1,9 @@
 #pragma once
-#include "ActorComponent.h"
+#include "ComponentBase.h"
 
 namespace Engine
 {
-	namespace Component
+	namespace Level
 	{
 		class StaticMeshComponent : public DrawableComponent
 		{

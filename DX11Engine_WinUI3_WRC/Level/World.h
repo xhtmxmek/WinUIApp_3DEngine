@@ -21,6 +21,10 @@ namespace Engine
 			World();
 			void Update(float elapsedTime);
 			void Render();
+			void PushDrawableComponent(std::shared_ptr<DrawableComponent> const& component)
+			{
+				DrawComponents.push_back(component);
+			}
 
 		private:
 			void CheckVisibilityActors();	//가시성 판정

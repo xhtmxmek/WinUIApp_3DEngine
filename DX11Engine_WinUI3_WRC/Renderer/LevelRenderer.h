@@ -5,7 +5,7 @@
 
 namespace Engine
 {
-	namespace Component
+	namespace Level
 	{
 		class DrawableComponent;
 	}
@@ -20,13 +20,13 @@ namespace Engine
 				static LevelRenderer instance;
 				return instance;
 			}
+			
+			LevelRenderer(const LevelRenderer& ) = delete;
+			LevelRenderer& operator=(const LevelRenderer& ) = delete;
 
-			void PushDrawableComponent(std::shared_ptr<Component::DrawableComponent> const& component);
-			void Update(float fElapsedTime);
-			void Render();
+			void Render(const std::vector<std::shared_ptr<Level::DrawableComponent>>& drawList );
 		private:
-			LevelRenderer();
-			std::vector<std::shared_ptr<Component::DrawableComponent>> DrawComponents;	//최대 렌더링 액터를 고정해놓고 쓸까?
+			LevelRenderer();			
 		};
 	}
 }

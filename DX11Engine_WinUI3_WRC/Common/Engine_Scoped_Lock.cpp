@@ -1,4 +1,4 @@
-#include "pch.h"
+#include "EngineMinimal.h"
 #include "Engine_Scoped_Lock.h"
 #include "Engine_Scoped_Lock.g.cpp"
 #include "EngineCriticalSection.h"

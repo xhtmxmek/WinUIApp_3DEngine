@@ -1,10 +1,10 @@
-#include "pch.h"
+#include "EngineMinimal.h"
 #include "StaticMeshComponent.h"
 #include "Common/DeviceResources.h"
 
 namespace Engine
 {
-	namespace Component
+	namespace Level
 	{
 		StaticMeshComponent::StaticMeshComponent()
 			:StaticMeshShape(nullptr)
@@ -24,7 +24,7 @@ namespace Engine
 
 		void StaticMeshComponent::Draw()
 		{
-			StaticMeshShape;
+			//StaticMeshShape;
 		}
 	}
 }

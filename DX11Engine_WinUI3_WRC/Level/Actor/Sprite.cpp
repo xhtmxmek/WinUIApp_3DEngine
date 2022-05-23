@@ -1,4 +1,4 @@
-#include "pch.h"
+#include "EngineMinimal.h"
 #include "Sprite.h"
 #include "Level/Component/SpriteComponent.h"
 
@@ -8,7 +8,7 @@ namespace Engine
 	{
 		void Sprite::Init()
 		{
-			Batch = std::make_unique<Component::SpriteComponent>();
+			Batch = std::make_unique<SpriteComponent>();
 			//¾À ·»´õ·¯¿¡ ÄÄÆ÷³ÍÆ® µî·ÏÇÏ±â
 		}
 

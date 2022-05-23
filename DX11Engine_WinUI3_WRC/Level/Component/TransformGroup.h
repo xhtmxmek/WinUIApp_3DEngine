@@ -21,17 +21,17 @@ namespace Engine
 		//transform.SetPositon
 		//GetPosition
 		//내부에서 position 참조할떄.
-		PropertyVector3 Position;
-		PropertyVector3 Scale;
+		Vector3 Position;
+		Vector3 Scale;
 		//quat일 경우 0,0,0,1
-		PropertyVector3 Rotation;
+		Vector3 Rotation;
 
 		Matrix World;
 		Matrix Local;
 		//Math::Matrix RotMat;
 		//GameObject* Owner;
 
-		void OnChangeTransorm(EngineProperty* property);
+		//void OnChangeTransorm(EngineProperty* property);
 		void UpdateTransform(TransformGroup* parent = nullptr );
 	};
 	

@@ -21,7 +21,7 @@ namespace Engine
 		private:
 			std::shared_ptr<ComponentBase> Parent;
 			std::list<std::shared_ptr<ComponentBase>> Child;
-			ActorComponentType ComponentType;
+			//ActorComponentType ComponentType;
 			TransformGroup Transform;
 			bool		Enable;
 			//std::map<PropertyName, EngineProperty*> Properties;
@@ -39,7 +39,7 @@ namespace Engine
 			bool IsVisible() { return Visible; }
 		private:
 			bool		Visible;
-			DrawLayer	ComponentDrawLayer;
+			//DrawLayer	ComponentDrawLayer;
 		};
 	}
 	

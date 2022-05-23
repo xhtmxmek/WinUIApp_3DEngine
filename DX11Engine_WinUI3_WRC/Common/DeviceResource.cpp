@@ -4,7 +4,7 @@
 //
 
 
-#include "pch.h"
+#include "EngineMinimal.h"
 #include "EngineHelper.h"
 #include "DeviceResources.h"
 

@@ -4,11 +4,13 @@
 
 namespace Engine
 {
-	namespace Level
+	namespace Component
 	{
 		StaticMeshComponent::StaticMeshComponent()
-			:StaticMeshShape(nullptr)
-		{		
+			:DrawableComponent("StaticMesh"),
+			StaticMeshShape(nullptr)
+		{
+			//외부 인자를 받아서 다른 종류의 StaticMesh를 만들면 거기에 맞춰서 이름세팅하기
 		}
 
 		void StaticMeshComponent::Init()

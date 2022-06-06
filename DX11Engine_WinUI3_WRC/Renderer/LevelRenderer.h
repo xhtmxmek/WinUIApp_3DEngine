@@ -5,7 +5,7 @@
 
 namespace Engine
 {
-	namespace Level
+	namespace Component
 	{
 		class DrawableComponent;
 	}
@@ -24,7 +24,7 @@ namespace Engine
 			LevelRenderer(const LevelRenderer& ) = delete;
 			LevelRenderer& operator=(const LevelRenderer& ) = delete;
 
-			void Render(const std::vector<std::shared_ptr<Level::DrawableComponent>>& drawList );
+			void Render(const std::vector<std::shared_ptr<Component::DrawableComponent>>& drawList );
 		private:
 			LevelRenderer();			
 		};

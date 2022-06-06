@@ -1,8 +1,8 @@
 #pragma once
-
+#include "DLLDefine.h"
 namespace Engine
 {
-	class Uncopyable
+	class ENGINE_API Uncopyable
 	{
 	protected:
 		Uncopyable(){}

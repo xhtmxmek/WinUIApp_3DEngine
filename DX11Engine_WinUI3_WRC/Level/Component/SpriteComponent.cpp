@@ -3,10 +3,12 @@
 
 namespace Engine
 {
-	namespace Level
+	namespace Component
 	{
-		SpriteComponent::SpriteComponent()
-			:Visible(false)		
+		RUNTIME_CLASS_IMPL(SpriteComponent)
+
+		SpriteComponent::SpriteComponent(const std::string& name)
+			:DrawableComponent(name)
 		{
 			m_spriteBatch.reset();
 		}

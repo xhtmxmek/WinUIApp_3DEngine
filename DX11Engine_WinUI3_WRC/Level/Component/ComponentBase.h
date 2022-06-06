@@ -1,4 +1,5 @@
 #pragma once
+#include "DLLDefine.h"
 #include "ComponentTypes.h"
 #include "TransformGroup.h"
 
@@ -6,19 +7,22 @@
 //Component에서 type이 필요 없으면 뺴주기. 필요하면 추가하기.
 namespace Engine
 {
-	namespace Level
+	namespace Component
 	{
 		class ComponentBase
 		{
 		public:
+			ComponentBase(const std::string& name): Name(name), Enable(true) {}
+			virtual ~ComponentBase(){}
 			virtual void Init() = 0;
 			virtual void Tick(float elasedTime) = 0;
-			void SetPosition(Vector3 const& pos);
-			void SetScale(Vector3 const& scale);
-			void SetRotation(Vector3 const& rot);
+			void SetPosition(DirectX::SimpleMath::Vector3 const& pos);
+			void SetScale(DirectX::SimpleMath::Vector3 const& scale);
+			void SetRotation(DirectX::SimpleMath::Vector3 const& rot);
 			const TransformGroup& GetComponentTransform() { return Transform; }
 			void UpdateComponentTransform(const TransformGroup* parent);
 		private:
+			std::string Name;
 			std::shared_ptr<ComponentBase> Parent;
 			std::list<std::shared_ptr<ComponentBase>> Child;
 			//ActorComponentType ComponentType;
@@ -34,6 +38,7 @@ namespace Engine
 		class DrawableComponent : public ComponentBase
 		{
 		public:
+			DrawableComponent(const std::string& name): Visible(true), ComponentBase(name) {}
 			virtual void Draw() = 0;
 			void SetVisible(bool visible) { Visible = visible; }
 			bool IsVisible() { return Visible; }

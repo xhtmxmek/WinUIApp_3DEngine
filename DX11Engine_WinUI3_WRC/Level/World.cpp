@@ -1,6 +1,8 @@
 #include "EngineMinimal.h"
 #include "World.h"
+#include "Actor/ActorManager.h"
 #include "Actor/Actor.h"
+//#include "Actor/Sprite.h"
 #include "Renderer/LevelRenderer.h"
 #include "Component/ComponentBase.h"
 
@@ -11,7 +13,7 @@ namespace Engine
 	{
 		World::World()
 		{
-			Actors.clear();
+			Actors.clear();			
 		}
 
 		void World::Update(float elapsedTime)
@@ -25,7 +27,10 @@ namespace Engine
 		{
 			//ÄÃ¸µ µî...
 			CheckVisibilityActors();
+			//std::shared_ptr<Engine::Level::ASprite> sprite = Engine::Level::ActorManager::GetInstance().CreateActor<Engine::Level::ASprite>("Hi");
+			size_t actorCount = ActorManager::GetInstance().GetNumActorList();			
 			Engine::Renderer::LevelRenderer::GetInstance().Render(DrawComponentsThisFrame);
+			//int k = 5;
 		}
 
 		void World::CheckVisibilityActors()

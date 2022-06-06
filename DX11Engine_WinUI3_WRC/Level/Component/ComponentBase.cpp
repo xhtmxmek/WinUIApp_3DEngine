@@ -2,19 +2,19 @@
 #include "ComponentBase.h"
 namespace Engine
 {		
-	namespace Level 
-	{
+	namespace Component 
+	{		
 		void ComponentBase::SetPosition(Vector3 const& pos)
 		{
-			Transform.SetPosition(pos);
+			//Transform.SetPosition(pos);
 		}
 		void ComponentBase::SetScale(Vector3 const& scale)
 		{
-			Transform.SetScale(scale);
+			//Transform.SetScale(scale);
 		}
 		void ComponentBase::SetRotation(Vector3 const& rot)
 		{
-			Transform.SetRotation(rot);
+			//Transform.SetRotation(rot);
 		}
 		void ComponentBase::UpdateComponentTransform(const TransformGroup* parent)
 		{

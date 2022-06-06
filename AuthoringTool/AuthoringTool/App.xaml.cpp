@@ -43,4 +43,10 @@ void App::OnLaunched(LaunchActivatedEventArgs const&)
 {
     window = make<MainWindow>();
     window.Activate();
+    winrt::hstring path = L"D:\\StudyDir\\WinUIApp_3DEngine\\x64\\Debug\\TestProject.DLL";
+    HMODULE hDll = ::LoadLibrary(path.c_str());
+    if (hDll != NULL)
+    {        
+        FreeLibrary(hDll);
+    }
 }

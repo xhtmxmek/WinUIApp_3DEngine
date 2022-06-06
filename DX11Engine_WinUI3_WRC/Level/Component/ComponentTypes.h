@@ -9,6 +9,7 @@ namespace Engine
 			StaticMesh,			
 			Collision,
 			Camera,
+			Sprite,
 		};
 
 		enum class PropertyName

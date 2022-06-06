@@ -1,20 +1,28 @@
 #pragma once
+#include "DLLDefine.h"
 #include "Actor.h"
 
 namespace Engine
 {			
-	namespace Level
+	namespace Component
 	{
 		class SpriteComponent;
+	}
 
-		class Sprite : public Actor
+	namespace Level
+	{		
+		class ENGINE_API ASprite : public Actor
 		{
 		public:
-			Sprite() = default;
+			RUNTIME_SUBCLASS(Actor)
+		public:
+			//ASprite() = default;
+			ASprite(const std::string& actorName);
+
 			void Init() final;
 			void Tick(float elasedTime) final;
 		private:
-			std::unique_ptr<SpriteComponent> Batch;
+			Component::SpriteComponent* Batch;
 		};
 	}
 }

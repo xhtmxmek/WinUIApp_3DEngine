@@ -65,6 +65,9 @@
       <Filter>Renderer</Filter>
     </ClCompile>
     <ClCompile Include="EngineAsset\Material.cpp" />
+    <ClCompile Include="Level\Actor\ActorImpl.cpp" />
+    <ClCompile Include="Common\RuntimeContext.cpp" />
+    <ClCompile Include="Level\Actor\ActorManagerImpl.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="EngineMinimal.h" />
@@ -107,7 +110,7 @@
     <ClInclude Include="Level\Component\TransformGroup.h">
       <Filter>Component</Filter>
     </ClInclude>
-    <ClInclude Include="Common\MathHelper.h">
+    <ClInclude Include="Common\EngineMath.h">
       <Filter>Common</Filter>
     </ClInclude>
     <ClInclude Include="Level\Component\StaticMeshComponent.h">
@@ -126,10 +129,16 @@
       <Filter>Renderer</Filter>
     </ClInclude>
     <ClInclude Include="EngineAsset\Material.h" />
+    <ClInclude Include="DLLDefine.h" />
+    <ClInclude Include="Level\Actor\ActorImpl.h" />
+    <ClInclude Include="Level\Component\ComponentFactory.h" />
+    <ClInclude Include="Common\RuntimeContext.h" />
+    <ClInclude Include="Level\Actor\ActorManagerImpl.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="DX11Engine_WinUI3_WRC.def" />
     <None Include="packages.config" />
+    <None Include="cpp.hint" />
   </ItemGroup>
   <ItemGroup>
     <None Include="PropertySheet.props" />

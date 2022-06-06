@@ -1,19 +1,22 @@
 #pragma once
+#include "DLLDefine.h"
 #include "ComponentBase.h"
+#include "Common/RuntimeContext.h"
 
 namespace Engine
 {
-	namespace Level
+	namespace Component
 	{
 		class SpriteComponent : public DrawableComponent
-		{
+		{			
+		public:			
+			RUNTIME_SUBCLASS(DrawableComponent)
 		public:
-			SpriteComponent();
+			SpriteComponent(const std::string& name);
 			void Init() final;			
 			void Tick(float elasedTime) final;
 			void Draw() final;
-		private:
-			bool		Visible;
+		private:			
 			std::unique_ptr<DirectX::SpriteBatch> m_spriteBatch;
 		};
 	}

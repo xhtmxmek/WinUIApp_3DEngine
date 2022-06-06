@@ -1,5 +1,6 @@
 #include "EngineMinimal.h"
 #include "ActorManager.h"
+#include "ActorManagerImpl.h"
 #include "Actor.h"
 
 namespace Engine
@@ -7,35 +8,32 @@ namespace Engine
 	namespace Level
 	{
 		ActorManager::ActorManager()
-			:CurrentActorSizeFactor(1),
-			ActorListResized(false)
 		{
+			pImpl = new ActorManagerImpl();
 		}
 
 		void ActorManager::CheckActorListCapacity()
 		{
-			//Actor가 일정 임계값 이상 만큼 생성요청이 올경우에는 Actorlist의 사이즈를 늘려준 후에 Copy한다
-			if (Actors.size() % ActorsSizeUnit < (ActorsSizeUnit - ActorSizeBias))
-				ActorListResized = false;
-			else
-			{
-				if (!ActorListResized)
-				{
-					std::unordered_map<std::string, std::shared_ptr<Actor>> tempActors;
-					tempActors.reserve(CurrentActorSizeFactor * ActorsSizeUnit);
-					tempActors.insert(Actors.begin(), Actors.end());					
-					Actors.reserve(CurrentActorSizeFactor * ActorsSizeUnit);
-					Actors.insert(tempActors.begin(), tempActors.end());					
+		}
 
-					ActorListResized = true;
-					CurrentActorSizeFactor++;
-				}
-			}
+		std::shared_ptr<Actor> ActorManager::CreateActor(const std::string& className, const std::string& instanceName)		
+		{
+			return pImpl->CreateActor(className, instanceName);
+		}
+
+		std::shared_ptr<Actor> ActorManager::GetActorByName(const std::string& actorName)
+		{
+			return pImpl->GetActorByName(actorName);
 		}
 
 		void ActorManager::Init()
 		{
-			Actors.reserve(ActorsSizeUnit);
+			pImpl->Init();
+		}
+
+		size_t ActorManager::GetNumActorList()
+		{
+			return pImpl->GetNumActorList();
 		}
 	}
 }

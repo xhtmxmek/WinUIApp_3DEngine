@@ -1,39 +1,57 @@
 #pragma once
+#include "DLLDefine.h"
 #include "EngineProperty.h"
-namespace Engine
+#include "Common/EngineMath.h"
+
+namespace DirectX	
 {
-	class TransformGroup
+	namespace SimpleMath
 	{
-	public:
-		TransformGroup();
-		void SetPosition(const Vector3& pos);
-		void SetScale(const Vector3& scale);
-		void SetRotation(const Vector3& rotation);
+		struct Vector3;
+		struct Matrix;
+	}
+}
 
-		const Vector3& GetPosition() const;
-		const Vector3& GetScale() const;
-		const Vector3& GetRotation() const;
-		const Matrix& GetWorld() const { return World; }
-		//static TransformGroup const& Identity() { return Identity; }
-		static const TransformGroup Identity;
-	private:			
-		//propVector3 Position 만들고 부모에 넘기기;
-		//transform.SetPositon
-		//GetPosition
-		//내부에서 position 참조할떄.
-		Vector3 Position;
-		Vector3 Scale;
-		//quat일 경우 0,0,0,1
-		Vector3 Rotation;
+namespace Engine
+{		
+	namespace Component
+	{
+		class TransformGroup
+		{
+		public:
+			TransformGroup();
+		private:
+			FVector3 test;
+			//	void SetPosition(const DirectX::SimpleMath::Vector3& pos);
+			//	void SetScale(const DirectX::SimpleMath::Vector3& scale);
+			//	void SetRotation(const DirectX::SimpleMath::Vector3& rotation);
 
-		Matrix World;
-		Matrix Local;
-		//Math::Matrix RotMat;
-		//GameObject* Owner;
+			//	const DirectX::SimpleMath::Vector3& GetPosition() const;
+			//	const DirectX::SimpleMath::Vector3& GetScale() const;
+			//	const DirectX::SimpleMath::Vector3& GetRotation() const;
+			//	const DirectX::SimpleMath::Matrix& GetWorld() const { return World; }
+			//	//static TransformGroup const& Identity() { return Identity; }
+			//	static const TransformGroup Identity;
+			//private:			
+			//	//propVector3 Position 만들고 부모에 넘기기;
+			//	//transform.SetPositon
+			//	//GetPosition
+			//	//내부에서 position 참조할떄.
+			//	DirectX::SimpleMath::Vector3 Position;
+			//	DirectX::SimpleMath::Vector3 Scale;
+			//	//quat일 경우 0,0,0,1
+			//	DirectX::SimpleMath::Vector3 Rotation;
 
-		//void OnChangeTransorm(EngineProperty* property);
-		void UpdateTransform(TransformGroup* parent = nullptr );
-	};
+			//	DirectX::SimpleMath::Matrix World;
+			//	DirectX::SimpleMath::Matrix Local;
+			//	//Math::Matrix RotMat;
+			//	//GameObject* Owner;
+
+			//	//void OnChangeTransorm(EngineProperty* property);
+			//	void UpdateTransform(TransformGroup* parent = nullptr );
+		};
+	}
+
 	
 }
 

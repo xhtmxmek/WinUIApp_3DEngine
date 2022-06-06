@@ -1,18 +1,24 @@
 #include "EngineMinimal.h"
-#include "Sprite.h"
 #include "Level/Component/SpriteComponent.h"
+#include "Sprite.h"
 
 namespace Engine
 {
 	namespace Level
 	{
-		void Sprite::Init()
+		RUNTIME_CLASS_IMPL(ASprite)
+
+		ASprite::ASprite(const std::string& actorName)
+			:Actor(actorName)
 		{
-			Batch = std::make_unique<SpriteComponent>();
-			//¾À ·»´õ·¯¿¡ ÄÄÆ÷³ÍÆ® µî·ÏÇÏ±â
+		}
+		void ASprite::Init()
+		{
+			//Batch = std::make_unique<Component::SpriteComponent>("");
+			//¾À ·»´õ·¯¿¡ ÄÄÆ÷³ÍÆ® µî·ÏÇÏ±â			
 		}
 
-		void Sprite::Tick(float elasedTime)
+		void ASprite::Tick(float elasedTime)
 		{			
 		}
 	}

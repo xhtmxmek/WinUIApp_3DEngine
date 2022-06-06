@@ -11,6 +11,8 @@
 #include "Level/Actor/ActorManager.h"
 #include <fstream>
 #include <sstream>
+#include "Common/RuntimeContext.h"
+//#include "Level/Actor/Sprite.h"
 
 // Note: Remove this static_assert after copying these generated source files to your project.
 // This assertion exists to avoid compiling these generated source files directly.
@@ -35,7 +37,8 @@ namespace winrt::DX11Engine_WinUI3_WRC::implementation
         DX::DeviceResourcesUtil::GetInstance().CreateDeviceResources();        
         DX::DeviceResourcesUtil::GetDeviceResources()->RegisterDeviceNotify(this);
         m_criticalSection = winrt::make<DX11Engine_WinUI3_WRC::implementation::EngineCriticalSection>();
-        m_World = std::make_unique<Engine::Level::World>();
+        Engine::RuntimeContext::InitialzeRuntimeTable();
+        m_World = std::make_unique<Engine::Level::World>();        
     }
 
     EngineDX11::~EngineDX11()
@@ -308,7 +311,8 @@ namespace winrt::DX11Engine_WinUI3_WRC::implementation
         //std::wstringstream testStr;
         //testStr << strPath << L"\\test.txt";
         
-        path = path + L"/Assets/Textures/cat.png";
+        //path = path + L"/Assets/Textures/cat.png";
+        path = L"D:\\StudyDir\\WinUIApp_3DEngine\\TestProject\\Assets\\cat.png";
         com_ptr_nothrow<ID3D11Resource> resource;
         HRESULT hr = CreateWICTextureFromFile(device, path.c_str(),
             //CreateWICTextureFromFile(device, L"Assets/cat.png",

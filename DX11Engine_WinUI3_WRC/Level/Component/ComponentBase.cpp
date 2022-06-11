@@ -25,6 +25,8 @@ namespace Engine
 						child->UpdateComponentTransform(&Transform);
 				});
 		}
+
+		//RUNTIME_CLASS_IMPL(DrawableComponent)
 	}
 }
 

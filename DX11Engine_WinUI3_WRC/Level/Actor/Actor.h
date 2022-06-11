@@ -2,26 +2,26 @@
 
 #include "DLLDefine.h"
 #include "PropertyActor.h"
-#include "Common/RuntimeContext.h"
+#include "Common/RuntimeContext.h"	//Class 이름 정보를 얻기위해 RunTimeContext 헤더를 포함했음. RuntimeContext는 어차피 거의 변하지 않음.
 
 namespace Engine
 {
 
 	namespace Component
 	{
-		class ComponentBase;
-		enum class ActorComponentType;
+		class ComponentBase;		
 		class TransformGroup;
 	}
 
 	namespace Level
 	{
+		class World;
 		class ActorImpl;
 
 		class ENGINE_API Actor
 		{					
 		public:
-			Actor(const std::string& name);
+			Actor(const std::string& name, World* rootWorld);
 
 			//소멸자
 			virtual ~Actor() {};

@@ -1,5 +1,6 @@
 #pragma once
 #include "DLLDefine.h"
+#include "Common/RuntimeContext.h"
 #include "ComponentTypes.h"
 #include "TransformGroup.h"
 
@@ -8,11 +9,13 @@
 namespace Engine
 {
 	namespace Component
-	{
+	{		
 		class ComponentBase
 		{
 		public:
-			ComponentBase(const std::string& name): Name(name), Enable(true) {}
+			//RUNTIME_ABSTRACT_ROOT_CLASS(ComponentBase)
+		public:
+			ComponentBase(const std::string& name, SceneComponentType type): Name(name), Enable(true), Type(type) {}
 			virtual ~ComponentBase(){}
 			virtual void Init() = 0;
 			virtual void Tick(float elasedTime) = 0;
@@ -21,13 +24,15 @@ namespace Engine
 			void SetRotation(DirectX::SimpleMath::Vector3 const& rot);
 			const TransformGroup& GetComponentTransform() { return Transform; }
 			void UpdateComponentTransform(const TransformGroup* parent);
+			SceneComponentType ComponentType() { return Type; }			
 		private:
 			std::string Name;
 			std::shared_ptr<ComponentBase> Parent;
-			std::list<std::shared_ptr<ComponentBase>> Child;
-			//ActorComponentType ComponentType;
+			std::list<std::shared_ptr<ComponentBase>> Child;			
 			TransformGroup Transform;
-			bool		Enable;
+			bool Enable;
+			SceneComponentType Type;
+			
 			//std::map<PropertyName, EngineProperty*> Properties;
 
 			//component 생성시에 component의 타입을 명시해줘야 하고, component를 얻어올떄 component의 타입명시를 해야한다.
@@ -38,7 +43,8 @@ namespace Engine
 		class DrawableComponent : public ComponentBase
 		{
 		public:
-			DrawableComponent(const std::string& name): Visible(true), ComponentBase(name) {}
+			//RUNTIME_ABSTRACT_SUB_CLASS(DrawableComponent, ComponentBase)
+			DrawableComponent(const std::string& name): Visible(true), ComponentBase(name, SceneComponentType::Drawable) {}
 			virtual void Draw() = 0;
 			void SetVisible(bool visible) { Visible = visible; }
 			bool IsVisible() { return Visible; }
@@ -48,4 +54,5 @@ namespace Engine
 		};
 	}
 	
+	typedef std::shared_ptr<Component::ComponentBase> ComponentPtr;
 }

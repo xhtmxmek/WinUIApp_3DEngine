@@ -20,16 +20,24 @@ namespace Engine
 		//Uncopyable
 		class World
 		{
-		public:
-			World();
+		public:			
+			//static World& GetInstance()
+			//{
+			//	static World world;
+			//	return world;
+			//}
+
+			void PushComponent(const std::shared_ptr<Component::ComponentBase>& component);
 			void Update(float elapsedTime);
 			void Render();
-			void PushDrawableComponent(std::shared_ptr<Component::DrawableComponent> const& component)
-			{
-				DrawComponents.push_back(component);
-			}
+			//void PushDrawableComponent(std::shared_ptr<Component::DrawableComponent> const& component)
+			//{
+			//	DrawComponents.push_back(component);
+			//}
+			//void Push
 
 		private:
+			World();
 			void CheckVisibilityActors();	//가시성 판정
 			std::unordered_map<std::wstring, std::shared_ptr<Actor>> Actors; //world에는 수많은 액터들이 존재할것이고, 액터가 추가될때 재정렬을 피하기 위해 Hash를 사용헀음. 			
 			std::vector<std::shared_ptr<Component::DrawableComponent>> DrawComponents;

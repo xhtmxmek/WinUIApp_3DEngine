@@ -55,15 +55,25 @@ namespace Engine
 	};
 }
 
+//#define RUNTIME_ABSTRACT_ROOT_CLASS(classtype) \
+//	public:\
+//		static const std::string ClassName(){ return std::string(#classtype); }\
+//		virtual bool KindOf(const std::string& className) { if (ClassName() == classtype) return true; }
+//
+//#define RUNTIME_ABSTRACT_SUB_CLASS(classtype, parent) \
+//	public:\
+//		static const std::string ClassName(){ return std::string(#classtype); }\
+//		virtual bool KindOf(const std::string& className) { if (ClassName() == classtype) return true; return parent::KindOf(classtype); }
+
 #define RUNTIME_SUBCLASS(parent)\
 	private: \
 		static void *Constructor(const std::string& name); \
 	protected: \
 	public: \
 		static void RegisterRuntime();\
-		static const std::string& ClassName(); 
-/*virtual bool KindOf(InternString classtype) { if (ClassName() == classtype) return true; return parent::KindOf(classtype); } \*/
-/*static bool ObjectKindOf(InternString classtype) { if (ClassName() == classtype) return true; return parent::ObjectKindOf(classtype); } \*/
+		static const std::string& ClassName();		
+		//virtual bool KindOf(const std::string& className) { if (ClassName() == classtype) return true; return parent::KindOf(classtype); }
+//virtual bool KindOf(InternString classtype) { if (ClassName() == classtype) return true; return parent::KindOf(classtype); }
 /*int ClassDepth() { return parent::ClassDepth() + 1; } \*/
 /*static void UnregisterRuntime();  \*/
 //virtual InternString LeafClassName(); 

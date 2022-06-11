@@ -10,7 +10,7 @@ namespace Engine
 {
     namespace Level
     {
-        Actor::Actor(const std::string& name)            
+        Actor::Actor(const std::string& name, World* rootWorld)
         {
             pImpl = new ActorImpl(name);
         }

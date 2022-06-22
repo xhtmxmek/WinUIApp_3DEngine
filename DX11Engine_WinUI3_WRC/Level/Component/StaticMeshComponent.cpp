@@ -6,8 +6,10 @@ namespace Engine
 {
 	namespace Component
 	{
-		StaticMeshComponent::StaticMeshComponent()
-			:DrawableComponent("StaticMesh"),
+		RUNTIME_CLASS_IMPL(StaticMeshComponent)
+
+		StaticMeshComponent::StaticMeshComponent(const std::string& name)
+			:DrawableComponent(name),
 			StaticMeshShape(nullptr)
 		{
 			//외부 인자를 받아서 다른 종류의 StaticMesh를 만들면 거기에 맞춰서 이름세팅하기

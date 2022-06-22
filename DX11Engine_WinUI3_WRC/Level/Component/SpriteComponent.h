@@ -12,7 +12,7 @@ namespace Engine
 		public:			
 			RUNTIME_SUBCLASS(DrawableComponent)
 		public:
-			SpriteComponent(const std::string& name);
+			SpriteComponent(const std::string& name = "SpriteComponent");
 			void Init() final;			
 			void Tick(float elasedTime) final;
 			void Draw() final;

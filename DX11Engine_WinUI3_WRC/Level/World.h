@@ -11,7 +11,10 @@ namespace Engine
 {
 	namespace Component
 	{
+		class ComponentBase;
 		class DrawableComponent;
+		class CameraComponent;
+		enum class SceneComponentType;
 	}
 
 	namespace Level
@@ -27,21 +30,27 @@ namespace Engine
 			//	return world;
 			//}
 
-			void PushComponent(const std::shared_ptr<Component::ComponentBase>& component);
+			void PushComponent(const std::shared_ptr<Component::ComponentBase>& component)
+			{
+				PushComponentFunc[static_cast<int>(component->ComponentType())](component);
+			}
 			void Update(float elapsedTime);
 			void Render();
-			//void PushDrawableComponent(std::shared_ptr<Component::DrawableComponent> const& component)
-			//{
-			//	DrawComponents.push_back(component);
-			//}
-			//void Push
 
 		private:
 			World();
-			void CheckVisibilityActors();	//가시성 판정
+			void CheckVisibilityActors();	//가시성 판정			
+			void PushCameraComponent(const std::shared_ptr<Component::ComponentBase>& component);
+			void PushDrawableComponent(const std::shared_ptr<Component::ComponentBase>& component);
+
 			std::unordered_map<std::wstring, std::shared_ptr<Actor>> Actors; //world에는 수많은 액터들이 존재할것이고, 액터가 추가될때 재정렬을 피하기 위해 Hash를 사용헀음. 			
 			std::vector<std::shared_ptr<Component::DrawableComponent>> DrawComponents;
 			std::vector<std::shared_ptr<Component::DrawableComponent>> DrawComponentsThisFrame;
+			std::vector<std::shared_ptr<Component::CameraComponent>> CameraComponents;
+
+			//std::vector<std::function<void(const std::shared_ptr<Component::ComponentBase>&)>> PushComponentFunc;
+			std::function<void(const std::shared_ptr<Component::ComponentBase>&)> PushComponentFunc[Component::SceneComponentType::ComponentType_Max];
+
 		};
 	}
 }

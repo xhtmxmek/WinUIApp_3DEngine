@@ -1,6 +1,8 @@
 #include "EngineMinimal.h"
 #include "RuntimeContext.h"
 #include "Level/Component/SpriteComponent.h"
+#include "Level/Component/StaticMeshComponent.h"
+#include "Level/Component/CameraComponent.h"
 #include "Level/Actor/Sprite.h"
 
 namespace Engine
@@ -13,6 +15,9 @@ namespace Engine
 	void RuntimeContext::InitialzeRuntimeTable()
 	{		
 		REGISTER_RUNTIME_CLASS(SpriteComponent);
+		REGISTER_RUNTIME_CLASS(StaticMeshComponent);
+		REGISTER_RUNTIME_CLASS(CameraComponent);
+
 		REGISTER_RUNTIME_CLASS(ASprite);
 	}
 }

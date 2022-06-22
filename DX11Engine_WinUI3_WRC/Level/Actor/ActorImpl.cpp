@@ -20,7 +20,7 @@ namespace Engine
                 std::shared_ptr<Component::ComponentBase> ptr(runtimeComponent);
                 Components.insert(std::make_pair(className, ptr));
 
-                Component::ComponentLinkToWorld(TopWorld, ptr);
+                Component::ComponentLinkToWorld(RootWorld, ptr);                
 
                 return ptr;                
             }
@@ -30,7 +30,7 @@ namespace Engine
 
         World* ActorImpl::GetWorld()
         {
-            return TopWorld;
+            return RootWorld;
         }
         //void ActorImpl::SetRootComponent(Component::ComponentBase* component)
         //{

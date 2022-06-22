@@ -7,8 +7,9 @@ namespace Engine
 	{
 		class StaticMeshComponent : public DrawableComponent
 		{
-		public:			
-			StaticMeshComponent();			
+		public:
+			RUNTIME_SUBCLASS(StaticMeshComponent)
+			StaticMeshComponent(const std::string& name = "StaticMeshComponent");
 			void Init() final;
 			void Tick(float elapsedTime) final;
 			void Draw() final;

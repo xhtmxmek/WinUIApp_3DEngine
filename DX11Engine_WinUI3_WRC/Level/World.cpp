@@ -5,6 +5,7 @@
 //#include "Actor/Sprite.h"
 #include "Renderer/LevelRenderer.h"
 #include "Component/ComponentBase.h"
+#include "Component/CameraComponent.h"
 
 using namespace std;
 namespace Engine
@@ -13,13 +14,13 @@ namespace Engine
 	{
 		World::World()
 		{
-			Actors.clear();			
-		}
+			Actors.clear();
+			PushComponentFunc[Component::SceneComponentType::Drawable] = std::bind(&World::PushDrawableComponent, this, std::placeholders::_1);
+			PushComponentFunc[Component::SceneComponentType::Camera] = std::bind(&World::PushCameraComponent, this, std::placeholders::_1);
 
-		void World::PushComponent(const std::shared_ptr<Component::ComponentBase>& component)
-		{
+			//DrawComponent를 Maximum만큼 정해놓기...
 		}
-
+		
 		void World::Update(float elapsedTime)
 		{
 			//enable인 Actor만 Update.							
@@ -30,8 +31,8 @@ namespace Engine
 		void World::Render()
 		{
 			//컬링 등...
-			CheckVisibilityActors();			
-			size_t actorCount = ActorManager::GetInstance().GetNumActorList();			
+			CheckVisibilityActors();
+			size_t actorCount = ActorManager::GetInstance().GetNumActorList();
 			Engine::Renderer::LevelRenderer::GetInstance().Render(DrawComponentsThisFrame);
 			//int k = 5;
 		}
@@ -53,8 +54,16 @@ namespace Engine
 					continue;
 				//frustom culling	
 				//occlusion culling
-				DrawComponentsThisFrame.push_back(elements);				
+				DrawComponentsThisFrame.push_back(elements);
 			}
+		}
+		void World::PushCameraComponent(const std::shared_ptr<Component::ComponentBase>& component)
+		{
+		}
+
+		void World::PushDrawableComponent(const shared_ptr<Component::ComponentBase>& component)
+		{			
+			DrawComponents.push_back(std::static_pointer_cast<Component::DrawableComponent>(component));
 		}
 	}
 }

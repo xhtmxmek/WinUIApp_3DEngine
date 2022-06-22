@@ -135,6 +135,7 @@
     <ClInclude Include="Level\Actor\ActorManagerImpl.h" />
     <ClInclude Include="Level\Actor\PropertyActor.h" />
     <ClInclude Include="Level\Actor\Sprite.h" />
+    <ClInclude Include="Level\Component\CameraComponent.h" />
     <ClInclude Include="Level\Component\ComponentBase.h" />
     <ClInclude Include="Level\Component\ComponentFactory.h" />
     <ClInclude Include="Level\Component\ComponentLinker.h" />
@@ -166,6 +167,7 @@
     </ClCompile>
     <ClCompile Include="Level\Actor\ActorManagerImpl.cpp" />
     <ClCompile Include="Level\Actor\Sprite.cpp" />
+    <ClCompile Include="Level\Component\CameraComponent.cpp" />
     <ClCompile Include="Level\Component\ComponentBase.cpp" />
     <ClCompile Include="Level\Component\ComponentLinker.cpp" />
     <ClCompile Include="Level\Component\SpriteComponent.cpp" />

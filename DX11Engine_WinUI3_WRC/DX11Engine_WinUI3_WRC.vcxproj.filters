@@ -69,6 +69,7 @@
     <ClCompile Include="Common\RuntimeContext.cpp" />
     <ClCompile Include="Level\Actor\ActorManagerImpl.cpp" />
     <ClCompile Include="Level\Component\ComponentLinker.cpp" />
+    <ClCompile Include="Level\Component\CameraComponent.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="EngineMinimal.h" />
@@ -136,6 +137,7 @@
     <ClInclude Include="Common\RuntimeContext.h" />
     <ClInclude Include="Level\Actor\ActorManagerImpl.h" />
     <ClInclude Include="Level\Component\ComponentLinker.h" />
+    <ClInclude Include="Level\Component\CameraComponent.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="DX11Engine_WinUI3_WRC.def" />

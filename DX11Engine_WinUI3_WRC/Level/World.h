@@ -14,7 +14,7 @@ namespace Engine
 		class ComponentBase;
 		class DrawableComponent;
 		class CameraComponent;
-		enum class SceneComponentType;
+		enum SceneComponentType;
 	}
 
 	namespace Level
@@ -23,7 +23,8 @@ namespace Engine
 		//Uncopyable
 		class World
 		{
-		public:			
+		public:	
+			World();
 			//static World& GetInstance()
 			//{
 			//	static World world;
@@ -32,13 +33,12 @@ namespace Engine
 
 			void PushComponent(const std::shared_ptr<Component::ComponentBase>& component)
 			{
-				PushComponentFunc[static_cast<int>(component->ComponentType())](component);
+				//PushComponentFunc[static_cast<int>(component->ComponentType())](component);
 			}
 			void Update(float elapsedTime);
 			void Render();
 
-		private:
-			World();
+		private:			
 			void CheckVisibilityActors();	//가시성 판정			
 			void PushCameraComponent(const std::shared_ptr<Component::ComponentBase>& component);
 			void PushDrawableComponent(const std::shared_ptr<Component::ComponentBase>& component);
@@ -49,7 +49,7 @@ namespace Engine
 			std::vector<std::shared_ptr<Component::CameraComponent>> CameraComponents;
 
 			//std::vector<std::function<void(const std::shared_ptr<Component::ComponentBase>&)>> PushComponentFunc;
-			std::function<void(const std::shared_ptr<Component::ComponentBase>&)> PushComponentFunc[Component::SceneComponentType::ComponentType_Max];
+			//std::function<void(const std::shared_ptr<Component::ComponentBase>&)> PushComponentFunc[Component::SceneComponentType::ComponentType_Max];
 
 		};
 	}

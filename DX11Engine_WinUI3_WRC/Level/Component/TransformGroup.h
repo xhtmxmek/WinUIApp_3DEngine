@@ -1,7 +1,6 @@
 #pragma once
 #include "DLLDefine.h"
 #include "EngineProperty.h"
-#include "Common/EngineMath.h"
 
 namespace DirectX	
 {
@@ -21,7 +20,7 @@ namespace Engine
 		public:
 			TransformGroup();
 		private:
-			FVector3 test;
+			//FVector3 test;
 			//	void SetPosition(const DirectX::SimpleMath::Vector3& pos);
 			//	void SetScale(const DirectX::SimpleMath::Vector3& scale);
 			//	void SetRotation(const DirectX::SimpleMath::Vector3& rotation);

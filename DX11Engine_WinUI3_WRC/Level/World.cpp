@@ -15,8 +15,8 @@ namespace Engine
 		World::World()
 		{
 			Actors.clear();
-			PushComponentFunc[Component::SceneComponentType::Drawable] = std::bind(&World::PushDrawableComponent, this, std::placeholders::_1);
-			PushComponentFunc[Component::SceneComponentType::Camera] = std::bind(&World::PushCameraComponent, this, std::placeholders::_1);
+			//PushComponentFunc[Component::SceneComponentType::Drawable] = std::bind(&World::PushDrawableComponent, this, std::placeholders::_1);
+			//PushComponentFunc[Component::SceneComponentType::Camera] = std::bind(&World::PushCameraComponent, this, std::placeholders::_1);
 
 			//DrawComponent를 Maximum만큼 정해놓기...
 		}

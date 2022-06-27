@@ -13,6 +13,15 @@ namespace Engine
 			//레벨 안에 있는 액터들은 자신들의 부모가 World임.			
 			component->ComponentType();			
 		}
+
+		void ComponentDispatch(const std::shared_ptr<DrawableComponent>& component)
+		{
+
+		}
+
+		void ComponentDispatch(const std::shared_ptr<CameraComponent>& component)
+		{
+		}
 	}
 }
 

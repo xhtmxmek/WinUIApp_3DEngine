@@ -10,7 +10,7 @@ namespace Engine
 {
     namespace Level
     {
-        Actor::Actor(const std::string& name, World* rootWorld)
+        Actor::Actor(const std::string& name)
         {
             pImpl = new ActorImpl(name);
         }
@@ -18,6 +18,10 @@ namespace Engine
         void Actor::SetRootComponent(Component::ComponentBase* component)
         {            
             pImpl->SetRootComponent(component);
+        }
+        std::unique_ptr<World>& Actor::GetWorld()
+        {
+            return pImpl->GetWorld();
         }
         std::shared_ptr<Component::ComponentBase> Actor::CreateComponent(const std::string& className, const std::string& instanceName)
         {

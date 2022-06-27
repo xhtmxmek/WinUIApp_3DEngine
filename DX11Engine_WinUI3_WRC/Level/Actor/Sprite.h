@@ -11,6 +11,8 @@ namespace Engine
 
 	namespace Level
 	{		
+		class SpriteImpl;
+
 		class ENGINE_API ASprite : public Actor
 		{
 		public:
@@ -22,7 +24,9 @@ namespace Engine
 			void Init() final;
 			void Tick(float elasedTime) final;
 		private:
-			Component::SpriteComponent* Batch;
+			SpriteImpl* pImpl;
+			//std::shared_ptr<Component::SpriteComponent> SpriteBatch;
+			//Component::SpriteComponent* SpriteBatch;
 		};
 	}
 }

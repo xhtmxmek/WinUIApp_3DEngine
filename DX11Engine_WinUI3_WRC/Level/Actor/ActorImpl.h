@@ -20,12 +20,13 @@ namespace Engine
 			결론적으로 Actor는 handle 클래스
 			모든 actor는 DrawAble이라고 가정하기.
 		*/
+		class SLevel;
 		class World;
 
 		class ActorImpl
 		{
 		public:
-			ActorImpl(const std::string& name, World* rootWorld) :Name(name), RootComponent(nullptr), RootWorld(rootWorld) {};
+			ActorImpl(const std::string& name) :Name(name), RootComponent(nullptr){};
 			
 			std::shared_ptr<Component::ComponentBase> GetActorComponentByName(const std::string& name)
 			{
@@ -43,7 +44,8 @@ namespace Engine
 			
 			std::shared_ptr<Component::ComponentBase> CreateComponent(const std::string& className, const std::string& instanceName);
 
-			World* GetWorld();
+			std::unique_ptr<World>& GetWorld();
+			//SLevel& GetLevel();
 
 			//Properties
 			//bool IsEnable() const { return m_PropActor.Enable; }
@@ -58,8 +60,7 @@ namespace Engine
 			//PropertyGroup::PropertyActor m_PropActor;
 			//1. 예약된 인덱스로 들어간다.(벡터의 capacity 낭비가 생김)
 			//2. 맵으로 찾아오게 함(검색시간의 불편함. 근데 컴포넌트 갯수는 많은일이 없어서 이게 맞을거같음)
-
-			World* RootWorld;
+			
 			//루트 컴포넌트 : 액터를 대표하는 컴포넌트. 컴포넌트 리스트중에 하나를 가리킴
 			Component::ComponentBase* RootComponent;
 			//컴포넌트 리스트 : 액터가 가지고 있는 컴포넌트 리스트. 

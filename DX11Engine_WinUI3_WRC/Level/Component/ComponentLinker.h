@@ -9,14 +9,16 @@ namespace Engine
 
 	namespace Component
 	{
-		class ComponentBase;		
+		class DrawableComponent;
+		class CameraComponent;
 
 		template<typename T>
-		void ComponentLinkToWorld(Level::World* world, const T& component)
+		void ComponentLink(const T& component)
 		{
-
+			ComponentDispatch(component);
 		}
 
-		
+		void ComponentDispatch(const std::shared_ptr<DrawableComponent>& component);
+		void ComponentDispatch(const std::shared_ptr<CameraComponent>& component);
 	}
 }

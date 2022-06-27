@@ -82,8 +82,6 @@
 #include <concrt.h>
 #include <wincodec.h>
 
-#include "Common/EngineMath.h"
-
 using namespace DirectX::SimpleMath;
 
 

@@ -3,6 +3,7 @@
 #include "DLLDefine.h"
 #include "PropertyActor.h"
 #include "Common/RuntimeContext.h"	//Class 이름 정보를 얻기위해 RunTimeContext 헤더를 포함했음. RuntimeContext는 어차피 거의 변하지 않음.
+#include "Level/Component/ComponentLinker.h"
 
 namespace Engine
 {
@@ -21,7 +22,7 @@ namespace Engine
 		class ENGINE_API Actor
 		{					
 		public:
-			Actor(const std::string& name, World* rootWorld);
+			Actor(const std::string& name);
 
 			//소멸자
 			virtual ~Actor() {};
@@ -34,10 +35,15 @@ namespace Engine
 			template<typename T>
 			std::shared_ptr<T> CreateComponent(const std::string& InstanceName)
 			{				
-				std::string runTimeClassName = T::ClassName();				
-				return std::static_pointer_cast<T>(CreateComponent(runTimeClassName, InstanceName));
+				std::string runTimeClassName = T::ClassName();
+				auto newComponent = std::static_pointer_cast<T>(CreateComponent(runTimeClassName, InstanceName));
+				//Component::ComponentLink<T>(newComponent);
+				Component::ComponentDispatch(newComponent);
+				//return std::static_pointer_cast<T>(CreateComponent(runTimeClassName, InstanceName));
+				return newComponent;
 				//생성된 클래스를 월드에 넣어주면, 월드가 템플릿 기반으로 컴포넌트를 받으면 되지 않나? 아니면 특수화버전으로.
 				//컴포넌트 링커는 컴포넌트를 월드 뿐만 아니라 다른곳에도 연결해줄수도 있을듯.. 일단월드만.
+
 			}
 
 			template<typename T>
@@ -47,6 +53,7 @@ namespace Engine
 			}
 
 			void SetRootComponent(Component::ComponentBase* component);
+			std::unique_ptr<World>& GetWorld();
 
 		private:
 			std::shared_ptr<Component::ComponentBase> CreateComponent(const std::string& className, const std::string& instanceName);

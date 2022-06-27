@@ -5,6 +5,8 @@
 //#include "Level/Component/TransformGroup.h"
 #include "ActorImpl.h"
 #include "Level/Component/ComponentLinker.h"
+#include "Level/Level.h"
+#include "Level/World.h"
 
 namespace Engine
 {
@@ -19,19 +21,22 @@ namespace Engine
                 Component::ComponentBase* runtimeComponent = (Component::ComponentBase*)RuntimeContext::New(className, instanceName);
                 std::shared_ptr<Component::ComponentBase> ptr(runtimeComponent);
                 Components.insert(std::make_pair(className, ptr));
-
-                Component::ComponentLinkToWorld(RootWorld, ptr);                
-
+                
                 return ptr;                
             }
             else
                 return nullptr;
         }
 
-        World* ActorImpl::GetWorld()
+        std::unique_ptr<World>& ActorImpl::GetWorld()
         {
-            return RootWorld;
+            return SLevel::GetInstance().GetWorld();
         }
+        //SLevel& ActorImpl::GetLevel()
+        //{
+        //    return 
+        //    // // O: 여기에 return 문을 삽입합니다.
+        //}
         //void ActorImpl::SetRootComponent(Component::ComponentBase* component)
         //{
         //    RootComponent = component;    

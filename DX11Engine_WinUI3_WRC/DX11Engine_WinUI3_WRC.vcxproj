@@ -118,7 +118,9 @@
     <ClInclude Include="Common\EngineCriticalSection.h" />
     <ClInclude Include="Common\EngineHelper.h" />
     <ClInclude Include="Common\Engine_Scoped_Lock.h" />
-    <ClInclude Include="Common\EngineMath.h" />
+    <ClInclude Include="Common\EngineMath.h">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+    </ClInclude>
     <ClInclude Include="Common\RuntimeContext.h" />
     <ClInclude Include="Common\StepTimer.h" />
     <ClInclude Include="Common\Uncopyable.h" />
@@ -135,6 +137,7 @@
     <ClInclude Include="Level\Actor\ActorManagerImpl.h" />
     <ClInclude Include="Level\Actor\PropertyActor.h" />
     <ClInclude Include="Level\Actor\Sprite.h" />
+    <ClInclude Include="Level\Actor\SpriteImpl.h" />
     <ClInclude Include="Level\Component\CameraComponent.h" />
     <ClInclude Include="Level\Component\ComponentBase.h" />
     <ClInclude Include="Level\Component\ComponentFactory.h" />
@@ -144,6 +147,7 @@
     <ClInclude Include="Level\Component\SpriteComponent.h" />
     <ClInclude Include="Level\Component\StaticMeshComponent.h" />
     <ClInclude Include="Level\Component\TransformGroup.h" />
+    <ClInclude Include="Level\Level.h" />
     <ClInclude Include="Level\World.h" />
     <ClInclude Include="EngineMinimal.h" />
     <ClInclude Include="EngineDX11.h">
@@ -167,12 +171,14 @@
     </ClCompile>
     <ClCompile Include="Level\Actor\ActorManagerImpl.cpp" />
     <ClCompile Include="Level\Actor\Sprite.cpp" />
+    <ClCompile Include="Level\Actor\SpriteImpl.cpp" />
     <ClCompile Include="Level\Component\CameraComponent.cpp" />
     <ClCompile Include="Level\Component\ComponentBase.cpp" />
     <ClCompile Include="Level\Component\ComponentLinker.cpp" />
     <ClCompile Include="Level\Component\SpriteComponent.cpp" />
     <ClCompile Include="Level\Component\StaticMeshComponent.cpp" />
     <ClCompile Include="Level\Component\TransformGroup.cpp" />
+    <ClCompile Include="Level\Level.cpp" />
     <ClCompile Include="Level\World.cpp" />
     <ClCompile Include="EngineMinimal.cpp">
       <PrecompiledHeader>Create</PrecompiledHeader>

@@ -21,8 +21,8 @@ namespace Engine
 			//ASprite() = default;
 			ASprite(const std::string& actorName);
 
-			void Init() final;
-			void Tick(float elasedTime) final;
+			virtual void Init() final;
+			virtual void Tick(float elasedTime) final;
 		private:
 			SpriteImpl* pImpl;
 			//std::shared_ptr<Component::SpriteComponent> SpriteBatch;

@@ -13,7 +13,7 @@ namespace Engine
 		{
 		public:
 			//ASprite() = default;
-			SpriteImpl(const std::string& actorName);
+			SpriteImpl(const std::shared_ptr<Component::SpriteComponent>& spriteBatch);
 
 			void Init();
 			void Tick(float elasedTime);

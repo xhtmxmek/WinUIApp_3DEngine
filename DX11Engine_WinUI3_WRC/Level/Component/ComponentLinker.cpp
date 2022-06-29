@@ -14,12 +14,12 @@ namespace Engine
 			component->ComponentType();			
 		}
 
-		void ComponentDispatch(const std::shared_ptr<DrawableComponent>& component)
+		void ComponentDispatch(const std::shared_ptr<DrawableComponent>& drawableComponent)
 		{
-
+			
 		}
 
-		void ComponentDispatch(const std::shared_ptr<CameraComponent>& component)
+		void ComponentDispatch(const std::shared_ptr<CameraComponent>& cameraComponent)
 		{
 		}
 	}

@@ -6,8 +6,8 @@ namespace Engine
 {
 	namespace Level
 	{		
-		SpriteImpl::SpriteImpl(const std::string& actorName)			
-		:SpriteBatch(nullptr)
+		SpriteImpl::SpriteImpl(const std::shared_ptr<Component::SpriteComponent>& spriteBatch)
+		:SpriteBatch(spriteBatch)
 		{
 			//SpriteBatch = CreateComponent<Component::SpriteComponent>("Sprite");
 			

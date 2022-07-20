@@ -13,11 +13,11 @@
 
 #include "Level/Actor/ActorManager.h"
 #include "Level/Actor/Sprite.h"
-//#include "Level/Component/SpriteComponent.h"
+#include "Level/Component/SpriteComponent.h"
 //#include "Level/Component/TransformGroup.h"
 
 
-//using namespace DirectX::SimpleMath;
+using namespace DirectX::SimpleMath;
 
 BOOL APIENTRY DllMain( HMODULE hModule,
                        DWORD  ul_reason_for_call,
@@ -30,11 +30,13 @@ BOOL APIENTRY DllMain( HMODULE hModule,
     case DLL_PROCESS_ATTACH:
     {        
         //TestActor test;
-        //Engine::Level::ASprite* test = new Engine::Level::ASprite("Hello");
+        Engine::Level::ASprite* test = new Engine::Level::ASprite("Hello");
         sprite = Engine::Level::ActorManager::GetInstance().CreateActor<Engine::Level::ASprite>("hello");
         size_t actorCount = Engine::Level::ActorManager::GetInstance().GetNumActorList();
         int k = 5;
-        //Engine::Level::SpriteComponent test;
+        Engine::Component::SpriteComponent* spriteComponent;
+        spriteComponent = nullptr;
+        spriteComponent->SetRotation(Vector3(1, 1, 1));
     }
     break;
     case DLL_THREAD_ATTACH:

@@ -1,8 +1,8 @@
 #pragma once
 #include "DLLDefine.h"
 #include "Common/RuntimeContext.h"
-#include "ComponentTypes.h"
 #include "TransformGroup.h"
+#include "ComponentTypes.h"
 
 //Component의 이름이 추가되는것은 흔한일이 아니기에, 포함하고있는 모든 헤더가 빌드되는건 어쩔수없는것같음
 //Component에서 type이 필요 없으면 뺴주기. 필요하면 추가하기.
@@ -10,28 +10,27 @@ namespace Engine
 {
 	namespace Component
 	{		
-		class ComponentBase
+		enum class SceneComponentType;
+		class ComponentBaseImpl;
+		class DrawableComponentImpl;
+
+		class ENGINE_API ComponentBase
 		{
 		public:
 			//RUNTIME_ABSTRACT_ROOT_CLASS(ComponentBase)
 		public:
-			ComponentBase(const std::string& name, SceneComponentType type): Name(name), Enable(true), Type(type) {}
+			ComponentBase(const std::string& name, SceneComponentType type);
 			virtual ~ComponentBase(){}
 			virtual void Init() = 0;
 			virtual void Tick(float elasedTime) = 0;
 			void SetPosition(DirectX::SimpleMath::Vector3 const& pos);
 			void SetScale(DirectX::SimpleMath::Vector3 const& scale);
 			void SetRotation(DirectX::SimpleMath::Vector3 const& rot);
-			const TransformGroup& GetComponentTransform() { return Transform; }
+			const TransformGroup& GetComponentTransform();
 			void UpdateComponentTransform(const TransformGroup* parent);
-			SceneComponentType ComponentType() { return Type; }			
+			SceneComponentType ComponentType();
 		private:
-			std::string Name;
-			std::shared_ptr<ComponentBase> Parent;
-			std::list<std::shared_ptr<ComponentBase>> Child;			
-			TransformGroup Transform;
-			bool Enable;
-			SceneComponentType Type;
+			ComponentBaseImpl* pImpl;
 			
 			//std::map<PropertyName, EngineProperty*> Properties;
 
@@ -40,7 +39,7 @@ namespace Engine
 			//component 
 		};
 
-		class DrawableComponent : public ComponentBase
+		class ENGINE_API DrawableComponent : public ComponentBase
 		{
 		public:
 			//RUNTIME_ABSTRACT_SUB_CLASS(DrawableComponent, ComponentBase)
@@ -49,6 +48,7 @@ namespace Engine
 			void SetVisible(bool visible) { Visible = visible; }
 			bool IsVisible() { return Visible; }
 		private:
+			DrawableComponentImpl* pImpl;
 			bool		Visible;
 			//DrawLayer	ComponentDrawLayer;
 		};

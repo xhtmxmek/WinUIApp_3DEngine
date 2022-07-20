@@ -1,5 +1,6 @@
 #include "EngineMinimal.h"
 #include "SpriteComponent.h"
+#include "SpriteComponentImpl.h"
 
 namespace Engine
 {
@@ -8,21 +9,28 @@ namespace Engine
 		RUNTIME_CLASS_IMPL(SpriteComponent)
 
 		SpriteComponent::SpriteComponent(const std::string& name)
-			:DrawableComponent(name)
+			:DrawableComponent(name),
+			pImpl(nullptr)
 		{
-			m_spriteBatch.reset();
+			pImpl = new SpriteComponentImpl(name);			
 		}
+
+		SpriteComponent::~SpriteComponent()
+		{
+			delete pImpl;
+		}
+
 		void SpriteComponent::Init()
 		{
 		}
+
 		void SpriteComponent::Tick(float elasedTime)
 		{
 		}
+
 		void SpriteComponent::Draw()
 		{
-			m_spriteBatch->Begin();
-			//m_spriteBatch->Draw();
-			m_spriteBatch->End();
+			pImpl->Draw();			
 		}
 	}
 }

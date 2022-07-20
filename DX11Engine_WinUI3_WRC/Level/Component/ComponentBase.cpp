@@ -1,9 +1,16 @@
 #include "EngineMinimal.h"
 #include "ComponentBase.h"
+#include "ComponentBaseImpl.h"
 namespace Engine
 {		
 	namespace Component 
-	{		
+	{
+		ComponentBase::ComponentBase(const std::string& name, SceneComponentType type)
+			:pImpl(nullptr)
+		{
+			pImpl = new ComponentBaseImpl(name, type);
+		}
+
 		void ComponentBase::SetPosition(Vector3 const& pos)
 		{
 			//Transform.SetPosition(pos);
@@ -16,14 +23,19 @@ namespace Engine
 		{
 			//Transform.SetRotation(rot);
 		}
+		const TransformGroup& ComponentBase::GetComponentTransform()
+		{
+			return pImpl->GetComponentTransform();
+			// // O: 여기에 return 문을 삽입합니다.
+		}
 		void ComponentBase::UpdateComponentTransform(const TransformGroup* parent)
 		{
-			std::for_each(Child.begin(), Child.end(),
-				[this](std::shared_ptr<ComponentBase>& component) {
-					ComponentBase* child = component.get();
-					if (child)
-						child->UpdateComponentTransform(&Transform);
-				});
+			pImpl->UpdateComponentTransform( parent );
+		}
+
+		SceneComponentType ComponentBase::ComponentType()
+		{
+			return pImpl->ComponentType();
 		}
 
 		//RUNTIME_CLASS_IMPL(DrawableComponent)

@@ -7,17 +7,19 @@ namespace Engine
 {
 	namespace Component
 	{
-		class SpriteComponent : public DrawableComponent
+		class SpriteComponentImpl;
+		class ENGINE_API SpriteComponent : public DrawableComponent
 		{			
 		public:			
 			RUNTIME_SUBCLASS(DrawableComponent)
 		public:
 			SpriteComponent(const std::string& name = "SpriteComponent");
+			~SpriteComponent();
 			void Init() final;			
 			void Tick(float elasedTime) final;
 			void Draw() final;
-		private:			
-			std::unique_ptr<DirectX::SpriteBatch> m_spriteBatch;
+		private:
+			SpriteComponentImpl* pImpl;
 		};
 	}
 }

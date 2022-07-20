@@ -140,11 +140,12 @@
     <ClInclude Include="Level\Actor\SpriteImpl.h" />
     <ClInclude Include="Level\Component\CameraComponent.h" />
     <ClInclude Include="Level\Component\ComponentBase.h" />
-    <ClInclude Include="Level\Component\ComponentFactory.h" />
+    <ClInclude Include="Level\Component\ComponentBaseImpl.h" />
     <ClInclude Include="Level\Component\ComponentLinker.h" />
     <ClInclude Include="Level\Component\ComponentTypes.h" />
     <ClInclude Include="Level\Component\EngineProperty.h" />
     <ClInclude Include="Level\Component\SpriteComponent.h" />
+    <ClInclude Include="Level\Component\SpriteComponentImpl.h" />
     <ClInclude Include="Level\Component\StaticMeshComponent.h" />
     <ClInclude Include="Level\Component\TransformGroup.h" />
     <ClInclude Include="Level\Level.h" />
@@ -174,8 +175,10 @@
     <ClCompile Include="Level\Actor\SpriteImpl.cpp" />
     <ClCompile Include="Level\Component\CameraComponent.cpp" />
     <ClCompile Include="Level\Component\ComponentBase.cpp" />
+    <ClCompile Include="Level\Component\ComponentBaseImpl.cpp" />
     <ClCompile Include="Level\Component\ComponentLinker.cpp" />
     <ClCompile Include="Level\Component\SpriteComponent.cpp" />
+    <ClCompile Include="Level\Component\SpriteComponentImpl.cpp" />
     <ClCompile Include="Level\Component\StaticMeshComponent.cpp" />
     <ClCompile Include="Level\Component\TransformGroup.cpp" />
     <ClCompile Include="Level\Level.cpp" />

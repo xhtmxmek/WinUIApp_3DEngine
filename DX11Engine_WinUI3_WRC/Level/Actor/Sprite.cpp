@@ -10,9 +10,14 @@ namespace Engine
 		RUNTIME_CLASS_IMPL(ASprite)
 
 		ASprite::ASprite(const std::string& actorName)
-			:Actor(actorName)			
+			:Actor(actorName),
+			pImpl(nullptr)
 		{			
 			pImpl = new SpriteImpl(CreateComponent<Component::SpriteComponent>("Sprite"));
+		}
+		ASprite::~ASprite()
+		{
+			delete pImpl;
 		}
 		void ASprite::Init()
 		{

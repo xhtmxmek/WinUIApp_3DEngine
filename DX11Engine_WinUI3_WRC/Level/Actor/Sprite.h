@@ -20,6 +20,7 @@ namespace Engine
 		public:
 			//ASprite() = default;
 			ASprite(const std::string& actorName);
+			~ASprite();
 
 			virtual void Init() final;
 			virtual void Tick(float elasedTime) final;

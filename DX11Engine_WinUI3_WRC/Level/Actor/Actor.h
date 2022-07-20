@@ -25,7 +25,7 @@ namespace Engine
 			Actor(const std::string& name);
 
 			//¼Ò¸êÀÚ
-			virtual ~Actor() {};
+			virtual ~Actor();
 
 			virtual void Init() = 0;
 
@@ -58,7 +58,7 @@ namespace Engine
 		private:
 			std::shared_ptr<Component::ComponentBase> CreateComponent(const std::string& className, const std::string& instanceName);
 			std::shared_ptr<Component::ComponentBase> GetComponentByName(const std::string& name);
-			//Impl
+			//Impl			
 			ActorImpl* pImpl;
 			
 			//std::map<std::string, std::shared_ptr<ComponentBase>> Components;			

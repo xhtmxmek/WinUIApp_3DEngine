@@ -14,7 +14,7 @@ namespace Engine
 		class ComponentBase;
 		class DrawableComponent;
 		class CameraComponent;
-		enum SceneComponentType;
+		enum class SceneComponentType;
 	}
 
 	namespace Level

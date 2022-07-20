@@ -72,6 +72,8 @@
     <ClCompile Include="Level\Component\CameraComponent.cpp" />
     <ClCompile Include="Level\Level.cpp" />
     <ClCompile Include="Level\Actor\SpriteImpl.cpp" />
+    <ClCompile Include="Level\Component\SpriteComponentImpl.cpp" />
+    <ClCompile Include="Level\Component\ComponentBaseImpl.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="EngineMinimal.h" />
@@ -135,13 +137,14 @@
     <ClInclude Include="EngineAsset\Material.h" />
     <ClInclude Include="DLLDefine.h" />
     <ClInclude Include="Level\Actor\ActorImpl.h" />
-    <ClInclude Include="Level\Component\ComponentFactory.h" />
     <ClInclude Include="Common\RuntimeContext.h" />
     <ClInclude Include="Level\Actor\ActorManagerImpl.h" />
     <ClInclude Include="Level\Component\ComponentLinker.h" />
     <ClInclude Include="Level\Component\CameraComponent.h" />
     <ClInclude Include="Level\Level.h" />
     <ClInclude Include="Level\Actor\SpriteImpl.h" />
+    <ClInclude Include="Level\Component\SpriteComponentImpl.h" />
+    <ClInclude Include="Level\Component\ComponentBaseImpl.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="DX11Engine_WinUI3_WRC.def" />

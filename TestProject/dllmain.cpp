@@ -14,6 +14,7 @@
 #include "Level/Actor/ActorManager.h"
 #include "Level/Actor/Sprite.h"
 #include "Level/Component/SpriteComponent.h"
+#include "Level/Component/StaticMeshComponent.h"
 //#include "Level/Component/TransformGroup.h"
 
 

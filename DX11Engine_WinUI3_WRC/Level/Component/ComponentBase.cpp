@@ -11,6 +11,11 @@ namespace Engine
 			pImpl = new ComponentBaseImpl(name, type);
 		}
 
+		ComponentBase::~ComponentBase()
+		{
+			delete pImpl;
+		}
+
 		void ComponentBase::SetPosition(Vector3 const& pos)
 		{
 			//Transform.SetPosition(pos);
@@ -23,6 +28,10 @@ namespace Engine
 		{
 			//Transform.SetRotation(rot);
 		}
+		DirectX::SimpleMath::Vector3 ComponentBase::GetRotation()
+		{
+			return pImpl->GetRotation();
+		}
 		const TransformGroup& ComponentBase::GetComponentTransform()
 		{
 			return pImpl->GetComponentTransform();
@@ -30,7 +39,16 @@ namespace Engine
 		}
 		void ComponentBase::UpdateComponentTransform(const TransformGroup* parent)
 		{
-			pImpl->UpdateComponentTransform( parent );
+			//자기자신의 transform update
+			pImpl->UpdateComponentTransform(parent);
+
+			//자식의 transform 업데이트
+			std::for_each(pImpl->GetChildren().begin(), pImpl->GetChildren().end(),
+				[this](std::shared_ptr<ComponentBase>& component) {
+					ComponentBase* child = component.get();
+					if (child)
+						child->UpdateComponentTransform(&pImpl->GetComponentTransform());
+				});			
 		}
 
 		SceneComponentType ComponentBase::ComponentType()

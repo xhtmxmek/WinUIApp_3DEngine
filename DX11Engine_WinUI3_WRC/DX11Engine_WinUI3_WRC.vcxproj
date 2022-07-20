@@ -147,6 +147,7 @@
     <ClInclude Include="Level\Component\SpriteComponent.h" />
     <ClInclude Include="Level\Component\SpriteComponentImpl.h" />
     <ClInclude Include="Level\Component\StaticMeshComponent.h" />
+    <ClInclude Include="Level\Component\StaticMeshComponentImpl.h" />
     <ClInclude Include="Level\Component\TransformGroup.h" />
     <ClInclude Include="Level\Level.h" />
     <ClInclude Include="Level\World.h" />
@@ -180,6 +181,7 @@
     <ClCompile Include="Level\Component\SpriteComponent.cpp" />
     <ClCompile Include="Level\Component\SpriteComponentImpl.cpp" />
     <ClCompile Include="Level\Component\StaticMeshComponent.cpp" />
+    <ClCompile Include="Level\Component\StaticMeshComponentImpl.cpp" />
     <ClCompile Include="Level\Component\TransformGroup.cpp" />
     <ClCompile Include="Level\Level.cpp" />
     <ClCompile Include="Level\World.cpp" />

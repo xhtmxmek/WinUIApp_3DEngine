@@ -74,6 +74,7 @@
     <ClCompile Include="Level\Actor\SpriteImpl.cpp" />
     <ClCompile Include="Level\Component\SpriteComponentImpl.cpp" />
     <ClCompile Include="Level\Component\ComponentBaseImpl.cpp" />
+    <ClCompile Include="Level\Component\StaticMeshComponentImpl.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="EngineMinimal.h" />
@@ -145,6 +146,7 @@
     <ClInclude Include="Level\Actor\SpriteImpl.h" />
     <ClInclude Include="Level\Component\SpriteComponentImpl.h" />
     <ClInclude Include="Level\Component\ComponentBaseImpl.h" />
+    <ClInclude Include="Level\Component\StaticMeshComponentImpl.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="DX11Engine_WinUI3_WRC.def" />

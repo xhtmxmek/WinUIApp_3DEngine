@@ -26,14 +26,14 @@ namespace Engine
 			//Transform.
 		}
 
+		DirectX::SimpleMath::Vector3 ComponentBaseImpl::GetRotation()
+		{
+			return Vector3(1,1,1);
+		}
+
 		void ComponentBaseImpl::UpdateComponentTransform(const TransformGroup* parent)
 		{
-			//std::for_each(Child.begin(), Child.end(),
-			//	[this](std::shared_ptr<ComponentBase>& component) {
-			//		ComponentBase* child = component.get();
-			//		if (child)
-			//			child->UpdateComponentTransform(&Transform);
-			//	});
+
 		}
 	}
 }

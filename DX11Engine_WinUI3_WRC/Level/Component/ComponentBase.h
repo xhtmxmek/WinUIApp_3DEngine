@@ -20,18 +20,20 @@ namespace Engine
 			//RUNTIME_ABSTRACT_ROOT_CLASS(ComponentBase)
 		public:
 			ComponentBase(const std::string& name, SceneComponentType type);
-			virtual ~ComponentBase(){}
+			virtual ~ComponentBase();
 			virtual void Init() = 0;
 			virtual void Tick(float elasedTime) = 0;
 			void SetPosition(DirectX::SimpleMath::Vector3 const& pos);
 			void SetScale(DirectX::SimpleMath::Vector3 const& scale);
 			void SetRotation(DirectX::SimpleMath::Vector3 const& rot);
+			DirectX::SimpleMath::Vector3 GetRotation();
 			const TransformGroup& GetComponentTransform();
 			void UpdateComponentTransform(const TransformGroup* parent);
 			SceneComponentType ComponentType();
 		private:
 			ComponentBaseImpl* pImpl;
-			
+			//std::list<std::shared_ptr<ComponentBase>> Child;
+			//std::shared_ptr<ComponentBase> Parent;
 			//std::map<PropertyName, EngineProperty*> Properties;
 
 			//component 생성시에 component의 타입을 명시해줘야 하고, component를 얻어올떄 component의 타입명시를 해야한다.

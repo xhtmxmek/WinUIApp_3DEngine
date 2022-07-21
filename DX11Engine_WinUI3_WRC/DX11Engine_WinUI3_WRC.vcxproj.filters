@@ -46,19 +46,19 @@
     <ClCompile Include="Level\Actor\Actor.cpp">
       <Filter>Level\Actor</Filter>
     </ClCompile>
-    <ClCompile Include="Level\Component\TransformGroup.cpp">
+    <ClCompile Include="Level\TransformGroup\TransformGroup.cpp">
       <Filter>Component</Filter>
     </ClCompile>
     <ClCompile Include="Level\Component\ComponentBase.cpp">
       <Filter>Component</Filter>
     </ClCompile>
-    <ClCompile Include="Level\Component\StaticMeshComponent.cpp">
+    <ClCompile Include="Level\Component\StaticMeshComponent\StaticMeshComponent.cpp">
       <Filter>Component</Filter>
     </ClCompile>
     <ClCompile Include="Level\Actor\Sprite.cpp">
       <Filter>Level\Actor</Filter>
     </ClCompile>
-    <ClCompile Include="Level\Component\SpriteComponent.cpp">
+    <ClCompile Include="Level\Component\SpriteComponent\SpriteComponent.cpp">
       <Filter>Component</Filter>
     </ClCompile>
     <ClCompile Include="Renderer\LevelRenderer.cpp">
@@ -72,9 +72,10 @@
     <ClCompile Include="Level\Component\CameraComponent.cpp" />
     <ClCompile Include="Level\Level.cpp" />
     <ClCompile Include="Level\Actor\SpriteImpl.cpp" />
-    <ClCompile Include="Level\Component\SpriteComponentImpl.cpp" />
+    <ClCompile Include="Level\Component\SpriteComponent\SpriteComponentImpl.cpp" />
     <ClCompile Include="Level\Component\ComponentBaseImpl.cpp" />
-    <ClCompile Include="Level\Component\StaticMeshComponentImpl.cpp" />
+    <ClCompile Include="Level\Component\StaticMeshComponent\StaticMeshComponentImpl.cpp" />
+    <ClCompile Include="Level\TransformGroup\TransformGroupImpl.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="EngineMinimal.h" />
@@ -114,13 +115,13 @@
     <ClInclude Include="Level\Component\ComponentTypes.h">
       <Filter>Component</Filter>
     </ClInclude>
-    <ClInclude Include="Level\Component\TransformGroup.h">
+    <ClInclude Include="Level\TransformGroup\TransformGroup.h">
       <Filter>Component</Filter>
     </ClInclude>
     <ClInclude Include="Common\EngineMath.h">
       <Filter>Common</Filter>
     </ClInclude>
-    <ClInclude Include="Level\Component\StaticMeshComponent.h">
+    <ClInclude Include="Level\Component\StaticMeshComponent\StaticMeshComponent.h">
       <Filter>Component</Filter>
     </ClInclude>
     <ClInclude Include="Level\Component\EngineProperty.h">
@@ -129,7 +130,7 @@
     <ClInclude Include="Level\Actor\Sprite.h">
       <Filter>Level\Actor</Filter>
     </ClInclude>
-    <ClInclude Include="Level\Component\SpriteComponent.h">
+    <ClInclude Include="Level\Component\SpriteComponent\SpriteComponent.h">
       <Filter>Component</Filter>
     </ClInclude>
     <ClInclude Include="Renderer\LevelRenderer.h">
@@ -144,9 +145,10 @@
     <ClInclude Include="Level\Component\CameraComponent.h" />
     <ClInclude Include="Level\Level.h" />
     <ClInclude Include="Level\Actor\SpriteImpl.h" />
-    <ClInclude Include="Level\Component\SpriteComponentImpl.h" />
+    <ClInclude Include="Level\Component\SpriteComponent\SpriteComponentImpl.h" />
     <ClInclude Include="Level\Component\ComponentBaseImpl.h" />
-    <ClInclude Include="Level\Component\StaticMeshComponentImpl.h" />
+    <ClInclude Include="Level\Component\StaticMeshComponent\StaticMeshComponentImpl.h" />
+    <ClInclude Include="Level\TransformGroup\TransformGroupImpl.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="DX11Engine_WinUI3_WRC.def" />

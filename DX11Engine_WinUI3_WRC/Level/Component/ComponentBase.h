@@ -1,7 +1,7 @@
 #pragma once
 #include "DLLDefine.h"
 #include "Common/RuntimeContext.h"
-#include "TransformGroup.h"
+#include "../TransformGroup/TransformGroup.h"
 #include "ComponentTypes.h"
 
 //Component의 이름이 추가되는것은 흔한일이 아니기에, 포함하고있는 모든 헤더가 빌드되는건 어쩔수없는것같음
@@ -27,8 +27,8 @@ namespace Engine
 			void SetScale(DirectX::SimpleMath::Vector3 const& scale);
 			void SetRotation(DirectX::SimpleMath::Vector3 const& rot);
 			DirectX::SimpleMath::Vector3 GetRotation();
-			const TransformGroup& GetComponentTransform();
-			void UpdateComponentTransform(const TransformGroup* parent);
+			const Level::TransformGroup& GetComponentTransform();
+			void UpdateComponentTransform(const Level::TransformGroup* parent);
 			SceneComponentType ComponentType();
 		private:
 			ComponentBaseImpl* pImpl;

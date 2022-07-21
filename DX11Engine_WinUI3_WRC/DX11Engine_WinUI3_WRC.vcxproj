@@ -144,11 +144,12 @@
     <ClInclude Include="Level\Component\ComponentLinker.h" />
     <ClInclude Include="Level\Component\ComponentTypes.h" />
     <ClInclude Include="Level\Component\EngineProperty.h" />
-    <ClInclude Include="Level\Component\SpriteComponent.h" />
-    <ClInclude Include="Level\Component\SpriteComponentImpl.h" />
-    <ClInclude Include="Level\Component\StaticMeshComponent.h" />
-    <ClInclude Include="Level\Component\StaticMeshComponentImpl.h" />
-    <ClInclude Include="Level\Component\TransformGroup.h" />
+    <ClInclude Include="Level\Component\SpriteComponent\SpriteComponent.h" />
+    <ClInclude Include="Level\Component\SpriteComponent\SpriteComponentImpl.h" />
+    <ClInclude Include="Level\Component\StaticMeshComponent\StaticMeshComponent.h" />
+    <ClInclude Include="Level\Component\StaticMeshComponent\StaticMeshComponentImpl.h" />
+    <ClInclude Include="Level\TransformGroup\TransformGroup.h" />
+    <ClInclude Include="Level\TransformGroup\TransformGroupImpl.h" />
     <ClInclude Include="Level\Level.h" />
     <ClInclude Include="Level\World.h" />
     <ClInclude Include="EngineMinimal.h" />
@@ -178,12 +179,13 @@
     <ClCompile Include="Level\Component\ComponentBase.cpp" />
     <ClCompile Include="Level\Component\ComponentBaseImpl.cpp" />
     <ClCompile Include="Level\Component\ComponentLinker.cpp" />
-    <ClCompile Include="Level\Component\SpriteComponent.cpp" />
-    <ClCompile Include="Level\Component\SpriteComponentImpl.cpp" />
-    <ClCompile Include="Level\Component\StaticMeshComponent.cpp" />
-    <ClCompile Include="Level\Component\StaticMeshComponentImpl.cpp" />
-    <ClCompile Include="Level\Component\TransformGroup.cpp" />
+    <ClCompile Include="Level\Component\SpriteComponent\SpriteComponent.cpp" />
+    <ClCompile Include="Level\Component\SpriteComponent\SpriteComponentImpl.cpp" />
+    <ClCompile Include="Level\Component\StaticMeshComponent\StaticMeshComponent.cpp" />
+    <ClCompile Include="Level\Component\StaticMeshComponent\StaticMeshComponentImpl.cpp" />
+    <ClCompile Include="Level\TransformGroup\TransformGroup.cpp" />
     <ClCompile Include="Level\Level.cpp" />
+    <ClCompile Include="Level\TransformGroup\TransformGroupImpl.cpp" />
     <ClCompile Include="Level\World.cpp" />
     <ClCompile Include="EngineMinimal.cpp">
       <PrecompiledHeader>Create</PrecompiledHeader>

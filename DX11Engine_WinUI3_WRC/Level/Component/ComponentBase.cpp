@@ -32,12 +32,12 @@ namespace Engine
 		{
 			return pImpl->GetRotation();
 		}
-		const TransformGroup& ComponentBase::GetComponentTransform()
+		const Level::TransformGroup& ComponentBase::GetComponentTransform()
 		{
 			return pImpl->GetComponentTransform();
 			// // O: 여기에 return 문을 삽입합니다.
 		}
-		void ComponentBase::UpdateComponentTransform(const TransformGroup* parent)
+		void ComponentBase::UpdateComponentTransform(const Level::TransformGroup* parent)
 		{
 			//자기자신의 transform update
 			pImpl->UpdateComponentTransform(parent);

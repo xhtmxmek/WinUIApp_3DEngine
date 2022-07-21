@@ -13,9 +13,9 @@
 
 #include "Level/Actor/ActorManager.h"
 #include "Level/Actor/Sprite.h"
-#include "Level/Component/SpriteComponent.h"
-#include "Level/Component/StaticMeshComponent.h"
-//#include "Level/Component/TransformGroup.h"
+#include "Level/Component/SpriteComponent/SpriteComponent.h"
+#include "Level/Component/StaticMeshComponent/StaticMeshComponent.h"
+#include "Level/TransformGroup/TransformGroup.h"
 
 
 using namespace DirectX::SimpleMath;
@@ -37,7 +37,7 @@ BOOL APIENTRY DllMain( HMODULE hModule,
         int k = 5;
         Engine::Component::SpriteComponent* spriteComponent;
         spriteComponent = nullptr;
-        spriteComponent->SetRotation(Vector3(1, 1, 1));
+        spriteComponent->SetRotation(Vector3(1, 1, 1));        
     }
     break;
     case DLL_THREAD_ATTACH:

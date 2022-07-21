@@ -1,6 +1,6 @@
 #pragma once
 #include "DLLDefine.h"
-#include "ComponentBase.h"
+#include "../ComponentBase.h"
 #include "Common/RuntimeContext.h"
 
 namespace Engine

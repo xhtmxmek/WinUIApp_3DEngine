@@ -1,6 +1,6 @@
 #pragma once
 #include "DLLDefine.h"
-#include "EngineProperty.h"
+//#include "EngineProperty.h"
 
 namespace DirectX	
 {
@@ -13,13 +13,18 @@ namespace DirectX
 
 namespace Engine
 {		
-	namespace Component
+	namespace Level
 	{
-		class TransformGroup
+		class TransformGroupImpl;
+
+		class ENGINE_API TransformGroup
 		{
 		public:
 			TransformGroup();
+			~TransformGroup();
+			const DirectX::SimpleMath::Vector3& GetPosition() const;
 		private:
+			TransformGroupImpl* pImpl;
 			//FVector3 test;
 			//	void SetPosition(const DirectX::SimpleMath::Vector3& pos);
 			//	void SetScale(const DirectX::SimpleMath::Vector3& scale);
@@ -36,10 +41,6 @@ namespace Engine
 			//	//transform.SetPositon
 			//	//GetPosition
 			//	//내부에서 position 참조할떄.
-			//	DirectX::SimpleMath::Vector3 Position;
-			//	DirectX::SimpleMath::Vector3 Scale;
-			//	//quat일 경우 0,0,0,1
-			//	DirectX::SimpleMath::Vector3 Rotation;
 
 			//	DirectX::SimpleMath::Matrix World;
 			//	DirectX::SimpleMath::Matrix Local;

@@ -1,10 +1,11 @@
 #include "EngineMinimal.h"
-#include "ComponentTypes.h"
+//#include "ComponentTypes.h"
 #include "TransformGroup.h"
+#include "TransformGroupImpl.h"
 
 namespace Engine
 {
-	namespace Component
+	namespace Level
 	{
 		//const TransformGroup TransformGroup::Identity;
 
@@ -29,11 +30,18 @@ namespace Engine
 
 			//pos에 Value에 =연산자로 넣으면 onchanged 함수 불림.
 			//onchanged&SetTransform은 UI에서 property 제어할때만 적용됨			
+
+			pImpl = new TransformGroupImpl();
 		}
-		//const Vector3& TransformGroup::GetPosition() const
-		//{
-		//	return Position;
-		//}
+		TransformGroup::~TransformGroup()
+		{
+			delete pImpl;
+		}
+
+		const Vector3& TransformGroup::GetPosition() const
+		{
+			return pImpl->GetPosition();
+		}
 		//const Vector3& TransformGroup::GetScale() const
 		//{
 		//	return Scale;

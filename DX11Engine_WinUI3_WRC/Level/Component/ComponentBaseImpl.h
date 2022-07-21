@@ -1,6 +1,6 @@
 #pragma once
 #include "ComponentTypes.h"
-#include "TransformGroup.h"
+#include "../TransformGroup/TransformGroup.h"
 
 namespace Engine
 {
@@ -17,8 +17,8 @@ namespace Engine
 			void SetScale(DirectX::SimpleMath::Vector3 const& scale);
 			void SetRotation(DirectX::SimpleMath::Vector3 const& rot);
 			DirectX::SimpleMath::Vector3 GetRotation();
-			const TransformGroup& GetComponentTransform() { return Transform; }
-			void UpdateComponentTransform(const TransformGroup* parent);
+			const Level::TransformGroup& GetComponentTransform() { return Transform; }
+			void UpdateComponentTransform(const Level::TransformGroup* parent);
 			SceneComponentType ComponentType() { return Type; }
 			std::shared_ptr<ComponentBase> GetParent() { return Parent; }
 			std::list<std::shared_ptr<ComponentBase>>& GetChildren() { return Children; }
@@ -28,7 +28,7 @@ namespace Engine
 			std::string Name;
 			std::shared_ptr<ComponentBase> Parent;
 			std::list<std::shared_ptr<ComponentBase>> Children;
-			TransformGroup Transform;
+			Level::TransformGroup Transform;
 			bool Enable;
 			SceneComponentType Type;
 		};

@@ -1,5 +1,5 @@
 #pragma once
-#include "ComponentBase.h"
+#include "../ComponentBase.h"
 
 namespace Engine
 {

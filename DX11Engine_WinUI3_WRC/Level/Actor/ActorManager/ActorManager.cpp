@@ -1,7 +1,7 @@
 #include "EngineMinimal.h"
 #include "ActorManager.h"
 #include "ActorManagerImpl.h"
-#include "Actor.h"
+#include "../Actor.h"
 
 namespace Engine
 {
@@ -10,6 +10,10 @@ namespace Engine
 		ActorManager::ActorManager()
 		{
 			pImpl = new ActorManagerImpl();
+		}
+
+		ActorManager::~ActorManager()
+		{			
 		}
 
 		void ActorManager::CheckActorListCapacity()
@@ -24,6 +28,11 @@ namespace Engine
 		std::shared_ptr<Actor> ActorManager::GetActorByName(const std::string& actorName)
 		{
 			return pImpl->GetActorByName(actorName);
+		}
+
+		void ActorManager::ReleaseInstance()
+		{
+			delete pImpl;
 		}
 
 		void ActorManager::Init()

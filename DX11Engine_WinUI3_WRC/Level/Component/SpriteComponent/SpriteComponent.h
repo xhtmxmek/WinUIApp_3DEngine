@@ -1,7 +1,12 @@
 #pragma once
 #include "DLLDefine.h"
-#include "../ComponentBase.h"
+#include "../ComponentBase/ComponentBase.h"
 #include "Common/RuntimeContext.h"
+
+namespace winrt
+{
+	struct hstring;
+}
 
 namespace Engine
 {
@@ -18,6 +23,8 @@ namespace Engine
 			void Init() final;			
 			void Tick(float elasedTime) final;
 			void Draw() final;
+			void Load(const winrt::hstring& textureName);
+			void SetPosition(DirectX::SimpleMath::Vector2 screenPos);
 		private:
 			SpriteComponentImpl* pImpl;
 		};

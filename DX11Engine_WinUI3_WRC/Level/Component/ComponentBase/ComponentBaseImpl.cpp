@@ -31,7 +31,7 @@ namespace Engine
 			return Vector3(1,1,1);
 		}
 
-		void ComponentBaseImpl::UpdateComponentTransform(const Level::TransformGroup* parent)
+		void ComponentBaseImpl::UpdateComponentTransform(const Math::TransformGroup* parent)
 		{
 
 		}

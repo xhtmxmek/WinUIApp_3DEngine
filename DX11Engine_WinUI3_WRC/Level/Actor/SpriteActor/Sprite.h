@@ -1,6 +1,6 @@
 #pragma once
 #include "DLLDefine.h"
-#include "Actor.h"
+#include "../Actor.h"
 
 namespace Engine
 {			

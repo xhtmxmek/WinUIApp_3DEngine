@@ -18,9 +18,9 @@ namespace Engine
 	{
 		class World;
 		class ActorImpl;
-
+		
 		class ENGINE_API Actor
-		{					
+		{								
 		public:
 			Actor(const std::string& name);
 
@@ -53,7 +53,7 @@ namespace Engine
 			}
 
 			void SetRootComponent(Component::ComponentBase* component);
-			std::unique_ptr<World>& GetWorld();
+			std::shared_ptr<World> GetWorld();
 
 		private:
 			std::shared_ptr<Component::ComponentBase> CreateComponent(const std::string& className, const std::string& instanceName);

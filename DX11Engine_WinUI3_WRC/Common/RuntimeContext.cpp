@@ -1,9 +1,9 @@
 #include "EngineMinimal.h"
 #include "RuntimeContext.h"
-#include "Level/Component/SpriteComponent.h"
-#include "Level/Component/StaticMeshComponent.h"
-#include "Level/Component/CameraComponent.h"
-#include "Level/Actor/Sprite.h"
+#include "Level/Component/SpriteComponent/SpriteComponent.h"
+#include "Level/Component/StaticMeshComponent/StaticMeshComponent.h"
+#include "Level/Component/CameraComponent/CameraComponent.h"
+#include "Level/Actor/SpriteActor/Sprite.h"
 
 namespace Engine
 {

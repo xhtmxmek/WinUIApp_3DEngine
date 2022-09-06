@@ -1,5 +1,5 @@
 #include "EngineMinimal.h"
-#include "Level/Component/ComponentBase.h"
+#include "Level/Component/ComponentBase/ComponentBase.h"
 #include "Level/Component/ComponentTypes.h"
 #include "Common/RuntimeContext.h"
 //#include "Level/Component/TransformGroup.h"
@@ -28,7 +28,7 @@ namespace Engine
                 return nullptr;
         }
 
-        std::unique_ptr<World>& ActorImpl::GetWorld()
+        std::shared_ptr<World> ActorImpl::GetWorld()
         {
             return SLevel::GetInstance().GetWorld();
         }

@@ -1,12 +1,16 @@
 #include "EngineMinimal.h"
 #include "ComponentBase.h"
 #include "ComponentBaseImpl.h"
+//#include "Level/Actor/Actor.h"
+//#include "Level/World.h"
+
 namespace Engine
 {		
 	namespace Component 
 	{
 		ComponentBase::ComponentBase(const std::string& name, SceneComponentType type)
 			:pImpl(nullptr)
+			,Owner(nullptr)
 		{
 			pImpl = new ComponentBaseImpl(name, type);
 		}
@@ -32,12 +36,12 @@ namespace Engine
 		{
 			return pImpl->GetRotation();
 		}
-		const Level::TransformGroup& ComponentBase::GetComponentTransform()
+		const Math::TransformGroup& ComponentBase::GetComponentTransform()
 		{
 			return pImpl->GetComponentTransform();
 			// // O: 여기에 return 문을 삽입합니다.
 		}
-		void ComponentBase::UpdateComponentTransform(const Level::TransformGroup* parent)
+		void ComponentBase::UpdateComponentTransform(const Math::TransformGroup* parent)
 		{
 			//자기자신의 transform update
 			pImpl->UpdateComponentTransform(parent);
@@ -55,6 +59,12 @@ namespace Engine
 		{
 			return pImpl->ComponentType();
 		}
+
+		//DrawableComponent::DrawableComponent(const std::string& name)
+		//	:ComponentBase(name, SceneComponentType::Drawable)
+		//{
+
+		//}
 
 		//RUNTIME_CLASS_IMPL(DrawableComponent)
 	}

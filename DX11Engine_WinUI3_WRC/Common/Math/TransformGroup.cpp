@@ -5,7 +5,7 @@
 
 namespace Engine
 {
-	namespace Level
+	namespace Math
 	{
 		//const TransformGroup TransformGroup::Identity;
 
@@ -38,33 +38,34 @@ namespace Engine
 			delete pImpl;
 		}
 
+		void TransformGroup::SetPosition(const Vector3& pos)
+		{
+			pImpl->SetPosition(pos);
+			//UpdateTransform();
+		}
+		void TransformGroup::SetScale(const Vector3& scale)
+		{
+			pImpl->SetScale(scale);
+			//UpdateTransform();
+		}
+		void TransformGroup::SetRotation(const Vector3& rotation)
+		{
+			pImpl->SetRotation(rotation);
+			//UpdateTransform();
+		}
+
 		const Vector3& TransformGroup::GetPosition() const
 		{
 			return pImpl->GetPosition();
 		}
-		//const Vector3& TransformGroup::GetScale() const
-		//{
-		//	return Scale;
-		//}
-		//const Vector3& TransformGroup::GetRotation() const
-		//{
-		//	return Rotation;
-		//}
-		//void TransformGroup::SetPosition(const Vector3& pos)
-		//{
-		//	Position = pos;
-		//	UpdateTransform();
-		//}
-		//void TransformGroup::SetScale(const Vector3& scale)
-		//{
-		//	Scale = scale;
-		//	UpdateTransform();
-		//}
-		//void TransformGroup::SetRotation(const Vector3& rotation)
-		//{
-		//	Rotation = rotation;
-		//	UpdateTransform();
-		//}
+		const Vector3& TransformGroup::GetScale() const
+		{
+			return pImpl->GetScale();
+		}
+		const Vector3& TransformGroup::GetRotation() const
+		{
+			return pImpl->GetRotation();
+		}
 		////void TransformGroup::OnChangeTransorm(EngineProperty* property)
 		////{
 		////	UpdateTransform();

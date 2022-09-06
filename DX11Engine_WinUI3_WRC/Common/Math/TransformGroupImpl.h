@@ -2,13 +2,19 @@
 
 namespace Engine
 {
-	namespace Level
+	namespace Math
 	{
 		class TransformGroupImpl
 		{
 		public:
 			TransformGroupImpl();
-			const DirectX::SimpleMath::Vector3& GetPosition() const { return Position; }
+			void SetPosition(const DirectX::SimpleMath::Vector3& pos);
+			void SetScale(const DirectX::SimpleMath::Vector3& scale);
+			void SetRotation(const DirectX::SimpleMath::Vector3& rotation);
+
+			const DirectX::SimpleMath::Vector3& GetPosition() const;
+			const DirectX::SimpleMath::Vector3& GetScale() const;
+			const DirectX::SimpleMath::Vector3& GetRotation() const;			
 		private:
 			DirectX::SimpleMath::Vector3 Position;
 			DirectX::SimpleMath::Vector3 Scale;

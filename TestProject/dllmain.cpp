@@ -11,11 +11,11 @@
 #include "SimpleMath.h"
 //#include "SpriteBatch.h"
 
-#include "Level/Actor/ActorManager.h"
-#include "Level/Actor/Sprite.h"
+#include "Level/Actor/ActorManager/ActorManager.h"
+#include "Level/Actor/SpriteActor/Sprite.h"
 #include "Level/Component/SpriteComponent/SpriteComponent.h"
 #include "Level/Component/StaticMeshComponent/StaticMeshComponent.h"
-#include "Level/TransformGroup/TransformGroup.h"
+#include "Common/Math/TransformGroup.h"
 
 
 using namespace DirectX::SimpleMath;
@@ -30,14 +30,13 @@ BOOL APIENTRY DllMain( HMODULE hModule,
     {        
     case DLL_PROCESS_ATTACH:
     {        
-        //TestActor test;
-        Engine::Level::ASprite* test = new Engine::Level::ASprite("Hello");
+        //TestActor test;        
         sprite = Engine::Level::ActorManager::GetInstance().CreateActor<Engine::Level::ASprite>("hello");
         size_t actorCount = Engine::Level::ActorManager::GetInstance().GetNumActorList();
         int k = 5;
-        Engine::Component::SpriteComponent* spriteComponent;
-        spriteComponent = nullptr;
-        spriteComponent->SetRotation(Vector3(1, 1, 1));        
+        //Engine::Component::SpriteComponent* spriteComponent;
+        //spriteComponent = nullptr;
+        //spriteComponent->SetRotation(Vector3(1, 1, 1));        
     }
     break;
     case DLL_THREAD_ATTACH:

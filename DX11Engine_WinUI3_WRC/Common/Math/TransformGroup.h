@@ -13,7 +13,7 @@ namespace DirectX
 
 namespace Engine
 {		
-	namespace Level
+	namespace Math
 	{
 		class TransformGroupImpl;
 
@@ -21,18 +21,16 @@ namespace Engine
 		{
 		public:
 			TransformGroup();
-			~TransformGroup();
-			const DirectX::SimpleMath::Vector3& GetPosition() const;
-		private:
-			TransformGroupImpl* pImpl;
-			//FVector3 test;
-			//	void SetPosition(const DirectX::SimpleMath::Vector3& pos);
-			//	void SetScale(const DirectX::SimpleMath::Vector3& scale);
-			//	void SetRotation(const DirectX::SimpleMath::Vector3& rotation);
+			~TransformGroup();			
+			void SetPosition(const DirectX::SimpleMath::Vector3& pos);
+			void SetScale(const DirectX::SimpleMath::Vector3& scale);
+			void SetRotation(const DirectX::SimpleMath::Vector3& rotation);
 
-			//	const DirectX::SimpleMath::Vector3& GetPosition() const;
-			//	const DirectX::SimpleMath::Vector3& GetScale() const;
-			//	const DirectX::SimpleMath::Vector3& GetRotation() const;
+			const DirectX::SimpleMath::Vector3& GetPosition() const;
+			const DirectX::SimpleMath::Vector3& GetScale() const;
+			const DirectX::SimpleMath::Vector3& GetRotation() const;
+		private:
+			TransformGroupImpl* pImpl;			
 			//	const DirectX::SimpleMath::Matrix& GetWorld() const { return World; }
 			//	//static TransformGroup const& Identity() { return Identity; }
 			//	static const TransformGroup Identity;
@@ -48,7 +46,7 @@ namespace Engine
 			//	//GameObject* Owner;
 
 			//	//void OnChangeTransorm(EngineProperty* property);
-			//	void UpdateTransform(TransformGroup* parent = nullptr );
+			//void UpdateTransform(TransformGroup* parent = nullptr );
 		};
 	}
 

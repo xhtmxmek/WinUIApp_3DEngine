@@ -10,7 +10,7 @@ namespace Engine
 			:OwningWorld(nullptr)
 		{
 			if (OwningWorld == nullptr)
-				OwningWorld = std::make_unique<World>();
+				OwningWorld = std::make_shared<World>();
 		}
 	}
 }

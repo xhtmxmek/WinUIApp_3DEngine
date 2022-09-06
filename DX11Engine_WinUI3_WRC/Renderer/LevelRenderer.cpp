@@ -1,6 +1,6 @@
 #include "EngineMinimal.h"
 #include "LevelRenderer.h"
-#include "Level/Component/ComponentBase.h"
+#include "Level/Component/ComponentBase/ComponentBase.h"
 
 namespace Engine
 {

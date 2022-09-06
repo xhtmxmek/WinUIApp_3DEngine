@@ -4,12 +4,13 @@
 //#include "Level/Component/TransformGroup.h"
 #include "ActorImpl.h"
 #include "Actor.h"
-#include "Level/Component/ComponentBase.h"
+#include "Level/Component/ComponentBase/ComponentBase.h"
 
 namespace Engine
 {
     namespace Level
-    {
+    {        
+
         Actor::Actor(const std::string& name)
         {
             pImpl = new ActorImpl(name);
@@ -25,7 +26,7 @@ namespace Engine
             pImpl->SetRootComponent(component);
         }
 
-        std::unique_ptr<World>& Actor::GetWorld()
+        std::shared_ptr<World> Actor::GetWorld()
         {         
             return pImpl->GetWorld();
         }

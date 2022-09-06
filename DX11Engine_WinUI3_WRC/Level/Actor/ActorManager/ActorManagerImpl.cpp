@@ -1,6 +1,6 @@
 #include "EngineMinimal.h"
 #include "ActorManagerImpl.h"
-#include "Actor.h"
+#include "../Actor.h"
 
 namespace Engine
 {

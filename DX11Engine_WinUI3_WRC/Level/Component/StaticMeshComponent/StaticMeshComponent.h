@@ -1,5 +1,5 @@
 #pragma once
-#include "../ComponentBase.h"
+#include "../ComponentBase/ComponentBase.h"
 
 namespace Engine
 {
@@ -7,7 +7,7 @@ namespace Engine
 	{
 		class StaticMeshComponentImpl;
 
-		class StaticMeshComponent : public DrawableComponent
+		class ENGINE_API StaticMeshComponent : public DrawableComponent
 		{
 		public:
 			RUNTIME_SUBCLASS(StaticMeshComponent)

@@ -21,13 +21,13 @@ namespace Engine
 			//{
 			//	return 
 			//}
-			std::unique_ptr<World>& GetWorld()
+			std::shared_ptr<World> GetWorld()
 			{
 				return OwningWorld;
 			}
 		private:
 			SLevel();
-			std::unique_ptr<World> OwningWorld;
+			std::shared_ptr<World> OwningWorld;
 		};
 	}
 }

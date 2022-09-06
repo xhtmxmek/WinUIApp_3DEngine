@@ -1,11 +1,11 @@
 #pragma once
-#include "ComponentBase.h"
+#include "../ComponentBase/ComponentBase.h"
 
 namespace Engine
 {
 	namespace Component
 	{
-		class CameraComponent : public ComponentBase
+		class ENGINE_API CameraComponent : public ComponentBase
 		{
 		public:
 			RUNTIME_SUBCLASS(CameraComponent)

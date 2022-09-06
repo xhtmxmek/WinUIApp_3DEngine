@@ -1,6 +1,6 @@
 #include "EngineMinimal.h"
 #include "ComponentLinker.h"
-#include "ComponentBase.h"
+#include "ComponentBase/ComponentBase.h"
 #include "Level/World.h"
 
 namespace Engine

@@ -44,7 +44,7 @@ namespace Engine
 			
 			std::shared_ptr<Component::ComponentBase> CreateComponent(const std::string& className, const std::string& instanceName);
 
-			std::unique_ptr<World>& GetWorld();
+			std::shared_ptr<World> GetWorld();
 			//SLevel& GetLevel();
 
 			//Properties

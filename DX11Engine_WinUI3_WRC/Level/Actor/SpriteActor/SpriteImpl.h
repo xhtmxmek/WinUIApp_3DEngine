@@ -13,13 +13,14 @@ namespace Engine
 		{
 		public:
 			//ASprite() = default;
-			SpriteImpl(const std::shared_ptr<Component::SpriteComponent>& spriteBatch);
+			SpriteImpl();
 
 			void Init();
 			void Tick(float elasedTime);
+
+			void SetSpriteBatch(std::shared_ptr<Component::SpriteComponent> ptr);	//추후 Get_Set Accessor로 바꾸기
 		private:
-			std::shared_ptr<Component::SpriteComponent> SpriteBatch;
-			//Component::SpriteComponent* SpriteBatch;
+			std::shared_ptr<Component::SpriteComponent> SpriteBatch;			
 		};
 	}
 }

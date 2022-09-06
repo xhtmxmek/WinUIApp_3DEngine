@@ -8,7 +8,7 @@
 #include "Common/Engine_Scoped_Lock.h"
 #include "Level/World.h"
 #include "Renderer/LevelRenderer.h"
-#include "Level/Actor/ActorManager.h"
+#include "Level/Actor/ActorManager/ActorManager.h"
 #include <fstream>
 #include <sstream>
 #include "Common/RuntimeContext.h"
@@ -43,7 +43,14 @@ namespace winrt::DX11Engine_WinUI3_WRC::implementation
 
     EngineDX11::~EngineDX11()
     {        
+        //DX11 릴리즈 되어야 하는 친구들은 여기서 릴리즈.(사실상 전부)
         DX::DeviceResourcesUtil::GetInstance().ReleaseInstance();
+        Engine::Level::ActorManager::GetInstance().ReleaseInstance();
+        //월드 
+        //액터 매니저 
+        //머티리얼 매니저
+        //셰이더 매니저
+        //렌더러?
     }
 
 #pragma region Initialize
@@ -158,12 +165,12 @@ namespace winrt::DX11Engine_WinUI3_WRC::implementation
 
         m_World->Render();        
         // TODO: Add your rendering code here.
-        m_spriteBatch->Begin();
+        //m_spriteBatch->Begin();
 
-        m_spriteBatch->Draw(m_texture.get(), m_screenPos, nullptr,
-            Colors::White, 0.f, m_origin);
+        //m_spriteBatch->Draw(m_texture.get(), m_screenPos, nullptr,
+        //    Colors::White, 0.f, m_origin);
 
-        m_spriteBatch->End();
+        //m_spriteBatch->End();
 
         PIXEndEvent(context);
 
@@ -272,11 +279,11 @@ namespace winrt::DX11Engine_WinUI3_WRC::implementation
     // These are the resources that depend on the device.
     bool EngineDX11::CreateDeviceDependentResources()
     {
-        auto device = DX::DeviceResourcesUtil::GetDeviceResources()->GetD3DDevice();
+        //auto device = DX::DeviceResourcesUtil::GetDeviceResources()->GetD3DDevice();
 
         // TODO: Initialize device dependent objects here (independent of window size).
-        auto context = DX::DeviceResourcesUtil::GetDeviceResources()->GetD3DDeviceContext();
-        m_spriteBatch = std::make_unique<SpriteBatch>(context);        
+        //auto context = DX::DeviceResourcesUtil::GetDeviceResources()->GetD3DDeviceContext();
+        //m_spriteBatch = std::make_unique<SpriteBatch>(context);        
 
 
         //StorageFolder storageFolder = ApplicationData::Current().LocalFolder();
@@ -289,7 +296,7 @@ namespace winrt::DX11Engine_WinUI3_WRC::implementation
         //
 
         ////WinUi3에서는?
-        winrt::hstring path = winrt::Windows::ApplicationModel::Package::Current().InstalledLocation().Path();
+       // winrt::hstring path = winrt::Windows::ApplicationModel::Package::Current().InstalledLocation().Path();
         //winrt::hstring test = L"D:\\StudyDir\\DirectX11Engine_UWP\\cat.png";
         //
 
@@ -312,21 +319,21 @@ namespace winrt::DX11Engine_WinUI3_WRC::implementation
         //testStr << strPath << L"\\test.txt";
         
         //path = path + L"/Assets/Textures/cat.png";
-        path = L"D:\\StudyDir\\WinUIApp_3DEngine\\TestProject\\Assets\\cat.png";
-        com_ptr_nothrow<ID3D11Resource> resource;
-        HRESULT hr = CreateWICTextureFromFile(device, path.c_str(),
-            //CreateWICTextureFromFile(device, L"Assets/cat.png",
-            resource.addressof(),
-            m_texture.put());
+        //path = L"D:\\StudyDir\\WinUIApp_3DEngine\\TestProject\\Assets\\cat.png";
+        //com_ptr_nothrow<ID3D11Resource> resource;
+        //HRESULT hr = CreateWICTextureFromFile(device, path.c_str(),
+        //    //CreateWICTextureFromFile(device, L"Assets/cat.png",
+        //    resource.addressof(),
+        //    m_texture.put());
 
-        com_ptr_nothrow<ID3D11Texture2D> cat;
-        DX::ThrowIfFailed(resource.query_to(cat.addressof()));
+        //com_ptr_nothrow<ID3D11Texture2D> cat;
+        //DX::ThrowIfFailed(resource.query_to(cat.addressof()));
 
-        CD3D11_TEXTURE2D_DESC catDesc;
-        cat->GetDesc(&catDesc);
+        //CD3D11_TEXTURE2D_DESC catDesc;
+        //cat->GetDesc(&catDesc);
 
-        m_origin.x = float(catDesc.Width / 2);
-        m_origin.y = float(catDesc.Height / 2);
+        //m_origin.x = float(catDesc.Width / 2);
+        //m_origin.y = float(catDesc.Height / 2);
 
         return true;
     }

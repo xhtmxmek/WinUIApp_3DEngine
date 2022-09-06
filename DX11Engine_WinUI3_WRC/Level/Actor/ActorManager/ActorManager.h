@@ -37,6 +37,8 @@ namespace Engine
 				return actor;
 			}
 
+			void ReleaseInstance();
+
 			void Init();
 
 			template<typename T>
@@ -53,6 +55,7 @@ namespace Engine
 			ActorManagerImpl* pImpl;
 			//func
 			ActorManager();
+			~ActorManager();
 			void CheckActorListCapacity();
 			std::shared_ptr<Actor> CreateActor(const std::string& className, const std::string& instanceName);
 			//Actor* CreateActor(const std::string& className, const std::string& instanceName);

@@ -6,6 +6,7 @@
 #include "Common/EngineHelper.h"
 #include "Common/EngineCriticalSection.h"
 #include "Common/Engine_Scoped_Lock.h"
+#include "Level/Level.h"
 #include "Level/World.h"
 #include "Renderer/LevelRenderer.h"
 #include "Level/Actor/ActorManager/ActorManager.h"
@@ -37,8 +38,8 @@ namespace winrt::DX11Engine_WinUI3_WRC::implementation
         DX::DeviceResourcesUtil::GetInstance().CreateDeviceResources();        
         DX::DeviceResourcesUtil::GetDeviceResources()->RegisterDeviceNotify(this);
         m_criticalSection = winrt::make<DX11Engine_WinUI3_WRC::implementation::EngineCriticalSection>();
-        Engine::RuntimeContext::InitialzeRuntimeTable();
-        m_World = std::make_unique<Engine::Level::World>();        
+        Engine::RuntimeContext::InitialzeRuntimeTable();        
+        m_World = Engine::Level::SLevel::GetInstance().GetWorld();
     }
 
     EngineDX11::~EngineDX11()
@@ -46,6 +47,7 @@ namespace winrt::DX11Engine_WinUI3_WRC::implementation
         //DX11 릴리즈 되어야 하는 친구들은 여기서 릴리즈.(사실상 전부)
         DX::DeviceResourcesUtil::GetInstance().ReleaseInstance();
         Engine::Level::ActorManager::GetInstance().ReleaseInstance();
+        Engine::Level::SLevel::GetInstance().ReleaseInstance();
         //월드 
         //액터 매니저 
         //머티리얼 매니저

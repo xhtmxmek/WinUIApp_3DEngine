@@ -83,6 +83,7 @@
 #include <wincodec.h>
 
 using namespace DirectX::SimpleMath;
+using namespace std;
 
 
 

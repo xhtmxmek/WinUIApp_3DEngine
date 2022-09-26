@@ -18,9 +18,9 @@ namespace Engine
 			void Init();
 			void Tick(float elasedTime);
 
-			void SetSpriteBatch(std::shared_ptr<Component::SpriteComponent> ptr);	//추후 Get_Set Accessor로 바꾸기
+			GET_SET_ACCESSOR(std::shared_ptr<Component::SpriteComponent>, SpriteComponent);
 		private:
-			std::shared_ptr<Component::SpriteComponent> SpriteBatch;			
+			std::shared_ptr<Component::SpriteComponent> SpriteComponent;
 		};
 	}
 }

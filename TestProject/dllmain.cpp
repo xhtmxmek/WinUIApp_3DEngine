@@ -16,6 +16,7 @@
 #include "Level/Component/SpriteComponent/SpriteComponent.h"
 #include "Level/Component/StaticMeshComponent/StaticMeshComponent.h"
 #include "Common/Math/TransformGroup.h"
+#include "Level/World.h"
 
 
 using namespace DirectX::SimpleMath;

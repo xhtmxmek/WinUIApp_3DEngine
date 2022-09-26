@@ -37,8 +37,8 @@ namespace Engine
 			{				
 				std::string runTimeClassName = T::ClassName();
 				auto newComponent = std::static_pointer_cast<T>(CreateComponent(runTimeClassName, InstanceName));
-				//Component::ComponentLink<T>(newComponent);
-				Component::ComponentDispatch(newComponent);
+				//Component::ComponentLink<T>(newComponent);				
+				Component::ComponentDispatch(this, newComponent);
 				//return std::static_pointer_cast<T>(CreateComponent(runTimeClassName, InstanceName));
 				return newComponent;
 				//생성된 클래스를 월드에 넣어주면, 월드가 템플릿 기반으로 컴포넌트를 받으면 되지 않나? 아니면 특수화버전으로.

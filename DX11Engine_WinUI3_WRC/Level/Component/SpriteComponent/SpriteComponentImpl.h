@@ -2,6 +2,11 @@
 
 namespace Engine
 {
+	namespace EngineAsset
+	{
+		class Texture;
+	}
+
 	namespace Component
 	{
 		class SpriteComponentImpl
@@ -12,7 +17,9 @@ namespace Engine
 			void Tick(float elasedTime);
 			void Draw();
 			void Load(const winrt::hstring& textureName);	
-			void SetPosition(Vector2 screenPos) { ScreenPos = screenPos; }
+			//GET_SET_ACCESSOR(Vector2, ScreenPos);
+			//GET_SET_ACCESSOR(float, Rotation);
+			//GET_SET_ACCESSOR(float, Scale);			
 		private:
 			//property로 빼는건 나중에
 			Vector2 ScreenPos;
@@ -21,9 +28,9 @@ namespace Engine
 
 			Vector2 UVOffset;
 			Color TintColor;
-			winrt::com_ptr<ID3D11ShaderResourceView> m_texture;
+			shared_ptr<EngineAsset::Texture> BasicTexture;
 			//Colors::WH
-			std::unique_ptr<DirectX::SpriteBatch> m_spriteBatch;
+			std::unique_ptr<DirectX::SpriteBatch> SpriteBatch;
 		};
 	}
 }

@@ -74,6 +74,8 @@
     <ClCompile Include="Common\Math\TransformGroupImpl.cpp" />
     <ClCompile Include="Level\Actor\ActorManager\ActorManager.cpp" />
     <ClCompile Include="Level\Actor\ActorManager\ActorManagerImpl.cpp" />
+    <ClCompile Include="Level\LevelImpl.cpp" />
+    <ClCompile Include="EngineAsset\Texture.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="EngineMinimal.h" />
@@ -148,6 +150,9 @@
     <ClInclude Include="Common\Math\TransformGroupImpl.h" />
     <ClInclude Include="Level\Actor\ActorManager\ActorManager.h" />
     <ClInclude Include="Level\Actor\ActorManager\ActorManagerImpl.h" />
+    <ClInclude Include="Common\pImplClassDefine.h" />
+    <ClInclude Include="Level\LevelImpl.h" />
+    <ClInclude Include="EngineAsset\Texture.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="DX11Engine_WinUI3_WRC.def" />

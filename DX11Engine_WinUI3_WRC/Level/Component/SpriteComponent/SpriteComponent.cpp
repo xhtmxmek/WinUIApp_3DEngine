@@ -8,12 +8,16 @@ namespace Engine
 	namespace Component
 	{
 		RUNTIME_CLASS_IMPL(SpriteComponent)
+		//IMPL_CLASS_PROPERTY_DEFEINITION(SpriteComponent, Vector2, ScreenPos)
+		//IMPL_CLASS_PROPERTY_DEFEINITION(SpriteComponent, shared_ptr<DirectX::SpriteBatch>, SpriteBatch)
+
 
 		SpriteComponent::SpriteComponent(const std::string& name)
 			:DrawableComponent(name),
 			pImpl(nullptr)
 		{
-			pImpl = new SpriteComponentImpl(name);			
+			pImpl = new SpriteComponentImpl(name);
+			//SetDiffuseTexture()
 		}
 
 		SpriteComponent::~SpriteComponent()
@@ -23,6 +27,7 @@ namespace Engine
 
 		void SpriteComponent::Init()
 		{
+			pImpl->Init();
 		}
 
 		void SpriteComponent::Tick(float elasedTime)
@@ -37,10 +42,6 @@ namespace Engine
 		void SpriteComponent::Load(const winrt::hstring& textureName)
 		{
 			pImpl->Load(textureName);
-		}
-		void SpriteComponent::SetPosition(Vector2 screenPos)
-		{
-			pImpl->SetPosition(screenPos);
 		}
 	}
 }

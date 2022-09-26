@@ -1,5 +1,6 @@
 #include "EngineMinimal.h"
 #include "Level/Component/SpriteComponent/SpriteComponent.h"
+#include "Common/pImplClassDefine.h"
 #include "SpriteImpl.h"
 
 namespace Engine
@@ -7,7 +8,7 @@ namespace Engine
 	namespace Level
 	{		
 		SpriteImpl::SpriteImpl()
-		:SpriteBatch(nullptr)
+		:SpriteComponent(nullptr)
 		{
 			//SpriteBatch = CreateComponent<Component::SpriteComponent>("Sprite");
 			
@@ -21,10 +22,6 @@ namespace Engine
 
 		void SpriteImpl::Tick(float elapsedTime)
 		{
-		}
-		void SpriteImpl::SetSpriteBatch(std::shared_ptr<Component::SpriteComponent> ptr)
-		{
-
 		}
 	}
 }

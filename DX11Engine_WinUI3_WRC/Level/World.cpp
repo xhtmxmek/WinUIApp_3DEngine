@@ -14,11 +14,11 @@ namespace Engine
 	{
 		World::World()
 		{
-			Actors.clear();
+			Actors.clear();			
 			PushComponentFunc.reserve(static_cast<int>(Component::SceneComponentType::ComponentType_Max));
 			PushComponentFunc.resize(static_cast<int>(Component::SceneComponentType::ComponentType_Max));
-			//PushComponentFunc[static_cast<int>(Component::SceneComponentType::Drawable)] = std::bind(&World::PushDrawableComponent, this, std::placeholders::_1);
-			//PushComponentFunc[static_cast<int>(Component::SceneComponentType::Camera)] = std::bind(&World::PushCameraComponent, this, std::placeholders::_1);
+			PushComponentFunc[static_cast<int>(Component::SceneComponentType::Drawable)] = std::bind(&World::PushDrawableComponent, this, std::placeholders::_1);
+			PushComponentFunc[static_cast<int>(Component::SceneComponentType::Camera)] = std::bind(&World::PushCameraComponent, this, std::placeholders::_1);
 
 			//DrawComponent를 Maximum만큼 정해놓기...
 		}
@@ -48,6 +48,8 @@ namespace Engine
 			//DrawActors.reserve(Actors.size());			
 			//액터는 여러개의 drawComponent를 가질수있음. 여기서 액터가 가지고있는 컴포넌틀를 전부 검사해야하나? 아니면
 			//
+
+			size_t test = ActorManager::GetInstance().GetNumActorList();
 			DrawComponentsThisFrame.reserve(DrawComponents.size());
 			for (const auto& elements : DrawComponents)
 			{
@@ -70,7 +72,7 @@ namespace Engine
 		}
 		void World::PushComponent(const std::shared_ptr<Component::ComponentBase>& component)
 		{
-			//PushComponentFunc[static_cast<int>(component->ComponentType())](component);
+			PushComponentFunc[static_cast<int>(component->ComponentType())](component);
 		}
 	}
 }

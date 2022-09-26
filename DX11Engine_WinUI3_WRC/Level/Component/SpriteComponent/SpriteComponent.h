@@ -2,6 +2,7 @@
 #include "DLLDefine.h"
 #include "../ComponentBase/ComponentBase.h"
 #include "Common/RuntimeContext.h"
+//#include "Common/pImplClassDefine.h"
 
 namespace winrt
 {
@@ -23,10 +24,10 @@ namespace Engine
 			void Init() final;			
 			void Tick(float elasedTime) final;
 			void Draw() final;
-			void Load(const winrt::hstring& textureName);
-			void SetPosition(DirectX::SimpleMath::Vector2 screenPos);
+			void Load(const winrt::hstring& textureName);			
 		private:
 			SpriteComponentImpl* pImpl;
+			//IMPL_CLASS_PROPERTY(std::shared_ptr<DirectX::SpriteBatch>, SpriteBatch);
 		};
 	}
 }

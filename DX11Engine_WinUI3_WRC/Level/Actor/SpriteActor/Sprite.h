@@ -15,9 +15,8 @@ namespace Engine
 		class SpriteImpl;
 
 		class ENGINE_API ASprite : public Actor
-		{
-		public:
-			IMPL_CLASS_PROPERTY(std::shared_ptr<Component::SpriteComponent>, SpriteComponent);
+		{		
+		//IMPL_CLASS_PROPERTY(std::shared_ptr<Component::SpriteComponent>, SpriteComponent)
 		public:
 			RUNTIME_SUBCLASS(Actor)
 		public:
@@ -28,12 +27,13 @@ namespace Engine
 			virtual void Init() final;
 			virtual void Tick(float elasedTime) final;
 		private:
-			map<string, string> mapTest;
-			string testTypeMember;
 			SpriteImpl* pImpl;
 			//GET_SET_IMPL_ACCESSOR(std::shared_ptr<Component::SpriteComponent>, SpriteBatch);			
 			//std::shared_ptr<Component::SpriteComponent> SpriteBatch;
-			//Component::SpriteComponent* SpriteBatch;		
+			//Component::SpriteComponent* SpriteBatch;
+			//속성값 넣어주면 속성값 이름으로 연산자
+		public:		
+			IMPL_CLASS_PROPERTY(std::shared_ptr<Component::SpriteComponent>, Sprite)
 			
 		};
 	}

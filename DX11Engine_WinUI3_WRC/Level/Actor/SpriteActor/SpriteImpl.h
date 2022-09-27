@@ -18,9 +18,9 @@ namespace Engine
 			void Init();
 			void Tick(float elasedTime);
 
-			GET_SET_ACCESSOR(std::shared_ptr<Component::SpriteComponent>, SpriteComponent);
+			GET_SET_ACCESSOR(std::shared_ptr<Component::SpriteComponent>, Sprite);
 		private:
-			std::shared_ptr<Component::SpriteComponent> SpriteComponent;
+			std::shared_ptr<Component::SpriteComponent> Sprite;
 		};
 	}
 }

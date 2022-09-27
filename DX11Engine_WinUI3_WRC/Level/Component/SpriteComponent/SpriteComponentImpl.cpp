@@ -13,7 +13,8 @@ namespace Engine
 			:ScreenPos(0.f, 0.f),
 			TintColor(0.f, 0.f, 0.f, 0.f)
 		{
-			SpriteBatch = make_unique<DirectX::SpriteBatch>();
+			auto deviceContext = DX::DeviceResourcesUtil::GetDeviceResources()->GetD3DDeviceContext();
+			SpriteBatch = make_unique<DirectX::SpriteBatch>(deviceContext);
 			BasicTexture = EngineAsset::TextureManager::GetInstance().GetTexture(L"D:\\StudyDir\\WinUIApp_3DEngine\\TestProject\\Assets\\cat.png");
 			//SpriteBatch->
 			//Load(L"");

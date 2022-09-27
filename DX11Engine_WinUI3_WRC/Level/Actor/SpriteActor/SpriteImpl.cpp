@@ -8,7 +8,7 @@ namespace Engine
 	namespace Level
 	{		
 		SpriteImpl::SpriteImpl()
-		:SpriteComponent(nullptr)
+		:Sprite(nullptr)
 		{
 			//SpriteBatch = CreateComponent<Component::SpriteComponent>("Sprite");
 			

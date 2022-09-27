@@ -4,6 +4,20 @@ namespace Engine
 {
 	namespace EngineAsset
 	{
+		class Texture
+		{
+		public:
+			Texture() : Name(L"") {};
+			bool Load(const wstring& textureName);
+			const winrt::com_ptr<ID3D11ShaderResourceView>& GetShaderResourceView()
+			{
+				return ShaderResourceView;
+			}
+		private:
+			winrt::com_ptr<ID3D11ShaderResourceView> ShaderResourceView;
+			std::wstring Name;
+		};
+
 		class TextureManager
 		{
 		public:
@@ -28,25 +42,12 @@ namespace Engine
 					auto newTexture = make_shared<Texture>();
 					Textures.insert(make_pair(textureName, newTexture));
 					return newTexture;
+					//요거 고쳐야됨
 				}
 			}
 		private:
-			TextureManager();
+			TextureManager(){}
 			map< winrt::hstring, shared_ptr<Texture>> Textures;
-		};
-
-		class Texture
-		{
-		public:
-			Texture() : Name(L"") {};
-			bool Load(const wstring& textureName);
-			const winrt::com_ptr<ID3D11ShaderResourceView>& GetShaderResourceView()
-			{
-				return ShaderResourceView;
-			}
-		private:
-			winrt::com_ptr<ID3D11ShaderResourceView> ShaderResourceView;
-			std::wstring Name;
 		};
 	}
 }

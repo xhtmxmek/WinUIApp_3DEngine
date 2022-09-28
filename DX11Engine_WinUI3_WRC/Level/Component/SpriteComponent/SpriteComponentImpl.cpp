@@ -35,8 +35,9 @@ namespace Engine
 			SpriteBatch->Begin();
 			//Sprite가 필요한것.
 			//screenPos, originpos, color, rotation			
+			ScreenPos = Vector2(200.0f, 200.0f);
 			SpriteBatch->Draw(BasicTexture->GetShaderResourceView().get(), ScreenPos, nullptr,
-				TintColor, Rotation, Vector2(0.f,0.f) );
+				TintColor, Rotation, Vector2(200.f,200.f) );
 
 			SpriteBatch->End();
 		}

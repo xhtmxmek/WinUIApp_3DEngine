@@ -31,9 +31,8 @@ namespace Engine
 			//GET_SET_IMPL_ACCESSOR(std::shared_ptr<Component::SpriteComponent>, SpriteBatch);			
 			//std::shared_ptr<Component::SpriteComponent> SpriteBatch;
 			//Component::SpriteComponent* SpriteBatch;
-			//속성값 넣어주면 속성값 이름으로 연산자
-		public:		
-			IMPL_CLASS_PROPERTY(std::shared_ptr<Component::SpriteComponent>, Sprite)
+			//속성값 넣어주면 속성값 이름으로 연산자			
+		IMPL_CLASS_PROPERTY(std::shared_ptr<Component::SpriteComponent>, Sprite)
 			
 		};
 	}

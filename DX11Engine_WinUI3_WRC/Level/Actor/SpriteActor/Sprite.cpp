@@ -1,6 +1,5 @@
 #include "EngineMinimal.h"
 #include "Level/Component/SpriteComponent/SpriteComponent.h"
-//#include "Common/pImplClassDefine.h"
 #include "Sprite.h"
 #include "SpriteImpl.h"
 #include "Level/World.h"
@@ -37,7 +36,7 @@ namespace Engine
 			pImpl = new SpriteImpl();				
 			//매크로로 집어넣기. 아니면 Component로 생성한 애들은 Impl에 자동화해서 들어가도록 만들기.
 			//SpriteComponent를 생성하면 SpriteImpl에 해당포인터를 넘겨줘야됨
-			//Sprite(CreateComponent<Component::SpriteComponent>("Sprite"));			
+			Sprite(CreateComponent<Component::SpriteComponent>("Sprite"));			
 			//Actor 생성하는데에서 그냥 월드 포인터 받아서 집어넣기.				
 			//요거 두개 되고 나면, 화면에 렌더링 확인.
 			//그다음에 카메라 컴포넌트, 스태틱 메시 구현해서 화면 렌더링 확인.

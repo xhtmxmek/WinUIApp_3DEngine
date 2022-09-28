@@ -10,6 +10,7 @@
 #include "Level/World.h"
 #include "Renderer/LevelRenderer.h"
 #include "Level/Actor/ActorManager/ActorManager.h"
+#include "EngineAsset/Texture.h"
 #include <fstream>
 #include <sstream>
 #include "Common/RuntimeContext.h"
@@ -48,6 +49,7 @@ namespace winrt::DX11Engine_WinUI3_WRC::implementation
         DX::DeviceResourcesUtil::GetInstance().ReleaseInstance();
         Engine::Level::ActorManager::GetInstance().ReleaseInstance();
         Engine::Level::SLevel::GetInstance().ReleaseInstance();
+        Engine::EngineAsset::TextureManager::GetInstance().ReleaseInstance();
         //월드 
         //액터 매니저 
         //머티리얼 매니저
@@ -169,8 +171,8 @@ namespace winrt::DX11Engine_WinUI3_WRC::implementation
         // TODO: Add your rendering code here.
         //m_spriteBatch->Begin();
 
-        //m_spriteBatch->Draw(m_texture.get(), m_screenPos, nullptr,
-        //    Colors::White, 0.f, m_origin);
+        //m_spriteBatch->Draw(m_texture.get(), Vector2(0,0), nullptr,
+        //    Colors::White, 0.f, Vector2(0, 0));
 
         //m_spriteBatch->End();
 
@@ -281,11 +283,11 @@ namespace winrt::DX11Engine_WinUI3_WRC::implementation
     // These are the resources that depend on the device.
     bool EngineDX11::CreateDeviceDependentResources()
     {
-        //auto device = DX::DeviceResourcesUtil::GetDeviceResources()->GetD3DDevice();
+        auto device = DX::DeviceResourcesUtil::GetDeviceResources()->GetD3DDevice();
 
         // TODO: Initialize device dependent objects here (independent of window size).
-        //auto context = DX::DeviceResourcesUtil::GetDeviceResources()->GetD3DDeviceContext();
-        //m_spriteBatch = std::make_unique<SpriteBatch>(context);        
+        auto context = DX::DeviceResourcesUtil::GetDeviceResources()->GetD3DDeviceContext();
+        m_spriteBatch = std::make_unique<SpriteBatch>(context);        
 
 
         //StorageFolder storageFolder = ApplicationData::Current().LocalFolder();
@@ -320,6 +322,7 @@ namespace winrt::DX11Engine_WinUI3_WRC::implementation
         //std::wstringstream testStr;
         //testStr << strPath << L"\\test.txt";
         
+        //winrt::hstring path;
         //path = path + L"/Assets/Textures/cat.png";
         //path = L"D:\\StudyDir\\WinUIApp_3DEngine\\TestProject\\Assets\\cat.png";
         //com_ptr_nothrow<ID3D11Resource> resource;

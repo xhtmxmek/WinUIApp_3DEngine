@@ -8,7 +8,7 @@ namespace Engine
 		{
 		public:
 			Texture() : Name(L"") {};
-			bool Load(const wstring& textureName);
+			bool Load(const winrt::hstring& textureName);
 			const winrt::com_ptr<ID3D11ShaderResourceView>& GetShaderResourceView()
 			{
 				return ShaderResourceView;
@@ -27,6 +27,8 @@ namespace Engine
 				return instance;
 			}
 
+			void ReleaseInstance() { Textures.clear(); }
+
 			TextureManager(const TextureManager&) = delete;
 			TextureManager& operator=(const TextureManager&) = delete;
 
@@ -40,8 +42,9 @@ namespace Engine
 				else
 				{
 					auto newTexture = make_shared<Texture>();
+					newTexture->Load(textureName);
 					Textures.insert(make_pair(textureName, newTexture));
-					return newTexture;
+					return Textures[textureName];
 					//요거 고쳐야됨
 				}
 			}

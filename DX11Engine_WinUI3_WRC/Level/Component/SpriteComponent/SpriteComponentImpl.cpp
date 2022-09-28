@@ -11,13 +11,12 @@ namespace Engine
 	{
 		SpriteComponentImpl::SpriteComponentImpl(const std::string& name)
 			:ScreenPos(0.f, 0.f),
-			TintColor(0.f, 0.f, 0.f, 0.f)
+			TintColor(DirectX::Colors::White)
 		{
 			auto deviceContext = DX::DeviceResourcesUtil::GetDeviceResources()->GetD3DDeviceContext();
 			SpriteBatch = make_unique<DirectX::SpriteBatch>(deviceContext);
-			BasicTexture = EngineAsset::TextureManager::GetInstance().GetTexture(L"D:\\StudyDir\\WinUIApp_3DEngine\\TestProject\\Assets\\cat.png");
-			//SpriteBatch->
-			//Load(L"");
+			//BasicTexture = EngineAsset::TextureManager::GetInstance().GetTexture(L"D:\\StudyDir\\WinUIApp_3DEngine\\TestProject\\Assets\\cat.png");
+			BasicTexture = EngineAsset::TextureManager::GetInstance().GetTexture(L"Textures\\cat.png");
 		}
 
 		void SpriteComponentImpl::Init()

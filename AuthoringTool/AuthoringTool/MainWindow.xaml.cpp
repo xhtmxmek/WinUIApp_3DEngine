@@ -122,6 +122,13 @@ namespace winrt::AuthoringTool::implementation
 
         m_Engine.Initialize(swapChainPanel());
 
+        winrt::hstring path = L"D:\\StudyDir\\WinUIApp_3DEngine\\x64\\Debug\\TestProject.DLL";
+        HMODULE hDll = ::LoadLibrary(path.c_str());
+        if (hDll != NULL)
+        {
+            FreeLibrary(hDll);
+        }   
+
         // 독립 입력 포인터 이벤트를 얻으려면 SwapChainPanel을 등록합니다.                
         auto controller = Microsoft::UI::Dispatching::DispatcherQueueController::CreateOnDedicatedThread();
         bool test = controller.DispatcherQueue().TryEnqueue(Microsoft::UI::Dispatching::DispatcherQueuePriority::High, [this]

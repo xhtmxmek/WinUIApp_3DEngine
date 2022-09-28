@@ -82,6 +82,9 @@
 #include <concrt.h>
 #include <wincodec.h>
 
+//엔진 코드들
+#include "Common/Path.h"
+
 using namespace DirectX::SimpleMath;
 using namespace std;
 

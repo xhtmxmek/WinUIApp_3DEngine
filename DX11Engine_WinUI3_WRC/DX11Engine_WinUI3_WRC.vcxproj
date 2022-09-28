@@ -115,6 +115,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="Common\DeviceResources.h" />
+    <ClInclude Include="Common\Path.h" />
     <ClInclude Include="Common\EngineCriticalSection.h" />
     <ClInclude Include="Common\EngineHelper.h" />
     <ClInclude Include="Common\Engine_Scoped_Lock.h" />
@@ -164,6 +165,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Common\DeviceResource.cpp" />
+    <ClCompile Include="Common\Path.cpp" />
     <ClCompile Include="Common\EngineCriticalSection.cpp" />
     <ClCompile Include="Common\Engine_Scoped_Lock.cpp" />
     <ClCompile Include="Common\RuntimeContext.cpp" />

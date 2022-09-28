@@ -50,6 +50,7 @@ namespace Engine
 			//
 
 			size_t test = ActorManager::GetInstance().GetNumActorList();
+			DrawComponentsThisFrame.clear();
 			DrawComponentsThisFrame.reserve(DrawComponents.size());
 			for (const auto& elements : DrawComponents)
 			{

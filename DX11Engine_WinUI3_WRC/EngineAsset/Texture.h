@@ -33,8 +33,11 @@ namespace Engine
 			TextureManager& operator=(const TextureManager&) = delete;
 
 			const shared_ptr<Texture>& GetTexture(winrt::hstring textureName)
-			{
-				auto iter = Textures.find(textureName);
+			{	
+				winrt::hstring applicationPath = Path::ApplicationDir;				
+				winrt::hstring path = applicationPath + L"\\Assets\\" + textureName;
+
+				auto iter = Textures.find(path);
 				if (iter != Textures.end())
 				{
 					return iter->second;
@@ -42,9 +45,9 @@ namespace Engine
 				else
 				{
 					auto newTexture = make_shared<Texture>();
-					newTexture->Load(textureName);
-					Textures.insert(make_pair(textureName, newTexture));
-					return Textures[textureName];
+					newTexture->Load(path);
+					Textures.insert(make_pair(path, newTexture));
+					return Textures[path];
 					//요거 고쳐야됨
 				}
 			}

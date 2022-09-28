@@ -74,6 +74,11 @@ namespace winrt::DX11Engine_WinUI3_WRC::implementation
 
     void EngineDX11::Initialize(Microsoft::UI::Xaml::Controls::SwapChainPanel const& panel)
     {
+        //각종 경로 불러오기. TestProjectDLL에서 부르는 엔진 DLL내의 Static 클래스, 변수들은 문제가 생길수 있음.
+        //직접 가져다 쓰지 않는다고 하더라도, DLL Import를 하고 pImpl구조를 만들어서 보호해야함.
+        //Engine::Path::ApplicationDir = winrt::Windows::ApplicationModel::Package::Current().InstalledLocation().Path();
+        Engine::Path::InitBasePathes();
+        //옵션 설정
         DX::DeviceResourcesUtil::GetDeviceResources()->SetOption(DX::DeviceResources::c_UseXAML);
         CreateDeviceDependentResources();
         DX::DeviceResourcesUtil::GetDeviceResources()->SetSwapChainPanel(panel);
@@ -166,15 +171,7 @@ namespace winrt::DX11Engine_WinUI3_WRC::implementation
         auto context = DX::DeviceResourcesUtil::GetDeviceResources()->GetD3DDeviceContext();
         PIXBeginEvent(context, PIX_COLOR_DEFAULT, L"Render");
 
-
         m_World->Render();        
-        // TODO: Add your rendering code here.
-        //m_spriteBatch->Begin();
-
-        //m_spriteBatch->Draw(m_texture.get(), Vector2(0,0), nullptr,
-        //    Colors::White, 0.f, Vector2(0, 0));
-
-        //m_spriteBatch->End();
 
         PIXEndEvent(context);
 
@@ -290,9 +287,9 @@ namespace winrt::DX11Engine_WinUI3_WRC::implementation
         m_spriteBatch = std::make_unique<SpriteBatch>(context);        
 
 
-        //StorageFolder storageFolder = ApplicationData::Current().LocalFolder();
-        //winrt::hstring path = storageFolder.Path();
-        //winrt::hstring path = winrt::Windows::ApplicationModel::Package::Current().InstalledLocation().Path();
+        StorageFolder storageFolder = ApplicationData::Current().LocalFolder();
+        winrt::hstring path = storageFolder.Path();
+        path = winrt::Windows::ApplicationModel::Package::Current().InstalledLocation().Path();
 
         //UWP는 샌드박스 식이라 정해진 폴더에만 접근 가능하지만, 우회적인 방법으로 다른곳에도 접근가능.
         //https://stackoverflow.com/questions/33082835/windows-10-universal-app-file-directory-access

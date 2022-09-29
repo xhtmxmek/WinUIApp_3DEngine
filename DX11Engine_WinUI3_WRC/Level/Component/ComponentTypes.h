@@ -11,6 +11,7 @@ namespace Engine
 			//Collision,
 			Camera,
 			Sprite,
+			Script,
 			ComponentType_Max
 		};
 

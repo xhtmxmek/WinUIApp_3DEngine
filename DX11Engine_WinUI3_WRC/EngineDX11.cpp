@@ -107,7 +107,7 @@ namespace winrt::DX11Engine_WinUI3_WRC::implementation
     void EngineDX11::Tick()
     {
         m_timer.Tick([&]()
-            {
+            {                
                 Update(m_timer);
             });
 
@@ -123,7 +123,9 @@ namespace winrt::DX11Engine_WinUI3_WRC::implementation
 
         float elapsedTime = float(timer.GetElapsedSeconds());
 
-        // TODO: Add your game logic here.        
+        // TODO: Add your game logic here.
+        // Input Update       
+        //월드가 스크립트를 가지고 있나? 엔진이 스크립트를 가지고 있나. 월드가 스크립트를 가지고 있는게 맞는거같음.
         m_World->Update(elapsedTime);        
 
         PIXEndEvent();

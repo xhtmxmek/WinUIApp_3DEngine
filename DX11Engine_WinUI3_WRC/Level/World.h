@@ -38,6 +38,7 @@ namespace Engine
 			std::vector<std::shared_ptr<Component::DrawableComponent>> DrawComponents;
 			std::vector<std::shared_ptr<Component::DrawableComponent>> DrawComponentsThisFrame;
 			std::vector<std::shared_ptr<Component::CameraComponent>> CameraComponents;
+			std::vector<std::shared_ptr<Component::ScriptComponent>> CameraComponents;
 
 			std::vector<std::function<void(const std::shared_ptr<Component::ComponentBase>&)>> PushComponentFunc;
 			//std::function<void(const std::shared_ptr<Component::ComponentBase>&)> PushComponentFunc[Component::SceneComponentType::ComponentType_Max];

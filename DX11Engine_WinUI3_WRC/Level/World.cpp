@@ -25,6 +25,9 @@ namespace Engine
 		
 		void World::Update(float elapsedTime)
 		{
+			//스크립트 업데이트.
+			//스크립트에서는 input 정보를 가져옴. 스크립트에서 마우스 로테이션 만큼, 키보드 눌린거에 반응 하여 실행..
+			//특정 Value 값에 애니메이션을 줄수 있음.
 			//enable인 Actor만 Update.							
 			for (const auto& [key, value] : Actors)
 				value->Tick(elapsedTime);

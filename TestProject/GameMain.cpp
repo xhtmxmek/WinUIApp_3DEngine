@@ -23,7 +23,7 @@ namespace GameScript
 	void GameMain::Init()
 	{
 		//engine에 GameMain의 함수 연결시켜주기. or Engine의 스크립트를 상속받아서 만들기. 가능한가?
-		auto sprite = Engine::Level::ActorManager::GetInstance().CreateActor<Engine::Level::ASprite>("hello");
+		auto sprite = Engine::Level::ActorManager::GetInstance().CreateActor <Engine::Level::ASprite>("hello");
 		size_t actorCount = Engine::Level::ActorManager::GetInstance().GetNumActorList();
 		int k = 5;
 	}

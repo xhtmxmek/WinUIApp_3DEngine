@@ -14,10 +14,12 @@ namespace Engine
 
 	void RuntimeContext::InitialzeRuntimeTable()
 	{		
+		//component
 		REGISTER_RUNTIME_CLASS(SpriteComponent);
 		REGISTER_RUNTIME_CLASS(StaticMeshComponent);
 		REGISTER_RUNTIME_CLASS(CameraComponent);
 
+		//Actor
 		REGISTER_RUNTIME_CLASS(ASprite);
 	}
 }

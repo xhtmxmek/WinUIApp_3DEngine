@@ -128,6 +128,7 @@
     <ClInclude Include="Common\Uncopyable.h" />
     <ClInclude Include="DLLDefine.h" />
     <ClInclude Include="EngineAsset\Material.h" />
+    <ClInclude Include="EngineAsset\Script\RuntimeContext.h" />
     <ClInclude Include="EngineAsset\Texture.h" />
     <ClInclude Include="Level\Actor\Actor.h">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</ExcludedFromBuild>
@@ -149,6 +150,8 @@
     <ClInclude Include="Level\Component\ComponentTypes.h" />
     <ClInclude Include="Level\Component\EngineProperty.h" />
     <ClInclude Include="Level\Component\ScriptComponent\ScriptComponent.h" />
+    <ClInclude Include="Level\Component\ScriptComponent\ScriptComponentImpl.h" />
+    <ClInclude Include="EngineAsset\Script\ScriptInterface.h" />
     <ClInclude Include="Level\Component\SpriteComponent\SpriteComponent.h" />
     <ClInclude Include="Level\Component\SpriteComponent\SpriteComponentImpl.h" />
     <ClInclude Include="Level\Component\StaticMeshComponent\StaticMeshComponent.h" />
@@ -185,6 +188,7 @@
     <ClCompile Include="Level\Component\ComponentBase\ComponentBaseImpl.cpp" />
     <ClCompile Include="Level\Component\ComponentLinker.cpp" />
     <ClCompile Include="Level\Component\ScriptComponent\ScriptComponent.cpp" />
+    <ClCompile Include="Level\Component\ScriptComponent\ScriptComponentImpl.cpp" />
     <ClCompile Include="Level\Component\SpriteComponent\SpriteComponent.cpp" />
     <ClCompile Include="Level\Component\SpriteComponent\SpriteComponentImpl.cpp" />
     <ClCompile Include="Level\Component\StaticMeshComponent\StaticMeshComponent.cpp" />

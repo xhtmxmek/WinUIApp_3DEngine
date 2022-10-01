@@ -78,6 +78,7 @@
     <ClCompile Include="EngineAsset\Texture.cpp" />
     <ClCompile Include="Common\Path.cpp" />
     <ClCompile Include="Level\Component\ScriptComponent\ScriptComponent.cpp" />
+    <ClCompile Include="Level\Component\ScriptComponent\ScriptComponentImpl.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="EngineMinimal.h" />
@@ -157,6 +158,9 @@
     <ClInclude Include="EngineAsset\Texture.h" />
     <ClInclude Include="Common\Path.h" />
     <ClInclude Include="Level\Component\ScriptComponent\ScriptComponent.h" />
+    <ClInclude Include="Level\Component\ScriptComponent\ScriptComponentImpl.h" />
+    <ClInclude Include="EngineAsset\Script\ScriptInterface.h" />
+    <ClInclude Include="EngineAsset\Script\RuntimeContext.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="DX11Engine_WinUI3_WRC.def" />

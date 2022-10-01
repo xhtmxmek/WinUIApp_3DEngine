@@ -126,6 +126,7 @@ namespace winrt::DX11Engine_WinUI3_WRC::implementation
         // TODO: Add your game logic here.
         // Input Update       
         //월드가 스크립트를 가지고 있나? 엔진이 스크립트를 가지고 있나. 월드가 스크립트를 가지고 있는게 맞는거같음.
+        //인풋 - > 스크립트 업데이트.
         m_World->Update(elapsedTime);        
 
         PIXEndEvent();

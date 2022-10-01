@@ -9,8 +9,13 @@ namespace winrt
 	struct hstring;
 }
 
-namespace Engine
+namespace Script
 {
+	class IScriptInterface;
+}
+
+namespace Engine
+{	
 	namespace Component
 	{
 		class ScriptComponentImpl;
@@ -22,10 +27,13 @@ namespace Engine
 			ScriptComponent(const std::string& name = "ScriptComponent");
 			~ScriptComponent();
 			void Init() final;
-			void Tick(float elasedTime) final;						
-		//private:
-		//	ScriptComponentImpl* pImpl;
-			//IMPL_CLASS_PROPERTY(std::shared_ptr<DirectX::SpriteBatch>, SpriteBatch);
+			void Tick(float elasedTime) final;
+			//void SetInitFunc(const std::function<void()>& initFunc);
+			//void SetUpdateFunc(const std::function<void(float elapsedTime)>& updateFunc);
+			void SetScriptInterface(Script::IScriptInterface* scriptInterface) { ScriptInterface = scriptInterface; }
+		private:
+			ScriptComponentImpl* pImpl;
+			Script::IScriptInterface* ScriptInterface;
 		};
 	}
 }

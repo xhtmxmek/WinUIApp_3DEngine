@@ -1,5 +1,7 @@
 #include "EngineMinimal.h"
 #include "ScriptComponent.h"
+#include "ScriptComponentImpl.h"
+#include "EngineAsset/Script/ScriptInterface.h"
 
 namespace Engine
 {
@@ -17,17 +19,27 @@ namespace Engine
 
 		ScriptComponent::~ScriptComponent()
 		{
-			//delete pImpl;
+			delete pImpl;			
 		}
 
 		void ScriptComponent::Init()
 		{
 			//pImpl->Init();
+			ScriptInterface->Init();
 		}
 
-		void ScriptComponent::Tick(float elasedTime)
+		void ScriptComponent::Tick(float elapsedTime)
 		{
-			//pImpl->Tick(elasedTime);
+			ScriptInterface->Tick(elapsedTime);
+			//pImpl->Tick(elapsedTime);			
 		}
+		//void ScriptComponent::SetInitFunc(const std::function<void()>& initFunc)
+		//{
+		//	pImpl->SetInitFunc(initFunc);
+		//}
+		//void ScriptComponent::SetUpdateFunc(const std::function<void(float elapsedTime)>& updateFunc)
+		//{
+		//	pImpl->SetUpdateFunc(updateFunc);
+		//}
 	}
 }

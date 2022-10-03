@@ -16,7 +16,7 @@ namespace Engine
 			void Init();
 			void Tick(float elasedTime);
 			void Draw();
-			void Load(const winrt::hstring& textureName);	
+			//void Load(const winrt::hstring& textureName);	
 			//GET_SET_ACCESSOR(Vector2, ScreenPos);
 			//GET_SET_ACCESSOR(float, Rotation);
 			//GET_SET_ACCESSOR(float, Scale);			
@@ -31,6 +31,7 @@ namespace Engine
 			shared_ptr<EngineAsset::Texture> BasicTexture;
 			//Colors::WH
 			std::unique_ptr<DirectX::SpriteBatch> SpriteBatch;
+			std::unique_ptr<DirectX::BasicEffect> Effect;
 		};
 	}
 }

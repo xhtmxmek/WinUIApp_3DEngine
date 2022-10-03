@@ -41,7 +41,7 @@ namespace Engine
 		}
 		void SpriteComponent::Load(const winrt::hstring& textureName)
 		{
-			pImpl->Load(textureName);
+			//pImpl->Load(textureName);
 		}
 	}
 }

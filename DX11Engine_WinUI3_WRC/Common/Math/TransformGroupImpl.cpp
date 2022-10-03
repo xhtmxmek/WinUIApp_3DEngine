@@ -6,6 +6,9 @@ namespace Engine
 	namespace Math
 	{
 		TransformGroupImpl::TransformGroupImpl()
+			:Position(0.f, 0.f, 0.f),
+			Rotation(0.f, 0.f, 0.f),
+			Scale(1.f, 1.f, 1.f)			
 		{
 		}
 
@@ -39,6 +42,15 @@ namespace Engine
 			return Rotation;
 		}
 
+		void TransformGroupImpl::UpdateTransform(TransformGroup* parent)
+		{
+			Local = Matrix::CreateScale(Scale) * Matrix::CreateFromYawPitchRoll(Rotation) * Matrix::CreateTranslation(Position);
+
+			if (parent)
+				World = Local * parent->GetWorld();
+			else
+				World = Local;
+		}
 
 	}
 }

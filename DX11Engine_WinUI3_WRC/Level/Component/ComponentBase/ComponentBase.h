@@ -19,8 +19,7 @@ namespace Engine
 
 	namespace Component
 	{		
-		enum class SceneComponentType;
-		class ComponentBaseImpl;
+		enum class SceneComponentType;		
 		class DrawableComponentImpl;
 
 		class ENGINE_API ComponentBase
@@ -32,24 +31,28 @@ namespace Engine
 			virtual ~ComponentBase();
 			virtual void Init() = 0;
 			virtual void Tick(float elasedTime) = 0;
+
 			void SetPosition(DirectX::SimpleMath::Vector3 const& pos);
 			void SetScale(DirectX::SimpleMath::Vector3 const& scale);
 			void SetRotation(DirectX::SimpleMath::Vector3 const& rot);
 			DirectX::SimpleMath::Vector3 GetRotation();
 			const Math::TransformGroup& GetComponentTransform();
 			void UpdateComponentTransform(const Math::TransformGroup* parent);
+
 			SceneComponentType ComponentType();
+
+			SharedPointer<ComponentBase> GetParent() { return Parent; }
+			List<SharedPointer<ComponentBase>>& GetChildren() { return Children; }
 		protected:
 			Engine::Level::Actor* Owner;
-		private:
-			ComponentBaseImpl* pImpl;
-			//std::list<std::shared_ptr<ComponentBase>> Child;
-			//std::shared_ptr<ComponentBase> Parent;
-			//std::map<PropertyName, EngineProperty*> Properties;
+		private:			
+			String Name;
+			SharedPointer<Component::ComponentBase> Parent;
+			List<SharedPointer<ComponentBase>> Children;
+			Math::TransformGroup Transform;
+			bool Enable;
+			SceneComponentType Type;
 
-			//component 생성시에 component의 타입을 명시해줘야 하고, component를 얻어올떄 component의 타입명시를 해야한다.
-			//component 생성시에는 각 상속받은 클래스에서 actor를 포함하고 있고, 얻어올떄도 actor를 헤더포함해야한다.
-			//component 
 		};
 
 		class ENGINE_API DrawableComponent : public ComponentBase

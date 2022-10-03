@@ -69,7 +69,6 @@
     <ClCompile Include="Level\Level.cpp" />
     <ClCompile Include="Level\Actor\SpriteActor\SpriteImpl.cpp" />
     <ClCompile Include="Level\Component\SpriteComponent\SpriteComponentImpl.cpp" />
-    <ClCompile Include="Level\Component\ComponentBase\ComponentBaseImpl.cpp" />
     <ClCompile Include="Level\Component\StaticMeshComponent\StaticMeshComponentImpl.cpp" />
     <ClCompile Include="Common\Math\TransformGroupImpl.cpp" />
     <ClCompile Include="Level\Actor\ActorManager\ActorManager.cpp" />
@@ -77,8 +76,7 @@
     <ClCompile Include="Level\LevelImpl.cpp" />
     <ClCompile Include="EngineAsset\Texture.cpp" />
     <ClCompile Include="Common\Path.cpp" />
-    <ClCompile Include="Level\Component\ScriptComponent\ScriptComponent.cpp" />
-    <ClCompile Include="Level\Component\ScriptComponent\ScriptComponentImpl.cpp" />
+    <ClCompile Include="Level\Actor\StaticMesh\StaticMesh.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="EngineMinimal.h" />
@@ -148,7 +146,6 @@
     <ClInclude Include="Level\Level.h" />
     <ClInclude Include="Level\Actor\SpriteActor\SpriteImpl.h" />
     <ClInclude Include="Level\Component\SpriteComponent\SpriteComponentImpl.h" />
-    <ClInclude Include="Level\Component\ComponentBase\ComponentBaseImpl.h" />
     <ClInclude Include="Level\Component\StaticMeshComponent\StaticMeshComponentImpl.h" />
     <ClInclude Include="Common\Math\TransformGroupImpl.h" />
     <ClInclude Include="Level\Actor\ActorManager\ActorManager.h" />
@@ -157,10 +154,12 @@
     <ClInclude Include="Level\LevelImpl.h" />
     <ClInclude Include="EngineAsset\Texture.h" />
     <ClInclude Include="Common\Path.h" />
-    <ClInclude Include="Level\Component\ScriptComponent\ScriptComponent.h" />
-    <ClInclude Include="Level\Component\ScriptComponent\ScriptComponentImpl.h" />
-    <ClInclude Include="EngineAsset\Script\ScriptInterface.h" />
-    <ClInclude Include="EngineAsset\Script\RuntimeContext.h" />
+    <ClInclude Include="Common\EngineBaseHeader.h" />
+    <ClInclude Include="Common\EngineCommonHeader.h" />
+    <ClInclude Include="Level\Actor\StaticMesh\StaticMesh.h" />
+    <ClInclude Include="TypeInterface\STLContainer.h" />
+    <ClInclude Include="TypeInterface\StringInterface.h" />
+    <ClInclude Include="TypeInterface\SmartPointer.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="DX11Engine_WinUI3_WRC.def" />

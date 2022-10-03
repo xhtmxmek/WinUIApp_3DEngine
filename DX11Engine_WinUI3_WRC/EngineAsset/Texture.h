@@ -34,7 +34,7 @@ namespace Engine
 
 			const shared_ptr<Texture>& GetTexture(winrt::hstring textureName)
 			{	
-				winrt::hstring applicationPath = Path::ApplicationDir;				
+				wstring applicationPath = Path::ApplicationDir;				
 				winrt::hstring path = applicationPath + L"\\Assets\\" + textureName;
 
 				auto iter = Textures.find(path);

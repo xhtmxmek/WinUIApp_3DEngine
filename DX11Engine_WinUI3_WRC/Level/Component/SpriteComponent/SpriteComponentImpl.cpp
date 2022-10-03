@@ -41,16 +41,17 @@ namespace Engine
 			SpriteBatch->End();
 		}
 
-		void SpriteComponentImpl::Load(const winrt::hstring& textureName)
-		{
-			//if( BasicTexture )
-			//	BasicTextu
-			//com_ptr_nothrow<ID3D11Texture2D> cat;
-			//DX::ThrowIfFailed(resource.query_to(cat.addressof()));
+		//void SpriteComponentImpl::Load(const winrt::hstring& textureName)
+		//{
+		//	//Effect->
+		//	//if( BasicTexture )
+		//	//	BasicTextu
+		//	//com_ptr_nothrow<ID3D11Texture2D> cat;
+		//	//DX::ThrowIfFailed(resource.query_to(cat.addressof()));
 
-			//CD3D11_TEXTURE2D_DESC catDesc;
-			//cat->GetDesc(&catDesc);
-		}
+		//	//CD3D11_TEXTURE2D_DESC catDesc;
+		//	//cat->GetDesc(&catDesc);
+		//}
 
 
 	}

@@ -112,7 +112,7 @@ namespace Engine
 */
 
 
-#define REGISTER_RUNTIME_CLASS(classType) classType::RegisterRuntime()
+#define REGISTER_RUNTIME_CLASS(classType) classType::RegisterRuntime();
 
 
 

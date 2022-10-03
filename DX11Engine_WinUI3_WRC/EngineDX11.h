@@ -54,6 +54,9 @@ namespace winrt::DX11Engine_WinUI3_WRC::implementation
 
         // Properties
         void GetDefaultSize(float& width, float& height) noexcept;
+        
+        //common
+        void LoadScriptProject(hstring const& path);
 
         // private
     private:

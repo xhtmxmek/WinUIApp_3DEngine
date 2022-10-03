@@ -21,7 +21,7 @@ namespace Engine
                 Component::ComponentBase* runtimeComponent = (Component::ComponentBase*)RuntimeContext::New(className, instanceName);
                 std::shared_ptr<Component::ComponentBase> ptr(runtimeComponent);
                 Components.insert(std::make_pair(className, ptr));
-                
+                ptr->Init();
                 return ptr;                
             }
             else

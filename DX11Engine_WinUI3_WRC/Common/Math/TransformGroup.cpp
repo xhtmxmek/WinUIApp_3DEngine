@@ -41,44 +41,55 @@ namespace Engine
 		void TransformGroup::SetPosition(const Vector3& pos)
 		{
 			pImpl->SetPosition(pos);
-			//UpdateTransform();
+			UpdateTransform();
 		}
 		void TransformGroup::SetScale(const Vector3& scale)
 		{
 			pImpl->SetScale(scale);
-			//UpdateTransform();
+			UpdateTransform();
 		}
 		void TransformGroup::SetRotation(const Vector3& rotation)
 		{
 			pImpl->SetRotation(rotation);
-			//UpdateTransform();
+			UpdateTransform();
 		}
 
 		const Vector3& TransformGroup::GetPosition() const
 		{
 			return pImpl->GetPosition();
 		}
+
 		const Vector3& TransformGroup::GetScale() const
 		{
 			return pImpl->GetScale();
 		}
+
 		const Vector3& TransformGroup::GetRotation() const
 		{
 			return pImpl->GetRotation();
 		}
-		////void TransformGroup::OnChangeTransorm(EngineProperty* property)
-		////{
-		////	UpdateTransform();
-		////}
-		//void TransformGroup::UpdateTransform(TransformGroup* parent)
-		//{
-		//	Local = Matrix::CreateScale(Scale) * Matrix::CreateFromYawPitchRoll(Rotation) * Matrix::CreateTranslation(Position);
 
-		//	if (parent)
-		//		World = Local * parent->GetWorld();
-		//	else
-		//		World = Local;
+		const DirectX::SimpleMath::Matrix& TransformGroup::GetWorld() const
+		{
+			// TODO: 여기에 return 문을 삽입합니다.
+			return pImpl->GetWorld();
+		}
+
+		void TransformGroup::UpdateTransform(TransformGroup* parent)
+		{
+			pImpl->UpdateTransform(parent);
+		}
+
+		//TransformGroup const TransformGroup::Default()
+		//{
+		//	// TODO: 여기에 return 문을 삽입합니다.
+		//	pImpl->Identity();
 		//}
+
+		////void TransformGroup::OnChangeTransorm(EngineProperty* property)
+////{
+////	UpdateTransform();
+////}
 	}
 
 

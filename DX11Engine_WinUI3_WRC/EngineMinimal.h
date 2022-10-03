@@ -68,22 +68,10 @@
 #include <winrt/Windows.Storage.AccessCache.h>
 
 
-//Common
-#include <algorithm>
-#include <cmath>
-#include <cstdint>
-#include <cstdio>
-#include <cwchar>
-#include <exception>
-#include <future>
-#include <iterator>
-#include <memory>
-#include <stdexcept>
-#include <concrt.h>
-#include <wincodec.h>
+#include "Common/EngineBaseHeader.h"
 
 //엔진 코드들
-#include "Common/Path.h"
+#include "Common/EngineCommonHeader.h"
 
 using namespace DirectX::SimpleMath;
 using namespace std;

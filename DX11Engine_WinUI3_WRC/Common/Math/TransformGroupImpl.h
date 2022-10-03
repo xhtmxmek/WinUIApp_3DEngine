@@ -3,7 +3,7 @@
 namespace Engine
 {
 	namespace Math
-	{
+	{		
 		class TransformGroupImpl
 		{
 		public:
@@ -14,7 +14,12 @@ namespace Engine
 
 			const DirectX::SimpleMath::Vector3& GetPosition() const;
 			const DirectX::SimpleMath::Vector3& GetScale() const;
-			const DirectX::SimpleMath::Vector3& GetRotation() const;			
+			const DirectX::SimpleMath::Vector3& GetRotation() const;
+
+			const DirectX::SimpleMath::Matrix& GetWorld() const { return World; }			
+			void UpdateTransform(TransformGroup* parent = nullptr);
+			static TransformGroup const Default() { return TransformGroup(); }
+			
 		private:
 			DirectX::SimpleMath::Vector3 Position;
 			DirectX::SimpleMath::Vector3 Scale;

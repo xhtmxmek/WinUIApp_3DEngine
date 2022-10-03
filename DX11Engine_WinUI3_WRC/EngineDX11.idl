@@ -37,6 +37,7 @@ namespace DX11Engine_WinUI3_WRC
 
         // Properties
         [noexcept] void GetDefaultSize(out Single width, out Single height);
+        void LoadScriptProject(String path);
     }
 
     [default_interface]

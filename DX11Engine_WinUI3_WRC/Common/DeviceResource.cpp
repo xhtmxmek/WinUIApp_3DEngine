@@ -613,8 +613,8 @@ void DeviceResources::CreateWindowSizeDependentResources()
             dxgiBackBuffer.get(),            
             &bitmapProperties,
             m_d2dTargetBitmap.put()
-        )
-    );
+        )        
+    );    
 
     m_d2dContext->SetTarget(m_d2dTargetBitmap.get());
     m_d2dContext->SetDpi(m_dpi * m_effectiveRasterizationScale, m_dpi * m_effectiveRasterizationScale);

@@ -1,28 +1,18 @@
 #pragma once
-#include "EngineAsset/Script/ScriptInterface.h"
-#include "EngineAsset/Script/RuntimeContext.h"
-namespace Script
+		
+class GameMain
 {
-	class GameMain : public IScriptInterface
-	{
-	public:
-		RUNTIME_SUBCLASS(GameMain)
-	public:
-		GameMain() = default;
-		~GameMain() = default;
+public:
+	GameMain() = default;
+	~GameMain() = default;
 
-		GameMain(GameMain&&) = delete;
-		GameMain& operator= (GameMain&&) = delete;
+	GameMain(GameMain&&) = delete;
+	GameMain& operator= (GameMain&&) = delete;
 
-		GameMain(GameMain const&) = delete;
-		GameMain& operator= (GameMain const&) = delete;	
+	GameMain(GameMain const&) = delete;
+	GameMain& operator= (GameMain const&) = delete;
 
-		//void Init();
-		//void Tick(float elasedTime);
-
-		void Init() final;
-		void Tick(float elasedTime) final;
-
-		static void RegisterRuntime();
-	};
-}
+	//로컬 파일에서 게임 실행에 필요한 정보들을 불러온다
+	void Initialize();
+};
+	

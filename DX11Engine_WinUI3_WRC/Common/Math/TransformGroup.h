@@ -24,14 +24,16 @@ namespace Engine
 			~TransformGroup();			
 			void SetPosition(const DirectX::SimpleMath::Vector3& pos);
 			void SetScale(const DirectX::SimpleMath::Vector3& scale);
-			void SetRotation(const DirectX::SimpleMath::Vector3& rotation);
+			void SetRotation(const DirectX::SimpleMath::Vector3& rotation);			
 
 			const DirectX::SimpleMath::Vector3& GetPosition() const;
 			const DirectX::SimpleMath::Vector3& GetScale() const;
 			const DirectX::SimpleMath::Vector3& GetRotation() const;
+
+			const DirectX::SimpleMath::Matrix& GetWorld() const;
 		private:
 			TransformGroupImpl* pImpl;			
-			//	const DirectX::SimpleMath::Matrix& GetWorld() const { return World; }
+			//	
 			//	//static TransformGroup const& Identity() { return Identity; }
 			//	static const TransformGroup Identity;
 			//private:			
@@ -40,13 +42,14 @@ namespace Engine
 			//	//GetPosition
 			//	//내부에서 position 참조할떄.
 
-			//	DirectX::SimpleMath::Matrix World;
-			//	DirectX::SimpleMath::Matrix Local;
+			//DirectX::SimpleMath::Matrix World;
+			//DirectX::SimpleMath::Matrix Local;
 			//	//Math::Matrix RotMat;
 			//	//GameObject* Owner;
 
 			//	//void OnChangeTransorm(EngineProperty* property);
-			//void UpdateTransform(TransformGroup* parent = nullptr );
+			void UpdateTransform(TransformGroup* parent = nullptr );
+			//static TransformGroup const Default();
 		};
 	}
 

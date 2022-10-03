@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <Import Project="..\packages\Microsoft.WindowsAppSDK.1.0.3\build\native\Microsoft.WindowsAppSDK.props" Condition="Exists('..\packages\Microsoft.WindowsAppSDK.1.0.3\build\native\Microsoft.WindowsAppSDK.props')" />
   <Import Project="..\packages\Microsoft.Windows.CppWinRT.2.0.220418.1\build\native\Microsoft.Windows.CppWinRT.props" Condition="Exists('..\packages\Microsoft.Windows.CppWinRT.2.0.220418.1\build\native\Microsoft.Windows.CppWinRT.props')" />
@@ -115,6 +115,8 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="Common\DeviceResources.h" />
+    <ClInclude Include="Common\EngineBaseHeader.h" />
+    <ClInclude Include="Common\EngineCommonHeader.h" />
     <ClInclude Include="Common\Path.h" />
     <ClInclude Include="Common\EngineCriticalSection.h" />
     <ClInclude Include="Common\EngineHelper.h" />
@@ -128,7 +130,6 @@
     <ClInclude Include="Common\Uncopyable.h" />
     <ClInclude Include="DLLDefine.h" />
     <ClInclude Include="EngineAsset\Material.h" />
-    <ClInclude Include="EngineAsset\Script\RuntimeContext.h" />
     <ClInclude Include="EngineAsset\Texture.h" />
     <ClInclude Include="Level\Actor\Actor.h">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</ExcludedFromBuild>
@@ -143,15 +144,12 @@
     <ClInclude Include="Level\Actor\PropertyActor.h" />
     <ClInclude Include="Level\Actor\SpriteActor\Sprite.h" />
     <ClInclude Include="Level\Actor\SpriteActor\SpriteImpl.h" />
+    <ClInclude Include="Level\Actor\StaticMesh\StaticMesh.h" />
     <ClInclude Include="Level\Component\CameraComponent\CameraComponent.h" />
     <ClInclude Include="Level\Component\ComponentBase\ComponentBase.h" />
-    <ClInclude Include="Level\Component\ComponentBase\ComponentBaseImpl.h" />
     <ClInclude Include="Level\Component\ComponentLinker.h" />
     <ClInclude Include="Level\Component\ComponentTypes.h" />
     <ClInclude Include="Level\Component\EngineProperty.h" />
-    <ClInclude Include="Level\Component\ScriptComponent\ScriptComponent.h" />
-    <ClInclude Include="Level\Component\ScriptComponent\ScriptComponentImpl.h" />
-    <ClInclude Include="EngineAsset\Script\ScriptInterface.h" />
     <ClInclude Include="Level\Component\SpriteComponent\SpriteComponent.h" />
     <ClInclude Include="Level\Component\SpriteComponent\SpriteComponentImpl.h" />
     <ClInclude Include="Level\Component\StaticMeshComponent\StaticMeshComponent.h" />
@@ -166,6 +164,9 @@
       <DependentUpon>EngineDX11.cpp</DependentUpon>
     </ClInclude>
     <ClInclude Include="Renderer\LevelRenderer.h" />
+    <ClInclude Include="TypeInterface\SmartPointer.h" />
+    <ClInclude Include="TypeInterface\STLContainer.h" />
+    <ClInclude Include="TypeInterface\StringInterface.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Common\DeviceResource.cpp" />
@@ -183,12 +184,10 @@
     <ClCompile Include="Level\Actor\ActorManager\ActorManagerImpl.cpp" />
     <ClCompile Include="Level\Actor\SpriteActor\Sprite.cpp" />
     <ClCompile Include="Level\Actor\SpriteActor\SpriteImpl.cpp" />
+    <ClCompile Include="Level\Actor\StaticMesh\StaticMesh.cpp" />
     <ClCompile Include="Level\Component\CameraComponent\CameraComponent.cpp" />
     <ClCompile Include="Level\Component\ComponentBase\ComponentBase.cpp" />
-    <ClCompile Include="Level\Component\ComponentBase\ComponentBaseImpl.cpp" />
     <ClCompile Include="Level\Component\ComponentLinker.cpp" />
-    <ClCompile Include="Level\Component\ScriptComponent\ScriptComponent.cpp" />
-    <ClCompile Include="Level\Component\ScriptComponent\ScriptComponentImpl.cpp" />
     <ClCompile Include="Level\Component\SpriteComponent\SpriteComponent.cpp" />
     <ClCompile Include="Level\Component\SpriteComponent\SpriteComponentImpl.cpp" />
     <ClCompile Include="Level\Component\StaticMeshComponent\StaticMeshComponent.cpp" />

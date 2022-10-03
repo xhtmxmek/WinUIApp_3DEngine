@@ -33,8 +33,8 @@ namespace Engine
 		}
 
 		void StaticMeshComponent::Draw()
-		{
-			pImpl->Draw();
+		{						
+			pImpl->Draw(GetComponentTransform());
 		}
 	}
 }

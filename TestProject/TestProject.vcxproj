@@ -157,6 +157,7 @@
     <ClInclude Include="framework.h" />
     <ClInclude Include="GameMain.h" />
     <ClInclude Include="pch.h" />
+    <ClInclude Include="RegisterRuntimeClass.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="dllmain.cpp" />

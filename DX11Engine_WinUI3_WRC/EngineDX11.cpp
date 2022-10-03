@@ -277,6 +277,18 @@ namespace winrt::DX11Engine_WinUI3_WRC::implementation
         width = 800;
         height = 600;
     }
+    void EngineDX11::LoadScriptProject(hstring const& path)
+    {
+        HMODULE hDll = ::LoadLibrary(path.c_str());
+        if (hDll != NULL)
+        {
+            FreeLibrary(hDll);
+        }
+        //로드 시점에 스크립트 프로젝트의 클래스들이 등록됨.
+        //런타임 등록을 했으니, 프로젝트 툴을 통하여 등록된 액터를 생성.
+        //이후에 해당 스크립트의 Actor를 생성하면 Init이 호출됨.
+    }
+
 #pragma endregion
 
 #pragma region Direct3D Resources

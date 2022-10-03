@@ -1,23 +1,18 @@
 #include "EngineMinimal.h"
+#include "Common/pImplClassDefine.h"
 #include "ComponentBase.h"
-#include "ComponentBaseImpl.h"
-//#include "Level/Actor/Actor.h"
-//#include "Level/World.h"
 
 namespace Engine
 {		
 	namespace Component 
 	{
 		ComponentBase::ComponentBase(const std::string& name, SceneComponentType type)
-			:pImpl(nullptr)
-			,Owner(nullptr)
-		{
-			pImpl = new ComponentBaseImpl(name, type);
+			:Owner(nullptr)
+		{			
 		}
 
 		ComponentBase::~ComponentBase()
-		{
-			delete pImpl;
+		{		
 		}
 
 		void ComponentBase::SetPosition(Vector3 const& pos)
@@ -34,30 +29,29 @@ namespace Engine
 		}
 		DirectX::SimpleMath::Vector3 ComponentBase::GetRotation()
 		{
-			return pImpl->GetRotation();
+			return Transform.GetRotation();
 		}
 		const Math::TransformGroup& ComponentBase::GetComponentTransform()
 		{
-			return pImpl->GetComponentTransform();
-			// // O: 여기에 return 문을 삽입합니다.
+			return Transform;			
 		}
 		void ComponentBase::UpdateComponentTransform(const Math::TransformGroup* parent)
-		{
-			//자기자신의 transform update
-			pImpl->UpdateComponentTransform(parent);
-
+		{						
+			//Children.GetListData
 			//자식의 transform 업데이트
-			std::for_each(pImpl->GetChildren().begin(), pImpl->GetChildren().end(),
-				[this](std::shared_ptr<ComponentBase>& component) {
-					ComponentBase* child = component.get();
-					if (child)
-						child->UpdateComponentTransform(&pImpl->GetComponentTransform());
+			//std::shared_ptr<int> test;
+			//if (test)
+			std::for_each(Children.Begin(), Children.End(),
+				[this](SharedPointer<ComponentBase>& component) {					
+					//ComponentBase* child = component.Get();					
+					if (component != nullptr)
+						component->UpdateComponentTransform(&Transform);
 				});			
 		}
 
 		SceneComponentType ComponentBase::ComponentType()
 		{
-			return pImpl->ComponentType();
+			return Type;
 		}
 
 		//DrawableComponent::DrawableComponent(const std::string& name)

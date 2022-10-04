@@ -43,25 +43,19 @@ namespace Engine
 			}
 
 			void operator=(const SharedPointer<T>& src) { pImpl->Pointer = src.pImpl->Pointer; }
-			void operator=(const std::shared_ptr<T>& src) { pImpl->Pointer = src; }
+			void operator=(const std::shared_ptr<T>& src) { pImpl->Pointer = src; }			
 
-			const std::shared_ptr<T>& operator->() { return pImpl->Pointer; }
-			bool operator==(const std::shared_ptr<T>& src)
-			{
-				return pImpl->Pointer == src;
-			}
+			T* operator->() const { return Get(); }
+			bool operator==(const std::shared_ptr<T>& src){ return pImpl->Pointer == src; }
+			bool operator==(const SharedPointer<T>& src) { return pImpl->Pointer == src.pImpl->Pointer; }
+			bool operator==(T* src) { return pImpl->Pointer.get() == src; }
+			
 
-			bool operator==(nullptr_t)
-			{
-				return pImpl->Pointer == nullptr;
-			}
+			bool operator!=(const std::shared_ptr<T>& src) { return pImpl->Pointer != src; }
+			bool operator!=(const SharedPointer<T>& src) { return pImpl->Pointer != src.pImpl->Pointer; }
+			bool operator!=(T* src) { return pImpl->Pointer.get() != src; }
 
-			bool operator!=(const std::shared_ptr<T>& src)
-			{
-				return pImpl->Pointer != src;
-			}
-
-			T* Get() { return pImpl->Pointer.get(); }
+			T* Get() const { return pImpl->Pointer.get(); }
 
 		private:
 			SharedPointerImpl<T>* pImpl;
@@ -91,10 +85,21 @@ namespace Engine
 				delete pImpl;
 			}
 
-			UniquePointer(const UniquePointer<T>& src) = delete;
-			UniquePointer(const std::unique_ptr<T>& src) = delete;
-			void operator=(const UniquePointer<T>& src) = delete;
-			void operator=(const std::unique_ptr<T>& src) = delete;
+			UniquePointer(const UniquePointer<T>& src){ pImpl->Pointer = src.pImpl->Pointer; }
+			UniquePointer(std::unique_ptr<T>& src) { pImpl->Pointer = src; }
+			void operator=(const UniquePointer<T>& src) { pImpl->Pointer = src.pImpl->Pointer; }
+			void operator=(std::unique_ptr<T>& src) { pImpl->Pointer = src; }
+
+			T* operator->() const { return Get(); }
+			bool operator==(const std::unique_ptr<T>& src) { return pImpl->Pointer == src; }
+			bool operator==(const UniquePointer<T>& src) { return pImpl->Pointer == src.pImpl->Pointer; }
+			bool operator==(T* src) { return pImpl->Pointer == src; }
+
+			bool operator!=(const std::unique_ptr<T>& src){ return pImpl->Pointer != src; }
+			bool operator!=(const UniquePointer<T>& src) { return pImpl->Pointer != src.pImpl->Pointer; }
+			bool operator!=(T* src) { return pImpl->Pointer != src; }
+
+			T* Get() const { return pImpl->Pointer.get(); }
 
 		private:
 			UniquePointerImpl<T>* pImpl;

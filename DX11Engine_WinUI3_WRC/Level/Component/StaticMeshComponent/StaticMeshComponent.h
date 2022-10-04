@@ -4,9 +4,7 @@
 namespace Engine
 {
 	namespace Component
-	{
-		class StaticMeshComponentImpl;
-
+	{		
 		class ENGINE_API StaticMeshComponent : public DrawableComponent
 		{
 		public:
@@ -15,9 +13,9 @@ namespace Engine
 			~StaticMeshComponent();
 			void Init() final;
 			void Tick(float elapsedTime) final;
-			void Draw() final;
+			void Draw() final;			
 		private:
-			StaticMeshComponentImpl* pImpl;
+			UniquePointer<DirectX::GeometricPrimitive> StaticMeshShape;			
 		};
 
 

@@ -69,7 +69,6 @@
     <ClCompile Include="Level\Level.cpp" />
     <ClCompile Include="Level\Actor\SpriteActor\SpriteImpl.cpp" />
     <ClCompile Include="Level\Component\SpriteComponent\SpriteComponentImpl.cpp" />
-    <ClCompile Include="Level\Component\StaticMeshComponent\StaticMeshComponentImpl.cpp" />
     <ClCompile Include="Common\Math\TransformGroupImpl.cpp" />
     <ClCompile Include="Level\Actor\ActorManager\ActorManager.cpp" />
     <ClCompile Include="Level\Actor\ActorManager\ActorManagerImpl.cpp" />
@@ -146,7 +145,6 @@
     <ClInclude Include="Level\Level.h" />
     <ClInclude Include="Level\Actor\SpriteActor\SpriteImpl.h" />
     <ClInclude Include="Level\Component\SpriteComponent\SpriteComponentImpl.h" />
-    <ClInclude Include="Level\Component\StaticMeshComponent\StaticMeshComponentImpl.h" />
     <ClInclude Include="Common\Math\TransformGroupImpl.h" />
     <ClInclude Include="Level\Actor\ActorManager\ActorManager.h" />
     <ClInclude Include="Level\Actor\ActorManager\ActorManagerImpl.h" />

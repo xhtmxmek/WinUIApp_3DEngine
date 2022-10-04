@@ -64,8 +64,7 @@ namespace Engine
 			virtual void Draw() = 0;
 			void SetVisible(bool visible) { Visible = visible; }
 			bool IsVisible() { return Visible; }
-		private:
-			DrawableComponentImpl* pImpl;
+		private:			
 			bool		Visible;
 			//DrawLayer	ComponentDrawLayer;
 		};

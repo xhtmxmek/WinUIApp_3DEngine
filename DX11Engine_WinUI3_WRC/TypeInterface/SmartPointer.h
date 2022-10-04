@@ -64,7 +64,7 @@ namespace Engine
 			UniquePointer(const UniquePointer<T>& src) = delete;
 			UniquePointer(std::unique_ptr<T>& src) = delete;
 			UniquePointer(UniquePointer<T>&& src) { pImpl->Pointer.reset(src.pImpl->Pointer.release()); }
-			UniquePointer(std::unique_ptr<T>&& src) { pImpl->Pointer.reset(= src.release()); }
+			UniquePointer(std::unique_ptr<T>&& src) { pImpl->Pointer.reset(src.release()); }
 
 			UniquePointer<T>& operator=(const UniquePointer<T>& src) = delete;
 			UniquePointer<T>& operator=(std::unique_ptr<T>& src) =  delete;

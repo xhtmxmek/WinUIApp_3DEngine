@@ -16,7 +16,8 @@ void GameMain::Initialize()
 	//빌드 후 이벤트로 특정헤더파일에 포함시키기
 	//auto sprite = Engine::Level::ActorManager::GetInstance().CreateActor<Engine::Level::ASprite>("hello");
 	auto staticMesh = Engine::Level::ActorManager::GetInstance().CreateActor<Engine::Level::AStaticMesh>("MeshTest");
-	int k = 5;
+	FVector2 test;
+	test.Test();
 
 	/*
 	0. 텍스트 파싱해서 소스 코드를 만들기. 또는 스크립트의 클래스 등록하기.... 어쩔수없다.

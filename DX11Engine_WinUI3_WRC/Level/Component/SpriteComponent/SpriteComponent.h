@@ -4,13 +4,13 @@
 #include "Common/RuntimeContext.h"
 //#include "Common/pImplClassDefine.h"
 
-namespace EngineAsset
-{
-	class Texture;
-}
-
 namespace Engine
 {
+	namespace EngineAsset
+	{
+		class Texture;
+	}
+
 	namespace Component
 	{
 		class SpriteComponentImpl;
@@ -25,12 +25,13 @@ namespace Engine
 			void Tick(float elasedTime) final;
 			void Draw() final;			
 		private:
-			Vector2 ScreenPos;
-			float Rotation;
-			float Scale;
+			//Vector2 ScreenPos;
+			//float Rotation;
+			//float Scale;
 
-			Vector2 UVOffset;
-			Color TintColor;
+			//Vector2 UVOffset;
+			//Color TintColor;
+			FVector2 protoType;
 			SharedPointer<EngineAsset::Texture> BasicTexture;
 			//Colors::WH
 			UniquePointer<DirectX::SpriteBatch> SpriteBatch;

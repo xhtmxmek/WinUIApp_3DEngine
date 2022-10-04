@@ -47,8 +47,7 @@ namespace Engine
 					auto newTexture = make_shared<Texture>();
 					newTexture->Load(path);
 					Textures.insert(make_pair(path, newTexture));
-					return Textures[path];
-					//요거 고쳐야됨
+					return Textures[path];					
 				}
 			}
 		private:

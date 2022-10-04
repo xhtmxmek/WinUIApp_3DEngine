@@ -4,9 +4,9 @@
 #include "Common/RuntimeContext.h"
 //#include "Common/pImplClassDefine.h"
 
-namespace winrt
+namespace EngineAsset
 {
-	struct hstring;
+	class Texture;
 }
 
 namespace Engine
@@ -20,14 +20,21 @@ namespace Engine
 			RUNTIME_SUBCLASS(DrawableComponent)
 		public:
 			SpriteComponent(const std::string& name = "SpriteComponent");
-			~SpriteComponent();
+			~SpriteComponent() = default;
 			void Init() final;			
 			void Tick(float elasedTime) final;
-			void Draw() final;
-			void Load(const winrt::hstring& textureName);			
+			void Draw() final;			
 		private:
-			SpriteComponentImpl* pImpl;
-			//IMPL_CLASS_PROPERTY(std::shared_ptr<DirectX::SpriteBatch>, SpriteBatch);
+			Vector2 ScreenPos;
+			float Rotation;
+			float Scale;
+
+			Vector2 UVOffset;
+			Color TintColor;
+			SharedPointer<EngineAsset::Texture> BasicTexture;
+			//Colors::WH
+			UniquePointer<DirectX::SpriteBatch> SpriteBatch;
+			UniquePointer<DirectX::BasicEffect> Effect;
 		};
 	}
 }

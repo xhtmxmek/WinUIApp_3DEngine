@@ -3,6 +3,7 @@
 #include "TypeInterface/SmartPointer.h"
 #include "TypeInterface/STLContainer.h"
 #include "TypeInterface/StringInterface.h"
+#include "TypeInterface/Math.h"
 
 using namespace Engine::Type;
 

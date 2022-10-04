@@ -1,47 +1,41 @@
 #include "EngineMinimal.h"
 #include "SpriteComponent.h"
-#include "SpriteComponentImpl.h"
 #include "Common/DeviceResources.h"
+#include "EngineAsset/Texture.h"
 
 namespace Engine
 {
 	namespace Component
 	{
 		RUNTIME_CLASS_IMPL(SpriteComponent)
-		//IMPL_CLASS_PROPERTY_DEFEINITION(SpriteComponent, Vector2, ScreenPos)
-		//IMPL_CLASS_PROPERTY_DEFEINITION(SpriteComponent, shared_ptr<DirectX::SpriteBatch>, SpriteBatch)
-
 
 		SpriteComponent::SpriteComponent(const std::string& name)
-			:DrawableComponent(name),
-			pImpl(nullptr)
+			:DrawableComponent(name)			
 		{
-			pImpl = new SpriteComponentImpl(name);
-			//SetDiffuseTexture()
-		}
-
-		SpriteComponent::~SpriteComponent()
-		{
-			delete pImpl;
-		}
+			auto deviceContext = DX::DeviceResourcesUtil::GetDeviceResources()->GetD3DDeviceContext();
+			SpriteBatch = make_unique<DirectX::SpriteBatch>(deviceContext);
+			//BasicTexture = EngineAsset::TextureManager::GetInstance().GetTexture(L"D:\\StudyDir\\WinUIApp_3DEngine\\TestProject\\Assets\\cat.png");
+			BasicTexture = EngineAsset::TextureManager::GetInstance().GetTexture(L"Textures\\cat.png");
+		}		
 
 		void SpriteComponent::Init()
-		{
-			pImpl->Init();
+		{			
 		}
 
 		void SpriteComponent::Tick(float elasedTime)
-		{
-			pImpl->Tick(elasedTime);
+		{		
 		}
 
 		void SpriteComponent::Draw()
 		{
-			pImpl->Draw();			
-		}
-		void SpriteComponent::Load(const winrt::hstring& textureName)
-		{
-			//pImpl->Load(textureName);
+			SpriteBatch->Begin();
+			//Sprite가 필요한것.
+			//screenPos, originpos, color, rotation			
+			ScreenPos = Vector2(200.0f, 200.0f);
+			SpriteBatch->Draw(BasicTexture->GetShaderResourceView().get(), ScreenPos, nullptr,
+				TintColor, Rotation, Vector2(200.f, 200.f));
+
+			SpriteBatch->End();
 		}
 	}
 }

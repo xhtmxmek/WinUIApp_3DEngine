@@ -151,7 +151,6 @@
     <ClInclude Include="Level\Component\ComponentTypes.h" />
     <ClInclude Include="Level\Component\EngineProperty.h" />
     <ClInclude Include="Level\Component\SpriteComponent\SpriteComponent.h" />
-    <ClInclude Include="Level\Component\SpriteComponent\SpriteComponentImpl.h" />
     <ClInclude Include="Level\Component\StaticMeshComponent\StaticMeshComponent.h" />
     <ClInclude Include="Common\Math\TransformGroup.h" />
     <ClInclude Include="Common\Math\TransformGroupImpl.h" />
@@ -163,6 +162,7 @@
       <DependentUpon>EngineDX11.cpp</DependentUpon>
     </ClInclude>
     <ClInclude Include="Renderer\LevelRenderer.h" />
+    <ClInclude Include="TypeInterface\Math.h" />
     <ClInclude Include="TypeInterface\SmartPointer.h" />
     <ClInclude Include="TypeInterface\STLContainer.h" />
     <ClInclude Include="TypeInterface\StringInterface.h" />
@@ -188,7 +188,6 @@
     <ClCompile Include="Level\Component\ComponentBase\ComponentBase.cpp" />
     <ClCompile Include="Level\Component\ComponentLinker.cpp" />
     <ClCompile Include="Level\Component\SpriteComponent\SpriteComponent.cpp" />
-    <ClCompile Include="Level\Component\SpriteComponent\SpriteComponentImpl.cpp" />
     <ClCompile Include="Level\Component\StaticMeshComponent\StaticMeshComponent.cpp" />
     <ClCompile Include="Common\Math\TransformGroup.cpp" />
     <ClCompile Include="Level\Level.cpp" />

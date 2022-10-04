@@ -68,7 +68,6 @@
     <ClCompile Include="Level\Component\CameraComponent\CameraComponent.cpp" />
     <ClCompile Include="Level\Level.cpp" />
     <ClCompile Include="Level\Actor\SpriteActor\SpriteImpl.cpp" />
-    <ClCompile Include="Level\Component\SpriteComponent\SpriteComponentImpl.cpp" />
     <ClCompile Include="Common\Math\TransformGroupImpl.cpp" />
     <ClCompile Include="Level\Actor\ActorManager\ActorManager.cpp" />
     <ClCompile Include="Level\Actor\ActorManager\ActorManagerImpl.cpp" />
@@ -144,7 +143,6 @@
     <ClInclude Include="Level\Component\CameraComponent\CameraComponent.h" />
     <ClInclude Include="Level\Level.h" />
     <ClInclude Include="Level\Actor\SpriteActor\SpriteImpl.h" />
-    <ClInclude Include="Level\Component\SpriteComponent\SpriteComponentImpl.h" />
     <ClInclude Include="Common\Math\TransformGroupImpl.h" />
     <ClInclude Include="Level\Actor\ActorManager\ActorManager.h" />
     <ClInclude Include="Level\Actor\ActorManager\ActorManagerImpl.h" />
@@ -158,6 +156,7 @@
     <ClInclude Include="TypeInterface\STLContainer.h" />
     <ClInclude Include="TypeInterface\StringInterface.h" />
     <ClInclude Include="TypeInterface\SmartPointer.h" />
+    <ClInclude Include="TypeInterface\Math.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="DX11Engine_WinUI3_WRC.def" />

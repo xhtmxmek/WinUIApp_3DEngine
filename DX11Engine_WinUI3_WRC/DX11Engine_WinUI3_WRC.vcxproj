@@ -129,6 +129,8 @@
     <ClInclude Include="Common\pImplClassDefine.h" />
     <ClInclude Include="Common\RuntimeContext.h" />
     <ClInclude Include="Common\StepTimer.h" />
+    <ClInclude Include="Common\Types\Math\Vector3.h" />
+    <ClInclude Include="Common\Types\Math\Vector4.h" />
     <ClInclude Include="Common\Uncopyable.h" />
     <ClInclude Include="DLLDefine.h" />
     <ClInclude Include="EngineAsset\Material.h" />
@@ -206,7 +208,6 @@
     <ClCompile Include="EngineDX11.cpp" />
     <ClCompile Include="$(GeneratedFilesDir)module.g.cpp" />
     <ClCompile Include="Renderer\LevelRenderer.cpp" />
-    <ClCompile Include="Common\Types\Math\Vector2.cpp" />
   </ItemGroup>
   <ItemGroup>
     <Midl Include="EngineDX11.idl">

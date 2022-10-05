@@ -75,7 +75,6 @@
     <ClCompile Include="EngineAsset\Texture.cpp" />
     <ClCompile Include="Common\Path.cpp" />
     <ClCompile Include="Level\Actor\StaticMesh\StaticMesh.cpp" />
-    <ClCompile Include="Common\Types\Math\Vector2.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="EngineMinimal.h" />
@@ -158,6 +157,8 @@
     <ClInclude Include="Common\Types\stdTypeInterface\StringInterface.h" />
     <ClInclude Include="Common\Types\stdTypeInterface\SmartPointer.h" />
     <ClInclude Include="Common\Types\Math\Vector2.h" />
+    <ClInclude Include="Common\Types\Math\Vector3.h" />
+    <ClInclude Include="Common\Types\Math\Vector4.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="DX11Engine_WinUI3_WRC.def" />

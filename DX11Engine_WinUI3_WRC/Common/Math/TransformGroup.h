@@ -12,7 +12,7 @@ namespace DirectX
 }
 
 namespace Engine
-{		
+{
 	namespace Math
 	{
 		class TransformGroupImpl;

@@ -154,8 +154,8 @@
     <ClInclude Include="Level\Component\EngineProperty.h" />
     <ClInclude Include="Level\Component\SpriteComponent\SpriteComponent.h" />
     <ClInclude Include="Level\Component\StaticMeshComponent\StaticMeshComponent.h" />
-    <ClInclude Include="Common\Types\Math\TransformGroup.h" />
-    <ClInclude Include="Common\Types\Math\TransformGroupImpl.h" />
+    <ClInclude Include="Common\Math\TransformGroup.h" />
+    <ClInclude Include="Common\Math\TransformGroupImpl.h" />
     <ClInclude Include="Level\Level.h" />
     <ClInclude Include="Level\LevelImpl.h" />
     <ClInclude Include="Level\World.h" />
@@ -195,9 +195,9 @@
     <ClCompile Include="Level\Component\ComponentLinker.cpp" />
     <ClCompile Include="Level\Component\SpriteComponent\SpriteComponent.cpp" />
     <ClCompile Include="Level\Component\StaticMeshComponent\StaticMeshComponent.cpp" />
-    <ClCompile Include="Common\Types\Math\TransformGroup.cpp" />
+    <ClCompile Include="Common\Math\TransformGroup.cpp" />
     <ClCompile Include="Level\Level.cpp" />
-    <ClCompile Include="Common\Types\Math\TransformGroupImpl.cpp" />
+    <ClCompile Include="Common\Math\TransformGroupImpl.cpp" />
     <ClCompile Include="Level\LevelImpl.cpp" />
     <ClCompile Include="Level\World.cpp" />
     <ClCompile Include="EngineMinimal.cpp">

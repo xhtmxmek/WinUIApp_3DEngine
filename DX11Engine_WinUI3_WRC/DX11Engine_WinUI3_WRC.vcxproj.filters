@@ -43,7 +43,7 @@
     <ClCompile Include="Level\Actor\Actor.cpp">
       <Filter>Level\Actor</Filter>
     </ClCompile>
-    <ClCompile Include="Common\Types\Math\TransformGroup.cpp">
+    <ClCompile Include="Common\Math\TransformGroup.cpp">
       <Filter>Component</Filter>
     </ClCompile>
     <ClCompile Include="Level\Component\ComponentBase\ComponentBase.cpp">
@@ -68,7 +68,7 @@
     <ClCompile Include="Level\Component\CameraComponent\CameraComponent.cpp" />
     <ClCompile Include="Level\Level.cpp" />
     <ClCompile Include="Level\Actor\SpriteActor\SpriteImpl.cpp" />
-    <ClCompile Include="Common\Types\Math\TransformGroupImpl.cpp" />
+    <ClCompile Include="Common\Math\TransformGroupImpl.cpp" />
     <ClCompile Include="Level\Actor\ActorManager\ActorManager.cpp" />
     <ClCompile Include="Level\Actor\ActorManager\ActorManagerImpl.cpp" />
     <ClCompile Include="Level\LevelImpl.cpp" />
@@ -115,7 +115,7 @@
     <ClInclude Include="Level\Component\ComponentTypes.h">
       <Filter>Component</Filter>
     </ClInclude>
-    <ClInclude Include="Common\Types\Math\TransformGroup.h">
+    <ClInclude Include="Common\Math\TransformGroup.h">
       <Filter>Component</Filter>
     </ClInclude>
     <ClInclude Include="Common\EngineMath.h">
@@ -144,7 +144,7 @@
     <ClInclude Include="Level\Component\CameraComponent\CameraComponent.h" />
     <ClInclude Include="Level\Level.h" />
     <ClInclude Include="Level\Actor\SpriteActor\SpriteImpl.h" />
-    <ClInclude Include="Common\Types\Math\TransformGroupImpl.h" />
+    <ClInclude Include="Common\Math\TransformGroupImpl.h" />
     <ClInclude Include="Level\Actor\ActorManager\ActorManager.h" />
     <ClInclude Include="Level\Actor\ActorManager\ActorManagerImpl.h" />
     <ClInclude Include="Common\pImplClassDefine.h" />

@@ -1,9 +1,9 @@
 #pragma once
 //е╦ют
-#include "TypeInterface/SmartPointer.h"
-#include "TypeInterface/STLContainer.h"
-#include "TypeInterface/StringInterface.h"
-#include "TypeInterface/Math.h"
+#include "Types/stdTypeInterface/SmartPointer.h"
+#include "Types/stdTypeInterface/STLContainer.h"
+#include "Types/stdTypeInterface/StringInterface.h"
+#include "Types/Math/Vector2.h"
 
 using namespace Engine::Type;
 

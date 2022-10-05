@@ -17,8 +17,7 @@ namespace Engine
 			//BasicTexture = EngineAsset::TextureManager::GetInstance().GetTexture(L"D:\\StudyDir\\WinUIApp_3DEngine\\TestProject\\Assets\\cat.png");
 			//const std::shared_ptr<EngineAsset::Texture> hello;
 			//const std::shared_ptr<EngineAsset::Texture>& test = hello;
-			BasicTexture = EngineAsset::TextureManager::GetInstance().GetTexture(L"Textures\\cat.png");
-			protoType.Test();
+			BasicTexture = EngineAsset::TextureManager::GetInstance().GetTexture(L"Textures\\cat.png");			
 		}		
 
 		void SpriteComponent::Init()

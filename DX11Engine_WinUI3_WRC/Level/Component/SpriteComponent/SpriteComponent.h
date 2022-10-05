@@ -2,7 +2,8 @@
 #include "DLLDefine.h"
 #include "../ComponentBase/ComponentBase.h"
 #include "Common/RuntimeContext.h"
-//#include "Common/pImplClassDefine.h"
+//#include <assimp/scene.h>
+#include <assimp/types.h>
 
 namespace Engine
 {
@@ -25,13 +26,13 @@ namespace Engine
 			void Tick(float elasedTime) final;
 			void Draw() final;			
 		private:
-			//Vector2 ScreenPos;
+			aiVector2D ScreenPos;
+			FVector2D protoType;
 			//float Rotation;
 			//float Scale;
 
 			//Vector2 UVOffset;
-			//Color TintColor;
-			FVector2 protoType;
+			//Color TintColor;			
 			SharedPointer<EngineAsset::Texture> BasicTexture;
 			//Colors::WH
 			UniquePointer<DirectX::SpriteBatch> SpriteBatch;

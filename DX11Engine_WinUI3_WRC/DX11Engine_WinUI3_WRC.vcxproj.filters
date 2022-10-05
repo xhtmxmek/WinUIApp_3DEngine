@@ -75,6 +75,7 @@
     <ClCompile Include="EngineAsset\Texture.cpp" />
     <ClCompile Include="Common\Path.cpp" />
     <ClCompile Include="Level\Actor\StaticMesh\StaticMesh.cpp" />
+    <ClCompile Include="TypeInterface\Math.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="EngineMinimal.h" />

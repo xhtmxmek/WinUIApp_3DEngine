@@ -5,6 +5,7 @@ namespace Engine
 {
 	namespace Type
 	{
+		template<typename T>
 		class FVector2
 		{
 		public:
@@ -12,8 +13,12 @@ namespace Engine
 			~FVector2() = default;
 			float x;
 			float y;
-			FVector2 Test() { return FVector2(); }
+			T type;
+			void Test();
 		};
+
+		template<typename T>
+		inline void FVector2<T>::Test(){}
 		//class FVector2Impl
 		//{
 		//public:
@@ -190,5 +195,7 @@ namespace Engine
 		//private:
 		//	WStringImpl* pImpl;
 		//};
+
+		typedef FVector2<float> FVector2D;
 	}
 }

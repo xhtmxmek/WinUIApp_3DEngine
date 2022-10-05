@@ -2,8 +2,7 @@
 #include "DLLDefine.h"
 #include "../ComponentBase/ComponentBase.h"
 #include "Common/RuntimeContext.h"
-//#include <assimp/scene.h>
-#include <assimp/types.h>
+#include <assimp/scene.h>
 
 namespace Engine
 {
@@ -26,8 +25,7 @@ namespace Engine
 			void Tick(float elasedTime) final;
 			void Draw() final;			
 		private:
-			aiVector2D ScreenPos;
-			FVector2D protoType;
+			FVector2D ScreenPos;			
 			//float Rotation;
 			//float Scale;
 

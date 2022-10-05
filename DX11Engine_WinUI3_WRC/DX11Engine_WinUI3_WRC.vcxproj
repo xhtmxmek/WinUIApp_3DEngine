@@ -154,8 +154,8 @@
     <ClInclude Include="Level\Component\EngineProperty.h" />
     <ClInclude Include="Level\Component\SpriteComponent\SpriteComponent.h" />
     <ClInclude Include="Level\Component\StaticMeshComponent\StaticMeshComponent.h" />
-    <ClInclude Include="Common\Math\TransformGroup.h" />
-    <ClInclude Include="Common\Math\TransformGroupImpl.h" />
+    <ClInclude Include="Common\Types\Math\TransformGroup.h" />
+    <ClInclude Include="Common\Types\Math\TransformGroupImpl.h" />
     <ClInclude Include="Level\Level.h" />
     <ClInclude Include="Level\LevelImpl.h" />
     <ClInclude Include="Level\World.h" />
@@ -164,10 +164,10 @@
       <DependentUpon>EngineDX11.cpp</DependentUpon>
     </ClInclude>
     <ClInclude Include="Renderer\LevelRenderer.h" />
-    <ClInclude Include="TypeInterface\Math.h" />
-    <ClInclude Include="TypeInterface\SmartPointer.h" />
-    <ClInclude Include="TypeInterface\STLContainer.h" />
-    <ClInclude Include="TypeInterface\StringInterface.h" />
+    <ClInclude Include="Common\Types\Math\Vector2.h" />
+    <ClInclude Include="Common\Types\stdTypeInterface\SmartPointer.h" />
+    <ClInclude Include="Common\Types\stdTypeInterface\STLContainer.h" />
+    <ClInclude Include="Common\Types\stdTypeInterface\StringInterface.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Common\DeviceResource.cpp" />
@@ -195,9 +195,9 @@
     <ClCompile Include="Level\Component\ComponentLinker.cpp" />
     <ClCompile Include="Level\Component\SpriteComponent\SpriteComponent.cpp" />
     <ClCompile Include="Level\Component\StaticMeshComponent\StaticMeshComponent.cpp" />
-    <ClCompile Include="Common\Math\TransformGroup.cpp" />
+    <ClCompile Include="Common\Types\Math\TransformGroup.cpp" />
     <ClCompile Include="Level\Level.cpp" />
-    <ClCompile Include="Common\Math\TransformGroupImpl.cpp" />
+    <ClCompile Include="Common\Types\Math\TransformGroupImpl.cpp" />
     <ClCompile Include="Level\LevelImpl.cpp" />
     <ClCompile Include="Level\World.cpp" />
     <ClCompile Include="EngineMinimal.cpp">
@@ -206,7 +206,7 @@
     <ClCompile Include="EngineDX11.cpp" />
     <ClCompile Include="$(GeneratedFilesDir)module.g.cpp" />
     <ClCompile Include="Renderer\LevelRenderer.cpp" />
-    <ClCompile Include="TypeInterface\Math.cpp" />
+    <ClCompile Include="Common\Types\Math\Vector2.cpp" />
   </ItemGroup>
   <ItemGroup>
     <Midl Include="EngineDX11.idl">

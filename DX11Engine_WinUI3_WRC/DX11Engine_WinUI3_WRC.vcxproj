@@ -129,8 +129,12 @@
     <ClInclude Include="Common\pImplClassDefine.h" />
     <ClInclude Include="Common\RuntimeContext.h" />
     <ClInclude Include="Common\StepTimer.h" />
+    <ClInclude Include="Common\Types\Math\Matrix3x3.h" />
+    <ClInclude Include="Common\Types\Math\Matrix4x4.h" />
+    <ClInclude Include="Common\Types\Math\plane.h" />
+    <ClInclude Include="Common\Types\Math\Quaternion.h" />
     <ClInclude Include="Common\Types\Math\Vector3.h" />
-    <ClInclude Include="Common\Types\Math\Vector4.h" />
+    <ClInclude Include="Common\Types\Math\Color.h" />
     <ClInclude Include="Common\Uncopyable.h" />
     <ClInclude Include="DLLDefine.h" />
     <ClInclude Include="EngineAsset\Material.h" />

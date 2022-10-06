@@ -10,7 +10,7 @@ namespace Engine
 		template <typename TReal>
 		class ENGINE_API Vector2t {
 		public:
-			Vector2t() : x(), y() {}
+			Vector2t() noexcept : x(), y() {}
 			Vector2t(TReal _x, TReal _y) : x(_x), y(_y) {}
 			explicit Vector2t(TReal _xyz) : x(_xyz), y(_xyz) {}
 			Vector2t(const Vector2t& o) = default;
@@ -108,7 +108,7 @@ namespace Engine
 		typedef Vector2t<int> Vector2i;
 
 		// ------------------------------------------------------------------------------------------------
-// symmetric addition
+		// symmetric addition
 		template <typename TReal>
 		inline
 			Vector2t<TReal> operator + (const Vector2t<TReal>& v1, const Vector2t<TReal>& v2) {

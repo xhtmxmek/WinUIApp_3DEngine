@@ -40,7 +40,9 @@ namespace Engine
 			}
 
 			void operator=(const String& src) { pImpl->Data = src.pImpl->Data; }
-			void operator=(const std::string& src) { pImpl->Data = src; }
+			void operator=(const std::string& src) { pImpl->Data = src; }			
+			const std::string& operator()() const { return pImpl->Data; }
+			//std::string& operator() { return pImpl->Data; }
 
 		private:
 			StringImpl* pImpl;

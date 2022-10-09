@@ -166,8 +166,8 @@ namespace Engine
             TReal r, g, b, a;
         };  // !struct aiColor4D
 
-        typedef Color4t<float> aiColor4f;
-        typedef Color4t<double> aiColor4d;
+        typedef Color4t<float> Color4f;
+        typedef Color4t<double> Color4d;
 
         // ------------------------------------------------------------------------------------------------
         template <typename TReal>

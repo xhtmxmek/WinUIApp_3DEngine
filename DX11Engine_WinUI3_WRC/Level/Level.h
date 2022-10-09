@@ -1,11 +1,11 @@
 #pragma once
 #include "DLLDefine.h"
+//#include "World.h"
 namespace Engine
 {
 	namespace Level
 	{
-		class World;
-		class SLevelImpl;
+		class World;		
 
 		class ENGINE_API SLevel
 		{
@@ -19,11 +19,11 @@ namespace Engine
 				return level;
 			}
 
-			std::shared_ptr<World> GetWorld();
-			void ReleaseInstance();
+			const SharedPointer<World>& GetWorld(){ return OwningWorld; }
+			void ReleaseInstance(){}
 		private:
-			SLevel();
-			SLevelImpl* pImpl;	
+			SLevel() = default;
+			SharedPointer<World> OwningWorld;
 		};
 	}
 }

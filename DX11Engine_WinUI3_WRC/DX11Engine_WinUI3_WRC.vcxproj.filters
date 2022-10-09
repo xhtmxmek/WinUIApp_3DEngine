@@ -62,16 +62,13 @@
       <Filter>Renderer</Filter>
     </ClCompile>
     <ClCompile Include="EngineAsset\Material.cpp" />
-    <ClCompile Include="Level\Actor\ActorImpl.cpp" />
     <ClCompile Include="Common\RuntimeContext.cpp" />
     <ClCompile Include="Level\Component\ComponentLinker.cpp" />
     <ClCompile Include="Level\Component\CameraComponent\CameraComponent.cpp" />
     <ClCompile Include="Level\Level.cpp" />
-    <ClCompile Include="Level\Actor\SpriteActor\SpriteImpl.cpp" />
     <ClCompile Include="Common\Math\TransformGroupImpl.cpp" />
     <ClCompile Include="Level\Actor\ActorManager\ActorManager.cpp" />
     <ClCompile Include="Level\Actor\ActorManager\ActorManagerImpl.cpp" />
-    <ClCompile Include="Level\LevelImpl.cpp" />
     <ClCompile Include="EngineAsset\Texture.cpp" />
     <ClCompile Include="Common\Path.cpp" />
     <ClCompile Include="Level\Actor\StaticMesh\StaticMesh.cpp" />
@@ -137,17 +134,14 @@
     </ClInclude>
     <ClInclude Include="EngineAsset\Material.h" />
     <ClInclude Include="DLLDefine.h" />
-    <ClInclude Include="Level\Actor\ActorImpl.h" />
     <ClInclude Include="Common\RuntimeContext.h" />
     <ClInclude Include="Level\Component\ComponentLinker.h" />
     <ClInclude Include="Level\Component\CameraComponent\CameraComponent.h" />
     <ClInclude Include="Level\Level.h" />
-    <ClInclude Include="Level\Actor\SpriteActor\SpriteImpl.h" />
     <ClInclude Include="Common\Math\TransformGroupImpl.h" />
     <ClInclude Include="Level\Actor\ActorManager\ActorManager.h" />
     <ClInclude Include="Level\Actor\ActorManager\ActorManagerImpl.h" />
     <ClInclude Include="Common\pImplClassDefine.h" />
-    <ClInclude Include="Level\LevelImpl.h" />
     <ClInclude Include="EngineAsset\Texture.h" />
     <ClInclude Include="Common\Path.h" />
     <ClInclude Include="Common\EngineBaseHeader.h" />

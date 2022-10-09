@@ -30,9 +30,8 @@ namespace Engine
 			//float Scale;
 
 			Vector2Childf UVOffset;
-			//Color TintColor;			
-			SharedPointer<EngineAsset::Texture> BasicTexture;
-			//Colors::WH
+			Color4f TintColor;
+			SharedPointer<EngineAsset::Texture> BasicTexture;			
 			UniquePointer<DirectX::SpriteBatch> SpriteBatch;
 			UniquePointer<DirectX::BasicEffect> Effect;
 		};

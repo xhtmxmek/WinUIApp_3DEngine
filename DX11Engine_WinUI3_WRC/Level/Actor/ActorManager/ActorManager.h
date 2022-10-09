@@ -42,7 +42,7 @@ namespace Engine
 			void Init();
 
 			template<typename T>
-			std::shared_ptr<T> CreateActor(const std::string& name)
+			SharedPointer<T> CreateActor(const std::string& name)
 			{
 				CheckActorListCapacity();
 				//삽입할때 이름이 같을경우 처리하는 로직(ex-뒤에_#를 붙인다던가)도 생각해보기				
@@ -51,15 +51,22 @@ namespace Engine
 			}
 
 			size_t GetNumActorList();
-		private:
-			ActorManagerImpl* pImpl;
+		private:			
 			//func
-			ActorManager();
+			ActorManager() : CurrentActorSizeFactor(1), ActorListResized(false){}
 			~ActorManager();
 			void CheckActorListCapacity();
-			std::shared_ptr<Actor> CreateActor(const std::string& className, const std::string& instanceName);
+			SharedPointer<Actor> CreateActor(const std::string& className, const std::string& instanceName);
 			//Actor* CreateActor(const std::string& className, const std::string& instanceName);
-			std::shared_ptr<Actor> GetActorByName(const std::string& actorName);
+			SharedPointer<Actor> GetActorByName(const std::string& actorName);
+
+			//멤버 변수
+			HashMap<const char*, SharedPointer<Actor>> Actors;
+			//public으로 공개해서 외부에서 사용할일이 있을것같으면 그때 변경
+			const size_t	ActorsSizeUnit = 1000;
+			const size_t	ActorSizeBias = 5;
+			unsigned int	CurrentActorSizeFactor;
+			bool			ActorListResized;
 		};
 	}
 }

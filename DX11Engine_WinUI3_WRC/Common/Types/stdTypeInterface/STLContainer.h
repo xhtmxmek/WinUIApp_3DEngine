@@ -45,7 +45,9 @@ namespace Engine
 			void operator=(const Map<key, value>& src) { pImpl->MapData = src.pImpl->MapData; }
 			void operator=(const std::map<key, value>& src) { pImpl->MapData = src; }
 
-			const std::map<key, value>& GetMapData() { return pImpl->MapData; }
+			std::map<key, value>& GetMapData() { return pImpl->MapData; }
+
+			std::map<key, value>& operator()() { return GetMapData(); }
 			
 
 		private:

@@ -1,45 +1,34 @@
 #include "EngineMinimal.h"
-//#include "Level/Component/ComponentBase.h"
-//#include "Level/Component/ComponentTypes.h"
-//#include "Level/Component/TransformGroup.h"
-#include "ActorImpl.h"
 #include "Actor.h"
 #include "Level/Component/ComponentBase/ComponentBase.h"
+#include "Level/Level.h"
+#include "Level/World.h"
 
 namespace Engine
 {
     namespace Level
     {        
-
-        Actor::Actor(const std::string& name)
+        SharedPointer<World> Actor::GetWorld()
         {
-            pImpl = new ActorImpl(name);
+            return SLevel::GetInstance().GetWorld();
         }
 
-        Actor::~Actor()
-        {
-            delete pImpl;
-        }
 
-        void Actor::SetRootComponent(Component::ComponentBase* component)
+        std::shared_ptr<Component::ComponentBase> Actor::CreateComponent(const String& className, const String& instanceName)
         {            
-            pImpl->SetRootComponent(component);
-        }
-
-        std::shared_ptr<World> Actor::GetWorld()
-        {         
-            return pImpl->GetWorld();
-        }
-
-        std::shared_ptr<Component::ComponentBase> Actor::CreateComponent(const std::string& className, const std::string& instanceName)
-        {            
-            //런타임 클래스의 클래스명 집어넣기
-            return pImpl->CreateComponent(className, instanceName);
-        }
-
-        std::shared_ptr<Component::ComponentBase> Actor::GetComponentByName(const std::string& name)
-        {            
-            return pImpl->GetActorComponentByName(name);
+            //런타임 클래스의 클래스명 집어넣기            
+            auto iter = Components().find(className().c_str());
+            if (iter == Components().end())
+            {
+                //new component의 포인터와 component의 타입(drawable인지, 뭐인지...를) 리턴해서 월드에 넣어주거나, 최초에 템플릿으로부터 받은 이넘타입을 월드에 넣어주기.                 
+                Component::ComponentBase* runtimeComponent = (Component::ComponentBase*)RuntimeContext::New(className(), instanceName());
+                std::shared_ptr<Component::ComponentBase> ptr(runtimeComponent);
+                Components().insert(std::make_pair(className().c_str(), ptr));
+                ptr->Init();
+                return ptr;
+            }
+            else
+                return nullptr;
         }
 
         //TransformGroup const& Actor::GetTransform()

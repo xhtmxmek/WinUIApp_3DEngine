@@ -25,9 +25,11 @@ namespace Engine
 			SharedPointer(const SharedPointer<T>& src) :SharedPointer() { pImpl->Pointer = src.pImpl->Pointer; }
 
 			SharedPointer(const std::shared_ptr<T>& src) :SharedPointer() { pImpl->Pointer = src; }
+			SharedPointer(nullptr_t) : SharedPointer() { pImpl->Pointer = nullptr; }
 
 			SharedPointer<T>& operator=(const SharedPointer<T>& src) { pImpl->Pointer = src.pImpl->Pointer; return *this; }
 			SharedPointer<T>& operator=(const std::shared_ptr<T>& src) { pImpl->Pointer = src; return *this; }
+			SharedPointer<T>& operator=(nullptr_t) { pImpl->Pointer = nullptr; return *this; }
 
 			T* operator->() const { return Get(); }
 			bool operator==(const std::shared_ptr<T>& src){ return pImpl->Pointer == src; }

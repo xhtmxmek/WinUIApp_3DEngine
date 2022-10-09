@@ -99,7 +99,7 @@
     </ClCompile>
     <Link>
       <AdditionalDependencies Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">d2d1.lib;d3d11.lib;dxgi.lib;dxguid.lib;windowscodecs.lib;dwrite.lib;ole32.lib;assimp-vc143-mtd.lib;%(AdditionalDependencies)</AdditionalDependencies>
-      <AdditionalLibraryDirectories Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(SolutionDir)\ExternalLibraries\Assimp\lib\x64\Debug\;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(SolutionDir)ExternalLibraries\Assimp\lib\x64\Debug\;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
     <Link>
       <AdditionalDependencies Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">d2d1.lib;d3d11.lib;dxgi.lib;dxguid.lib;windowscodecs.lib;dwrite.lib;ole32.lib;%(AdditionalDependencies)</AdditionalDependencies>
@@ -142,7 +142,6 @@
     <ClInclude Include="Level\Actor\Actor.h">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</ExcludedFromBuild>
     </ClInclude>
-    <ClInclude Include="Level\Actor\ActorImpl.h" />
     <ClInclude Include="Level\Actor\ActorManager.h">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
       </ExcludedFromBuild>
@@ -151,7 +150,6 @@
     <ClInclude Include="Level\Actor\ActorManager\ActorManagerImpl.h" />
     <ClInclude Include="Level\Actor\PropertyActor.h" />
     <ClInclude Include="Level\Actor\SpriteActor\Sprite.h" />
-    <ClInclude Include="Level\Actor\SpriteActor\SpriteImpl.h" />
     <ClInclude Include="Level\Actor\StaticMesh\StaticMesh.h" />
     <ClInclude Include="Level\Component\CameraComponent\CameraComponent.h" />
     <ClInclude Include="Level\Component\ComponentBase\ComponentBase.h" />
@@ -163,7 +161,6 @@
     <ClInclude Include="Common\Math\TransformGroup.h" />
     <ClInclude Include="Common\Math\TransformGroupImpl.h" />
     <ClInclude Include="Level\Level.h" />
-    <ClInclude Include="Level\LevelImpl.h" />
     <ClInclude Include="Level\World.h" />
     <ClInclude Include="EngineMinimal.h" />
     <ClInclude Include="EngineDX11.h">
@@ -186,14 +183,11 @@
     <ClCompile Include="Level\Actor\Actor.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</ExcludedFromBuild>
     </ClCompile>
-    <ClCompile Include="Level\Actor\ActorImpl.cpp" />
     <ClCompile Include="Level\Actor\ActorManager\ActorManager.cpp" />
     <ClCompile Include="Level\Actor\ActorManager\ActorManagerImpl.cpp" />
     <ClCompile Include="Level\Actor\SpriteActor\Sprite.cpp">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
-    </ClCompile>
-    <ClCompile Include="Level\Actor\SpriteActor\SpriteImpl.cpp">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+      </ExcludedFromBuild>
     </ClCompile>
     <ClCompile Include="Level\Actor\StaticMesh\StaticMesh.cpp" />
     <ClCompile Include="Level\Component\CameraComponent\CameraComponent.cpp" />
@@ -204,7 +198,6 @@
     <ClCompile Include="Common\Math\TransformGroup.cpp" />
     <ClCompile Include="Level\Level.cpp" />
     <ClCompile Include="Common\Math\TransformGroupImpl.cpp" />
-    <ClCompile Include="Level\LevelImpl.cpp" />
     <ClCompile Include="Level\World.cpp" />
     <ClCompile Include="EngineMinimal.cpp">
       <PrecompiledHeader>Create</PrecompiledHeader>

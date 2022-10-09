@@ -209,22 +209,22 @@ namespace Engine
                 TReal invdet = static_cast<TReal>(1.0) / det;
 
                 Matrix3x3t<TReal> res;
-                res._11 = invdet * (_22 * _33 - _23 * _32);
-                res._12 = -invdet * (_12 * _33 - _13 * _32);
-                res._13 = invdet * (_12 * _23 - _13 * _22);
-                res._21 = -invdet * (_21 * _33 - _23 * _31);
-                res._22 = invdet * (_11 * _33 - _13 * _31);
-                res._23 = -invdet * (_11 * _23 - _13 * _21);
-                res._31 = invdet * (_21 * _32 - _22 * _31);
-                res._32 = -invdet * (_11 * _32 - _12 * _31);
-                res._33 = invdet * (_11 * _22 - _12 * _21);
+                res._11 = invdet * (_22 * _33 - _32 * _23);
+                res._21 = -invdet * (_21 * _33 - _31 * _23);
+                res._31 = invdet * (_21 * _32 - _31 * _22);
+                res._12 = -invdet * (_12 * _33 - _32 * _13);
+                res._22 = invdet * (_11 * _33 - _31 * _13);
+                res._32 = -invdet * (_11 * _32 - _31 * _12);
+                res._13 = invdet * (_12 * _23 - _22 * _13);
+                res._23 = -invdet * (_11 * _23 - _21 * _13);
+                res._33 = invdet * (_11 * _22 - _21 * _12);
                 *this = res;
 
                 return *this;
             }
             TReal Determinant() const
             {
-                return _11 * _22 * _33 - _11 * _23 * _32 + _12 * _23 * _31 - _12 * _21 * _33 + _13 * _21 * _32 - _13 * _22 * _31;
+                return _11 * _22 * _33 - _11 * _32 * _23 + _21 * _32 * _13 - _21 * _12 * _33 + _31 * _12 * _23 - _31 * _22 * _13;
             }
 
             // -------------------------------------------------------------------
@@ -236,10 +236,10 @@ namespace Engine
             static Matrix3x3t& RotationZ(TReal a, Matrix3x3t& out)
             {
                 out._11 = out._22 = std::cos(a);
-                out._21 = std::sin(a);
-                out._12 = -out._21;
+                out._12 = std::sin(a);
+                out._21 = -out._12;
 
-                out._13 = out._23 = out._31 = out._32 = 0.f;
+                out._31 = out._32 = out._13 = out._23 = 0.f;
                 out._33 = 1.f;
 
                 return out;
@@ -259,9 +259,9 @@ namespace Engine
                 TReal x = axis.x, y = axis.y, z = axis.z;
 
                 // Many thanks to MathWorld and Wikipedia
-                out._11 = t * x * x + c;   out._12 = t * x * y - s * z; out._13 = t * x * z + s * y;
-                out._21 = t * x * y + s * z; out._22 = t * y * y + c;   out._23 = t * y * z - s * x;
-                out._31 = t * x * z - s * y; out._32 = t * y * z + s * x; out._33 = t * z * z + c;
+                out._11 = t * x * x + c;   out._21 = t * x * y - s * z; out._31 = t * x * z + s * y;
+                out._12 = t * x * y + s * z; out._22 = t * y * y + c;   out._32 = t * y * z - s * x;
+                out._13 = t * x * z - s * y; out._23 = t * y * z + s * x; out._33 = t * z * z + c;
 
                 return out;
             }
@@ -275,8 +275,8 @@ namespace Engine
             static Matrix3x3t& Translation(const Vector2t<TReal>& v, Matrix3x3t& out)
             {
                 out = Matrix3x3t<TReal>();
-                out._13 = v.x;
-                out._23 = v.y;
+                out._31 = v.x;
+                out._32 = v.y;
                 return out;
             }
 
@@ -342,7 +342,7 @@ namespace Engine
                     {
                         for (unsigned int j = 0; j < 3; j++)
                         {
-                            out[i][j] = -_31_ * u[i] * u[j] - _32_ * v[i] * v[j]
+                            out[j][i] = -_31_ * u[i] * u[j] - _32_ * v[i] * v[j]
                                 + _33_ * v[i] * u[j];
                         }
                         out[i][i] += static_cast<TReal>(1.0);
@@ -359,16 +359,16 @@ namespace Engine
                     const TReal hvxz = hvx * v.z;
                     const TReal hvyz = hvz * v.y;
                     out[0][0] = e + hvx * v.x;
-                    out[0][1] = hvxy - v.z;
-                    out[0][2] = hvxz + v.y;
+                    out[1][0] = hvxy - v.z;
+                    out[2][0] = hvxz + v.y;
 
-                    out[1][0] = hvxy + v.z;
+                    out[0][1] = hvxy + v.z;
                     out[1][1] = e + h * v.y * v.y;
-                    out[1][2] = hvyz - v.x;
+                    out[2][1] = hvyz - v.x;
 
-                    out[2][0] = hvxz - v.y;
-                    out[2][1] = hvyz + v.x;
-                    out[2][2] = e + hvz * v.z;
+                    out[3][0] = hvxz - v.y;
+                    out[3][1] = hvyz + v.x;
+                    out[3][2] = e + hvz * v.z;
                 }
                 return out;
             }

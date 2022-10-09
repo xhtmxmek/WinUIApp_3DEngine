@@ -46,7 +46,7 @@ namespace Engine
 {
 	namespace Type
 	{
-        struct Plane {
+        struct ENGINE_API Plane {
             Plane() noexcept : a(0.f), b(0.f), c(0.f), d(0.f) {}
             Plane(double _a, double _b, double _c, double _d) :
                 a(_a), b(_b), c(_c), d(_d) {}

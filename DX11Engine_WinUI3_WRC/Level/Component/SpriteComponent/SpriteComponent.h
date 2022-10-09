@@ -25,11 +25,11 @@ namespace Engine
 			void Tick(float elasedTime) final;
 			void Draw() final;			
 		private:
-			Vector2f ScreenPos;			
+			Vector2Childf ScreenPos;
 			//float Rotation;
 			//float Scale;
 
-			Vector2f UVOffset;
+			Vector2Childf UVOffset;
 			//Color TintColor;			
 			SharedPointer<EngineAsset::Texture> BasicTexture;
 			//Colors::WH

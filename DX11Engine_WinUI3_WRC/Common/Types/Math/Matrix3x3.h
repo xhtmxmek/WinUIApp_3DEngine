@@ -63,7 +63,7 @@ namespace Engine
          *  defined thereby.
          */
         template <typename TReal>
-        class Matrix3x3t {
+        class ENGINE_API Matrix3x3t {
         public:
             Matrix3x3t() noexcept :
                 _11(static_cast<TReal>(1.0f)), _12(), _13(),
@@ -297,8 +297,8 @@ namespace Engine
 
                 if (f > static_cast<TReal>(1.0) - static_cast<TReal>(0.00001))     /* "from" and "to"-vector almost parallel */
                 {
-                    aiVector3D u, v;     /* temporary storage vectors */
-                    aiVector3D x;       /* vector most nearly orthogonal to "from" */
+                    Vector3f u, v;     /* temporary storage vectors */
+                    Vector3f x;       /* vector most nearly orthogonal to "from" */
 
                     x.x = (from.x > 0.0) ? from.x : -from.x;
                     x.y = (from.y > 0.0) ? from.y : -from.y;
@@ -333,7 +333,7 @@ namespace Engine
 
                     u.x = x.x - from.x; u.y = x.y - from.y; u.z = x.z - from.z;
                     v.x = x.x - to.x;   v.y = x.y - to.y;   v.z = x.z - to.z;
-
+                    
                     const TReal _31_ = static_cast<TReal>(2.0) / (u * u);
                     const TReal _32_ = static_cast<TReal>(2.0) / (v * v);
                     const TReal _33_ = _31_ * _32_ * (u * v);
@@ -342,15 +342,15 @@ namespace Engine
                     {
                         for (unsigned int j = 0; j < 3; j++)
                         {
-                            mtx[i][j] = -_31_ * u[i] * u[j] - _32_ * v[i] * v[j]
+                            out[i][j] = -_31_ * u[i] * u[j] - _32_ * v[i] * v[j]
                                 + _33_ * v[i] * u[j];
                         }
-                        mtx[i][i] += static_cast<TReal>(1.0);
+                        out[i][i] += static_cast<TReal>(1.0);
                     }
                 }
                 else  /* the most common case, unless "from"="to", or "from"=-"to" */
                 {
-                    const aiVector3D v = from ^ to;
+                    const Vector3f v = from ^ to;
                     /* ... use this hand optimized version (9 mults less) */
                     const TReal h = static_cast<TReal>(1.0) / (static_cast<TReal>(1.0) + e);      /* optimization by Gottfried Chen */
                     const TReal hvx = h * v.x;
@@ -358,19 +358,19 @@ namespace Engine
                     const TReal hvxy = hvx * v.y;
                     const TReal hvxz = hvx * v.z;
                     const TReal hvyz = hvz * v.y;
-                    mtx[0][0] = e + hvx * v.x;
-                    mtx[0][1] = hvxy - v.z;
-                    mtx[0][2] = hvxz + v.y;
+                    out[0][0] = e + hvx * v.x;
+                    out[0][1] = hvxy - v.z;
+                    out[0][2] = hvxz + v.y;
 
-                    mtx[1][0] = hvxy + v.z;
-                    mtx[1][1] = e + h * v.y * v.y;
-                    mtx[1][2] = hvyz - v.x;
+                    out[1][0] = hvxy + v.z;
+                    out[1][1] = e + h * v.y * v.y;
+                    out[1][2] = hvyz - v.x;
 
-                    mtx[2][0] = hvxz - v.y;
-                    mtx[2][1] = hvyz + v.x;
-                    mtx[2][2] = e + hvz * v.z;
+                    out[2][0] = hvxz - v.y;
+                    out[2][1] = hvyz + v.x;
+                    out[2][2] = e + hvz * v.z;
                 }
-                return mtx;
+                return out;
             }
 
         public:

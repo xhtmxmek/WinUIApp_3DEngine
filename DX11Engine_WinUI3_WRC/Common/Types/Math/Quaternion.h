@@ -57,7 +57,7 @@ namespace Engine
         // ---------------------------------------------------------------------------
         /** Represents a quaternion in a 4D vector. */
         template <typename TReal>
-        class Quaterniont
+        class ENGINE_API Quaterniont
         {
         public:
             Quaterniont() noexcept : w(1.0), x(), y(), z() {}
@@ -155,7 +155,7 @@ namespace Engine
             /** Returns a matrix representation of the quaternion */
             Matrix3x3t<TReal> GetMatrix() const
             {
-                aiMatrix3x3t<TReal> resMatrix;
+                Matrix3x3t<TReal> resMatrix;
                 resMatrix.a1 = static_cast<TReal>(1.0) - static_cast<TReal>(2.0) * (y * y + z * z);
                 resMatrix.a2 = static_cast<TReal>(2.0) * (x * y - z * w);
                 resMatrix.a3 = static_cast<TReal>(2.0) * (x * z + y * w);
@@ -224,11 +224,11 @@ namespace Engine
             /** Rotate a point by this quaternion */
             Vector3t<TReal> Rotate(const Vector3t<TReal>& in) const
             {
-                Quaterniont q2(0.f, v.x, v.y, v.z), q = *this, qinv = q;
+                Quaterniont q2(0.f, in.x, in.y, in.z), q = *this, qinv = q;
                 qinv.Conjugate();
 
                 q = q * q2 * qinv;
-                return aiVector3t<TReal>(q.x, q.y, q.z);
+                return Vector3t<TReal>(q.x, q.y, q.z);
             }
 
             /** Multiply two quaternions */

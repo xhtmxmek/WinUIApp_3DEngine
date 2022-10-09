@@ -19,11 +19,11 @@ namespace Engine
 			{
 				x = pX; y = pY;
 			}
-			Vector2t SquareLength() const
+			TReal SquareLength() const
 			{
 				return x * x + y * y;
 			}
-			Vector2t Length() const
+			TReal Length() const
 			{
 				return std::sqrt(SquareLength());
 			}
@@ -171,5 +171,15 @@ namespace Engine
 			return Vector2t<TReal>(-v.x, -v.y);
 		}
 
+		template <typename TReal>
+		class ENGINE_API Vector2Childt : public Vector2t<TReal> {
+		public:
+			Vector2Childt() noexcept : Vector2t() {}
+			Vector2Childt(TReal _x, TReal _y) : Vector2t(_x, _y) {}
+			explicit Vector2Childt(TReal _xyz) : Vector2t(_xyz) {}
+			Vector2Childt(const Vector2Childt& o) = default;
+		};
+
+		typedef Vector2Childt<float> Vector2Childf;
 	}
 }

@@ -24,7 +24,7 @@ namespace Engine
 			LevelRenderer(const LevelRenderer& ) = delete;
 			LevelRenderer& operator=(const LevelRenderer& ) = delete;
 
-			void Render(const std::vector<std::shared_ptr<Component::DrawableComponent>>& drawList );
+			void Render(const Vector<SharedPointer<Component::DrawableComponent>>& drawList );
 		private:
 			LevelRenderer();			
 		};

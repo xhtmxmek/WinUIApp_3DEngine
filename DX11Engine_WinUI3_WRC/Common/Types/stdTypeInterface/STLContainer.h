@@ -46,8 +46,8 @@ namespace Engine
 			void operator=(const std::map<key, value>& src) { pImpl->MapData = src; }
 
 			std::map<key, value>& GetMapData() { return pImpl->MapData; }
-
 			std::map<key, value>& operator()() { return GetMapData(); }
+			std::map<key, value>& operator()() const { return GetMapData(); }
 			
 
 		private:
@@ -92,6 +92,7 @@ namespace Engine
 
 			void operator=(const Set<key>& src) { pImpl->SetData = src.pImpl->SetData; }
 			void operator=(const std::set<key>& src) { pImpl->SetData = src; }
+			std::set<key>& operator()() { return pImpl->SetData; }
 
 		private:
 			SetImpl<key>* pImpl;
@@ -138,6 +139,7 @@ namespace Engine
 
 			void operator=(const HashMap<key, value>& src) { pImpl->HashMapData = src.pImpl->HashMapData; }
 			void operator=(const std::unordered_map<key, value>& src) { pImpl->HashMapData = src; }
+			std::unordered_map<key, value>& operator()() { return pImpl->HashMapData; }
 
 		private:
 			HashMapImpl<key, value>* pImpl;
@@ -181,6 +183,8 @@ namespace Engine
 
 			void operator=(const HashSet<key>& src) { pImpl->HashSetData = src.pImpl->HashSetData; }
 			void operator=(const std::unordered_set<key>& src) { pImpl->HashSetData = src; }
+			std::unordered_set<key>& operator()() { return pImpl->HashSetData; }
+			std::unordered_set<key>& operator()() const { return pImpl->HashSetData; }
 
 		private:
 			HashSetImpl<key>* pImpl;
@@ -226,6 +230,8 @@ namespace Engine
 
 			void operator=(const Vector<T>& src) { pImpl->VectorData = src.pImpl->VectorData; }
 			void operator=(const std::vector<T>& src) { pImpl->VectorData = src; }
+			std::vector<T>& operator()() { return pImpl->VectorData; }
+			const std::vector<T>& operator()() const { return pImpl->VectorData; }
 
 		private:
 			VectorImpl<T>* pImpl;
@@ -274,7 +280,8 @@ namespace Engine
 			auto Begin() { return pImpl->ListData.begin(); }
 			auto End() { return pImpl->ListData.end(); }
 
-			const std::list<T>& GetListData() { return pImpl->ListData; }
+			std::list<T>& GetListData() { return pImpl->ListData; }
+			std::vector<T>& operator()() { return GetListData(); }
 
 		private:
 			ListImpl<T>* pImpl;

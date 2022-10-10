@@ -10,7 +10,7 @@ namespace Engine
     {        
         SharedPointer<World> Actor::GetWorld()
         {
-            return SLevel::GetInstance().GetWorld();
+            return SLevel::GetWorld();
         }
 
 

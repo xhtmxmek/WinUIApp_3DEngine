@@ -10,9 +10,7 @@ namespace Engine
 	}
 
 	namespace Level
-	{
-		class SpriteImpl;
-
+	{		
 		class ENGINE_API AStaticMesh : public Actor
 		{
 			//IMPL_CLASS_PROPERTY(std::shared_ptr<Component::SpriteComponent>, SpriteComponent)

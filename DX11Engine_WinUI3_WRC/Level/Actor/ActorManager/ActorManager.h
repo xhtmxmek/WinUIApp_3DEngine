@@ -46,15 +46,16 @@ namespace Engine
 			{
 				CheckActorListCapacity();
 				//삽입할때 이름이 같을경우 처리하는 로직(ex-뒤에_#를 붙인다던가)도 생각해보기				
-				std::shared_ptr<T> newActor(std::static_pointer_cast<T>(CreateActor(T::ClassName(), name)));								
-				return newActor;
+				//SharedPointer<T> newActorPtr;
+				//auto newActor = CreateActor(T::ClassName(), name);
+				//SharedPointer<T> newActorPtr(std::static_pointer_cast<T>(newActor()));								
+				return nullptr;
 			}
 
 			size_t GetNumActorList();
 		private:			
 			//func
-			ActorManager() : CurrentActorSizeFactor(1), ActorListResized(false){}
-			~ActorManager();
+			ActorManager() : CurrentActorSizeFactor(1), ActorListResized(false){}			
 			void CheckActorListCapacity();
 			SharedPointer<Actor> CreateActor(const std::string& className, const std::string& instanceName);
 			//Actor* CreateActor(const std::string& className, const std::string& instanceName);

@@ -3,6 +3,7 @@
 #include "Common/RuntimeContext.h"
 #include "Common/Math/TransformGroup.h"
 #include "../ComponentTypes.h"
+#include "Common/Types/stdTypeInterface/SmartPointer.h"
 
 //Component의 이름이 추가되는것은 흔한일이 아니기에, 포함하고있는 모든 헤더가 빌드되는건 어쩔수없는것같음
 //Component에서 type이 필요 없으면 뺴주기. 필요하면 추가하기.
@@ -68,7 +69,5 @@ namespace Engine
 			bool		Visible;
 			//DrawLayer	ComponentDrawLayer;
 		};
-	}
-	
-	typedef std::shared_ptr<Component::ComponentBase> ComponentPtr;
+	}	
 }

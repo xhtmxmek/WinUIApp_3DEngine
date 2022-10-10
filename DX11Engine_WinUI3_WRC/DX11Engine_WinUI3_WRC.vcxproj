@@ -147,7 +147,6 @@
       </ExcludedFromBuild>
     </ClInclude>
     <ClInclude Include="Level\Actor\ActorManager\ActorManager.h" />
-    <ClInclude Include="Level\Actor\ActorManager\ActorManagerImpl.h" />
     <ClInclude Include="Level\Actor\PropertyActor.h" />
     <ClInclude Include="Level\Actor\SpriteActor\Sprite.h" />
     <ClInclude Include="Level\Actor\StaticMesh\StaticMesh.h" />
@@ -170,7 +169,9 @@
     <ClInclude Include="Common\Types\Math\Vector2.h" />
     <ClInclude Include="Common\Types\stdTypeInterface\SmartPointer.h" />
     <ClInclude Include="Common\Types\stdTypeInterface\STLContainer.h" />
-    <ClInclude Include="Common\Types\stdTypeInterface\StringInterface.h" />
+    <ClInclude Include="Common\Types\stdTypeInterface\StringInterface.h">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Common\DeviceResource.cpp" />
@@ -184,7 +185,6 @@
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</ExcludedFromBuild>
     </ClCompile>
     <ClCompile Include="Level\Actor\ActorManager\ActorManager.cpp" />
-    <ClCompile Include="Level\Actor\ActorManager\ActorManagerImpl.cpp" />
     <ClCompile Include="Level\Actor\SpriteActor\Sprite.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
       </ExcludedFromBuild>

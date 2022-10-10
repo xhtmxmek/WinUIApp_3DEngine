@@ -68,7 +68,6 @@
     <ClCompile Include="Level\Level.cpp" />
     <ClCompile Include="Common\Math\TransformGroupImpl.cpp" />
     <ClCompile Include="Level\Actor\ActorManager\ActorManager.cpp" />
-    <ClCompile Include="Level\Actor\ActorManager\ActorManagerImpl.cpp" />
     <ClCompile Include="EngineAsset\Texture.cpp" />
     <ClCompile Include="Common\Path.cpp" />
     <ClCompile Include="Level\Actor\StaticMesh\StaticMesh.cpp" />
@@ -140,7 +139,6 @@
     <ClInclude Include="Level\Level.h" />
     <ClInclude Include="Common\Math\TransformGroupImpl.h" />
     <ClInclude Include="Level\Actor\ActorManager\ActorManager.h" />
-    <ClInclude Include="Level\Actor\ActorManager\ActorManagerImpl.h" />
     <ClInclude Include="Common\pImplClassDefine.h" />
     <ClInclude Include="EngineAsset\Texture.h" />
     <ClInclude Include="Common\Path.h" />

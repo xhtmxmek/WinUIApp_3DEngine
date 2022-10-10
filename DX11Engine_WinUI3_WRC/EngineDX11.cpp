@@ -39,8 +39,7 @@ namespace winrt::DX11Engine_WinUI3_WRC::implementation
         DX::DeviceResourcesUtil::GetInstance().CreateDeviceResources();        
         DX::DeviceResourcesUtil::GetDeviceResources()->RegisterDeviceNotify(this);
         m_criticalSection = winrt::make<DX11Engine_WinUI3_WRC::implementation::EngineCriticalSection>();
-        Engine::RuntimeContext::InitialzeRuntimeTable();        
-        m_World = Engine::Level::SLevel::GetInstance().GetWorld();
+        Engine::RuntimeContext::InitialzeRuntimeTable();                
     }
 
     EngineDX11::~EngineDX11()
@@ -48,7 +47,7 @@ namespace winrt::DX11Engine_WinUI3_WRC::implementation
         //DX11 릴리즈 되어야 하는 친구들은 여기서 릴리즈.(사실상 전부)
         DX::DeviceResourcesUtil::GetInstance().ReleaseInstance();
         Engine::Level::ActorManager::GetInstance().ReleaseInstance();
-        Engine::Level::SLevel::GetInstance().ReleaseInstance();
+        //Engine::Level::SLevel::GetInstance().ReleaseInstance();
         Engine::EngineAsset::TextureManager::GetInstance().ReleaseInstance();
         //월드 
         //액터 매니저 
@@ -78,6 +77,10 @@ namespace winrt::DX11Engine_WinUI3_WRC::implementation
         //직접 가져다 쓰지 않는다고 하더라도, DLL Import를 하고 pImpl구조를 만들어서 보호해야함.
         //Engine::Path::ApplicationDir = winrt::Windows::ApplicationModel::Package::Current().InstalledLocation().Path();
         Engine::Path::InitBasePathes();
+        //기본 월드 생성
+        m_World = make_shared<Engine::Level::World>();
+
+        Engine::Level::SLevel::SetWorld(m_World);
         //옵션 설정
         DX::DeviceResourcesUtil::GetDeviceResources()->SetOption(DX::DeviceResources::c_UseXAML);
         CreateDeviceDependentResources();

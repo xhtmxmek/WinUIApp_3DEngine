@@ -16,6 +16,9 @@ void GameMain::Initialize()
 	//auto sprite = Engine::Level::ActorManager::GetInstance().CreateActor<Engine::Level::ASprite>("hello");
 	//Engine::Type::SharedPointer<int> test;
 	Engine::Type::TestClass<int> test;
+	Engine::Level::AStaticMesh mesh("mesh");
+	mesh.testMember.member = 5;
+	mesh.testMember.member = 3;
 	//Engine::Level::AStaticMesh test("test");
 	//auto staticMesh = Engine::Level::ActorManager::GetInstance().CreateActor<Engine::Level::AStaticMesh>("MeshTest");
 	//FVector2 test;

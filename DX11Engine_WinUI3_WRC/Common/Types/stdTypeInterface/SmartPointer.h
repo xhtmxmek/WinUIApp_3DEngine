@@ -16,7 +16,7 @@ namespace Engine
 		};
 
 		template <typename T>
-		class SharedPointer
+		class ENGINE_API SharedPointer
 		{
 		public:
 			SharedPointer() { pImpl = new SharedPointerImpl<T>; }
@@ -102,7 +102,8 @@ namespace Engine
 		class TestClass
 		{
 		public:
-			TestClass(){}
+			TestClass(){member = T};
+			int member;
 		};
 	}
 }

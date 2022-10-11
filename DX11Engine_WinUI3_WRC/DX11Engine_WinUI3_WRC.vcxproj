@@ -179,6 +179,7 @@
     <ClCompile Include="Common\EngineCriticalSection.cpp" />
     <ClCompile Include="Common\Engine_Scoped_Lock.cpp" />
     <ClCompile Include="Common\RuntimeContext.cpp" />
+    <ClCompile Include="Common\Types\stdTypeInterface\SmartPointer.cpp" />
     <ClCompile Include="EngineAsset\Material.cpp" />
     <ClCompile Include="EngineAsset\Texture.cpp" />
     <ClCompile Include="Level\Actor\Actor.cpp">

@@ -26,6 +26,8 @@ namespace Engine
 		private:
 			//Engine::Type::ISmartPointer<Component::StaticMeshComponent> Mesh;
 			Type::SharedPointer<Component::StaticMeshComponent> Mesh;
+		public:
+			TestClass<int> testMember;
 
 		};
 	}

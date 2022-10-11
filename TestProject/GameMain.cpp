@@ -4,7 +4,6 @@
 #include "Level/Actor/ActorManager/ActorManager.h"
 //#include "Level/Actor/SpriteActor/Sprite.h"
 #include "Level/Actor/StaticMesh/StaticMesh.h"
-#include "Common/Types/stdTypeInterface/SmartPointer.h"
 
 
 //using namespace Engine;
@@ -14,13 +13,10 @@ void GameMain::Initialize()
 {
 	//빌드 후 이벤트로 특정헤더파일에 포함시키기
 	//auto sprite = Engine::Level::ActorManager::GetInstance().CreateActor<Engine::Level::ASprite>("hello");
-	//Engine::Type::SharedPointer<int> test;
-	Engine::Type::TestClass<int> test;
-	Engine::Level::AStaticMesh mesh("mesh");
-	mesh.testMember.member = 5;
-	mesh.testMember.member = 3;
+	//Engine::Type::shared_ptr<int> test;
+	//Engine::Type::TestClass test;	
 	//Engine::Level::AStaticMesh test("test");
-	//auto staticMesh = Engine::Level::ActorManager::GetInstance().CreateActor<Engine::Level::AStaticMesh>("MeshTest");
+	auto staticMesh = Engine::Level::ActorManager::GetInstance().CreateActor<Engine::Level::AStaticMesh>("MeshTest");
 	//FVector2 test;
 	//test.Test();
 

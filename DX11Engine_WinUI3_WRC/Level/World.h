@@ -25,22 +25,22 @@ namespace Engine
 		{
 		public:				
 			World();
-			void PushComponent(const SharedPointer<Component::ComponentBase>& component);
+			void PushComponent(const shared_ptr<Component::ComponentBase>& component);
 			void Update(float elapsedTime);
 			void Render();
 
 		private:
 			void CheckVisibilityActors();	//가시성 판정			
-			void PushCameraComponent(const SharedPointer<Component::ComponentBase>& component);
-			void PushDrawableComponent(const SharedPointer<Component::ComponentBase>& component);
+			void PushCameraComponent(const shared_ptr<Component::ComponentBase>& component);
+			void PushDrawableComponent(const shared_ptr<Component::ComponentBase>& component);
 
-			HashMap<const wchar_t*, SharedPointer<Actor>> Actors; //world에는 수많은 액터들이 존재할것이고, 액터가 추가될때 재정렬을 피하기 위해 Hash를 사용헀음. 			
-			Vector<SharedPointer<Component::DrawableComponent>> DrawComponents;
-			Vector<SharedPointer<Component::DrawableComponent>> DrawComponentsThisFrame;
-			Vector<SharedPointer<Component::CameraComponent>> CameraComponents;
+			unordered_map<const wchar_t*, shared_ptr<Actor>> Actors; //world에는 수많은 액터들이 존재할것이고, 액터가 추가될때 재정렬을 피하기 위해 Hash를 사용헀음. 			
+			vector<shared_ptr<Component::DrawableComponent>> DrawComponents;
+			vector<shared_ptr<Component::DrawableComponent>> DrawComponentsThisFrame;
+			vector<shared_ptr<Component::CameraComponent>> CameraComponents;
 
-			std::vector<std::function<void(const SharedPointer<Component::ComponentBase>&)>> PushComponentFunc;
-			//std::function<void(const SharedPointer<Component::ComponentBase>&)> PushComponentFunc[Component::SceneComponentType::ComponentType_Max];
+			std::vector<std::function<void(const shared_ptr<Component::ComponentBase>&)>> PushComponentFunc;
+			//std::function<void(const shared_ptr<Component::ComponentBase>&)> PushComponentFunc[Component::SceneComponentType::ComponentType_Max];
 
 		};
 	}

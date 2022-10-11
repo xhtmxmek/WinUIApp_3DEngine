@@ -14,11 +14,11 @@ namespace Engine
 	{
 		World::World()
 		{
-			Actors().clear();
+			Actors.clear();
 			PushComponentFunc.reserve(static_cast<int>(Component::SceneComponentType::ComponentType_Max));
 			PushComponentFunc.resize(static_cast<int>(Component::SceneComponentType::ComponentType_Max));
-			//PushComponentFunc[static_cast<int>(Component::SceneComponentType::Drawable)] = std::bind(&World::PushDrawableComponent, this, std::placeholders::_1);
-			//PushComponentFunc[static_cast<int>(Component::SceneComponentType::Camera)] = std::bind(&World::PushCameraComponent, this, std::placeholders::_1);
+			PushComponentFunc[static_cast<int>(Component::SceneComponentType::Drawable)] = std::bind(&World::PushDrawableComponent, this, std::placeholders::_1);
+			PushComponentFunc[static_cast<int>(Component::SceneComponentType::Camera)] = std::bind(&World::PushCameraComponent, this, std::placeholders::_1);
 
 			//DrawComponent를 Maximum만큼 정해놓기...
 		}
@@ -30,7 +30,7 @@ namespace Engine
 			//스크립트에서는 input 정보를 가져옴. 스크립트에서 마우스 로테이션 만큼, 키보드 눌린거에 반응 하여 실행..
 			//특정 Value 값에 애니메이션을 줄수 있음.
 			//enable인 Actor만 Update.							
-			for (const auto& [key, value] : Actors())
+			for (const auto& [key, value] : Actors)
 				value->Tick(elapsedTime);
 		}
 
@@ -54,28 +54,28 @@ namespace Engine
 			//
 
 			size_t test = ActorManager::GetInstance().GetNumActorList();
-			DrawComponentsThisFrame().clear();
-			DrawComponentsThisFrame().reserve(DrawComponents().size());
-			for (const auto& elements : DrawComponents())
+			DrawComponentsThisFrame.clear();
+			DrawComponentsThisFrame.reserve(DrawComponents.size());
+			for (const auto& elements : DrawComponents)
 			{
 				//is visible?
 				if (!elements->IsVisible())
 					continue;
 				//frustom culling	
 				//occlusion culling
-				DrawComponentsThisFrame().push_back(elements);
+				DrawComponentsThisFrame.push_back(elements);
 			}
 		}
-		void World::PushCameraComponent(const SharedPointer<Component::ComponentBase>& component)
+		void World::PushCameraComponent(const shared_ptr<Component::ComponentBase>& component)
 		{			
-			//CameraComponents().push_back(SharedPointer(std::static_pointer_cast<Component::CameraComponent>(component())));
+			//CameraComponents().push_back(shared_ptr(std::static_pointer_cast<Component::CameraComponent>(component())));
 		}
 
-		void World::PushDrawableComponent(const SharedPointer<Component::ComponentBase>& component)
+		void World::PushDrawableComponent(const shared_ptr<Component::ComponentBase>& component)
 		{						
-			DrawComponents().push_back(SharedPointer(std::static_pointer_cast<Component::DrawableComponent>(component())));
+			DrawComponents.push_back(shared_ptr(std::static_pointer_cast<Component::DrawableComponent>(component)));
 		}
-		void World::PushComponent(const SharedPointer<Component::ComponentBase>& component)
+		void World::PushComponent(const shared_ptr<Component::ComponentBase>& component)
 		{
 			PushComponentFunc[static_cast<int>(component->ComponentType())](component);
 		}

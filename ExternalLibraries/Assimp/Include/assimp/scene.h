@@ -102,7 +102,7 @@ struct ASSIMP_API aiNode {
      * surrounded by @verbatim <> @endverbatim e.g.
      *  @verbatim<DummyRootNode> @endverbatim.
      */
-    C_STRUCT aiString mName;
+    C_STRUCT aistring mName;
 
     /** The transformation relative to the node's parent. */
     C_STRUCT aiMatrix4x4 mTransformation;
@@ -149,12 +149,12 @@ struct ASSIMP_API aiNode {
      *  @return nullptr or a valid Node if the search was successful.
      */
     inline
-    const aiNode* FindNode(const aiString& name) const {
+    const aiNode* FindNode(const aistring& name) const {
         return FindNode(name.data);
     }
 
     inline
-    aiNode* FindNode(const aiString& name) {
+    aiNode* FindNode(const aistring& name) {
         return FindNode(name.data);
     }
 
@@ -340,7 +340,7 @@ struct aiScene
 
     /** The name of the scene itself.
      */
-    C_STRUCT aiString mName;
+    C_STRUCT aistring mName;
 
     /**
      *

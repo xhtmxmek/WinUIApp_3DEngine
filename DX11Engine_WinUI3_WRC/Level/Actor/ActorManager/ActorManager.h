@@ -20,49 +20,46 @@ namespace Engine
 {
 	namespace Level
 	{
-		class Actor;
-		class ActorManagerImpl;
+		class Actor;		
 
 		//액터가 변경되면 ActorManager도 빌드해야 하고 ActorManager빌드하면 이 친구를 포함하는 모든 소스파일들 다시 빌드해야함. ActorManager에서 요청하는 많은 파일들이 있을것인데...
 		//근데 Actor매니저에서 Actor를 요청해서 쓰는 녀석들은 cpp에서는 어차피 Actor를 포함시켜야함.
 		//Actor를 빌드, Actor매니저를 빌드, Actor매니저를 들고 있는 엔진이 빌드.
 		//Actor는 인터페이스 구성되면 빌드될일이 거의 없음. 자식들이 빌드되는 것이지.
 		//SingleTon으로 구성했지만, 구조적으로 singleTon이 아니어도 되면 싱글톤으로 만들지 말기.
-		class ENGINE_API ActorManager : public Uncopyable
+		class ActorManager : public Uncopyable
 		{
 		public:
-			static ActorManager& GetInstance()
+			ENGINE_API static ActorManager& GetInstance()
 			{
 				static ActorManager actor;
 				return actor;
 			}
 
 			void ReleaseInstance();
-
 			void Init();
 
 			template<typename T>
-			SharedPointer<T> CreateActor(const std::string& name)
+			std::shared_ptr<T> CreateActor(const std::string& name)
 			{
 				CheckActorListCapacity();
-				//삽입할때 이름이 같을경우 처리하는 로직(ex-뒤에_#를 붙인다던가)도 생각해보기				
-				//SharedPointer<T> newActorPtr;
-				//auto newActor = CreateActor(T::ClassName(), name);
-				//SharedPointer<T> newActorPtr(std::static_pointer_cast<T>(newActor()));								
-				return nullptr;
+				//삽입할때 이름이 같을경우 처리하는 로직(ex-뒤에_#를 붙인다던가)도 생각해보기								
+				auto newActor = CreateActor(T::ClassName(), name);
+				std::shared_ptr<T> newActorPtr(std::static_pointer_cast<T>(newActor));
+				return newActorPtr;
 			}
 
-			size_t GetNumActorList();
+			ENGINE_API size_t GetNumActorList();
 		private:			
 			//func
 			ActorManager() : CurrentActorSizeFactor(1), ActorListResized(false){}			
-			void CheckActorListCapacity();
-			SharedPointer<Actor> CreateActor(const std::string& className, const std::string& instanceName);
+			ENGINE_API void CheckActorListCapacity();
+			ENGINE_API std::shared_ptr<Actor> CreateActor(const std::string& className, const std::string& instanceName);
 			//Actor* CreateActor(const std::string& className, const std::string& instanceName);
-			SharedPointer<Actor> GetActorByName(const std::string& actorName);
+			std::shared_ptr<Actor> GetActorByName(const std::string& actorName);
 
 			//멤버 변수
-			HashMap<const char*, SharedPointer<Actor>> Actors;
+			std::unordered_map<const char*, std::shared_ptr<Actor>> Actors;
 			//public으로 공개해서 외부에서 사용할일이 있을것같으면 그때 변경
 			const size_t	ActorsSizeUnit = 1000;
 			const size_t	ActorSizeBias = 5;

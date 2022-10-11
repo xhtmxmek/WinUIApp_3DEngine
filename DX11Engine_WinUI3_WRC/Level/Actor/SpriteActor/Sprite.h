@@ -14,18 +14,18 @@ namespace Engine
 	{		
 		class SpriteImpl;
 
-		class ENGINE_API ASprite : public Actor
+		class ASprite : public Actor
 		{				
 		public:
 			RUNTIME_SUBCLASS(Actor)
 		public:
 			//ASprite() = default;
-			ASprite(const std::string& actorName);			
+			ENGINE_API ASprite(const std::string& actorName);
 
-			virtual void Init() final;
+			ENGINE_API virtual void Init() final;
 			virtual void Tick(float elasedTime) final;	
 		private:
-			SharedPointer<Component::SpriteComponent> SpriteComp;
+			shared_ptr<Component::SpriteComponent> SpriteComp;
 			
 		};
 	}

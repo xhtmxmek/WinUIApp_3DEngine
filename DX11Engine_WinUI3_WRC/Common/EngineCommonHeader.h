@@ -1,8 +1,5 @@
 #pragma once
 //е╦ют
-#include "Types/stdTypeInterface/SmartPointer.h"
-#include "Types/stdTypeInterface/STLContainer.h"
-#include "Types/stdTypeInterface/StringInterface.h"
 #include "Types/Math/Vector2.h"
 #include "Types/Math/Vector3.h"
 #include "Types/Math/Color.h"

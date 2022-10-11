@@ -41,8 +41,8 @@ namespace Engine
 			//자식의 transform 업데이트
 			//std::shared_ptr<int> test;
 			//if (test)
-			std::for_each(Children.Begin(), Children.End(),
-				[this](SharedPointer<ComponentBase>& component) {					
+			std::for_each(Children.begin(), Children.end(),
+				[this](shared_ptr<ComponentBase>& component) {					
 					//ComponentBase* child = component.Get();					
 					if (component != nullptr)
 						component->UpdateComponentTransform(&Transform);

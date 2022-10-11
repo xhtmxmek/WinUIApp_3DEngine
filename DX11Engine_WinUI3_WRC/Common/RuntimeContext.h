@@ -1,6 +1,7 @@
 #pragma once
 #include <map>
 #include <string>
+#include "DLLDefine.h"
 
 namespace Engine
 {
@@ -71,12 +72,12 @@ namespace Engine
 	protected: \
 	public: \
 		static void RegisterRuntime();\
-		static const std::string& ClassName();		
+		ENGINE_API static const std::string& ClassName();		
 		//virtual bool KindOf(const std::string& className) { if (ClassName() == classtype) return true; return parent::KindOf(classtype); }
-//virtual bool KindOf(InternString classtype) { if (ClassName() == classtype) return true; return parent::KindOf(classtype); }
+//virtual bool KindOf(Internstring classtype) { if (ClassName() == classtype) return true; return parent::KindOf(classtype); }
 /*int ClassDepth() { return parent::ClassDepth() + 1; } \*/
 /*static void UnregisterRuntime();  \*/
-//virtual InternString LeafClassName(); 
+//virtual Internstring LeafClassName(); 
 
 #define RUNTIME_CLASS_IMPL(classtype) \
 	std::string runtimeName##classtype(#classtype); \
@@ -94,8 +95,8 @@ namespace Engine
 	}\
 /*RuntimeClass::GetRuntimeContext()->Register(runtimeName##classtype, classtype::Constructor, classtype::ObjectKindOf, Dictionary::group); \*/
 /*
-	InternString runtimeName##classtype(#classtype); \
-	InternString classtype::ClassName() \
+	Internstring runtimeName##classtype(#classtype); \
+	Internstring classtype::ClassName() \
 	{\
 		return runtimeName##classtype;  \
 	}\
@@ -105,7 +106,7 @@ namespace Engine
 	{\
 		RuntimeClass::GetRuntimeContext()->Unregister( runtimeName##classtype ); \
 	}\
-	InternString classtype::LeafClassName()\
+	Internstring classtype::LeafClassName()\
 	{\
 		return ClassName(); \
 	}\

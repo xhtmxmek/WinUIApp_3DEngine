@@ -5,12 +5,12 @@ namespace Engine
 {
 	namespace Component
 	{
-		class ENGINE_API CameraComponent : public ComponentBase
+		class CameraComponent : public ComponentBase
 		{
 		public:
 			RUNTIME_SUBCLASS(CameraComponent)
-			CameraComponent(const std::string& name = "CameraComponent");
-			void Init() final;
+			ENGINE_API CameraComponent(const std::string& name = "CameraComponent");
+			ENGINE_API void Init() final;
 			void Tick(float elapsedTime) final;								
 		};
 	}

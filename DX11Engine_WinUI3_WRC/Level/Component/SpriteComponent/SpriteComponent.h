@@ -2,7 +2,6 @@
 #include "DLLDefine.h"
 #include "../ComponentBase/ComponentBase.h"
 #include "Common/RuntimeContext.h"
-#include <assimp/scene.h>
 
 namespace Engine
 {
@@ -14,14 +13,14 @@ namespace Engine
 	namespace Component
 	{
 		class SpriteComponentImpl;
-		class ENGINE_API SpriteComponent : public DrawableComponent
+		class SpriteComponent : public DrawableComponent
 		{			
 		public:			
 			RUNTIME_SUBCLASS(DrawableComponent)
 		public:
-			SpriteComponent(const std::string& name = "SpriteComponent");
-			~SpriteComponent() = default;
-			void Init() final;			
+			ENGINE_API SpriteComponent(const std::string& name = "SpriteComponent");
+			ENGINE_API ~SpriteComponent() = default;
+			ENGINE_API void Init() final;
 			void Tick(float elasedTime) final;
 			void Draw() final;			
 		private:
@@ -31,9 +30,9 @@ namespace Engine
 
 			Vector2Childf UVOffset;
 			Color4f TintColor;
-			SharedPointer<EngineAsset::Texture> BasicTexture;			
-			UniquePointer<DirectX::SpriteBatch> SpriteBatch;
-			UniquePointer<DirectX::BasicEffect> Effect;
+			shared_ptr<EngineAsset::Texture> BasicTexture;			
+			unique_ptr<DirectX::SpriteBatch> SpriteBatch;
+			unique_ptr<DirectX::BasicEffect> Effect;
 		};
 	}
 }

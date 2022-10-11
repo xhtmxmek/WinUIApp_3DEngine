@@ -7,24 +7,24 @@ namespace Engine
 	{
 		class World;		
 
-		class ENGINE_API SLevel
+		class SLevel
 		{
 		public:
 			SLevel(const SLevel&) = delete;
 			SLevel& operator=(const SLevel&) = delete;
 
-			static const SharedPointer<World>& GetWorld(){ return GetInstance().OwningWorld; }
-			static void SetWorld(const SharedPointer<World> world) { GetInstance().OwningWorld = world; }
+			ENGINE_API static const shared_ptr<World>& GetWorld(){ return GetInstance().OwningWorld; }
+			ENGINE_API static void SetWorld(const shared_ptr<World> world) { GetInstance().OwningWorld = world; }
 			void ReleaseInstance(){}
 		private:
-			SLevel() = default;
-			static SLevel& GetInstance()
+			ENGINE_API SLevel() = default;
+			ENGINE_API static SLevel& GetInstance()
 			{
 				static SLevel level;
 				return level;
 			}
 
-			static SharedPointer<World> OwningWorld;
+			static shared_ptr<World> OwningWorld;
 		};
 	}
 }

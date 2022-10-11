@@ -7,6 +7,7 @@
 #include "EngineMinimal.h"
 #include "EngineHelper.h"
 #include "DeviceResources.h"
+#include "windows.h"
 
 using namespace D2D1;
 using namespace DirectX;
@@ -160,7 +161,7 @@ void DeviceResources::CreateDeviceResources()
     } 
     else
     {
-        OutputDebugStringA("WARNING: Direct3D Debug Device is not available\n");
+        //OutputDebugstringA("WARNING: Direct3D Debug Device is not available\n");
     }
 #endif
 
@@ -206,7 +207,7 @@ void DeviceResources::CreateDeviceResources()
         {
             m_options &= ~c_AllowTearing;
 #ifdef _DEBUG
-            OutputDebugStringA("WARNING: Variable refresh rate displays not supported");
+            //OutputDebugstringA("WARNING: Variable refresh rate displays not supported");
 #endif
         }
     }
@@ -288,7 +289,7 @@ void DeviceResources::CreateDeviceResources()
 
         if (SUCCEEDED(hr))
         {
-            OutputDebugStringA("Direct3D Adapter - WARP\n");
+            //OutputDebugstringA("Direct3D Adapter - WARP\n");
         }
     }
 #endif
@@ -396,7 +397,7 @@ void DeviceResources::CreateWindowSizeDependentResources()
             char buff[64] = {};
             sprintf_s(buff, "Device Lost on ResizeBuffers: Reason code 0x%08X\n",
                 static_cast<unsigned int>((hr == DXGI_ERROR_DEVICE_REMOVED) ? m_d3dDevice->GetDeviceRemovedReason() : hr));
-            OutputDebugStringA(buff);
+            //OutputDebugstringA(buff);
 #endif
             // If the device was removed for any reason, a new device and swap chain will need to be created.
             HandleDeviceLost();
@@ -654,7 +655,7 @@ void DeviceResources::GetHardwareAdapter(IDXGIAdapter1** ppAdapter)
 #ifdef _DEBUG
             wchar_t buff[256] = {};
             swprintf_s(buff, L"Direct3D Adapter (%u): VID:%04X, PID:%04X - %ls\n", adapterIndex, desc.VendorId, desc.DeviceId, desc.Description);
-            OutputDebugStringW(buff);
+            //OutputDebugstringW(buff);
 #endif
 
             break;
@@ -681,7 +682,7 @@ void DeviceResources::GetHardwareAdapter(IDXGIAdapter1** ppAdapter)
 #ifdef _DEBUG
             wchar_t buff[256] = {};
             swprintf_s(buff, L"Direct3D Adapter (%u): VID:%04X, PID:%04X - %ls\n", adapterIndex, desc.VendorId, desc.DeviceId, desc.Description);
-            OutputDebugStringW(buff);
+            //OutputDebugstringW(buff);
 #endif
 
             break;
@@ -819,7 +820,7 @@ void DeviceResources::ValidateDevice()
         || FAILED(m_d3dDevice->GetDeviceRemovedReason()))
     {
 #ifdef _DEBUG
-        OutputDebugStringA("Device Lost on ValidateDevice\n");
+        //OutputDebugstringA("Device Lost on ValidateDevice\n");
 #endif
 
         // Create a new device and swap chain.
@@ -920,7 +921,7 @@ void DeviceResources::Present()
         char buff[64] = {};
         sprintf_s(buff, "Device Lost on Present: Reason code 0x%08X\n",
             static_cast<unsigned int>((hr == DXGI_ERROR_DEVICE_REMOVED) ? m_d3dDevice->GetDeviceRemovedReason() : hr));
-        OutputDebugStringA(buff);
+        //OutputDebugstringA(buff);
 #endif
         HandleDeviceLost();
     }

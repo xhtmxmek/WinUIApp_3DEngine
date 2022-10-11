@@ -5,17 +5,17 @@ namespace Engine
 {
 	namespace Component
 	{		
-		class ENGINE_API StaticMeshComponent : public DrawableComponent
+		class StaticMeshComponent : public DrawableComponent
 		{
 		public:
 			RUNTIME_SUBCLASS(StaticMeshComponent)
-			StaticMeshComponent(const std::string& name = "StaticMeshComponent");
-			~StaticMeshComponent();
+			ENGINE_API StaticMeshComponent(const std::string& name = "StaticMeshComponent");
+			ENGINE_API ~StaticMeshComponent();
 			void Init() final;
 			void Tick(float elapsedTime) final;
 			void Draw() final;			
 		private:
-			UniquePointer<DirectX::GeometricPrimitive> StaticMeshShape;			
+			unique_ptr<DirectX::GeometricPrimitive> StaticMeshShape;			
 		};
 
 

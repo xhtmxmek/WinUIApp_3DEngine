@@ -6,6 +6,6 @@ namespace Engine
 {
 	namespace Level
 	{
-		SharedPointer<World> SLevel::OwningWorld;
+		shared_ptr<World> SLevel::OwningWorld;
 	}
 }

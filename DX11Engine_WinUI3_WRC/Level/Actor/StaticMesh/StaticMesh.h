@@ -11,23 +11,21 @@ namespace Engine
 
 	namespace Level
 	{		
-		class ENGINE_API AStaticMesh : public Actor
+		class AStaticMesh : public Actor
 		{
 			//IMPL_CLASS_PROPERTY(std::shared_ptr<Component::SpriteComponent>, SpriteComponent)
 		public:
 			RUNTIME_SUBCLASS(AStaticMesh)
 		public:
 			//ASprite() = default;
-			AStaticMesh(const std::string& actorName);
-			~AStaticMesh();
+			ENGINE_API AStaticMesh(const std::string& actorName);
+			ENGINE_API ~AStaticMesh();
 
 			virtual void Init() final;
 			virtual void Tick(float elasedTime) final;
 		private:
 			//Engine::Type::ISmartPointer<Component::StaticMeshComponent> Mesh;
-			Type::SharedPointer<Component::StaticMeshComponent> Mesh;
-		public:
-			TestClass<int> testMember;
+			std::shared_ptr<Component::StaticMeshComponent> Mesh;
 
 		};
 	}

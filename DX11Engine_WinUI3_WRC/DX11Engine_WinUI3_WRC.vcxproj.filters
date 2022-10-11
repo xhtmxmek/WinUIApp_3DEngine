@@ -71,7 +71,6 @@
     <ClCompile Include="EngineAsset\Texture.cpp" />
     <ClCompile Include="Common\Path.cpp" />
     <ClCompile Include="Level\Actor\StaticMesh\StaticMesh.cpp" />
-    <ClCompile Include="Common\Types\stdTypeInterface\SmartPointer.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="EngineMinimal.h" />
@@ -146,9 +145,6 @@
     <ClInclude Include="Common\EngineBaseHeader.h" />
     <ClInclude Include="Common\EngineCommonHeader.h" />
     <ClInclude Include="Level\Actor\StaticMesh\StaticMesh.h" />
-    <ClInclude Include="Common\Types\stdTypeInterface\STLContainer.h" />
-    <ClInclude Include="Common\Types\stdTypeInterface\StringInterface.h" />
-    <ClInclude Include="Common\Types\stdTypeInterface\SmartPointer.h" />
     <ClInclude Include="Common\Types\Math\Vector2.h" />
     <ClInclude Include="Common\Types\Math\Vector3.h" />
     <ClInclude Include="Common\Types\Math\Color.h" />

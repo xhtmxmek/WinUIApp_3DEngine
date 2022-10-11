@@ -76,7 +76,7 @@ namespace winrt::DX11Engine_WinUI3_WRC::implementation
 
         //ResourceManager         
         //World
-        SharedPointer<Engine::Level::World> m_World;
+        shared_ptr<Engine::Level::World> m_World;
 
         //texture
         com_ptr<ID3D11ShaderResourceView> m_texture;

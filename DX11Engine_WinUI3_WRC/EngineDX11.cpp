@@ -44,13 +44,11 @@ namespace winrt::DX11Engine_WinUI3_WRC::implementation
 
     EngineDX11::~EngineDX11()
     {        
-        //DX11 릴리즈 되어야 하는 친구들은 여기서 릴리즈.(사실상 전부)
+        //싱글톤 클래스들은 이곳에서 릴리즈 되어야함
         DX::DeviceResourcesUtil::GetInstance().ReleaseInstance();
         Engine::Level::ActorManager::GetInstance().ReleaseInstance();
-        //Engine::Level::SLevel::GetInstance().ReleaseInstance();
+        Engine::Level::SLevel::GetInstance().ReleaseInstance();
         Engine::EngineAsset::TextureManager::GetInstance().ReleaseInstance();
-        //월드 
-        //액터 매니저 
         //머티리얼 매니저
         //셰이더 매니저
         //렌더러?

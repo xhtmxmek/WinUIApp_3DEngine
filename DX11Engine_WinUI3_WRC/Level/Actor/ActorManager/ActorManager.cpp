@@ -47,7 +47,8 @@ namespace Engine
 		}
 
 		void ActorManager::ReleaseInstance()
-		{			
+		{
+			Actors.clear();
 		}
 
 		void ActorManager::Init()

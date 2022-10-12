@@ -194,7 +194,11 @@ namespace winrt::AuthoringTool::implementation
 
     void MainWindow::myButton_Click(IInspectable const&, RoutedEventArgs const&)
     {
-        myButton().Content(box_value(L"Clicked"));
+        float width, height;
+        m_Engine.GetDefaultSize(width, height);
+        //MainViewModel().BookSku().Title(std::to_wstring(width));
+        //myButton().Content(box_value(L"Clicked"));
+        myButton().Content(box_value(std::to_wstring(width)));
         double test = myButton().XamlRoot().RasterizationScale();
         test = 0.0f;
     }

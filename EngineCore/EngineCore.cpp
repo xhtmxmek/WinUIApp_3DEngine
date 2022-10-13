@@ -1,8 +1,5 @@
-ï»¿#include "EngineMinimal.h"
-#include "EngineDX11.h"
-#if __has_include("EngineDX11.g.cpp")
-#include "EngineDX11.g.cpp"
-#endif
+#include "pch.h"
+#include "EngineCore.h"
 #include "Common/EngineHelper.h"
 #include "Common/EngineCriticalSection.h"
 #include "Common/Engine_Scoped_Lock.h"
@@ -15,43 +12,12 @@
 #include <sstream>
 #include "Common/RuntimeContext.h"
 
-
-extern void ExitGame() noexcept;
-
-using namespace DirectX;
-using namespace DirectX::SimpleMath;
-//using namespace winrt;
-using namespace winrt::Windows::System::Threading;
-//using namespace winrt::Windows::Foundation;
-using namespace winrt::Windows::Storage;
-using namespace winrt::Windows::Storage::Pickers;
-
-namespace winrt::DX11Engine_WinUI3_WRC::implementation
+namespace Engine
 {
-    EngineDX11::EngineDX11()
-        :m_pointerLocationX(0.0f)
-    {                
-        //DX::DeviceResourcesUtil::GetDeviceResources() = std::make_unique<DX::DeviceResources>();
-        DX::DeviceResourcesUtil::GetInstance().CreateDeviceResources();        
-        DX::DeviceResourcesUtil::GetDeviceResources()->RegisterDeviceNotify(this);
-        m_criticalSection = winrt::make<DX11Engine_WinUI3_WRC::implementation::EngineCriticalSection>();
-        Engine::RuntimeContext::InitialzeRuntimeTable();                
-    }
-
-    EngineDX11::~EngineDX11()
-    {        
-        //ì‹±ê¸€í†¤ í´ë˜ìŠ¤ë“¤ì€ ì´ê³³ì—ì„œ ë¦´ë¦¬ì¦ˆ ë˜ì–´ì•¼í•¨
-        DX::DeviceResourcesUtil::GetInstance().ReleaseInstance();
-        Engine::Level::ActorManager::GetInstance().ReleaseInstance();
-        Engine::Level::SLevel::GetInstance().ReleaseInstance();
-        Engine::EngineAsset::TextureManager::GetInstance().ReleaseInstance();
-        //ë¨¸í‹°ë¦¬ì–¼ ë§¤ë‹ˆì €
-        //ì…°ì´ë” ë§¤ë‹ˆì €
-        //ë Œë”ëŸ¬?
-    }
+	extern void ExitGame() noexcept;
 
 #pragma region Initialize
-    //void EngineDX11::Initialize(HWND window)
+    //void EngineCore::Initialize(HWND window)
     //{
     //    CreateDeviceDependentResources();
     //    DX::DeviceResourcesUtil::GetDeviceResources()->SetWindow(window, 500, 500);
@@ -65,20 +31,20 @@ namespace winrt::DX11Engine_WinUI3_WRC::implementation
     //    */
     //}
 
-    void EngineDX11::Initialize(Microsoft::UI::Xaml::Controls::SwapChainPanel const& panel)
+    void EngineCore::Initialize(const SwapchainPanelInfo& swapChainPanelInfo)
     {
-        //ê°ì¢… ê²½ë¡œ ë¶ˆëŸ¬ì˜¤ê¸°. TestProjectDLLì—ì„œ ë¶€ë¥´ëŠ” ì—”ì§„ DLLë‚´ì˜ Static í´ë˜ìŠ¤, ë³€ìˆ˜ë“¤ì€ ë¬¸ì œê°€ ìƒê¸¸ìˆ˜ ìˆìŒ.
-        //ì§ì ‘ ê°€ì ¸ë‹¤ ì“°ì§€ ì•ŠëŠ”ë‹¤ê³  í•˜ë”ë¼ë„, DLL Importë¥¼ í•˜ê³  pImplêµ¬ì¡°ë¥¼ ë§Œë“¤ì–´ì„œ ë³´í˜¸í•´ì•¼í•¨.
+        //°¢Á¾ °æ·Î ºÒ·¯¿À±â. TestProjectDLL¿¡¼­ ºÎ¸£´Â ¿£Áø DLL³»ÀÇ Static Å¬·¡½º, º¯¼öµéÀº ¹®Á¦°¡ »ı±æ¼ö ÀÖÀ½.
+        //Á÷Á¢ °¡Á®´Ù ¾²Áö ¾Ê´Â´Ù°í ÇÏ´õ¶óµµ, DLL Import¸¦ ÇÏ°í pImpl±¸Á¶¸¦ ¸¸µé¾î¼­ º¸È£ÇØ¾ßÇÔ.
         //Engine::Path::ApplicationDir = winrt::Windows::ApplicationModel::Package::Current().InstalledLocation().Path();
         Engine::Path::InitBasePathes();
-        //ê¸°ë³¸ ì›”ë“œ ìƒì„±
+        //±âº» ¿ùµå »ı¼º
         m_World = make_shared<Engine::Level::World>();
 
         Engine::Level::SLevel::SetWorld(m_World);
-        //ì˜µì…˜ ì„¤ì •
+        //¿É¼Ç ¼³Á¤
         DX::DeviceResourcesUtil::GetDeviceResources()->SetOption(DX::DeviceResources::c_UseXAML);
         CreateDeviceDependentResources();
-        DX::DeviceResourcesUtil::GetDeviceResources()->SetSwapChainPanel(panel);
+        //DX::DeviceResourcesUtil::GetDeviceResources()->SetSwapChainPanel(panel);
         CreateWindowSizeDependentResources();
 
         //Engine::Level::ActorManager::GetInstance()
@@ -91,7 +57,7 @@ namespace winrt::DX11Engine_WinUI3_WRC::implementation
         */
     }
 
-    void EngineDX11::UnInitialize()
+    void EngineCore::UnInitialize()
     {
         DX::DeviceResourcesUtil::GetDeviceResources().reset();
         m_spriteBatch.reset();
@@ -101,20 +67,20 @@ namespace winrt::DX11Engine_WinUI3_WRC::implementation
 
 #pragma region Frame Update
     // Executes the basic game loop.
-    void EngineDX11::Tick()
+    void EngineCore::Tick()
     {
         m_timer.Tick([&]()
-            {                
+            {
                 Update(m_timer);
             });
 
         Render();
 
-        
+
     }
 
     // Updates the world.
-    void EngineDX11::Update(DX::StepTimer const& timer)
+    void EngineCore::Update(DX::StepTimer const& timer)
     {
         PIXBeginEvent(PIX_COLOR_DEFAULT, L"Update");
 
@@ -122,56 +88,56 @@ namespace winrt::DX11Engine_WinUI3_WRC::implementation
 
         // TODO: Add your game logic here.
         // Input Update       
-        //ì›”ë“œê°€ ìŠ¤í¬ë¦½íŠ¸ë¥¼ ê°€ì§€ê³  ìˆë‚˜? ì—”ì§„ì´ ìŠ¤í¬ë¦½íŠ¸ë¥¼ ê°€ì§€ê³  ìˆë‚˜. ì›”ë“œê°€ ìŠ¤í¬ë¦½íŠ¸ë¥¼ ê°€ì§€ê³  ìˆëŠ”ê²Œ ë§ëŠ”ê±°ê°™ìŒ.
-        //ì¸í’‹ - > ìŠ¤í¬ë¦½íŠ¸ ì—…ë°ì´íŠ¸.
-        m_World->Update(elapsedTime);        
+        //¿ùµå°¡ ½ºÅ©¸³Æ®¸¦ °¡Áö°í ÀÖ³ª? ¿£ÁøÀÌ ½ºÅ©¸³Æ®¸¦ °¡Áö°í ÀÖ³ª. ¿ùµå°¡ ½ºÅ©¸³Æ®¸¦ °¡Áö°í ÀÖ´Â°Ô ¸Â´Â°Å°°À½.
+        //ÀÎÇ² - > ½ºÅ©¸³Æ® ¾÷µ¥ÀÌÆ®.
+        m_World->Update(elapsedTime);
 
         PIXEndEvent();
     }
 
-    void EngineDX11::StartRenderLoop()
+    void EngineCore::StartRenderLoop()
     {
         ProcessInput();
-        
-        if (m_renderLoopWorker != nullptr && m_renderLoopWorker.Status() == winrt::Windows::Foundation::AsyncStatus::Started)        
-            return;        
-        
-        auto workItemHandler = WorkItemHandler([this, strong_this{ get_strong() }](winrt::Windows::Foundation::IAsyncAction action)
-            {                
-                while (action.Status() == winrt::Windows::Foundation::AsyncStatus::Started)
-                {                                        
-                    winrt::DX11Engine_WinUI3_WRC::Engine_Scoped_Lock lock{ m_criticalSection };                    
-                    Tick();
-                }
-            });
 
-        // ì „ìš©ì¸ ìš°ì„  ìˆœìœ„ê°€ ë†’ì€ ë°±ê·¸ë¼ìš´ë“œ ìŠ¤ë ˆë“œì—ì„œ ì‘ì—…ì„ ì‹¤í–‰í•©ë‹ˆë‹¤.
-        m_renderLoopWorker = ThreadPool::RunAsync(workItemHandler, WorkItemPriority::High, WorkItemOptions::TimeSliced);
+        //if (m_renderLoopWorker != nullptr && m_renderLoopWorker.Status() == winrt::Windows::Foundation::AsyncStatus::Started)
+        //    return;
+
+        //auto workItemHandler = WorkItemHandler([this, strong_this{ get_strong() }](winrt::Windows::Foundation::IAsyncAction action)
+        //    {
+        //        while (action.Status() == winrt::Windows::Foundation::AsyncStatus::Started)
+        //        {
+        //            winrt::DX11Engine_WinUI3_WRC::Engine_Scoped_Lock lock{ m_criticalSection };
+        //            Tick();
+        //        }
+        //    });
+
+        //// Àü¿ëÀÎ ¿ì¼± ¼øÀ§°¡ ³ôÀº ¹é±×¶ó¿îµå ½º·¹µå¿¡¼­ ÀÛ¾÷À» ½ÇÇàÇÕ´Ï´Ù.
+        //m_renderLoopWorker = ThreadPool::RunAsync(workItemHandler, WorkItemPriority::High, WorkItemOptions::TimeSliced);
     }
 
-    void EngineDX11::StopRenderLoop()
-    {        
+    void EngineCore::StopRenderLoop()
+    {
         DX::DeviceResourcesUtil::GetDeviceResources()->Trim();
-        m_renderLoopWorker.Cancel();                
+        //m_renderLoopWorker.Cancel();
     }
 #pragma endregion
 
 #pragma region Frame Render
     // Draws the scene.
-    void EngineDX11::Render()
+    void EngineCore::Render()
     {
         // Don't try to render anything before the first Update.
         if (m_timer.GetFrameCount() == 0)
         {
             return;
         }
-        
+
         Clear();
 
         auto context = DX::DeviceResourcesUtil::GetDeviceResources()->GetD3DDeviceContext();
         PIXBeginEvent(context, PIX_COLOR_DEFAULT, L"Render");
 
-        m_World->Render();        
+        m_World->Render();
 
         PIXEndEvent(context);
 
@@ -182,7 +148,7 @@ namespace winrt::DX11Engine_WinUI3_WRC::implementation
     }
 
     // Helper method to clear the back buffers.
-    void EngineDX11::Clear()
+    void EngineCore::Clear()
     {
         auto context = DX::DeviceResourcesUtil::GetDeviceResources()->GetD3DDeviceContext();
         PIXBeginEvent(context, PIX_COLOR_DEFAULT, L"Clear");
@@ -204,26 +170,26 @@ namespace winrt::DX11Engine_WinUI3_WRC::implementation
 #pragma endregion
 
 
-    // ê²Œì„ ìƒíƒœë¥¼ ì—…ë°ì´íŠ¸í•˜ê¸° ì „ì— ì‚¬ìš©ìì˜ ëª¨ë“  ì…ë ¥ ì²˜ë¦¬
-    void EngineDX11::ProcessInput()
+    // °ÔÀÓ »óÅÂ¸¦ ¾÷µ¥ÀÌÆ®ÇÏ±â Àü¿¡ »ç¿ëÀÚÀÇ ¸ğµç ÀÔ·Â Ã³¸®
+    void EngineCore::ProcessInput()
     {
-        // TODO: ì—¬ê¸°ì— í”„ë ˆì„ ì…ë ¥ ì²˜ë¦¬ë³„ë¡œ ì¶”ê°€í•©ë‹ˆë‹¤.
+        // TODO: ¿©±â¿¡ ÇÁ·¹ÀÓ ÀÔ·Â Ã³¸®º°·Î Ãß°¡ÇÕ´Ï´Ù.
         //m_sceneRenderer->TrackingUpdate(m_pointerLocationX);
     }
 
 #pragma region Message Handlers
     // Message handlers
-    void EngineDX11::OnActivated()
+    void EngineCore::OnActivated()
     {
         // TODO: Game is becoming active window.
     }
 
-    void EngineDX11::OnDeactivated()
+    void EngineCore::OnDeactivated()
     {
         // TODO: Game is becoming background window.
     }
 
-    void EngineDX11::OnSuspending()
+    void EngineCore::OnSuspending()
     {
         auto context = DX::DeviceResourcesUtil::GetDeviceResources()->GetD3DDeviceContext();
         context->ClearState();
@@ -233,14 +199,14 @@ namespace winrt::DX11Engine_WinUI3_WRC::implementation
         // TODO: Game is being power-suspended.
     }
 
-    void EngineDX11::OnResuming()
+    void EngineCore::OnResuming()
     {
         m_timer.ResetElapsedTime();
 
         // TODO: Game is being power-resumed.
     }
 
-    void EngineDX11::OnWindowSizeChanged(float width, float height)
+    void EngineCore::OnWindowSizeChanged(float width, float height)
     {
         if (!DX::DeviceResourcesUtil::GetDeviceResources()->SetLogicalSize(Windows::Foundation::Size(width, height)))
             return;
@@ -250,65 +216,65 @@ namespace winrt::DX11Engine_WinUI3_WRC::implementation
         // TODO: Game window is being resized.
     }
 
-    void EngineDX11::OnSwapchainXamlChanged(double rasterizationScale, Windows::Foundation::Size size, float compositionScaleX, float compositionScaleY)
-    {
-        if(DX::DeviceResourcesUtil::GetDeviceResources()->SetSwapchainXamlChanged(rasterizationScale, size, compositionScaleX, compositionScaleY))
-            CreateWindowSizeDependentResources();
-    }
+    //void EngineCore::OnSwapchainXamlChanged(double rasterizationScale, Windows::Foundation::Size size, float compositionScaleX, float compositionScaleY)
+    //{
+    //    if (DX::DeviceResourcesUtil::GetDeviceResources()->SetSwapchainXamlChanged(rasterizationScale, size, compositionScaleX, compositionScaleY))
+    //        CreateWindowSizeDependentResources();
+    //}
 
-    void EngineDX11::OnOrientationChanged(winrt::Windows::Graphics::Display::DisplayOrientations const& orientation)
-    {
-        DX::DeviceResourcesUtil::GetDeviceResources()->SetCurrentOrientation(orientation);
-        CreateWindowSizeDependentResources();
-    }
+    //void EngineCore::OnOrientationChanged(winrt::Windows::Graphics::Display::DisplayOrientations const& orientation)
+    //{
+    //    DX::DeviceResourcesUtil::GetDeviceResources()->SetCurrentOrientation(orientation);
+    //    CreateWindowSizeDependentResources();
+    //}
 
-    void EngineDX11::ValidateDevice()
+    void EngineCore::ValidateDevice()
     {
         DX::DeviceResourcesUtil::GetDeviceResources()->ValidateDevice();
     }
 
     // Properties
-    void EngineDX11::GetDefaultSize(float& width, float& height) noexcept //const noexcept
+    void EngineCore::GetDefaultSize(float& width, float& height) noexcept //const noexcept
     {
         // TODO: Change to desired default window size (note minimum size is 320x200).
         width = 800;
         height = 600;
     }
-    void EngineDX11::LoadScriptProject(hstring const& path)
+    void EngineCore::LoadScriptProject(hstring const& path)
     {
         HMODULE hDll = ::LoadLibrary(path.c_str());
         if (hDll != NULL)
         {
             FreeLibrary(hDll);
         }
-        //ë¡œë“œ ì‹œì ì— ìŠ¤í¬ë¦½íŠ¸ í”„ë¡œì íŠ¸ì˜ í´ë˜ìŠ¤ë“¤ì´ ë“±ë¡ë¨.
-        //ëŸ°íƒ€ì„ ë“±ë¡ì„ í–ˆìœ¼ë‹ˆ, í”„ë¡œì íŠ¸ íˆ´ì„ í†µí•˜ì—¬ ë“±ë¡ëœ ì•¡í„°ë¥¼ ìƒì„±.
-        //ì´í›„ì— í•´ë‹¹ ìŠ¤í¬ë¦½íŠ¸ì˜ Actorë¥¼ ìƒì„±í•˜ë©´ Initì´ í˜¸ì¶œë¨.
+        //·Îµå ½ÃÁ¡¿¡ ½ºÅ©¸³Æ® ÇÁ·ÎÁ§Æ®ÀÇ Å¬·¡½ºµéÀÌ µî·ÏµÊ.
+        //·±Å¸ÀÓ µî·ÏÀ» ÇßÀ¸´Ï, ÇÁ·ÎÁ§Æ® ÅøÀ» ÅëÇÏ¿© µî·ÏµÈ ¾×ÅÍ¸¦ »ı¼º.
+        //ÀÌÈÄ¿¡ ÇØ´ç ½ºÅ©¸³Æ®ÀÇ Actor¸¦ »ı¼ºÇÏ¸é InitÀÌ È£ÃâµÊ.
     }
 
 #pragma endregion
 
 #pragma region Direct3D Resources
     // These are the resources that depend on the device.
-    bool EngineDX11::CreateDeviceDependentResources()
+    bool EngineCore::CreateDeviceDependentResources()
     {
         auto device = DX::DeviceResourcesUtil::GetDeviceResources()->GetD3DDevice();
 
         // TODO: Initialize device dependent objects here (independent of window size).
         auto context = DX::DeviceResourcesUtil::GetDeviceResources()->GetD3DDeviceContext();
-        m_spriteBatch = std::make_unique<SpriteBatch>(context);        
+        m_spriteBatch = std::make_unique<SpriteBatch>(context);
 
 
-        StorageFolder storageFolder = ApplicationData::Current().LocalFolder();
-        winrt::hstring path = storageFolder.Path();
-        path = winrt::Windows::ApplicationModel::Package::Current().InstalledLocation().Path();
+        //StorageFolder storageFolder = ApplicationData::Current().LocalFolder();
+        //winrt::hstring path = storageFolder.Path();
+        //path = winrt::Windows::ApplicationModel::Package::Current().InstalledLocation().Path();
 
-        //UWPëŠ” ìƒŒë“œë°•ìŠ¤ ì‹ì´ë¼ ì •í•´ì§„ í´ë”ì—ë§Œ ì ‘ê·¼ ê°€ëŠ¥í•˜ì§€ë§Œ, ìš°íšŒì ì¸ ë°©ë²•ìœ¼ë¡œ ë‹¤ë¥¸ê³³ì—ë„ ì ‘ê·¼ê°€ëŠ¥.
+        //UWP´Â »÷µå¹Ú½º ½ÄÀÌ¶ó Á¤ÇØÁø Æú´õ¿¡¸¸ Á¢±Ù °¡´ÉÇÏÁö¸¸, ¿ìÈ¸ÀûÀÎ ¹æ¹ıÀ¸·Î ´Ù¸¥°÷¿¡µµ Á¢±Ù°¡´É.
         //https://stackoverflow.com/questions/33082835/windows-10-universal-app-file-directory-access
-        //í…ŒìŠ¤íŠ¸ ë˜ëŠ” ë¦¬ì†ŒìŠ¤ë“¤ì€ ì—”ì§„ì—ì„œ ì œê³µë˜ëŠ” ê¸°ë³¸ binaries.
+        //Å×½ºÆ® µÇ´Â ¸®¼Ò½ºµéÀº ¿£Áø¿¡¼­ Á¦°øµÇ´Â ±âº» binaries.
         //
 
-        ////WinUi3ì—ì„œëŠ”?
+        ////WinUi3¿¡¼­´Â?
        // winrt::hstring path = winrt::Windows::ApplicationModel::Package::Current().InstalledLocation().Path();
         //winrt::hstring test = L"D:\\StudyDir\\DirectX11Engine_UWP\\cat.png";
         //
@@ -330,7 +296,7 @@ namespace winrt::DX11Engine_WinUI3_WRC::implementation
 
         //std::wstringstream testStr;
         //testStr << strPath << L"\\test.txt";
-        
+
         //winrt::hstring path;
         //path = path + L"/Assets/Textures/cat.png";
         //path = L"D:\\StudyDir\\WinUIApp_3DEngine\\TestProject\\Assets\\cat.png";
@@ -353,7 +319,7 @@ namespace winrt::DX11Engine_WinUI3_WRC::implementation
     }
 
     // Allocate all memory resources that change on a window SizeChanged event.
-    void EngineDX11::CreateWindowSizeDependentResources()
+    void EngineCore::CreateWindowSizeDependentResources()
     {
         // TODO: Initialize windows-size dependent objects here.
         Windows::Foundation::Size outputSize = DX::DeviceResourcesUtil::GetDeviceResources()->GetOutputSize();
@@ -364,13 +330,13 @@ namespace winrt::DX11Engine_WinUI3_WRC::implementation
         m_screenPos.y = float(outputSize.Height) / 2.f;
     }
 
-    void EngineDX11::OnDeviceLost()
+    void EngineCore::OnDeviceLost()
     {
         // TODO: Add Direct3D resource cleanup here.
         m_spriteBatch.reset();
     }
 
-    void EngineDX11::OnDeviceRestored()
+    void EngineCore::OnDeviceRestored()
     {
         CreateDeviceDependentResources();
 

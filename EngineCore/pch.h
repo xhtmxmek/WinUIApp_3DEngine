@@ -85,8 +85,9 @@
 //엔진 코드들
 #include "Common/EngineCommonHeader.h"
 
-using namespace DirectX::SimpleMath;
 using namespace std;
+using namespace DirectX;
+using namespace DirectX::SimpleMath;
 
 
 

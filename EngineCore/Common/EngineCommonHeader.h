@@ -7,7 +7,8 @@
 #include "Types/Math/Quaternion.h"
 #include "Types/Math/Matrix3x3.h"
 #include "Types/Math/Matrix4x4.h"
-
+#include "Types/CommonTypes.h"
+#include "EngineEnums.h"
 using namespace Engine::Type;
 
 //프로퍼티

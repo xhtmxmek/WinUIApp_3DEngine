@@ -208,7 +208,7 @@ namespace Engine
 
     void EngineCore::OnWindowSizeChanged(float width, float height)
     {
-        if (!DX::DeviceResourcesUtil::GetDeviceResources()->SetLogicalSize(Windows::Foundation::Size(width, height)))
+        if (!DX::DeviceResourcesUtil::GetDeviceResources()->SetLogicalSize(Size(width, height)))
             return;
 
         CreateWindowSizeDependentResources();
@@ -240,7 +240,7 @@ namespace Engine
         width = 800;
         height = 600;
     }
-    void EngineCore::LoadScriptProject(hstring const& path)
+    void EngineCore::LoadScriptProject(wstring const& path)
     {
         HMODULE hDll = ::LoadLibrary(path.c_str());
         if (hDll != NULL)
@@ -258,8 +258,7 @@ namespace Engine
     // These are the resources that depend on the device.
     bool EngineCore::CreateDeviceDependentResources()
     {
-        auto device = DX::DeviceResourcesUtil::GetDeviceResources()->GetD3DDevice();
-
+        auto device = DX::DeviceResourcesUtil::GetDeviceResources()->GetD3DDevice();        
         // TODO: Initialize device dependent objects here (independent of window size).
         auto context = DX::DeviceResourcesUtil::GetDeviceResources()->GetD3DDeviceContext();
         m_spriteBatch = std::make_unique<SpriteBatch>(context);
@@ -322,7 +321,7 @@ namespace Engine
     void EngineCore::CreateWindowSizeDependentResources()
     {
         // TODO: Initialize windows-size dependent objects here.
-        Windows::Foundation::Size outputSize = DX::DeviceResourcesUtil::GetDeviceResources()->GetOutputSize();
+        Size outputSize = DX::DeviceResourcesUtil::GetDeviceResources()->GetOutputSize();
         float aspectRatio = outputSize.Width / outputSize.Height;
         float fovAngleY = 70.0f * XM_PI / 180.0f;
         //auto size = DX::DeviceResourcesUtil::GetDeviceResources()->GetOutputSize();
@@ -333,7 +332,7 @@ namespace Engine
     void EngineCore::OnDeviceLost()
     {
         // TODO: Add Direct3D resource cleanup here.
-        m_spriteBatch.reset();
+        //m_spriteBatch.reset();
     }
 
     void EngineCore::OnDeviceRestored()

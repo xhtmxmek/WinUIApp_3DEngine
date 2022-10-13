@@ -49,6 +49,8 @@
     <ClInclude Include="EngineAsset\Material.h" />
     <ClInclude Include="EngineAsset\Texture.h" />
     <ClInclude Include="DLLDefine.h" />
+    <ClInclude Include="Common\Types\CommonTypes.h" />
+    <ClInclude Include="Common\EngineEnums.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="EngineCore.cpp" />

@@ -9,7 +9,13 @@ namespace Engine
     {
 
     };
-    class EngineCore
+
+    namespace Level
+    {
+        class World;
+    }
+    
+    class EngineCore : private DX::IDeviceNotify
     {
 #ifdef WIN_APPS_SDK
         //void Initialize(Microsoft.UI.Xaml.Controls.SwapChainPanel panel);
@@ -23,6 +29,9 @@ namespace Engine
         void StopRenderLoop();
         void ProcessInput();
         
+        void OnDeviceLost() override;
+        void OnDeviceRestored() override;
+
         // Messages
         void OnActivated();
         void OnDeactivated();
@@ -40,7 +49,7 @@ namespace Engine
         void GetDefaultSize(float& width, float& height) noexcept;
 
         //common
-        void LoadScriptProject(hstring const& path);
+        void LoadScriptProject(wstring const& path);
 
         // private
     private:

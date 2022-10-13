@@ -146,6 +146,7 @@
     <ClInclude Include="Common\EngineBaseHeader.h" />
     <ClInclude Include="Common\EngineCommonHeader.h" />
     <ClInclude Include="Common\EngineCriticalSection.h" />
+    <ClInclude Include="Common\EngineEnums.h" />
     <ClInclude Include="Common\EngineHelper.h" />
     <ClInclude Include="Common\EngineMath.h" />
     <ClInclude Include="Common\Engine_Scoped_Lock.h" />
@@ -155,6 +156,7 @@
     <ClInclude Include="Common\pImplClassDefine.h" />
     <ClInclude Include="Common\RuntimeContext.h" />
     <ClInclude Include="Common\StepTimer.h" />
+    <ClInclude Include="Common\Types\CommonTypes.h" />
     <ClInclude Include="Common\Types\Math\Color.h" />
     <ClInclude Include="Common\Types\Math\Matrix3x3.h" />
     <ClInclude Include="Common\Types\Math\Matrix4x4.h" />

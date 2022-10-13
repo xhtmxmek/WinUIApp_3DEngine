@@ -476,6 +476,7 @@ void DeviceResources::CreateWindowSizeDependentResources()
 
         if (m_options & c_UseXAML)
         {
+            //엔진이 가지고 있는 콜백을 응용프로그램 단에서 세팅            
             // 스왑 체인을 SwapChainPanel과 연결
             // UI 변경 내용은 UI 스레드에 다시 디스패치해야 함            
             //GetSwapchainPanel().Dispatcher().RunAsync(CoreDispatcherPriority::High, DispatchedHandler([=]()            
@@ -756,6 +757,7 @@ void DX::DeviceResources::SetSwapChainPanel(winrt::Microsoft::UI::Xaml::Controls
     if (!panel.IsLoaded())
         return; 
 
+    //UI레이어
     GetSwapchainPanel() = panel;            
     m_logicalSize = winrt::Windows::Foundation::Size(static_cast<float>(panel.ActualWidth()), static_cast<float>(panel.ActualHeight()));
     //m_nativeOrientation = currentDisplayInformation.NativeOrientation();
@@ -940,7 +942,7 @@ void DeviceResources::Present()
 
 #pragma region WindowTransform
 // This method is called when the window changes size
-bool DX::DeviceResources::SetLogicalSize(winrt::Windows::Foundation::Size logicalSize)
+bool DX::DeviceResources::SetLogicalSize(Vector2f logicalSize)
 {
     if (m_logicalSize == logicalSize)
     {

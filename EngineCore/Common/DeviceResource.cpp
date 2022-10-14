@@ -490,7 +490,7 @@ namespace Engine
                         DX::ThrowIfFailed(panelNative->SetSwapChain(m_swapChain.get()));
                     });
                 */
-                RegisterSwapChainToUIPanel(m_swapChain.get());
+                RegisterSwapChainToUIPanelCallBack(m_swapChain.get());
 
                 // Ensure that DXGI does not queue more than one frame at a time. This both reduces latency and
                 // ensures that the application will only render after each VSync, minimizing power consumption.

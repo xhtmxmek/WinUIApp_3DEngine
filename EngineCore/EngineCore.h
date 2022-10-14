@@ -2,6 +2,7 @@
 #define WIN_APPS_SDK
 #include "Common/DeviceResources.h"
 #include "Common/StepTimer.h"
+#include "DLLDefine.h"
 
 namespace Engine
 {    
@@ -15,25 +16,25 @@ namespace Engine
         EngineCore():RenderLoopActivate(false){}
 #ifdef WIN_APPS_SDK
         //void Initialize(Microsoft.UI.Xaml.Controls.SwapChainPanel panel);
-        void Initialize(const SwapchainPanelInfo& swapChainPanelInfo);
+        ENGINE_API void Initialize(const SwapchainPanelInfo& swapChainPanelInfo, const std::function<void(IDXGISwapChain3*)>& swapchainRegisterFunc);
 #endif //WIN_APPS_SDK
-        void UnInitialize();
+        ENGINE_API void UnInitialize();
 
         // Basic game loop / input
         void Tick();
-        void StartRenderLoop();
-        void StopRenderLoop();
+        ENGINE_API void StartRenderLoop();
+        ENGINE_API void StopRenderLoop();
         void ProcessInput();
         
         void OnDeviceLost() override;
         void OnDeviceRestored() override;
 
         // Messages
-        void OnActivated();
-        void OnDeactivated();
-        void OnSuspending();
-        void OnResuming();
-        void OnWindowSizeChanged(float width, float height);
+        ENGINE_API void OnActivated();
+        ENGINE_API void OnDeactivated();
+        ENGINE_API void OnSuspending();
+        ENGINE_API void OnResuming();
+        ENGINE_API void OnWindowSizeChanged(float width, float height);
         //void OnSwapchainXamlChanged(double rasterizationScale, Windows.Foundation.Size size, float compositonScaleX, float compositonScaleY);
         //void OnOrientationChanged(Windows.Graphics.Display.DisplayOrientations orientation);
         void ValidateDevice();
@@ -42,10 +43,10 @@ namespace Engine
         //winrt::DX11Engine_WinUI3_WRC::EngineCriticalSection GetCriticalSection() { return m_criticalSection; }
 
         // Properties
-        void GetDefaultSize(float& width, float& height) noexcept;
+        ENGINE_API void GetDefaultSize(float& width, float& height) noexcept;
 
         //common
-        void LoadScriptProject(wstring const& path);
+        ENGINE_API void LoadScriptProject(wstring const& path);
 
         // private
     private:

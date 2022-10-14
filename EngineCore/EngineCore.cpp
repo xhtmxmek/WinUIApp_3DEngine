@@ -31,7 +31,7 @@ namespace Engine
     //    */
     //}
 
-    void EngineCore::Initialize(const SwapchainPanelInfo& swapChainPanelInfo)
+    void EngineCore::Initialize(const SwapchainPanelInfo& swapChainPanelInfo, const std::function<void(IDXGISwapChain3*)>& swapchainRegisterFunc)
     {
         //각종 경로 불러오기. TestProjectDLL에서 부르는 엔진 DLL내의 Static 클래스, 변수들은 문제가 생길수 있음.
         //직접 가져다 쓰지 않는다고 하더라도, DLL Import를 하고 pImpl구조를 만들어서 보호해야함.
@@ -45,6 +45,8 @@ namespace Engine
         DX::DeviceResourcesUtil::GetDeviceResources()->SetOption(DX::DeviceResources::c_UseXAML);
         CreateDeviceDependentResources();
         //DX::DeviceResourcesUtil::GetDeviceResources()->SetSwapChainPanel(panel);
+        DX::DeviceResourcesUtil::GetDeviceResources()->SetSwapChainPanel(swapChainPanelInfo);        
+        DX::DeviceResourcesUtil::GetDeviceResources()->RegisterSwapChainToUIPanelCallBack = swapchainRegisterFunc;
         CreateWindowSizeDependentResources();
 
         //Engine::Level::ActorManager::GetInstance()

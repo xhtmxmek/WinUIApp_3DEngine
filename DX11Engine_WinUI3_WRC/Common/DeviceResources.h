@@ -63,17 +63,17 @@ namespace DX
 		void Present();
 
 		//Window Transform
-		bool SetLogicalSize(Type::Size logicalSize);
-		bool SetSwapchainXamlChanged(double rasterizationScale, Vector2f logicalSize, float compositionScaleX, float compositionScaleY);
+		bool SetLogicalSize(winrt::Windows::Foundation::Size logicalSize);
+		bool SetSwapchainXamlChanged(double rasterizationScale, winrt::Windows::Foundation::Size logicalSize, float compositionScaleX, float compositionScaleY);
 		void SetCurrentOrientation(winrt::Windows::Graphics::Display::DisplayOrientations currentOrientation);
 		void SetCompositionScale(float compositionScaleX, float compositionScaleY);
 
 		//Get Size Value
 		//RECT GetOutputSize() const noexcept { return m_outputSize; }
-		Vector2f GetOutputSize() const { return m_outputSize; }
+		winrt::Windows::Foundation::Size GetOutputSize() const { return m_outputSize; }
 		DXGI_MODE_ROTATION GetRotation() const noexcept { return m_rotation; }
 		//// 렌더링 대상의 크기(DIP)입니다.
-		Vector2f GetLogicalSize() const { return m_logicalSize; }
+		winrt::Windows::Foundation::Size GetLogicalSize() const { return m_logicalSize; }
 		//float						GetDpi() const { return m_effectiveDpi; }
 
 		// Device Accessors.
@@ -164,9 +164,9 @@ namespace DX
 		DXGI_MODE_ROTATION                                              m_rotation;
 		DWORD                                                           m_dxgiFactoryFlags;
 		//RECT                                                          m_outputSize;        
-		Vector2f						        m_d3dRenderTargetSize;
-		Vector2f				                m_outputSize;
-		Vector2f				                m_logicalSize;
+		winrt::Windows::Foundation::Size						        m_d3dRenderTargetSize;
+		winrt::Windows::Foundation::Size				                m_outputSize;
+		winrt::Windows::Foundation::Size				                m_logicalSize;
 		winrt::Windows::Graphics::Display::DisplayOrientations	        m_nativeOrientation;
 		winrt::Windows::Graphics::Display::DisplayOrientations	        m_currentOrientation;
 		float											                m_RasterizationScale;
@@ -198,18 +198,18 @@ namespace DX
 	public:
 		void CreateDeviceResources() { if (!m_deviceResources) m_deviceResources = std::make_shared<DeviceResources>(); }
 		void ReleaseInstance() { m_deviceResources.reset(); }
-		static DeviceResourcesUtil& GetInstance() 
-		{ 
+		static DeviceResourcesUtil& GetInstance()
+		{
 			static DeviceResourcesUtil instance;
 			return instance;
 		}
 
 		static std::shared_ptr<DeviceResources> GetDeviceResources() { return GetInstance().m_deviceResources; }
 
-		
+
 
 	private:
-		DeviceResourcesUtil() = default;		
+		DeviceResourcesUtil() = default;
 		std::shared_ptr<DeviceResources>    m_deviceResources;
 	};
 }

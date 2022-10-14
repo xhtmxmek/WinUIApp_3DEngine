@@ -19,6 +19,7 @@ namespace Engine
 		Vector2f CompositionScale;
 		Type::Size ActureSize;
 		float RasterizationScale;
+		std::function<void(IDXGISwapChain3*)> RegisterSwapChainToUIPanelCallBack;
 		
 	};
 
@@ -59,8 +60,7 @@ namespace Engine
 			DeviceResources& operator= (DeviceResources const&) = delete;
 
 			//Window Set
-			//xaml 전용			
-			std::function<void(IDXGISwapChain3*)> RegisterSwapChainToUIPanel;
+			//xaml 전용						
 			void SetSwapChainPanel(SwapchainPanelInfo const& panel);
 			//corewindow 전용
 			//void SetWindow(winrt::Windows::UI::Core::CoreWindow const& window) noexcept;

@@ -6,7 +6,7 @@ namespace Engine
 {
 	namespace EngineAsset
 	{
-		bool Texture::Load(const winrt::hstring& textureName)
+		bool Texture::Load(const wstring& textureName)
 		{
 			auto device = DX::DeviceResourcesUtil::GetDeviceResources()->GetD3DDevice();			
 			/*

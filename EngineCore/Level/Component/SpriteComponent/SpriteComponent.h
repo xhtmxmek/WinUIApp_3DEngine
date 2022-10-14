@@ -24,11 +24,11 @@ namespace Engine
 			void Tick(float elasedTime) final;
 			void Draw() final;			
 		private:
-			Vector2Childf ScreenPos;
+			Vector2f ScreenPos;
 			//float Rotation;
 			//float Scale;
 
-			Vector2Childf UVOffset;
+			Vector2f UVOffset;
 			Color4f TintColor;
 			shared_ptr<EngineAsset::Texture> BasicTexture;			
 			unique_ptr<DirectX::SpriteBatch> SpriteBatch;

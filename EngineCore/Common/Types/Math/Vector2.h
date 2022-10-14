@@ -8,7 +8,7 @@ namespace Engine
 		//assimp에서 따왔다고 명시하기
 
 		template <typename TReal>
-		class ENGINE_API Vector2t {
+		class Vector2t {
 		public:
 			Vector2t() noexcept : x(), y() {}
 			Vector2t(TReal _x, TReal _y) : x(_x), y(_y) {}
@@ -170,16 +170,5 @@ namespace Engine
 			Vector2t<TReal> operator - (const Vector2t<TReal>& v) {
 			return Vector2t<TReal>(-v.x, -v.y);
 		}
-
-		template <typename TReal>
-		class ENGINE_API Vector2Childt : public Vector2t<TReal> {
-		public:
-			Vector2Childt() noexcept : Vector2t() {}
-			Vector2Childt(TReal _x, TReal _y) : Vector2t(_x, _y) {}
-			explicit Vector2Childt(TReal _xyz) : Vector2t(_xyz) {}
-			Vector2Childt(const Vector2Childt& o) = default;
-		};
-
-		typedef Vector2Childt<float> Vector2Childf;
 	}
 }

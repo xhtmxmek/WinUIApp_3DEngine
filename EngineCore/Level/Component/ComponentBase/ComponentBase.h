@@ -32,10 +32,10 @@ namespace Engine
 			virtual void Init() = 0;
 			virtual void Tick(float elasedTime) = 0;
 
-			ENGINE_API void SetPosition(DirectX::SimpleMath::Vector3 const& pos);
-			ENGINE_API void SetScale(DirectX::SimpleMath::Vector3 const& scale);
-			ENGINE_API void SetRotation(DirectX::SimpleMath::Vector3 const& rot);
-			ENGINE_API DirectX::SimpleMath::Vector3 GetRotation();
+			ENGINE_API void SetPosition(Vector3f const& pos);
+			ENGINE_API void SetScale(Vector3f const& scale);
+			ENGINE_API void SetRotation(Vector3f const& rot);
+			ENGINE_API Vector3f GetRotation();
 			ENGINE_API const Math::TransformGroup& GetComponentTransform();
 			ENGINE_API void UpdateComponentTransform(const Math::TransformGroup* parent);
 

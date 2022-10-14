@@ -26,7 +26,6 @@
     <ClInclude Include="Level\World.h" />
     <ClInclude Include="Renderer\LevelRenderer.h" />
     <ClInclude Include="Common\Math\TransformGroup.h" />
-    <ClInclude Include="Common\Math\TransformGroupImpl.h" />
     <ClInclude Include="Common\Types\Math\Color.h" />
     <ClInclude Include="Common\Types\Math\Matrix3x3.h" />
     <ClInclude Include="Common\Types\Math\Matrix4x4.h" />
@@ -69,7 +68,6 @@
     <ClCompile Include="Level\World.cpp" />
     <ClCompile Include="Renderer\LevelRenderer.cpp" />
     <ClCompile Include="Common\Math\TransformGroup.cpp" />
-    <ClCompile Include="Common\Math\TransformGroupImpl.cpp" />
     <ClCompile Include="Common\DeviceResource.cpp" />
     <ClCompile Include="Common\Engine_Scoped_Lock.cpp" />
     <ClCompile Include="Common\EngineCriticalSection.cpp" />

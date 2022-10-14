@@ -63,7 +63,7 @@ namespace DX
 		void Present();
 
 		//Window Transform
-		bool SetLogicalSize(Vector2f logicalSize);
+		bool SetLogicalSize(Type::Size logicalSize);
 		bool SetSwapchainXamlChanged(double rasterizationScale, Vector2f logicalSize, float compositionScaleX, float compositionScaleY);
 		void SetCurrentOrientation(winrt::Windows::Graphics::Display::DisplayOrientations currentOrientation);
 		void SetCompositionScale(float compositionScaleX, float compositionScaleY);

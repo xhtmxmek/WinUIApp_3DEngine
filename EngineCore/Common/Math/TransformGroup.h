@@ -17,35 +17,29 @@ namespace Engine
 	{
 		class TransformGroupImpl;
 
-		class ENGINE_API TransformGroup
+		class TransformGroup
 		{
 		public:
-			TransformGroup();
-			~TransformGroup();			
-			void SetPosition(const DirectX::SimpleMath::Vector3& pos);
-			void SetScale(const DirectX::SimpleMath::Vector3& scale);
-			void SetRotation(const DirectX::SimpleMath::Vector3& rotation);			
+			ENGINE_API TransformGroup();
+			ENGINE_API ~TransformGroup();
+			ENGINE_API void SetPosition(const Vector3f& pos) { Position = pos; UpdateTransform(); }
+			ENGINE_API void SetScale(const Vector3f& scale) { Scale = scale; UpdateTransform(); }
+			ENGINE_API void SetRotation(const Vector3f& rotation) { Rotation = rotation; UpdateTransform(); }
 
-			const DirectX::SimpleMath::Vector3& GetPosition() const;
-			const DirectX::SimpleMath::Vector3& GetScale() const;
-			const DirectX::SimpleMath::Vector3& GetRotation() const;
+			ENGINE_API const Vector3f& GetPosition() const { return Position; }
+			ENGINE_API const Vector3f& GetScale() const { return Scale; }
+			ENGINE_API const Vector3f& GetRotation() const { return Rotation; }
 
-			const DirectX::SimpleMath::Matrix& GetWorld() const;
+			ENGINE_API const Matrix4x4f& GetWorldMatrix() const { return WorldMatrix; }
+			ENGINE_API static TransformGroup const Default() { return TransformGroup(); }
 		private:
-			TransformGroupImpl* pImpl;			
-			//	
-			//	//static TransformGroup const& Identity() { return Identity; }
-			//	static const TransformGroup Identity;
-			//private:			
-			//	//propVector3 Position 만들고 부모에 넘기기;
-			//	//transform.SetPositon
-			//	//GetPosition
-			//	//내부에서 position 참조할떄.
+			Vector3f Position;
+			Vector3f Scale;
+			//	//quat일 경우 0,0,0,1
+			Vector3f Rotation;
 
-			//DirectX::SimpleMath::Matrix World;
-			//DirectX::SimpleMath::Matrix Local;
-			//	//Math::Matrix RotMat;
-			//	//GameObject* Owner;
+			Matrix4x4f WorldMatrix;
+			Matrix4x4f LocalMatrix;
 
 			//	//void OnChangeTransorm(EngineProperty* property);
 			void UpdateTransform(TransformGroup* parent = nullptr );

@@ -37,7 +37,9 @@ namespace Engine
 			Matrix proj = Matrix::CreatePerspectiveFieldOfView(DirectX::XM_PI / 4.f,
 				float(size.Width) / float(size.Height), 0.1f, 10.f);
 
-			StaticMeshShape->Draw(GetComponentTransform().GetWorld(), view, proj);
+			//요거는... 바꾸자. 직접 파이프라인에 세팅해서 렌더링하는걸로
+			DirectX::SimpleMath::Matrix(&GetComponentTransform().GetWorldMatrix()._11);
+			StaticMeshShape->Draw(DirectX::SimpleMath::Matrix(&GetComponentTransform().GetWorldMatrix()._11), view, proj);
 		}
 	}
 }

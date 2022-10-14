@@ -1,8 +1,8 @@
 #include "pch.h"
 #include "EngineCore.h"
 #include "Common/EngineHelper.h"
-#include "Common/EngineCriticalSection.h"
-#include "Common/Engine_Scoped_Lock.h"
+//#include "Common/EngineCriticalSection.h"
+//#include "Common/Engine_Scoped_Lock.h"
 #include "Level/Level.h"
 #include "Level/World.h"
 #include "Renderer/LevelRenderer.h"
@@ -99,6 +99,24 @@ namespace Engine
     {
         ProcessInput();
 
+        /*
+        쓰레드가 시작된 상태라면 return
+        쓰레드가 작업중이라면 joinable은 true이다. 또한 작업을 마쳤더라도 join이 호출되지 않았다면 joinable은 true이다.
+        최초 : joinable false. 실행되고 나서 true. 실행 중에 join 호출하면?
+        */
+
+        if (RenderLoopThread.joinable())
+            return;
+        
+        RenderLoopThread = thread([this]()
+            {
+                while (RenderLoopActivate)
+                {
+                    std::scoped_lock<std::mutex> lock(EngineTickMutex);
+                    Tick();
+                }
+            });
+
         //if (m_renderLoopWorker != nullptr && m_renderLoopWorker.Status() == winrt::Windows::Foundation::AsyncStatus::Started)
         //    return;
 
@@ -118,6 +136,8 @@ namespace Engine
     void EngineCore::StopRenderLoop()
     {
         DX::DeviceResourcesUtil::GetDeviceResources()->Trim();
+        RenderLoopActivate = false;
+        RenderLoopThread.join();
         //m_renderLoopWorker.Cancel();
     }
 #pragma endregion
@@ -258,10 +278,10 @@ namespace Engine
     // These are the resources that depend on the device.
     bool EngineCore::CreateDeviceDependentResources()
     {
-        auto device = DX::DeviceResourcesUtil::GetDeviceResources()->GetD3DDevice();        
+        //auto device = DX::DeviceResourcesUtil::GetDeviceResources()->GetD3DDevice();        
         // TODO: Initialize device dependent objects here (independent of window size).
-        auto context = DX::DeviceResourcesUtil::GetDeviceResources()->GetD3DDeviceContext();
-        m_spriteBatch = std::make_unique<SpriteBatch>(context);
+        //auto context = DX::DeviceResourcesUtil::GetDeviceResources()->GetD3DDeviceContext();
+        //m_spriteBatch = std::make_unique<SpriteBatch>(context);
 
 
         //StorageFolder storageFolder = ApplicationData::Current().LocalFolder();

@@ -73,7 +73,7 @@ namespace Engine
 
 		void World::PushDrawableComponent(const shared_ptr<Component::ComponentBase>& component)
 		{						
-			DrawComponents.push_back(shared_ptr(std::static_pointer_cast<Component::DrawableComponent>(component)));
+			DrawComponents.push_back((std::static_pointer_cast<Component::DrawableComponent>(component)));
 		}
 		void World::PushComponent(const shared_ptr<Component::ComponentBase>& component)
 		{

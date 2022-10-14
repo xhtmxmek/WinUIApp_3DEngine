@@ -15,19 +15,19 @@ namespace Engine
 		{		
 		}
 
-		void ComponentBase::SetPosition(Vector3 const& pos)
+		void ComponentBase::SetPosition(Vector3f const& pos)
 		{
 			//Transform.SetPosition(pos);
 		}
-		void ComponentBase::SetScale(Vector3 const& scale)
+		void ComponentBase::SetScale(Vector3f const& scale)
 		{
 			//Transform.SetScale(scale);
 		}
-		void ComponentBase::SetRotation(Vector3 const& rot)
+		void ComponentBase::SetRotation(Vector3f const& rot)
 		{
 			//Transform.SetRotation(rot);
 		}
-		DirectX::SimpleMath::Vector3 ComponentBase::GetRotation()
+		Vector3f ComponentBase::GetRotation()
 		{
 			return Transform.GetRotation();
 		}

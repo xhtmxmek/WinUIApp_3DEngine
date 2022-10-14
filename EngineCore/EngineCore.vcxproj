@@ -113,12 +113,13 @@
       <PrecompiledHeader>Use</PrecompiledHeader>
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
       <AdditionalIncludeDirectories>$(ProjectDir);$(SolutionDir)ExternalLibraries\Assimp\Include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <LanguageStandard>stdcpp17</LanguageStandard>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <EnableUAC>false</EnableUAC>
-      <AdditionalLibraryDirectories>SolutionDir)ExternalLibraries\Assimp\lib\x64\Debug\</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>$(SolutionDir)ExternalLibraries\Assimp\lib\x64\Debug\</AdditionalLibraryDirectories>
       <AdditionalDependencies>d2d1.lib;d3d11.lib;dxgi.lib;dxguid.lib;windowscodecs.lib;dwrite.lib;ole32.lib;assimp-vc143-mtd.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
@@ -145,13 +146,16 @@
     <ClInclude Include="Common\DeviceResources.h" />
     <ClInclude Include="Common\EngineBaseHeader.h" />
     <ClInclude Include="Common\EngineCommonHeader.h" />
-    <ClInclude Include="Common\EngineCriticalSection.h" />
+    <ClInclude Include="Common\EngineCriticalSection.h">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+    </ClInclude>
     <ClInclude Include="Common\EngineEnums.h" />
     <ClInclude Include="Common\EngineHelper.h" />
     <ClInclude Include="Common\EngineMath.h" />
-    <ClInclude Include="Common\Engine_Scoped_Lock.h" />
+    <ClInclude Include="Common\Engine_Scoped_Lock.h">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+    </ClInclude>
     <ClInclude Include="Common\Math\TransformGroup.h" />
-    <ClInclude Include="Common\Math\TransformGroupImpl.h" />
     <ClInclude Include="Common\Path.h" />
     <ClInclude Include="Common\pImplClassDefine.h" />
     <ClInclude Include="Common\RuntimeContext.h" />
@@ -189,10 +193,13 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Common\DeviceResource.cpp" />
-    <ClCompile Include="Common\EngineCriticalSection.cpp" />
-    <ClCompile Include="Common\Engine_Scoped_Lock.cpp" />
+    <ClCompile Include="Common\EngineCriticalSection.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="Common\Engine_Scoped_Lock.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+    </ClCompile>
     <ClCompile Include="Common\Math\TransformGroup.cpp" />
-    <ClCompile Include="Common\Math\TransformGroupImpl.cpp" />
     <ClCompile Include="Common\Path.cpp" />
     <ClCompile Include="Common\RuntimeContext.cpp" />
     <ClCompile Include="dllmain.cpp" />

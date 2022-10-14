@@ -5,11 +5,6 @@
 
 namespace Engine
 {    
-    struct SwapchainPanelInfo
-    {
-
-    };
-
     namespace Level
     {
         class World;
@@ -17,6 +12,7 @@ namespace Engine
     
     class EngineCore : private DX::IDeviceNotify
     {
+        EngineCore():RenderLoopActivate(false){}
 #ifdef WIN_APPS_SDK
         //void Initialize(Microsoft.UI.Xaml.Controls.SwapChainPanel panel);
         void Initialize(const SwapchainPanelInfo& swapChainPanelInfo);
@@ -43,7 +39,7 @@ namespace Engine
         void ValidateDevice();
 
         //Thread
-        winrt::DX11Engine_WinUI3_WRC::EngineCriticalSection GetCriticalSection() { return m_criticalSection; }
+        //winrt::DX11Engine_WinUI3_WRC::EngineCriticalSection GetCriticalSection() { return m_criticalSection; }
 
         // Properties
         void GetDefaultSize(float& width, float& height) noexcept;
@@ -79,9 +75,12 @@ namespace Engine
         DirectX::SimpleMath::Vector2 m_screenPos;
         DirectX::SimpleMath::Vector2 m_origin;
 
-        //Thread 관련
-        Windows::Foundation::IAsyncAction m_renderLoopWorker;
-        winrt::DX11Engine_WinUI3_WRC::EngineCriticalSection m_criticalSection{ nullptr };
+        //Thread 관련    
+        bool RenderLoopActivate;
+        std::thread RenderLoopThread;
+        std::mutex EngineTickMutex;
+        //Windows::Foundation::IAsyncAction m_renderLoopWorker;
+        //winrt::DX11Engine_WinUI3_WRC::EngineCriticalSection m_criticalSection{ nullptr };
         // 현재 입력 포인터 위치를 추적합니다.
         float m_pointerLocationX;
     };

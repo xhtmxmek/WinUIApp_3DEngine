@@ -1,7 +1,6 @@
 #include "pch.h"
 //#include "ComponentTypes.h"
 #include "TransformGroup.h"
-#include "TransformGroupImpl.h"
 
 namespace Engine
 {
@@ -10,13 +9,9 @@ namespace Engine
 		//const TransformGroup TransformGroup::Identity;
 
 		TransformGroup::TransformGroup()
-			//:Position(0, 0, 0),
-			//Rotation(0, 0, 0),
-			//Scale(1, 1, 1)
-
-			//:Position("Position", PropertyType::TypeVector3, Vector3(0, 0, 0)),
-			//Rotation("Rotation", PropertyType::TypeVector3, Vector3(0, 0, 0)),
-			//Scale("Position", PropertyType::TypeVector3, Vector3(1, 1, 1))
+			:Position(0.f, 0.f, 0.f),
+			Rotation(0.f, 0.f, 0.f),
+			Scale(1.f, 1.f, 1.f)
 		{
 			//내가원하는 동작은 바깥의 Positon property를 Onchange를 부르면 등록한 callback(이경우에는 
 
@@ -29,55 +24,21 @@ namespace Engine
 			//Scale.OnChange = std::bind(&TransformGroup::OnChangeTransorm, this, std::placeholders::_1);
 
 			//pos에 Value에 =연산자로 넣으면 onchanged 함수 불림.
-			//onchanged&SetTransform은 UI에서 property 제어할때만 적용됨			
-
-			pImpl = new TransformGroupImpl();
+			//onchanged&SetTransform은 UI에서 property 제어할때만 적용됨						
 		}
 		TransformGroup::~TransformGroup()
 		{
-			delete pImpl;
-		}
-
-		void TransformGroup::SetPosition(const Vector3& pos)
-		{
-			pImpl->SetPosition(pos);
-			UpdateTransform();
-		}
-		void TransformGroup::SetScale(const Vector3& scale)
-		{
-			pImpl->SetScale(scale);
-			UpdateTransform();
-		}
-		void TransformGroup::SetRotation(const Vector3& rotation)
-		{
-			pImpl->SetRotation(rotation);
-			UpdateTransform();
-		}
-
-		const Vector3& TransformGroup::GetPosition() const
-		{
-			return pImpl->GetPosition();
-		}
-
-		const Vector3& TransformGroup::GetScale() const
-		{
-			return pImpl->GetScale();
-		}
-
-		const Vector3& TransformGroup::GetRotation() const
-		{
-			return pImpl->GetRotation();
-		}
-
-		const DirectX::SimpleMath::Matrix& TransformGroup::GetWorld() const
-		{
-			// TODO: 여기에 return 문을 삽입합니다.
-			return pImpl->GetWorld();
 		}
 
 		void TransformGroup::UpdateTransform(TransformGroup* parent)
 		{
-			pImpl->UpdateTransform(parent);
+			
+			LocalMatrix = Matrix4x4f(Scale, Quaterniont(Rotation.y, Rotation.x, Rotation.z), Position);
+
+			if (parent)
+				WorldMatrix = LocalMatrix * parent->GetWorldMatrix();
+			else
+				WorldMatrix = LocalMatrix;
 		}
 
 		//TransformGroup const TransformGroup::Default()

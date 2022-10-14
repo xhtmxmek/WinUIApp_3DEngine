@@ -12,8 +12,19 @@ using namespace wil;
 
 namespace Engine
 {
+	//UI와 연관있는 구조체들만 따로 모아놓는것도 있을듯
+	struct SwapchainPanelInfo
+	{
+		bool Loaded;
+		Vector2f CompositionScale;
+		Type::Size ActureSize;
+		float RasterizationScale;
+		
+	};
+
 	namespace DX
 	{
+
 		// Provides an interface for an application that owns DeviceResources to be notified of the device being lost or created.
 		interface IDeviceNotify
 		{
@@ -48,8 +59,9 @@ namespace Engine
 			DeviceResources& operator= (DeviceResources const&) = delete;
 
 			//Window Set
-			//xaml 전용
-			void SetSwapChainPanel(winrt::Microsoft::UI::Xaml::Controls::SwapChainPanel const& panel);
+			//xaml 전용			
+			std::function<void(IDXGISwapChain3*)> RegisterSwapChainToUIPanel;
+			void SetSwapChainPanel(SwapchainPanelInfo const& panel);
 			//corewindow 전용
 			//void SetWindow(winrt::Windows::UI::Core::CoreWindow const& window) noexcept;
 			void SetWindow(HWND window, float width, float height) noexcept;
@@ -66,7 +78,7 @@ namespace Engine
 
 			//Window Transform
 			bool SetLogicalSize(Engine::Type::Size logicalSize);
-			bool SetSwapchainXamlChanged(double rasterizationScale, Engine::Type::Size logicalSize, float compositionScaleX, float compositionScaleY);
+			bool SetSwapchainXamlChanged(double rasterizationScale, Type::Size logicalSize, float compositionScaleX, float compositionScaleY);
 			void SetCurrentOrientation(Engine::DisplayOrientation currentOrientation);
 			void SetCompositionScale(float compositionScaleX, float compositionScaleY);
 
@@ -110,11 +122,11 @@ namespace Engine
 			//Option Set
 			void                    SetOption(unsigned int option) { m_options |= option; }
 			// XAML 패널에 대한 캐시된 참조입니다.
-			winrt::Microsoft::UI::Xaml::Controls::SwapChainPanel& GetSwapchainPanel()
-			{
-				static winrt::Microsoft::UI::Xaml::Controls::SwapChainPanel swapchainPanel;
-				return swapchainPanel;
-			}
+			//winrt::Microsoft::UI::Xaml::Controls::SwapChainPanel& GetSwapchainPanel()
+			//{
+			//	static winrt::Microsoft::UI::Xaml::Controls::SwapChainPanel swapchainPanel;
+			//	return swapchainPanel;
+			//}
 
 		private:
 			//Resource 생성시 helper

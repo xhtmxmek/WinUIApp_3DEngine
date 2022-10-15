@@ -4,7 +4,7 @@ namespace Engine
 {
 	namespace Type
 	{
-		struct Size
+		struct ENGINE_API Size
 		{
 			float Width;
 			float Height;

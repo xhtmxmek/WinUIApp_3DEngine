@@ -768,6 +768,7 @@ namespace Engine
         m_compositionScaleX = panelInfo.CompositionScale.x;
         m_compositionScaleY = panelInfo.CompositionScale.y;
         m_RasterizationScale = panelInfo.RasterizationScale;
+        RegisterSwapChainToUIPanelCallBack = panelInfo.RegisterSwapChainToUIPanelCallBack;
         m_d2dContext->SetDpi(m_dpi, m_dpi);
 
         CreateWindowSizeDependentResources();

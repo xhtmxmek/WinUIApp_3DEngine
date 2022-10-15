@@ -9,6 +9,7 @@
 #include "Types/Math/Matrix4x4.h"
 #include "Types/CommonTypes.h"
 #include "EngineEnums.h"
+#include "UIInfoParams.h"
 using namespace Engine::Type;
 
 //프로퍼티

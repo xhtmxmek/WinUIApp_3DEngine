@@ -29,3 +29,5 @@
 #include <winrt/Windows.System.Threading.h>
 #include <dxgi1_6.h>
 #include <concrt.h>
+
+#include <mutex>

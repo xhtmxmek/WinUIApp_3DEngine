@@ -1,22 +1,10 @@
 #include "pch.h"
+#include "EngineCoreWrapper.h"
 #include "EngineCore.h"
-#include "Common/EngineHelper.h"
-#include "Common/DeviceResources.h"
-#include "Common/StepTimer.h"
-//#include "Common/EngineCriticalSection.h"
-//#include "Common/Engine_Scoped_Lock.h"
-#include "Level/Level.h"
-#include "Level/World.h"
-#include "Renderer/LevelRenderer.h"
-#include "Level/Actor/ActorManager/ActorManager.h"
-#include "EngineAsset/Texture.h"
-#include <fstream>
-#include <sstream>
-#include "Common/RuntimeContext.h"
 
 namespace Engine
 {
-	extern void ExitGame() noexcept;
+    extern void ExitGame() noexcept;
 
 #pragma region Initialize
     //void EngineCore::Initialize(HWND window)
@@ -33,37 +21,25 @@ namespace Engine
     //    */
     //}
 
+    EngineCoreWrapper::EngineCoreWrapper()
+    {
+        EngineCoreNative = new EngineCore();
+    }
+
+    EngineCoreWrapper::~EngineCoreWrapper()
+    {
+        delete EngineCoreNative;
+    }
+
     void EngineCore::Initialize(const SwapchainPanelInfo& swapChainPanelInfo)
     {
-        //각종 경로 불러오기. TestProjectDLL에서 부르는 엔진 DLL내의 Static 클래스, 변수들은 문제가 생길수 있음.
-        //직접 가져다 쓰지 않는다고 하더라도, DLL Import를 하고 pImpl구조를 만들어서 보호해야함.
-        //Engine::Path::ApplicationDir = winrt::Windows::ApplicationModel::Package::Current().InstalledLocation().Path();
-        Engine::Path::InitBasePathes();
-        //기본 월드 생성
-        m_World = make_shared<Engine::Level::World>();
-
-        Engine::Level::SLevel::SetWorld(m_World);
-        //옵션 설정
-        DX::DeviceResourcesUtil::GetDeviceResources()->SetOption(DX::DeviceResources::c_UseXAML);
-        CreateDeviceDependentResources();
-        //DX::DeviceResourcesUtil::GetDeviceResources()->SetSwapChainPanel(panel);
-        DX::DeviceResourcesUtil::GetDeviceResources()->SetSwapChainPanel(swapChainPanelInfo);                
-        CreateWindowSizeDependentResources();
-
-        //Engine::Level::ActorManager::GetInstance()
-
-        // TODO: Change the timer settings if you want something other than the default variable timestep mode.
-        // e.g. for 60 FPS fixed timestep update logic, call:
-        /*
-        m_timer.SetFixedTimeStep(true);
-        m_timer.SetTargetElapsedSeconds(1.0 / 60);
-        */
+        EngineCoreNative->Initialize();
     }
 
     void EngineCore::UnInitialize()
-    {
+    {        
         DX::DeviceResourcesUtil::GetDeviceResources().reset();
-       // m_spriteBatch.reset();
+        // m_spriteBatch.reset();
     }
 #pragma endregion
 
@@ -110,7 +86,7 @@ namespace Engine
 
         if (RenderLoopThread.joinable())
             return;
-        
+
         RenderLoopThread = thread([this]()
             {
                 while (RenderLoopActivate)
@@ -365,5 +341,7 @@ namespace Engine
         CreateWindowSizeDependentResources();
     }
 #pragma endregion
+
+
 
 }

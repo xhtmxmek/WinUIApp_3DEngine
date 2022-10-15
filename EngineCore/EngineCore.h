@@ -1,56 +1,69 @@
 #pragma once
 #define WIN_APPS_SDK
-#include "Common/DeviceResources.h"
-#include "Common/StepTimer.h"
+//#include "Common/StepTimer.h"
 #include "DLLDefine.h"
 
 namespace Engine
 {    
+    namespace DX
+    {
+        class StepTimer;
+    }
+
     namespace Level
     {
         class World;
     }
-    
-    class EngineCore : private DX::IDeviceNotify
+
+    namespace Type
     {
+        struct Size;
+    }    
+
+    struct SwapchainPanelInfo;
+    
+    class EngineCore
+    {
+    public:
         EngineCore():RenderLoopActivate(false){}
 #ifdef WIN_APPS_SDK
         //void Initialize(Microsoft.UI.Xaml.Controls.SwapChainPanel panel);
-        ENGINE_API void Initialize(const SwapchainPanelInfo& swapChainPanelInfo, const std::function<void(IDXGISwapChain3*)>& swapchainRegisterFunc);
+        void Initialize(const SwapchainPanelInfo& swapChainPanelInfo);
 #endif //WIN_APPS_SDK
-        ENGINE_API void UnInitialize();
+        void UnInitialize();
 
         // Basic game loop / input
         void Tick();
-        ENGINE_API void StartRenderLoop();
-        ENGINE_API void StopRenderLoop();
+        void StartRenderLoop();
+        void StopRenderLoop();
         void ProcessInput();
         
-        void OnDeviceLost() override;
-        void OnDeviceRestored() override;
+        void OnDeviceLost();
+        void OnDeviceRestored();
 
         // Messages
-        ENGINE_API void OnActivated();
-        ENGINE_API void OnDeactivated();
-        ENGINE_API void OnSuspending();
-        ENGINE_API void OnResuming();
-        ENGINE_API void OnWindowSizeChanged(float width, float height);
-        //void OnSwapchainXamlChanged(double rasterizationScale, Windows.Foundation.Size size, float compositonScaleX, float compositonScaleY);
+        void OnActivated();
+        void OnDeactivated();
+        void OnSuspending();
+        void OnResuming();
+        void OnWindowSizeChanged(float width, float height);
+        void OnSwapchainXamlChanged(double rasterizationScale, Type::Size size, float compositonScaleX, float compositonScaleY);
         //void OnOrientationChanged(Windows.Graphics.Display.DisplayOrientations orientation);
         void ValidateDevice();
 
         //Thread
         //winrt::DX11Engine_WinUI3_WRC::EngineCriticalSection GetCriticalSection() { return m_criticalSection; }
+        std::mutex& GetMutex() { return EngineTickMutex; }
 
         // Properties
-        ENGINE_API void GetDefaultSize(float& width, float& height) noexcept;
+        void GetDefaultSize(float& width, float& height) noexcept;
 
         //common
-        ENGINE_API void LoadScriptProject(wstring const& path);
+        void LoadScriptProject(std::wstring const& path);
 
         // private
     private:
-        void Update(DX::StepTimer const& timer);
+        void Update(const std::unique_ptr<Engine::DX::StepTimer>& timer);
         void Render();
 
         void Clear();
@@ -62,19 +75,19 @@ namespace Engine
         //std::unique_ptr<DX::DeviceResources>    m_deviceResources;
 
         //// Rendering loop timer.
-        DX::StepTimer                           m_timer;
-
+        std::unique_ptr<Engine::DX::StepTimer> Timer;
+        //Engine::DX::StepTimer* Timer;
         //ResourceManager         
         //World
-        shared_ptr<Engine::Level::World> m_World;
+        std::shared_ptr<Engine::Level::World> m_World;
 
         //texture
-        com_ptr<ID3D11ShaderResourceView> m_texture;
+        //wil::com_ptr<ID3D11ShaderResourceView> m_texture;
 
         ////sprite
-        std::unique_ptr<DirectX::SpriteBatch> m_spriteBatch;
-        DirectX::SimpleMath::Vector2 m_screenPos;
-        DirectX::SimpleMath::Vector2 m_origin;
+        //std::unique_ptr<DirectX::SpriteBatch> m_spriteBatch;
+        //DirectX::SimpleMath::Vector2 m_screenPos;
+        //DirectX::SimpleMath::Vector2 m_origin;
 
         //Thread ฐüทร    
         bool RenderLoopActivate;

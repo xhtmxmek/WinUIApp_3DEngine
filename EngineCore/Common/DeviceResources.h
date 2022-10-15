@@ -13,15 +13,6 @@ using namespace wil;
 namespace Engine
 {
 	//UI와 연관있는 구조체들만 따로 모아놓는것도 있을듯
-	struct SwapchainPanelInfo
-	{
-		bool Loaded;
-		Vector2f CompositionScale;
-		Type::Size ActureSize;
-		float RasterizationScale;
-		std::function<void(IDXGISwapChain3*)> RegisterSwapChainToUIPanelCallBack;
-		
-	};
 
 	namespace DX
 	{
@@ -127,6 +118,7 @@ namespace Engine
 			//	static winrt::Microsoft::UI::Xaml::Controls::SwapChainPanel swapchainPanel;
 			//	return swapchainPanel;
 			//}
+			
 
 		private:
 			//Resource 생성시 helper
@@ -178,11 +170,11 @@ namespace Engine
 			DXGI_MODE_ROTATION                                              m_rotation;
 			DWORD                                                           m_dxgiFactoryFlags;
 			//RECT                                                          m_outputSize;        
-			Engine::Type::Size											m_d3dRenderTargetSize;
-			Engine::Type::Size											m_outputSize;
-			Engine::Type::Size											m_logicalSize;
-			DisplayOrientation											m_nativeOrientation;
-			DisplayOrientation											m_currentOrientation;
+			Engine::Type::Size												m_d3dRenderTargetSize;
+			Engine::Type::Size												m_outputSize;
+			Engine::Type::Size												m_logicalSize;
+			DisplayOrientation												m_nativeOrientation;
+			DisplayOrientation												m_currentOrientation;
 			float											                m_RasterizationScale;
 			float                                                           m_dpi;
 			float											                m_compositionScaleX;
@@ -205,6 +197,8 @@ namespace Engine
 
 			// The IDeviceNotify can be held directly as it owns the DeviceResources.
 			IDeviceNotify* m_deviceNotify;
+
+			std::function<void(IDXGISwapChain3*)>							RegisterSwapChainToUIPanelCallBack;
 		};
 
 		class DeviceResourcesUtil

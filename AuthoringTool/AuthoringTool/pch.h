@@ -31,3 +31,7 @@
 #include <concrt.h>
 
 #include <mutex>
+
+//엔진 헤더
+#pragma comment(lib, "x64/Debug/EngineCore.lib")
+#include "EngineCore/EngineHeader_Used_Application.h"

@@ -3,7 +3,6 @@
 #if __has_include("MainWindow.g.cpp")
 #include "MainWindow.g.cpp"
 #endif
-#include "EngineCore/EngineHeader_Used_Application.h"
 //엔진에서 UI측에 제공할 타입들만 헤더로 만들어서 뺴놓기
 //#include "EngineCore/Common/StepTimer.h"
 //
@@ -131,14 +130,15 @@ namespace winrt::AuthoringTool::implementation
         double scale = swapChainPanel().XamlRoot().RasterizationScale();
 
         //엔진 DLL 로드. 경로는 원래는 실행파일 경로에 넣어주면됨엔진 인스턴스 생성
-        HMODULE hDll = ::LoadLibrary(L"D:\\StudyDir\\WinUIApp_3DEngine\\x64\\Debug\\EngineCore.DLL");
-        if (hDll != NULL)
-        {
-            FreeLibrary(hDll);
-        }
+        //HMODULE hDll = ::LoadLibrary(L"D:\\StudyDir\\WinUIApp_3DEngine\\x64\\Debug\\EngineCore.DLL");
+        //if (hDll != NULL)
+        //{
+        //    FreeLibrary(hDll);
+        //}
         //RenderingEngine = std::make_unique<Engine::EngineCore>();
-        Engine::SwapchainPanelInfo swapchainPanelInfo;
-        //swapchainPanelInfo.
+        Engine::SwapchainPanelInfo swapchainPanelInfo;        
+        //RenderingEngine->Initialize(swapChainPanel());
+        //swapchainPanelInfo.ActureSize = Engine swapChainPanel().ActualSize();
         //RenderingEngine->Initialize(swapChainPanel());
 
         //Default 프로젝트를 로드함. 디폴트 프로젝트는 실행파일 경로에 넣어주면됨

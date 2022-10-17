@@ -1,0 +1,167 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Resources">
+      <UniqueIdentifier>accd3aa8-1ba0-4223-9bbe-0c431709210b</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tga;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="Generated Files">
+      <UniqueIdentifier>{926ab91d-31b4-48c3-b9a4-e681349f27f0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Common">
+      <UniqueIdentifier>{77082587-1559-4541-b4c4-f8d95f04cccd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Level">
+      <UniqueIdentifier>{451b7d55-1e71-42d8-8a4e-f40615f54b0f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Level\Actor">
+      <UniqueIdentifier>{f5b3b08c-3273-4ea6-810c-9876dabbe408}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Component">
+      <UniqueIdentifier>{a5d85d21-5850-47f8-b4f2-0a9f8ded0ceb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Renderer">
+      <UniqueIdentifier>{15977910-3e75-4e76-b8ee-ce5ef6abbe08}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="EngineMinimal.cpp" />
+    <ClCompile Include="EngineDX11.cpp" />
+    <ClCompile Include="$(GeneratedFilesDir)module.g.cpp" />
+    <ClCompile Include="Common\DeviceResource.cpp">
+      <Filter>Common</Filter>
+    </ClCompile>
+    <ClCompile Include="Common\Engine_Scoped_Lock.cpp">
+      <Filter>Common</Filter>
+    </ClCompile>
+    <ClCompile Include="Common\EngineCriticalSection.cpp">
+      <Filter>Common</Filter>
+    </ClCompile>
+    <ClCompile Include="Level\World.cpp">
+      <Filter>Level</Filter>
+    </ClCompile>
+    <ClCompile Include="Level\Actor\Actor.cpp">
+      <Filter>Level\Actor</Filter>
+    </ClCompile>
+    <ClCompile Include="Common\Math\TransformGroup.cpp">
+      <Filter>Component</Filter>
+    </ClCompile>
+    <ClCompile Include="Level\Component\ComponentBase\ComponentBase.cpp">
+      <Filter>Component</Filter>
+    </ClCompile>
+    <ClCompile Include="Level\Component\StaticMeshComponent\StaticMeshComponent.cpp">
+      <Filter>Component</Filter>
+    </ClCompile>
+    <ClCompile Include="Level\Actor\SpriteActor\Sprite.cpp">
+      <Filter>Level\Actor</Filter>
+    </ClCompile>
+    <ClCompile Include="Level\Component\SpriteComponent\SpriteComponent.cpp">
+      <Filter>Component</Filter>
+    </ClCompile>
+    <ClCompile Include="Renderer\LevelRenderer.cpp">
+      <Filter>Renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="EngineAsset\Material.cpp" />
+    <ClCompile Include="Common\RuntimeContext.cpp" />
+    <ClCompile Include="Level\Component\ComponentLinker.cpp" />
+    <ClCompile Include="Level\Component\CameraComponent\CameraComponent.cpp" />
+    <ClCompile Include="Level\Level.cpp" />
+    <ClCompile Include="Common\Math\TransformGroupImpl.cpp" />
+    <ClCompile Include="Level\Actor\ActorManager\ActorManager.cpp" />
+    <ClCompile Include="EngineAsset\Texture.cpp" />
+    <ClCompile Include="Common\Path.cpp" />
+    <ClCompile Include="Level\Actor\StaticMesh\StaticMesh.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="EngineMinimal.h" />
+    <ClInclude Include="Common\DeviceResources.h">
+      <Filter>Common</Filter>
+    </ClInclude>
+    <ClInclude Include="Common\EngineHelper.h">
+      <Filter>Common</Filter>
+    </ClInclude>
+    <ClInclude Include="Common\StepTimer.h">
+      <Filter>Common</Filter>
+    </ClInclude>
+    <ClInclude Include="Common\Engine_Scoped_Lock.h">
+      <Filter>Common</Filter>
+    </ClInclude>
+    <ClInclude Include="Common\EngineCriticalSection.h">
+      <Filter>Common</Filter>
+    </ClInclude>
+    <ClInclude Include="Level\World.h">
+      <Filter>Level</Filter>
+    </ClInclude>
+    <ClInclude Include="Common\Uncopyable.h">
+      <Filter>Common</Filter>
+    </ClInclude>
+    <ClInclude Include="Level\Actor\Actor.h">
+      <Filter>Level\Actor</Filter>
+    </ClInclude>
+    <ClInclude Include="Level\Actor\PropertyActor.h">
+      <Filter>Level\Actor</Filter>
+    </ClInclude>
+    <ClInclude Include="Level\Actor\ActorManager.h">
+      <Filter>Level\Actor</Filter>
+    </ClInclude>
+    <ClInclude Include="Level\Component\ComponentBase\ComponentBase.h">
+      <Filter>Component</Filter>
+    </ClInclude>
+    <ClInclude Include="Level\Component\ComponentTypes.h">
+      <Filter>Component</Filter>
+    </ClInclude>
+    <ClInclude Include="Common\Math\TransformGroup.h">
+      <Filter>Component</Filter>
+    </ClInclude>
+    <ClInclude Include="Common\EngineMath.h">
+      <Filter>Common</Filter>
+    </ClInclude>
+    <ClInclude Include="Level\Component\StaticMeshComponent\StaticMeshComponent.h">
+      <Filter>Component</Filter>
+    </ClInclude>
+    <ClInclude Include="Level\Component\EngineProperty.h">
+      <Filter>Component</Filter>
+    </ClInclude>
+    <ClInclude Include="Level\Actor\SpriteActor\Sprite.h">
+      <Filter>Level\Actor</Filter>
+    </ClInclude>
+    <ClInclude Include="Level\Component\SpriteComponent\SpriteComponent.h">
+      <Filter>Component</Filter>
+    </ClInclude>
+    <ClInclude Include="Renderer\LevelRenderer.h">
+      <Filter>Renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="EngineAsset\Material.h" />
+    <ClInclude Include="DLLDefine.h" />
+    <ClInclude Include="Common\RuntimeContext.h" />
+    <ClInclude Include="Level\Component\ComponentLinker.h" />
+    <ClInclude Include="Level\Component\CameraComponent\CameraComponent.h" />
+    <ClInclude Include="Level\Level.h" />
+    <ClInclude Include="Common\Math\TransformGroupImpl.h" />
+    <ClInclude Include="Level\Actor\ActorManager\ActorManager.h" />
+    <ClInclude Include="Common\pImplClassDefine.h" />
+    <ClInclude Include="EngineAsset\Texture.h" />
+    <ClInclude Include="Common\Path.h" />
+    <ClInclude Include="Common\EngineBaseHeader.h" />
+    <ClInclude Include="Common\EngineCommonHeader.h" />
+    <ClInclude Include="Level\Actor\StaticMesh\StaticMesh.h" />
+    <ClInclude Include="Common\Types\Math\Vector2.h" />
+    <ClInclude Include="Common\Types\Math\Vector3.h" />
+    <ClInclude Include="Common\Types\Math\Color.h" />
+    <ClInclude Include="Common\Types\Math\Quaternion.h" />
+    <ClInclude Include="Common\Types\Math\Matrix3x3.h" />
+    <ClInclude Include="Common\Types\Math\Matrix4x4.h" />
+    <ClInclude Include="Common\Types\Math\plane.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="DX11Engine_WinUI3_WRC.def" />
+    <None Include="packages.config" />
+    <None Include="cpp.hint" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="PropertySheet.props" />
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="readme.txt" />
+  </ItemGroup>
+</Project>

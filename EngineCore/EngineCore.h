@@ -47,7 +47,7 @@ namespace Engine
         void OnSuspending();
         void OnResuming();
         void OnWindowSizeChanged(float width, float height);
-        void OnSwapchainXamlChanged(double rasterizationScale, Type::Size size, float compositonScaleX, float compositonScaleY);
+        void OnSwapchainXamlChanged(const SwapchainPanelInfo& swapChainPanelInfo);
         //void OnOrientationChanged(Windows.Graphics.Display.DisplayOrientations orientation);
         void ValidateDevice();
 

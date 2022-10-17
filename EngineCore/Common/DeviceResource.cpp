@@ -960,28 +960,28 @@ namespace Engine
         return true;
     }
 
-    bool DX::DeviceResources::SetSwapchainXamlChanged(double rasterizationScale, Type::Size logicalSize, float compositionScaleX, float compositionScaleY)
+    bool DX::DeviceResources::SetSwapchainXamlChanged(const SwapchainPanelInfo& swapChainPanelInfo)
     {
         bool needChange = false;
-        if (static_cast<float>(rasterizationScale) != m_RasterizationScale)
+        if (static_cast<float>(swapChainPanelInfo.RasterizationScale) != m_RasterizationScale)
         {
-            m_RasterizationScale = static_cast<float>(rasterizationScale);
+            m_RasterizationScale = static_cast<float>(swapChainPanelInfo.RasterizationScale);
             m_dpi *= m_RasterizationScale;
             m_d2dContext->SetDpi(m_dpi, m_dpi);
             needChange = true;
         }
 
-        if (m_logicalSize != logicalSize)
+        if (m_logicalSize != swapChainPanelInfo.ActureSize)
         {
-            m_logicalSize = Type::Size(logicalSize.Width, logicalSize.Height);
+            m_logicalSize = Type::Size(swapChainPanelInfo.ActureSize.Width, swapChainPanelInfo.ActureSize.Height);
             needChange = true;
         }
 
-        if (m_compositionScaleX != compositionScaleX ||
-            m_compositionScaleY != compositionScaleY)
+        if (m_compositionScaleX != swapChainPanelInfo.CompositionScale.x ||
+            m_compositionScaleY != swapChainPanelInfo.CompositionScale.y)
         {
-            m_compositionScaleX = compositionScaleX;
-            m_compositionScaleY = compositionScaleY;
+            m_compositionScaleX = swapChainPanelInfo.CompositionScale.x;
+            m_compositionScaleY = swapChainPanelInfo.CompositionScale.y;
             needChange = true;
         }
 

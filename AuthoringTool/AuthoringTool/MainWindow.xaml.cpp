@@ -3,7 +3,6 @@
 #if __has_include("MainWindow.g.cpp")
 #include "MainWindow.g.cpp"
 #endif
-#include "EngineCore/EngineCoreInterface.h"
 #include "EngineCore/EngineHeader_Used_Application.h"
 //엔진에서 UI측에 제공할 타입들만 헤더로 만들어서 뺴놓기
 //#include "EngineCore/Common/StepTimer.h"

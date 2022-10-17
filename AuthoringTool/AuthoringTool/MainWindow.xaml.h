@@ -6,10 +6,11 @@
 #include <dxgi1_6.h>
 #include <d2d1_3.h>
 //#include "Bookstore.BookstoreViewModel.h"
+#include "EngineCore/EngineCoreWrapper.h"
 
 namespace Engine
 {
-	class EngineCoreInterface;
+	class EngineCoreWrapper;
 }
 
 namespace winrt::AuthoringTool::implementation
@@ -119,7 +120,7 @@ namespace winrt::AuthoringTool::implementation
 
 		// XAML 페이지 백그라운드에서 DirectX 콘텐츠를 렌더링하는 데 사용되는 리소스입니다.		
 		//winrt::DX11Engine_WinUI3_WRC::EngineDX11 m_Engine;
-		std::unique_ptr<Engine::EngineCoreInterface> RenderingEngine;
+		std::unique_ptr<Engine::EngineCoreWrapper> RenderingEngine;
 		HMODULE EngineDLLHandle;
 
 

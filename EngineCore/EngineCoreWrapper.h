@@ -19,8 +19,8 @@ namespace Engine
     class EngineCoreWrapper
     {
     public:
-        EngineCoreWrapper();
-        ~EngineCoreWrapper();
+        ENGINE_API EngineCoreWrapper();
+        ENGINE_API ~EngineCoreWrapper();
 #ifdef WIN_APPS_SDK
         //void Initialize(Microsoft.UI.Xaml.Controls.SwapChainPanel panel);
         ENGINE_API void Initialize(const SwapchainPanelInfo& swapChainPanelInfo);
@@ -42,7 +42,8 @@ namespace Engine
         ENGINE_API void OnSuspending();
         ENGINE_API void OnResuming();
         ENGINE_API void OnWindowSizeChanged(float width, float height);
-        ENGINE_API void OnSwapchainXamlChanged(double rasterizationScale, Type::Size size, float compositonScaleX, float compositonScaleY);
+        //ENGINE_API void OnSwapchainXamlChanged(double rasterizationScale, Type::Size size, float compositonScaleX, float compositonScaleY);
+        ENGINE_API void OnSwapchainXamlChanged(const SwapchainPanelInfo& swapChainPanelInfo);
         //void OnOrientationChanged(Windows.Graphics.Display.DisplayOrientations orientation);
         ENGINE_API void ValidateDevice();
 

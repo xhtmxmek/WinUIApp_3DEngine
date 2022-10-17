@@ -69,7 +69,7 @@ namespace Engine
 
 			//Window Transform
 			bool SetLogicalSize(Engine::Type::Size logicalSize);
-			bool SetSwapchainXamlChanged(double rasterizationScale, Type::Size logicalSize, float compositionScaleX, float compositionScaleY);
+			bool SetSwapchainXamlChanged(const SwapchainPanelInfo& swapChainPanelInfo);
 			void SetCurrentOrientation(Engine::DisplayOrientation currentOrientation);
 			void SetCompositionScale(float compositionScaleX, float compositionScaleY);
 

@@ -239,9 +239,9 @@ namespace Engine
         // TODO: Game window is being resized.
     }
 
-    void EngineCore::OnSwapchainXamlChanged(double rasterizationScale, Type::Size size, float compositionScaleX, float compositionScaleY)
-    {
-        if (DX::DeviceResourcesUtil::GetDeviceResources()->SetSwapchainXamlChanged(rasterizationScale, size, compositionScaleX, compositionScaleY))
+    void EngineCore::OnSwapchainXamlChanged(const SwapchainPanelInfo& swapChainPanelInfo)
+    {        
+        if (DX::DeviceResourcesUtil::GetDeviceResources()->SetSwapchainXamlChanged(swapChainPanelInfo))
             CreateWindowSizeDependentResources();
     }
 

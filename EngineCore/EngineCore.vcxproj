@@ -146,7 +146,6 @@
     <ClInclude Include="Common\DeviceResources.h" />
     <ClInclude Include="Common\EngineBaseHeader.h" />
     <ClInclude Include="Common\EngineCommonHeader.h" />
-    <ClInclude Include="EngineCoreWrapper.h" />
     <ClInclude Include="Common\EngineCriticalSection.h">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
     </ClInclude>
@@ -209,7 +208,6 @@
     <ClCompile Include="EngineAsset\Material.cpp" />
     <ClCompile Include="EngineAsset\Texture.cpp" />
     <ClCompile Include="EngineCore.cpp" />
-    <ClCompile Include="EngineCoreWrapper.cpp" />
     <ClCompile Include="Level\Actor\Actor.cpp" />
     <ClCompile Include="Level\Actor\ActorManager\ActorManager.cpp" />
     <ClCompile Include="Level\Actor\SpriteActor\Sprite.cpp" />

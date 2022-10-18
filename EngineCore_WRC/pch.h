@@ -25,12 +25,12 @@
 ////#include <wil/cppwinrt_wrl.h>
 //#include <wil/com.h>
 
-////DXToolKit
-//#include <d3d11_4.h>
-//#include <dxgi1_6.h>
-//#include <d2d1_3.h>
-//#include <d2d1effects_2.h>
-//#include <dwrite_3.h>
+////DXToolKit -> 엔진에 추가시킬수도 있음
+#include <d3d11_4.h>
+#include <dxgi1_6.h>
+#include <d2d1_3.h>
+#include <d2d1effects_2.h>
+#include <dwrite_3.h>
 //
 //#include <pix.h>
 //
@@ -73,9 +73,13 @@
 
 //엔진 코드들
 //#include "Common/EngineCommonHeader.h"
+#include "../EngineCore/EngineHeader_Used_Application.h"
+
+//std 헤더들
+#include <mutex>
 
 //using namespace DirectX::SimpleMath;
-#pragma comment(lib, "EngineCore.lib")
+#pragma comment(lib, "x64/Debug/EngineCore.lib")
 
 using namespace std;
 

@@ -1,7 +1,7 @@
 ﻿#include "pch.h"
 #include "EngineCore.h"
-#if __has_include("EngineCore.g.cpp")
-#include "EngineCore.g.cpp"
+#if __has_include("EngineCore_WRC.EngineCore.g.cpp")
+#include "EngineCore_WRC.EngineCore.g.cpp"
 #endif
 //#include "Common/EngineHelper.h"
 //#include "Common/EngineCriticalSection.h"
@@ -61,15 +61,11 @@ namespace winrt::EngineCore_WRC::implementation
 
 #pragma region Frame Update
     // Executes the basic game loop.
-    void EngineCore::Tick()
-    {
-        //EngineCorenative->
-    }
-
     void EngineCore::StartRenderLoop()
-    {
-        ProcessInput();
-        
+    {        
+
+        EngineCoreNative->StartRenderLoop();
+
         //if (m_renderLoopWorker != nullptr && m_renderLoopWorker.Status() == winrt::Windows::Foundation::AsyncStatus::Started)        
         //    return;        
         //
@@ -89,28 +85,23 @@ namespace winrt::EngineCore_WRC::implementation
     void EngineCore::StopRenderLoop()
     {        
         //DX::DeviceResourcesUtil::GetDeviceResources()->Trim();
-        //m_renderLoopWorker.Cancel();                
+        //m_renderLoopWorker.Cancel();        
+        EngineCoreNative->StopRenderLoop();
     }
 #pragma endregion
-
-
-    // 게임 상태를 업데이트하기 전에 사용자의 모든 입력 처리
-    void EngineCore::ProcessInput()
-    {
-        // TODO: 여기에 프레임 입력 처리별로 추가합니다.
-        //m_sceneRenderer->TrackingUpdate(m_pointerLocationX);
-    }
 
 #pragma region Message Handlers
     // Message handlers
     void EngineCore::OnActivated()
     {
         // TODO: Game is becoming active window.
+        EngineCoreNative->OnActivated();
     }
 
     void EngineCore::OnDeactivated()
     {
         // TODO: Game is becoming background window.
+        EngineCoreNative->OnDeactivated();
     }
 
     void EngineCore::OnSuspending()
@@ -127,23 +118,23 @@ namespace winrt::EngineCore_WRC::implementation
     }
 
     void EngineCore::OnWindowSizeChanged(float width, float height)
-    {
+    {        
         EngineCoreNative->OnWindowSizeChanged(width, height);
     }
 
-    void EngineCore::OnSwapchainXamlChanged(double rasterizationScale, winrt::Windows::Foundation::Size const& size, float compositonScaleX, float compositonScaleY)
-    {
-        //EngineCoreNative->OnSwapchainXamlChanged();
+    void EngineCore::OnSwapchainXamlChanged(const Microsoft::UI::Xaml::Controls::SwapChainPanel& panel)
+    {    
+        Engine::SwapchainPanelInfo swapchainpanelInfo;
+        swapchainpanelInfo.ActureSize = Engine::Type::Size(panel.ActualSize().x, panel.ActualSize().y);
+        swapchainpanelInfo.CompositionScale = Engine::Type::Vector2f(panel.CompositionScaleX(), panel.CompositionScaleY());
+        swapchainpanelInfo.Loaded = panel.IsLoaded();
+        swapchainpanelInfo.RasterizationScale = panel.RasterizationScale();        
+        EngineCoreNative->OnSwapchainXamlChanged(swapchainpanelInfo);
     }
 
     void EngineCore::OnOrientationChanged(winrt::Windows::Graphics::Display::DisplayOrientations const& orientation)
     {
         //EngineCoreNative->O
-    }
-
-    void EngineCore::ValidateDevice()
-    {
-        //DX::DeviceResourcesUtil::GetDeviceResources()->ValidateDevice();
     }
 
     // Properties

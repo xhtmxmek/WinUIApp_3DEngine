@@ -52,7 +52,6 @@
     <ClInclude Include="Common\EngineEnums.h" />
     <ClInclude Include="Common\UIInfoParams.h" />
     <ClInclude Include="EngineHeader_Used_Application.h" />
-    <ClInclude Include="EngineCoreWrapper.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="EngineCore.cpp" />
@@ -78,7 +77,6 @@
     <ClCompile Include="Common\RuntimeContext.cpp" />
     <ClCompile Include="EngineAsset\Material.cpp" />
     <ClCompile Include="EngineAsset\Texture.cpp" />
-    <ClCompile Include="EngineCoreWrapper.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

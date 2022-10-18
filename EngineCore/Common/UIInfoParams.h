@@ -7,7 +7,7 @@ namespace Engine
 		bool Loaded;
 		Type::Vector2f CompositionScale;
 		Type::Size ActureSize;
-		float RasterizationScale;
+		double RasterizationScale;
 		std::function<void(IDXGISwapChain3*)> RegisterSwapChainToUIPanelCallBack;
 
 	};

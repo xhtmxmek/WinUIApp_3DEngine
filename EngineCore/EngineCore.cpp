@@ -74,6 +74,7 @@ namespace Engine
     {
         Timer->Tick([&]()
             {
+                ProcessInput();
                 Update(Timer);
             });
 
@@ -99,9 +100,7 @@ namespace Engine
     }
 
     void EngineCore::StartRenderLoop()
-    {
-        ProcessInput();
-
+    {        
         /*
         쓰레드가 시작된 상태라면 return
         쓰레드가 작업중이라면 joinable은 true이다. 또한 작업을 마쳤더라도 join이 호출되지 않았다면 joinable은 true이다.

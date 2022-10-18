@@ -189,7 +189,7 @@ namespace Engine
 
         PIXEndEvent(context);
     }
-#pragma endregion
+#pragma endregion 
 
 
     // 게임 상태를 업데이트하기 전에 사용자의 모든 입력 처리
@@ -255,13 +255,6 @@ namespace Engine
         DX::DeviceResourcesUtil::GetDeviceResources()->ValidateDevice();
     }
 
-    // Properties
-    void EngineCore::GetDefaultSize(float& width, float& height) noexcept //const noexcept
-    {
-        // TODO: Change to desired default window size (note minimum size is 320x200).
-        width = 800;
-        height = 600;
-    }
     void EngineCore::LoadScriptProject(wstring const& path)
     {
         HMODULE hDll = ::LoadLibrary(path.c_str());

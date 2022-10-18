@@ -33,7 +33,8 @@ namespace EngineCore_WRC
         
 
         // Properties
-        [noexcept] void GetDefaultSize(out Single width, out Single height);
+        //[noexcept] void GetDefaultSize(out Single width, out Single height);
+        [noexcept]  Windows.Foundation.Size GetDefaultBackBufferSize();
         void LoadScriptProject(String path);
     }
 

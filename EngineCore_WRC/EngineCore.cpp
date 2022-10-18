@@ -20,7 +20,7 @@ extern void ExitGame() noexcept;
 
 //using namespace winrt;
 using namespace winrt::Windows::System::Threading;
-//using namespace winrt::Windows::Foundation;
+using namespace winrt::Windows::Foundation;
 using namespace winrt::Windows::Storage;
 using namespace winrt::Windows::Storage::Pickers;
 
@@ -138,9 +138,10 @@ namespace winrt::EngineCore_WRC::implementation
     }
 
     // Properties
-    void EngineCore::GetDefaultSize(float& width, float& height) noexcept //const noexcept
-    {
-        EngineCoreNative->GetDefaultSize(width, height);
+    Windows::Foundation::Size EngineCore::GetDefaultBackBufferSize() noexcept //const noexcept
+    {   
+        Engine::Type::Size size = EngineCoreNative->GetDefaultBackBufferSize();
+        return Size(size.Width, size.Height);        
     }
     void EngineCore::LoadScriptProject(hstring const& path)
     {

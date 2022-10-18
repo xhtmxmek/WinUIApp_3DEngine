@@ -42,7 +42,7 @@ namespace winrt::EngineCore_WRC::implementation
         void OnSwapchainXamlChanged(const Microsoft::UI::Xaml::Controls::SwapChainPanel& panel);
         void OnOrientationChanged(winrt::Windows::Graphics::Display::DisplayOrientations const& orientation);        
         //winrt::EngineCore_WRC::EngineCriticalSection GetCriticalSection();
-        void GetDefaultSize(float& width, float& height) noexcept;
+        Windows::Foundation::Size GetDefaultBackBufferSize() noexcept;
         void LoadScriptProject(hstring const& path);
     private:
         std::unique_ptr<Engine::EngineCore> EngineCoreNative;        

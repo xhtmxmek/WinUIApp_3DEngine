@@ -55,7 +55,10 @@ namespace Engine
         //std::mutex& GetMutex() { return EngineTickMutex; }
 
         // Properties
-        ENGINE_API void GetDefaultSize(float& width, float& height) noexcept;
+        ENGINE_API Type::Size GetDefaultBackBufferSize() noexcept
+        {
+            return Type::Size(800.0f, 600.0f);
+        }
 
         //common
         ENGINE_API void LoadScriptProject(std::wstring const& path);

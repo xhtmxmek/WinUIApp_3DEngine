@@ -6,7 +6,6 @@
 #include <dxgi1_6.h>
 #include <d2d1_3.h>
 //#include "Bookstore.BookstoreViewModel.h"
-#include "EngineCore/EngineCoreWrapper.h"
 
 namespace Engine
 {

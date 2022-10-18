@@ -32,7 +32,8 @@ namespace EngineCore_WRC
         //Thread
         //void LockEngineThread();
         //void UnLockEngineThread();
-        EngineCriticalSection GetCriticalSection();
+        //EngineCriticalSection GetCriticalSection();
+        concurrency.critical_section GetCriticalSection();
         
 
         // Properties

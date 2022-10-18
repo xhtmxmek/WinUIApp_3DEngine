@@ -104,6 +104,7 @@ namespace winrt::AuthoringTool::implementation
 #pragma region SwapChainPanel Event
     void MainWindow::OnSwapChainPanelXamlRootChanged(Microsoft::UI::Xaml::XamlRoot const& sender, Microsoft::UI::Xaml::XamlRootChangedEventArgs const& args)
     {
+        //Concurrency::critical_section::scoped_lock()
         //Engine_Scoped_Lock lock(m_Engine.GetCriticalSection());
         //std::scoped_lock<std::mutex> lock(RenderingEngine->GetMutex());
         // Dpi가 Change되면 WindowSize도 같이 Change 되니까 Engine에 Dpi Changed

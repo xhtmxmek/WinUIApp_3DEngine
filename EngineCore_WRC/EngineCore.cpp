@@ -29,7 +29,7 @@ namespace winrt::EngineCore_WRC::implementation
     EngineCore::EngineCore()        
     {                
         //DX::DeviceResourcesUtil::GetDeviceResources() = std::make_unique<DX::DeviceResources>();
-        EngineCoreNative = make_unique<Engine::EngineCore>();
+        EngineCoreNative = make_unique<Engine::EngineCore>();        
     }
 
 #pragma region Initialize

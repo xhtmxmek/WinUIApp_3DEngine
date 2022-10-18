@@ -67,7 +67,8 @@
 #include <winrt/Windows.Storage.FileProperties.h>
 #include <winrt/Windows.Storage.AccessCache.h>
 
-
+#include <concrt.h>
+#include <wincodec.h>
 //#include "Common/EngineBaseHeader.h"
 
 //엔진 코드들

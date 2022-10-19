@@ -2,6 +2,7 @@
 
 #include "MainWindow.g.h"
 #include <winrt/EngineCore_WRC.h>
+//#include <winrt/DX11Engine_WinUI3_WRC.h>
 #include <d3d11_4.h>
 #include <dxgi1_6.h>
 #include <d2d1_3.h>
@@ -120,7 +121,7 @@ namespace winrt::AuthoringTool::implementation
 
 		// XAML 페이지 백그라운드에서 DirectX 콘텐츠를 렌더링하는 데 사용되는 리소스입니다.		
 		winrt::EngineCore_WRC::EngineCore RenderingEngine;
-		//std::unique_ptr<Engine::EngineCoreWrapper> RenderingEngine;		
+		//winrt::DX11Engine_WinUI3_WRC::EngineDX11 Engine;		
 
 		bool					m_windowVisible;
 		float                   m_logicalWidth;

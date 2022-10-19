@@ -63,11 +63,11 @@ namespace winrt::AuthoringTool::implementation
             m_windowVisible = args.Visible();
             if (m_windowVisible)
             {
-                RenderingEngine.StartRenderLoop();
+               // RenderingEngine.StartRenderLoop();
             }
             else
             {
-                RenderingEngine.StopRenderLoop();
+                //RenderingEngine.StopRenderLoop();
             }
         }
     }
@@ -90,8 +90,8 @@ namespace winrt::AuthoringTool::implementation
     {
         //Engine_Scoped_Lock lock(Engine->GetCriticalSection());
         //std::scoped_lock<std::mutex> lock(RenderingEngine->GetMutex());
-        RenderingEngine.StopRenderLoop();
-        RenderingEngine = { nullptr };        
+        //RenderingEngine.StopRenderLoop();
+        //RenderingEngine = { nullptr };        
     }
 
     void MainWindow::OnSizeChanged(IInspectable const& sender, Microsoft::UI::Xaml::WindowSizeChangedEventArgs const& args)
@@ -107,7 +107,7 @@ namespace winrt::AuthoringTool::implementation
         //std::scoped_lock<std::mutex> lock(RenderingEngine->GetMutex());
         // Dpi가 Change되면 WindowSize도 같이 Change 되니까 Engine에 Dpi Changed
         Engine::Type::Size rootSize(sender.Size().Width, sender.Size().Height);
-        RenderingEngine.OnSwapchainXamlChanged(swapChainPanel());
+        //RenderingEngine.OnSwapchainXamlChanged(swapChainPanel());
         //RenderingEngine->OnSwapchainXamlChanged(sender.RasterizationScale(), rootSize, swapChainPanel().CompositionScaleX(), swapChainPanel().CompositionScaleY());
     }
 
@@ -117,7 +117,7 @@ namespace winrt::AuthoringTool::implementation
         //std::scoped_lock<std::mutex> lock(RenderingEngine->GetMutex());
         //Engine::Type::Size panelSize(m_logicalWidth, m_logicalHeight);
         //RenderingEngine->OnSwapchainXamlChanged(sender.RasterizationScale(), panelSize, swapChainPanel().CompositionScaleX(), swapChainPanel().CompositionScaleY());
-        RenderingEngine.OnSwapchainXamlChanged(swapChainPanel());
+        //RenderingEngine.OnSwapchainXamlChanged(swapChainPanel());
     }
 
     void MainWindow::OnSwapchainPanelLoaded(IInspectable const& sender, Microsoft::UI::Xaml::RoutedEventArgs const& e)
@@ -128,11 +128,11 @@ namespace winrt::AuthoringTool::implementation
         RenderingEngine.Initialize(swapChainPanel());        
         //Default 프로젝트를 로드함. 디폴트 프로젝트는 실행파일 경로에 넣어주면됨. config파일 만들어서 디폴트 프로젝트 or last project 경로 넣어주기.
         winrt::hstring path = L"D:\\StudyDir\\WinUIApp_3DEngine\\x64\\Debug\\TestProject.DLL";
-        RenderingEngine.LoadScriptProject(path.c_str());
+        //RenderingEngine.LoadScriptProject(path.c_str());
 
         RegisterDedicatedInputOnSwapchain();
             
-        RenderingEngine.StartRenderLoop();
+        //RenderingEngine.StartRenderLoop();
     }
 #pragma endregion
 
@@ -205,7 +205,7 @@ namespace winrt::AuthoringTool::implementation
     {
         float width = 0.0f;
         float height = 0.0f;
-        Windows::Foundation::Size size = RenderingEngine.GetDefaultBackBufferSize();
+        //Windows::Foundation::Size size = RenderingEngine.GetDefaultBackBufferSize();
         //MainViewModel().BookSku().Title(std::to_wstring(width));
         //myButton().Content(box_value(L"Clicked"));
         myButton().Content(box_value(std::to_wstring(width)));

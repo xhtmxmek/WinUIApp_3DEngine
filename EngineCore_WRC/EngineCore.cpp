@@ -50,23 +50,26 @@ namespace winrt::EngineCore_WRC::implementation
 
 	void EngineCore::Initialize(Microsoft::UI::Xaml::Controls::SwapChainPanel const& panel)
 	{
-		SetSwapchainPanelInfo(panel);
-		EngineCoreNative->Initialize(SwapchainPanelInfo);
+		SetSwapchainPanelInfo(panel);		
+		//Engine::SwapchainPanelInfo info;
+		//EngineCoreNative->Initialize(info);
+		//Engine::Type::Size
+		//Engine::Type::Size size = EngineCoreNative->GetDefaultBackBufferSize();
 	}
 
 	void EngineCore::UnInitialize()
 	{
-		EngineCoreNative->UnInitialize();
+		//EngineCoreNative->UnInitialize();
 	}
 
 	void EngineCore::SetSwapchainPanelInfo(const Microsoft::UI::Xaml::Controls::SwapChainPanel& panel)
 	{
-		Engine::SwapchainPanelInfo info;
-		info.ActureSize = Engine::Type::Size(panel.ActualSize().x, panel.ActualSize().y);
-		info.CompositionScale = Engine::Type::Vector2f(panel.CompositionScaleX(), panel.CompositionScaleY());
-		info.IsLoaded = panel.IsLoaded();
-		info.RasterizationScale = panel.RasterizationScale();
-		info.RegisterSwapChainToUIPanelCallBack =
+		
+		SwapchainPanelInfo.ActureSize = Engine::Type::Size(panel.ActualSize().x, panel.ActualSize().y);
+		SwapchainPanelInfo.CompositionScale = Engine::Type::Vector2f(panel.CompositionScaleX(), panel.CompositionScaleY());
+		SwapchainPanelInfo.IsLoaded = panel.IsLoaded();
+		SwapchainPanelInfo.RasterizationScale = panel.RasterizationScale();
+		SwapchainPanelInfo.RegisterSwapChainToUIPanelCallBack =
 			[&](IDXGISwapChain3* swapchain) {
 			panel.DispatcherQueue().TryEnqueue(winrt::Microsoft::UI::Dispatching::DispatcherQueuePriority::High, [&]
 				{
@@ -85,7 +88,7 @@ namespace winrt::EngineCore_WRC::implementation
 	void EngineCore::StartRenderLoop()
 	{
 
-		EngineCoreNative->StartRenderLoop();
+		//EngineCoreNative->StartRenderLoop();
 
 		//if (m_renderLoopWorker != nullptr && m_renderLoopWorker.Status() == winrt::Windows::Foundation::AsyncStatus::Started)        
 		//    return;        
@@ -107,7 +110,7 @@ namespace winrt::EngineCore_WRC::implementation
 	{
 		//DX::DeviceResourcesUtil::GetDeviceResources()->Trim();
 		//m_renderLoopWorker.Cancel();        
-		EngineCoreNative->StopRenderLoop();
+		//EngineCoreNative->StopRenderLoop();
 	}
 #pragma endregion
 
@@ -116,38 +119,38 @@ namespace winrt::EngineCore_WRC::implementation
 	void EngineCore::OnActivated()
 	{
 		// TODO: Game is becoming active window.
-		EngineCoreNative->OnActivated();
+		//EngineCoreNative->OnActivated();
 	}
 
 	void EngineCore::OnDeactivated()
 	{
 		// TODO: Game is becoming background window.
-		EngineCoreNative->OnDeactivated();
+		//EngineCoreNative->OnDeactivated();
 	}
 
 	void EngineCore::OnSuspending()
 	{
-		EngineCoreNative->OnSuspending();
+		//EngineCoreNative->OnSuspending();
 		// TODO: Game is being power-suspended.
 	}
 
 	void EngineCore::OnResuming()
 	{
-		EngineCoreNative->OnResuming();
+		//EngineCoreNative->OnResuming();
 
 		// TODO: Game is being power-resumed.
 	}
 
 	void EngineCore::OnWindowSizeChanged(float width, float height)
 	{
-		EngineCoreNative->OnWindowSizeChanged(width, height);
+		//EngineCoreNative->OnWindowSizeChanged(width, height);
 	}
 
 	void EngineCore::OnSwapchainXamlChanged(const Microsoft::UI::Xaml::Controls::SwapChainPanel& panel)
 	{
 		Engine::SwapchainPanelInfo swapchainpanelInfo;
 		SetSwapchainPanelInfo(panel);
-		EngineCoreNative->OnSwapchainXamlChanged(swapchainpanelInfo);
+		//EngineCoreNative->OnSwapchainXamlChanged(swapchainpanelInfo);
 	}
 
 	void EngineCore::OnOrientationChanged(winrt::Windows::Graphics::Display::DisplayOrientations const& orientation)
@@ -158,12 +161,13 @@ namespace winrt::EngineCore_WRC::implementation
 	// Properties
 	Windows::Foundation::Size EngineCore::GetDefaultBackBufferSize() noexcept //const noexcept
 	{
-		Engine::Type::Size size = EngineCoreNative->GetDefaultBackBufferSize();
-		return Size(size.Width, size.Height);
+		//Engine::Type::Size size = EngineCoreNative->GetDefaultBackBufferSize();
+		//return Size(size.Width, size.Height);
+		return Size(0, 0);
 	}
 	void EngineCore::LoadScriptProject(hstring const& path)
 	{
-		EngineCoreNative->LoadScriptProject(path.c_str());
+		//EngineCoreNative->LoadScriptProject(path.c_str());
 	}
 
 #pragma endregion

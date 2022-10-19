@@ -7,7 +7,7 @@
     <CppWinRTOptimized>true</CppWinRTOptimized>
     <CppWinRTRootNamespaceAutoMerge>true</CppWinRTRootNamespaceAutoMerge>
     <MinimalCoreWin>true</MinimalCoreWin>
-    <ProjectGuid>{84904ac3-90a8-47d3-b7be-e6aacb1d8c18}</ProjectGuid>
+    <ProjectGuid>{E882E8D6-8380-4424-9E6F-362564807CC3}</ProjectGuid>
     <ProjectName>DX11Engine_WinUI3_WRC</ProjectName>
     <RootNamespace>DX11Engine_WinUI3_WRC</RootNamespace>
     <DefaultLanguage>ko-KR</DefaultLanguage>

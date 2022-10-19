@@ -38,10 +38,14 @@ namespace Engine
         //각종 경로 불러오기. TestProjectDLL에서 부르는 엔진 DLL내의 Static 클래스, 변수들은 문제가 생길수 있음.
         //직접 가져다 쓰지 않는다고 하더라도, DLL Import를 하고 pImpl구조를 만들어서 보호해야함.
         //Engine::Path::ApplicationDir = winrt::Windows::ApplicationModel::Package::Current().InstalledLocation().Path();
+        DX::DeviceResourcesUtil::GetInstance().CreateDeviceResources();
+        //DX::DeviceResourcesUtil::GetDeviceResources()->RegisterDeviceNotify(this);
+        Engine::RuntimeContext::InitialzeRuntimeTable();
+
+        //기본 경로 초기화
         Engine::Path::InitBasePathes();
         //기본 월드 생성
         m_World = make_shared<Engine::Level::World>();
-
         Engine::Level::SLevel::SetWorld(m_World);
         //옵션 설정
         DX::DeviceResourcesUtil::GetDeviceResources()->SetOption(DX::DeviceResources::c_UseXAML);

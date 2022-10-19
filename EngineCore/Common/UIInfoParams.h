@@ -4,6 +4,10 @@ namespace Engine
 {
 	struct SwapchainPanelInfo
 	{
+		ENGINE_API SwapchainPanelInfo() = default;
+		ENGINE_API ~SwapchainPanelInfo() = default;
+		//ENGINE_API 
+
 		bool IsLoaded;
 		Type::Vector2f CompositionScale;
 		Type::Size ActureSize;

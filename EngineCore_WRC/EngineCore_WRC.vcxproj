@@ -318,7 +318,6 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="cpp.hint" />
-    <None Include="DX11Engine_WinUI3_WRC.def" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

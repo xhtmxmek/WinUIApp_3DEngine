@@ -42,6 +42,7 @@ namespace winrt::AuthoringTool::implementation
 		//void OnSwapChainPanelSizeChanged(IInspectable const& sender, Microsoft::UI::Xaml::SizeChangedEventArgs const& e);
 		//void OnOrientationChanged(Windows::Graphics::Display::DisplayInformation const& sender, IInspectable const& args);
 		//void OnDisplayContentsInvalidated(Windows::Graphics::Display::DisplayInformation const& sender, IInspectable const& args);
+		void OnSwapchainPanelLoaded(IInspectable const& sender, Microsoft::UI::Xaml::RoutedEventArgs const& e);
 
 		// 기타 이벤트 처리기입니다.
 		void AppBarButton_Click(IInspectable const& sender, Microsoft::UI::Xaml::RoutedEventArgs const& e);
@@ -52,8 +53,8 @@ namespace winrt::AuthoringTool::implementation
 		void OnPointerReleasedSwapChain(Microsoft::UI::Input::InputPointerSource const& sender, Microsoft::UI::Input::PointerEventArgs const& e);
 		//void swapChainPanel_PointerReleased(winrt::Windows::Foundation::IInspectable const& sender, winrt::Windows::UI::Xaml::Input::PointerRoutedEventArgs const& e);
 
-		//Control
-		void OnSwapchainPanelLoaded(IInspectable const& sender, Microsoft::UI::Xaml::RoutedEventArgs const& e);
+		//Control		
+		void RegisterDedicatedInputOnSwapchain();
 
 		//DXGI_MODE_ROTATION ComputeDisplayRotation() const noexcept
 		//{

@@ -124,35 +124,13 @@ namespace winrt::AuthoringTool::implementation
     {
         swapChainPanel().XamlRoot().Changed({ this, &MainWindow::OnSwapChainPanelXamlRootChanged });
 
-        //swapChainPanel이 로드 된 뒤에 엔진을 로드, 초기화한다
-        double scale = swapChainPanel().XamlRoot().RasterizationScale();
-
-        Engine::SwapchainPanelInfo swapchainPanelInfo;  
+        //swapChainPanel이 로드 된 뒤에 엔진을 로드, 초기화한다        
         RenderingEngine.Initialize(swapChainPanel());        
-
-        //Default 프로젝트를 로드함. 디폴트 프로젝트는 실행파일 경로에 넣어주면됨
+        //Default 프로젝트를 로드함. 디폴트 프로젝트는 실행파일 경로에 넣어주면됨. config파일 만들어서 디폴트 프로젝트 or last project 경로 넣어주기.
         winrt::hstring path = L"D:\\StudyDir\\WinUIApp_3DEngine\\x64\\Debug\\TestProject.DLL";
         RenderingEngine.LoadScriptProject(path.c_str());
 
-        // 독립 입력 포인터 이벤트를 얻으려면 SwapChainPanel을 등록합니다.                
-        auto controller = Microsoft::UI::Dispatching::DispatcherQueueController::CreateOnDedicatedThread();
-        bool test = controller.DispatcherQueue().TryEnqueue(Microsoft::UI::Dispatching::DispatcherQueuePriority::High, [this]
-            {
-                // CoreIndependentInputSource는 어떤 스레드가 만들어지던 특정 디바이스 유형에 대한 포인터 이벤트가 발생됩니다.  
-                uint32_t inputParam = (uint32_t)Microsoft::UI::Input::InputPointerSourceDeviceKinds::Mouse |
-                    (uint32_t)Microsoft::UI::Input::InputPointerSourceDeviceKinds::Touch |
-                    (uint32_t)Microsoft::UI::Input::InputPointerSourceDeviceKinds::Pen;
-
-                Microsoft::UI::Input::InputPointerSource coreInput = swapChainPanel().CreateCoreIndependentInputSource(
-                    static_cast<Microsoft::UI::Input::InputPointerSourceDeviceKinds>(inputParam)
-                );
-
-                // 백그라운드 스레드에서 발생할 포인터 이벤트를 등록합니다.
-                coreInput.PointerPressed({ this, &MainWindow::OnPointerPressedSwapChain });
-                coreInput.PointerMoved({ this, &MainWindow::OnPointerMovedSwapChain });
-                coreInput.PointerReleased({ this, &MainWindow::OnPointerReleasedSwapChain });
-
-            });
+        RegisterDedicatedInputOnSwapchain();
             
         RenderingEngine.StartRenderLoop();
     }
@@ -183,6 +161,29 @@ namespace winrt::AuthoringTool::implementation
     {
         // 포인터가 해제되는 경우 추적 포인터 이동이 중지됩니다.
         //m_main->StopTracking();
+    }
+
+    void MainWindow::RegisterDedicatedInputOnSwapchain()
+    {
+        // 독립 입력 포인터 이벤트를 얻으려면 SwapChainPanel을 등록합니다.                
+        auto controller = Microsoft::UI::Dispatching::DispatcherQueueController::CreateOnDedicatedThread();
+        bool result = controller.DispatcherQueue().TryEnqueue(Microsoft::UI::Dispatching::DispatcherQueuePriority::High, [this]
+            {
+                // CoreIndependentInputSource는 어떤 스레드가 만들어지던 특정 디바이스 유형에 대한 포인터 이벤트가 발생됩니다.  
+                uint32_t inputParam = (uint32_t)Microsoft::UI::Input::InputPointerSourceDeviceKinds::Mouse |
+                    (uint32_t)Microsoft::UI::Input::InputPointerSourceDeviceKinds::Touch |
+                    (uint32_t)Microsoft::UI::Input::InputPointerSourceDeviceKinds::Pen;
+
+                Microsoft::UI::Input::InputPointerSource coreInput = swapChainPanel().CreateCoreIndependentInputSource(
+                    static_cast<Microsoft::UI::Input::InputPointerSourceDeviceKinds>(inputParam)
+                );
+
+                // 백그라운드 스레드에서 발생할 포인터 이벤트를 등록합니다.
+                coreInput.PointerPressed({ this, &MainWindow::OnPointerPressedSwapChain });
+                coreInput.PointerMoved({ this, &MainWindow::OnPointerMovedSwapChain });
+                coreInput.PointerReleased({ this, &MainWindow::OnPointerReleasedSwapChain });
+
+            });
     }
 
     //void MainPage::ClickHandler(IInspectable const&, RoutedEventArgs const&)

@@ -484,8 +484,8 @@ namespace Engine
                 /*
                      GetSwapchainPanel().DispatcherQueue().TryEnqueue(winrt::Microsoft::UI::Dispatching::DispatcherQueuePriority::High, [this]
                     {
-                        // SwapChainPanel에 대한 기본 인터페이스 가져오기                                                            
-                        //auto panelNative = GetSwapchainPanel().as<ISwapChainPanelNative>();
+                         SwapChainPanel에 대한 기본 인터페이스 가져오기                                                            
+                        auto panelNative = GetSwapchainPanel().as<ISwapChainPanelNative>();
                         auto panelNative = GetSwapchainPanel().as<ISwapChainPanelNative>();
                         DX::ThrowIfFailed(panelNative->SetSwapChain(m_swapChain.get()));
                     });
@@ -758,7 +758,7 @@ namespace Engine
     // 이 메서드는 XAML 컨트롤이 생성 또는 재생성될 때 호출됩니다.
     void DX::DeviceResources::SetSwapChainPanel(SwapchainPanelInfo const& panelInfo)
     {
-        if (!panelInfo.Loaded)
+        if (!panelInfo.IsLoaded)
             return;
 
         //UI레이어        

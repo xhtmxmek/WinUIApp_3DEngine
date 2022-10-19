@@ -6,15 +6,21 @@ MinimumVisualStudioVersion = 10.0.40219.1
 Project("{C7167F0D-BC9F-4E6E-AFE1-012C56B48DB5}") = "AuthoringTool (Package)", "AuthoringTool\AuthoringTool (Package)\AuthoringTool (Package).wapproj", "{193AE09B-FE69-4166-AD06-2B234B47A8BC}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "AuthoringTool", "AuthoringTool\AuthoringTool\AuthoringTool.vcxproj", "{218720AB-4C86-4319-B25A-3E5B13EDAFB8}"
+	ProjectSection(ProjectDependencies) = postProject
+		{84904AC3-90A8-47D3-B7BE-E6AACB1D8C18} = {84904AC3-90A8-47D3-B7BE-E6AACB1D8C18}
+	EndProjectSection
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "TestProject", "TestProject\TestProject.vcxproj", "{10E2C058-EB10-4346-AF13-B0165C47DA6B}"
 	ProjectSection(ProjectDependencies) = postProject
-		{84904AC3-90A8-47D3-B7BE-E6AACB1D8C18} = {84904AC3-90A8-47D3-B7BE-E6AACB1D8C18}
+		{2C0E3B6B-EDE0-4CA2-915B-B41357598295} = {2C0E3B6B-EDE0-4CA2-915B-B41357598295}
 	EndProjectSection
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "EngineCore", "EngineCore\EngineCore.vcxproj", "{2C0E3B6B-EDE0-4CA2-915B-B41357598295}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "EngineCore_WRC", "EngineCore_WRC\EngineCore_WRC.vcxproj", "{84904AC3-90A8-47D3-B7BE-E6AACB1D8C18}"
+	ProjectSection(ProjectDependencies) = postProject
+		{2C0E3B6B-EDE0-4CA2-915B-B41357598295} = {2C0E3B6B-EDE0-4CA2-915B-B41357598295}
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

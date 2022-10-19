@@ -4,7 +4,7 @@ namespace Engine
 {
 	struct SwapchainPanelInfo
 	{
-		bool Loaded;
+		bool IsLoaded;
 		Type::Vector2f CompositionScale;
 		Type::Size ActureSize;
 		double RasterizationScale;

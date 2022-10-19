@@ -20,10 +20,10 @@
 
 //Dx 관련 헤더
 //comPtr 관련
-//#include <wrl/client.h>
+#include <wrl/client.h>
 ////#include <wil/cppwinrt.h>
 ////#include <wil/cppwinrt_wrl.h>
-//#include <wil/com.h>
+#include <wil/com.h>
 
 ////DXToolKit -> 엔진에 추가시킬수도 있음
 #include <d3d11_4.h>

@@ -9,7 +9,7 @@
     <MinimalCoreWin>true</MinimalCoreWin>
     <ProjectGuid>{84904ac3-90a8-47d3-b7be-e6aacb1d8c18}</ProjectGuid>
     <ProjectName>EngineCore_WRC</ProjectName>
-    <RootNamespace>DX11Engine_WinUI3_WRC</RootNamespace>
+    <RootNamespace>EngineCore_WRC</RootNamespace>
     <DefaultLanguage>ko-KR</DefaultLanguage>
     <MinimumVisualStudioVersion>16.0</MinimumVisualStudioVersion>
     <AppContainerApplication>true</AppContainerApplication>
@@ -89,7 +89,7 @@
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateWindowsMetadata>true</GenerateWindowsMetadata>
-      <ModuleDefinitionFile>DX11Engine_WinUI3_WRC.def</ModuleDefinitionFile>
+      <ModuleDefinitionFile>EngineCore_WRC.def</ModuleDefinitionFile>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)'=='Debug'">

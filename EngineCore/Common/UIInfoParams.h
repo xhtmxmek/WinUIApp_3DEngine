@@ -5,7 +5,8 @@ namespace Engine
 	struct SwapchainPanelInfo
 	{
 		ENGINE_API SwapchainPanelInfo() = default;
-		ENGINE_API ~SwapchainPanelInfo() = default;
+		ENGINE_API SwapchainPanelInfo(const SwapchainPanelInfo&) = default;
+		ENGINE_API ~SwapchainPanelInfo() = default;		
 		//ENGINE_API 
 
 		bool IsLoaded;

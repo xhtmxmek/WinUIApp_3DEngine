@@ -1,4 +1,5 @@
 ﻿#pragma once
+#pragma comment(lib, "x64/Debug/EngineCore.lib")
 
 //UI 관련 -> WinUI 헤더
 #include <unknwn.h>
@@ -79,7 +80,6 @@
 #include <mutex>
 
 //using namespace DirectX::SimpleMath;
-#pragma comment(lib, "x64/Debug/EngineCore.lib")
 
 using namespace std;
 

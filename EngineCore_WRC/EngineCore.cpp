@@ -65,20 +65,20 @@ namespace winrt::EngineCore_WRC::implementation
 	void EngineCore::SetSwapchainPanelInfo(const Microsoft::UI::Xaml::Controls::SwapChainPanel& panel)
 	{
 		
-		SwapchainPanelInfo.ActureSize = Engine::Type::Size(panel.ActualSize().x, panel.ActualSize().y);
-		SwapchainPanelInfo.CompositionScale = Engine::Type::Vector2f(panel.CompositionScaleX(), panel.CompositionScaleY());
-		SwapchainPanelInfo.IsLoaded = panel.IsLoaded();
-		SwapchainPanelInfo.RasterizationScale = panel.RasterizationScale();
-		SwapchainPanelInfo.RegisterSwapChainToUIPanelCallBack =
-			[&](IDXGISwapChain3* swapchain) {
-			panel.DispatcherQueue().TryEnqueue(winrt::Microsoft::UI::Dispatching::DispatcherQueuePriority::High, [&]
-				{
-					// SwapChainPanel에 대한 기본 인터페이스 가져오기                                                            
-					//auto panelNative = GetSwapchainPanel().as<ISwapChainPanelNative>();                
-					auto panelNative = panel.as<ISwapChainPanelNative>();
-					Engine::DX::ThrowIfFailed(panelNative->SetSwapChain(swapchain));
-				});
-		};
+		//SwapchainPanelInfo.ActureSize = Engine::Type::Size(panel.ActualSize().x, panel.ActualSize().y);
+		//SwapchainPanelInfo.CompositionScale = Engine::Type::Vector2f(panel.CompositionScaleX(), panel.CompositionScaleY());
+		//SwapchainPanelInfo.IsLoaded = panel.IsLoaded();
+		//SwapchainPanelInfo.RasterizationScale = panel.RasterizationScale();
+		//SwapchainPanelInfo.RegisterSwapChainToUIPanelCallBack =
+		//	[&](IDXGISwapChain3* swapchain) {
+		//	panel.DispatcherQueue().TryEnqueue(winrt::Microsoft::UI::Dispatching::DispatcherQueuePriority::High, [&]
+		//		{
+		//			// SwapChainPanel에 대한 기본 인터페이스 가져오기                                                            
+		//			//auto panelNative = GetSwapchainPanel().as<ISwapChainPanelNative>();                
+		//			auto panelNative = panel.as<ISwapChainPanelNative>();
+		//			Engine::DX::ThrowIfFailed(panelNative->SetSwapChain(swapchain));
+		//		});
+		//};
 	}
 #pragma endregion
 
@@ -148,8 +148,8 @@ namespace winrt::EngineCore_WRC::implementation
 
 	void EngineCore::OnSwapchainXamlChanged(const Microsoft::UI::Xaml::Controls::SwapChainPanel& panel)
 	{
-		Engine::SwapchainPanelInfo swapchainpanelInfo;
-		SetSwapchainPanelInfo(panel);
+		//Engine::SwapchainPanelInfo swapchainpanelInfo;
+		//SetSwapchainPanelInfo(panel);
 		//EngineCoreNative->OnSwapchainXamlChanged(swapchainpanelInfo);
 	}
 

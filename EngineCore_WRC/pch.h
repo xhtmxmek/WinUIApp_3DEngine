@@ -1,5 +1,5 @@
 ﻿#pragma once
-#pragma comment(lib, "x64/Debug/EngineCore.lib")
+#pragma comment(lib, "EngineCore.lib")
 
 //UI 관련 -> WinUI 헤더
 #include <unknwn.h>

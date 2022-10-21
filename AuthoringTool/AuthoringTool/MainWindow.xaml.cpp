@@ -106,7 +106,7 @@ namespace winrt::AuthoringTool::implementation
         //Engine_Scoped_Lock lock(m_Engine.GetCriticalSection());
         //std::scoped_lock<std::mutex> lock(RenderingEngine->GetMutex());
         // Dpi가 Change되면 WindowSize도 같이 Change 되니까 Engine에 Dpi Changed
-        Engine::Type::Size rootSize(sender.Size().Width, sender.Size().Height);
+        //Engine::Type::Size rootSize(sender.Size().Width, sender.Size().Height);
         //RenderingEngine.OnSwapchainXamlChanged(swapChainPanel());
         //RenderingEngine->OnSwapchainXamlChanged(sender.RasterizationScale(), rootSize, swapChainPanel().CompositionScaleX(), swapChainPanel().CompositionScaleY());
     }

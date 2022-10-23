@@ -50,10 +50,9 @@ namespace winrt::EngineCore_WRC::implementation
 
 	void EngineCore::Initialize(Microsoft::UI::Xaml::Controls::SwapChainPanel const& panel)
 	{
-		SetSwapchainPanelInfo(panel);				
+		SetSwapchainPanelInfo(panel);
+		SetRegisterSwapChainFunc(panel);
 		EngineCoreNative->Initialize(SwapchainPanelInfo);
-		//Engine::Type::Size
-		//Engine::Type::Size size = EngineCoreNative->GetDefaultBackBufferSize();
 	}
 
 	void EngineCore::UnInitialize()
@@ -64,18 +63,19 @@ namespace winrt::EngineCore_WRC::implementation
 	void EngineCore::SetSwapchainPanelInfo(const Microsoft::UI::Xaml::Controls::SwapChainPanel& panel)
 	{
 		
-		SwapchainPanelInfo.ActureSize = Engine::Type::Size(panel.ActualSize().x, panel.ActualSize().y);
-		SwapchainPanelInfo.CompositionScale = Engine::Type::Vector2f(panel.CompositionScaleX(), panel.CompositionScaleY());
+		SwapchainPanelInfo.ActureSize = SharedTypes::Size(panel.ActualSize().x, panel.ActualSize().y);
+		SwapchainPanelInfo.CompositionScale = Vector2f(panel.CompositionScaleX(), panel.CompositionScaleY());
 		SwapchainPanelInfo.IsLoaded = panel.IsLoaded();
 		SwapchainPanelInfo.RasterizationScale = panel.RasterizationScale();
-		SwapchainPanelInfo.RegisterSwapChainToUIPanelCallBack =
-			[&](IDXGISwapChain3* swapchain) {
+	}
+	void EngineCore::SetRegisterSwapChainFunc(const Microsoft::UI::Xaml::Controls::SwapChainPanel& panel)
+	{	
+		SwapchainPanelUI = panel;
+		RegisterSwapChainToUIPanel = [&](IDXGISwapChain3* engineSwapChain) {
 			panel.DispatcherQueue().TryEnqueue(winrt::Microsoft::UI::Dispatching::DispatcherQueuePriority::High, [&]
-				{
-					// SwapChainPanel에 대한 기본 인터페이스 가져오기                                                            
-					//auto panelNative = GetSwapchainPanel().as<ISwapChainPanelNative>();                
-					auto panelNative = panel.as<ISwapChainPanelNative>();
-					Engine::DX::ThrowIfFailed(panelNative->SetSwapChain(swapchain));
+				{					
+					auto panelNative = SwapchainPanelUI.as<ISwapChainPanelNative>();
+					Engine::DX::ThrowIfFailed(panelNative->SetSwapChain(engineSwapChain));
 				});
 		};
 	}
@@ -146,10 +146,9 @@ namespace winrt::EngineCore_WRC::implementation
 	}
 
 	void EngineCore::OnSwapchainXamlChanged(const Microsoft::UI::Xaml::Controls::SwapChainPanel& panel)
-	{
-		//Engine::SwapchainPanelInfo swapchainpanelInfo;
-		//SetSwapchainPanelInfo(panel);
-		//EngineCoreNative->OnSwapchainXamlChanged(swapchainpanelInfo);
+	{		
+		SetSwapchainPanelInfo(panel);
+		EngineCoreNative->OnSwapchainXamlChanged(SwapchainPanelInfo);
 	}
 
 	void EngineCore::OnOrientationChanged(winrt::Windows::Graphics::Display::DisplayOrientations const& orientation)

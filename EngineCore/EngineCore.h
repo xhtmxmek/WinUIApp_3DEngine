@@ -18,10 +18,7 @@ namespace Engine
     namespace Type
     {
         struct Size;
-    }    
-
-    struct SwapchainPanelInfo;
-    
+    }            
     class EngineCore
     {
     public:
@@ -55,9 +52,9 @@ namespace Engine
         //std::mutex& GetMutex() { return EngineTickMutex; }
 
         // Properties
-        ENGINE_API Type::Size GetDefaultBackBufferSize() noexcept
+        ENGINE_API Size GetDefaultBackBufferSize() noexcept
         {
-            return Type::Size(800.0f, 600.0f);
+            return Size(800.0f, 600.0f);
         }
 
         //common

@@ -1,16 +1,17 @@
 #pragma once
 //타입
-#include "Types/Math/Vector2.h"
-#include "Types/Math/Vector3.h"
-#include "Types/Math/Color.h"
-#include "Types/Math/Plane.h"
-#include "Types/Math/Quaternion.h"
-#include "Types/Math/Matrix3x3.h"
-#include "Types/Math/Matrix4x4.h"
-#include "Types/CommonTypes.h"
+#include <Math/Vector2.h>
+#include <Math/Vector3.h>
+#include <Math/Color.h>
+#include <Math/Plane.h>
+#include <Math/Quaternion.h>
+#include <Math/Matrix3x3.h>
+#include <Math/Matrix4x4.h>
+#include <CommonTypes.h>
+#include <UIInfoParams.h>
 #include "EngineEnums.h"
-#include "UIInfoParams.h"
-using namespace Engine::Type;
+//using namespace Engine::Type;
+using namespace SharedTypes;
 
 //프로퍼티
 #include "Common/Path.h"

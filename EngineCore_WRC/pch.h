@@ -22,8 +22,6 @@
 //Dx 관련 헤더
 //comPtr 관련
 #include <wrl/client.h>
-////#include <wil/cppwinrt.h>
-////#include <wil/cppwinrt_wrl.h>
 #include <wil/com.h>
 
 ////DXToolKit -> 엔진에 추가시킬수도 있음
@@ -32,37 +30,7 @@
 #include <d2d1_3.h>
 #include <d2d1effects_2.h>
 #include <dwrite_3.h>
-//
-//#include <pix.h>
-//
-//#ifdef _DEBUG
-//#include <dxgidebug.h>
-//#endif
 
-//#include <DirectXMath.h>
-//#include <DirectXColors.h>
-//
-//#include "BufferHelpers.h"
-//#include "CommonStates.h"
-//#include "DDSTextureLoader.h"
-//#include "DirectXHelpers.h"
-//#include "Effects.h"
-//#include "GamePad.h"
-//#include "GeometricPrimitive.h"
-//#include "GraphicsMemory.h"
-//#include "Keyboard.h"
-//#include "Model.h"
-//#include "Mouse.h"
-//#include "PostProcess.h"
-//#include "PrimitiveBatch.h"
-//#include "ScreenGrab.h"
-//#include "SimpleMath.h"
-//#include "SpriteBatch.h"
-//#include "SpriteFont.h"
-//#include "VertexTypes.h"
-//#include "WICTextureLoader.h"
-
-//Storage 관련 
 #include <winrt/Windows.Storage.h>
 #include <winrt/Windows.Storage.Pickers.h>
 #include <winrt/Windows.Storage.FileProperties.h>
@@ -70,18 +38,21 @@
 
 #include <concrt.h>
 #include <wincodec.h>
-//#include "Common/EngineBaseHeader.h"
 
-//엔진 코드들
-//#include "Common/EngineCommonHeader.h"
+
+//Base Types
+#include <CommonTypes.h>
+#include <Math/Vector2.h>
+#include <UIInfoParams.h>
+
 #include "../EngineCore/EngineHeader_Used_Application.h"
 
 //std 헤더들
 #include <mutex>
 
-//using namespace DirectX::SimpleMath;
 
 using namespace std;
+using namespace SharedTypes;
 
 
 

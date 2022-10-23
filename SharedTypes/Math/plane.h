@@ -41,21 +41,20 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 
 #pragma once
-#include "DLLDefine.h"
-namespace Engine
+
+namespace SharedTypes
 {
-	namespace Type
-	{
-        struct ENGINE_API Plane {
-            Plane() noexcept : a(0.f), b(0.f), c(0.f), d(0.f) {}
-            Plane(double _a, double _b, double _c, double _d) :
-                a(_a), b(_b), c(_c), d(_d) {}
 
-            Plane(const Plane& o) :
-                a(o.a), b(o.b), c(o.c), d(o.d) {}
+	struct Plane {
+		Plane() noexcept : a(0.f), b(0.f), c(0.f), d(0.f) {}
+		Plane(double _a, double _b, double _c, double _d) :
+			a(_a), b(_b), c(_c), d(_d) {}
 
-            //! Plane equation
-            double a, b, c, d;
-        }; // !struct aiPlane
-	}
+		Plane(const Plane& o) :
+			a(o.a), b(o.b), c(o.c), d(o.d) {}
+
+		//! Plane equation
+		double a, b, c, d;
+	}; // !struct aiPlane
+
 }

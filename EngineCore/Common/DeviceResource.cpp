@@ -481,15 +481,6 @@ namespace Engine
                 //엔진이 가지고 있는 콜백을 응용프로그램 단에서 세팅            
                 // 스왑 체인을 SwapChainPanel과 연결
                 // UI 변경 내용은 UI 스레드에 다시 디스패치해야 함                            
-                /*
-                     GetSwapchainPanel().DispatcherQueue().TryEnqueue(winrt::Microsoft::UI::Dispatching::DispatcherQueuePriority::High, [this]
-                    {
-                         SwapChainPanel에 대한 기본 인터페이스 가져오기                                                            
-                        auto panelNative = GetSwapchainPanel().as<ISwapChainPanelNative>();
-                        auto panelNative = GetSwapchainPanel().as<ISwapChainPanelNative>();
-                        DX::ThrowIfFailed(panelNative->SetSwapChain(m_swapChain.get()));
-                    });
-                */
                 RegisterSwapChainToUIPanelCallBack(m_swapChain.get());
 
                 // Ensure that DXGI does not queue more than one frame at a time. This both reduces latency and
@@ -767,8 +758,7 @@ namespace Engine
         //m_currentOrientation = currentDisplayInformation.CurrentOrientation();
         m_compositionScaleX = panelInfo.CompositionScale.x;
         m_compositionScaleY = panelInfo.CompositionScale.y;
-        m_RasterizationScale = panelInfo.RasterizationScale;
-        RegisterSwapChainToUIPanelCallBack = panelInfo.RegisterSwapChainToUIPanelCallBack;
+        m_RasterizationScale = panelInfo.RasterizationScale;        
         m_d2dContext->SetDpi(m_dpi, m_dpi);
 
         CreateWindowSizeDependentResources();
@@ -781,7 +771,7 @@ namespace Engine
         //m_window = windowPtr;
         m_window = window;
         //m_logicalSize = winrt::Windows::Foundation::Size(window.Bounds().Width, window.Bounds().Height);
-        m_logicalSize = Type::Size(width, height);
+        m_logicalSize = SharedTypes::Size(width, height);
         //DisplayInformation currentDisplayInformation = DisplayInformation::GetForCurrentView();
         //m_nativeOrientation = currentDisplayInformation.NativeOrientation();
         //m_currentOrientation = currentDisplayInformation.CurrentOrientation();
@@ -946,7 +936,7 @@ namespace Engine
 
 #pragma region WindowTransform
     // This method is called when the window changes size
-    bool DX::DeviceResources::SetLogicalSize(Type::Size logicalSize)
+    bool DX::DeviceResources::SetLogicalSize(SharedTypes::Size logicalSize)
     {
         if (m_logicalSize == logicalSize)
         {
@@ -973,7 +963,7 @@ namespace Engine
 
         if (m_logicalSize != swapChainPanelInfo.ActureSize)
         {
-            m_logicalSize = Type::Size(swapChainPanelInfo.ActureSize.Width, swapChainPanelInfo.ActureSize.Height);
+            m_logicalSize = SharedTypes::Size(swapChainPanelInfo.ActureSize.Width, swapChainPanelInfo.ActureSize.Height);
             needChange = true;
         }
 

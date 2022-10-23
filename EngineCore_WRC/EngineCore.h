@@ -44,10 +44,15 @@ namespace winrt::EngineCore_WRC::implementation
         //winrt::EngineCore_WRC::EngineCriticalSection GetCriticalSection();
         Windows::Foundation::Size GetDefaultBackBufferSize() noexcept;
         void LoadScriptProject(hstring const& path);
-    private:
+    private:         
+        void SetSwapchainPanelInfo(const Microsoft::UI::Xaml::Controls::SwapChainPanel& panel);        
+        void SetRegisterSwapChainFunc(const Microsoft::UI::Xaml::Controls::SwapChainPanel& panel);
+        
         std::unique_ptr<Engine::EngineCore> EngineCoreNative;
-        void SetSwapchainPanelInfo(const Microsoft::UI::Xaml::Controls::SwapChainPanel& panel);
-        Engine::SwapchainPanelInfo SwapchainPanelInfo;
+
+        Microsoft::UI::Xaml::Controls::SwapChainPanel SwapchainPanelUI;
+        SwapchainPanelInfo SwapchainPanelInfo;        
+        std::function<void(IDXGISwapChain3*)> RegisterSwapChainToUIPanel;
     };
 }
 namespace winrt::EngineCore_WRC::factory_implementation

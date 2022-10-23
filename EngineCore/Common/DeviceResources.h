@@ -68,17 +68,17 @@ namespace Engine
 			void Present();
 
 			//Window Transform
-			bool SetLogicalSize(Engine::Type::Size logicalSize);
+			bool SetLogicalSize(SharedTypes::Size logicalSize);
 			bool SetSwapchainXamlChanged(const SwapchainPanelInfo& swapChainPanelInfo);
 			void SetCurrentOrientation(Engine::DisplayOrientation currentOrientation);
 			void SetCompositionScale(float compositionScaleX, float compositionScaleY);
 
 			//Get Size Value
 			//RECT GetOutputSize() const noexcept { return m_outputSize; }				
-			Engine::Type::Size GetOutputSize() const { return m_outputSize; }
+			SharedTypes::Size GetOutputSize() const { return m_outputSize; }
 			DXGI_MODE_ROTATION GetRotation() const noexcept { return m_rotation; }
 			//// 렌더링 대상의 크기(DIP)입니다.
-			Engine::Type::Size GetLogicalSize() const { return m_logicalSize; }
+			SharedTypes::Size GetLogicalSize() const { return m_logicalSize; }
 			//float						GetDpi() const { return m_effectiveDpi; }
 
 			// Device Accessors.
@@ -118,7 +118,7 @@ namespace Engine
 			//	static winrt::Microsoft::UI::Xaml::Controls::SwapChainPanel swapchainPanel;
 			//	return swapchainPanel;
 			//}
-			
+
 
 		private:
 			//Resource 생성시 helper
@@ -170,9 +170,9 @@ namespace Engine
 			DXGI_MODE_ROTATION                                              m_rotation;
 			DWORD                                                           m_dxgiFactoryFlags;
 			//RECT                                                          m_outputSize;        
-			Engine::Type::Size												m_d3dRenderTargetSize;
-			Engine::Type::Size												m_outputSize;
-			Engine::Type::Size												m_logicalSize;
+			SharedTypes::Size												m_d3dRenderTargetSize;
+			SharedTypes::Size												m_outputSize;
+			SharedTypes::Size												m_logicalSize;
 			DisplayOrientation												m_nativeOrientation;
 			DisplayOrientation												m_currentOrientation;
 			float											                m_RasterizationScale;
@@ -197,7 +197,6 @@ namespace Engine
 
 			// The IDeviceNotify can be held directly as it owns the DeviceResources.
 			IDeviceNotify* m_deviceNotify;
-
 			std::function<void(IDXGISwapChain3*)>							RegisterSwapChainToUIPanelCallBack;
 		};
 

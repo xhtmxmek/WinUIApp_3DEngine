@@ -42,7 +42,7 @@ namespace Engine
         ENGINE_API void OnDeactivated();
         ENGINE_API void OnSuspending();
         ENGINE_API void OnResuming();
-        ENGINE_API void OnWindowSizeChanged(float width, float height);
+        ENGINE_API void OnWindowSizeChanged(SharedTypes::Size windowSize);
         ENGINE_API void OnSwapchainXamlChanged(const SwapchainPanelInfo& swapChainPanelInfo);
         //void OnOrientationChanged(Windows.Graphics.Display.DisplayOrientations orientation);
         ENGINE_API void ValidateDevice();
@@ -81,6 +81,8 @@ namespace Engine
         //// Rendering loop timer.
         std::unique_ptr<Engine::DX::StepTimer> Timer;
         std::shared_ptr<Engine::Level::World> m_World;
+        //std::unique_ptr<DirectX::Keyboard> m_keyboard;
+        //std::unique_ptr<DirectX::Mouse> m_mouse;
 
 
         //Thread ฐüทร    

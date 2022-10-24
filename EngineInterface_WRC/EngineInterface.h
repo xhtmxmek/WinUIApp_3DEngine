@@ -38,7 +38,7 @@ namespace winrt::EngineInterface_WRC::implementation
         void OnDeactivated();
         void OnSuspending();
         void OnResuming();
-        void OnWindowSizeChanged(float width, float height);
+        void OnWindowSizeChanged(Windows::Foundation::Size windowSize);
         void OnSwapchainXamlChanged(const Microsoft::UI::Xaml::Controls::SwapChainPanel& panel);
         void OnOrientationChanged(winrt::Windows::Graphics::Display::DisplayOrientations const& orientation);        
         //winrt::EngineCore_WRC::EngineCriticalSection GetCriticalSection();

@@ -90,7 +90,10 @@ namespace winrt::AuthoringTool::implementation
     }
 
     void MainWindow::OnSizeChanged(IInspectable const& sender, Microsoft::UI::Xaml::WindowSizeChangedEventArgs const& args)
-    {
+    {   
+        //엔진이 초기화 된 이후에만 사이즈 체인지를 해야함.
+        //사이즈 체인지 할때는 렌더링 쓰레드 꺼야함.
+        RenderingEngine.OnWindowSizeChanged(args.Size());
     }
 #pragma endregion
 

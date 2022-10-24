@@ -100,9 +100,9 @@ namespace winrt::EngineInterface_WRC::implementation
 		EngineCoreNative->OnResuming();
 	}
 
-	void EngineInterface::OnWindowSizeChanged(float width, float height)
+	void EngineInterface::OnWindowSizeChanged(Windows::Foundation::Size windowSize)
 	{
-		EngineCoreNative->OnWindowSizeChanged(width, height);
+		EngineCoreNative->OnWindowSizeChanged(SharedTypes::Size(windowSize.Width, windowSize.Height));
 	}
 
 	void EngineInterface::OnSwapchainXamlChanged(const Microsoft::UI::Xaml::Controls::SwapChainPanel& panel)

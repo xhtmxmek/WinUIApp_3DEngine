@@ -244,10 +244,10 @@ namespace Engine
 		// TODO: Game is being power-resumed.
 	}
 
-	void EngineCore::OnWindowSizeChanged(float width, float height)
+	void EngineCore::OnWindowSizeChanged(SharedTypes::Size windowSize)
 	{
-		if (!DX::DeviceResourcesUtil::GetDeviceResources()->SetLogicalSize(Size(width, height)))
-			return;
+		//if (!DX::DeviceResourcesUtil::GetDeviceResources()->SetLogicalSize(Size(windowSize.Width, windowSize.Height)))
+		//	return;
 
 		CreateWindowSizeDependentResources();
 

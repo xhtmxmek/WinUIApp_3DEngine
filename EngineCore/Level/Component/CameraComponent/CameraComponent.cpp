@@ -10,8 +10,7 @@ namespace Engine
 
 			CameraComponent::CameraComponent(const std::string& name)
 			:ComponentBase(name, SceneComponentType::Camera)
-			{
-			//외부 인자를 받아서 다른 종류의 StaticMesh를 만들면 거기에 맞춰서 이름세팅하기
+			{			
 			}
 
 		void CameraComponent::Init()
@@ -20,7 +19,14 @@ namespace Engine
 
 		void CameraComponent::Tick(float elapsedTime)
 		{
-
+			//엔진에서 입력을 매프레임마다 업데이트함
+			//여기서 엔진 입력에 따라서 카메라 Transform 값을 처리
+			/*
+			* 우클릭 상태에서 마우스 움직임 : 카메라 회전
+			* 우클릭 상태에서 WSAD : 카메라 이동
+			* 상수 버퍼 업데이트.
+			*/
+			//						
 		}
 	}
 }

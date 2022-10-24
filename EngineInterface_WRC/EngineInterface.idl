@@ -22,7 +22,7 @@ namespace EngineInterface_WRC
         void OnDeactivated();
         void OnSuspending();
         void OnResuming();
-        void OnWindowSizeChanged(Single width, Single height);
+        void OnWindowSizeChanged(Windows.Foundation.Size windowSize);
         void OnSwapchainXamlChanged(Microsoft.UI.Xaml.Controls.SwapChainPanel panel);
         void OnOrientationChanged(Windows.Graphics.Display.DisplayOrientations orientation);        
 

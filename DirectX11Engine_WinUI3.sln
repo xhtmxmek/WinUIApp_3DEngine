@@ -16,10 +16,14 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "TestProject", "TestProject\
 	EndProjectSection
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "EngineCore", "EngineCore\EngineCore.vcxproj", "{2C0E3B6B-EDE0-4CA2-915B-B41357598295}"
+	ProjectSection(ProjectDependencies) = postProject
+		{A5A862CA-E1E0-416E-8074-1A5ED8093E96} = {A5A862CA-E1E0-416E-8074-1A5ED8093E96}
+	EndProjectSection
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "EngineCore_WRC", "EngineCore_WRC\EngineCore_WRC.vcxproj", "{84904AC3-90A8-47D3-B7BE-E6AACB1D8C18}"
 	ProjectSection(ProjectDependencies) = postProject
 		{2C0E3B6B-EDE0-4CA2-915B-B41357598295} = {2C0E3B6B-EDE0-4CA2-915B-B41357598295}
+		{A5A862CA-E1E0-416E-8074-1A5ED8093E96} = {A5A862CA-E1E0-416E-8074-1A5ED8093E96}
 	EndProjectSection
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "SharedTypes", "SharedTypes\SharedTypes.vcxproj", "{A5A862CA-E1E0-416E-8074-1A5ED8093E96}"

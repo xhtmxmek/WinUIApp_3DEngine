@@ -120,8 +120,7 @@ namespace winrt::AuthoringTool::implementation
 		//}
 
 		// XAML 페이지 백그라운드에서 DirectX 콘텐츠를 렌더링하는 데 사용되는 리소스입니다.		
-		winrt::EngineCore_WRC::EngineCore RenderingEngine;
-		//winrt::DX11Engine_WinUI3_WRC::EngineDX11 Engine;		
+		winrt::EngineCore_WRC::EngineCore RenderingEngine;		
 
 		bool					m_windowVisible;
 		float                   m_logicalWidth;

@@ -61,14 +61,10 @@ namespace winrt::AuthoringTool::implementation
         if (swapChainPanel().IsLoaded())
         {
             m_windowVisible = args.Visible();
-            if (m_windowVisible)
-            {
-               // RenderingEngine.StartRenderLoop();
-            }
-            else
-            {
-                //RenderingEngine.StopRenderLoop();
-            }
+            if (m_windowVisible)            
+               RenderingEngine.StartRenderLoop();            
+            else            
+               RenderingEngine.StopRenderLoop();            
         }
     }
 
@@ -88,10 +84,9 @@ namespace winrt::AuthoringTool::implementation
 
     void MainWindow::OnClosed(IInspectable const& sender, Microsoft::UI::Xaml::WindowEventArgs const& args)
     {
-        //Engine_Scoped_Lock lock(Engine->GetCriticalSection());
-        //std::scoped_lock<std::mutex> lock(RenderingEngine->GetMutex());
-        //RenderingEngine.StopRenderLoop();
-        //RenderingEngine = { nullptr };        
+        RenderingEngine.StopRenderLoop();
+        RenderingEngine.UnInitialize();
+        RenderingEngine = { nullptr };        
     }
 
     void MainWindow::OnSizeChanged(IInspectable const& sender, Microsoft::UI::Xaml::WindowSizeChangedEventArgs const& args)
@@ -103,21 +98,12 @@ namespace winrt::AuthoringTool::implementation
 #pragma region SwapChainPanel Event
     void MainWindow::OnSwapChainPanelXamlRootChanged(Microsoft::UI::Xaml::XamlRoot const& sender, Microsoft::UI::Xaml::XamlRootChangedEventArgs const& args)
     {        
-        //Engine_Scoped_Lock lock(m_Engine.GetCriticalSection());
-        //std::scoped_lock<std::mutex> lock(RenderingEngine->GetMutex());
-        // Dpi가 Change되면 WindowSize도 같이 Change 되니까 Engine에 Dpi Changed
-        //Engine::Type::Size rootSize(sender.Size().Width, sender.Size().Height);
-        RenderingEngine.OnSwapchainXamlChanged(swapChainPanel());
-        //RenderingEngine->OnSwapchainXamlChanged(sender.RasterizationScale(), rootSize, swapChainPanel().CompositionScaleX(), swapChainPanel().CompositionScaleY());
+        RenderingEngine.OnSwapchainXamlChanged(swapChainPanel());        
     }
 
     void MainWindow::OnSwapChainPanelCompositionScaleChanged(Microsoft::UI::Xaml::Controls::SwapChainPanel const& sender, IInspectable const& args)
     {
-        //Engine_Scoped_Lock lock(m_Engine.GetCriticalSection());
-        //std::scoped_lock<std::mutex> lock(RenderingEngine->GetMutex());
-        //Engine::Type::Size panelSize(m_logicalWidth, m_logicalHeight);
         RenderingEngine.OnSwapchainXamlChanged(swapChainPanel());
-        //RenderingEngine.OnSwapchainXamlChanged(swapChainPanel());
     }
 
     void MainWindow::OnSwapchainPanelLoaded(IInspectable const& sender, Microsoft::UI::Xaml::RoutedEventArgs const& e)
@@ -128,11 +114,11 @@ namespace winrt::AuthoringTool::implementation
         RenderingEngine.Initialize(swapChainPanel());        
         //Default 프로젝트를 로드함. 디폴트 프로젝트는 실행파일 경로에 넣어주면됨. config파일 만들어서 디폴트 프로젝트 or last project 경로 넣어주기.
         winrt::hstring path = L"D:\\StudyDir\\WinUIApp_3DEngine\\x64\\Debug\\TestProject.DLL";
-        //RenderingEngine.LoadScriptProject(path.c_str());
+        RenderingEngine.LoadScriptProject(path.c_str());
 
-        RegisterDedicatedInputOnSwapchain();
-            
-        //RenderingEngine.StartRenderLoop();
+        RegisterDedicatedInputOnSwapchain();            
+
+        RenderingEngine.StartRenderLoop();
     }
 #pragma endregion
 

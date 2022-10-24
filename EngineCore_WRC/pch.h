@@ -39,6 +39,8 @@
 #include <concrt.h>
 #include <wincodec.h>
 
+//std
+#include <functional>
 
 //Base Types
 #include <CommonTypes.h>

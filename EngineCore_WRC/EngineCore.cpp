@@ -3,17 +3,7 @@
 #if __has_include("EngineCore.g.cpp")
 #include "EngineCore.g.cpp"
 #endif
-//#include "Common/EngineHelper.h"
-//#include "Common/EngineCriticalSection.h"
-//#include "Common/Engine_Scoped_Lock.h"
-//#include "Level/Level.h"
-//#include "Level/World.h"
-//#include "Renderer/LevelRenderer.h"
-//#include "Level/Actor/ActorManager/ActorManager.h"
-//#include "EngineAsset/Texture.h"
-//#include <fstream>
-//#include <sstream>
-//#include "Common/RuntimeContext.h"
+
 #include "../EngineCore/EngineCore.h" //
 #include "../EngineCore/Common/EngineHelper.h"
 
@@ -28,36 +18,26 @@ using namespace winrt::Windows::Storage::Pickers;
 namespace winrt::EngineCore_WRC::implementation
 {
 	EngineCore::EngineCore()
-	{
-		//DX::DeviceResourcesUtil::GetDeviceResources() = std::make_unique<DX::DeviceResources>();
+	{		
 		EngineCoreNative = make_unique<Engine::EngineCore>();
 	}
 
 #pragma region Initialize
-	//void EngineCore::Initialize(HWND window)
-	//{
-	//    CreateDeviceDependentResources();
-	//    DX::DeviceResourcesUtil::GetDeviceResources()->SetWindow(window, 500, 500);
-	//    CreateWindowSizeDependentResources();
-
-	//    // TODO: Change the timer settings if you want something other than the default variable timestep mode.
-	//    // e.g. for 60 FPS fixed timestep update logic, call:
-	//    /*
-	//    m_timer.SetFixedTimeStep(true);
-	//    m_timer.SetTargetElapsedSeconds(1.0 / 60);
-	//    */
-	//}
-
 	void EngineCore::Initialize(Microsoft::UI::Xaml::Controls::SwapChainPanel const& panel)
 	{
-		SetSwapchainPanelInfo(panel);
-		SetRegisterSwapChainFunc(panel);
+		InitializeSwapChainPanelInfo(panel);
 		EngineCoreNative->Initialize(SwapchainPanelInfo);
 	}
 
 	void EngineCore::UnInitialize()
 	{
 		EngineCoreNative->UnInitialize();
+	}
+
+	void EngineCore::InitializeSwapChainPanelInfo(const Microsoft::UI::Xaml::Controls::SwapChainPanel& panel)
+	{
+		SwapchainPanelUI = panel;		
+		SetSwapchainPanelInfo(panel);		
 	}
 
 	void EngineCore::SetSwapchainPanelInfo(const Microsoft::UI::Xaml::Controls::SwapChainPanel& panel)
@@ -67,17 +47,20 @@ namespace winrt::EngineCore_WRC::implementation
 		SwapchainPanelInfo.CompositionScale = Vector2f(panel.CompositionScaleX(), panel.CompositionScaleY());
 		SwapchainPanelInfo.IsLoaded = panel.IsLoaded();
 		SwapchainPanelInfo.RasterizationScale = panel.RasterizationScale();
-	}
-	void EngineCore::SetRegisterSwapChainFunc(const Microsoft::UI::Xaml::Controls::SwapChainPanel& panel)
-	{	
-		SwapchainPanelUI = panel;
-		RegisterSwapChainToUIPanel = [&](IDXGISwapChain3* engineSwapChain) {
-			panel.DispatcherQueue().TryEnqueue(winrt::Microsoft::UI::Dispatching::DispatcherQueuePriority::High, [&]
-				{					
+
+		SwapchainPanelInfo.RegisterSwapChainToUIPanel = [&](IDXGISwapChain3* engineSwapChain) {
+
+			EngineSwapChain = engineSwapChain;
+
+			SwapchainPanelUI.DispatcherQueue().TryEnqueue(winrt::Microsoft::UI::Dispatching::DispatcherQueuePriority::High, [&]
+				{
 					auto panelNative = SwapchainPanelUI.as<ISwapChainPanelNative>();
-					Engine::DX::ThrowIfFailed(panelNative->SetSwapChain(engineSwapChain));
+					panelNative->SetSwapChain(EngineSwapChain);					
 				});
 		};
+	}
+	void EngineCore::SetRegisterSwapChainFunc(const Microsoft::UI::Xaml::Controls::SwapChainPanel& panel)
+	{			
 	}
 #pragma endregion
 
@@ -86,30 +69,12 @@ namespace winrt::EngineCore_WRC::implementation
 	// Executes the basic game loop.
 	void EngineCore::StartRenderLoop()
 	{
-
-		//EngineCoreNative->StartRenderLoop();
-
-		//if (m_renderLoopWorker != nullptr && m_renderLoopWorker.Status() == winrt::Windows::Foundation::AsyncStatus::Started)        
-		//    return;        
-		//
-		//auto workItemHandler = WorkItemHandler([this, strong_this{ get_strong() }](winrt::Windows::Foundation::IAsyncAction action)
-		//    {                
-		//        while (action.Status() == winrt::Windows::Foundation::AsyncStatus::Started)
-		//        {                                        
-		//            winrt::DX11Engine_WinUI3_WRC::Engine_Scoped_Lock lock{ m_criticalSection };                    
-		//            Tick();
-		//        }
-		//    });
-
-		//// 전용인 우선 순위가 높은 백그라운드 스레드에서 작업을 실행합니다.
-		//m_renderLoopWorker = ThreadPool::RunAsync(workItemHandler, WorkItemPriority::High, WorkItemOptions::TimeSliced);
+		EngineCoreNative->StartRenderLoop();
 	}
 
 	void EngineCore::StopRenderLoop()
-	{
-		//DX::DeviceResourcesUtil::GetDeviceResources()->Trim();
-		//m_renderLoopWorker.Cancel();        
-		//EngineCoreNative->StopRenderLoop();
+	{      
+		EngineCoreNative->StopRenderLoop();
 	}
 #pragma endregion
 
@@ -117,32 +82,27 @@ namespace winrt::EngineCore_WRC::implementation
 	// Message handlers
 	void EngineCore::OnActivated()
 	{
-		// TODO: Game is becoming active window.
-		//EngineCoreNative->OnActivated();
+		EngineCoreNative->OnActivated();
 	}
 
 	void EngineCore::OnDeactivated()
 	{
-		// TODO: Game is becoming background window.
-		//EngineCoreNative->OnDeactivated();
+		EngineCoreNative->OnDeactivated();
 	}
 
 	void EngineCore::OnSuspending()
 	{
-		//EngineCoreNative->OnSuspending();
-		// TODO: Game is being power-suspended.
+		EngineCoreNative->OnSuspending();
 	}
 
 	void EngineCore::OnResuming()
 	{
-		//EngineCoreNative->OnResuming();
-
-		// TODO: Game is being power-resumed.
+		EngineCoreNative->OnResuming();
 	}
 
 	void EngineCore::OnWindowSizeChanged(float width, float height)
 	{
-		//EngineCoreNative->OnWindowSizeChanged(width, height);
+		EngineCoreNative->OnWindowSizeChanged(width, height);
 	}
 
 	void EngineCore::OnSwapchainXamlChanged(const Microsoft::UI::Xaml::Controls::SwapChainPanel& panel)
@@ -161,11 +121,11 @@ namespace winrt::EngineCore_WRC::implementation
 	{
 		//Engine::Type::Size size = EngineCoreNative->GetDefaultBackBufferSize();
 		//return Size(size.Width, size.Height);
-		return Size(0, 0);
+		return Windows::Foundation::Size(0, 0);
 	}
 	void EngineCore::LoadScriptProject(hstring const& path)
 	{
-		//EngineCoreNative->LoadScriptProject(path.c_str());
+		EngineCoreNative->LoadScriptProject(path.c_str());
 	}
 
 #pragma endregion

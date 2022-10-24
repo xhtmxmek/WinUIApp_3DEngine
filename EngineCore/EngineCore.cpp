@@ -47,6 +47,7 @@ namespace Engine
         //기본 월드 생성
         m_World = make_shared<Engine::Level::World>();
         Engine::Level::SLevel::SetWorld(m_World);
+        Timer = make_unique<Engine::DX::StepTimer>();
         //옵션 설정
         DX::DeviceResourcesUtil::GetDeviceResources()->SetOption(DX::DeviceResources::c_UseXAML);
         CreateDeviceDependentResources();
@@ -66,8 +67,10 @@ namespace Engine
 
     void EngineCore::UnInitialize()
     {
-        DX::DeviceResourcesUtil::GetDeviceResources().reset();
-       // m_spriteBatch.reset();
+        DX::DeviceResourcesUtil::GetInstance().ReleaseInstance();
+        Level::SLevel::GetInstance().ReleaseInstance();
+        Level::ActorManager::GetInstance().ReleaseInstance();
+        EngineAsset::TextureManager::GetInstance().ReleaseInstance();       
     }
 #pragma endregion
 
@@ -110,6 +113,7 @@ namespace Engine
         쓰레드가 작업중이라면 joinable은 true이다. 또한 작업을 마쳤더라도 join이 호출되지 않았다면 joinable은 true이다.
         최초 : joinable false. 실행되고 나서 true. 실행 중에 join 호출하면?
         */
+        RenderLoopActivate = true;
 
         if (RenderLoopThread.joinable())
             return;

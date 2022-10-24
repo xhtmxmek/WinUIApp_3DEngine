@@ -481,7 +481,7 @@ namespace Engine
                 //엔진이 가지고 있는 콜백을 응용프로그램 단에서 세팅            
                 // 스왑 체인을 SwapChainPanel과 연결
                 // UI 변경 내용은 UI 스레드에 다시 디스패치해야 함                            
-                RegisterSwapChainToUIPanelCallBack(m_swapChain.get());
+                RegisterSwapChainToUIPanelCallBack(m_swapChain.get());                
 
                 // Ensure that DXGI does not queue more than one frame at a time. This both reduces latency and
                 // ensures that the application will only render after each VSync, minimizing power consumption.
@@ -758,7 +758,8 @@ namespace Engine
         //m_currentOrientation = currentDisplayInformation.CurrentOrientation();
         m_compositionScaleX = panelInfo.CompositionScale.x;
         m_compositionScaleY = panelInfo.CompositionScale.y;
-        m_RasterizationScale = panelInfo.RasterizationScale;        
+        m_RasterizationScale = panelInfo.RasterizationScale;
+        RegisterSwapChainToUIPanelCallBack = panelInfo.RegisterSwapChainToUIPanel;        
         m_d2dContext->SetDpi(m_dpi, m_dpi);
 
         CreateWindowSizeDependentResources();

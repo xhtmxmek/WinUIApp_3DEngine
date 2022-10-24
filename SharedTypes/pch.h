@@ -12,6 +12,7 @@
 
 #include <algorithm>
 #include <cmath>
+#include <functional>
 
 
 #include "Math/Vector2.h"
@@ -22,5 +23,6 @@
 #include "Math/Matrix3x3.h"
 #include "Math/Matrix4x4.h"
 #include "CommonTypes.h"
+#include "UIInfoParams.h"
 
 #endif //PCH_H

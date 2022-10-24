@@ -1,7 +1,7 @@
 ﻿#include "pch.h"
-#include "EngineCore.h"
-#if __has_include("EngineCore.g.cpp")
-#include "EngineCore.g.cpp"
+#include "EngineInterface.h"
+#if __has_include("EngineInterface.g.cpp")
+#include "EngineInterface.g.cpp"
 #endif
 
 #include "../EngineCore/EngineCore.h" //
@@ -15,32 +15,32 @@ using namespace winrt::Windows::Foundation;
 using namespace winrt::Windows::Storage;
 using namespace winrt::Windows::Storage::Pickers;
 
-namespace winrt::EngineCore_WRC::implementation
+namespace winrt::EngineInterface_WRC::implementation
 {
-	EngineCore::EngineCore()
+	EngineInterface::EngineInterface()
 	{		
 		EngineCoreNative = make_unique<Engine::EngineCore>();
 	}
 
 #pragma region Initialize
-	void EngineCore::Initialize(Microsoft::UI::Xaml::Controls::SwapChainPanel const& panel)
+	void EngineInterface::Initialize(Microsoft::UI::Xaml::Controls::SwapChainPanel const& panel)
 	{
 		InitializeSwapChainPanelInfo(panel);
 		EngineCoreNative->Initialize(SwapchainPanelInfo);
 	}
 
-	void EngineCore::UnInitialize()
+	void EngineInterface::UnInitialize()
 	{
 		EngineCoreNative->UnInitialize();
 	}
 
-	void EngineCore::InitializeSwapChainPanelInfo(const Microsoft::UI::Xaml::Controls::SwapChainPanel& panel)
+	void EngineInterface::InitializeSwapChainPanelInfo(const Microsoft::UI::Xaml::Controls::SwapChainPanel& panel)
 	{
 		SwapchainPanelUI = panel;		
 		SetSwapchainPanelInfo(panel);		
 	}
 
-	void EngineCore::SetSwapchainPanelInfo(const Microsoft::UI::Xaml::Controls::SwapChainPanel& panel)
+	void EngineInterface::SetSwapchainPanelInfo(const Microsoft::UI::Xaml::Controls::SwapChainPanel& panel)
 	{
 		
 		SwapchainPanelInfo.ActureSize = SharedTypes::Size(panel.ActualSize().x, panel.ActualSize().y);
@@ -59,7 +59,7 @@ namespace winrt::EngineCore_WRC::implementation
 				});
 		};
 	}
-	void EngineCore::SetRegisterSwapChainFunc(const Microsoft::UI::Xaml::Controls::SwapChainPanel& panel)
+	void EngineInterface::SetRegisterSwapChainFunc(const Microsoft::UI::Xaml::Controls::SwapChainPanel& panel)
 	{			
 	}
 #pragma endregion
@@ -67,12 +67,12 @@ namespace winrt::EngineCore_WRC::implementation
 
 #pragma region Frame Update
 	// Executes the basic game loop.
-	void EngineCore::StartRenderLoop()
+	void EngineInterface::StartRenderLoop()
 	{
 		EngineCoreNative->StartRenderLoop();
 	}
 
-	void EngineCore::StopRenderLoop()
+	void EngineInterface::StopRenderLoop()
 	{      
 		EngineCoreNative->StopRenderLoop();
 	}
@@ -80,50 +80,50 @@ namespace winrt::EngineCore_WRC::implementation
 
 #pragma region Message Handlers
 	// Message handlers
-	void EngineCore::OnActivated()
+	void EngineInterface::OnActivated()
 	{
 		EngineCoreNative->OnActivated();
 	}
 
-	void EngineCore::OnDeactivated()
+	void EngineInterface::OnDeactivated()
 	{
 		EngineCoreNative->OnDeactivated();
 	}
 
-	void EngineCore::OnSuspending()
+	void EngineInterface::OnSuspending()
 	{
 		EngineCoreNative->OnSuspending();
 	}
 
-	void EngineCore::OnResuming()
+	void EngineInterface::OnResuming()
 	{
 		EngineCoreNative->OnResuming();
 	}
 
-	void EngineCore::OnWindowSizeChanged(float width, float height)
+	void EngineInterface::OnWindowSizeChanged(float width, float height)
 	{
 		EngineCoreNative->OnWindowSizeChanged(width, height);
 	}
 
-	void EngineCore::OnSwapchainXamlChanged(const Microsoft::UI::Xaml::Controls::SwapChainPanel& panel)
+	void EngineInterface::OnSwapchainXamlChanged(const Microsoft::UI::Xaml::Controls::SwapChainPanel& panel)
 	{		
 		SetSwapchainPanelInfo(panel);
 		EngineCoreNative->OnSwapchainXamlChanged(SwapchainPanelInfo);
 	}
 
-	void EngineCore::OnOrientationChanged(winrt::Windows::Graphics::Display::DisplayOrientations const& orientation)
+	void EngineInterface::OnOrientationChanged(winrt::Windows::Graphics::Display::DisplayOrientations const& orientation)
 	{
 		//EngineCoreNative->O
 	}
 
 	// Properties
-	Windows::Foundation::Size EngineCore::GetDefaultBackBufferSize() noexcept //const noexcept
+	Windows::Foundation::Size EngineInterface::GetDefaultBackBufferSize() noexcept //const noexcept
 	{
 		//Engine::Type::Size size = EngineCoreNative->GetDefaultBackBufferSize();
 		//return Size(size.Width, size.Height);
 		return Windows::Foundation::Size(0, 0);
 	}
-	void EngineCore::LoadScriptProject(hstring const& path)
+	void EngineInterface::LoadScriptProject(hstring const& path)
 	{
 		EngineCoreNative->LoadScriptProject(path.c_str());
 	}

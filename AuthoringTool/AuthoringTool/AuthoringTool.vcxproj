@@ -158,7 +158,7 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\EngineCore_WRC\EngineCore_WRC.vcxproj">
+    <ProjectReference Include="..\..\EngineInterface_WRC\EngineInterface_WRC.vcxproj">
       <Project>{84904ac3-90a8-47d3-b7be-e6aacb1d8c18}</Project>
     </ProjectReference>
   </ItemGroup>

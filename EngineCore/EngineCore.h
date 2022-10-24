@@ -22,7 +22,7 @@ namespace Engine
     class EngineCore
     {
     public:
-        ENGINE_API EngineCore():RenderLoopActivate(false){}
+        ENGINE_API EngineCore():RenderLoopActivate(false), ProjectHandle(nullptr) {}
         ENGINE_API ~EngineCore() = default;
 #ifdef WIN_APPS_SDK
         //void Initialize(Microsoft.UI.Xaml.Controls.SwapChainPanel panel);
@@ -70,6 +70,8 @@ namespace Engine
 
         void Clear();
 
+        void InitializeGlobalObjects();
+        void LoadDefaultProject();
         bool CreateDeviceDependentResources();
         void CreateWindowSizeDependentResources();
 
@@ -78,18 +80,8 @@ namespace Engine
 
         //// Rendering loop timer.
         std::unique_ptr<Engine::DX::StepTimer> Timer;
-        //Engine::DX::StepTimer* Timer;
-        //ResourceManager         
-        //World
         std::shared_ptr<Engine::Level::World> m_World;
 
-        //texture
-        //wil::com_ptr<ID3D11ShaderResourceView> m_texture;
-
-        ////sprite
-        //std::unique_ptr<DirectX::SpriteBatch> m_spriteBatch;
-        //DirectX::SimpleMath::Vector2 m_screenPos;
-        //DirectX::SimpleMath::Vector2 m_origin;
 
         //Thread 관련    
         bool RenderLoopActivate;
@@ -99,5 +91,7 @@ namespace Engine
         //winrt::DX11Engine_WinUI3_WRC::EngineCriticalSection m_criticalSection{ nullptr };
         // 현재 입력 포인터 위치를 추적합니다.
         float m_pointerLocationX;
+
+        HMODULE ProjectHandle;
     };
 }

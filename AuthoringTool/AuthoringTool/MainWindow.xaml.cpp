@@ -109,13 +109,8 @@ namespace winrt::AuthoringTool::implementation
     void MainWindow::OnSwapchainPanelLoaded(IInspectable const& sender, Microsoft::UI::Xaml::RoutedEventArgs const& e)
     {
         swapChainPanel().XamlRoot().Changed({ this, &MainWindow::OnSwapChainPanelXamlRootChanged });
-
-        //swapChainPanel이 로드 된 뒤에 엔진을 로드, 초기화한다        
-        RenderingEngine.Initialize(swapChainPanel());        
-        //Default 프로젝트를 로드함. 디폴트 프로젝트는 실행파일 경로에 넣어주면됨. config파일 만들어서 디폴트 프로젝트 or last project 경로 넣어주기.
-        winrt::hstring path = L"D:\\StudyDir\\WinUIApp_3DEngine\\x64\\Debug\\TestProject.DLL";
-        RenderingEngine.LoadScriptProject(path.c_str());
-
+        
+        RenderingEngine.Initialize(swapChainPanel());                
         RegisterDedicatedInputOnSwapchain();            
 
         RenderingEngine.StartRenderLoop();

@@ -1,9 +1,9 @@
-namespace EngineCore_WRC
+namespace EngineInterface_WRC
 {
     [default_interface]
-    runtimeclass EngineCore
+    runtimeclass EngineInterface
     {
-        EngineCore();
+        EngineInterface();
 
         // Initialization and management       
         //void Initialize(Windows.Foundation.IReference <Int64> window);        
@@ -26,35 +26,10 @@ namespace EngineCore_WRC
         void OnSwapchainXamlChanged(Microsoft.UI.Xaml.Controls.SwapChainPanel panel);
         void OnOrientationChanged(Windows.Graphics.Display.DisplayOrientations orientation);        
 
-        //Thread
-        //void LockEngineThread();
-        //void UnLockEngineThread();
-        //EngineCriticalSection GetCriticalSection();        
-        
-
         // Properties
         //[noexcept] void GetDefaultSize(out Single width, out Single height);
         [noexcept]  Windows.Foundation.Size GetDefaultBackBufferSize();
         void LoadScriptProject(String path);
     }
-
-    //[default_interface]
-    //runtimeclass EngineCriticalSection
-    //{
-    //    EngineCriticalSection();
-    //    void Lock();
-    //    void UnLock();
-    //}
-
-    //[default_interface]
-    //runtimeclass Engine_Scoped_Lock
-    //{
-    //    [default_overload]
-    //    Engine_Scoped_Lock();
-    //    Engine_Scoped_Lock( EngineCriticalSection mutex );
-
-    //    //EngineCriticalSection Mutex{ get; };
-    //}
-
     
 }

@@ -6,6 +6,7 @@
 //엔진에서 UI측에 제공할 타입들만 헤더로 만들어서 뺴놓기
 //#include "EngineCore/Common/StepTimer.h"
 //
+#include <microsoft.ui.xaml.window.h>
 
 using namespace winrt;
 using namespace Microsoft::UI::Xaml;
@@ -29,11 +30,20 @@ namespace winrt::AuthoringTool::implementation
         VisibilityChanged({ this, &MainWindow::OnVisibilityChanged });
         Activated({ this, &MainWindow::OnActivated });
         Closed({ this, &MainWindow::OnClosed });
-        SizeChanged({ this, &MainWindow::OnSizeChanged });
+        SizeChanged({ this, &MainWindow::OnSizeChanged });                
 
         // 스왑 체인 패널 이벤트(DX 렌더링용)     
         swapChainPanel().Loaded({ this, &MainWindow::OnSwapchainPanelLoaded });
         swapChainPanel().CompositionScaleChanged({ this, &MainWindow::OnSwapChainPanelCompositionScaleChanged });
+        swapChainPanel().ManipulationStarted({ this, &MainWindow::OnSwapChainPanelManupalationStarted });
+        // Retrieve the window handle (HWND) of the current WinUI 3 window.
+        //auto windowNative{ this->try_as<::IWindowNative>() };
+        //winrt::check_bool(windowNative);
+        //HWND hWnd{ 0 };
+        //windowNative->get_WindowHandle(&hWnd);        
+
+        //winrt::Microsoft::UI::Xaml::Interop::native            
+        //swapChainPanel().dragDragEnter({this, })
         //currentDisplayInformation.OrientationChanged({ this, &MainPage::OnOrientationChanged });
         //DisplayInformation::DisplayContentsInvalidated({ this, &MainPage::OnDisplayContentsInvalidated });
 
@@ -70,7 +80,7 @@ namespace winrt::AuthoringTool::implementation
 
     void MainWindow::OnActivated(IInspectable const& sender, Microsoft::UI::Xaml::WindowActivatedEventArgs const& args)
     {
-        if (args.WindowActivationState() == Microsoft::UI::Xaml::WindowActivationState::Deactivated)
+        if (args.WindowActivationState() == Microsoft::UI::Xaml::WindowActivationState::PointerActivated)
         {
             // Show the "paused" UI. 
             //VisualStateManager::GoToState(this, L"PauseUI", false);
@@ -91,9 +101,8 @@ namespace winrt::AuthoringTool::implementation
 
     void MainWindow::OnSizeChanged(IInspectable const& sender, Microsoft::UI::Xaml::WindowSizeChangedEventArgs const& args)
     {   
-        //엔진이 초기화 된 이후에만 사이즈 체인지를 해야함.
-        //사이즈 체인지 할때는 렌더링 쓰레드 꺼야함.
-        RenderingEngine.OnWindowSizeChanged(args.Size());
+        if (swapChainPanel().IsLoaded())
+            RenderingEngine.OnWindowSizeChanged(args.Size());
     }
 #pragma endregion
 
@@ -106,7 +115,13 @@ namespace winrt::AuthoringTool::implementation
 
     void MainWindow::OnSwapChainPanelCompositionScaleChanged(Microsoft::UI::Xaml::Controls::SwapChainPanel const& sender, IInspectable const& args)
     {
-        RenderingEngine.OnSwapchainXamlChanged(swapChainPanel());
+        RenderingEngine.OnSwapchainXamlChanged(swapChainPanel());        
+    }
+
+    void MainWindow::OnSwapChainPanelManupalationStarted(IInspectable const& sender, Microsoft::UI::Xaml::Input::ManipulationStartedRoutedEventArgs const& e)
+    {        
+        int k = 5;
+        k = 7;
     }
 
     void MainWindow::OnSwapchainPanelLoaded(IInspectable const& sender, Microsoft::UI::Xaml::RoutedEventArgs const& e)
@@ -128,6 +143,8 @@ namespace winrt::AuthoringTool::implementation
 
     void MainWindow::OnPointerPressedSwapChain(Microsoft::UI::Input::InputPointerSource const& sender, Microsoft::UI::Input::PointerEventArgs const& e)
     {
+        int k = 5;
+        k = 7;
         // 포인터를 누르면 포인터 이동 추적을 시작합니다.
         //m_Engine.StartTracking();
     }

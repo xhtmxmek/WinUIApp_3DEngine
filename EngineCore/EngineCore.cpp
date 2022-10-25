@@ -246,16 +246,17 @@ namespace Engine
 
 	void EngineCore::OnWindowSizeChanged(SharedTypes::Size windowSize)
 	{
-		//if (!DX::DeviceResourcesUtil::GetDeviceResources()->SetLogicalSize(Size(windowSize.Width, windowSize.Height)))
-		//	return;
+		std::scoped_lock<std::mutex> lock(EngineTickMutex);
+		if (!DX::DeviceResourcesUtil::GetDeviceResources()->SetLogicalSize(Size(windowSize.Width, windowSize.Height)))
+			return;
 
 		CreateWindowSizeDependentResources();
-
-		// TODO: Game window is being resized.
+		
 	}
 
 	void EngineCore::OnSwapchainXamlChanged(const SwapchainPanelInfo& swapChainPanelInfo)
 	{
+		std::scoped_lock<std::mutex> lock(EngineTickMutex);
 		if (DX::DeviceResourcesUtil::GetDeviceResources()->SetSwapchainXamlChanged(swapChainPanelInfo))
 			CreateWindowSizeDependentResources();
 	}
@@ -369,7 +370,6 @@ namespace Engine
 	void EngineCore::OnDeviceRestored()
 	{
 		CreateDeviceDependentResources();
-
 		CreateWindowSizeDependentResources();
 	}
 #pragma endregion

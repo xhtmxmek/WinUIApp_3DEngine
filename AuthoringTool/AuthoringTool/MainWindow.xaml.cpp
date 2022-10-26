@@ -7,6 +7,7 @@
 //#include "EngineCore/Common/StepTimer.h"
 //
 #include <microsoft.ui.xaml.window.h>
+#include <winrt/Microsoft.UI.Xaml.Input.h>
 
 using namespace winrt;
 using namespace Microsoft::UI::Xaml;
@@ -35,7 +36,8 @@ namespace winrt::AuthoringTool::implementation
         // 스왑 체인 패널 이벤트(DX 렌더링용)     
         swapChainPanel().Loaded({ this, &MainWindow::OnSwapchainPanelLoaded });
         swapChainPanel().CompositionScaleChanged({ this, &MainWindow::OnSwapChainPanelCompositionScaleChanged });
-        swapChainPanel().ManipulationStarted({ this, &MainWindow::OnSwapChainPanelManupalationStarted });
+        swapChainPanel().ManipulationStarted({ this, &MainWindow::OnSwapChainPanelManipulationStarted });        
+        //OnSwapChainPanelManipulationStarted(swapChainPanel(), test);
         // Retrieve the window handle (HWND) of the current WinUI 3 window.
         //auto windowNative{ this->try_as<::IWindowNative>() };
         //winrt::check_bool(windowNative);
@@ -75,7 +77,7 @@ namespace winrt::AuthoringTool::implementation
                RenderingEngine.StartRenderLoop();            
             else            
                RenderingEngine.StopRenderLoop();            
-        }
+        }        
     }
 
     void MainWindow::OnActivated(IInspectable const& sender, Microsoft::UI::Xaml::WindowActivatedEventArgs const& args)
@@ -118,7 +120,7 @@ namespace winrt::AuthoringTool::implementation
         RenderingEngine.OnSwapchainXamlChanged(swapChainPanel());        
     }
 
-    void MainWindow::OnSwapChainPanelManupalationStarted(IInspectable const& sender, Microsoft::UI::Xaml::Input::ManipulationStartedRoutedEventArgs const& e)
+    void MainWindow::OnSwapChainPanelManipulationStarted(IInspectable const& sender, Microsoft::UI::Xaml::Input::ManipulationStartedRoutedEventArgs const& e)
     {        
         int k = 5;
         k = 7;

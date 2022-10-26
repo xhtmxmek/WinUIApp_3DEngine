@@ -35,7 +35,8 @@ namespace winrt::AuthoringTool::implementation
 
         // 스왑 체인 패널 이벤트(DX 렌더링용)     
         swapChainPanel().Loaded({ this, &MainWindow::OnSwapchainPanelLoaded });
-        swapChainPanel().CompositionScaleChanged({ this, &MainWindow::OnSwapChainPanelCompositionScaleChanged });   
+        swapChainPanel().CompositionScaleChanged({ this, &MainWindow::OnSwapChainPanelCompositionScaleChanged });
+        //swapChainPanel().key
         //swapChainPanel().SizeChanged({ this, &MainWindow::OnSwapChainPanel_SizeChanged });
         
 
@@ -122,13 +123,13 @@ namespace winrt::AuthoringTool::implementation
     }
 
     void MainWindow::OnSwapChainPanel_SizeChanged(Windows::Foundation::IInspectable const& sender, Microsoft::UI::Xaml::SizeChangedEventArgs const& args)
-    {        
+    {                
         RenderingEngine.OnSwapchainXamlChanged(swapChainPanel());
     }
 
     void MainWindow::OnSwapchainPanelLoaded(IInspectable const& sender, Microsoft::UI::Xaml::RoutedEventArgs const& e)
     {
-        //swapChainPanel().XamlRoot().Changed({ this, &MainWindow::OnSwapChainPanelXamlRootChanged });
+        //swapChainPanel().XamlRoot().Changed({ this, &MainWindow::OnSwapChainPanelXamlRootChanged });        
         swapChainPanel().SizeChanged({ this, &MainWindow::OnSwapChainPanel_SizeChanged });
         
         RenderingEngine.Initialize(swapChainPanel());                

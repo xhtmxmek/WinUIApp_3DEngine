@@ -11,7 +11,9 @@ namespace Engine
 			RUNTIME_SUBCLASS(CameraComponent)
 			ENGINE_API CameraComponent(const std::string& name = "CameraComponent");
 			ENGINE_API void Init() final;
-			void Tick(float elapsedTime) final;								
+			void Tick(float elapsedTime) final;
+		private:
+			void ProcessInput();
 		};
 	}
 }

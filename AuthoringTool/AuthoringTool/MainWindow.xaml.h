@@ -24,9 +24,7 @@ namespace winrt::AuthoringTool::implementation
 
 		void myButton_Click(Windows::Foundation::IInspectable const& sender, Microsoft::UI::Xaml::RoutedEventArgs const& args);
 		void ClickHandler(Windows::Foundation::IInspectable const& sender, Microsoft::UI::Xaml::RoutedEventArgs const& args);
-		AuthoringTool::BookstoreViewModel MainViewModel();
-		void OnSwapChainPanelManipulationStarted(IInspectable const& sender, Microsoft::UI::Xaml::Input::ManipulationStartedRoutedEventArgs const& e);
-
+		AuthoringTool::BookstoreViewModel MainViewModel();		
 	private:
 		//not projection
 // XAML 하위 수준 렌더링 이벤트 처리기입니다.
@@ -40,7 +38,8 @@ namespace winrt::AuthoringTool::implementation
 
 		// SwapChainPanel 이벤트 처리기입니다.
 		void OnSwapChainPanelXamlRootChanged(Microsoft::UI::Xaml::XamlRoot const& sender, Microsoft::UI::Xaml::XamlRootChangedEventArgs const& args);
-		void OnSwapChainPanelCompositionScaleChanged(Microsoft::UI::Xaml::Controls::SwapChainPanel const& sender, IInspectable const& args);		
+		void OnSwapChainPanelCompositionScaleChanged(Microsoft::UI::Xaml::Controls::SwapChainPanel const& sender, IInspectable const& args);
+		void OnSwapChainPanel_SizeChanged(Windows::Foundation::IInspectable const& sender, Microsoft::UI::Xaml::SizeChangedEventArgs const& args);
 		
 		//void OnSwapChainPanelSizeChanged(IInspectable const& sender, Microsoft::UI::Xaml::SizeChangedEventArgs const& e);
 		//void OnOrientationChanged(Windows::Graphics::Display::DisplayInformation const& sender, IInspectable const& args);

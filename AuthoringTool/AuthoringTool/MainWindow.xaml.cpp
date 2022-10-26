@@ -35,9 +35,10 @@ namespace winrt::AuthoringTool::implementation
 
         // 스왑 체인 패널 이벤트(DX 렌더링용)     
         swapChainPanel().Loaded({ this, &MainWindow::OnSwapchainPanelLoaded });
-        swapChainPanel().CompositionScaleChanged({ this, &MainWindow::OnSwapChainPanelCompositionScaleChanged });
-        swapChainPanel().ManipulationStarted({ this, &MainWindow::OnSwapChainPanelManipulationStarted });        
-        //OnSwapChainPanelManipulationStarted(swapChainPanel(), test);
+        swapChainPanel().CompositionScaleChanged({ this, &MainWindow::OnSwapChainPanelCompositionScaleChanged });   
+        //swapChainPanel().SizeChanged({ this, &MainWindow::OnSwapChainPanel_SizeChanged });
+        
+
         // Retrieve the window handle (HWND) of the current WinUI 3 window.
         //auto windowNative{ this->try_as<::IWindowNative>() };
         //winrt::check_bool(windowNative);
@@ -103,15 +104,15 @@ namespace winrt::AuthoringTool::implementation
 
     void MainWindow::OnSizeChanged(IInspectable const& sender, Microsoft::UI::Xaml::WindowSizeChangedEventArgs const& args)
     {   
-        if (swapChainPanel().IsLoaded())
-            RenderingEngine.OnWindowSizeChanged(args.Size());
+        //if (swapChainPanel().IsLoaded())
+        //    RenderingEngine.OnWindowSizeChanged(args.Size());
     }
 #pragma endregion
 
 
 #pragma region SwapChainPanel Event
     void MainWindow::OnSwapChainPanelXamlRootChanged(Microsoft::UI::Xaml::XamlRoot const& sender, Microsoft::UI::Xaml::XamlRootChangedEventArgs const& args)
-    {        
+    {                
         RenderingEngine.OnSwapchainXamlChanged(swapChainPanel());        
     }
 
@@ -120,15 +121,15 @@ namespace winrt::AuthoringTool::implementation
         RenderingEngine.OnSwapchainXamlChanged(swapChainPanel());        
     }
 
-    void MainWindow::OnSwapChainPanelManipulationStarted(IInspectable const& sender, Microsoft::UI::Xaml::Input::ManipulationStartedRoutedEventArgs const& e)
+    void MainWindow::OnSwapChainPanel_SizeChanged(Windows::Foundation::IInspectable const& sender, Microsoft::UI::Xaml::SizeChangedEventArgs const& args)
     {        
-        int k = 5;
-        k = 7;
+        RenderingEngine.OnSwapchainXamlChanged(swapChainPanel());
     }
 
     void MainWindow::OnSwapchainPanelLoaded(IInspectable const& sender, Microsoft::UI::Xaml::RoutedEventArgs const& e)
     {
-        swapChainPanel().XamlRoot().Changed({ this, &MainWindow::OnSwapChainPanelXamlRootChanged });
+        //swapChainPanel().XamlRoot().Changed({ this, &MainWindow::OnSwapChainPanelXamlRootChanged });
+        swapChainPanel().SizeChanged({ this, &MainWindow::OnSwapChainPanel_SizeChanged });
         
         RenderingEngine.Initialize(swapChainPanel());                
         RegisterDedicatedInputOnSwapchain();            

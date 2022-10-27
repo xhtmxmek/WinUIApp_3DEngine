@@ -6,8 +6,6 @@
 //엔진에서 UI측에 제공할 타입들만 헤더로 만들어서 뺴놓기
 //#include "EngineCore/Common/StepTimer.h"
 //
-#include <microsoft.ui.xaml.window.h>
-#include <winrt/Microsoft.UI.Xaml.Input.h>
 
 using namespace winrt;
 using namespace Microsoft::UI::Xaml;

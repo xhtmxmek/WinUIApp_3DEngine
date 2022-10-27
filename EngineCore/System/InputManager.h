@@ -5,7 +5,7 @@ namespace Engine
 	namespace Input
 	{
 		class KeyboardState;
-		enum class KeyboardState::VirtualKey;
+		enum class VirtualKey;
 
 		class InputManager
 		{
@@ -17,8 +17,8 @@ namespace Engine
 			}
 
 			void Initialize();
-			bool GetKeyboardState(KeyboardState::VirtualKey key);
-			void SetKeyboardState(KeyboardState::VirtualKey key, bool isPressed);
+			bool GetKeyboardState(VirtualKey key);
+			void SetKeyboardState(VirtualKey key, bool isPressed);
 		private:
 			unique_ptr<KeyboardState> Keyboard;
 			InputManager();

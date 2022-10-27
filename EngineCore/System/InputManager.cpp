@@ -11,13 +11,14 @@ namespace Engine
 			Keyboard = make_unique<KeyboardState>();
 		}
 
-		bool InputManager::GetKeyboardState(KeyboardState::VirtualKey key)
+		bool InputManager::GetKeyboardState(VirtualKey key)
 		{	
 			return Keyboard->GetState(key);
 		}
 
-		void InputManager::SetKeyboardState(KeyboardState::VirtualKey key, bool isPressed)
+		void InputManager::SetKeyboardState(VirtualKey key, bool isPressed)
 		{
+			Keyboard->SetState(key, isPressed);
 		}
 
 		InputManager::InputManager()

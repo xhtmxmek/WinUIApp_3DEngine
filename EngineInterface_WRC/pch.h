@@ -35,6 +35,7 @@
 #include <winrt/Windows.Storage.Pickers.h>
 #include <winrt/Windows.Storage.FileProperties.h>
 #include <winrt/Windows.Storage.AccessCache.h>
+#include <winrt/Microsoft.UI.Xaml.Input.h>
 
 #include <concrt.h>
 #include <wincodec.h>

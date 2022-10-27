@@ -24,7 +24,13 @@ namespace Engine
     namespace Type
     {
         struct Size;
-    }            
+    }
+
+    namespace Input
+    {        
+        enum class VirtualKey;
+    }
+
     class EngineCore
     {
     public:
@@ -53,9 +59,7 @@ namespace Engine
         //void OnOrientationChanged(Windows.Graphics.Display.DisplayOrientations orientation);
         ENGINE_API void ValidateDevice();
 
-        //Thread
-        //winrt::DX11Engine_WinUI3_WRC::EngineCriticalSection GetCriticalSection() { return m_criticalSection; }
-        //std::mutex& GetMutex() { return EngineTickMutex; }
+        ENGINE_API void KeyProcess(Input::VirtualKey key, bool isPressed);
 
         // Properties
         ENGINE_API Size GetDefaultBackBufferSize() noexcept

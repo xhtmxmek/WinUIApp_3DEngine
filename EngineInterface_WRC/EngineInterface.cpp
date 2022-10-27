@@ -117,9 +117,9 @@ namespace winrt::EngineInterface_WRC::implementation
 	}
 
 	void EngineInterface::KeyboardProcess(winrt::Microsoft::UI::Xaml::Input::KeyRoutedEventArgs const& args)
-	{
-		args.key
-		EngineCoreNative->inputManager
+	{					
+		Engine::Input::VirtualKey nativekey = static_cast<Engine::Input::VirtualKey>(args.Key());
+		EngineCoreNative->KeyProcess(nativekey, !args.KeyStatus().IsKeyReleased);
 	}
 
 	// Properties

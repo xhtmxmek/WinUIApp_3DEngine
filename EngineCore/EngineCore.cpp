@@ -9,6 +9,7 @@
 #include "Level/World.h"
 #include "Renderer/LevelRenderer.h"
 #include "Level/Actor/ActorManager/ActorManager.h"
+#include "System/InputManager.h"
 #include "EngineAsset/Texture.h"
 #include <fstream>
 #include <sstream>
@@ -270,6 +271,11 @@ namespace Engine
 	void EngineCore::ValidateDevice()
 	{
 		DX::DeviceResourcesUtil::GetDeviceResources()->ValidateDevice();
+	}
+
+	void EngineCore::KeyProcess(Input::VirtualKey key, bool isPressed)
+	{
+		Input::InputManager::GetInstance().SetKeyboardState(key, isPressed);
 	}
 
 	void EngineCore::LoadScriptProject(wstring const& path)

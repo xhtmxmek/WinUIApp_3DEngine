@@ -185,10 +185,10 @@ namespace Engine
             };
         public:
             KeyboardState();
+            void SetState(VirtualKey key, bool isPressed);
             bool GetState(VirtualKey key);
         private:
-            std::vector<bool> State;
-            bool State[VirtualKey::VirtualKey_Max];
+            std::vector<bool> State;            
         };
     }
 }

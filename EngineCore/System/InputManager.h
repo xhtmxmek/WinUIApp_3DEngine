@@ -2,11 +2,26 @@
 
 namespace Engine
 {
-	class InputManager
+	namespace Input
 	{
-	public:
-		InputManager();
-		//키 스테이트(키가 눌려있는 상태인지)
-		//
-	};
+		class KeyboardState;
+		enum class KeyboardState::VirtualKey;
+
+		class InputManager
+		{
+		public:
+			static InputManager& GetInstance()
+			{
+				static InputManager inputManager;
+				return inputManager;
+			}
+
+			void Initialize();
+			bool GetKeyboardState(KeyboardState::VirtualKey key);
+			void SetKeyboardState(KeyboardState::VirtualKey key, bool isPressed);
+		private:
+			unique_ptr<KeyboardState> Keyboard;
+			InputManager();
+		};
+	}
 }

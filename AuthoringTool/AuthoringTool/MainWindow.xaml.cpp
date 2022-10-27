@@ -130,10 +130,12 @@ namespace winrt::AuthoringTool::implementation
     void MainWindow::OnSwapchainPanelLoaded(IInspectable const& sender, Microsoft::UI::Xaml::RoutedEventArgs const& e)
     {
         //swapChainPanel().XamlRoot().Changed({ this, &MainWindow::OnSwapChainPanelXamlRootChanged });        
-        swapChainPanel().SizeChanged({ this, &MainWindow::OnSwapChainPanel_SizeChanged });
+        swapChainPanel().SizeChanged({ this, &MainWindow::OnSwapChainPanel_SizeChanged });        
         
         RenderingEngine.Initialize(swapChainPanel());                
-        RegisterDedicatedInputOnSwapchain();            
+        RegisterDedicatedInputOnSwapchain();
+        swapChainPanel().KeyDown({ this, &MainWindow::OnKeyDown_SwapChain });
+        swapChainPanel().KeyUp({ this, &MainWindow::OnKeyUp_SwapChain });
 
         RenderingEngine.StartRenderLoop();
     }
@@ -166,6 +168,16 @@ namespace winrt::AuthoringTool::implementation
     {
         // 포인터가 해제되는 경우 추적 포인터 이동이 중지됩니다.
         //m_main->StopTracking();
+    }
+
+    void MainWindow::OnKeyDown_SwapChain(Windows::Foundation::IInspectable const& sender, Microsoft::UI::Xaml::Input::KeyRoutedEventArgs const& args)
+    {        
+        RenderingEngine.KeyboardProcess(args);
+    }
+
+    void MainWindow::OnKeyUp_SwapChain(Windows::Foundation::IInspectable const& sender, Microsoft::UI::Xaml::Input::KeyRoutedEventArgs const& args)
+    {
+        RenderingEngine.KeyboardProcess(args);
     }
 
     void MainWindow::RegisterDedicatedInputOnSwapchain()

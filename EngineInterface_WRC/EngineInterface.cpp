@@ -116,6 +116,12 @@ namespace winrt::EngineInterface_WRC::implementation
 		//EngineCoreNative->O
 	}
 
+	void EngineInterface::KeyboardProcess(winrt::Microsoft::UI::Xaml::Input::KeyRoutedEventArgs const& args)
+	{
+		args.key
+		EngineCoreNative->inputManager
+	}
+
 	// Properties
 	Windows::Foundation::Size EngineInterface::GetDefaultBackBufferSize() noexcept //const noexcept
 	{

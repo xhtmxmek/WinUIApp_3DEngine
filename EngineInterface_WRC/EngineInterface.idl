@@ -24,7 +24,10 @@ namespace EngineInterface_WRC
         void OnResuming();
         void OnWindowSizeChanged(Windows.Foundation.Size windowSize);
         void OnSwapchainXamlChanged(Microsoft.UI.Xaml.Controls.SwapChainPanel panel);
-        void OnOrientationChanged(Windows.Graphics.Display.DisplayOrientations orientation);        
+        void OnOrientationChanged(Windows.Graphics.Display.DisplayOrientations orientation);
+
+        //input
+        void KeyboardProcess(Microsoft.UI.Xaml.Input.KeyRoutedEventArgs args);
 
         // Properties
         //[noexcept] void GetDefaultSize(out Single width, out Single height);

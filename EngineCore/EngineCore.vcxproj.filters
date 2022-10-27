@@ -43,6 +43,8 @@
     <ClInclude Include="DLLDefine.h" />
     <ClInclude Include="Common\EngineEnums.h" />
     <ClInclude Include="EngineHeader_Used_Application.h" />
+    <ClInclude Include="System\InputManager.h" />
+    <ClInclude Include="System\KeyboardState.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="EngineCore.cpp" />
@@ -68,8 +70,13 @@
     <ClCompile Include="Common\RuntimeContext.cpp" />
     <ClCompile Include="EngineAsset\Material.cpp" />
     <ClCompile Include="EngineAsset\Texture.cpp" />
+    <ClCompile Include="System\InputManager.cpp" />
+    <ClCompile Include="System\KeyboardState.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Natvis Include="$(MSBuildThisFileDirectory)..\..\natvis\wil.natvis" />
   </ItemGroup>
 </Project>

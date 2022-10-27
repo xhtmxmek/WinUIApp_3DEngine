@@ -187,6 +187,8 @@
     <ClInclude Include="Level\World.h" />
     <ClInclude Include="pch.h" />
     <ClInclude Include="Renderer\LevelRenderer.h" />
+    <ClInclude Include="System\InputManager.h" />
+    <ClInclude Include="System\KeyboardState.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Common\DeviceResource.cpp" />
@@ -221,6 +223,8 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
     </ClCompile>
     <ClCompile Include="Renderer\LevelRenderer.cpp" />
+    <ClCompile Include="System\InputManager.cpp" />
+    <ClCompile Include="System\KeyboardState.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

@@ -40,10 +40,11 @@ namespace winrt::EngineInterface_WRC::implementation
         void OnResuming();
         void OnWindowSizeChanged(Windows::Foundation::Size windowSize);
         void OnSwapchainXamlChanged(const Microsoft::UI::Xaml::Controls::SwapChainPanel& panel);
-        void OnOrientationChanged(winrt::Windows::Graphics::Display::DisplayOrientations const& orientation);        
-        //winrt::EngineCore_WRC::EngineCriticalSection GetCriticalSection();
+        void OnOrientationChanged(winrt::Windows::Graphics::Display::DisplayOrientations const& orientation); 
+        void KeyboardProcess(winrt::Microsoft::UI::Xaml::Input::KeyRoutedEventArgs const& args);
+
         Windows::Foundation::Size GetDefaultBackBufferSize() noexcept;
-        void LoadScriptProject(hstring const& path);
+        void LoadScriptProject(hstring const& path);        
     private: 
         void InitializeSwapChainPanelInfo(const Microsoft::UI::Xaml::Controls::SwapChainPanel& panel);
         void SetSwapchainPanelInfo(const Microsoft::UI::Xaml::Controls::SwapChainPanel& panel);        

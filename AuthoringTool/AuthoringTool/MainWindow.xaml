@@ -29,6 +29,19 @@
             <TextBox x:Name="myTextBox" />
             <TextBlock Text="{x:Bind myTextBox.Text, Mode=OneWay}" />
             <Button Click="ClickHandler" Content="{x:Bind MainViewModel.BookSku.Title, Mode=OneWay}" />
+            <!--Actor의Deteil패널에 표시될 속성을 불러옴.stack패널을 분리하는것도 좋은아이디어.
+                        ActorViewModel은 이름, 컴포넌트, 프로퍼티 순으로 이루어져있음-->
+            <TextBox Text="{x:Bind MainViewModel.ActorsDetils.Name, Mode=TwoWay}" />
+            <ListBox ItemsSource="{x:Bind MainViewModel.ActorDetails.Components}">
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate x:DataType="local:Component">
+                        <!--<TextBlock Text="{x:Bind Title, Mode=OneWay}"/>-->
+                        <ListBox ItemsSource="{x:Bind MainViewModel.Properties}">
+                            
+                        </ListBox>
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+            </ListBox>
 
 
         </StackPanel>

@@ -1,6 +1,7 @@
 #include "pch.h"
 #include "CameraComponent.h"
 #include "Common/DeviceResources.h"
+#include "System/KeyboardState.h"
 #include "System/InputManager.h"
 
 namespace Engine
@@ -19,9 +20,7 @@ namespace Engine
 		}
 
 		void CameraComponent::Tick(float elapsedTime)
-		{
-			
-			Get
+		{					
 			// 						
 			//여기서 엔진 입력에 따라서 카메라 Transform 값을 처리
 			/*

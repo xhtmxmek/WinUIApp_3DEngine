@@ -1,0 +1,13 @@
+import "ActorComponent.idl";
+
+namespace EngineInterface_WRC
+{
+    [default_interface]
+    runtimeclass ActorViewModel
+    {
+        ActorDetail();
+        //ÄÄÆ÷³ÍÆ®ÀÇ ¹­À½. ÄÄÆ÷³ÍÆ® ¿©·¯°³¸¦ »Ñ¸²
+        Windows.Foundation.Collections.IObservableVector<ActorComponent> Components{ get; };
+    }
+}
+

@@ -1,0 +1,13 @@
+import "oaidl.idl";
+import "ocidl.idl";
+
+namespace EngineInterface_WRC
+{
+    [default_interface]
+    runtimeclass ActorProperty
+    {        
+        ActorProperty(String title);
+        String Title;    
+    }
+}
+

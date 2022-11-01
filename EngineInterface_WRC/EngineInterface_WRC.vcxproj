@@ -119,6 +119,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="ActorViewModel\ActorComponent.h" />
     <ClInclude Include="DLLDefine.h" />
     <ClInclude Include="EngineInterface.h" />
     <ClInclude Include="Level\Actor\ActorManager.h">
@@ -128,6 +129,7 @@
     <ClInclude Include="pch.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="ActorViewModel\ActorComponent.cpp" />
     <ClCompile Include="EngineInterface.cpp" />
     <ClCompile Include="pch.cpp">
       <PrecompiledHeader>Create</PrecompiledHeader>
@@ -145,7 +147,15 @@
     </Text>
   </ItemGroup>
   <ItemGroup>
+    <Midl Include="ActorViewModel\ActorComponent.idl" />
+    <Midl Include="ActorViewModel\ActorViewModel.idl">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+      </ExcludedFromBuild>
+    </Midl>
     <Midl Include="EngineInterface.idl" />
+    <Midl Include="ActorViewModel\ActorProperty.idl">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+    </Midl>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

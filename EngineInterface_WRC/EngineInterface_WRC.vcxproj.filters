@@ -28,6 +28,7 @@
     <ClCompile Include="$(GeneratedFilesDir)module.g.cpp" />
     <ClCompile Include="pch.cpp" />
     <ClCompile Include="EngineInterface.cpp" />
+    <ClCompile Include="ActorViewModel\ActorComponent.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Level\Actor\ActorManager.h">
@@ -36,6 +37,7 @@
     <ClInclude Include="DLLDefine.h" />
     <ClInclude Include="pch.h" />
     <ClInclude Include="EngineInterface.h" />
+    <ClInclude Include="ActorViewModel\ActorComponent.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
@@ -52,5 +54,8 @@
   </ItemGroup>
   <ItemGroup>
     <Midl Include="EngineInterface.idl" />
+    <Midl Include="ActorViewModel\ActorViewModel.idl" />
+    <Midl Include="ActorViewModel\ActorComponent.idl" />
+    <Midl Include="ActorViewModel\ActorProperty.idl" />
   </ItemGroup>
 </Project>

@@ -147,9 +147,13 @@ namespace winrt::AuthoringTool::implementation
 
     void MainWindow::OnPointerPressedSwapChain(Microsoft::UI::Input::InputPointerSource const& sender, Microsoft::UI::Input::PointerEventArgs const& e)
     {
-        int k = 5;
-        k = 7;
-        // 포인터를 누르면 포인터 이동 추적을 시작합니다.
+        //TODO
+        //마우스 피킹시 동작
+        //마우스 스테이트 업데이트, 
+        /*
+        * -저작도구 동작
+        * 엔진 클릭시 피킹으로 오브젝트의 정보 뽑아옴. 오브젝트의 정보는 EngineInterface가 들고있음.
+        */
         //m_Engine.StartTracking();
     }
 

@@ -120,6 +120,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="ActorViewModel\ActorComponent.h" />
+    <ClInclude Include="ActorViewModel\ActorViewModel.h" />
     <ClInclude Include="DLLDefine.h" />
     <ClInclude Include="EngineInterface.h" />
     <ClInclude Include="Level\Actor\ActorManager.h">
@@ -130,6 +131,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ActorViewModel\ActorComponent.cpp" />
+    <ClCompile Include="ActorViewModel\ActorViewModel.cpp" />
     <ClCompile Include="EngineInterface.cpp" />
     <ClCompile Include="pch.cpp">
       <PrecompiledHeader>Create</PrecompiledHeader>

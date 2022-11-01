@@ -11,6 +11,8 @@
     <Midl Include="MainWindow.idl" />
     <Midl Include="Booksku.idl" />
     <Midl Include="BookStoreViewModel.idl" />
+    <Midl Include="Test.idl" />
+    <Midl Include="Test2.idl" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="pch.cpp" />

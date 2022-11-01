@@ -148,6 +148,8 @@
       <SubType>Code</SubType>
       <DependentUpon>MainWindow.xaml</DependentUpon>
     </Midl>
+    <Midl Include="Test.idl" />
+    <Midl Include="Test2.idl" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="readme.txt">

@@ -29,6 +29,7 @@
     <ClCompile Include="pch.cpp" />
     <ClCompile Include="EngineInterface.cpp" />
     <ClCompile Include="ActorViewModel\ActorComponent.cpp" />
+    <ClCompile Include="ActorViewModel\ActorViewModel.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Level\Actor\ActorManager.h">
@@ -38,6 +39,7 @@
     <ClInclude Include="pch.h" />
     <ClInclude Include="EngineInterface.h" />
     <ClInclude Include="ActorViewModel\ActorComponent.h" />
+    <ClInclude Include="ActorViewModel\ActorViewModel.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

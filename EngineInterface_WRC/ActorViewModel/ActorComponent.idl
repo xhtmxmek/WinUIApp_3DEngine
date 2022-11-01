@@ -1,8 +1,7 @@
 namespace EngineInterface_WRC
-{
+{    
     runtimeclass ActorComponent : Microsoft.UI.Xaml.Data.INotifyPropertyChanged
-    {
-        ActorComponent();
+    {                
         ActorComponent(String title);
         String Title;
         //프로퍼티의 묶음. 컴포넌트 여러개를 뿌림

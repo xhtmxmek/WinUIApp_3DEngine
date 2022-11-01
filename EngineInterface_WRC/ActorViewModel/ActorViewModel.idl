@@ -1,11 +1,11 @@
-import "ActorComponent.idl";
+import "ActorViewModel/ActorComponent.idl";
 
 namespace EngineInterface_WRC
 {
     [default_interface]
     runtimeclass ActorViewModel
     {
-        ActorDetail();
+        ActorViewModel();
         //ÄÄÆ÷³ÍÆ®ÀÇ ¹­À½. ÄÄÆ÷³ÍÆ® ¿©·¯°³¸¦ »Ñ¸²
         Windows.Foundation.Collections.IObservableVector<ActorComponent> Components{ get; };
     }

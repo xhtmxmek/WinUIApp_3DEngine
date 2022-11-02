@@ -147,9 +147,8 @@
     <Midl Include="MainWindow.idl">
       <SubType>Code</SubType>
       <DependentUpon>MainWindow.xaml</DependentUpon>
+      <AdditionalIncludeDirectories Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(SolutionDir)EngineInterface_WRC\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </Midl>
-    <Midl Include="Test.idl" />
-    <Midl Include="Test2.idl" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="readme.txt">

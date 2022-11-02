@@ -9,7 +9,7 @@ namespace winrt::EngineInterface_WRC::implementation
         ActorViewModel();
         winrt::Windows::Foundation::Collections::IObservableVector<winrt::EngineInterface_WRC::ActorComponent> Components();
     private:        
-        Windows::Foundation::Collections::IObservableVector<ActorComponent> ComponentsData;
+        Windows::Foundation::Collections::IObservableVector<EngineInterface_WRC::ActorComponent> ComponentsData;
     };
 }
 namespace winrt::EngineInterface_WRC::factory_implementation

@@ -6,8 +6,8 @@ namespace EngineInterface_WRC
     [default_interface]
     runtimeclass ActorProperty
     {        
-        ActorProperty(String title);
-        String Title;    
+        ActorProperty(String name);
+        String Name;    
     }
 }
 

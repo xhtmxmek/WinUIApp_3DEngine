@@ -34,11 +34,12 @@
                 ActorViewModel은 이름, 컴포넌트, 프로퍼티 순으로 이루어져있음
             -->
             <!--<TextBox Text="{x:Bind MainViewModel.ActorsDetils.Name, Mode=TwoWay}" />-->
-            <ListBox ItemsSource="{x:Bind MainViewModel.ActorDetails.Components}">
+            <!--<ListBox ItemsSource="{x:Bind MainViewModel.ActorDetails.Components}">
                 <ItemsControl.ItemTemplate>
                     <DataTemplate x:DataType="local:ActorComponent">
-                        <!--<TextBlock Text="{x:Bind Title, Mode=OneWay}"/>-->
-                        <!--<TextBlock Text="{x:Bind Name, Mode=OneWay}"/>
+            -->
+            <!--<TextBlock Text="{x:Bind Title, Mode=OneWay}"/>-->
+            <!--<TextBlock Text="{x:Bind Name, Mode=OneWay}"/>
                         <ListBox ItemsSource="{x:Bind MainViewModel.Properties}">
                             <ItemsControl.ItemTemplate>
                                 <DataTemplate x:DataType="local:Property">
@@ -46,9 +47,10 @@
                                 </DataTemplate>
                             </ItemsControl.ItemTemplate>
                         </ListBox>-->
+            <!--
                     </DataTemplate>
                 </ItemsControl.ItemTemplate>
-            </ListBox>
+            </ListBox>-->
 
 
         </StackPanel>

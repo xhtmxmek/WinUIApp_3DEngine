@@ -1,5 +1,5 @@
-import "BookstoreViewModel.idl";
-import "../../EngineInterface_WRC/ActorViewModel/ActorViewModel.idl";
+import "ViewModels/BookStore/BookstoreViewModel.idl";
+//import "../../EngineInterface_WRC/ActorViewModel/ActorViewModel.idl";
 
 namespace AuthoringTool
 {
@@ -7,7 +7,7 @@ namespace AuthoringTool
     runtimeclass MainWindow : Microsoft.UI.Xaml.Window
     {
         MainWindow();
-        //AuthoringTool.BookstoreViewModel MainViewModel{ get; };
+        AuthoringTool.BookstoreViewModel MainViewModel{ get; };
         
         Microsoft.UI.Xaml.Controls.TextBox myTextBox{ get; }; //읽기전용으로 선언. cpp와 h는 구현하지 않아도됨
     }

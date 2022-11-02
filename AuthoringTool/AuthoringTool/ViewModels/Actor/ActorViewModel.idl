@@ -1,9 +1,9 @@
-import "ActorViewModel/ActorComponent.idl";
+import "ViewModels/Actor/ActorComponent.idl";
 
-namespace EngineInterface_WRC
+namespace AuthoringTool
 {
     [default_interface]
-    runtimeclass ActorViewModel
+    runtimeclass ActorViewModel : Microsoft.UI.Xaml.Data.INotifyPropertyChanged
     {
         ActorViewModel();
         //ÄÄÆ÷³ÍÆ®ÀÇ ¹­À½. ÄÄÆ÷³ÍÆ® ¿©·¯°³¸¦ »Ñ¸²

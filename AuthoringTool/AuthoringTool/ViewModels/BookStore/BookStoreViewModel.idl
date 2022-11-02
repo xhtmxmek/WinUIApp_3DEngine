@@ -1,5 +1,5 @@
 // BookstoreViewModel.idl
-import "BookSku.idl";
+import "BookStore/Booksku.idl";
 
 namespace AuthoringTool
 {

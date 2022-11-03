@@ -241,4 +241,8 @@ namespace winrt::AuthoringTool::implementation
     {
         return m_mainViewModel;
     }
+    AuthoringTool::ActorViewModel MainWindow::SelectedActorViewModel()
+    {
+        return _actorViewModel;
+    }
 }

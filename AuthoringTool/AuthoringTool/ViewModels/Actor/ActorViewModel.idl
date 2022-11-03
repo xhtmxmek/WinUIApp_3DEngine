@@ -1,12 +1,14 @@
+#pragma once
+
 import "ActorComponent.idl";
 
-namespace EngineInterface_WRC
+namespace AuthoringTool
 {
     [default_interface]
-    runtimeclass ActorViewModel : Microsoft.UI.Xaml.Data.INotifyPropertyChanged
+    runtimeclass ActorViewModel
     {
         ActorViewModel();
-        //ÄÄÆ÷³ÍÆ®ÀÇ ¹­À½. ÄÄÆ÷³ÍÆ® ¿©·¯°³¸¦ »Ñ¸²
+        String Name;
         Windows.Foundation.Collections.IObservableVector<ActorComponent> Components{ get; };
     }
 }

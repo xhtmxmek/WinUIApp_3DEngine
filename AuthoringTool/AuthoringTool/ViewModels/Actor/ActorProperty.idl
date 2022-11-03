@@ -1,12 +1,12 @@
-namespace EngineInterface_WRC
+#pragma once
+
+namespace AuthoringTool
 {
     [default_interface]
     runtimeclass ActorProperty : Microsoft.UI.Xaml.Data.INotifyPropertyChanged
     {        
         ActorProperty(String name);
-        String Name;
-
-        String Value()
+        String Name;        
     }
 }
 

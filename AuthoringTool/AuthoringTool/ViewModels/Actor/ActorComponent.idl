@@ -1,10 +1,12 @@
+#pragma once
+
 import "ActorProperty.idl";
-namespace EngineInterface_WRC
+namespace AuthoringTool
 {    
-    runtimeclass ActorComponent : Microsoft.UI.Xaml.Data.INotifyPropertyChanged
+    runtimeclass ActorComponent
     {                
         ActorComponent(String name);
-        String Name;        
+        String Name{ get; };
         Windows.Foundation.Collections.IObservableVector<ActorProperty> Properties{ get; };        
     }
 }

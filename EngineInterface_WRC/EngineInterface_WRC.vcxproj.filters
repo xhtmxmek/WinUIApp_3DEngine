@@ -28,8 +28,6 @@
     <ClCompile Include="$(GeneratedFilesDir)module.g.cpp" />
     <ClCompile Include="pch.cpp" />
     <ClCompile Include="EngineInterface.cpp" />
-    <ClCompile Include="ViewModels\Actor\ActorComponent.cpp" />
-    <ClCompile Include="ViewModels\Actor\ActorViewModel.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Level\Actor\ActorManager.h">
@@ -38,8 +36,6 @@
     <ClInclude Include="DLLDefine.h" />
     <ClInclude Include="pch.h" />
     <ClInclude Include="EngineInterface.h" />
-    <ClInclude Include="ViewModels\Actor\ActorComponent.h" />
-    <ClInclude Include="ViewModels\Actor\ActorViewModel.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
@@ -56,8 +52,5 @@
   </ItemGroup>
   <ItemGroup>
     <Midl Include="EngineInterface.idl" />
-    <Midl Include="ViewModels\Actor\ActorComponent.idl" />
-    <Midl Include="ViewModels\Actor\ActorProperty.idl" />
-    <Midl Include="ViewModels\Actor\ActorViewModel.idl" />
   </ItemGroup>
 </Project>

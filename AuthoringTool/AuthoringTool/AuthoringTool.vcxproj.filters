@@ -10,9 +10,6 @@
     <Midl Include="App.idl" />
     <Midl Include="MainWindow.idl" />
     <Midl Include="ViewModels\BookStore\Booksku.idl" />
-    <Midl Include="ViewModels\Actor\ActorComponent.idl" />
-    <Midl Include="ViewModels\Actor\ActorProperty.idl" />
-    <Midl Include="ViewModels\Actor\ActorViewModel.idl" />
     <Midl Include="ViewModels\BookStore\BookStoreViewModel.idl" />
   </ItemGroup>
   <ItemGroup>
@@ -21,8 +18,6 @@
     <ClCompile Include="ViewModels\BookStore\BookSku.cpp" />
     <ClCompile Include="ViewModels\BookStore\BookstoreViewModel.cpp" />
     <ClCompile Include="Models\User.cpp" />
-    <ClCompile Include="ViewModels\Actor\ActorViewModel.cpp" />
-    <ClCompile Include="ViewModels\Actor\ActorComponent.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="pch.h" />
@@ -30,8 +25,6 @@
     <ClInclude Include="ViewModels\BookStore\BookSku.h" />
     <ClInclude Include="ViewModels\BookStore\BookstoreViewModel.h" />
     <ClInclude Include="Models\User.h" />
-    <ClInclude Include="ViewModels\Actor\ActorViewModel.h" />
-    <ClInclude Include="ViewModels\Actor\ActorComponent.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Assets">

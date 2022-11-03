@@ -1,13 +1,12 @@
-import "oaidl.idl";
-import "ocidl.idl";
-
 namespace EngineInterface_WRC
 {
     [default_interface]
-    runtimeclass ActorProperty
+    runtimeclass ActorProperty : Microsoft.UI.Xaml.Data.INotifyPropertyChanged
     {        
         ActorProperty(String name);
-        String Name;    
+        String Name;
+
+        String Value()
     }
 }
 

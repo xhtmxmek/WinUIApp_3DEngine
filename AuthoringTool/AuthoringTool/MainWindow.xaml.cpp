@@ -229,7 +229,6 @@ namespace winrt::AuthoringTool::implementation
         //myButton().Content(box_value(L"Clicked"));
         myButton().Content(box_value(std::to_wstring(width)));
         double test = myButton().XamlRoot().RasterizationScale();
-        test = 0.0f;
     }
 
     void MainWindow::ClickHandler(Windows::Foundation::IInspectable const& sender, Microsoft::UI::Xaml::RoutedEventArgs const& args)

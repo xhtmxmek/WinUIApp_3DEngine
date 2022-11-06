@@ -41,7 +41,12 @@ namespace winrt::EngineInterface_WRC::implementation
         void OnWindowSizeChanged(Windows::Foundation::Size windowSize);
         void OnSwapchainXamlChanged(const Microsoft::UI::Xaml::Controls::SwapChainPanel& panel);
         void OnOrientationChanged(winrt::Windows::Graphics::Display::DisplayOrientations const& orientation); 
+
         void KeyboardProcess(winrt::Microsoft::UI::Xaml::Input::KeyRoutedEventArgs const& args);
+        void StartTracking(winrt::Microsoft::UI::Input::PointerEventArgs const& args);
+        void TrackingUpdate(winrt::Microsoft::UI::Input::PointerEventArgs const& args);
+        winrt::EngineInterface_WRC::PointerActionResult StopTracking(winrt::Microsoft::UI::Input::PointerEventArgs const& args);
+        void PointerWheelChanged(winrt::Microsoft::UI::Input::PointerEventArgs const& args);
 
         Windows::Foundation::Size GetDefaultBackBufferSize() noexcept;
         void LoadScriptProject(hstring const& path);        
@@ -50,7 +55,7 @@ namespace winrt::EngineInterface_WRC::implementation
         void SetSwapchainPanelInfo(const Microsoft::UI::Xaml::Controls::SwapChainPanel& panel);        
         void SetRegisterSwapChainFunc(const Microsoft::UI::Xaml::Controls::SwapChainPanel& panel);        
         
-        std::unique_ptr<Engine::EngineCore> EngineCoreNative;
+        std::unique_ptr<Engine::EngineCore> engineCoreNative_;
 
         Microsoft::UI::Xaml::Controls::SwapChainPanel SwapchainPanelUI;
         SwapchainPanelInfo SwapchainPanelInfo;

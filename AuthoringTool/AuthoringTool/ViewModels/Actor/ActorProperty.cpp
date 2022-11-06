@@ -9,7 +9,7 @@ namespace winrt::AuthoringTool::implementation
     }
     hstring ActorProperty::Name()
     {
-        throw _name;
+        return _name;
     }
     void ActorProperty::Name(hstring const& value)
     {

@@ -1,0 +1,25 @@
+namespace EngineInterface_WRC
+{
+	[default_interface]
+	runtimeclass ComponentPropertyProxy
+	{
+		ComponentPropertyProxy();
+		String Value;
+	}
+
+
+	[default_interface]
+	runtimeclass ActorComponentProxy
+	{
+		ActorComponentProxy();
+		Windows.Foundation.Collections.IVector<ComponentPropertyProxy> Properties{get; };
+	}
+
+	[default_interface]
+	runtimeclass ActorProxy
+	{
+		ActorProxy();
+		Windows.Foundation.Collections.IVector<ActorComponentProxy> Components{ get; };
+	}
+
+}

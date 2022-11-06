@@ -8,66 +8,70 @@
     mc:Ignorable="d">
 
 
-    <SplitView IsPaneOpen="True"
-               DisplayMode="CompactInline"
-               OpenPaneLength="296">
-        <SplitView.Pane>
-            <StackPanel HorizontalAlignment="Center"
-            VerticalAlignment="Top"
-            Orientation="Vertical">
-                <TextBlock Text="Pane"
-                       FontSize="24"
-                       VerticalAlignment="Center"
-                       HorizontalAlignment="Center"/>
-                <Button x:Name="myButton" Click="myButton_Click">Click Me</Button>
-                <TextBox x:Name="myTextBox" />
-            <TextBlock Text="{x:Bind myTextBox.Text, Mode=OneWay}" />
-            <Button Click="ClickHandler" Content="{x:Bind MainViewModel.BookSku.Title, Mode=OneWay}" />
-            </StackPanel>
-        </SplitView.Pane>
+    <SplitView
+        DisplayMode="CompactInline"
+        IsPaneOpen="True"
+        OpenPaneLength="296"
+        PanePlacement="Right">
         <SwapChainPanel x:Name="swapChainPanel">
             <StackPanel
-            HorizontalAlignment="Center"
-            VerticalAlignment="Top"
-            Orientation="Vertical">
+                HorizontalAlignment="Center"
+                VerticalAlignment="Top"
+                Orientation="Vertical">
                 <!--            <TextBlock
                 HorizontalAlignment="Left"
                 VerticalAlignment="Top"
                 FontSize="36"
                 Text="Hello WinUI3 World"
                 TextWrapping="Wrap" />
-            -->
+                -->
                 <!--<TextBlock
                 x:Name="HelloGreetings"
                 HorizontalAlignment="Center"
                 FontSize="36"
                 Text="{Binding helloGreetings}" />-->
-                
+
                 <!--
-                Actor의Deteil패널에 표시될 속성을 불러옴.stack패널을 분리하는것도 좋은아이디어.
-                ActorViewModel은 이름, 컴포넌트, 프로퍼티 순으로 이루어져있음
-            -->
-                <!--<TextBox Text="{x:Bind SelectedActorViewModel.Name, Mode=TwoWay}" />
-            <ListBox ItemsSource="{x:Bind SelectedActorViewModel.Components}">
-                <ItemsControl.ItemTemplate>
-                    <DataTemplate x:DataType="local:ActorComponent">
-                        <StackPanel>
-                            -->
-                <!--<TextBlock Text="Name" />-->
-                <!--
-                            <TextBlock Text="{x:Bind Name, Mode=OneTime}" />
-                            <ListBox ItemsSource="{x:Bind Properties}">
-                                <ItemsControl.ItemTemplate>
-                                    <DataTemplate x:DataType="local:ActorProperty">
-                                        <TextBlock Text="{x:Bind Name, Mode=OneWay}" />
-                                    </DataTemplate>
-                                </ItemsControl.ItemTemplate>
-                            </ListBox>
-                        </StackPanel>
-                    </DataTemplate>
-                </ItemsControl.ItemTemplate>
-            </ListBox>-->
+                    Actor의Deteil패널에 표시될 속성을 불러옴.stack패널을 분리하는것도 좋은아이디어.
+                    ActorViewModel은 이름, 컴포넌트, 프로퍼티 순으로 이루어져있음
+                -->
             </StackPanel>
         </SwapChainPanel>
+        <SplitView.Pane>
+            <StackPanel
+                HorizontalAlignment="Center"
+                VerticalAlignment="Top"
+                Orientation="Vertical">
+                <TextBox Text="{x:Bind SelectedActorViewModel.Name, Mode=TwoWay}" />
+                <!--<TextBox Background="DarkGray" Text="ActorName" />-->
+                <ListBox ItemsSource="{x:Bind SelectedActorViewModel.Components}">
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate x:DataType="local:ActorComponent">
+                            <StackPanel>
+                                <!--<TextBlock Text="ComponentName" />-->
+                                <TextBlock Text="{x:Bind Name, Mode=OneTime}" />
+                                <ListBox ItemsSource="{x:Bind Properties}">
+                                    <ItemsControl.ItemTemplate>
+                                        <DataTemplate x:DataType="local:ActorProperty">
+                                            <TextBlock Text="{x:Bind Name, Mode=OneWay}" />
+                                        </DataTemplate>
+                                    </ItemsControl.ItemTemplate>
+                                </ListBox>
+                            </StackPanel>
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                </ListBox>
+
+                <!--<TextBlock
+                    HorizontalAlignment="Center"
+                    VerticalAlignment="Center"
+                    FontSize="24"
+                    Text="Pane" />
+                <Button x:Name="myButton" Click="myButton_Click">Click Me</Button>
+                <TextBox x:Name="myTextBox" />
+                <TextBlock Text="{x:Bind myTextBox.Text, Mode=OneWay}" />
+                <Button Click="ClickHandler" Content="{x:Bind MainViewModel.BookSku.Title, Mode=OneWay}" />-->
+            </StackPanel>
+        </SplitView.Pane>
     </SplitView>
 </Window>

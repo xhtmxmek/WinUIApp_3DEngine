@@ -189,6 +189,7 @@
     <ClInclude Include="Renderer\LevelRenderer.h" />
     <ClInclude Include="System\InputManager.h" />
     <ClInclude Include="System\KeyboardState.h" />
+    <ClInclude Include="System\MouseState.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Common\DeviceResource.cpp" />
@@ -225,8 +226,10 @@
     <ClCompile Include="Renderer\LevelRenderer.cpp" />
     <ClCompile Include="System\InputManager.cpp" />
     <ClCompile Include="System\KeyboardState.cpp" />
+    <ClCompile Include="System\MouseState.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="cpp.hint" />
     <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

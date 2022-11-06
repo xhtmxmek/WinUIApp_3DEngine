@@ -45,6 +45,7 @@
     <ClInclude Include="EngineHeader_Used_Application.h" />
     <ClInclude Include="System\InputManager.h" />
     <ClInclude Include="System\KeyboardState.h" />
+    <ClInclude Include="System\MouseState.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="EngineCore.cpp" />
@@ -72,9 +73,11 @@
     <ClCompile Include="EngineAsset\Texture.cpp" />
     <ClCompile Include="System\InputManager.cpp" />
     <ClCompile Include="System\KeyboardState.cpp" />
+    <ClCompile Include="System\MouseState.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
+    <None Include="cpp.hint" />
   </ItemGroup>
   <ItemGroup>
     <Natvis Include="$(MSBuildThisFileDirectory)..\..\natvis\wil.natvis" />

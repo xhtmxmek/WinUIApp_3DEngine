@@ -21,12 +21,10 @@
 #include <winrt/Microsoft.UI.Xaml.Media.h>
 #include <winrt/Microsoft.UI.Xaml.Navigation.h>
 #include <winrt/Microsoft.UI.Xaml.Shapes.h>
-//#include <Microsoft.UI.Xaml.Window.h>
 #include <winrt/Microsoft.UI.Xaml.Input.h>
 #include <winrt/Microsoft.UI.Dispatching.h>
 #include <wil/cppwinrt_helpers.h>
 
-//custom
 #include <winrt/Microsoft.UI.Input.h>
 #include <winrt/Windows.System.Threading.h>
 #include <dxgi1_6.h>

@@ -145,6 +145,8 @@
   <ItemGroup>
     <ClInclude Include="CommonTypes.h" />
     <ClInclude Include="framework.h" />
+    <ClInclude Include="Input\PointerButton.h" />
+    <ClInclude Include="Input\VirtualKey.h" />
     <ClInclude Include="Math\Color.h" />
     <ClInclude Include="Math\Matrix3x3.h" />
     <ClInclude Include="Math\Matrix4x4.h" />

@@ -14,6 +14,8 @@
 #include <winrt/Microsoft.UI.Xaml.Navigation.h>
 #include <winrt/Microsoft.UI.Dispatching.h>
 #include <Microsoft.UI.xaml.media.dxinterop.h>
+#include <winrt/Microsoft.UI.Xaml.Input.h>
+#include <winrt/Microsoft.UI.Input.h>
 
 //UWP 시절 winRT 헤더.. 필요없는것들은 제해도 될듯
 #include "winrt/Windows.ApplicationModel.Activation.h"
@@ -35,18 +37,17 @@
 #include <winrt/Windows.Storage.Pickers.h>
 #include <winrt/Windows.Storage.FileProperties.h>
 #include <winrt/Windows.Storage.AccessCache.h>
-#include <winrt/Microsoft.UI.Xaml.Input.h>
 
 #include <concrt.h>
 #include <wincodec.h>
 
-//std
 #include <functional>
 
-//Base Types
 #include <CommonTypes.h>
 #include <Math/Vector2.h>
 #include <UIInfoParams.h>
+#include <Input/PointerButton.h>
+#include <Input/VirtualKey.h>
 
 #include "../EngineCore/EngineHeader_Used_Application.h"
 

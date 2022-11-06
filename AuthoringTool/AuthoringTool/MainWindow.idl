@@ -10,6 +10,6 @@ namespace AuthoringTool
         AuthoringTool.BookstoreViewModel MainViewModel{ get; };
         AuthoringTool.ActorViewModel SelectedActorViewModel{ get; };
         
-        Microsoft.UI.Xaml.Controls.TextBox myTextBox{ get; }; //읽기전용으로 선언. cpp와 h는 구현하지 않아도됨
+        //Microsoft.UI.Xaml.Controls.TextBox myTextBox{ get; }; //읽기전용으로 선언. cpp와 h는 구현하지 않아도됨
     }
 }

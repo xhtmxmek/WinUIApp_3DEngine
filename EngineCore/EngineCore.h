@@ -9,6 +9,12 @@ EngineCore는 최대한 플랫폼 독립적인 코드로 가는것이 목표
 운영체제 관련된 코드(Ex window: winrt)는 엔진 인터페이스쪽에서 처리하는게 맞는거 같음.
 */
 
+namespace SharedTypes
+{
+    enum class VirtualKey;
+    enum class PointerButton;
+}
+
 namespace Engine
 {    
     namespace DX
@@ -24,11 +30,6 @@ namespace Engine
     namespace Type
     {
         struct Size;
-    }
-
-    namespace Input
-    {        
-        enum class VirtualKey;
     }
 
     class EngineCore
@@ -59,12 +60,13 @@ namespace Engine
         //void OnOrientationChanged(Windows.Graphics.Display.DisplayOrientations orientation);
         ENGINE_API void ValidateDevice();
 
-        ENGINE_API void KeyProcess(Input::VirtualKey key, bool isPressed);
+        ENGINE_API void KeyProcess(SharedTypes::VirtualKey key, bool isPressed);
+        ENGINE_API void PointerProcess(SharedTypes::PointerButton button, bool isPressed, float delta, Vector2i pos);
 
         // Properties
-        ENGINE_API Size GetDefaultBackBufferSize() noexcept
+        ENGINE_API SharedTypes::Size GetDefaultBackBufferSize() noexcept
         {
-            return Size(800.0f, 600.0f);
+            return SharedTypes::Size(800.0f, 600.0f);
         }
 
         //common
@@ -84,25 +86,16 @@ namespace Engine
         void LoadDefaultProject();
         bool CreateDeviceDependentResources();
         void CreateWindowSizeDependentResources();
-
-        //// Device resources.
-        //std::unique_ptr<DX::DeviceResources>    m_deviceResources;
-
-        //// Rendering loop timer.
+        
         std::unique_ptr<Engine::DX::StepTimer> Timer;
         std::shared_ptr<Engine::Level::World> m_World;
-        //std::unique_ptr<DirectX::Keyboard> m_keyboard;
-        //std::unique_ptr<DirectX::Mouse> m_mouse;
-
-
-        //Thread 관련    
+        
         bool RenderLoopActivate;
         std::thread RenderLoopThread;
         std::mutex EngineTickMutex;
         //Windows::Foundation::IAsyncAction m_renderLoopWorker;
-        //winrt::DX11Engine_WinUI3_WRC::EngineCriticalSection m_criticalSection{ nullptr };
-        // 현재 입력 포인터 위치를 추적합니다.
-        float m_pointerLocationX;
+
+
 
         HMODULE ProjectHandle;
     };

@@ -43,7 +43,7 @@
     <AppxPackageSigningEnabled>True</AppxPackageSigningEnabled>
     <EntryPointProjectUniqueName>..\AuthoringTool\AuthoringTool.vcxproj</EntryPointProjectUniqueName>
     <GenerateAppInstallerFile>False</GenerateAppInstallerFile>
-    <PackageCertificateThumbprint>9678699D72BF6EEED8C03E30F5B620C522ED3132</PackageCertificateThumbprint>
+    <PackageCertificateThumbprint>2BC2017230E6C3C2378E1DEA1F6FFC23BC700520</PackageCertificateThumbprint>
     <AppxPackageSigningTimestampDigestAlgorithm>SHA256</AppxPackageSigningTimestampDigestAlgorithm>
     <AppxAutoIncrementPackageRevision>True</AppxAutoIncrementPackageRevision>
     <GenerateTestArtifacts>True</GenerateTestArtifacts>

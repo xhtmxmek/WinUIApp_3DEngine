@@ -48,6 +48,12 @@
     <ClInclude Include="UIInfoParams.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Input\VirtualKey.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Input\PointerButton.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="SharedTypes.cpp">

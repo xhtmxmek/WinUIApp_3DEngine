@@ -5,7 +5,7 @@ namespace winrt::AuthoringTool::implementation
 {
     struct ActorProperty : ActorPropertyT<ActorProperty>
     {
-        ActorProperty() = default;
+        ActorProperty() = delete;
 
         ActorProperty(hstring const& name);
         hstring Name();

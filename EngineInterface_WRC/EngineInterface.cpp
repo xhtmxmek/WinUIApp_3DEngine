@@ -19,19 +19,19 @@ namespace winrt::EngineInterface_WRC::implementation
 {
 	EngineInterface::EngineInterface()
 	{		
-		EngineCoreNative = make_unique<Engine::EngineCore>();
+		engineCoreNative_ = make_unique<Engine::EngineCore>();
 	}
 
 #pragma region Initialize
 	void EngineInterface::Initialize(Microsoft::UI::Xaml::Controls::SwapChainPanel const& panel)
 	{
 		InitializeSwapChainPanelInfo(panel);
-		EngineCoreNative->Initialize(SwapchainPanelInfo);
+		engineCoreNative_->Initialize(SwapchainPanelInfo);
 	}
 
 	void EngineInterface::UnInitialize()
 	{
-		EngineCoreNative->UnInitialize();
+		engineCoreNative_->UnInitialize();
 	}
 
 	void EngineInterface::InitializeSwapChainPanelInfo(const Microsoft::UI::Xaml::Controls::SwapChainPanel& panel)
@@ -69,12 +69,12 @@ namespace winrt::EngineInterface_WRC::implementation
 	// Executes the basic game loop.
 	void EngineInterface::StartRenderLoop()
 	{
-		EngineCoreNative->StartRenderLoop();
+		engineCoreNative_->StartRenderLoop();
 	}
 
 	void EngineInterface::StopRenderLoop()
 	{      
-		EngineCoreNative->StopRenderLoop();
+		engineCoreNative_->StopRenderLoop();
 	}
 #pragma endregion
 
@@ -82,56 +82,90 @@ namespace winrt::EngineInterface_WRC::implementation
 	// Message handlers
 	void EngineInterface::OnActivated()
 	{
-		EngineCoreNative->OnActivated();
+		engineCoreNative_->OnActivated();
 	}
 
 	void EngineInterface::OnDeactivated()
 	{
-		EngineCoreNative->OnDeactivated();
+		engineCoreNative_->OnDeactivated();
 	}
 
 	void EngineInterface::OnSuspending()
 	{
-		EngineCoreNative->OnSuspending();
+		engineCoreNative_->OnSuspending();
 	}
 
 	void EngineInterface::OnResuming()
 	{
-		EngineCoreNative->OnResuming();
+		engineCoreNative_->OnResuming();
 	}
 
 	void EngineInterface::OnWindowSizeChanged(Windows::Foundation::Size windowSize)
 	{
-		EngineCoreNative->OnWindowSizeChanged(SharedTypes::Size(windowSize.Width, windowSize.Height));
+		engineCoreNative_->OnWindowSizeChanged(SharedTypes::Size(windowSize.Width, windowSize.Height));
 	}
 
 	void EngineInterface::OnSwapchainXamlChanged(const Microsoft::UI::Xaml::Controls::SwapChainPanel& panel)
 	{		
 		SetSwapchainPanelInfo(panel);
-		EngineCoreNative->OnSwapchainXamlChanged(SwapchainPanelInfo);
+		engineCoreNative_->OnSwapchainXamlChanged(SwapchainPanelInfo);
 	}
 
 	void EngineInterface::OnOrientationChanged(winrt::Windows::Graphics::Display::DisplayOrientations const& orientation)
 	{
-		//EngineCoreNative->O
+		//engineCoreNative_->O
 	}
 
 	void EngineInterface::KeyboardProcess(winrt::Microsoft::UI::Xaml::Input::KeyRoutedEventArgs const& args)
 	{					
-		Engine::Input::VirtualKey nativekey = static_cast<Engine::Input::VirtualKey>(args.Key());
-		EngineCoreNative->KeyProcess(nativekey, !args.KeyStatus().IsKeyReleased);
+		SharedTypes::VirtualKey nativekey = static_cast<SharedTypes::VirtualKey>(args.Key());
+		engineCoreNative_->KeyProcess(nativekey, !args.KeyStatus().IsKeyReleased);
+	}
+
+	void EngineInterface::StartTracking(winrt::Microsoft::UI::Input::PointerEventArgs const& args)
+	{
+		SharedTypes::PointerButton button;
+		if (args.CurrentPoint().Properties().IsLeftButtonPressed())
+			button = SharedTypes::PointerButton::LeftButton;
+		else if (args.CurrentPoint().Properties().IsRightButtonPressed())
+			button = SharedTypes::PointerButton::RightButton;		
+	}
+
+	void EngineInterface::TrackingUpdate(winrt::Microsoft::UI::Input::PointerEventArgs const& args)
+	{
+		args.CurrentPoint().Position();
+	}
+
+	winrt::EngineInterface_WRC::PointerActionResult EngineInterface::StopTracking(winrt::Microsoft::UI::Input::PointerEventArgs const& args)
+	{
+		SharedTypes::PointerButton button;
+		if (args.CurrentPoint().Properties().IsLeftButtonPressed())
+			button = SharedTypes::PointerButton::LeftButton;
+		else if (args.CurrentPoint().Properties().IsRightButtonPressed())
+			button = SharedTypes::PointerButton::RightButton;
+
+		EngineInterface_WRC::PointerActionResult result;
+
+		return result;
+	}
+
+	void EngineInterface::PointerWheelChanged(winrt::Microsoft::UI::Input::PointerEventArgs const& args)
+	{
+		//winrt::Windows::Foundation::Numerics::float2			
+		if (args.CurrentPoint().Properties().IsHorizontalMouseWheel())			
+			args.CurrentPoint().Properties().MouseWheelDelta();
 	}
 
 	// Properties
 	Windows::Foundation::Size EngineInterface::GetDefaultBackBufferSize() noexcept //const noexcept
 	{
-		//Engine::Type::Size size = EngineCoreNative->GetDefaultBackBufferSize();
+		//Engine::Type::Size size = engineCoreNative_->GetDefaultBackBufferSize();
 		//return Size(size.Width, size.Height);
 		return Windows::Foundation::Size(0, 0);
 	}
 	void EngineInterface::LoadScriptProject(hstring const& path)
 	{
-		EngineCoreNative->LoadScriptProject(path.c_str());
+		engineCoreNative_->LoadScriptProject(path.c_str());
 	}
 
 #pragma endregion

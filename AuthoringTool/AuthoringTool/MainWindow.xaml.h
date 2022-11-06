@@ -54,6 +54,9 @@ namespace winrt::AuthoringTool::implementation
 		void OnPointerPressedSwapChain(Microsoft::UI::Input::InputPointerSource const& sender, Microsoft::UI::Input::PointerEventArgs const& e);
 		void OnPointerMovedSwapChain(Microsoft::UI::Input::InputPointerSource const& sender, Microsoft::UI::Input::PointerEventArgs const& e);
 		void OnPointerReleasedSwapChain(Microsoft::UI::Input::InputPointerSource const& sender, Microsoft::UI::Input::PointerEventArgs const& e);
+		void OnPointerWheelChangedSwapChain(Microsoft::UI::Input::InputPointerSource const& sender, Microsoft::UI::Input::PointerEventArgs const& e);
+
+		void SetPickedActor(EngineInterface_WRC::ActorProxy const& pickedActor);
 
 		void OnKeyDown_SwapChain(Windows::Foundation::IInspectable const& sender, Microsoft::UI::Xaml::Input::KeyRoutedEventArgs const& args);
 		void OnKeyUp_SwapChain(Windows::Foundation::IInspectable const& sender, Microsoft::UI::Xaml::Input::KeyRoutedEventArgs const& args);
@@ -125,7 +128,7 @@ namespace winrt::AuthoringTool::implementation
 		//}
 
 		// XAML 페이지 백그라운드에서 DirectX 콘텐츠를 렌더링하는 데 사용되는 리소스입니다.		
-		winrt::EngineInterface_WRC::EngineInterface RenderingEngine;		
+		winrt::EngineInterface_WRC::EngineInterface renderingEngine_;		
 
 		bool					m_windowVisible;
 		float                   m_logicalWidth;
@@ -142,7 +145,7 @@ namespace winrt::AuthoringTool::implementation
 		//AuthoringTool::BookstoreViewModel m_mainViewModel{ nullptr };
 		//아니면 균일한생성
 		AuthoringTool::BookstoreViewModel m_mainViewModel;
-		AuthoringTool::ActorViewModel _actorViewModel;
+		AuthoringTool::ActorViewModel actorViewModel_;
 	};
 }
 

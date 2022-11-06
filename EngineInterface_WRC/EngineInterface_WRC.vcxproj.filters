@@ -28,6 +28,10 @@
     <ClCompile Include="$(GeneratedFilesDir)module.g.cpp" />
     <ClCompile Include="pch.cpp" />
     <ClCompile Include="EngineInterface.cpp" />
+    <ClCompile Include="UIProxy\ActorComponentProxy.cpp" />
+    <ClCompile Include="UIProxy\ActorProxy.cpp" />
+    <ClCompile Include="UIProxy\ComponentPropertyProxy.cpp" />
+    <ClCompile Include="PointerActionResult.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Level\Actor\ActorManager.h">
@@ -36,6 +40,10 @@
     <ClInclude Include="DLLDefine.h" />
     <ClInclude Include="pch.h" />
     <ClInclude Include="EngineInterface.h" />
+    <ClInclude Include="UIProxy\ActorComponentProxy.h" />
+    <ClInclude Include="UIProxy\ActorProxy.h" />
+    <ClInclude Include="UIProxy\ComponentPropertyProxy.h" />
+    <ClInclude Include="PointerActionResult.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
@@ -52,5 +60,6 @@
   </ItemGroup>
   <ItemGroup>
     <Midl Include="EngineInterface.idl" />
+    <Midl Include="UIProxy\ActorProxy.idl" />
   </ItemGroup>
 </Project>

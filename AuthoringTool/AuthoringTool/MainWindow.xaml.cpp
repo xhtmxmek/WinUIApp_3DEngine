@@ -74,9 +74,9 @@ namespace winrt::AuthoringTool::implementation
         {
             m_windowVisible = args.Visible();
             if (m_windowVisible)            
-               RenderingEngine.StartRenderLoop();            
+               renderingEngine_.StartRenderLoop();            
             else            
-               RenderingEngine.StopRenderLoop();            
+               renderingEngine_.StopRenderLoop();            
         }        
     }
 
@@ -96,15 +96,15 @@ namespace winrt::AuthoringTool::implementation
 
     void MainWindow::OnClosed(IInspectable const& sender, Microsoft::UI::Xaml::WindowEventArgs const& args)
     {
-        RenderingEngine.StopRenderLoop();
-        RenderingEngine.UnInitialize();
-        RenderingEngine = { nullptr };        
+        renderingEngine_.StopRenderLoop();
+        renderingEngine_.UnInitialize();
+        renderingEngine_ = { nullptr };        
     }
 
     void MainWindow::OnSizeChanged(IInspectable const& sender, Microsoft::UI::Xaml::WindowSizeChangedEventArgs const& args)
     {   
         //if (swapChainPanel().IsLoaded())
-        //    RenderingEngine.OnWindowSizeChanged(args.Size());
+        //    renderingEngine_.OnWindowSizeChanged(args.Size());
     }
 #pragma endregion
 
@@ -112,17 +112,17 @@ namespace winrt::AuthoringTool::implementation
 #pragma region SwapChainPanel Event
     void MainWindow::OnSwapChainPanelXamlRootChanged(Microsoft::UI::Xaml::XamlRoot const& sender, Microsoft::UI::Xaml::XamlRootChangedEventArgs const& args)
     {                
-        RenderingEngine.OnSwapchainXamlChanged(swapChainPanel());        
+        renderingEngine_.OnSwapchainXamlChanged(swapChainPanel());        
     }
 
     void MainWindow::OnSwapChainPanelCompositionScaleChanged(Microsoft::UI::Xaml::Controls::SwapChainPanel const& sender, IInspectable const& args)
     {
-        RenderingEngine.OnSwapchainXamlChanged(swapChainPanel());        
+        renderingEngine_.OnSwapchainXamlChanged(swapChainPanel());        
     }
 
     void MainWindow::OnSwapChainPanel_SizeChanged(Windows::Foundation::IInspectable const& sender, Microsoft::UI::Xaml::SizeChangedEventArgs const& args)
     {                
-        RenderingEngine.OnSwapchainXamlChanged(swapChainPanel());
+        renderingEngine_.OnSwapchainXamlChanged(swapChainPanel());
     }
 
     void MainWindow::OnSwapchainPanelLoaded(IInspectable const& sender, Microsoft::UI::Xaml::RoutedEventArgs const& e)
@@ -130,12 +130,12 @@ namespace winrt::AuthoringTool::implementation
         //swapChainPanel().XamlRoot().Changed({ this, &MainWindow::OnSwapChainPanelXamlRootChanged });        
         swapChainPanel().SizeChanged({ this, &MainWindow::OnSwapChainPanel_SizeChanged });        
         
-        RenderingEngine.Initialize(swapChainPanel());                
+        renderingEngine_.Initialize(swapChainPanel());                
         RegisterDedicatedInputOnSwapchain();
         swapChainPanel().KeyDown({ this, &MainWindow::OnKeyDown_SwapChain });
         swapChainPanel().KeyUp({ this, &MainWindow::OnKeyUp_SwapChain });
 
-        RenderingEngine.StartRenderLoop();
+        renderingEngine_.StartRenderLoop();
     }
 #pragma endregion
 
@@ -145,41 +145,65 @@ namespace winrt::AuthoringTool::implementation
         // 그리고 다음과 같이 이벤트 처리기를 채웁니다.
     }
 
-    void MainWindow::OnPointerPressedSwapChain(Microsoft::UI::Input::InputPointerSource const& sender, Microsoft::UI::Input::PointerEventArgs const& e)
+    void MainWindow::OnPointerPressedSwapChain(Microsoft::UI::Input::InputPointerSource const& sender, Microsoft::UI::Input::PointerEventArgs const& args)
     {
+
         //TODO
         //마우스 피킹시 동작
         //마우스 스테이트 업데이트, 
         /*
         * -저작도구 동작
         * 엔진 클릭시 피킹으로 오브젝트의 정보 뽑아옴. 오브젝트의 정보는 EngineInterface가 들고있음.
+        * EngineInterFace에서 검사해서 ActorProxy 생성함. 액터 피킹 성공하면 ActorProxy 반환해서 ActorViewModel에 넘겨줌.
+        * ViewModel에서  
         */
-        //m_Engine.StartTracking();
+        //m_Engine.StartTracking();        
+        //trackingOutput = renderingEngine_.startTracking();
+        //_actorViewModel.SetActor();
+        //renderingEngine_.startT
+        renderingEngine_.StartTracking(args);
     }
 
-    void MainWindow::OnPointerMovedSwapChain(Microsoft::UI::Input::InputPointerSource const& sender, Microsoft::UI::Input::PointerEventArgs const& e)
-    {
+    void MainWindow::OnPointerMovedSwapChain(Microsoft::UI::Input::InputPointerSource const& sender, Microsoft::UI::Input::PointerEventArgs const& args)
+    {                        
         // 포인터 추적 코드를 업데이트합니다.
         //if (m_Engine.IsTracking())
         //{
         //    m_Engine.TrackingUpdate(e.CurrentPoint().Position().X);
         //}
+        renderingEngine_.TrackingUpdate(args);
     }
 
-    void MainWindow::OnPointerReleasedSwapChain(Microsoft::UI::Input::InputPointerSource const& sender, Microsoft::UI::Input::PointerEventArgs const& e)
+    void MainWindow::OnPointerReleasedSwapChain(Microsoft::UI::Input::InputPointerSource const& sender, Microsoft::UI::Input::PointerEventArgs const& args)
+    {
+        EngineInterface_WRC::PointerActionResult result = renderingEngine_.StopTracking(args);
+        EngineInterface_WRC::ActorProxy proxy;
+        //proxy.Components().
+        //result.PickedActor()
+    }
+
+    void MainWindow::OnPointerWheelChangedSwapChain(Microsoft::UI::Input::InputPointerSource const& sender, Microsoft::UI::Input::PointerEventArgs const& args)
     {
         // 포인터가 해제되는 경우 추적 포인터 이동이 중지됩니다.
         //m_main->StopTracking();
+        //lbutton떄 피킹. buttonDown때와 위치가 같고 picking object 존재한다면 오브젝트보내버리기.
+        renderingEngine_.PointerWheelChanged(args);
+    }
+
+    void MainWindow::SetPickedActor(EngineInterface_WRC::ActorProxy const& pickedActor)
+    {
+
+        //actorViewModel_.
     }
 
     void MainWindow::OnKeyDown_SwapChain(Windows::Foundation::IInspectable const& sender, Microsoft::UI::Xaml::Input::KeyRoutedEventArgs const& args)
     {        
-        RenderingEngine.KeyboardProcess(args);
+        renderingEngine_.KeyboardProcess(args);
     }
 
     void MainWindow::OnKeyUp_SwapChain(Windows::Foundation::IInspectable const& sender, Microsoft::UI::Xaml::Input::KeyRoutedEventArgs const& args)
     {
-        RenderingEngine.KeyboardProcess(args);
+        renderingEngine_.KeyboardProcess(args);
     }
 
     void MainWindow::RegisterDedicatedInputOnSwapchain()
@@ -201,6 +225,7 @@ namespace winrt::AuthoringTool::implementation
                 coreInput.PointerPressed({ this, &MainWindow::OnPointerPressedSwapChain });
                 coreInput.PointerMoved({ this, &MainWindow::OnPointerMovedSwapChain });
                 coreInput.PointerReleased({ this, &MainWindow::OnPointerReleasedSwapChain });
+                coreInput.PointerWheelChanged({ this, &MainWindow::OnPointerWheelChangedSwapChain });
 
             });
     }
@@ -224,11 +249,11 @@ namespace winrt::AuthoringTool::implementation
     {
         float width = 0.0f;
         float height = 0.0f;
-        //Windows::Foundation::Size size = RenderingEngine.GetDefaultBackBufferSize();
+        //Windows::Foundation::Size size = renderingEngine_.GetDefaultBackBufferSize();
         //MainViewModel().BookSku().Title(std::to_wstring(width));
         //myButton().Content(box_value(L"Clicked"));
-        myButton().Content(box_value(std::to_wstring(width)));
-        double test = myButton().XamlRoot().RasterizationScale();
+        //myButton().Content(box_value(std::to_wstring(width)));
+        //double test = myButton().XamlRoot().RasterizationScale();
     }
 
     void MainWindow::ClickHandler(Windows::Foundation::IInspectable const& sender, Microsoft::UI::Xaml::RoutedEventArgs const& args)

@@ -9,7 +9,6 @@
 #include "Level/World.h"
 #include "Renderer/LevelRenderer.h"
 #include "Level/Actor/ActorManager/ActorManager.h"
-#include "System/KeyboardState.h"
 #include "System/InputManager.h"
 #include "EngineAsset/Texture.h"
 #include <fstream>
@@ -274,9 +273,15 @@ namespace Engine
 		DX::DeviceResourcesUtil::GetDeviceResources()->ValidateDevice();
 	}
 
-	void EngineCore::KeyProcess(Input::VirtualKey key, bool isPressed)
+	void EngineCore::KeyProcess(SharedTypes::VirtualKey key, bool isPressed)
 	{
 		Input::InputManager::GetInstance().SetKeyboardState(key, isPressed);
+	}
+
+	void EngineCore::PointerProcess(SharedTypes::PointerButton button, bool isPressed, float delta, Vector2i pos)
+	{
+		Input::InputManager::GetInstance().SetMouseState(button, isPressed, delta, pos);
+		//pickingLogic
 	}
 
 	void EngineCore::LoadScriptProject(wstring const& path)

@@ -1,6 +1,5 @@
 #include "pch.h"
 #include "InputManager.h"
-#include "KeyboardState.h"
 
 namespace Engine
 {	
@@ -9,24 +8,26 @@ namespace Engine
 		void InputManager::Initialize()
 		{
 			Keyboard = make_unique<KeyboardState>();
+			Mouse = make_unique<MouseState>();
 		}
 
-		bool InputManager::GetKeyboardState(VirtualKey key)
+		bool InputManager::GetKeyboardState(SharedTypes::VirtualKey key)
 		{	
 			return Keyboard->GetState(key);
 		}
 
-		void InputManager::SetKeyboardState(VirtualKey key, bool isPressed)
+		void InputManager::SetKeyboardState(SharedTypes::VirtualKey key, bool isPressed)
 		{
 			Keyboard->SetState(key, isPressed);
 		}
 
-		InputManager::InputManager()
+		void InputManager::GetMouseState(SharedTypes::PointerButton button)
 		{
-			//키보드, 마우스 입력처리는 엔진에서 다루는게 맞는데, 메시지는 UI단에서 넘어옴.
-			//
-			//std::unique_ptr<DirectX::Keyboard> keyboard;
-			//keyboard->SetWindow()
+		}
+
+		void InputManager::SetMouseState(SharedTypes::PointerButton button, bool isPressed, float delta, Vector2i pos)
+		{
+			Mouse->SetState(button, isPressed, delta, pos);
 		}
 	}
 }

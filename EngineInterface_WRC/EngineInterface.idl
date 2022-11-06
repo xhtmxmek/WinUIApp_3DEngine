@@ -1,38 +1,51 @@
+import "UIProxy/ActorProxy.idl";
+
 namespace EngineInterface_WRC
 {
-    [default_interface]
-    runtimeclass EngineInterface
-    {
-        EngineInterface();
+	runtimeclass PointerActionResult
+	{
+		PointerActionResult();
+		ActorProxy PickedActor;
+	}
 
-        // Initialization and management       
-        //void Initialize(Windows.Foundation.IReference <Int64> window);        
-        [default_overload]
-        //void Initialize(Windows.UI.Core.CoreWindow window);        
-        void Initialize(Microsoft.UI.Xaml.Controls.SwapChainPanel panel);
-        void UnInitialize();
+	[default_interface]
+	runtimeclass EngineInterface
+	{
+		EngineInterface();
 
-        // Basic game loop / input        
-        void StartRenderLoop();
-        void StopRenderLoop();        
+		// Initialization and management       
+		//void Initialize(Windows.Foundation.IReference <Int64> window);        
+		[default_overload]
+		//void Initialize(Windows.UI.Core.CoreWindow window);        
+		void Initialize(Microsoft.UI.Xaml.Controls.SwapChainPanel panel);
+		void UnInitialize();
 
-        // IDeviceNotify - 오버라이딩 함수는 IDL runtimeClass안에서 선언안해도됨
-        // Messages
-        void OnActivated();
-        void OnDeactivated();
-        void OnSuspending();
-        void OnResuming();
-        void OnWindowSizeChanged(Windows.Foundation.Size windowSize);
-        void OnSwapchainXamlChanged(Microsoft.UI.Xaml.Controls.SwapChainPanel panel);
-        void OnOrientationChanged(Windows.Graphics.Display.DisplayOrientations orientation);
+		// Basic game loop / input        
+		void StartRenderLoop();
+		void StopRenderLoop();
 
-        //input
-        void KeyboardProcess(Microsoft.UI.Xaml.Input.KeyRoutedEventArgs args);
+		// IDeviceNotify - 오버라이딩 함수는 IDL runtimeClass안에서 선언안해도됨
+		// Messages
+		void OnActivated();
+		void OnDeactivated();
+		void OnSuspending();
+		void OnResuming();
+		void OnWindowSizeChanged(Windows.Foundation.Size windowSize);
+		void OnSwapchainXamlChanged(Microsoft.UI.Xaml.Controls.SwapChainPanel panel);
+		void OnOrientationChanged(Windows.Graphics.Display.DisplayOrientations orientation);
 
-        // Properties
-        //[noexcept] void GetDefaultSize(out Single width, out Single height);
-        [noexcept]  Windows.Foundation.Size GetDefaultBackBufferSize();
-        void LoadScriptProject(String path);
-    }
-    
+		//input
+		void KeyboardProcess(Microsoft.UI.Xaml.Input.KeyRoutedEventArgs args);
+		void StartTracking(Microsoft.UI.Input.PointerEventArgs args);
+		void TrackingUpdate(Microsoft.UI.Input.PointerEventArgs args);
+		PointerActionResult StopTracking(Microsoft.UI.Input.PointerEventArgs args);
+		void PointerWheelChanged(Microsoft.UI.Input.PointerEventArgs args);
+		//PointerActionResult PointerProcess(Microsoft.UI.Input.PointerEventArgs args);
+
+		// Properties
+		//[noexcept] void GetDefaultSize(out Single width, out Single height);
+		[noexcept]  Windows.Foundation.Size GetDefaultBackBufferSize();
+		void LoadScriptProject(String path);
+	}
+
 }

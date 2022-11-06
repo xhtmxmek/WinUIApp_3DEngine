@@ -7,7 +7,7 @@ namespace AuthoringTool
     [default_interface]
     runtimeclass ActorViewModel
     {
-        ActorViewModel();
+        ActorViewModel();       
         String Name;
         Windows.Foundation.Collections.IObservableVector<ActorComponent> Components{ get; };
     }

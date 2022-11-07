@@ -40,6 +40,6 @@ namespace winrt::AuthoringTool::implementation
         //    _components.Append(component);
         //}
 
-        actor.Components()
+        //actor.Components()
     }
 }

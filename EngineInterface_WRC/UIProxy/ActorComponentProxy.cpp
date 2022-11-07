@@ -4,8 +4,18 @@
 
 namespace winrt::EngineInterface_WRC::implementation
 {
+    ActorComponentProxy::ActorComponentProxy()
+    {
+        properties_ = Windows::Foundation::Collections::IVector<winrt::EngineInterface_WRC::ComponentPropertyProxy>();
+    }
+
     winrt::Windows::Foundation::Collections::IVector<winrt::EngineInterface_WRC::ComponentPropertyProxy> ActorComponentProxy::Properties()
     {
-        throw hresult_not_implemented();
+        return properties_;
+    }
+
+    hstring ActorComponentProxy::Name()
+    {
+        return name_;
     }
 }

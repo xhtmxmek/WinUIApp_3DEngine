@@ -144,7 +144,9 @@ namespace winrt::EngineInterface_WRC::implementation
 		else if (args.CurrentPoint().Properties().IsRightButtonPressed())
 			button = SharedTypes::PointerButton::RightButton;
 
-		EngineInterface_WRC::PointerActionResult result;
+		PointerActionResult result;
+						
+		//engineCoreNative_->PointerProcess()
 
 		return result;
 	}

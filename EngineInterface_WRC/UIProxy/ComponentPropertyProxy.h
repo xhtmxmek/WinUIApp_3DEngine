@@ -7,8 +7,11 @@ namespace winrt::EngineInterface_WRC::implementation
     {
         ComponentPropertyProxy() = default;
 
+        hstring Name();
         hstring Value();
         void Value(hstring const& value);
+    private:
+        hstring name_;
     };
 }
 namespace winrt::EngineInterface_WRC::factory_implementation

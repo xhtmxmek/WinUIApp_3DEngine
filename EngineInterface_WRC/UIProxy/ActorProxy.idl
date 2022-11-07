@@ -3,6 +3,7 @@ namespace EngineInterface_WRC
 	[default_interface]
 	runtimeclass ComponentPropertyProxy
 	{
+		String Name{get; };
 		ComponentPropertyProxy();
 		String Value;
 	}
@@ -11,6 +12,7 @@ namespace EngineInterface_WRC
 	[default_interface]
 	runtimeclass ActorComponentProxy
 	{
+		String Name{get; };
 		ActorComponentProxy();
 		Windows.Foundation.Collections.IVector<ComponentPropertyProxy> Properties{get; };
 	}
@@ -18,6 +20,7 @@ namespace EngineInterface_WRC
 	[default_interface]
 	runtimeclass ActorProxy
 	{
+		String Name;
 		ActorProxy();
 		Windows.Foundation.Collections.IVector<ActorComponentProxy> Components{ get; };
 	}

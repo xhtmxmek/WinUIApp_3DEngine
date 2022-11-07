@@ -1,11 +1,9 @@
 ﻿#pragma once
 
 #include "MainWindow.g.h"
-#include <winrt/EngineInterface_WRC.h>
-//#include <winrt/DX11Engine_WinUI3_WRC.h>
-#include <d3d11_4.h>
-#include <dxgi1_6.h>
-#include <d2d1_3.h>
+//#include <d3d11_4.h>
+//#include <dxgi1_6.h>
+//#include <d2d1_3.h>
 //#include "Bookstore.BookstoreViewModel.h"
 
 namespace Engine

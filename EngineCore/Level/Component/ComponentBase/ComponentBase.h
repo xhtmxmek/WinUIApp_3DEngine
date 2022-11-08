@@ -21,6 +21,7 @@ namespace Engine
 	{		
 		enum class SceneComponentType;		
 		class DrawableComponentImpl;
+		class PropertyType;
 
 		class ComponentBase
 		{
@@ -41,17 +42,19 @@ namespace Engine
 
 			ENGINE_API SceneComponentType ComponentType();
 
-			ENGINE_API shared_ptr<ComponentBase> GetParent() { return Parent; }
-			ENGINE_API list<shared_ptr<ComponentBase>>& GetChildren() { return Children; }
+			ENGINE_API shared_ptr<ComponentBase> GetParent() { return parent_; }
+			ENGINE_API list<shared_ptr<ComponentBase>>& GetChildren() { return children_; }
+			ENGINE_API const string& Name() { return name_; }
 		protected:
-			Engine::Level::Actor* Owner;
+			Engine::Level::Actor* owner_;
 		private:			
-			string Name;
-			shared_ptr<Component::ComponentBase> Parent;
-			list<shared_ptr<ComponentBase>> Children;
-			Math::TransformGroup Transform;
-			bool Enable;
-			SceneComponentType Type;
+			string name_;
+			shared_ptr<Component::ComponentBase> parent_;
+			list<shared_ptr<ComponentBase>> children_;
+			Math::TransformGroup transform_;
+			bool enable_;
+			SceneComponentType type_;
+			vector<shared_ptr<PropertyType>> properties_;
 
 		};
 
@@ -59,13 +62,13 @@ namespace Engine
 		{
 		public:
 			//RUNTIME_ABSTRACT_SUB_CLASS(DrawableComponent, ComponentBase)
-			ENGINE_API DrawableComponent(const std::string& name) : Visible(true), ComponentBase(name, SceneComponentType::Drawable){}
+			ENGINE_API DrawableComponent(const std::string& name) : visible_(true), ComponentBase(name, SceneComponentType::Drawable){}
 			//DrawableComponent(const std::string& name);
 			virtual void Draw() = 0;
-			ENGINE_API void SetVisible(bool visible) { Visible = visible; }
-			ENGINE_API bool IsVisible() { return Visible; }
+			ENGINE_API void SetVisible(bool visible) { visible_ = visible; }
+			ENGINE_API bool IsVisible() { return visible_; }
 		private:			
-			bool		Visible;
+			bool		visible_;
 			//DrawLayer	ComponentDrawLayer;
 		};
 	}	

@@ -4,7 +4,8 @@
 
 namespace winrt::EngineInterface_WRC::implementation
 {
-    ActorComponentProxy::ActorComponentProxy()
+    ActorComponentProxy::ActorComponentProxy(const hstring& name)
+        :name_(name)
     {
         properties_ = Windows::Foundation::Collections::IVector<winrt::EngineInterface_WRC::ComponentPropertyProxy>();
     }

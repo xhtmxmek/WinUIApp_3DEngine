@@ -6,6 +6,8 @@
 
 #include "../EngineCore/EngineCore.h" //
 #include "../EngineCore/Common/EngineHelper.h"
+#include "../EngineCore/Level/Actor/Actor.h"
+#include "../EngineCore/Level/Component/ComponentBase/ComponentBase.h"
 
 extern void ExitGame() noexcept;
 
@@ -18,7 +20,10 @@ using namespace winrt::Windows::Storage::Pickers;
 namespace winrt::EngineInterface_WRC::implementation
 {
 	EngineInterface::EngineInterface()
-	{		
+		:engineSwapChain_(nullptr),
+		//pickedActor_(nullptr),
+		pickedPos_(0.0f, 0.0f)
+	{
 		engineCoreNative_ = make_unique<Engine::EngineCore>();
 	}
 
@@ -26,7 +31,7 @@ namespace winrt::EngineInterface_WRC::implementation
 	void EngineInterface::Initialize(Microsoft::UI::Xaml::Controls::SwapChainPanel const& panel)
 	{
 		InitializeSwapChainPanelInfo(panel);
-		engineCoreNative_->Initialize(SwapchainPanelInfo);
+		engineCoreNative_->Initialize(swapchainPanelInfo_);
 	}
 
 	void EngineInterface::UnInitialize()
@@ -36,31 +41,31 @@ namespace winrt::EngineInterface_WRC::implementation
 
 	void EngineInterface::InitializeSwapChainPanelInfo(const Microsoft::UI::Xaml::Controls::SwapChainPanel& panel)
 	{
-		SwapchainPanelUI = panel;		
-		SetSwapchainPanelInfo(panel);		
+		swapchainPanelUI_ = panel;
+		SetSwapchainPanelInfo(panel);
 	}
 
 	void EngineInterface::SetSwapchainPanelInfo(const Microsoft::UI::Xaml::Controls::SwapChainPanel& panel)
 	{
-		
-		SwapchainPanelInfo.ActureSize = SharedTypes::Size(panel.ActualSize().x, panel.ActualSize().y);
-		SwapchainPanelInfo.CompositionScale = Vector2f(panel.CompositionScaleX(), panel.CompositionScaleY());
-		SwapchainPanelInfo.IsLoaded = panel.IsLoaded();
-		SwapchainPanelInfo.RasterizationScale = panel.RasterizationScale();
 
-		SwapchainPanelInfo.RegisterSwapChainToUIPanel = [&](IDXGISwapChain3* engineSwapChain) {
+		swapchainPanelInfo_.ActureSize = SharedTypes::Size(panel.ActualSize().x, panel.ActualSize().y);
+		swapchainPanelInfo_.CompositionScale = Vector2f(panel.CompositionScaleX(), panel.CompositionScaleY());
+		swapchainPanelInfo_.IsLoaded = panel.IsLoaded();
+		swapchainPanelInfo_.RasterizationScale = panel.RasterizationScale();
 
-			EngineSwapChain = engineSwapChain;
+		swapchainPanelInfo_.RegisterSwapChainToUIPanel = [&](IDXGISwapChain3* engineSwapChain) {
 
-			SwapchainPanelUI.DispatcherQueue().TryEnqueue(winrt::Microsoft::UI::Dispatching::DispatcherQueuePriority::High, [&]
+			engineSwapChain_ = engineSwapChain;
+
+			swapchainPanelUI_.DispatcherQueue().TryEnqueue(winrt::Microsoft::UI::Dispatching::DispatcherQueuePriority::High, [&]
 				{
-					auto panelNative = SwapchainPanelUI.as<ISwapChainPanelNative>();
-					panelNative->SetSwapChain(EngineSwapChain);					
+					auto panelNative = swapchainPanelUI_.as<ISwapChainPanelNative>();
+					panelNative->SetSwapChain(engineSwapChain_);
 				});
 		};
 	}
 	void EngineInterface::SetRegisterSwapChainFunc(const Microsoft::UI::Xaml::Controls::SwapChainPanel& panel)
-	{			
+	{
 	}
 #pragma endregion
 
@@ -73,7 +78,7 @@ namespace winrt::EngineInterface_WRC::implementation
 	}
 
 	void EngineInterface::StopRenderLoop()
-	{      
+	{
 		engineCoreNative_->StopRenderLoop();
 	}
 #pragma endregion
@@ -106,9 +111,9 @@ namespace winrt::EngineInterface_WRC::implementation
 	}
 
 	void EngineInterface::OnSwapchainXamlChanged(const Microsoft::UI::Xaml::Controls::SwapChainPanel& panel)
-	{		
+	{
 		SetSwapchainPanelInfo(panel);
-		engineCoreNative_->OnSwapchainXamlChanged(SwapchainPanelInfo);
+		engineCoreNative_->OnSwapchainXamlChanged(swapchainPanelInfo_);
 	}
 
 	void EngineInterface::OnOrientationChanged(winrt::Windows::Graphics::Display::DisplayOrientations const& orientation)
@@ -116,7 +121,7 @@ namespace winrt::EngineInterface_WRC::implementation
 	}
 
 	void EngineInterface::KeyboardProcess(winrt::Microsoft::UI::Xaml::Input::KeyRoutedEventArgs const& args)
-	{					
+	{
 		SharedTypes::VirtualKey nativekey = static_cast<SharedTypes::VirtualKey>(args.Key());
 		engineCoreNative_->KeyProcess(nativekey, !args.KeyStatus().IsKeyReleased);
 	}
@@ -127,7 +132,8 @@ namespace winrt::EngineInterface_WRC::implementation
 		bool pressed = false;
 		CheckButtonState(args, button, pressed);
 
-		engineCoreNative_->PointerProcess(button, true, 0.0f, Vector2i(args.CurrentPoint().Position().X, args.CurrentPoint().Position().Y));
+		engineCoreNative_->PointerProcess(button, true, 0.0f, Vector2i((int)args.CurrentPoint().Position().X, (int)args.CurrentPoint().Position().Y));
+		//engineCoreNative_->PickCheck(Vector2i(0, 0), pickedActor_);
 	}
 
 	void EngineInterface::TrackingUpdate(winrt::Microsoft::UI::Input::PointerEventArgs const& args)
@@ -136,7 +142,7 @@ namespace winrt::EngineInterface_WRC::implementation
 		bool pressed = false;
 		CheckButtonState(args, button, pressed);
 
-		engineCoreNative_->PointerProcess(button, pressed, 0.0f, Vector2i(args.CurrentPoint().Position().X, args.CurrentPoint().Position().Y));
+		engineCoreNative_->PointerProcess(button, pressed, 0.0f, Vector2i((int)args.CurrentPoint().Position().X, (int)args.CurrentPoint().Position().Y));
 	}
 
 	winrt::EngineInterface_WRC::PointerActionResult EngineInterface::StopTracking(winrt::Microsoft::UI::Input::PointerEventArgs const& args)
@@ -144,25 +150,21 @@ namespace winrt::EngineInterface_WRC::implementation
 		SharedTypes::PointerButton button;
 		bool pressed = false;
 		CheckButtonState(args, button, pressed);
+		
+		engineCoreNative_->PointerProcess(button, false, 0.0f, Vector2i((int)args.CurrentPoint().Position().X, (int)args.CurrentPoint().Position().Y));
 
+		Vector2f currentPos = Vector2f(args.CurrentPoint().Position().X, args.CurrentPoint().Position().Y);
+		if (currentPos == pickedPos_)
+		{			
+		}
 		PointerActionResult result;
-						
-		engineCoreNative_->PointerProcess(button, false, 0.0f, Vector2i(args.CurrentPoint().Position().X, args.CurrentPoint().Position().Y));
-
-		engineCoreNative_->PickCheck(Vector2i(0,0),);
-		/*
-		* if(pickedPos == currentPos)
-		* engineCoreNative_->RayCheck();
-		* engineCoreNative->LastPickedActor();
-		*/		
-
 		return result;
 	}
 
 	void EngineInterface::PointerWheelChanged(winrt::Microsoft::UI::Input::PointerEventArgs const& args)
 	{
 		//winrt::Windows::Foundation::Numerics::float2			
-		if (args.CurrentPoint().Properties().IsHorizontalMouseWheel())			
+		if (args.CurrentPoint().Properties().IsHorizontalMouseWheel())
 			args.CurrentPoint().Properties().MouseWheelDelta();
 	}
 
@@ -178,6 +180,25 @@ namespace winrt::EngineInterface_WRC::implementation
 			button = SharedTypes::PointerButton::RightButton;
 			pressed = true;
 		}
+	}
+
+	void EngineInterface::UpdateActorProxy()
+	{
+
+		actorProxy_.Components().Clear();
+		for (auto iterComponent : pickedActor_->Components())
+		{			
+			wstring convertName;			
+			convertName.assign(iterComponent.second->Name().begin(), iterComponent.second->Name().end());
+
+			ActorComponentProxy componentProxy(convertName);
+			for (auto iterProperty : iterComponent.)
+			componentProxy.Properties().Append()
+			actorProxy_.Components().Append(componentProxy);
+			//*iter.second->Name();
+		}
+		//pickedActor_->Components().size();
+		//actorProxy_.c
 	}
 
 	// Properties

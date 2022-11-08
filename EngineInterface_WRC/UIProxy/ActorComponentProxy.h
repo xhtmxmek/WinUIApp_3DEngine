@@ -5,7 +5,7 @@ namespace winrt::EngineInterface_WRC::implementation
 {
     struct ActorComponentProxy : ActorComponentProxyT<ActorComponentProxy>
     {
-        ActorComponentProxy();
+        ActorComponentProxy(const hstring& name);
         hstring Name();
         winrt::Windows::Foundation::Collections::IVector<winrt::EngineInterface_WRC::ComponentPropertyProxy> Properties();
     private:

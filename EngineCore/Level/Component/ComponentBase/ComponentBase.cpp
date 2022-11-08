@@ -7,7 +7,7 @@ namespace Engine
 	namespace Component 
 	{
 		ComponentBase::ComponentBase(const std::string& name, SceneComponentType type)
-			:Owner(nullptr)
+			:owner_(nullptr)
 		{			
 		}
 
@@ -29,11 +29,11 @@ namespace Engine
 		}
 		Vector3f ComponentBase::GetRotation()
 		{
-			return Transform.GetRotation();
+			return transform_.GetRotation();
 		}
 		const Math::TransformGroup& ComponentBase::GetComponentTransform()
 		{
-			return Transform;			
+			return transform_;
 		}
 		void ComponentBase::UpdateComponentTransform(const Math::TransformGroup* parent)
 		{						
@@ -41,17 +41,17 @@ namespace Engine
 			//자식의 transform 업데이트
 			//std::shared_ptr<int> test;
 			//if (test)
-			std::for_each(Children.begin(), Children.end(),
+			std::for_each(children_.begin(), children_.end(),
 				[this](shared_ptr<ComponentBase>& component) {					
 					//ComponentBase* child = component.Get();					
 					if (component != nullptr)
-						component->UpdateComponentTransform(&Transform);
+						component->UpdateComponentTransform(&transform_);
 				});			
 		}
 
 		SceneComponentType ComponentBase::ComponentType()
 		{
-			return Type;
+			return type_;
 		}
 
 		//DrawableComponent::DrawableComponent(const std::string& name)

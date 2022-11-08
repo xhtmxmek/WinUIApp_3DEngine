@@ -23,7 +23,7 @@ namespace Engine
 		{								
 		public:
 			ENGINE_API Actor(const std::string& name)
-				:RootComponent(nullptr),
+				:rootComponent_(nullptr),
 				Name("")
 			{}
 
@@ -46,30 +46,36 @@ namespace Engine
 				//컴포넌트 링커는 컴포넌트를 월드 뿐만 아니라 다른곳에도 연결해줄수도 있을듯.. 일단월드만.
 
 			}
+			
+
+			std::map<const char*, std::shared_ptr<Component::ComponentBase>>& Components()
+			{
+				return components_;
+			}
 
 			template<typename T>
 			std::shared_ptr<T> GetActorComponent(const std::string& name)
 			{
-				return std::static_pointer_cast<T>(GetActorComponent(name));
+				return std::static_pointer_cast<T>(GetComponentByName(name));
 			}
 
 			ENGINE_API std::shared_ptr<Component::ComponentBase> GetComponentByName(const std::string& name)
 			{
-				auto iter = Components.find(name.c_str());
-				if (iter != Components.end())
+				auto iter = components_.find(name.c_str());
+				if (iter != components_.end())
 					return iter->second;
 
 				return nullptr;
 			}
 
-			ENGINE_API void SetRootComponent(Component::ComponentBase* component){ RootComponent = component; }
+			ENGINE_API void SetRootComponent(Component::ComponentBase* component){ rootComponent_ = component; }
 			ENGINE_API std::shared_ptr<World> GetWorld();
 
 		private:
 			std::shared_ptr<Component::ComponentBase> CreateComponent(const std::string& className, const std::string& instanceName);
 			//루트 컴포넌트 : 액터를 대표하는 컴포넌트. 컴포넌트 리스트중에 하나를 가리킴
-			Component::ComponentBase* RootComponent;			
-			std::map<const char*, std::shared_ptr<Component::ComponentBase>> Components;
+			Component::ComponentBase* rootComponent_;			
+			std::map<const char*, std::shared_ptr<Component::ComponentBase>> components_;
 			std::string Name;			
 		};
 	}

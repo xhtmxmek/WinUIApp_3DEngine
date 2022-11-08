@@ -23,16 +23,6 @@ namespace Engine
 			Material,
 		};
 
-		enum class PropertyType
-		{
-			TypeBool,
-			TypeInt,
-			TypeFloat,
-			TypeVector2,
-			TypeVector3,
-			TypeVector4,
-		};
-
 		enum class DrawLayer
 		{
 			Default,

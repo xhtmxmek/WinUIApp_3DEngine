@@ -22,6 +22,10 @@
 namespace Engine
 {
     class EngineCore;
+    namespace Level
+    {
+        class Actor;
+    }
 }
 
 namespace winrt::EngineInterface_WRC::implementation
@@ -52,15 +56,19 @@ namespace winrt::EngineInterface_WRC::implementation
         void LoadScriptProject(hstring const& path);        
     private: 
         void InitializeSwapChainPanelInfo(const Microsoft::UI::Xaml::Controls::SwapChainPanel& panel);
-        void SetSwapchainPanelInfo(const Microsoft::UI::Xaml::Controls::SwapChainPanel& panel);        
+        void SetSwapchainPanelInfo(const Microsoft::UI::Xaml::Controls::SwapChainPanel& panel);
         void SetRegisterSwapChainFunc(const Microsoft::UI::Xaml::Controls::SwapChainPanel& panel);
         void CheckButtonState(winrt::Microsoft::UI::Input::PointerEventArgs const& args, SharedTypes::PointerButton& button, bool pressed);
+        void UpdateActorProxy();
         
         std::unique_ptr<Engine::EngineCore> engineCoreNative_;
 
-        Microsoft::UI::Xaml::Controls::SwapChainPanel SwapchainPanelUI;
-        SwapchainPanelInfo SwapchainPanelInfo;
-        IDXGISwapChain3* EngineSwapChain;
+        Microsoft::UI::Xaml::Controls::SwapChainPanel swapchainPanelUI_;
+        SwapchainPanelInfo swapchainPanelInfo_;
+        IDXGISwapChain3* engineSwapChain_;        
+        Vector2f pickedPos_;
+        shared_ptr<Engine::Level::Actor> pickedActor_;
+        ActorProxy actorProxy_;
 
     };
 }

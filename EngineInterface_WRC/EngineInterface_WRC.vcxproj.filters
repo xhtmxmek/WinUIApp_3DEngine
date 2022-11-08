@@ -37,7 +37,6 @@
     <ClInclude Include="Level\Actor\ActorManager.h">
       <Filter>Level\Actor</Filter>
     </ClInclude>
-    <ClInclude Include="DLLDefine.h" />
     <ClInclude Include="pch.h" />
     <ClInclude Include="EngineInterface.h" />
     <ClInclude Include="UIProxy\ActorComponentProxy.h" />

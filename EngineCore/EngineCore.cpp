@@ -57,7 +57,7 @@ namespace Engine
 		}
 	}
 
-	void EngineCore::Initialize(const SwapchainPanelInfo& swapChainPanelInfo)
+	void EngineCore::Initialize(const SwapchainPanelInfo& swapchainPanelInfo_)
 	{
 		DX::DeviceResourcesUtil::GetInstance().CreateDeviceResources();
 		//DX::DeviceResourcesUtil::GetDeviceResources()->RegisterDeviceNotify(this);
@@ -69,7 +69,7 @@ namespace Engine
 
 		DX::DeviceResourcesUtil::GetDeviceResources()->SetOption(DX::DeviceResources::c_UseXAML);
 		CreateDeviceDependentResources();
-		DX::DeviceResourcesUtil::GetDeviceResources()->SetSwapChainPanel(swapChainPanelInfo);
+		DX::DeviceResourcesUtil::GetDeviceResources()->SetSwapChainPanel(swapchainPanelInfo_);
 		CreateWindowSizeDependentResources();
 	}
 
@@ -255,10 +255,10 @@ namespace Engine
 		
 	}
 
-	void EngineCore::OnSwapchainXamlChanged(const SwapchainPanelInfo& swapChainPanelInfo)
+	void EngineCore::OnSwapchainXamlChanged(const SwapchainPanelInfo& swapchainPanelInfo_)
 	{
 		std::scoped_lock<std::mutex> lock(EngineTickMutex);
-		if (DX::DeviceResourcesUtil::GetDeviceResources()->SetSwapchainXamlChanged(swapChainPanelInfo))
+		if (DX::DeviceResourcesUtil::GetDeviceResources()->SetSwapchainXamlChanged(swapchainPanelInfo_))
 			CreateWindowSizeDependentResources();
 	}
 
@@ -298,7 +298,7 @@ namespace Engine
 
 	void EngineCore::PickCheck(Vector2i screenPos, shared_ptr<Level::Actor>& pickedActor)
 	{
-		pickedActor = Level::ActorManager::GetInstance().GetActor("MeshTest");
+		pickedActor = Level::ActorManager::GetInstance().GetActorByName("MeshTest");
 	}
 
 #pragma endregion

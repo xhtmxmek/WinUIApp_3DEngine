@@ -25,6 +25,7 @@ namespace Engine
     namespace Level
     {
         class World;
+        class Actor;
     }
 
     namespace Type
@@ -39,7 +40,7 @@ namespace Engine
         ENGINE_API ~EngineCore() = default;
 #ifdef WIN_APPS_SDK
         //void Initialize(Microsoft.UI.Xaml.Controls.SwapChainPanel panel);
-        ENGINE_API void Initialize(const SwapchainPanelInfo& swapChainPanelInfo);
+        ENGINE_API void Initialize(const SwapchainPanelInfo& swapchainPanelInfo_);
 #endif //WIN_APPS_SDK
         ENGINE_API void UnInitialize();
 
@@ -56,7 +57,7 @@ namespace Engine
         ENGINE_API void OnSuspending();
         ENGINE_API void OnResuming();
         ENGINE_API void OnWindowSizeChanged(SharedTypes::Size windowSize);
-        ENGINE_API void OnSwapchainXamlChanged(const SwapchainPanelInfo& swapChainPanelInfo);
+        ENGINE_API void OnSwapchainXamlChanged(const SwapchainPanelInfo& swapchainPanelInfo);
         //void OnOrientationChanged(Windows.Graphics.Display.DisplayOrientations orientation);
         ENGINE_API void ValidateDevice();
 

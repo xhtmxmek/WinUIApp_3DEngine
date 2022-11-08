@@ -49,13 +49,7 @@ namespace Engine
 				return newActorPtr;
 			}
 
-			template<typename T>
-			std::shared_ptr<T> GetActor(const std::string& name)
-			{								
-				return GetActorByName(name);				
-			}
-
-
+			std::shared_ptr<Actor> GetActorByName(const std::string& actorName);
 
 			ENGINE_API size_t GetNumActorList();
 		private:			
@@ -63,8 +57,7 @@ namespace Engine
 			ActorManager() : CurrentActorSizeFactor(1), ActorListResized(false){}			
 			ENGINE_API void CheckActorListCapacity();
 			ENGINE_API std::shared_ptr<Actor> CreateActor(const std::string& className, const std::string& instanceName);
-			//Actor* CreateActor(const std::string& className, const std::string& instanceName);
-			std::shared_ptr<Actor> GetActorByName(const std::string& actorName);
+			//Actor* CreateActor(const std::string& className, const std::string& instanceName);			
 
 			//¸â¹ö º¯¼ö
 			std::unordered_map<const char*, std::shared_ptr<Actor>> Actors;

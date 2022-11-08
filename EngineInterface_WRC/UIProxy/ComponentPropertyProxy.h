@@ -5,7 +5,7 @@ namespace winrt::EngineInterface_WRC::implementation
 {
     struct ComponentPropertyProxy : ComponentPropertyProxyT<ComponentPropertyProxy>
     {
-        ComponentPropertyProxy() = default;
+        ComponentPropertyProxy(const hstring& name);
 
         hstring Name();
         hstring Value();

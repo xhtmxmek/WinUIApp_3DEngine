@@ -71,6 +71,7 @@ namespace Engine
 
         //common
         ENGINE_API void LoadScriptProject(std::wstring const& path);
+        ENGINE_API void PickCheck(Vector2i screenPos, shared_ptr<Level::Actor>& pickedActor);
 
         // private
     private:

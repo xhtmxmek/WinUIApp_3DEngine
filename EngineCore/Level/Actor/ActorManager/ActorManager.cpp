@@ -32,8 +32,8 @@ namespace Engine
 			auto iter = Actors.find(instanceName.c_str());
 			if (iter == Actors.end())
 			{
-				Level::Actor* runtimeActor = static_cast<Level::Actor*>(RuntimeContext::New(className, instanceName));				
-				shared_ptr<Level::Actor> ptr(runtimeActor);				
+				Level::Actor* runtimeActor = static_cast<Level::Actor*>(RuntimeContext::New(className, instanceName));
+				shared_ptr<Level::Actor> ptr(runtimeActor);
 				Actors.insert(std::make_pair(instanceName.c_str(), ptr));
 				return ptr;
 			}
@@ -43,6 +43,10 @@ namespace Engine
 
 		shared_ptr<Actor> ActorManager::GetActorByName(const std::string& actorName)
 		{
+			auto iter = Actors.find(actorName.c_str());
+			if (iter != Actors.end())
+				return iter->second;
+
 			return nullptr;
 		}
 
@@ -52,7 +56,7 @@ namespace Engine
 		}
 
 		void ActorManager::Init()
-		{			
+		{
 		}
 
 		size_t ActorManager::GetNumActorList()

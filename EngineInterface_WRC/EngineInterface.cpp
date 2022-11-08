@@ -113,7 +113,6 @@ namespace winrt::EngineInterface_WRC::implementation
 
 	void EngineInterface::OnOrientationChanged(winrt::Windows::Graphics::Display::DisplayOrientations const& orientation)
 	{
-		//engineCoreNative_->O
 	}
 
 	void EngineInterface::KeyboardProcess(winrt::Microsoft::UI::Xaml::Input::KeyRoutedEventArgs const& args)
@@ -125,28 +124,37 @@ namespace winrt::EngineInterface_WRC::implementation
 	void EngineInterface::StartTracking(winrt::Microsoft::UI::Input::PointerEventArgs const& args)
 	{
 		SharedTypes::PointerButton button;
-		if (args.CurrentPoint().Properties().IsLeftButtonPressed())
-			button = SharedTypes::PointerButton::LeftButton;
-		else if (args.CurrentPoint().Properties().IsRightButtonPressed())
-			button = SharedTypes::PointerButton::RightButton;		
+		bool pressed = false;
+		CheckButtonState(args, button, pressed);
+
+		engineCoreNative_->PointerProcess(button, true, 0.0f, Vector2i(args.CurrentPoint().Position().X, args.CurrentPoint().Position().Y));
 	}
 
 	void EngineInterface::TrackingUpdate(winrt::Microsoft::UI::Input::PointerEventArgs const& args)
 	{
-		args.CurrentPoint().Position();
+		SharedTypes::PointerButton button;
+		bool pressed = false;
+		CheckButtonState(args, button, pressed);
+
+		engineCoreNative_->PointerProcess(button, pressed, 0.0f, Vector2i(args.CurrentPoint().Position().X, args.CurrentPoint().Position().Y));
 	}
 
 	winrt::EngineInterface_WRC::PointerActionResult EngineInterface::StopTracking(winrt::Microsoft::UI::Input::PointerEventArgs const& args)
 	{
 		SharedTypes::PointerButton button;
-		if (args.CurrentPoint().Properties().IsLeftButtonPressed())
-			button = SharedTypes::PointerButton::LeftButton;
-		else if (args.CurrentPoint().Properties().IsRightButtonPressed())
-			button = SharedTypes::PointerButton::RightButton;
+		bool pressed = false;
+		CheckButtonState(args, button, pressed);
 
 		PointerActionResult result;
 						
-		//engineCoreNative_->PointerProcess()
+		engineCoreNative_->PointerProcess(button, false, 0.0f, Vector2i(args.CurrentPoint().Position().X, args.CurrentPoint().Position().Y));
+
+		engineCoreNative_->PickCheck(Vector2i(0,0),);
+		/*
+		* if(pickedPos == currentPos)
+		* engineCoreNative_->RayCheck();
+		* engineCoreNative->LastPickedActor();
+		*/		
 
 		return result;
 	}
@@ -156,6 +164,20 @@ namespace winrt::EngineInterface_WRC::implementation
 		//winrt::Windows::Foundation::Numerics::float2			
 		if (args.CurrentPoint().Properties().IsHorizontalMouseWheel())			
 			args.CurrentPoint().Properties().MouseWheelDelta();
+	}
+
+	void EngineInterface::CheckButtonState(winrt::Microsoft::UI::Input::PointerEventArgs const& args, SharedTypes::PointerButton& button, bool pressed)
+	{
+		if (args.CurrentPoint().Properties().IsLeftButtonPressed())
+		{
+			button = SharedTypes::PointerButton::LeftButton;
+			pressed = true;
+		}
+		else if (args.CurrentPoint().Properties().IsRightButtonPressed())
+		{
+			button = SharedTypes::PointerButton::RightButton;
+			pressed = true;
+		}
 	}
 
 	// Properties

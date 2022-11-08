@@ -49,6 +49,14 @@ namespace Engine
 				return newActorPtr;
 			}
 
+			template<typename T>
+			std::shared_ptr<T> GetActor(const std::string& name)
+			{								
+				return GetActorByName(name);				
+			}
+
+
+
 			ENGINE_API size_t GetNumActorList();
 		private:			
 			//func

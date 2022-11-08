@@ -6,14 +6,14 @@ namespace winrt::EngineInterface_WRC::implementation
 {
     hstring ComponentPropertyProxy::Name()
     {
-        name_;
+        return name_;
     }
     hstring ComponentPropertyProxy::Value()
     {
-        throw hresult_not_implemented();
+        return value_;
     }
     void ComponentPropertyProxy::Value(hstring const& value)
     {
-        throw hresult_not_implemented();
+        value_ = value;
     }
 }

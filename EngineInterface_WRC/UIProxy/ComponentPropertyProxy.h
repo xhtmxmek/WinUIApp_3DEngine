@@ -12,6 +12,7 @@ namespace winrt::EngineInterface_WRC::implementation
         void Value(hstring const& value);
     private:
         hstring name_;
+        hstring value_;
     };
 }
 namespace winrt::EngineInterface_WRC::factory_implementation

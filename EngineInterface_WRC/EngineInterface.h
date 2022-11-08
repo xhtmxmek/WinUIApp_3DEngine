@@ -53,7 +53,8 @@ namespace winrt::EngineInterface_WRC::implementation
     private: 
         void InitializeSwapChainPanelInfo(const Microsoft::UI::Xaml::Controls::SwapChainPanel& panel);
         void SetSwapchainPanelInfo(const Microsoft::UI::Xaml::Controls::SwapChainPanel& panel);        
-        void SetRegisterSwapChainFunc(const Microsoft::UI::Xaml::Controls::SwapChainPanel& panel);        
+        void SetRegisterSwapChainFunc(const Microsoft::UI::Xaml::Controls::SwapChainPanel& panel);
+        void CheckButtonState(winrt::Microsoft::UI::Input::PointerEventArgs const& args, SharedTypes::PointerButton& button, bool pressed);
         
         std::unique_ptr<Engine::EngineCore> engineCoreNative_;
 

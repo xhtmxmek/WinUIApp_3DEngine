@@ -296,6 +296,11 @@ namespace Engine
 		//이후에 해당 스크립트의 Actor를 생성하면 Init이 호출됨.
 	}
 
+	void EngineCore::PickCheck(Vector2i screenPos, shared_ptr<Level::Actor>& pickedActor)
+	{
+		pickedActor = Level::ActorManager::GetInstance().GetActor("MeshTest");
+	}
+
 #pragma endregion
 
 #pragma region Direct3D Resources

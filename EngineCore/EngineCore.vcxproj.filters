@@ -47,6 +47,7 @@
     <ClInclude Include="System\KeyboardState.h" />
     <ClInclude Include="System\MouseState.h" />
     <ClInclude Include="Level\Property\ComponentProperty.h" />
+    <ClInclude Include="EngineAsset\Shader.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="EngineCore.cpp" />
@@ -75,6 +76,7 @@
     <ClCompile Include="System\InputManager.cpp" />
     <ClCompile Include="System\KeyboardState.cpp" />
     <ClCompile Include="System\MouseState.cpp" />
+    <ClCompile Include="EngineAsset\Shader.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

@@ -9,10 +9,9 @@ namespace Engine
 		RUNTIME_CLASS_IMPL(StaticMeshComponent)
 
 		StaticMeshComponent::StaticMeshComponent(const std::string& name)
-			:DrawableComponent(name)
-			//StaticMeshShape(nullptr)
-		{
-			//외부 인자를 받아서 다른 종류의 StaticMesh를 만들면 거기에 맞춰서 이름세팅하기			
+			:DrawableComponent(name),
+			staticMeshShape_(nullptr)
+		{						
 		}
 
 		StaticMeshComponent::~StaticMeshComponent()
@@ -22,7 +21,7 @@ namespace Engine
 		void StaticMeshComponent::Init()
 		{
 			auto context = DX::DeviceResourcesUtil::GetDeviceResources()->GetD3DDeviceContext();
-			StaticMeshShape = DirectX::GeometricPrimitive::CreateSphere(context);						
+			staticMeshShape_ = DirectX::GeometricPrimitive::CreateSphere(context);		
 		}
 
 		void StaticMeshComponent::Tick(float elapsedTime)
@@ -39,7 +38,7 @@ namespace Engine
 
 			//요거는... 바꾸자. 직접 파이프라인에 세팅해서 렌더링하는걸로
 			DirectX::SimpleMath::Matrix(&GetComponentTransform().GetWorldMatrix()._11);
-			StaticMeshShape->Draw(DirectX::SimpleMath::Matrix(&GetComponentTransform().GetWorldMatrix()._11), view, proj);
+			staticMeshShape_->Draw(DirectX::SimpleMath::Matrix(&GetComponentTransform().GetWorldMatrix()._11), view, proj);
 		}
 	}
 }

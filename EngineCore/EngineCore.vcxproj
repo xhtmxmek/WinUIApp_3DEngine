@@ -184,7 +184,7 @@
     <ClInclude Include="Level\Component\SpriteComponent\SpriteComponent.h" />
     <ClInclude Include="Level\Component\StaticMeshComponent\StaticMeshComponent.h" />
     <ClInclude Include="Level\Level.h" />
-    <ClInclude Include="Level\Property\ComponentProperty.h" />
+    <ClInclude Include="Common\Property\PropertyBase.h" />
     <ClInclude Include="Level\World.h" />
     <ClInclude Include="pch.h" />
     <ClInclude Include="Renderer\LevelRenderer.h" />

@@ -17,11 +17,11 @@ namespace Engine
 		class TransformGroup;
 	}
 
+	class ProperyBase;
 	namespace Component
 	{		
 		enum class SceneComponentType;		
-		class DrawableComponentImpl;
-		class PropertyType;
+		class DrawableComponentImpl;		
 
 		class ComponentBase
 		{
@@ -44,8 +44,9 @@ namespace Engine
 
 			ENGINE_API shared_ptr<ComponentBase> GetParent() { return parent_; }
 			ENGINE_API list<shared_ptr<ComponentBase>>& GetChildren() { return children_; }
-			ENGINE_API const string& Name() { return name_; }
+			ENGINE_API const string& Name() { return name_; }			
 		protected:
+			void AddProperty(const shared_ptr<ProperyBase>& property);
 			Engine::Level::Actor* owner_;
 		private:			
 			string name_;
@@ -54,7 +55,7 @@ namespace Engine
 			Math::TransformGroup transform_;
 			bool enable_;
 			SceneComponentType type_;
-			vector<shared_ptr<PropertyType>> properties_;
+			vector<shared_ptr<ProperyBase>> properties_;
 
 		};
 

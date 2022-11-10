@@ -1,5 +1,6 @@
 #pragma once
-#include "../ComponentBase/ComponentBase.h"
+#include "Level/Component/ComponentBase/ComponentBase.h"
+#include "Common/Property/PropertyBase.h"
 
 namespace Engine
 {
@@ -7,6 +8,10 @@ namespace Engine
 	{		
 		class StaticMeshComponent : public DrawableComponent
 		{
+			enum class primitiveType
+			{
+
+			};
 		public:
 			RUNTIME_SUBCLASS(StaticMeshComponent)
 			ENGINE_API StaticMeshComponent(const std::string& name = "StaticMeshComponent");
@@ -14,8 +19,9 @@ namespace Engine
 			void Init() final;
 			void Tick(float elapsedTime) final;
 			void Draw() final;			
-		private:
-			unique_ptr<DirectX::GeometricPrimitive> StaticMeshShape;			
+		private:			
+			unique_ptr<DirectX::GeometricPrimitive> staticMeshShape_;
+			ENGINE_PROPERTY()
 		};
 
 

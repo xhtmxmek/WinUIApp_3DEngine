@@ -4,20 +4,33 @@ namespace Engine
 {
 	namespace EngineAsset
 	{
+		class Texture;
+
+		enum class TextureKey
+		{
+			Diffuse = 0,
+			Normal,
+			Specular,
+			Texture_Max,
+
+		};
+
+
 		class Material
 		{
-		private:
-			//texture는 Manager가 관리함. 엔진 기본 리소스는 엔진 시작지 생성됨.
-			wil::com_ptr<ID3D11ShaderResourceView> DiffuseMap;
-			wil::com_ptr<ID3D11ShaderResourceView> NormalMap;
-			wil::com_ptr<ID3D11ShaderResourceView> SpecularMap;
-			//이외의 각종 옵션들...
+		private:			
+			vector<wil::com_ptr<Texture>> textures_;			
 			void UpdateConstBuffers();
 		public:
+			Material();
+
+			void SetTexture(TextureKey key, const wil::com_ptr<Texture>& texture)
+			{
+				int textureKey = static_cast<int>(key);
+				textures_[textureKey] = texture;
+			}
+
 			void DrawMaterial();
-			static const int DiffuseMapSlot = 0;
-			static const int NormalMapSlot = 1;
-			static const int SpecularMapSlot = 2;
 		};
 
 		class MaterialManager

@@ -43,6 +43,7 @@
 #include <d2d1_3.h>
 #include <d2d1effects_2.h>
 #include <dwrite_3.h>
+#include <d3d11shader.h>
 
 #include <pix.h>
 

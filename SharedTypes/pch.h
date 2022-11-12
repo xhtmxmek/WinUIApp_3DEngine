@@ -14,6 +14,9 @@
 #include <cmath>
 #include <functional>
 
+#include <string>
+#include <map>
+
 
 #include "Math/Vector2.h"
 #include "Math/Vector3.h"

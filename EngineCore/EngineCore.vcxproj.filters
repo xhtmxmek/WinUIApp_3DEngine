@@ -15,13 +15,13 @@
     <ClInclude Include="Level\Actor\StaticMesh\StaticMesh.h" />
     <ClInclude Include="Level\Actor\Actor.h" />
     <ClInclude Include="Level\Actor\PropertyActor.h" />
-    <ClInclude Include="Level\Component\CameraComponent\CameraComponent.h" />
-    <ClInclude Include="Level\Component\ComponentBase\ComponentBase.h" />
-    <ClInclude Include="Level\Component\SpriteComponent\SpriteComponent.h" />
-    <ClInclude Include="Level\Component\StaticMeshComponent\StaticMeshComponent.h" />
-    <ClInclude Include="Level\Component\ComponentLinker.h" />
-    <ClInclude Include="Level\Component\ComponentTypes.h" />
-    <ClInclude Include="Level\Component\EngineProperty.h" />
+    <ClInclude Include="Component\CameraComponent\CameraComponent.h" />
+    <ClInclude Include="Component\ComponentBase\ComponentBase.h" />
+    <ClInclude Include="Component\SpriteComponent\SpriteComponent.h" />
+    <ClInclude Include="Component\StaticMeshComponent\StaticMeshComponent.h" />
+    <ClInclude Include="Component\ComponentLinker.h" />
+    <ClInclude Include="Component\ComponentTypes.h" />
+    <ClInclude Include="Component\EngineProperty.h" />
     <ClInclude Include="Level\Level.h" />
     <ClInclude Include="Level\World.h" />
     <ClInclude Include="Renderer\LevelRenderer.h" />
@@ -46,7 +46,7 @@
     <ClInclude Include="System\InputManager.h" />
     <ClInclude Include="System\KeyboardState.h" />
     <ClInclude Include="System\MouseState.h" />
-    <ClInclude Include="Common\Property\PropertyBase.h" />
+    <ClInclude Include="Component\Property\PropertyBase.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="EngineCore.cpp" />
@@ -56,11 +56,11 @@
     <ClCompile Include="Level\Actor\SpriteActor\Sprite.cpp" />
     <ClCompile Include="Level\Actor\StaticMesh\StaticMesh.cpp" />
     <ClCompile Include="Level\Actor\Actor.cpp" />
-    <ClCompile Include="Level\Component\CameraComponent\CameraComponent.cpp" />
-    <ClCompile Include="Level\Component\ComponentBase\ComponentBase.cpp" />
-    <ClCompile Include="Level\Component\SpriteComponent\SpriteComponent.cpp" />
-    <ClCompile Include="Level\Component\StaticMeshComponent\StaticMeshComponent.cpp" />
-    <ClCompile Include="Level\Component\ComponentLinker.cpp" />
+    <ClCompile Include="Component\CameraComponent\CameraComponent.cpp" />
+    <ClCompile Include="Component\ComponentBase\ComponentBase.cpp" />
+    <ClCompile Include="Component\SpriteComponent\SpriteComponent.cpp" />
+    <ClCompile Include="Component\StaticMeshComponent\StaticMeshComponent.cpp" />
+    <ClCompile Include="Component\ComponentLinker.cpp" />
     <ClCompile Include="Level\Level.cpp" />
     <ClCompile Include="Level\World.cpp" />
     <ClCompile Include="Renderer\LevelRenderer.cpp" />

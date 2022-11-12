@@ -1,6 +1,6 @@
 #include "pch.h"
 #include "Actor.h"
-#include "Level/Component/ComponentBase/ComponentBase.h"
+#include "Component/ComponentBase/ComponentBase.h"
 #include "Level/Level.h"
 #include "Level/World.h"
 

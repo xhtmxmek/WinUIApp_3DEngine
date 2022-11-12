@@ -3,7 +3,7 @@
 #include "DLLDefine.h"
 #include "PropertyActor.h"
 #include "Common/RuntimeContext.h"	//Class 이름 정보를 얻기위해 RunTimeContext 헤더를 포함했음. RuntimeContext는 어차피 거의 변하지 않음.
-#include "Level/Component/ComponentLinker.h"
+#include "Component/ComponentLinker.h"
 
 namespace Engine
 {

@@ -3,8 +3,8 @@
 
 //Component
 //#include "Level/Component/SpriteComponent/SpriteComponent.h"
-#include "Level/Component/StaticMeshComponent/StaticMeshComponent.h"
-#include "Level/Component/CameraComponent/CameraComponent.h"
+#include "Component/StaticMeshComponent/StaticMeshComponent.h"
+#include "Component/CameraComponent/CameraComponent.h"
 
 //Actor
 //#include "Level/Actor/SpriteActor/Sprite.h"
@@ -18,7 +18,7 @@ namespace Engine
 	std::map<std::string, RuntimeClass*> RuntimeContext::RuntimeClassTable;
 
 	void RuntimeContext::InitialzeRuntimeTable()
-	{		
+	{				
 		//component
 		//REGISTER_RUNTIME_CLASS(SpriteComponent)
 		REGISTER_RUNTIME_CLASS(StaticMeshComponent)

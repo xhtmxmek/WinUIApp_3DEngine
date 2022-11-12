@@ -54,10 +54,10 @@ namespace Engine
 			return type_;
 		}
 
-		void ComponentBase::AddProperty(const shared_ptr<ComponentProperty>& property)
-		{
-			properties_.push_back(property);
-		}
+		//void ComponentBase::AddProperty(const shared_ptr<ProperyBase>& property)
+		//{
+		//	properties_.push_back(property);
+		//}
 
 		//DrawableComponent::DrawableComponent(const std::string& name)
 		//	:ComponentBase(name, SceneComponentType::Drawable)

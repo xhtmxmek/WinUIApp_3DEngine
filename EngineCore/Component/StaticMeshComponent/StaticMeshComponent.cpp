@@ -21,7 +21,14 @@ namespace Engine
 		void StaticMeshComponent::Init()
 		{
 			auto context = DX::DeviceResourcesUtil::GetDeviceResources()->GetD3DDeviceContext();
-			staticMeshShape_ = DirectX::GeometricPrimitive::CreateSphere(context);		
+			staticMeshShape_ = DirectX::GeometricPrimitive::CreateSphere(context);
+
+			meshType_.Register("Cube", PropertyStaticMesh::MeshType::Cube);
+			meshType_.Register("Sphere", PropertyStaticMesh::MeshType::Sphere);
+			meshType_.Register("Cylinder", PropertyStaticMesh::MeshType::Cylinder);
+			meshType_.Register("Cone", PropertyStaticMesh::MeshType::Cone);
+									
+			AddProperty(&meshType_);
 		}
 
 		void StaticMeshComponent::Tick(float elapsedTime)
@@ -36,7 +43,7 @@ namespace Engine
 			Matrix proj = Matrix::CreatePerspectiveFieldOfView(DirectX::XM_PI / 4.f,
 				float(size.Width) / float(size.Height), 0.1f, 10.f);
 
-			//요거는... 바꾸자. 직접 파이프라인에 세팅해서 렌더링하는걸로
+			//TODO : 요거는... 바꾸자. 직접 파이프라인에 세팅해서 렌더링하는걸로
 			DirectX::SimpleMath::Matrix(&GetComponentTransform().GetWorldMatrix()._11);
 			staticMeshShape_->Draw(DirectX::SimpleMath::Matrix(&GetComponentTransform().GetWorldMatrix()._11), view, proj);
 		}

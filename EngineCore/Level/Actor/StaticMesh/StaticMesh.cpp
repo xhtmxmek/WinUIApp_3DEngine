@@ -1,5 +1,5 @@
 #include "pch.h"
-#include "Level/Component/StaticMeshComponent/StaticMeshComponent.h"
+#include "Component/StaticMeshComponent/StaticMeshComponent.h"
 #include "StaticMesh.h"
 //#include "SpriteImpl.h"
 

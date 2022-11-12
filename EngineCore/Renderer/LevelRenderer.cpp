@@ -1,6 +1,6 @@
 #include "pch.h"
 #include "LevelRenderer.h"
-#include "Level/Component/ComponentBase/ComponentBase.h"
+#include "Component/ComponentBase/ComponentBase.h"
 
 namespace Engine
 {

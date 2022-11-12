@@ -1,5 +1,5 @@
 #include "pch.h"
-#include "Level/Component/SpriteComponent/SpriteComponent.h"
+#include "Component/SpriteComponent/SpriteComponent.h"
 #include "Sprite.h"
 #include "Level/World.h"
 

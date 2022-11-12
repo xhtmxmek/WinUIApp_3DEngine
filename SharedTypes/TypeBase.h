@@ -1,7 +1,7 @@
 #pragma once
 #include "pch.h"
 
-namespace Engine
+namespace SharedTypes
 {
 	enum class PropertyType
 	{
@@ -14,17 +14,17 @@ namespace Engine
 		TypeSelectList
 	};
 
-	class PropertyBase
+	class TypeBase
 	{
 	public:
 		//OnChanged 함수 포인터를 넣어주면될듯
 		//프로퍼티는 OnChanged 호출되면 Value를 넣어주어 Callback실행함
 		//OnChange 이벤트에 여러개 실행시키고싶다면, OnChange를 벡터로 만들고 해당 이벤트에 바인딩시키기.
-		PropertyBase(std::string const& name, PropertyType const& type)
+		TypeBase(std::string const& name, PropertyType const& type)
 			:name_(name), type_(type)
 		{
 		}
-		std::function<void(PropertyBase*)> OnChange;
+		std::function<void(TypeBase*)> OnChange;
 		void ApplyChange() { OnChange(this); }
 	private:
 		std::string name_;
@@ -32,54 +32,79 @@ namespace Engine
 		//std::vector<EngineProperty> child는 나중에 생각
 	};
 
-	class PropertyInt : public PropertyBase
+	class TypeInt : public TypeBase
 	{
 	public:
-		PropertyInt(std::string const& name, PropertyType const& type)
-			:PropertyBase(name, type),
+		TypeInt(std::string const& name, PropertyType const& type)
+			:TypeBase(name, type),
 			value_(0)
 		{
+		}
+		TypeInt& operator=(int value)
+		{
+			value_ = value; return (*this);
 		}
 	private:
 		int value_;
 		//std::vector<EngineProperty> child는 나중에 생각
 	};
 
-	class PropertyFloat : public PropertyBase
+	class TypeFloat : public TypeBase
 	{
 	public:
-		PropertyFloat(std::string const& name, PropertyType const& type)
-			:PropertyBase(name, type),
+		TypeFloat(std::string const& name, PropertyType const& type)
+			:TypeBase(name, type),
 			value_(0.0f)
 		{
+		}
+
+		TypeFloat& operator=(int value)
+		{
+			value_ = value; return (*this);
 		}
 	private:
 		float value_;
 		//std::vector<EngineProperty> child는 나중에 생각
 	};
 
-	class PropertyBool : public PropertyBase
+	class TypeBool : public TypeBase
 	{
 	public:
-		PropertyBool(std::string const& name, PropertyType const& type)
-			:PropertyBase(name, type),
+		TypeBool(std::string const& name, PropertyType const& type)
+			:TypeBase(name, type),
 			value_(false)
 		{
 		}
+		TypeBool& operator=(int value)
+		{
+			value_ = value; return (*this);
+		}
+
 	private:
 		float value_;
 	};
 
-	class PropertyEnumList : public PropertyInt
+	//Property value는 Int. enum을 가지고 있고 UI에는 key값에 해당하는 String을 보여줌.
+	class TypeEnum : public TypeInt
 	{
 	public:
-		PropertyEnumList(std::string const& name, PropertyType const& type)
-			:PropertyInt(name, type)
+		TypeEnum(std::string const& name, PropertyType const& type)
+			:TypeInt(name, type)
 		{
 		}
-	private:
-		std::map<string, int> selectList_;
 
+		void Register(const std::string& name, int value)
+		{
+			selectList_[name] = value;
+		}
+
+		TypeEnum& operator=(int value)
+		{
+			(TypeInt::operator=(value));
+			return *this;
+		}
+	private:
+		std::map<std::string, int> selectList_;
 	};
 
 	//class PropertyBool : public EngineProperty
@@ -103,12 +128,13 @@ namespace Engine
 	//	//const Vector3& operator*( PropertyVector3 const& rhs){ return Value * }
 	//};
 
-#define ENGINE_PROPERTY(name, type)\
-	private: \
-		type name_;\
-	public:\
-		type Name();\
-		void Name(const type& value);\
+//#define ENGINE_PROPERTY(name, type)\
+//	private: \
+//		type name_;\
+//	public:\
+//		type Name();\
+//		void Name(const type& value);\
+
 }
 
 

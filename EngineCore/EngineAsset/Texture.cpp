@@ -21,7 +21,7 @@ namespace Engine
 				//CreateWICTextureFromFile(device, L"Assets/cat.png",
 				resource.addressof(),
 				ShaderResourceView.put());
-
+			
 			return SUCCEEDED(hr);
 		}
 	}

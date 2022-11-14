@@ -6,6 +6,13 @@ namespace Engine
 {
 	namespace EngineAsset
 	{
+		Material::Material()
+		{
+			int maxTextureCount = static_cast<int>(TextureKey::Texture_Max);
+			textures_.reserve(maxTextureCount);
+			textures_.resize(maxTextureCount, nullptr);
+		}
+
 		void Material::UpdateConstBuffers()
 		{
 		}

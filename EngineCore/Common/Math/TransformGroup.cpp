@@ -9,9 +9,9 @@ namespace Engine
 		//const TransformGroup TransformGroup::Identity;
 
 		TransformGroup::TransformGroup()
-			:position_(Vector3f(0.f, 0.f, 0.f)),
-			rotation_(Vector3f(0.f, 0.f, 0.f)),
-			scale_(Vector3f(1.f, 1.f, 1.f))
+			:position_("position"),
+			rotation_("rotation"),
+			scale_("scale")
 		{
 			//내가원하는 동작은 바깥의 Positon property를 Onchange를 부르면 등록한 callback(이경우에는 
 
@@ -37,12 +37,12 @@ namespace Engine
 
 		const Vector3f& TransformGroup::GetScale()
 		{
-			scale_.Value();
+			return scale_.Value();
 		}
 
 		const Vector3f& TransformGroup::GetRotation()
 		{
-			rotation_.Value();
+			return rotation_.Value();
 		}
 
 		void TransformGroup::UpdateTransform(TransformGroup* parent)

@@ -10,7 +10,8 @@ namespace Engine
 
 		StaticMeshComponent::StaticMeshComponent(const std::string& name)
 			:DrawableComponent(name),
-			staticMeshShape_(nullptr)
+			staticMeshShape_(nullptr),
+			meshType_("meshtype")
 		{						
 		}
 

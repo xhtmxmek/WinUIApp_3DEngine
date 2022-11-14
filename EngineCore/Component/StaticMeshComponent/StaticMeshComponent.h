@@ -17,8 +17,8 @@ namespace Engine
 				Cone,
 			};
 
-			PropertyStaticMesh(std::string const& name, PropertyType const& type)
-				:PropertyEnum(name, type)
+			PropertyStaticMesh(std::string const& name)
+				:PropertyEnum(name)
 			{
 				//각 타입의 주소를 넘겨서, 컴포넌트 프로퍼티 부모에서 packedValue호출시키기. 
 			}
@@ -28,6 +28,8 @@ namespace Engine
 				PropertyEnum::operator=(static_cast<int>(type));
 				return *this;
 			}
+
+			virtual wstring PackedValue() { return L"Cube"; }
 		};
 
 		class StaticMeshComponent : public DrawableComponent

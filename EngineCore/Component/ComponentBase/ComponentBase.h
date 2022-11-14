@@ -44,7 +44,7 @@ namespace Engine
 			ENGINE_API list<shared_ptr<ComponentBase>>& GetChildren() { return children_; }
 			ENGINE_API const string& Name() { return name_; }			
 		protected:
-			void AddProperty(PropertyBase* property);
+			void AddProperty(PropertyBase* newProperty);
 			Level::Actor* owner_;
 		private:			
 			string name_;
@@ -53,7 +53,7 @@ namespace Engine
 			Math::TransformGroup transform_;
 			bool enable_;
 			SceneComponentType type_;
-			vector<shared_ptr<PropertyBase>> properties_;
+			vector<PropertyBase*> properties_;
 
 		};
 

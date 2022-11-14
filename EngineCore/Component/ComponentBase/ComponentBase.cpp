@@ -54,6 +54,11 @@ namespace Engine
 			return type_;
 		}
 
+		void ComponentBase::AddProperty(PropertyBase* newProperty)
+		{
+			properties_.push_back(newProperty);
+		}
+
 		//void ComponentBase::AddProperty(const shared_ptr<ProperyBase>& property)
 		//{
 		//	properties_.push_back(property);

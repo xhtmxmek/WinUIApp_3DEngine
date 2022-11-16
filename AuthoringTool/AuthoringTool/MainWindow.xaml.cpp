@@ -7,6 +7,8 @@
 //#include "EngineCore/Common/StepTimer.h"
 //
 
+#include "ViewModels/Actor/ActorViewModel.h"
+
 using namespace winrt;
 using namespace Microsoft::UI::Xaml;
 //using namespace DX11Engine_WinUI3_WRC;
@@ -158,8 +160,7 @@ namespace winrt::AuthoringTool::implementation
         * ViewModel에서  
         */
         //m_Engine.StartTracking();        
-        //trackingOutput = renderingEngine_.startTracking();
-        //_actorViewModel.SetActor();
+        //trackingOutput = renderingEngine_.startTracking();        
         //renderingEngine_.startT
         renderingEngine_.StartTracking(args);
     }
@@ -178,6 +179,8 @@ namespace winrt::AuthoringTool::implementation
     {
         EngineInterface_WRC::PointerActionResult result = renderingEngine_.StopTracking(args);
         EngineInterface_WRC::ActorProxy proxy;
+
+        GetPickedActor();
         //proxy.Components().
         //result.PickedActor()
     }
@@ -228,6 +231,23 @@ namespace winrt::AuthoringTool::implementation
                 coreInput.PointerWheelChanged({ this, &MainWindow::OnPointerWheelChangedSwapChain });
 
             });
+    }
+
+    void MainWindow::GetPickedActor()
+    {
+        //Test Code
+        for (int i = 0; i < 5; i++)
+        {
+/*            hstring componentName = L"TestComponent_" + to_hstring(i);
+            AuthoringTool::ActorComponent component = winrt::make<AuthoringTool::implementation::ActorComponent>(componentName);
+            AuthoringTool::ActorProperty property = winrt::make<AuthoringTool::implementation::ActorProperty>(L"TestProperty_1");
+            AuthoringTool::ActorProperty property2 = winrt::make<AuthoringTool::implementation::ActorProperty>(L"TestProperty_2");
+            AuthoringTool::ActorProperty property3 = winrt::make<AuthoringTool::implementation::ActorProperty>(L"TestProperty_3");
+            component.Properties().Append(property);
+            component.Properties().Append(property2);
+            component.Properties().Append(property3);
+            actorViewModel_.Components().Append(component);        */    
+        }
     }
 
     //void MainPage::ClickHandler(IInspectable const&, RoutedEventArgs const&)

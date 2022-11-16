@@ -28,7 +28,7 @@ namespace Engine
 			bool GetKeyboardState(SharedTypes::VirtualKey key);
 			void SetKeyboardState(SharedTypes::VirtualKey key, bool isPressed);
 			void GetMouseState(SharedTypes::PointerButton button);
-			void SetMouseState(SharedTypes::PointerButton button, bool isPressed, float delta, Vector2i pos);
+			void SetMouseState(vector<bool> const& pointerState, float delta, Vector2i pos);
 
 		private:
 			unique_ptr<KeyboardState> Keyboard;

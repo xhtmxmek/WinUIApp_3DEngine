@@ -26,16 +26,13 @@ namespace winrt::AuthoringTool::implementation
 		AuthoringTool::ActorViewModel SelectedActorViewModel();
 	private:
 		//not projection
-// XAML 하위 수준 렌더링 이벤트 처리기입니다.
 		void OnRendering(IInspectable const& sender, IInspectable const& args);
-
-		// 창 이벤트 처리기입니다.
+		
 		void OnVisibilityChanged(IInspectable const& sender, Microsoft::UI::Xaml::WindowVisibilityChangedEventArgs const& args);
 		void OnActivated(IInspectable const& sender, Microsoft::UI::Xaml::WindowActivatedEventArgs const& args);
 		void OnClosed(IInspectable const& sender, Microsoft::UI::Xaml::WindowEventArgs const& args);
 		void OnSizeChanged(IInspectable const& sender, Microsoft::UI::Xaml::WindowSizeChangedEventArgs const& args);
-
-		// SwapChainPanel 이벤트 처리기입니다.
+		
 		void OnSwapChainPanelXamlRootChanged(Microsoft::UI::Xaml::XamlRoot const& sender, Microsoft::UI::Xaml::XamlRootChangedEventArgs const& args);
 		void OnSwapChainPanelCompositionScaleChanged(Microsoft::UI::Xaml::Controls::SwapChainPanel const& sender, IInspectable const& args);
 		void OnSwapChainPanel_SizeChanged(Windows::Foundation::IInspectable const& sender, Microsoft::UI::Xaml::SizeChangedEventArgs const& args);
@@ -44,11 +41,9 @@ namespace winrt::AuthoringTool::implementation
 		//void OnOrientationChanged(Windows::Graphics::Display::DisplayInformation const& sender, IInspectable const& args);
 		//void OnDisplayContentsInvalidated(Windows::Graphics::Display::DisplayInformation const& sender, IInspectable const& args);
 		void OnSwapchainPanelLoaded(IInspectable const& sender, Microsoft::UI::Xaml::RoutedEventArgs const& e);
-
-		// 기타 이벤트 처리기입니다.
+		
 		void AppBarButton_Click(IInspectable const& sender, Microsoft::UI::Xaml::RoutedEventArgs const& e);
-
-		// 독립 입력 처리 함수입니다.		
+		
 		void OnPointerPressedSwapChain(Microsoft::UI::Input::InputPointerSource const& sender, Microsoft::UI::Input::PointerEventArgs const& e);
 		void OnPointerMovedSwapChain(Microsoft::UI::Input::InputPointerSource const& sender, Microsoft::UI::Input::PointerEventArgs const& e);
 		void OnPointerReleasedSwapChain(Microsoft::UI::Input::InputPointerSource const& sender, Microsoft::UI::Input::PointerEventArgs const& e);
@@ -57,11 +52,12 @@ namespace winrt::AuthoringTool::implementation
 		void SetPickedActor(EngineInterface_WRC::ActorProxy const& pickedActor);
 
 		void OnKeyDown_SwapChain(Windows::Foundation::IInspectable const& sender, Microsoft::UI::Xaml::Input::KeyRoutedEventArgs const& args);
-		void OnKeyUp_SwapChain(Windows::Foundation::IInspectable const& sender, Microsoft::UI::Xaml::Input::KeyRoutedEventArgs const& args);
-		//void swapChainPanel_PointerReleased(winrt::Windows::Foundation::IInspectable const& sender, winrt::Windows::UI::Xaml::Input::PointerRoutedEventArgs const& e);
+		void OnKeyUp_SwapChain(Windows::Foundation::IInspectable const& sender, Microsoft::UI::Xaml::Input::KeyRoutedEventArgs const& args);		
 
 		//Control		
 		void RegisterDedicatedInputOnSwapchain();
+
+		void GetPickedActor();
 
 		//DXGI_MODE_ROTATION ComputeDisplayRotation() const noexcept
 		//{

@@ -25,7 +25,7 @@ namespace Engine
         {
         public:
             MouseState();
-            void SetState(SharedTypes::PointerButton button, bool isPressed, float delta, Vector2i pos);
+            void SetState(vector<bool> const& pointerState, float delta, Vector2i pos);
             ButtonState GetState(SharedTypes::PointerButton button);
         private:
             std::vector<ButtonState> state_;

@@ -20,20 +20,6 @@ namespace Engine
 	extern void ExitGame() noexcept;
 
 #pragma region Initialize
-	//void EngineCore::Initialize(HWND window)
-	//{
-	//    CreateDeviceDependentResources();
-	//    DX::DeviceResourcesUtil::GetDeviceResources()->SetWindow(window, 500, 500);
-	//    CreateWindowSizeDependentResources();
-
-	//    // TODO: Change the timer settings if you want something other than the default variable timestep mode.
-	//    // e.g. for 60 FPS fixed timestep update logic, call:
-	//    /*
-	//    m_timer.SetFixedTimeStep(true);
-	//    m_timer.SetTargetElapsedSeconds(1.0 / 60);
-	//    */
-	//}
-
 	void EngineCore::InitializeGlobalObjects()
 	{
 		m_World = make_shared<Engine::Level::World>();
@@ -63,9 +49,12 @@ namespace Engine
 		//DX::DeviceResourcesUtil::GetDeviceResources()->RegisterDeviceNotify(this);
 		RuntimeContext::InitialzeRuntimeTable();
 		InitializeGlobalObjects();
+		Input::InputManager::GetInstance().Initialize();
 
 		Path::InitBasePathes();
 		LoadDefaultProject();
+
+
 
 		DX::DeviceResourcesUtil::GetDeviceResources()->SetOption(DX::DeviceResources::c_UseXAML);
 		CreateDeviceDependentResources();
@@ -278,9 +267,9 @@ namespace Engine
 		Input::InputManager::GetInstance().SetKeyboardState(key, isPressed);
 	}
 
-	void EngineCore::PointerProcess(SharedTypes::PointerButton button, bool isPressed, float delta, Vector2i pos)
+	void EngineCore::PointerProcess(vector<bool> const& pointerState, float delta, Vector2i pos)
 	{
-		Input::InputManager::GetInstance().SetMouseState(button, isPressed, delta, pos);
+		Input::InputManager::GetInstance().SetMouseState(pointerState, delta, pos);
 		//pickingLogic
 	}
 

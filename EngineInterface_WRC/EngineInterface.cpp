@@ -32,6 +32,10 @@ namespace winrt::EngineInterface_WRC::implementation
 	{
 		InitializeSwapChainPanelInfo(panel);
 		engineCoreNative_->Initialize(swapchainPanelInfo_);
+
+		UINT buttonCount = static_cast<int>(SharedTypes::PointerButton::Button_Max);
+		MouseButtonState.reserve(buttonCount);
+		MouseButtonState.resize(buttonCount);
 	}
 
 	void EngineInterface::UnInitialize()
@@ -128,30 +132,21 @@ namespace winrt::EngineInterface_WRC::implementation
 
 	void EngineInterface::StartTracking(winrt::Microsoft::UI::Input::PointerEventArgs const& args)
 	{
-		SharedTypes::PointerButton button;
-		bool pressed = false;
-		CheckButtonState(args, button, pressed);
-
-		engineCoreNative_->PointerProcess(button, true, 0.0f, Vector2i((int)args.CurrentPoint().Position().X, (int)args.CurrentPoint().Position().Y));
+		CheckButtonState(args);
+		engineCoreNative_->PointerProcess(MouseButtonState, 0.0f, Vector2i((int)args.CurrentPoint().Position().X, (int)args.CurrentPoint().Position().Y));
 		//engineCoreNative_->PickCheck(Vector2i(0, 0), pickedActor_);
 	}
 
 	void EngineInterface::TrackingUpdate(winrt::Microsoft::UI::Input::PointerEventArgs const& args)
-	{
-		SharedTypes::PointerButton button;
-		bool pressed = false;
-		CheckButtonState(args, button, pressed);
-
-		engineCoreNative_->PointerProcess(button, pressed, 0.0f, Vector2i((int)args.CurrentPoint().Position().X, (int)args.CurrentPoint().Position().Y));
+	{		
+		CheckButtonState(args);
+		engineCoreNative_->PointerProcess(MouseButtonState, 0.0f, Vector2i((int)args.CurrentPoint().Position().X, (int)args.CurrentPoint().Position().Y));
 	}
 
 	winrt::EngineInterface_WRC::PointerActionResult EngineInterface::StopTracking(winrt::Microsoft::UI::Input::PointerEventArgs const& args)
 	{
-		SharedTypes::PointerButton button;
-		bool pressed = false;
-		CheckButtonState(args, button, pressed);
-		
-		engineCoreNative_->PointerProcess(button, false, 0.0f, Vector2i((int)args.CurrentPoint().Position().X, (int)args.CurrentPoint().Position().Y));
+		CheckButtonState(args);		
+		engineCoreNative_->PointerProcess(MouseButtonState, 0.0f, Vector2i((int)args.CurrentPoint().Position().X, (int)args.CurrentPoint().Position().Y));
 
 		Vector2f currentPos = Vector2f(args.CurrentPoint().Position().X, args.CurrentPoint().Position().Y);
 		if (currentPos == pickedPos_)
@@ -168,18 +163,10 @@ namespace winrt::EngineInterface_WRC::implementation
 			args.CurrentPoint().Properties().MouseWheelDelta();
 	}
 
-	void EngineInterface::CheckButtonState(winrt::Microsoft::UI::Input::PointerEventArgs const& args, SharedTypes::PointerButton& button, bool pressed)
-	{
-		if (args.CurrentPoint().Properties().IsLeftButtonPressed())
-		{
-			button = SharedTypes::PointerButton::LeftButton;
-			pressed = true;
-		}
-		else if (args.CurrentPoint().Properties().IsRightButtonPressed())
-		{
-			button = SharedTypes::PointerButton::RightButton;
-			pressed = true;
-		}
+	void EngineInterface::CheckButtonState(winrt::Microsoft::UI::Input::PointerEventArgs const& args)
+	{		
+		MouseButtonState[static_cast<UINT>(SharedTypes::PointerButton::LeftButton)] = args.CurrentPoint().Properties().IsLeftButtonPressed();
+		MouseButtonState[static_cast<UINT>(SharedTypes::PointerButton::RightButton)] = args.CurrentPoint().Properties().IsRightButtonPressed();
 	}
 
 	void EngineInterface::UpdateActorProxy()

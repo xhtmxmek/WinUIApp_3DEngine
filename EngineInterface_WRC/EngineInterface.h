@@ -58,7 +58,7 @@ namespace winrt::EngineInterface_WRC::implementation
         void InitializeSwapChainPanelInfo(const Microsoft::UI::Xaml::Controls::SwapChainPanel& panel);
         void SetSwapchainPanelInfo(const Microsoft::UI::Xaml::Controls::SwapChainPanel& panel);
         void SetRegisterSwapChainFunc(const Microsoft::UI::Xaml::Controls::SwapChainPanel& panel);
-        void CheckButtonState(winrt::Microsoft::UI::Input::PointerEventArgs const& args, SharedTypes::PointerButton& button, bool pressed);
+        void CheckButtonState(winrt::Microsoft::UI::Input::PointerEventArgs const& args);
         void UpdateActorProxy();
         
         std::unique_ptr<Engine::EngineCore> engineCoreNative_;
@@ -69,6 +69,7 @@ namespace winrt::EngineInterface_WRC::implementation
         Vector2f pickedPos_;
         shared_ptr<Engine::Level::Actor> pickedActor_;
         ActorProxy actorProxy_;
+        vector<bool>MouseButtonState;
 
     };
 }

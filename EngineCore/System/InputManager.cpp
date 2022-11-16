@@ -1,5 +1,6 @@
 #include "pch.h"
 #include "InputManager.h"
+#include "Input/PointerButton.h"
 
 namespace Engine
 {	
@@ -25,9 +26,9 @@ namespace Engine
 		{
 		}
 
-		void InputManager::SetMouseState(SharedTypes::PointerButton button, bool isPressed, float delta, Vector2i pos)
-		{
-			Mouse->SetState(button, isPressed, delta, pos);
+		void InputManager::SetMouseState(vector<bool> const& pointerState, float delta, Vector2i pos)
+		{			
+			Mouse->SetState(pointerState, delta, pos);
 		}
 	}
 }

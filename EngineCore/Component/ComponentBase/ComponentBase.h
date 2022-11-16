@@ -40,9 +40,22 @@ namespace Engine
 
 			ENGINE_API SceneComponentType ComponentType();
 
-			ENGINE_API shared_ptr<ComponentBase> GetParent() { return parent_; }
-			ENGINE_API list<shared_ptr<ComponentBase>>& GetChildren() { return children_; }
-			ENGINE_API const string& Name() { return name_; }			
+			ENGINE_API shared_ptr<ComponentBase> GetParent() 
+			{ 
+				return parent_; 
+			}
+			ENGINE_API list<shared_ptr<ComponentBase>>& GetChildren() 
+			{ 
+				return children_; 
+			}
+			ENGINE_API const string& Name() 
+			{ 
+				return name_; 
+			}	
+			ENGINE_API const vector<PropertyBase*>& Properties()
+			{ 
+				return properties_;
+			}
 		protected:
 			void AddProperty(PropertyBase* newProperty);
 			Level::Actor* owner_;

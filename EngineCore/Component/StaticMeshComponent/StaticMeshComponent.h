@@ -29,7 +29,7 @@ namespace Engine
 				return *this;
 			}
 
-			virtual wstring PackedValue() { return L"Cube"; }
+			virtual std::wstring PackedValue() { return L"Cube"; }
 		};
 
 		class StaticMeshComponent : public DrawableComponent

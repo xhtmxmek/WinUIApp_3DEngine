@@ -4,10 +4,10 @@
 #include "EngineInterface.g.cpp"
 #endif
 
-#include "../EngineCore/EngineCore.h" //
-#include "../EngineCore/Common/EngineHelper.h"
-#include "../EngineCore/Level/Actor/Actor.h"
-#include "../EngineCore/Level/Component/ComponentBase/ComponentBase.h"
+#include "EngineCore.h"
+#include "Common/EngineHelper.h"
+#include "Level/Actor/Actor.h"
+#include "Component/ComponentBase/ComponentBase.h"
 
 extern void ExitGame() noexcept;
 
@@ -187,18 +187,20 @@ namespace winrt::EngineInterface_WRC::implementation
 
 		actorProxy_.Components().Clear();
 		for (auto iterComponent : pickedActor_->Components())
-		{			
+		{								
 			wstring convertName;			
 			convertName.assign(iterComponent.second->Name().begin(), iterComponent.second->Name().end());
 
 			ActorComponentProxy componentProxy(convertName);
-			for (auto iterProperty : iterComponent.)
-			componentProxy.Properties().Append()
+			for (auto iterProperty : iterComponent.second->Properties())
+			{
+				wstring propertyName;
+				propertyName.assign(iterProperty->Name().begin(), iterProperty->Name().end());
+				ComponentPropertyProxy propertyProxy(propertyName);
+				componentProxy.Properties().Append(propertyProxy);					
+			}
 			actorProxy_.Components().Append(componentProxy);
-			//*iter.second->Name();
 		}
-		//pickedActor_->Components().size();
-		//actorProxy_.c
 	}
 
 	// Properties

@@ -43,7 +43,6 @@
                 VerticalAlignment="Top"
                 Orientation="Vertical">
                 <TextBox Text="{x:Bind SelectedActorViewModel.Name, Mode=TwoWay}" />
-                <!--<TextBox Background="DarkGray" Text="ActorName" />-->
                 <ListBox ItemsSource="{x:Bind SelectedActorViewModel.Components}">
                     <ItemsControl.ItemTemplate>
                         <DataTemplate x:DataType="local:ActorComponent">
@@ -52,8 +51,12 @@
                                 <TextBlock Text="{x:Bind Name, Mode=OneTime}" />
                                 <ListBox ItemsSource="{x:Bind Properties}">
                                     <ItemsControl.ItemTemplate>
+                                        <!--
+                                            ActorProperty의 타입이 float이면 타입 하나만 정의. float3이면 텍스트 박스 세개 만들기
+                                            단 하나면 Value에 바인딩, float3이면 value0, value1, value2에 각각 매핑
+                                        -->
                                         <DataTemplate x:DataType="local:ActorProperty">
-                                            <TextBlock Text="{x:Bind Name, Mode=OneWay}" />
+                                            <!--<TextBlock Text="{x:Bind Name, Mode=OneWay}" />-->
                                         </DataTemplate>
                                     </ItemsControl.ItemTemplate>
                                 </ListBox>

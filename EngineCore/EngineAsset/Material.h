@@ -6,11 +6,11 @@ namespace Engine
 	{
 		class Texture;
 
-		enum class TextureKey
+		enum TextureKey
 		{
-			Diffuse = 0,
-			Normal,
-			Specular,
+			DiffuseMap = 0,
+			NormalMap,
+			SpecularMap,
 			Texture_Max,
 
 		};
@@ -19,12 +19,12 @@ namespace Engine
 		class Material
 		{
 		private:			
-			vector<wil::com_ptr<Texture>> textures_;			
+			vector<std::shared_ptr<Texture>> textures_;			
 			void UpdateConstBuffers();
 		public:
 			Material();
 
-			void SetTexture(TextureKey key, const wil::com_ptr<Texture>& texture)
+			void SetTexture(TextureKey key, const std::shared_ptr<Texture>& texture)
 			{
 				int textureKey = static_cast<int>(key);
 				textures_[textureKey] = texture;

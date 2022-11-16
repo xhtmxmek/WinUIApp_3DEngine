@@ -2,11 +2,22 @@
 
 namespace AuthoringTool
 {
+    enum property_Type
+    {
+       TypeBool = 0,
+       TypeInt,
+       TypeFloat,
+       TypeVector2,
+       TypeVector3,
+       TypeVector4,
+       TypeEnum
+    };
+
     [default_interface]
     runtimeclass ActorProperty : Microsoft.UI.Xaml.Data.INotifyPropertyChanged
     {        
         ActorProperty(String name);
         String Name;        
-    }
+    }        
 }
 

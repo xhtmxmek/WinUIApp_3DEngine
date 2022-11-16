@@ -46,12 +46,8 @@
     <ClInclude Include="System\InputManager.h" />
     <ClInclude Include="System\KeyboardState.h" />
     <ClInclude Include="System\MouseState.h" />
-<<<<<<< HEAD
-    <ClInclude Include="Component\Property\PropertyBase.h" />
-=======
-    <ClInclude Include="Level\Property\ComponentProperty.h" />
     <ClInclude Include="EngineAsset\Shader.h" />
->>>>>>> 5309df7b2680e863310ae851824c815b370ae0ed
+    <ClInclude Include="Component\Property\PropertyBase.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="EngineCore.cpp" />

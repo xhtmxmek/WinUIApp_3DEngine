@@ -1,4 +1,5 @@
 #include "pch.h"
+#include "Texture.h"
 #include "Material.h"
 #include "Common/DeviceResources.h"
 
@@ -7,10 +8,9 @@ namespace Engine
 	namespace EngineAsset
 	{
 		Material::Material()
-		{
-			int maxTextureCount = static_cast<int>(TextureKey::Texture_Max);
-			textures_.reserve(maxTextureCount);
-			textures_.resize(maxTextureCount, nullptr);
+		{			
+			textures_.reserve(TextureKey::Texture_Max);
+			textures_.resize(TextureKey::Texture_Max, nullptr);
 		}
 
 		void Material::UpdateConstBuffers()
@@ -20,9 +20,11 @@ namespace Engine
 		void Material::DrawMaterial()
 		{
 			auto d3dContext = DX::DeviceResourcesUtil::GetDeviceResources()->GetD3DDeviceContext();
-			d3dContext->PSSetShaderResources(DiffuseMapSlot, 1, DiffuseMap.put());
-			d3dContext->PSSetShaderResources(NormalMapSlot, 1, NormalMap.put());
-			d3dContext->PSSetShaderResources(SpecularMapSlot, 1, SpecularMap.put());
+			
+			for (UINT i = 0; i < TextureKey::Texture_Max; i++)
+			{
+				d3dContext->PSSetShaderResources(i, 1, textures_[i]->GetShaderResourceView().addressof());
+			}
 		}
 	}
 }

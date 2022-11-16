@@ -18,7 +18,6 @@
 #include <wincodec.h>
 
 #include <string>
-#include <wstring>
 #include <memory>
 #include <map>
 #include <set>

@@ -27,8 +27,15 @@ namespace Engine
 			{
 			}
 			std::function<void(PropertyBase*)> OnChange;
-			void ApplyChange() { OnChange(this); }
-			wstring PackedValue();
+			void ApplyChange() 
+			{ 
+				OnChange(this); 
+			}
+			virtual std::wstring PackedValue() = 0;
+			std::string Name()
+			{
+				return name_;
+			}
 		private:
 			std::string name_;
 			PropertyType type_;
@@ -48,7 +55,10 @@ namespace Engine
 				value_ = value; return (*this);
 			}
 
-			virtual void PackedValue() {  }
+			virtual std::wstring PackedValue()
+			{
+				return L"0";
+			}
 		private:
 			int value_;
 			//std::vector<EngineProperty> child는 나중에 생각
@@ -68,7 +78,10 @@ namespace Engine
 				value_ = value; return (*this);
 			}
 
-			virtual void PackedValue() { }
+			virtual std::wstring PackedValue() 
+			{
+				return L"0.0f";
+			}
 		private:
 			float value_;
 			//std::vector<EngineProperty> child는 나중에 생각
@@ -87,7 +100,10 @@ namespace Engine
 				value_ = value; return (*this);
 			}
 
-			virtual void PackedValue() { }
+			virtual std::wstring PackedValue() 
+			{
+				return L"False";
+			}
 		private:
 			bool value_;
 		};
@@ -107,7 +123,10 @@ namespace Engine
 			}
 
 
-			virtual void PackedValue() { }
+			virtual std::wstring PackedValue()
+			{ 
+				return L"EnumBase";
+			}
 			PropertyEnum& operator=(int value)
 			{
 				value_ = value;
@@ -133,7 +152,10 @@ namespace Engine
 				return value_;
 			}
 
-			virtual void PackedValue() { }
+			virtual std::wstring PackedValue()
+			{
+				return L"0.0f, 0.0f, 0.0f";
+			}
 		private:
 			Vector3f value_;
 		};

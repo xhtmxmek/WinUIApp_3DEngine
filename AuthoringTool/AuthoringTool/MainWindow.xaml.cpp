@@ -104,7 +104,7 @@ namespace winrt::AuthoringTool::implementation
     }
 
     void MainWindow::OnSizeChanged(IInspectable const& sender, Microsoft::UI::Xaml::WindowSizeChangedEventArgs const& args)
-    {   
+    {           
         //if (swapChainPanel().IsLoaded())
         //    renderingEngine_.OnWindowSizeChanged(args.Size());
     }
@@ -135,9 +135,10 @@ namespace winrt::AuthoringTool::implementation
         renderingEngine_.Initialize(swapChainPanel());                
         RegisterDedicatedInputOnSwapchain();
         swapChainPanel().KeyDown({ this, &MainWindow::OnKeyDown_SwapChain });
-        swapChainPanel().KeyUp({ this, &MainWindow::OnKeyUp_SwapChain });
+        swapChainPanel().KeyUp({ this, &MainWindow::OnKeyUp_SwapChain });        
 
         renderingEngine_.StartRenderLoop();
+
     }
 #pragma endregion
 
@@ -180,7 +181,7 @@ namespace winrt::AuthoringTool::implementation
         EngineInterface_WRC::PointerActionResult result = renderingEngine_.StopTracking(args);
         EngineInterface_WRC::ActorProxy proxy;
 
-        GetPickedActor();
+        //GetPickedActor();
         //proxy.Components().
         //result.PickedActor()
     }
@@ -246,7 +247,10 @@ namespace winrt::AuthoringTool::implementation
             component.Properties().Append(property);
             component.Properties().Append(property2);
             component.Properties().Append(property3);
-            actorViewModel_.Components().Append(component);        */    
+            actorViewModel_.Components().Append(component);        */   
+            hstring componentName = L"TestComponent_" + to_hstring(i);
+            AuthoringTool::ActorComponent component = winrt::make<AuthoringTool::implementation::ActorComponent>(componentName);
+            SelectedActorViewModel().Components().Append(component);
         }
     }
 

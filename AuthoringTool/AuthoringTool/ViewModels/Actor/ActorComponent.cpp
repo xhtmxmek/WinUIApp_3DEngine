@@ -17,4 +17,12 @@ namespace winrt::AuthoringTool::implementation
     {
         return _properties;
     }
+    winrt::event_token ActorComponent::PropertyChanged(winrt::Microsoft::UI::Xaml::Data::PropertyChangedEventHandler const& handler)
+    {
+        return _propertyChanged.add(handler);
+    }
+    void ActorComponent::PropertyChanged(winrt::event_token const& token) noexcept
+    {
+        return _propertyChanged.remove(token);
+    }
 }

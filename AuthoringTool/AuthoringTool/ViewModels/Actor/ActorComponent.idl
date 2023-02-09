@@ -3,7 +3,7 @@
 import "ActorProperty.idl";
 namespace AuthoringTool
 {    
-    runtimeclass ActorComponent
+    runtimeclass ActorComponent : Microsoft.UI.Xaml.Data.INotifyPropertyChanged
     {                
         ActorComponent(String name);
         String Name{ get; };

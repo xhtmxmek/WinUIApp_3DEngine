@@ -47,7 +47,7 @@
                     <ItemsControl.ItemTemplate>
                         <DataTemplate x:DataType="local:ActorComponent">
                             <StackPanel>
-                                <TextBlock Text="{x:Bind Name, Mode=OneTime}" />
+                                <TextBlock Text="{x:Bind Name, Mode=OneWay}" />
                                 <!--<ListBox ItemsSource="{x:Bind Properties}">
                                     <ItemsControl.ItemTemplate>
                                         <DataTemplate x:DataType="local:ActorProperty" />

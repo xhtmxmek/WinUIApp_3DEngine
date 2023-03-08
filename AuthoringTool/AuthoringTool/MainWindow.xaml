@@ -90,9 +90,8 @@
                     <DataTemplate x:DataType="local:StaticMeshComponent">
                         <StackPanel>
                             <TextBlock Text="Static Mesh" />
-                            <!--  썸네일이미지 넣고 싶은데 찾아봐야할듯  -->
-                            <ListBox />
-                            <!--<Image Source="{x:Bind }"/>-->
+                            <ComboBox ItemsSource="{x:Bind StaticMeshTypes}" />
+                            <Image Source="{x:Bind CurrentMeshImage}" />
                         </StackPanel>
                     </DataTemplate>
                 </GridView>

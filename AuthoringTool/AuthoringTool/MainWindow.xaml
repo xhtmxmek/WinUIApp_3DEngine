@@ -58,6 +58,45 @@
                     </ItemsControl.ItemTemplate>
                 </ListBox>
 
+                <!--  RootComponent or SelectedComponent만 보여주기.  -->
+                <!--  선택된 컴포넌트의 Transform 표시  -->
+                <StackPanel>
+                    <TextBlock Text="Transform" />
+                    <TextBlock Text="Position" />
+                    <TextBlock Text="Rotation" />
+                    <TextBlock Text="Scale" />
+
+                    <TextBox Text="{x:Bind SelectedActorViewModel.CurrentComponent.Transform.Position.x}" />
+                    <TextBox Text="{x:Bind SelectedActorViewModel.CurrentComponent.Transform.Position.y}" />
+                    <TextBox Text="{x:Bind SelectedActorViewModel.CurrentComponent.Transform.Position.z}" />
+
+                    <TextBox Text="{x:Bind SelectedActorViewModel.CurrentComponent.Transform.Rotation.x}" />
+                    <TextBox Text="{x:Bind SelectedActorViewModel.CurrentComponent.Transform.Rotation.y}" />
+                    <TextBox Text="{x:Bind SelectedActorViewModel.CurrentComponent.Transform.Rotation.z}" />
+
+                    <TextBox Text="{x:Bind SelectedActorViewModel.CurrentComponent.Transform.Scale.x}" />
+                    <TextBox Text="{x:Bind SelectedActorViewModel.CurrentComponent.Transform.Scale.y}" />
+                    <TextBox Text="{x:Bind SelectedActorViewModel.CurrentComponent.Transform.Scale.z}" />
+                </StackPanel>
+
+                <StackPanel>
+                    <TextBlock Text="Rendering" />
+                    <TextBlock Text="Visible" />
+                    <CheckBox IsChecked="{x:Bind SelectedActorViewModel.CurrentComponent.Visible}" />
+                </StackPanel>
+
+                <!--  선택된 컴포넌트의 프로퍼티들 표시  -->
+                <GridView ItemsSource="{x:Bind SelectedActorViewModel.CurrentComponent.StaticMeshComponents}">
+                    <DataTemplate x:DataType="local:StaticMeshComponent">
+                        <StackPanel>
+                            <TextBlock Text="Static Mesh" />
+                            <!--  썸네일이미지 넣고 싶은데 찾아봐야할듯  -->
+                            <ListBox />
+                            <!--<Image Source="{x:Bind }"/>-->
+                        </StackPanel>
+                    </DataTemplate>
+                </GridView>
+
                 <!--<TextBlock
                     HorizontalAlignment="Center"
                     VerticalAlignment="Center"

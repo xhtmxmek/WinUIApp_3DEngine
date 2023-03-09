@@ -7,6 +7,13 @@ namespace AuthoringTool
     {                
         ActorComponent(String name);
         String Name{ get; };
+
+        Boolean Visible;
+
+        Windows.Foundation.Numerics.Vector3 Position;
+        Windows.Foundation.Numerics.Vector3 Rotation;
+        Windows.Foundation.Numerics.Vector3 Scale;
+
         Windows.Foundation.Collections.IObservableVector<ActorProperty> Properties{ get; };        
     }
 }

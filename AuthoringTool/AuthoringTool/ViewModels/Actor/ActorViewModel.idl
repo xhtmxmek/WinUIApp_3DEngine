@@ -10,6 +10,7 @@ namespace AuthoringTool
         ActorViewModel();       
         String Name;
         Windows.Foundation.Collections.IObservableVector<ActorComponent> Components{ get; };
+        //ActorComponent SelectedComponent{ get; };
     }
 }
 

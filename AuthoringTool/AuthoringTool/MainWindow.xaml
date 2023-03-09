@@ -48,18 +48,13 @@
                         <DataTemplate x:DataType="local:ActorComponent">
                             <StackPanel>
                                 <TextBlock Text="{x:Bind Name, Mode=OneWay}" />
-                                <!--<ListBox ItemsSource="{x:Bind Properties}">
-                                    <ItemsControl.ItemTemplate>
-                                        <DataTemplate x:DataType="local:ActorProperty" />
-                                    </ItemsControl.ItemTemplate>
-                                </ListBox>-->
                             </StackPanel>
                         </DataTemplate>
                     </ItemsControl.ItemTemplate>
                 </ListBox>
 
                 <!--  RootComponent or SelectedComponent만 보여주기.  -->
-                <!--  선택된 컴포넌트의 Transform 표시  -->
+                <!--  선택된 컴포넌트의 Transform 표시  --><!--
                 <StackPanel>
                     <TextBlock Text="Transform" />
                     <TextBlock Text="Position" />
@@ -85,8 +80,8 @@
                     <CheckBox IsChecked="{x:Bind SelectedActorViewModel.CurrentComponent.Visible}" />
                 </StackPanel>
 
-                <!--  선택된 컴포넌트의 프로퍼티들 표시  -->
-                <GridView ItemsSource="{x:Bind SelectedActorViewModel.CurrentComponent.StaticMeshComponents}">
+                --><!--  선택된 컴포넌트의 프로퍼티들 표시  --><!--
+                <GridView ItemsSource="{x:Bind SelectedActorViewModel.CurrentComponent.StaticMeshProperties}">
                     <DataTemplate x:DataType="local:StaticMeshComponent">
                         <StackPanel>
                             <TextBlock Text="Static Mesh" />
@@ -94,7 +89,7 @@
                             <Image Source="{x:Bind CurrentMeshImage}" />
                         </StackPanel>
                     </DataTemplate>
-                </GridView>
+                </GridView>-->
 
                 <!--<TextBlock
                     HorizontalAlignment="Center"

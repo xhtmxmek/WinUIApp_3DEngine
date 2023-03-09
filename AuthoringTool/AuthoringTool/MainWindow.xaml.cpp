@@ -36,6 +36,8 @@ namespace winrt::AuthoringTool::implementation
         // 스왑 체인 패널 이벤트(DX 렌더링용)     
         swapChainPanel().Loaded({ this, &MainWindow::OnSwapchainPanelLoaded });
         swapChainPanel().CompositionScaleChanged({ this, &MainWindow::OnSwapChainPanelCompositionScaleChanged });
+
+        //OnPointerPressedSwapChain
         //swapChainPanel().key
         //swapChainPanel().SizeChanged({ this, &MainWindow::OnSwapChainPanel_SizeChanged });
         
@@ -133,9 +135,17 @@ namespace winrt::AuthoringTool::implementation
         swapChainPanel().SizeChanged({ this, &MainWindow::OnSwapChainPanel_SizeChanged });        
         
         renderingEngine_.Initialize(swapChainPanel());                
-        RegisterDedicatedInputOnSwapchain();
+        //RegisterDedicatedInputOnSwapchain();
+
+        //winrt::Windows::Foundation::Numerics::float2        
+        swapChainPanel().PointerPressed({ this, &MainWindow::OnPointerPressedSwapChain });
+        swapChainPanel().PointerReleased({ this, &MainWindow::OnPointerReleasedSwapChain });
+        swapChainPanel().PointerMoved({ this, &MainWindow::OnPointerMovedSwapChain });
+        swapChainPanel().PointerWheelChanged({ this, &MainWindow::OnPointerWheelChangedSwapChain });
+        //swapChainPanel().Po
+
         swapChainPanel().KeyDown({ this, &MainWindow::OnKeyDown_SwapChain });
-        swapChainPanel().KeyUp({ this, &MainWindow::OnKeyUp_SwapChain });        
+        swapChainPanel().KeyUp({ this, &MainWindow::OnKeyUp_SwapChain });         
 
         renderingEngine_.StartRenderLoop();
 
@@ -148,7 +158,7 @@ namespace winrt::AuthoringTool::implementation
         // 그리고 다음과 같이 이벤트 처리기를 채웁니다.
     }
 
-    void MainWindow::OnPointerPressedSwapChain(Microsoft::UI::Input::InputPointerSource const& sender, Microsoft::UI::Input::PointerEventArgs const& args)
+    void MainWindow::OnPointerPressedSwapChain(Windows::Foundation::IInspectable const& sender, Microsoft::UI::Xaml::Input::PointerRoutedEventArgs const& args)
     {
 
         //TODO
@@ -163,35 +173,35 @@ namespace winrt::AuthoringTool::implementation
         //m_Engine.StartTracking();        
         //trackingOutput = renderingEngine_.startTracking();        
         //renderingEngine_.startT
-        renderingEngine_.StartTracking(args);
+        //renderingEngine_.StartTracking(args);
     }
 
-    void MainWindow::OnPointerMovedSwapChain(Microsoft::UI::Input::InputPointerSource const& sender, Microsoft::UI::Input::PointerEventArgs const& args)
+    void MainWindow::OnPointerMovedSwapChain(Windows::Foundation::IInspectable const& sender, Microsoft::UI::Xaml::Input::PointerRoutedEventArgs const& args)
     {                        
         // 포인터 추적 코드를 업데이트합니다.
         //if (m_Engine.IsTracking())
         //{
         //    m_Engine.TrackingUpdate(e.CurrentPoint().Position().X);
         //}
-        renderingEngine_.TrackingUpdate(args);
+        //renderingEngine_.TrackingUpdate(args);
     }
 
-    void MainWindow::OnPointerReleasedSwapChain(Microsoft::UI::Input::InputPointerSource const& sender, Microsoft::UI::Input::PointerEventArgs const& args)
+    void MainWindow::OnPointerReleasedSwapChain(Windows::Foundation::IInspectable const& sender, Microsoft::UI::Xaml::Input::PointerRoutedEventArgs const& args)
     {
-        EngineInterface_WRC::PointerActionResult result = renderingEngine_.StopTracking(args);
-        EngineInterface_WRC::ActorProxy proxy;
+        //EngineInterface_WRC::PointerActionResult result = renderingEngine_.StopTracking(args);
+        //EngineInterface_WRC::ActorProxy proxy;
 
-        //GetPickedActor();
+        GetPickedActor();
         //proxy.Components().
         //result.PickedActor()
     }
 
-    void MainWindow::OnPointerWheelChangedSwapChain(Microsoft::UI::Input::InputPointerSource const& sender, Microsoft::UI::Input::PointerEventArgs const& args)
+    void MainWindow::OnPointerWheelChangedSwapChain(Windows::Foundation::IInspectable const& sender, Microsoft::UI::Xaml::Input::PointerRoutedEventArgs const& args)
     {
         // 포인터가 해제되는 경우 추적 포인터 이동이 중지됩니다.
         //m_main->StopTracking();
         //lbutton떄 피킹. buttonDown때와 위치가 같고 picking object 존재한다면 오브젝트보내버리기.
-        renderingEngine_.PointerWheelChanged(args);
+        //renderingEngine_.PointerWheelChanged(args);
     }
 
     void MainWindow::SetPickedActor(EngineInterface_WRC::ActorProxy const& pickedActor)
@@ -226,16 +236,16 @@ namespace winrt::AuthoringTool::implementation
                 );
 
                 // 백그라운드 스레드에서 발생할 포인터 이벤트를 등록합니다.
-                coreInput.PointerPressed({ this, &MainWindow::OnPointerPressedSwapChain });
-                coreInput.PointerMoved({ this, &MainWindow::OnPointerMovedSwapChain });
-                coreInput.PointerReleased({ this, &MainWindow::OnPointerReleasedSwapChain });
-                coreInput.PointerWheelChanged({ this, &MainWindow::OnPointerWheelChangedSwapChain });
+                //coreInput.PointerPressed({ this, &MainWindow::OnPointerPressedSwapChain });
+                //coreInput.PointerMoved({ this, &MainWindow::OnPointerMovedSwapChain });
+                //coreInput.PointerReleased({ this, &MainWindow::OnPointerReleasedSwapChain });
+                //coreInput.PointerWheelChanged({ this, &MainWindow::OnPointerWheelChangedSwapChain });
 
             });
     }
 
     void MainWindow::GetPickedActor()
-    {
+    {        
         //Test Code
         for (int i = 0; i < 5; i++)
         {
@@ -249,8 +259,9 @@ namespace winrt::AuthoringTool::implementation
             component.Properties().Append(property3);
             actorViewModel_.Components().Append(component);        */   
             hstring componentName = L"TestComponent_" + to_hstring(i);
-            AuthoringTool::ActorComponent component = winrt::make<AuthoringTool::implementation::ActorComponent>(componentName);
+            AuthoringTool::ActorComponent component = winrt::make<AuthoringTool::implementation::ActorComponent>(componentName);            
             SelectedActorViewModel().Components().Append(component);
+            int size = SelectedActorViewModel().Components().Size();
         }
     }
 

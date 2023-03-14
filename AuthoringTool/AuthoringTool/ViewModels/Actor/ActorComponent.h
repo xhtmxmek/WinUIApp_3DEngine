@@ -1,6 +1,7 @@
 #pragma once
 #include "ActorComponent.g.h"
 #include "ActorProperty.h"
+#include "StaticMeshProperty.h"
 
 namespace winrt::AuthoringTool::implementation
 {
@@ -11,11 +12,16 @@ namespace winrt::AuthoringTool::implementation
         ActorComponent(hstring const& name);
         hstring Name();
 
-        winrt::Windows::Foundation::Collections::IObservableVector<winrt::AuthoringTool::ActorProperty> Properties();
+        winrt::Windows::Foundation::Collections::IObservableVector<winrt::AuthoringTool::TransformGroupProperty> TransformGroupProperties();
+        winrt::Windows::Foundation::Collections::IObservableVector<winrt::AuthoringTool::RenderingProperty> RenderingProperties();
+        winrt::Windows::Foundation::Collections::IObservableVector<winrt::AuthoringTool::StaticMeshProperty> StaticMeshProperties();
+
         winrt::event_token PropertyChanged(winrt::Microsoft::UI::Xaml::Data::PropertyChangedEventHandler const& handler);
         void PropertyChanged(winrt::event_token const& token) noexcept;
     private:        
-        Windows::Foundation::Collections::IObservableVector<AuthoringTool::ActorProperty> _properties;
+        winrt::Windows::Foundation::Collections::IObservableVector<winrt::AuthoringTool::TransformGroupProperty> transformGroupProperties_;
+        winrt::Windows::Foundation::Collections::IObservableVector<winrt::AuthoringTool::RenderingProperty> rederingProperties_;
+        winrt::Windows::Foundation::Collections::IObservableVector<winrt::AuthoringTool::StaticMeshProperty> staticMeshProperties_;        
         winrt::hstring _name;
         winrt::event<Microsoft::UI::Xaml::Data::PropertyChangedEventHandler> _propertyChanged;
 

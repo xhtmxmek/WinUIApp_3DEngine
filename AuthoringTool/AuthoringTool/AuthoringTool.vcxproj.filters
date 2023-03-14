@@ -24,9 +24,9 @@
     <ClCompile Include="ViewModels\Actor\ActorComponent.cpp" />
     <ClCompile Include="ViewModels\Actor\ActorProperty.cpp" />
     <ClCompile Include="ViewModels\Actor\ActorViewModel.cpp" />
-    <ClCompile Include="ViewModels\Actor\Rendering.cpp" />
-    <ClCompile Include="ViewModels\Actor\StaticMeshProperties.cpp" />
-    <ClCompile Include="ViewModels\Actor\TransformGroup.cpp" />
+    <ClCompile Include="ViewModels\Actor\RenderingProperty.cpp" />
+    <ClCompile Include="ViewModels\Actor\StaticMeshProperty.cpp" />
+    <ClCompile Include="ViewModels\Actor\TransformGroupProperty.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="pch.h" />
@@ -37,9 +37,9 @@
     <ClInclude Include="ViewModels\Actor\ActorComponent.h" />
     <ClInclude Include="ViewModels\Actor\ActorProperty.h" />
     <ClInclude Include="ViewModels\Actor\ActorViewModel.h" />
-    <ClInclude Include="ViewModels\Actor\Rendering.h" />
-    <ClInclude Include="ViewModels\Actor\StaticMeshProperties.h" />
-    <ClInclude Include="ViewModels\Actor\TransformGroup.h" />
+    <ClInclude Include="ViewModels\Actor\RenderingProperty.h" />
+    <ClInclude Include="ViewModels\Actor\StaticMeshProperty.h" />
+    <ClInclude Include="ViewModels\Actor\TransformGroupProperty.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Assets">

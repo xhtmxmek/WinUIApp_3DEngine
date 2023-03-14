@@ -83,17 +83,17 @@
 
                 <!--  선택된 컴포넌트의 프로퍼티들 표시  -->
 
-                <!--<GridView ItemsSource="{x:Bind SelectedActorViewModel.CurrentComponent.StaticMeshProperties}">
-                    <DataTemplate x:DataType="local:StaticMeshProperty">
-                        <StackPanel>
-                            <TextBlock Text="Static Mesh" />
-                            <ComboBox ItemsSource="{x:Bind StaticMeshTypes}" />
-                -->
-                <!--<Image Source="{x:Bind CurrentMeshImage}" />-->
-                <!--
-                        </StackPanel>
-                    </DataTemplate>
-                </GridView>-->
+                <GridView ItemsSource="{x:Bind SelectedActorViewModel.SelectedComponent.StaticMeshProperties}">
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate x:DataType="local:StaticMeshProperty">
+                            <StackPanel>
+                                <TextBlock Text="Static Mesh" />
+                                <ComboBox ItemsSource="{x:Bind StatcMeshTypes}" />
+                                <!--<Image Source="{x:Bind CurrentMeshImage}" />-->
+                            </StackPanel>
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                </GridView>
 
                 <!--<TextBlock
                     HorizontalAlignment="Center"

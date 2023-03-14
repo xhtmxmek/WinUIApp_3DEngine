@@ -54,7 +54,8 @@
                 </ListBox>
 
                 <!--  RootComponent or SelectedComponent만 보여주기.  -->
-                <!--  선택된 컴포넌트의 Transform 표시  --><!--
+                <!--  선택된 컴포넌트의 Transform 표시  -->
+                <!--
                 <StackPanel>
                     <TextBlock Text="Transform" />
                     <TextBlock Text="Position" />
@@ -78,15 +79,18 @@
                     <TextBlock Text="Rendering" />
                     <TextBlock Text="Visible" />
                     <CheckBox IsChecked="{x:Bind SelectedActorViewModel.CurrentComponent.Visible}" />
-                </StackPanel>
+                </StackPanel>-->
 
-                --><!--  선택된 컴포넌트의 프로퍼티들 표시  --><!--
-                <GridView ItemsSource="{x:Bind SelectedActorViewModel.CurrentComponent.StaticMeshProperties}">
-                    <DataTemplate x:DataType="local:StaticMeshComponent">
+                <!--  선택된 컴포넌트의 프로퍼티들 표시  -->
+
+                <!--<GridView ItemsSource="{x:Bind SelectedActorViewModel.CurrentComponent.StaticMeshProperties}">
+                    <DataTemplate x:DataType="local:StaticMeshProperty">
                         <StackPanel>
                             <TextBlock Text="Static Mesh" />
                             <ComboBox ItemsSource="{x:Bind StaticMeshTypes}" />
-                            <Image Source="{x:Bind CurrentMeshImage}" />
+                -->
+                <!--<Image Source="{x:Bind CurrentMeshImage}" />-->
+                <!--
                         </StackPanel>
                     </DataTemplate>
                 </GridView>-->

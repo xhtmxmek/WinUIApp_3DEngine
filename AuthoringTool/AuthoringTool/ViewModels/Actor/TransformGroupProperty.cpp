@@ -28,7 +28,7 @@ namespace winrt::AuthoringTool::implementation
         return position_;
     }
     void TransformGroupProperty::Position(winrt::Windows::Foundation::Numerics::float3 const& value)
-    {
+    {        
         if (position_ != value)
         {
             position_ = value;

@@ -31,10 +31,6 @@
                 FontSize="36"
                 Text="{Binding helloGreetings}" />-->
 
-                <!--
-                    Actor의Deteil패널에 표시될 속성을 불러옴.stack패널을 분리하는것도 좋은아이디어.
-                    ActorViewModel은 이름, 컴포넌트, 프로퍼티 순으로 이루어져있음
-                -->
             </StackPanel>
         </SwapChainPanel>
         <SplitView.Pane>
@@ -53,35 +49,44 @@
                     </ItemsControl.ItemTemplate>
                 </ListBox>
 
-                <!--  RootComponent or SelectedComponent만 보여주기.  -->
-                <!--  선택된 컴포넌트의 Transform 표시  -->
-                <!--
-                <StackPanel>
-                    <TextBlock Text="Transform" />
-                    <TextBlock Text="Position" />
-                    <TextBlock Text="Rotation" />
-                    <TextBlock Text="Scale" />
-
-                    <TextBox Text="{x:Bind SelectedActorViewModel.CurrentComponent.Transform.Position.x}" />
-                    <TextBox Text="{x:Bind SelectedActorViewModel.CurrentComponent.Transform.Position.y}" />
-                    <TextBox Text="{x:Bind SelectedActorViewModel.CurrentComponent.Transform.Position.z}" />
-
-                    <TextBox Text="{x:Bind SelectedActorViewModel.CurrentComponent.Transform.Rotation.x}" />
-                    <TextBox Text="{x:Bind SelectedActorViewModel.CurrentComponent.Transform.Rotation.y}" />
-                    <TextBox Text="{x:Bind SelectedActorViewModel.CurrentComponent.Transform.Rotation.z}" />
-
-                    <TextBox Text="{x:Bind SelectedActorViewModel.CurrentComponent.Transform.Scale.x}" />
-                    <TextBox Text="{x:Bind SelectedActorViewModel.CurrentComponent.Transform.Scale.y}" />
-                    <TextBox Text="{x:Bind SelectedActorViewModel.CurrentComponent.Transform.Scale.z}" />
-                </StackPanel>
-
-                <StackPanel>
-                    <TextBlock Text="Rendering" />
-                    <TextBlock Text="Visible" />
-                    <CheckBox IsChecked="{x:Bind SelectedActorViewModel.CurrentComponent.Visible}" />
-                </StackPanel>-->
-
                 <!--  선택된 컴포넌트의 프로퍼티들 표시  -->
+                <GridView ItemsSource="{x:Bind SelectedActorViewModel.SelectedComponent.RenderingProperties}">
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate x:DataType="local:RenderingProperty">
+                            <StackPanel>
+                                <TextBlock Text="Rendering" />
+                                <CheckBox Content="Visible" IsChecked="{x:Bind Visible}" />
+                                <!--<Image Source="{x:Bind CurrentMeshImage}" />-->
+                            </StackPanel>
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                </GridView>
+
+                <GridView ItemsSource="{x:Bind SelectedActorViewModel.SelectedComponent.TransformGroupProperties}">
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate x:DataType="local:TransformGroupProperty">
+                            <StackPanel>
+                                <TextBlock Text="Transform" />
+                                <TextBlock Text="Position" />
+                                <TextBlock Text="Rotation" />
+                                <TextBlock Text="Scale" />
+
+                                <TextBox Text="{x:Bind Position}" />
+                                <!--<TextBox Text="{x:Bind Position.X}" />
+                                <TextBox Text="{x:Bind Position.Y}" />
+                                <TextBox Text="{x:Bind Position.Z}" />
+
+                                <TextBox Text="{x:Bind Rotation.X}" />
+                                <TextBox Text="{x:Bind Rotation.Y}" />
+                                <TextBox Text="{x:Bind Rotation.Z}" />
+
+                                <TextBox Text="{x:Bind Scale.X}" />
+                                <TextBox Text="{x:Bind Scale.Y}" />
+                                <TextBox Text="{x:Bind Scale.Z}" />-->
+                            </StackPanel>
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                </GridView>
 
                 <GridView ItemsSource="{x:Bind SelectedActorViewModel.SelectedComponent.StaticMeshProperties}">
                     <ItemsControl.ItemTemplate>
@@ -94,6 +99,7 @@
                         </DataTemplate>
                     </ItemsControl.ItemTemplate>
                 </GridView>
+
 
                 <!--<TextBlock
                     HorizontalAlignment="Center"

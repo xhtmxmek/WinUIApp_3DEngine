@@ -249,20 +249,13 @@ namespace winrt::AuthoringTool::implementation
         //Test Code
         for (int i = 0; i < 5; i++)
         {
-/*            hstring componentName = L"TestComponent_" + to_hstring(i);
-            AuthoringTool::ActorComponent component = winrt::make<AuthoringTool::implementation::ActorComponent>(componentName);
-            AuthoringTool::ActorProperty property = winrt::make<AuthoringTool::implementation::ActorProperty>(L"TestProperty_1");
-            AuthoringTool::ActorProperty property2 = winrt::make<AuthoringTool::implementation::ActorProperty>(L"TestProperty_2");
-            AuthoringTool::ActorProperty property3 = winrt::make<AuthoringTool::implementation::ActorProperty>(L"TestProperty_3");
-            component.Properties().Append(property);
-            component.Properties().Append(property2);
-            component.Properties().Append(property3);
-            actorViewModel_.Components().Append(component);        */   
             hstring componentName = L"TestComponent_" + to_hstring(i);
             AuthoringTool::ActorComponent component = winrt::make<AuthoringTool::implementation::ActorComponent>(componentName);            
             SelectedActorViewModel().Components().Append(component);
             int size = SelectedActorViewModel().Components().Size();
         }
+
+        //renderingEngine_.
     }
 
     //void MainPage::ClickHandler(IInspectable const&, RoutedEventArgs const&)

@@ -145,7 +145,7 @@ namespace winrt::AuthoringTool::implementation
         //swapChainPanel().Po
 
         swapChainPanel().KeyDown({ this, &MainWindow::OnKeyDown_SwapChain });
-        swapChainPanel().KeyUp({ this, &MainWindow::OnKeyUp_SwapChain });         
+        swapChainPanel().KeyUp({ this, &MainWindow::OnKeyUp_SwapChain });                       
 
         renderingEngine_.StartRenderLoop();
 

@@ -73,6 +73,7 @@
                         Background="#1A1A1A"
                         Content="Type" />
                 </Grid>
+                <TreeView />
             </StackPanel>
         </SplitView.Pane>
         <!--<SplitView.Pane>

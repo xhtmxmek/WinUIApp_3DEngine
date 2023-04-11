@@ -23,7 +23,7 @@ namespace winrt::AuthoringTool::implementation
 		void myButton_Click(Windows::Foundation::IInspectable const& sender, Microsoft::UI::Xaml::RoutedEventArgs const& args);
 		void ClickHandler(Windows::Foundation::IInspectable const& sender, Microsoft::UI::Xaml::RoutedEventArgs const& args);
 		AuthoringTool::BookstoreViewModel MainViewModel();
-		AuthoringTool::ActorViewModel SelectedActorViewModel();
+		//AuthoringTool::ActorViewModel SelectedActorViewModel();
 	private:
 		//not projection
 		void OnRendering(IInspectable const& sender, IInspectable const& args);
@@ -139,7 +139,7 @@ namespace winrt::AuthoringTool::implementation
 		//AuthoringTool::BookstoreViewModel m_mainViewModel{ nullptr };
 		//아니면 균일한생성
 		AuthoringTool::BookstoreViewModel m_mainViewModel;
-		AuthoringTool::ActorViewModel actorViewModel_;
+		//AuthoringTool::ActorViewModel actorViewModel_;
 	};
 }
 

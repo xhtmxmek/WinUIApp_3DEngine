@@ -73,7 +73,7 @@
                         Background="#1A1A1A"
                         Content="Type" />
                 </Grid>
-                <TreeView />
+                <TreeView x:Name="WorldOutLinerTree" />
             </StackPanel>
         </SplitView.Pane>
         <!--<SplitView.Pane>

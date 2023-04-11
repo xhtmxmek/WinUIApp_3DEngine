@@ -7,7 +7,7 @@
 //#include "EngineCore/Common/StepTimer.h"
 //
 
-#include "ViewModels/Actor/ActorViewModel.h"
+//#include "ViewModels/Actor/ActorViewModel.h"
 
 using namespace winrt;
 using namespace Microsoft::UI::Xaml;
@@ -141,14 +141,12 @@ namespace winrt::AuthoringTool::implementation
         swapChainPanel().PointerPressed({ this, &MainWindow::OnPointerPressedSwapChain });
         swapChainPanel().PointerReleased({ this, &MainWindow::OnPointerReleasedSwapChain });
         swapChainPanel().PointerMoved({ this, &MainWindow::OnPointerMovedSwapChain });
-        swapChainPanel().PointerWheelChanged({ this, &MainWindow::OnPointerWheelChangedSwapChain });
-        //swapChainPanel().Po
+        swapChainPanel().PointerWheelChanged({ this, &MainWindow::OnPointerWheelChangedSwapChain });        
 
         swapChainPanel().KeyDown({ this, &MainWindow::OnKeyDown_SwapChain });
         swapChainPanel().KeyUp({ this, &MainWindow::OnKeyUp_SwapChain });                       
 
-        renderingEngine_.StartRenderLoop();
-
+        renderingEngine_.StartRenderLoop();       
     }
 #pragma endregion
 
@@ -250,9 +248,9 @@ namespace winrt::AuthoringTool::implementation
         for (int i = 0; i < 5; i++)
         {
             hstring componentName = L"TestComponent_" + to_hstring(i);
-            AuthoringTool::ActorComponent component = winrt::make<AuthoringTool::implementation::ActorComponent>(componentName);            
-            SelectedActorViewModel().Components().Append(component);
-            int size = SelectedActorViewModel().Components().Size();
+            //AuthoringTool::ActorComponent component = winrt::make<AuthoringTool::implementation::ActorComponent>(componentName);            
+            //SelectedActorViewModel().Components().Append(component);
+            //int size = SelectedActorViewModel().Components().Size();
         }
 
         //renderingEngine_.
@@ -293,8 +291,8 @@ namespace winrt::AuthoringTool::implementation
     {
         return m_mainViewModel;
     }
-    AuthoringTool::ActorViewModel MainWindow::SelectedActorViewModel()
-    {
-        return actorViewModel_;
-    }
+    //AuthoringTool::ActorViewModel MainWindow::SelectedActorViewModel()
+    //{
+    //    return actorViewModel_;
+    //}
 }

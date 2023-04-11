@@ -1,0 +1,34 @@
+#pragma once
+namespace AuthoringTool
+{
+	runtimeclass ActorProperty : Microsoft.UI.Xaml.Data.INotifyPropertyChanged
+	{
+		ActorProperty(String name);
+		String Name{ get; };
+		Microsoft.UI.Xaml.UIElement MappedControl;
+	}
+
+	runtimeclass ActorComponent
+	{
+		String name_;
+		Windows.Foundation.Collections.IObservableVector<ActorComponent> childComponents_{ get; };
+		Windows.Foundation.Collections.IObservableVector<ActorProperty> properties_{ get; };
+	}
+
+	runtimeclass ActorInfo
+	{
+		String name_;
+		String type_;
+		Windows.Foundation.Collections.IObservableVector<ActorInfo> childActors_{ get; };
+		Windows.Foundation.Collections.IObservableVector<ActorComponent> components{ get; };
+	}
+
+	[default_interface]
+	runtimeclass ActorListViewModel
+	{
+		ActorListViewModel();
+		Windows.Foundation.Collections.IObservableVector<ActorInfo> ActorInfos{ get; };
+		ActorInfo SelectedActor;
+	}
+}
+

@@ -115,11 +115,9 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ViewModels\Actor\ActorComponent.h" />
+    <ClInclude Include="ViewModels\Actor\ActorInfo.h" />
+    <ClInclude Include="ViewModels\Actor\ActorListViewModel.h" />
     <ClInclude Include="ViewModels\Actor\ActorProperty.h" />
-    <ClInclude Include="ViewModels\Actor\ActorViewModel.h" />
-    <ClInclude Include="ViewModels\Actor\RenderingProperty.h" />
-    <ClInclude Include="ViewModels\Actor\StaticMeshProperty.h" />
-    <ClInclude Include="ViewModels\Actor\TransformGroupProperty.h" />
     <ClInclude Include="ViewModels\BookStore\BookSku.h" />
     <ClInclude Include="ViewModels\BookStore\BookstoreViewModel.h" />
     <ClInclude Include="Models\User.h" />
@@ -138,11 +136,9 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ViewModels\Actor\ActorComponent.cpp" />
+    <ClCompile Include="ViewModels\Actor\ActorInfo.cpp" />
+    <ClCompile Include="ViewModels\Actor\ActorListViewModel.cpp" />
     <ClCompile Include="ViewModels\Actor\ActorProperty.cpp" />
-    <ClCompile Include="ViewModels\Actor\ActorViewModel.cpp" />
-    <ClCompile Include="ViewModels\Actor\RenderingProperty.cpp" />
-    <ClCompile Include="ViewModels\Actor\StaticMeshProperty.cpp" />
-    <ClCompile Include="ViewModels\Actor\TransformGroupProperty.cpp" />
     <ClCompile Include="ViewModels\BookStore\BookSku.cpp" />
     <ClCompile Include="ViewModels\BookStore\BookstoreViewModel.cpp" />
     <ClCompile Include="Models\User.cpp" />
@@ -162,9 +158,10 @@
       <SubType>Code</SubType>
       <DependentUpon>App.xaml</DependentUpon>
     </Midl>
-    <Midl Include="ViewModels\Actor\ActorComponent.idl" />
-    <Midl Include="ViewModels\Actor\ActorProperty.idl" />
-    <Midl Include="ViewModels\Actor\ActorViewModel.idl" />
+    <Midl Include="ViewModels\Actor\ActorListViewModel.idl">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+      </ExcludedFromBuild>
+    </Midl>
     <Midl Include="ViewModels\BookStore\Booksku.idl" />
     <Midl Include="MainWindow.idl">
       <SubType>Code</SubType>

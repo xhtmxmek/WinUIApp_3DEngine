@@ -4,19 +4,22 @@
 
 namespace winrt::EngineInterface_WRC::implementation
 {
-    ActorComponentProxy::ActorComponentProxy(const hstring& name)
+    ActorComponentProxy::ActorComponentProxy(hstring const& name)
         :name_(name)
     {
-        properties_ = Windows::Foundation::Collections::IVector<winrt::EngineInterface_WRC::ComponentPropertyProxy>();
+        childComponents_ = winrt::single_threaded_observable_vector<EngineInterface_WRC::ActorComponentProxy>();
+        properties_ = winrt::single_threaded_observable_vector<EngineInterface_WRC::ComponentPropertyProxy>();
     }
-
-    winrt::Windows::Foundation::Collections::IVector<winrt::EngineInterface_WRC::ComponentPropertyProxy> ActorComponentProxy::Properties()
-    {
-        return properties_;
-    }
-
     hstring ActorComponentProxy::Name()
     {
         return name_;
+    }
+    winrt::Windows::Foundation::Collections::IObservableVector<winrt::EngineInterface_WRC::ActorComponentProxy> ActorComponentProxy::ChildComponents()
+    {
+        return childComponents_;
+    }
+    winrt::Windows::Foundation::Collections::IObservableVector<winrt::EngineInterface_WRC::ComponentPropertyProxy> ActorComponentProxy::Properties()
+    {
+        return properties_;
     }
 }

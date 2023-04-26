@@ -4,26 +4,33 @@
 
 namespace winrt::EngineInterface_WRC::implementation
 {
-	ComponentPropertyProxy::ComponentPropertyProxy(const hstring& name)
-		:name_(name)
-	{
-	}
-	hstring ComponentPropertyProxy::Name()
-	{
-		return name_;
-	}
-	hstring ComponentPropertyProxy::Value()
-	{
-		return value_;
-	}
-	void ComponentPropertyProxy::Value(hstring const& value)
-	{
-		value_ = value;
-		/*
-		* 1.엔진의 값이 float이면 float을 스트링으로 패킹.
-		* vector3이면 string으로 패킹.
-		* 저작도구에서 타입에 따라 스트링을 언패킹.
-		* 2. 대응 되는 타입을 idl에 선언 (float3, float2, float). 그냥 case로 추가해주는게 나을듯.
-		*/
-	}
+    ComponentPropertyProxy::ComponentPropertyProxy(hstring const& name)
+        :name_(name)
+    {
+        Microsoft::UI::Xaml::Controls::TextBlock textBlock;
+        textBlock.Text(L"Hi");
+        mappedControl_ = textBlock;
+    }
+    hstring ComponentPropertyProxy::Name()
+    {
+        return name_;
+    }
+    winrt::Microsoft::UI::Xaml::UIElement ComponentPropertyProxy::MappedControl()
+    {
+        return mappedControl_;
+    }
+    void ComponentPropertyProxy::MappedControl(winrt::Microsoft::UI::Xaml::UIElement const& value)
+    {
+        //if(mappedControl_.value != value.value)일때..
+        mappedControl_ = value;
+        propertyChanged_(*this, Microsoft::UI::Xaml::Data::PropertyChangedEventArgs{ L"MappedControl" });
+    }
+    winrt::event_token ComponentPropertyProxy::PropertyChanged(winrt::Microsoft::UI::Xaml::Data::PropertyChangedEventHandler const& handler)
+    {
+        return propertyChanged_.add(handler);
+    }
+    void ComponentPropertyProxy::PropertyChanged(winrt::event_token const& token) noexcept
+    {
+        propertyChanged_.remove(token);
+    }
 }

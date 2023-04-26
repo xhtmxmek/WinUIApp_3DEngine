@@ -1,4 +1,5 @@
 import "ViewModels/BookStore/BookstoreViewModel.idl";
+//import "Viewmoedls/Actor/ActorListViewModel.idl";
 //import "ActorViewModel.idl";
 
 namespace AuthoringTool
@@ -8,6 +9,7 @@ namespace AuthoringTool
     {
         MainWindow();
         AuthoringTool.BookstoreViewModel MainViewModel{ get; };
+        //AuthoringTool.ActorListViewModel ActorList{ get; }
         //AuthoringTool.ActorListViewModel SelectedActorViewModel{ get; };
         
         //Microsoft.UI.Xaml.Controls.TextBox myTextBox{ get; }; //읽기전용으로 선언. cpp와 h는 구현하지 않아도됨

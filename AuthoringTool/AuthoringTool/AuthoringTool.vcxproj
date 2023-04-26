@@ -96,7 +96,7 @@
       <AdditionalDependencies Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <Midl>
-      <AdditionalIncludeDirectories Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(ProjectDir)ViewModels\BookStore\;$(ProjectDir)ViewModels\Actor\</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(ProjectDir)ViewModels\BookStore\;$(SolutionDir)EngineInterface_WRC\UIProxy\;$(ProjectDir)ViewModels\Actor\</AdditionalIncludeDirectories>
       <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
       </PreprocessorDefinitions>
     </Midl>
@@ -114,10 +114,16 @@
     <Manifest Include="app.manifest" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="ViewModels\Actor\ActorComponent.h" />
-    <ClInclude Include="ViewModels\Actor\ActorInfo.h" />
+    <ClInclude Include="ViewModels\Actor\ActorComponent.h">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+    </ClInclude>
+    <ClInclude Include="ViewModels\Actor\ActorInfo.h">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+    </ClInclude>
     <ClInclude Include="ViewModels\Actor\ActorListViewModel.h" />
-    <ClInclude Include="ViewModels\Actor\ActorProperty.h" />
+    <ClInclude Include="ViewModels\Actor\ActorProperty.h">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+    </ClInclude>
     <ClInclude Include="ViewModels\BookStore\BookSku.h" />
     <ClInclude Include="ViewModels\BookStore\BookstoreViewModel.h" />
     <ClInclude Include="Models\User.h" />
@@ -135,10 +141,16 @@
     <Page Include="MainWindow.xaml" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="ViewModels\Actor\ActorComponent.cpp" />
-    <ClCompile Include="ViewModels\Actor\ActorInfo.cpp" />
+    <ClCompile Include="ViewModels\Actor\ActorComponent.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="ViewModels\Actor\ActorInfo.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+    </ClCompile>
     <ClCompile Include="ViewModels\Actor\ActorListViewModel.cpp" />
-    <ClCompile Include="ViewModels\Actor\ActorProperty.cpp" />
+    <ClCompile Include="ViewModels\Actor\ActorProperty.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+    </ClCompile>
     <ClCompile Include="ViewModels\BookStore\BookSku.cpp" />
     <ClCompile Include="ViewModels\BookStore\BookstoreViewModel.cpp" />
     <ClCompile Include="Models\User.cpp" />

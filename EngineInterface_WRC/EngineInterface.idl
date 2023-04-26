@@ -2,11 +2,11 @@ import "UIProxy/ActorProxy.idl";
 
 namespace EngineInterface_WRC
 {
-	runtimeclass PointerActionResult
-	{
-		PointerActionResult();
-		ActorProxy PickedActor;
-	}
+	//runtimeclass PointerActionResult
+	//{
+	//	PointerActionResult();
+	//	ActorProxy PickedActor;
+	//}
 
 	[default_interface]
 	runtimeclass EngineInterface
@@ -38,7 +38,7 @@ namespace EngineInterface_WRC
 		void KeyboardProcess(Microsoft.UI.Xaml.Input.KeyRoutedEventArgs args);
 		void StartTracking(Microsoft.UI.Input.PointerEventArgs args);
 		void TrackingUpdate(Microsoft.UI.Input.PointerEventArgs args);
-		PointerActionResult StopTracking(Microsoft.UI.Input.PointerEventArgs args);
+		//PointerActionResult StopTracking(Microsoft.UI.Input.PointerEventArgs args);
 		void PointerWheelChanged(Microsoft.UI.Input.PointerEventArgs args);
 		//PointerActionResult PointerProcess(Microsoft.UI.Input.PointerEventArgs args);
 

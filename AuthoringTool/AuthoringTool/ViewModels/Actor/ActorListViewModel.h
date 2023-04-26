@@ -26,9 +26,9 @@ namespace winrt::AuthoringTool::implementation
     {
         ActorListViewModel() = default;
 
-        winrt::Windows::Foundation::Collections::IObservableVector<winrt::AuthoringTool::ActorInfo> ActorInfos();
-        winrt::AuthoringTool::ActorInfo SelectedActor();
-        void SelectedActor(winrt::AuthoringTool::ActorInfo const& value);
+        winrt::Windows::Foundation::Collections::IObservableVector<winrt::EngineInterface_WRC::ActorProxy> ActorInfos();
+        winrt::EngineInterface_WRC::ActorProxy SelectedActor();
+        void SelectedActor(winrt::EngineInterface_WRC::ActorProxy const& value);
     };
 }
 namespace winrt::AuthoringTool::factory_implementation

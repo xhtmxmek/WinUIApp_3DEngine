@@ -143,18 +143,18 @@ namespace winrt::EngineInterface_WRC::implementation
 		engineCoreNative_->PointerProcess(MouseButtonState, 0.0f, Vector2i((int)args.CurrentPoint().Position().X, (int)args.CurrentPoint().Position().Y));
 	}
 
-	winrt::EngineInterface_WRC::PointerActionResult EngineInterface::StopTracking(winrt::Microsoft::UI::Input::PointerEventArgs const& args)
-	{
-		CheckButtonState(args);		
-		engineCoreNative_->PointerProcess(MouseButtonState, 0.0f, Vector2i((int)args.CurrentPoint().Position().X, (int)args.CurrentPoint().Position().Y));
+	//winrt::EngineInterface_WRC::PointerActionResult EngineInterface::StopTracking(winrt::Microsoft::UI::Input::PointerEventArgs const& args)
+	//{
+	//	CheckButtonState(args);		
+	//	engineCoreNative_->PointerProcess(MouseButtonState, 0.0f, Vector2i((int)args.CurrentPoint().Position().X, (int)args.CurrentPoint().Position().Y));
 
-		Vector2f currentPos = Vector2f(args.CurrentPoint().Position().X, args.CurrentPoint().Position().Y);
-		if (currentPos == pickedPos_)
-		{			
-		}
-		PointerActionResult result;
-		return result;
-	}
+	//	Vector2f currentPos = Vector2f(args.CurrentPoint().Position().X, args.CurrentPoint().Position().Y);
+	//	if (currentPos == pickedPos_)
+	//	{			
+	//	}
+	//	PointerActionResult result;
+	//	return result;
+	//}
 
 	void EngineInterface::PointerWheelChanged(winrt::Microsoft::UI::Input::PointerEventArgs const& args)
 	{
@@ -172,22 +172,22 @@ namespace winrt::EngineInterface_WRC::implementation
 	void EngineInterface::UpdateActorProxy()
 	{
 
-		actorProxy_.Components().Clear();
-		for (auto iterComponent : pickedActor_->Components())
-		{								
-			wstring convertName;			
-			convertName.assign(iterComponent.second->Name().begin(), iterComponent.second->Name().end());
+		//actorProxy_.Components().Clear();
+		//for (auto iterComponent : pickedActor_->Components())
+		//{								
+		//	wstring convertName;			
+		//	convertName.assign(iterComponent.second->Name().begin(), iterComponent.second->Name().end());
 
-			ActorComponentProxy componentProxy(convertName);
-			for (auto iterProperty : iterComponent.second->Properties())
-			{
-				wstring propertyName;
-				propertyName.assign(iterProperty->Name().begin(), iterProperty->Name().end());
-				ComponentPropertyProxy propertyProxy(propertyName);
-				componentProxy.Properties().Append(propertyProxy);					
-			}
-			actorProxy_.Components().Append(componentProxy);
-		}
+		//	ActorComponentProxy componentProxy(convertName);
+		//	for (auto iterProperty : iterComponent.second->Properties())
+		//	{
+		//		wstring propertyName;
+		//		propertyName.assign(iterProperty->Name().begin(), iterProperty->Name().end());
+		//		ComponentPropertyProxy propertyProxy(propertyName);
+		//		componentProxy.Properties().Append(propertyProxy);					
+		//	}
+		//	actorProxy_.Components().Append(componentProxy);
+		//}
 	}
 
 	// Properties

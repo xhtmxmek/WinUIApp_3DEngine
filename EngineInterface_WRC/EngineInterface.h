@@ -49,7 +49,7 @@ namespace winrt::EngineInterface_WRC::implementation
         void KeyboardProcess(winrt::Microsoft::UI::Xaml::Input::KeyRoutedEventArgs const& args);
         void StartTracking(winrt::Microsoft::UI::Input::PointerEventArgs const& args);
         void TrackingUpdate(winrt::Microsoft::UI::Input::PointerEventArgs const& args);
-        winrt::EngineInterface_WRC::PointerActionResult StopTracking(winrt::Microsoft::UI::Input::PointerEventArgs const& args);
+        //winrt::EngineInterface_WRC::PointerActionResult StopTracking(winrt::Microsoft::UI::Input::PointerEventArgs const& args);
         void PointerWheelChanged(winrt::Microsoft::UI::Input::PointerEventArgs const& args);
 
         Windows::Foundation::Size GetDefaultBackBufferSize() noexcept;
@@ -68,7 +68,7 @@ namespace winrt::EngineInterface_WRC::implementation
         IDXGISwapChain3* engineSwapChain_;        
         Vector2f pickedPos_;
         shared_ptr<Engine::Level::Actor> pickedActor_;
-        ActorProxy actorProxy_;
+        //ActorProxy actorProxy_;
         vector<bool>MouseButtonState;
 
     };

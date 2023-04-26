@@ -5,12 +5,16 @@ namespace winrt::EngineInterface_WRC::implementation
 {
     struct ActorComponentProxy : ActorComponentProxyT<ActorComponentProxy>
     {
-        ActorComponentProxy(const hstring& name);
+        ActorComponentProxy() = default;
+
+        ActorComponentProxy(hstring const& name);
         hstring Name();
-        winrt::Windows::Foundation::Collections::IVector<winrt::EngineInterface_WRC::ComponentPropertyProxy> Properties();
+        winrt::Windows::Foundation::Collections::IObservableVector<winrt::EngineInterface_WRC::ActorComponentProxy> ChildComponents();
+        winrt::Windows::Foundation::Collections::IObservableVector<winrt::EngineInterface_WRC::ComponentPropertyProxy> Properties();
     private:
+        winrt::Windows::Foundation::Collections::IObservableVector<winrt::EngineInterface_WRC::ActorComponentProxy> childComponents_;
+        winrt::Windows::Foundation::Collections::IObservableVector<winrt::EngineInterface_WRC::ComponentPropertyProxy> properties_;
         hstring name_;
-        Windows::Foundation::Collections::IVector<winrt::EngineInterface_WRC::ComponentPropertyProxy> properties_;
     };
 }
 namespace winrt::EngineInterface_WRC::factory_implementation

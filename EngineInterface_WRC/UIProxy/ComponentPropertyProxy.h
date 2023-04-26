@@ -5,14 +5,18 @@ namespace winrt::EngineInterface_WRC::implementation
 {
     struct ComponentPropertyProxy : ComponentPropertyProxyT<ComponentPropertyProxy>
     {
-        ComponentPropertyProxy(const hstring& name);
+        ComponentPropertyProxy() = default;
 
+        ComponentPropertyProxy(hstring const& name);
         hstring Name();
-        hstring Value();
-        void Value(hstring const& value);
+        winrt::Microsoft::UI::Xaml::UIElement MappedControl();
+        void MappedControl(winrt::Microsoft::UI::Xaml::UIElement const& value);
+        winrt::event_token PropertyChanged(winrt::Microsoft::UI::Xaml::Data::PropertyChangedEventHandler const& handler);
+        void PropertyChanged(winrt::event_token const& token) noexcept;
     private:
         hstring name_;
-        hstring value_;
+        winrt::event<Microsoft::UI::Xaml::Data::PropertyChangedEventHandler> propertyChanged_;
+        winrt::Microsoft::UI::Xaml::UIElement mappedControl_{ nullptr };
     };
 }
 namespace winrt::EngineInterface_WRC::factory_implementation

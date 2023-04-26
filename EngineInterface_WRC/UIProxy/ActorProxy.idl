@@ -1,28 +1,27 @@
 namespace EngineInterface_WRC
 {
-	[default_interface]
-	runtimeclass ComponentPropertyProxy
+	runtimeclass ComponentPropertyProxy : Microsoft.UI.Xaml.Data.INotifyPropertyChanged
 	{
-		String Name{get; };
 		ComponentPropertyProxy(String name);
-		String Value;
+		String Name{ get; };
+		Microsoft.UI.Xaml.UIElement MappedControl;
 	}
 
-
-	[default_interface]
 	runtimeclass ActorComponentProxy
 	{
-		String Name{get; };
 		ActorComponentProxy(String name);
-		Windows.Foundation.Collections.IVector<ComponentPropertyProxy> Properties{get; };
+		String Name{ get; };
+		Windows.Foundation.Collections.IObservableVector<ActorComponentProxy> ChildComponents{ get; };
+		Windows.Foundation.Collections.IObservableVector<ComponentPropertyProxy> Properties{ get; };
 	}
 
-	[default_interface]
 	runtimeclass ActorProxy
 	{
+		ActorProxy(String name, String type);
 		String Name;
-		ActorProxy();
-		Windows.Foundation.Collections.IVector<ActorComponentProxy> Components{ get; };
+		String Type;
+		Windows.Foundation.Collections.IObservableVector<ActorProxy> ChildActors{ get; };
+		Windows.Foundation.Collections.IObservableVector<ActorComponentProxy> Components{ get; };
 	}
 
 }

@@ -1,11 +1,12 @@
 // BookstoreViewModel.idl
 import "Booksku.idl";
+//import "ActorProxy.idl";
 
 namespace AuthoringTool
 {
     runtimeclass BookstoreViewModel
     {
         BookstoreViewModel();
-        BookSku BookSku{ get; };
+        BookSku BookSku{ get; };        
     }
 }

@@ -146,7 +146,8 @@ namespace winrt::AuthoringTool::implementation
         swapChainPanel().KeyDown({ this, &MainWindow::OnKeyDown_SwapChain });
         swapChainPanel().KeyUp({ this, &MainWindow::OnKeyUp_SwapChain });                       
 
-        renderingEngine_.StartRenderLoop();       
+        renderingEngine_.StartRenderLoop();
+        GetWorldInfo();
     }
 #pragma endregion
 
@@ -256,6 +257,14 @@ namespace winrt::AuthoringTool::implementation
         //renderingEngine_.
     }
 
+    void MainWindow::GetWorldInfo()
+    {        
+        EngineInterface_WRC::ActorProxy actor(L"firstActor", L"actor");
+        worldViewModel_.ActorInfos().Insert(L"firstActor", actor);
+        //worldViewModel_.ActorInfos().Lookup()
+        worldViewModel_.TestList().Append(actor);
+    }
+
     //void MainPage::ClickHandler(IInspectable const&, RoutedEventArgs const&)
     //{
     //    myButton().Content(box_value(L"Clicked"));
@@ -282,17 +291,17 @@ namespace winrt::AuthoringTool::implementation
         //double test = myButton().XamlRoot().RasterizationScale();
     }
 
-    void MainWindow::ClickHandler(Windows::Foundation::IInspectable const& sender, Microsoft::UI::Xaml::RoutedEventArgs const& args)
-    {
-        MainViewModel().BookSku().Title(L"To Kill a Mockingbird");
-    }
-
-    winrt::AuthoringTool::BookstoreViewModel MainWindow::MainViewModel()
-    {
-        return m_mainViewModel;
-    }
-    //AuthoringTool::ActorViewModel MainWindow::SelectedActorViewModel()
+    //void MainWindow::ClickHandler(Windows::Foundation::IInspectable const& sender, Microsoft::UI::Xaml::RoutedEventArgs const& args)
     //{
-    //    return actorViewModel_;
+    //    MainViewModel().BookSku().Title(L"To Kill a Mockingbird");
     //}
+
+    //winrt::AuthoringTool::BookstoreViewModel MainWindow::MainViewModel()
+    //{
+    //    return m_mainViewModel;
+    //}
+    AuthoringTool::ActorListViewModel MainWindow::WorldInfoViewModel()
+    {
+        return worldViewModel_;
+    }
 }

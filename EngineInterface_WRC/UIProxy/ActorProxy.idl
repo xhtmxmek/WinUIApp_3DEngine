@@ -15,7 +15,7 @@ namespace EngineInterface_WRC
 		Windows.Foundation.Collections.IObservableVector<ComponentPropertyProxy> Properties{ get; };
 	}
 
-	runtimeclass ActorProxy
+	runtimeclass ActorProxy : Microsoft.UI.Xaml.Data.INotifyPropertyChanged
 	{
 		ActorProxy(String name, String type);
 		String Name;

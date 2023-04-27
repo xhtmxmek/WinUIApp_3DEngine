@@ -114,18 +114,13 @@
     <Manifest Include="app.manifest" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="ViewModels\Actor\ActorComponent.h">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
-    </ClInclude>
-    <ClInclude Include="ViewModels\Actor\ActorInfo.h">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
-    </ClInclude>
     <ClInclude Include="ViewModels\Actor\ActorListViewModel.h" />
-    <ClInclude Include="ViewModels\Actor\ActorProperty.h">
+    <ClInclude Include="ViewModels\BookStore\BookSku.h">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
     </ClInclude>
-    <ClInclude Include="ViewModels\BookStore\BookSku.h" />
-    <ClInclude Include="ViewModels\BookStore\BookstoreViewModel.h" />
+    <ClInclude Include="ViewModels\BookStore\BookstoreViewModel.h">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+    </ClInclude>
     <ClInclude Include="Models\User.h" />
     <ClInclude Include="pch.h" />
     <ClInclude Include="App.xaml.h">
@@ -141,18 +136,13 @@
     <Page Include="MainWindow.xaml" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="ViewModels\Actor\ActorComponent.cpp">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
-    </ClCompile>
-    <ClCompile Include="ViewModels\Actor\ActorInfo.cpp">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
-    </ClCompile>
     <ClCompile Include="ViewModels\Actor\ActorListViewModel.cpp" />
-    <ClCompile Include="ViewModels\Actor\ActorProperty.cpp">
+    <ClCompile Include="ViewModels\BookStore\BookSku.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
     </ClCompile>
-    <ClCompile Include="ViewModels\BookStore\BookSku.cpp" />
-    <ClCompile Include="ViewModels\BookStore\BookstoreViewModel.cpp" />
+    <ClCompile Include="ViewModels\BookStore\BookstoreViewModel.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+    </ClCompile>
     <ClCompile Include="Models\User.cpp" />
     <ClCompile Include="pch.cpp">
       <PrecompiledHeader>Create</PrecompiledHeader>
@@ -174,13 +164,17 @@
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
       </ExcludedFromBuild>
     </Midl>
-    <Midl Include="ViewModels\BookStore\Booksku.idl" />
+    <Midl Include="ViewModels\BookStore\Booksku.idl">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+    </Midl>
     <Midl Include="MainWindow.idl">
       <SubType>Code</SubType>
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <AdditionalIncludeDirectories Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(SolutionDir)EngineInterface_WRC\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </Midl>
-    <Midl Include="ViewModels\BookStore\BookStoreViewModel.idl" />
+    <Midl Include="ViewModels\BookStore\BookStoreViewModel.idl">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+    </Midl>
   </ItemGroup>
   <ItemGroup>
     <Text Include="readme.txt">

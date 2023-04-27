@@ -24,16 +24,28 @@
 
 namespace winrt::AuthoringTool::implementation
 {
-    winrt::Windows::Foundation::Collections::IObservableVector<winrt::EngineInterface_WRC::ActorProxy> ActorListViewModel::ActorInfos()
+    ActorListViewModel::ActorListViewModel()
     {
-        throw hresult_not_implemented();
+        actorInfos_ = winrt::single_threaded_observable_map<winrt::hstring, winrt::EngineInterface_WRC::ActorProxy>();
+        testList_ = winrt::single_threaded_observable_vector<winrt::EngineInterface_WRC::ActorProxy>();
     }
-    winrt::EngineInterface_WRC::ActorProxy ActorListViewModel::SelectedActor()
+
+    winrt::Windows::Foundation::Collections::IObservableMap<winrt::hstring, winrt::EngineInterface_WRC::ActorProxy> ActorListViewModel::ActorInfos()
     {
-        throw hresult_not_implemented();
+        return actorInfos_;
     }
-    void ActorListViewModel::SelectedActor(winrt::EngineInterface_WRC::ActorProxy const& value)
+
+    winrt::Windows::Foundation::Collections::IObservableVector<winrt::EngineInterface_WRC::ActorProxy> ActorListViewModel::TestList()
     {
-        throw hresult_not_implemented();
+        return testList_;
+    }
+
+    winrt::hstring ActorListViewModel::SelectedActorName()
+    {
+        return selectedActorName_;
+    }
+    void ActorListViewModel::SelectedActorName(winrt::hstring const& value)
+    {
+        selectedActorName_ = value;
     }
 }

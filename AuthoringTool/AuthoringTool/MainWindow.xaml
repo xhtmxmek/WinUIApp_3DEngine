@@ -5,8 +5,8 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:local="using:AuthoringTool"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:wrc="using:EngineInterface_WRC"
     mc:Ignorable="d">
-
 
     <SplitView
         x:Name="splitView"
@@ -73,7 +73,22 @@
                         Background="#1A1A1A"
                         Content="Type" />
                 </Grid>
-                <TreeView x:Name="WorldOutLinerTree" />
+                <!--<TreeView ItemsSource="{x:Bind WorldInfoViewModel.ActorInfos}">
+                    <TreeView.ItemTemplate>
+                        <DataTemplate x:DataType="map>
+                            <TreeViewItem Content="{x:Bind Value.Name}" ItemsSource="{x:Bind Value.Components}" />
+                        </DataTemplate>
+                    </TreeView.ItemTemplate>
+                </TreeView>-->
+
+                <ListBox ItemsSource="{x:Bind WorldInfoViewModel.ActorInfos}">
+                    <ListBox.ItemTemplate>
+                        <DataTemplate>
+                            <TextBlock Text="{x:Bind Key}" />
+                        </DataTemplate>
+                    </ListBox.ItemTemplate>
+                </ListBox>
+
             </StackPanel>
         </SplitView.Pane>
         <!--<SplitView.Pane>

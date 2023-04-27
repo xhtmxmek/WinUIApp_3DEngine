@@ -6,8 +6,9 @@ namespace AuthoringTool
 	runtimeclass ActorListViewModel
 	{
 		ActorListViewModel();		
-		Windows.Foundation.Collections.IObservableVector<EngineInterface_WRC.ActorProxy> ActorInfos{ get; };
-		EngineInterface_WRC.ActorProxy SelectedActor;
+		Windows.Foundation.Collections.IObservableMap<String, EngineInterface_WRC.ActorProxy> ActorInfos{ get; };
+		Windows.Foundation.Collections.IObservableVector<EngineInterface_WRC.ActorProxy> TestList{ get; };
+		String SelectedActorName;
 	}
 }
 

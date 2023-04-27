@@ -18,7 +18,11 @@ namespace winrt::EngineInterface_WRC::implementation
 
     void ActorProxy::Name(hstring const& value)
     {
-        name_ = value;
+        if (name_ != value)
+        {
+            name_ = value;
+            propertyChanged_(*this, Microsoft::UI::Xaml::Data::PropertyChangedEventArgs{ L"Name" });
+        }
     }
 
     hstring ActorProxy::Type()
@@ -29,6 +33,17 @@ namespace winrt::EngineInterface_WRC::implementation
     void ActorProxy::Type(hstring const& value)
     {
         type_ = value;
+        propertyChanged_(*this, Microsoft::UI::Xaml::Data::PropertyChangedEventArgs{ L"Type" });
+    }
+
+    winrt::event_token ActorProxy::PropertyChanged(Microsoft::UI::Xaml::Data::PropertyChangedEventHandler const& handler)
+    {
+        return propertyChanged_.add(handler);
+    }
+
+    void ActorProxy::PropertyChanged(winrt::event_token const& token)
+    {
+        propertyChanged_.remove(token);
     }
 
     winrt::Windows::Foundation::Collections::IObservableVector<winrt::EngineInterface_WRC::ActorProxy> ActorProxy::ChildActors()

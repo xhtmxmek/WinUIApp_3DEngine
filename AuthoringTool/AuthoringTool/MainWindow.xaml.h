@@ -22,8 +22,8 @@ namespace winrt::AuthoringTool::implementation
 
 		void myButton_Click(Windows::Foundation::IInspectable const& sender, Microsoft::UI::Xaml::RoutedEventArgs const& args);
 		void ClickHandler(Windows::Foundation::IInspectable const& sender, Microsoft::UI::Xaml::RoutedEventArgs const& args);
-		AuthoringTool::BookstoreViewModel MainViewModel();
-		//AuthoringTool::ActorViewModel SelectedActorViewModel();
+		//AuthoringTool::BookstoreViewModel MainViewModel();
+		AuthoringTool::ActorListViewModel WorldInfoViewModel();
 	private:
 		//not projection
 		void OnRendering(IInspectable const& sender, IInspectable const& args);
@@ -57,7 +57,9 @@ namespace winrt::AuthoringTool::implementation
 		//Control		
 		void RegisterDedicatedInputOnSwapchain();
 
+		//Scene
 		void GetPickedActor();
+		void GetWorldInfo();
 
 		//DXGI_MODE_ROTATION ComputeDisplayRotation() const noexcept
 		//{
@@ -138,8 +140,8 @@ namespace winrt::AuthoringTool::implementation
 		//winrt::make로 생성자에서 생성할수있음
 		//AuthoringTool::BookstoreViewModel m_mainViewModel{ nullptr };
 		//아니면 균일한생성
-		AuthoringTool::BookstoreViewModel m_mainViewModel;
-		//AuthoringTool::ActorViewModel actorViewModel_;
+		//AuthoringTool::BookstoreViewModel m_mainViewModel;
+		AuthoringTool::ActorListViewModel worldViewModel_;
 	};
 }
 

@@ -24,11 +24,17 @@ namespace winrt::AuthoringTool::implementation
 {
     struct ActorListViewModel : ActorListViewModelT<ActorListViewModel>
     {
-        ActorListViewModel() = default;
+        ActorListViewModel();
 
-        winrt::Windows::Foundation::Collections::IObservableVector<winrt::EngineInterface_WRC::ActorProxy> ActorInfos();
-        winrt::EngineInterface_WRC::ActorProxy SelectedActor();
-        void SelectedActor(winrt::EngineInterface_WRC::ActorProxy const& value);
+        winrt::Windows::Foundation::Collections::IObservableMap<winrt::hstring, winrt::EngineInterface_WRC::ActorProxy> ActorInfos();
+        winrt::Windows::Foundation::Collections::IObservableVector<winrt::EngineInterface_WRC::ActorProxy> TestList();
+        winrt::hstring SelectedActorName();
+        void SelectedActorName(winrt::hstring const& value);
+    private:
+        winrt::Windows::Foundation::Collections::IObservableMap<winrt::hstring, winrt::EngineInterface_WRC::ActorProxy> actorInfos_;
+        winrt::Windows::Foundation::Collections::IObservableVector<winrt::EngineInterface_WRC::ActorProxy> testList_;
+        winrt::hstring selectedActorName_;
+
     };
 }
 namespace winrt::AuthoringTool::factory_implementation

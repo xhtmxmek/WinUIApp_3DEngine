@@ -20,7 +20,6 @@
     <ClCompile Include="ViewModels\BookStore\BookstoreViewModel.cpp" />
     <ClCompile Include="Models\User.cpp" />
     <ClCompile Include="ViewModels\Actor\ActorListViewModel.cpp" />
-    <ClCompile Include="ViewModels\Actor\ActorInfo.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="pch.h" />
@@ -29,7 +28,6 @@
     <ClInclude Include="ViewModels\BookStore\BookstoreViewModel.h" />
     <ClInclude Include="Models\User.h" />
     <ClInclude Include="ViewModels\Actor\ActorListViewModel.h" />
-    <ClInclude Include="ViewModels\Actor\ActorInfo.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Assets">

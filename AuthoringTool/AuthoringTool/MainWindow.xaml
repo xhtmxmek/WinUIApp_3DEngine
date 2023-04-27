@@ -83,7 +83,7 @@
 
                 <ListBox ItemsSource="{x:Bind WorldInfoViewModel.ActorInfos}">
                     <ListBox.ItemTemplate>
-                        <DataTemplate>
+                        <DataTemplate x:DataType="map">
                             <TextBlock Text="{x:Bind Key}" />
                         </DataTemplate>
                     </ListBox.ItemTemplate>

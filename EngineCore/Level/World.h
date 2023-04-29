@@ -28,6 +28,7 @@ namespace Engine
 			void PushComponent(const shared_ptr<Component::ComponentBase>& component);
 			void Update(float elapsedTime);
 			void Render();
+			const unordered_map<const wchar_t*, shared_ptr<Actor>> GetActorList();
 
 		private:
 			void CheckVisibilityActors();	//가시성 판정			

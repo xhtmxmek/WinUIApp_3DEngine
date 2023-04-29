@@ -201,7 +201,12 @@ namespace winrt::EngineInterface_WRC::implementation
 	{
 		engineCoreNative_->LoadScriptProject(path.c_str());
 	}
-
 #pragma endregion
 
+
+	winrt::Windows::Foundation::Collections::IMap<hstring, winrt::EngineInterface_WRC::ActorProxy> EngineInterface::WorldActorList()
+	{
+		engineCoreNative_->GetActorList();
+		//auto coll2{ winrt::single_threaded_map<winrt::hstring, int>(std::move(values)) };
+	}
 }

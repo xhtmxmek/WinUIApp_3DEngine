@@ -53,7 +53,9 @@ namespace winrt::EngineInterface_WRC::implementation
         void PointerWheelChanged(winrt::Microsoft::UI::Input::PointerEventArgs const& args);
 
         Windows::Foundation::Size GetDefaultBackBufferSize() noexcept;
-        void LoadScriptProject(hstring const& path);        
+        void LoadScriptProject(hstring const& path);
+
+        winrt::Windows::Foundation::Collections::IMap<hstring, winrt::EngineInterface_WRC::ActorProxy> WorldActorList();
     private: 
         void InitializeSwapChainPanelInfo(const Microsoft::UI::Xaml::Controls::SwapChainPanel& panel);
         void SetSwapchainPanelInfo(const Microsoft::UI::Xaml::Controls::SwapChainPanel& panel);
@@ -69,7 +71,7 @@ namespace winrt::EngineInterface_WRC::implementation
         Vector2f pickedPos_;
         shared_ptr<Engine::Level::Actor> pickedActor_;
         //ActorProxy actorProxy_;
-        vector<bool>MouseButtonState;
+        vector<bool>MouseButtonState;        
 
     };
 }

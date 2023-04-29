@@ -290,6 +290,11 @@ namespace Engine
 		pickedActor = Level::ActorManager::GetInstance().GetActorByName("MeshTest");
 	}
 
+	const unordered_map<const wchar_t*, shared_ptr<Level::Actor>> EngineCore::GetActorList()
+	{
+		return m_World->GetActorList();
+	}
+
 #pragma endregion
 
 #pragma region Direct3D Resources

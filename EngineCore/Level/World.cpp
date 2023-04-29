@@ -43,6 +43,11 @@ namespace Engine
 			//int k = 5;
 		}
 
+		const unordered_map<const wchar_t*, shared_ptr<Actor>> World::GetActorList()
+		{
+			return Actors;
+		}
+
 		void World::CheckVisibilityActors()
 		{
 			//액터가 가지고 있는 DrawComponent들을 넘겨주어야함

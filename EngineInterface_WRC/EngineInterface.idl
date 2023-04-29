@@ -46,6 +46,8 @@ namespace EngineInterface_WRC
 		//[noexcept] void GetDefaultSize(out Single width, out Single height);
 		[noexcept]  Windows.Foundation.Size GetDefaultBackBufferSize();
 		void LoadScriptProject(String path);
+
+		Windows.Foundation.Collections.IMap<String, ActorProxy> WorldActorList{ get; };
 	}
 
 }

@@ -5,10 +5,18 @@ namespace AuthoringTool
 	[default_interface]
 	runtimeclass ActorListViewModel
 	{
-		ActorListViewModel();		
-		Windows.Foundation.Collections.IObservableMap<String, EngineInterface_WRC.ActorProxy> ActorInfos{ get; };
-		Windows.Foundation.Collections.IObservableVector<EngineInterface_WRC.ActorProxy> TestList{ get; };
+		ActorListViewModel();				
+		Windows.Foundation.Collections.IObservableVector<EngineInterface_WRC.ActorProxy> ActorInfos{ get; };
 		String SelectedActorName;
+		/*
+		표시하는건 vector		
+		기본적으로는 map의 모든 멤버를 다 채워넣어서 보여줌. 이름검색하면 이벤트 발생시켜서 map에서 해당 이름 검색해서 OulinerVector를 다 비우고 그 멤버만 보여줌.
+		map은 오브젝트의 이름과 벡터의 index를 k,v로 가지고있음.
+		3D오브젝트가 클릭되면 오브젝트의 이름을 map에서 검색해서 표시 벡터의 idx를 가져와서 하이라이팅함.(selectedflag... 백그라운드 칼라를 바인딩해야할듯?)
+		리스트에서 클릭됬을시 해당 아이템의 onclicked이벤트로 체크해서, 하이라이팅함.
+		이 map은 기본적으로 들고 있고 엔진에서 최초에 hash 받아와서 세팅. 저작도구를 통하지 않고 엔진에서 삭제 처리 될경우 이 map을 다시 업데이트 해야됨.
+		//map에서 해당 이름 삭제, 
+		*/
 	}
 }
 

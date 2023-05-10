@@ -56,7 +56,7 @@ namespace Engine
 
 		void ComponentBase::AddProperty(PropertyBase* newProperty)
 		{
-			properties_.push_back(newProperty);
+			//properties_.push_back(newProperty);
 		}
 
 		//void ComponentBase::AddProperty(const shared_ptr<ProperyBase>& property)

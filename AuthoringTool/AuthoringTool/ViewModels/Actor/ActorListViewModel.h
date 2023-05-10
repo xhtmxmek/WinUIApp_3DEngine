@@ -32,7 +32,7 @@ namespace winrt::AuthoringTool::implementation
     private:
         winrt::Windows::Foundation::Collections::IObservableVector<winrt::EngineInterface_WRC::ActorProxy> actorInfos_;        
         winrt::hstring selectedActorName_;
-        std::unordered_map<winrt::hstring, unsigned int> const& actorLookupTable
+        //std::unordered_map<winrt::hstring, unsigned int> const& actorLookupTable
 
     };
 }

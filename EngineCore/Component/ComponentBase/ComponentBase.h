@@ -52,7 +52,7 @@ namespace Engine
 			{ 
 				return name_; 
 			}	
-			ENGINE_API const vector<PropertyBase*>& Properties()
+			ENGINE_API const vector<shared_ptr<PropertyBase>>& Properties()
 			{ 
 				return properties_;
 			}
@@ -66,7 +66,7 @@ namespace Engine
 			Math::TransformGroup transform_;
 			bool enable_;
 			SceneComponentType type_;
-			vector<PropertyBase*> properties_;
+			vector<shared_ptr<PropertyBase>> properties_;
 
 		};
 

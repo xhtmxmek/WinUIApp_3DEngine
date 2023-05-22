@@ -25,24 +25,30 @@
 namespace winrt::AuthoringTool::implementation
 {
     ActorListViewModel::ActorListViewModel()
-    {        
-        actorInfos_ = winrt::single_threaded_observable_vector<winrt::EngineInterface_WRC::ActorProxy>();        
+    {                
+        //Proxy로부터 ActorListInfo를 받아서 이 vector를 업데이트 시킴
+        //observableVector이기 떄문에 추가, 삭제시 알수있음.
+        //속성은 람다로 연결시켜줘야 변화를 알수 있을듯.
     }
     winrt::Windows::Foundation::Collections::IObservableVector<winrt::EngineInterface_WRC::ActorProxy> ActorListViewModel::ActorInfos()
+    {        
+        return viewActorList_;
+    }
+
+    void ActorListViewModel::ActorInfos(const winrt::Windows::Foundation::Collections::IObservableVector<winrt::EngineInterface_WRC::ActorProxy>& actors)
     {
-        return actorInfos_;
+        viewActorList_ = actors;
     }
 
     winrt::hstring ActorListViewModel::SelectedActorName()
     {
-        return selectedActorName_;
+        return hstring(L"test");
     }
     void ActorListViewModel::SelectedActorName(winrt::hstring const& value)
-    {
-        selectedActorName_ = value;
+    {        
     }
-    void ActorListViewModel::UpdateSceneActorInfo(std::unordered_map<winrt::hstring, unsigned int> const& actorLookupTable)
+    void ActorListViewModel::UpdateSceneActorInfo(const winrt::Windows::Foundation::Collections::IObservableVector<winrt::EngineInterface_WRC::ActorProxy>& actors)
     {
-
+        viewActorList_ = actors;
     }
 }

@@ -290,7 +290,7 @@ namespace Engine
 		pickedActor = Level::ActorManager::GetInstance().GetActorByName("MeshTest");
 	}
 
-	const unordered_map<const wchar_t*, shared_ptr<Level::Actor>> EngineCore::GetActorList()
+	const unordered_map<std::string, shared_ptr<Level::Actor>>& EngineCore::GetActorList()
 	{
 		return m_World->GetActorList();
 	}

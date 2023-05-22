@@ -1,6 +1,8 @@
 #pragma once
 #include "DLLDefine.h"
 //#include "World.h"
+
+using namespace std;
 namespace Engine
 {
 	namespace Level
@@ -13,8 +15,8 @@ namespace Engine
 			SLevel(const SLevel&) = delete;
 			SLevel& operator=(const SLevel&) = delete;
 
-			ENGINE_API static const shared_ptr<World>& GetWorld(){ return GetInstance().OwningWorld; }
-			ENGINE_API static void SetWorld(const shared_ptr<World> world) { GetInstance().OwningWorld = world; }			
+			ENGINE_API static const std::shared_ptr<World>& GetWorld(){ return GetInstance().OwningWorld; }
+			ENGINE_API static void SetWorld(const std::shared_ptr<World> world) { GetInstance().OwningWorld = world; }			
 			ENGINE_API static SLevel& GetInstance()			
 			{
 				static SLevel level;

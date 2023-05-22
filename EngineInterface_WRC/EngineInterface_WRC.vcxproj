@@ -133,6 +133,7 @@
     </ClInclude>
     <ClInclude Include="UIProxy\ActorComponentProxy.h" />
     <ClInclude Include="UIProxy\ActorProxy.h" />
+    <ClInclude Include="UIProxy\ActorProxyProcessor.h" />
     <ClInclude Include="UIProxy\ComponentPropertyProxy.h" />
   </ItemGroup>
   <ItemGroup>
@@ -146,6 +147,7 @@
     </ClCompile>
     <ClCompile Include="UIProxy\ActorComponentProxy.cpp" />
     <ClCompile Include="UIProxy\ActorProxy.cpp" />
+    <ClCompile Include="UIProxy\ActorProxyProcessor.cpp" />
     <ClCompile Include="UIProxy\ComponentPropertyProxy.cpp" />
   </ItemGroup>
   <ItemGroup>

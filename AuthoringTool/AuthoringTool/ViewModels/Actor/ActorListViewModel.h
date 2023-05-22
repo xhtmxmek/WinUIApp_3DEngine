@@ -26,14 +26,12 @@ namespace winrt::AuthoringTool::implementation
     {
         ActorListViewModel();
         winrt::Windows::Foundation::Collections::IObservableVector<winrt::EngineInterface_WRC::ActorProxy> ActorInfos();
+        void ActorInfos(const winrt::Windows::Foundation::Collections::IObservableVector<winrt::EngineInterface_WRC::ActorProxy>& actors);
         winrt::hstring SelectedActorName();
         void SelectedActorName(winrt::hstring const& value);
-        void UpdateSceneActorInfo(std::unordered_map<winrt::hstring, unsigned int> const& actorLookupTable);
-    private:
-        winrt::Windows::Foundation::Collections::IObservableVector<winrt::EngineInterface_WRC::ActorProxy> actorInfos_;        
-        winrt::hstring selectedActorName_;
-        //std::unordered_map<winrt::hstring, unsigned int> const& actorLookupTable
-
+        void UpdateSceneActorInfo(const winrt::Windows::Foundation::Collections::IObservableVector<winrt::EngineInterface_WRC::ActorProxy>& actors);
+    private:        
+        winrt::Windows::Foundation::Collections::IObservableVector<winrt::EngineInterface_WRC::ActorProxy> viewActorList_;
     };
 }
 namespace winrt::AuthoringTool::factory_implementation

@@ -32,6 +32,7 @@
     <ClCompile Include="UIProxy\ActorProxy.cpp" />
     <ClCompile Include="UIProxy\ComponentPropertyProxy.cpp" />
     <ClCompile Include="PointerActionResult.cpp" />
+    <ClCompile Include="UIProxy\ActorProxyProcessor.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Level\Actor\ActorManager.h">
@@ -43,6 +44,7 @@
     <ClInclude Include="UIProxy\ActorProxy.h" />
     <ClInclude Include="UIProxy\ComponentPropertyProxy.h" />
     <ClInclude Include="PointerActionResult.h" />
+    <ClInclude Include="UIProxy\ActorProxyProcessor.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

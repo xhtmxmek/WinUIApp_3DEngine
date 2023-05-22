@@ -136,6 +136,7 @@ namespace winrt::AuthoringTool::implementation
         
         renderingEngine_.Initialize(swapChainPanel());                
         //RegisterDedicatedInputOnSwapchain();
+        //ActorViewModel.Initialize();
 
         //winrt::Windows::Foundation::Numerics::float2        
         swapChainPanel().PointerPressed({ this, &MainWindow::OnPointerPressedSwapChain });
@@ -145,9 +146,9 @@ namespace winrt::AuthoringTool::implementation
 
         swapChainPanel().KeyDown({ this, &MainWindow::OnKeyDown_SwapChain });
         swapChainPanel().KeyUp({ this, &MainWindow::OnKeyUp_SwapChain });                       
-
-        renderingEngine_.StartRenderLoop();
-        worldViewModel_.
+        
+        renderingEngine_.StartRenderLoop();        
+        worldViewModel_.ActorInfos(renderingEngine_.WorldActorList());
     }
 #pragma endregion
 
@@ -255,14 +256,6 @@ namespace winrt::AuthoringTool::implementation
         }
 
         //renderingEngine_.
-    }
-
-    void MainWindow::GetWorldInfo()
-    {        
-        EngineInterface_WRC::ActorProxy actor(L"firstActor", L"actor");
-        worldViewModel_.ActorInfos().Insert(L"firstActor", actor);
-        //worldViewModel_.ActorInfos().Lookup()
-        worldViewModel_.TestList().Append(actor);
     }
 
     //void MainPage::ClickHandler(IInspectable const&, RoutedEventArgs const&)

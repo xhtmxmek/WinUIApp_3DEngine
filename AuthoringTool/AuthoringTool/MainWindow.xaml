@@ -73,22 +73,22 @@
                         Background="#1A1A1A"
                         Content="Type" />
                 </Grid>
+
+                <!--  Actor의 이름과 타입만 listing하기.  -->
                 <!--<TreeView ItemsSource="{x:Bind WorldInfoViewModel.ActorInfos}">
                     <TreeView.ItemTemplate>
-                        <DataTemplate x:DataType="map>
-                            <TreeViewItem Content="{x:Bind Value.Name}" ItemsSource="{x:Bind Value.Components}" />
+                        <DataTemplate x:DataType="wrc:ActorProxy">
+                            <TreeViewItem Content="{x:Bind Name}" ItemsSource="{x:Bind ChildActors}" />
                         </DataTemplate>
                     </TreeView.ItemTemplate>
                 </TreeView>-->
-
                 <ListBox ItemsSource="{x:Bind WorldInfoViewModel.ActorInfos}">
-                    <ListBox.ItemTemplate>
-                        <DataTemplate x:DataType="map">
-                            <TextBlock Text="{x:Bind Key}" />
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate x:DataType="wrc:ActorProxy">
+                            <TextBlock Text="{x:Bind Name, Mode=TwoWay}" />
                         </DataTemplate>
-                    </ListBox.ItemTemplate>
+                    </ItemsControl.ItemTemplate>
                 </ListBox>
-
             </StackPanel>
         </SplitView.Pane>
         <!--<SplitView.Pane>

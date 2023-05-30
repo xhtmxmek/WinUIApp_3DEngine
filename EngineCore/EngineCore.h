@@ -74,6 +74,7 @@ namespace Engine
         ENGINE_API void LoadScriptProject(std::wstring const& path);
         ENGINE_API void PickCheck(Vector2i screenPos, shared_ptr<Level::Actor>& pickedActor);
 
+        //std 템플릿에에대한 DLL 통신은 불가. Value로 패킹해서 내보내야됨. sharedType에 Hash 패킹 클래스를 추가하면 될듯.
         ENGINE_API const unordered_map<std::string, shared_ptr<Level::Actor>>& GetActorList();
 
         // private

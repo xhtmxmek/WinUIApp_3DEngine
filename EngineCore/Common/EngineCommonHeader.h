@@ -1,5 +1,6 @@
 #pragma once
 //е╦ют
+#define Pure = 0 
 #include <Math/Vector2.h>
 #include <Math/Vector3.h>
 #include <Math/Color.h>

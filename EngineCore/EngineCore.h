@@ -2,7 +2,6 @@
 #define WIN_APPS_SDK
 //#include "Common/StepTimer.h"
 #include "DLLDefine.h"
-
 /*
 EngineCore는 최대한 플랫폼 독립적인 코드로 가는것이 목표
 렌더링에 관련된 API는 사용하지만, 운영체제 관련된 코드는 최대한 배제할 예정
@@ -28,12 +27,7 @@ namespace Engine
         class Actor;
     }
 
-    namespace Type
-    {
-        struct Size;
-    }
-
-    class EngineCore
+    class EngineCore     
     {
     public:
         ENGINE_API EngineCore():RenderLoopActivate(false), ProjectHandle(nullptr) {}

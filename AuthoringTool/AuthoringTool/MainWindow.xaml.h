@@ -8,7 +8,7 @@
 
 namespace Engine
 {
-	class EngineCoreWrapper;
+	class EngineCore;
 }
 
 namespace winrt::AuthoringTool::implementation
@@ -124,7 +124,7 @@ namespace winrt::AuthoringTool::implementation
 		//}
 
 		// XAML 페이지 백그라운드에서 DirectX 콘텐츠를 렌더링하는 데 사용되는 리소스입니다.		
-		winrt::EngineInterface_WRC::EngineInterface renderingEngine_;		
+		std::unique_ptr<Engine::EngineCore> renderingEngine_;
 
 		bool					m_windowVisible;
 		float                   m_logicalWidth;

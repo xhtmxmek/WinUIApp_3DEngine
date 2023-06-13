@@ -2,7 +2,7 @@
 #include "EngineCore.h"
 #include "Common/EngineHelper.h"
 #include "Common/DeviceResources.h"
-#include "Common/StepTimer.h"
+#include "EngineCoreBuild.h"
 //#include "Common/EngineCriticalSection.h"
 //#include "Common/Engine_Scoped_Lock.h"
 #include "Level/Level.h"
@@ -80,7 +80,7 @@ namespace Engine
 		Timer->Tick([&]()
 			{
 				ProcessInput();
-				Update(Timer);
+				Update();
 			});
 
 		Render();
@@ -89,11 +89,11 @@ namespace Engine
 	}
 
 	// Updates the world.
-	void EngineCore::Update(const std::unique_ptr<DX::StepTimer>& timer)
+	void EngineCore::Update()
 	{
 		PIXBeginEvent(PIX_COLOR_DEFAULT, L"Update");
 
-		float elapsedTime = float(timer->GetElapsedSeconds());
+		float elapsedTime = float(Timer->GetElapsedSeconds());
 
 		// TODO: Add your game logic here.
 		// Input Update       

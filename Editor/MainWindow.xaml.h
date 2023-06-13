@@ -8,7 +8,7 @@
 
 namespace Engine
 {
-	class EngineCoreInterface;
+	class EngineCore;
 }
 
 namespace winrt::Editor::implementation
@@ -125,7 +125,7 @@ namespace winrt::Editor::implementation
 
 		// XAML 페이지 백그라운드에서 DirectX 콘텐츠를 렌더링하는 데 사용되는 리소스입니다.		
 		//winrt::EngineInterface_WRC::EngineInterface renderingEngine_;
-		Engine::EngineCoreInterface* renderingEngine_;
+		std::unique_ptr<Engine::EngineCore> renderingEngine_;
 
 		bool					m_windowVisible;
 		float                   m_logicalWidth;
@@ -146,7 +146,7 @@ namespace winrt::Editor::implementation
 	};
 }
 
-namespace winrt::AuthoringTool::factory_implementation
+namespace winrt::Editor::factory_implementation
 {
 	struct MainWindow : MainWindowT<MainWindow, implementation::MainWindow>
 	{

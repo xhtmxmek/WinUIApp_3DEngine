@@ -3,7 +3,9 @@
 
 #include "pch.h"
 #include "MainWindow.xaml.h"
-#include "EngineCoreInterface.h"
+#include "Common/EngineBaseHeader.h"
+#include "Common/EngineCommonHeader.h"
+#include "EngineCore.h"
 #if __has_include("MainWindow.g.cpp")
 #include "MainWindow.g.cpp"
 #endif

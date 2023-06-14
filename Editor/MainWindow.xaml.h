@@ -1,9 +1,6 @@
 #pragma once
 
 #include "MainWindow.g.h"
-//#include <d3d11_4.h>
-//#include <dxgi1_6.h>
-//#include <d2d1_3.h>
 //#include "Bookstore.BookstoreViewModel.h"
 
 namespace Engine
@@ -26,12 +23,12 @@ namespace winrt::Editor::implementation
 		//void MyProperty(int32_t value);
 
 		void myButton_Click(Windows::Foundation::IInspectable const& sender, Microsoft::UI::Xaml::RoutedEventArgs const& args);
-		void ClickHandler(Windows::Foundation::IInspectable const& sender, Microsoft::UI::Xaml::RoutedEventArgs const& args);
+		//void ClickHandler(Windows::Foundation::IInspectable const& sender, Microsoft::UI::Xaml::RoutedEventArgs const& args);
 		//AuthoringTool::BookstoreViewModel MainViewModel();
 		//AuthoringTool::ActorListViewModel WorldInfoViewModel();
 	private:
 		//not projection
-		void OnRendering(IInspectable const& sender, IInspectable const& args);
+		//void OnRendering(IInspectable const& sender, IInspectable const& args);
 
 		void OnVisibilityChanged(IInspectable const& sender, Microsoft::UI::Xaml::WindowVisibilityChangedEventArgs const& args);
 		void OnActivated(IInspectable const& sender, Microsoft::UI::Xaml::WindowActivatedEventArgs const& args);
@@ -132,7 +129,7 @@ namespace winrt::Editor::implementation
 
 		// XAML 페이지 백그라운드에서 DirectX 콘텐츠를 렌더링하는 데 사용되는 리소스입니다.		
 		//winrt::EngineInterface_WRC::EngineInterface renderingEngine_;
-		Engine::EngineInterface* renderingEngine_;
+		//Engine::EngineInterface* renderingEngine_;
 
 		bool					m_windowVisible;
 		float                   m_logicalWidth;

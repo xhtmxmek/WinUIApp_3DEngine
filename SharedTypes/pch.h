@@ -10,22 +10,6 @@
 // add headers that you want to pre-compile here
 #include "framework.h"
 
-#include <algorithm>
-#include <cmath>
-#include <functional>
-
-#include <string>
-#include <map>
-
-
-#include "Math/Vector2.h"
-#include "Math/Vector3.h"
-#include "Math/Color.h"
-#include "Math/Plane.h"
-#include "Math/Quaternion.h"
-#include "Math/Matrix3x3.h"
-#include "Math/Matrix4x4.h"
-#include "CommonTypes.h"
-#include "UIInfoParams.h"
+#include "BaseTypes.h"
 
 #endif //PCH_H

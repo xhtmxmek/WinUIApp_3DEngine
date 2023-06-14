@@ -81,13 +81,13 @@
                     </TreeView.ItemTemplate>
                 </TreeView>-->
 
-				<ListBox ItemsSource="{x:Bind WorldInfoViewModel.ActorInfos}">
+				<!--<ListBox ItemsSource="{x:Bind WorldInfoViewModel.ActorInfos}">
 					<ListBox.ItemTemplate>
 						<DataTemplate x:DataType="map">
 							<TextBlock Text="{x:Bind Key}" />
 						</DataTemplate>
 					</ListBox.ItemTemplate>
-				</ListBox>
+				</ListBox-->
 
 			</StackPanel>
 		</SplitView.Pane>

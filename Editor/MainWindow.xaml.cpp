@@ -3,8 +3,6 @@
 
 #include "pch.h"
 #include "MainWindow.xaml.h"
-#include "Common/EngineBaseHeader.h"
-#include "Common/EngineCommonHeader.h"
 #include "EngineInterface.h"
 #if __has_include("MainWindow.g.cpp")
 #include "MainWindow.g.cpp"
@@ -77,10 +75,10 @@ namespace winrt::Editor::implementation
         if (swapChainPanel().IsLoaded())
         {
             m_windowVisible = args.Visible();
-            if (m_windowVisible)
-                renderingEngine_->StartRenderLoop();
-            else
-                renderingEngine_->StopRenderLoop();
+            //if (m_windowVisible)
+            //    renderingEngine_->StartRenderLoop();
+            //else
+            //    renderingEngine_->StopRenderLoop();
         }
     }
 
@@ -100,15 +98,13 @@ namespace winrt::Editor::implementation
 
     void MainWindow::OnClosed(IInspectable const& sender, Microsoft::UI::Xaml::WindowEventArgs const& args)
     {
-        renderingEngine_->StopRenderLoop();
-        renderingEngine_->UnInitialize();
-        renderingEngine_ = { nullptr };
+        //renderingEngine_->StopRenderLoop();
+        //renderingEngine_->UnInitialize();
+        //renderingEngine_ = { nullptr };
     }
 
     void MainWindow::OnSizeChanged(IInspectable const& sender, Microsoft::UI::Xaml::WindowSizeChangedEventArgs const& args)
     {
-        //if (swapChainPanel().IsLoaded())
-        //    renderingEngine_.OnWindowSizeChanged(args.Size());
     }
 #pragma endregion
 
@@ -118,21 +114,21 @@ namespace winrt::Editor::implementation
     {
         SharedTypes::SwapchainPanelInfo scPanelInfo;
         SetSwapchainPanelInfo(swapChainPanel(), scPanelInfo);
-        renderingEngine_->OnSwapchainXamlChanged(scPanelInfo);
+/*        renderingEngine_->OnSwapchainXamlChanged(scPanelInfo)*/;
     }
 
     void MainWindow::OnSwapChainPanelCompositionScaleChanged(Microsoft::UI::Xaml::Controls::SwapChainPanel const& sender, IInspectable const& args)
     {
         SharedTypes::SwapchainPanelInfo scPanelInfo;
         SetSwapchainPanelInfo(swapChainPanel(), scPanelInfo);
-        renderingEngine_->OnSwapchainXamlChanged(scPanelInfo);
+        /*renderingEngine_->OnSwapchainXamlChanged(scPanelInfo);*/
     }
 
     void MainWindow::OnSwapChainPanel_SizeChanged(Windows::Foundation::IInspectable const& sender, Microsoft::UI::Xaml::SizeChangedEventArgs const& args)
     {
         SharedTypes::SwapchainPanelInfo scPanelInfo;
         SetSwapchainPanelInfo(swapChainPanel(), scPanelInfo);
-        renderingEngine_->OnSwapchainXamlChanged(scPanelInfo);
+        //renderingEngine_->OnSwapchainXamlChanged(scPanelInfo);
     }
 
     void MainWindow::SetSwapchainPanelInfo(const Microsoft::UI::Xaml::Controls::SwapChainPanel& panel, 
@@ -145,13 +141,12 @@ namespace winrt::Editor::implementation
         swapchainInfo_.IsLoaded = panel.IsLoaded();
         swapchainInfo_.RasterizationScale = panel.RasterizationScale();
 
-        swapchainInfo_.RegisterSwapChainToUIPanel = [&](IDXGISwapChain3* engineSwapChain) {
+        swapchainInfo_.RegisterSwapChainToUIPanel = [&](IDXGISwapChain* engineSwapChain) {
 
             panel.DispatcherQueue().TryEnqueue(winrt::Microsoft::UI::Dispatching::DispatcherQueuePriority::High, 
                 [&]
                 {
                     auto panelNative = panel.as<ISwapChainPanelNative>();
-                    IDXGISwapChain3* test = engineSwapChain;
                     panelNative->SetSwapChain(engineSwapChain);
                     //이걸 호출하는 시점에 결국 둘다 알아야된다. 어떻게든 
                 });
@@ -165,7 +160,7 @@ namespace winrt::Editor::implementation
 
         SharedTypes::SwapchainPanelInfo scPanelInfo;
         SetSwapchainPanelInfo(swapChainPanel(), scPanelInfo);
-        renderingEngine_->Initialize(scPanelInfo);
+        //renderingEngine_->Initialize(scPanelInfo);
         //RegisterDedicatedInputOnSwapchain();
 
         //winrt::Windows::Foundation::Numerics::float2        
@@ -177,7 +172,7 @@ namespace winrt::Editor::implementation
         swapChainPanel().KeyDown({ this, &MainWindow::OnKeyDown_SwapChain });
         swapChainPanel().KeyUp({ this, &MainWindow::OnKeyUp_SwapChain });
 
-        renderingEngine_->StartRenderLoop();
+        //renderingEngine_->StartRenderLoop();
         GetWorldInfo();
     }
 #pragma endregion
@@ -330,9 +325,4 @@ namespace winrt::Editor::implementation
     //    return worldViewModel_;
     //}
 
-
-    void MainWindow::myButton_Click(IInspectable const&, RoutedEventArgs const&)
-    {
-        //myButton().Content(box_value(L"Clicked"));
-    }
 }

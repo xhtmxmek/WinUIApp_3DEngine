@@ -57,6 +57,12 @@
     <ClInclude Include="TypeBase.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="BaseTypes.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="CommonDefine.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="SharedTypes.cpp">

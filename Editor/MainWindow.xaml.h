@@ -8,7 +8,12 @@
 
 namespace Engine
 {
-	class EngineCore;
+	class EngineInterface;
+}
+
+namespace SharedTypes
+{
+	struct SwapchainPanelInfo;
 }
 
 namespace winrt::Editor::implementation
@@ -36,6 +41,8 @@ namespace winrt::Editor::implementation
 		void OnSwapChainPanelXamlRootChanged(Microsoft::UI::Xaml::XamlRoot const& sender, Microsoft::UI::Xaml::XamlRootChangedEventArgs const& args);
 		void OnSwapChainPanelCompositionScaleChanged(Microsoft::UI::Xaml::Controls::SwapChainPanel const& sender, IInspectable const& args);
 		void OnSwapChainPanel_SizeChanged(Windows::Foundation::IInspectable const& sender, Microsoft::UI::Xaml::SizeChangedEventArgs const& args);
+		void SetSwapchainPanelInfo(const Microsoft::UI::Xaml::Controls::SwapChainPanel& panel, 
+			SharedTypes::SwapchainPanelInfo& swapchainInfo_);
 
 		//void OnSwapChainPanelSizeChanged(IInspectable const& sender, Microsoft::UI::Xaml::SizeChangedEventArgs const& e);
 		//void OnOrientationChanged(Windows::Graphics::Display::DisplayInformation const& sender, IInspectable const& args);
@@ -125,7 +132,7 @@ namespace winrt::Editor::implementation
 
 		// XAML 페이지 백그라운드에서 DirectX 콘텐츠를 렌더링하는 데 사용되는 리소스입니다.		
 		//winrt::EngineInterface_WRC::EngineInterface renderingEngine_;
-		std::unique_ptr<Engine::EngineCore> renderingEngine_;
+		Engine::EngineInterface* renderingEngine_;
 
 		bool					m_windowVisible;
 		float                   m_logicalWidth;

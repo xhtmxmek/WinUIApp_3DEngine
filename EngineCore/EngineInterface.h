@@ -59,4 +59,5 @@ namespace Engine
 
 	ENGINE_API void InitEngine();
 	ENGINE_API void ReleaseEngine();
+    ENGINE_API EngineInterface* GetRenderingEngine();
 }

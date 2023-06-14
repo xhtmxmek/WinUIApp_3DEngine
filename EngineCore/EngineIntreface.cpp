@@ -14,6 +14,11 @@ namespace Engine
 
 	void ReleaseEngine()
 	{
+		enginePtr_.reset();
+	}
 
+	EngineInterface* GetRenderingEngine()
+	{
+		return enginePtr_.get();
 	}
 }

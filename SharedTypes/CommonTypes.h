@@ -14,5 +14,5 @@ namespace SharedTypes
 
 		bool operator==(const Size& src) { return ((Width == src.Width) && (Height == src.Height)); }
 		bool operator!=(const Size& src) { return ((Width != src.Width) && (Height != src.Height)); }
-	};		
+	};	
 }

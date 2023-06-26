@@ -147,7 +147,7 @@ namespace winrt::AuthoringTool::implementation
         swapChainPanel().KeyUp({ this, &MainWindow::OnKeyUp_SwapChain });                       
 
         renderingEngine_.StartRenderLoop();
-        worldViewModel_.
+        GetWorldInfo();
     }
 #pragma endregion
 

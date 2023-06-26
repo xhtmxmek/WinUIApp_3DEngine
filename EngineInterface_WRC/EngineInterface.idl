@@ -47,12 +47,7 @@ namespace EngineInterface_WRC
 		[noexcept]  Windows.Foundation.Size GetDefaultBackBufferSize();
 		void LoadScriptProject(String path);
 
-		//engine에서 액터 얻어오기
 		Windows.Foundation.Collections.IMap<String, ActorProxy> WorldActorList{ get; };
-		//특정 액터의 삭제, 추가는 ui로 연결되있음. 쌍방 통신 가능.
-		//저작도구에서 추가하면 actorlist에 추가, 엔진에도 추가. 엔진에서 액터 추가되면 콜백 호출하여 프로퍼티 업데이트. (동일한 함수 호출하면 될듯)
-		//삭제하면 actorList에서 삭제, 엔진에서도 삭제.
-		//특정 value의 값 변경은 이벤트로 엔진과 연결되 있음. 쌍방통신가능. 콜백호출하기.		
 	}
 
 }

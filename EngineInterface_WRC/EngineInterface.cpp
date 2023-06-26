@@ -169,6 +169,27 @@ namespace winrt::EngineInterface_WRC::implementation
 		MouseButtonState[static_cast<UINT>(SharedTypes::PointerButton::RightButton)] = args.CurrentPoint().Properties().IsRightButtonPressed();
 	}
 
+	void EngineInterface::UpdateActorProxy()
+	{
+
+		//actorProxy_.Components().Clear();
+		//for (auto iterComponent : pickedActor_->Components())
+		//{								
+		//	wstring convertName;			
+		//	convertName.assign(iterComponent.second->Name().begin(), iterComponent.second->Name().end());
+
+		//	ActorComponentProxy componentProxy(convertName);
+		//	for (auto iterProperty : iterComponent.second->Properties())
+		//	{
+		//		wstring propertyName;
+		//		propertyName.assign(iterProperty->Name().begin(), iterProperty->Name().end());
+		//		ComponentPropertyProxy propertyProxy(propertyName);
+		//		componentProxy.Properties().Append(propertyProxy);					
+		//	}
+		//	actorProxy_.Components().Append(componentProxy);
+		//}
+	}
+
 	// Properties
 	Windows::Foundation::Size EngineInterface::GetDefaultBackBufferSize() noexcept //const noexcept
 	{
@@ -185,75 +206,7 @@ namespace winrt::EngineInterface_WRC::implementation
 
 	winrt::Windows::Foundation::Collections::IMap<hstring, winrt::EngineInterface_WRC::ActorProxy> EngineInterface::WorldActorList()
 	{
-		/*
-		* 엔진 내부의 액터 구조(부모, 자식관계, 액터가 삭제됨 등)의 변화가 일어날때 이 함수가 호출된다.
-		* 사실 에디터에서만 쓰이는 함수라서... 인게임에서는 절대 안쓰임
-		* 에디터에서 애셋 조작할떄 주로쓰임.
-		* 애셋 조작-> 해당 애셋의 네이티브 정보 변경(엔진단에서)-> 액터 변경.
-		*/				
-		for (auto& iter : engineCoreNative_->GetActorList())
-		{
-			auto nativeActor = iter.second;
-
-			UpdateActorProxy(nativeActor);			
-			//for (auto& componentIter : nativeActor->Components())
-			//{
-			//	auto nativeComponent = componentIter.second;
-			//	ActorComponentProxy componentProxy(winrt::to_hstring(nativeComponent->Name()));
-			//	for (auto& nativeProperty : nativeComponent->Properties())
-			//	{
-			//		ComponentPropertyProxy propertyProxy(winrt::to_hstring(nativeProperty->Name()));
-			//		componentProxy.Properties().Append(propertyProxy);
-			//	}
-			//	for (auto& componentChildren : nativeComponent->GetChildren())
-			//	{
-			//		omponentPropertyProxy propertyProxy(winrt::to_hstring(nativeProperty->Name()));
-			//	}
-			//}
-			
-			/*
-			* for (auto childActor : nativeActor->childs)
-			*/
-		}
-
-		
-		//auto test = winrt::single_threaded_map<winrt::hstring, int>();
-		winrt::Windows::Foundation::Collections::IMap<hstring, winrt::EngineInterface_WRC::ActorProxy> result;
-		return result;
-
-	}
-
-	void EngineInterface::UpdateActorProxy(const std::shared_ptr<Engine::Level::Actor>& actorNative)
-	{
-
-		ActorProxy actorProxy(winrt::to_hstring(actorNative->GetName()), L"staticMesh");
-		for (auto& componentIter : actorNative->Components())
-		{
-			UpdateActorComponentProxy(componentIter.second);
-		}
-
-
-		for (auto child : actorNative->Children())
-		{
-			UpdateActorProxy(child);
-		}
-
-
-	}
-	void EngineInterface::UpdateActorComponentProxy(const std::shared_ptr<Engine::Component::ComponentBase>& componentNative)
-	{
-		ActorComponentProxy componentProxy(winrt::to_hstring(componentNative->Name()));
-		for (auto& propertyIter : componentNative->Properties())
-		{
-			UpdateComponentPropertyProxy(propertyIter);
-		}
-
-		for (auto& child : componentNative->GetChildren())
-		{
-			UpdateActorComponentProxy(child);
-		}
-	}
-	void EngineInterface::UpdateComponentPropertyProxy(const std::shared_ptr<Engine::Component::PropertyBase>& propertyNative)
-	{	
+		engineCoreNative_->GetActorList();
+		//auto coll2{ winrt::single_threaded_map<winrt::hstring, int>(std::move(values)) };
 	}
 }

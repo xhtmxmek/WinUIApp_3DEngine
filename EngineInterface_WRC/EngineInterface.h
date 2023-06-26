@@ -61,11 +61,7 @@ namespace winrt::EngineInterface_WRC::implementation
         void SetSwapchainPanelInfo(const Microsoft::UI::Xaml::Controls::SwapChainPanel& panel);
         void SetRegisterSwapChainFunc(const Microsoft::UI::Xaml::Controls::SwapChainPanel& panel);
         void CheckButtonState(winrt::Microsoft::UI::Input::PointerEventArgs const& args);
-
-        void UpdateActorProxy(const std::shared_ptr<Engine::Level::Actor>& actorNative);        
-        void UpdateActorComponentProxy(const std::shared_ptr<Engine::Component::ComponentBase>& componentNative);
-        void UpdateComponentPropertyProxy(const std::shared_ptr<Engine::Component::PropertyBase>& propertyNative);
-
+        void UpdateActorProxy();
         
         std::unique_ptr<Engine::EngineCore> engineCoreNative_;
 

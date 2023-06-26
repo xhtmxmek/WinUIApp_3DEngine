@@ -43,6 +43,5 @@ namespace winrt::AuthoringTool::implementation
     }
     void ActorListViewModel::UpdateSceneActorInfo(std::unordered_map<winrt::hstring, unsigned int> const& actorLookupTable)
     {
-
     }
 }

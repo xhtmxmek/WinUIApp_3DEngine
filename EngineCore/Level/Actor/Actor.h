@@ -71,18 +71,7 @@ namespace Engine
 			ENGINE_API void SetRootComponent(Component::ComponentBase* component){ rootComponent_ = component; }
 			ENGINE_API std::shared_ptr<World> GetWorld();
 
-			ENGINE_API std::vector<std::shared_ptr<Level::Actor>>& Children()
-			{
-				return children_;
-			}
-
-			std::string& GetName()
-			{
-				return Name;
-			}
-
 		private:
-			std::vector<std::shared_ptr<Level::Actor>> children_;
 			std::shared_ptr<Component::ComponentBase> CreateComponent(const std::string& className, const std::string& instanceName);
 			//루트 컴포넌트 : 액터를 대표하는 컴포넌트. 컴포넌트 리스트중에 하나를 가리킴
 			Component::ComponentBase* rootComponent_;			

@@ -26,7 +26,7 @@ namespace winrt::AuthoringTool::implementation
 {
     ActorListViewModel::ActorListViewModel()
     {        
-        actorInfos_ = winrt::single_threaded_observable_vector<winrt::EngineInterface_WRC::ActorProxy>();        
+        actorInfos_ = winrt::single_threaded_observable_vector<winrt::EngineInterface_WRC::ActorProxy>();
     }
     winrt::Windows::Foundation::Collections::IObservableVector<winrt::EngineInterface_WRC::ActorProxy> ActorListViewModel::ActorInfos()
     {

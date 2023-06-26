@@ -1,17 +1,19 @@
-ï»¿#pragma once
+#pragma once
 
 #include "MainWindow.g.h"
-//#include <d3d11_4.h>
-//#include <dxgi1_6.h>
-//#include <d2d1_3.h>
 //#include "Bookstore.BookstoreViewModel.h"
 
 namespace Engine
 {
-	class EngineCore;
+	class EngineInterface;
 }
 
-namespace winrt::AuthoringTool::implementation
+namespace SharedTypes
+{
+	struct SwapchainPanelInfo;
+}
+
+namespace winrt::Editor::implementation
 {
 	struct MainWindow : MainWindowT<MainWindow>
 	{
@@ -21,38 +23,40 @@ namespace winrt::AuthoringTool::implementation
 		//void MyProperty(int32_t value);
 
 		void myButton_Click(Windows::Foundation::IInspectable const& sender, Microsoft::UI::Xaml::RoutedEventArgs const& args);
-		void ClickHandler(Windows::Foundation::IInspectable const& sender, Microsoft::UI::Xaml::RoutedEventArgs const& args);
+		//void ClickHandler(Windows::Foundation::IInspectable const& sender, Microsoft::UI::Xaml::RoutedEventArgs const& args);
 		//AuthoringTool::BookstoreViewModel MainViewModel();
-		AuthoringTool::ActorListViewModel WorldInfoViewModel();
+		//AuthoringTool::ActorListViewModel WorldInfoViewModel();
 	private:
 		//not projection
-		void OnRendering(IInspectable const& sender, IInspectable const& args);
-		
+		//void OnRendering(IInspectable const& sender, IInspectable const& args);
+
 		void OnVisibilityChanged(IInspectable const& sender, Microsoft::UI::Xaml::WindowVisibilityChangedEventArgs const& args);
 		void OnActivated(IInspectable const& sender, Microsoft::UI::Xaml::WindowActivatedEventArgs const& args);
 		void OnClosed(IInspectable const& sender, Microsoft::UI::Xaml::WindowEventArgs const& args);
 		void OnSizeChanged(IInspectable const& sender, Microsoft::UI::Xaml::WindowSizeChangedEventArgs const& args);
-		
+
 		void OnSwapChainPanelXamlRootChanged(Microsoft::UI::Xaml::XamlRoot const& sender, Microsoft::UI::Xaml::XamlRootChangedEventArgs const& args);
 		void OnSwapChainPanelCompositionScaleChanged(Microsoft::UI::Xaml::Controls::SwapChainPanel const& sender, IInspectable const& args);
 		void OnSwapChainPanel_SizeChanged(Windows::Foundation::IInspectable const& sender, Microsoft::UI::Xaml::SizeChangedEventArgs const& args);
-		
+		void SetSwapchainPanelInfo(const Microsoft::UI::Xaml::Controls::SwapChainPanel& panel, 
+			SharedTypes::SwapchainPanelInfo& swapchainInfo_);
+
 		//void OnSwapChainPanelSizeChanged(IInspectable const& sender, Microsoft::UI::Xaml::SizeChangedEventArgs const& e);
 		//void OnOrientationChanged(Windows::Graphics::Display::DisplayInformation const& sender, IInspectable const& args);
 		//void OnDisplayContentsInvalidated(Windows::Graphics::Display::DisplayInformation const& sender, IInspectable const& args);
 		void OnSwapchainPanelLoaded(IInspectable const& sender, Microsoft::UI::Xaml::RoutedEventArgs const& e);
-		
+
 		void AppBarButton_Click(IInspectable const& sender, Microsoft::UI::Xaml::RoutedEventArgs const& e);
-		
+
 		void OnPointerPressedSwapChain(Windows::Foundation::IInspectable const& sender, Microsoft::UI::Xaml::Input::PointerRoutedEventArgs const& args);
 		void OnPointerMovedSwapChain(Windows::Foundation::IInspectable const& sender, Microsoft::UI::Xaml::Input::PointerRoutedEventArgs const& args);
 		void OnPointerReleasedSwapChain(Windows::Foundation::IInspectable const& sender, Microsoft::UI::Xaml::Input::PointerRoutedEventArgs const& args);
 		void OnPointerWheelChangedSwapChain(Windows::Foundation::IInspectable const& sender, Microsoft::UI::Xaml::Input::PointerRoutedEventArgs const& args);
 
-		void SetPickedActor(EngineInterface_WRC::ActorProxy const& pickedActor);
+		//void SetPickedActor(EngineInterface_WRC::ActorProxy const& pickedActor);
 
 		void OnKeyDown_SwapChain(Windows::Foundation::IInspectable const& sender, Microsoft::UI::Xaml::Input::KeyRoutedEventArgs const& args);
-		void OnKeyUp_SwapChain(Windows::Foundation::IInspectable const& sender, Microsoft::UI::Xaml::Input::KeyRoutedEventArgs const& args);		
+		void OnKeyUp_SwapChain(Windows::Foundation::IInspectable const& sender, Microsoft::UI::Xaml::Input::KeyRoutedEventArgs const& args);
 
 		//Control		
 		void RegisterDedicatedInputOnSwapchain();
@@ -123,8 +127,7 @@ namespace winrt::AuthoringTool::implementation
 		//	return (double(pixels) * 96.f / m_DPI);
 		//}
 
-		// XAML í˜ì´ì§€ ë°±ê·¸ë¼ìš´ë“œì—ì„œ DirectX ì½˜í…ì¸ ë¥¼ ë Œë”ë§í•˜ëŠ” ë° ì‚¬ìš©ë˜ëŠ” ë¦¬ì†ŒìŠ¤ì…ë‹ˆë‹¤.		
-		std::unique_ptr<Engine::EngineCore> renderingEngine_;
+		Engine::EngineInterface* renderingEngine_;
 
 		bool					m_windowVisible;
 		float                   m_logicalWidth;
@@ -133,19 +136,19 @@ namespace winrt::AuthoringTool::implementation
 		//winrt::Windows::Graphics::Display::DisplayOrientations	m_nativeOrientation;
 		//winrt::Windows::Graphics::Display::DisplayOrientations	m_currentOrientation;
 
-		// ë°±ê·¸ë¼ìš´ë“œ ì‘ì—…ì ìŠ¤ë ˆë“œì—ì„œ ë…ë¦½ ì…ë ¥ì„ ì¶”ì í•©ë‹ˆë‹¤.
+		// ¹é±×¶ó¿îµå ÀÛ¾÷ÀÚ ½º·¹µå¿¡¼­ µ¶¸³ ÀÔ·ÂÀ» ÃßÀûÇÕ´Ï´Ù.
 		Windows::Foundation::IAsyncAction m_inputLoopWorker;
 
-		//êµ¬í˜„ì´ ì• í”Œë¦¬ì¼€ì´ì…˜ê³¼ ë™ì¼í•œ í”„ë¡œì íŠ¸(ì»´íŒŒì¼ ë‹¨ìœ„)ì— ìˆìœ¼ë¯€ë¡œ std::nullptr_të¡œ ì´ˆê¸°í™” í›„
-		//winrt::makeë¡œ ìƒì„±ìì—ì„œ ìƒì„±í• ìˆ˜ìˆìŒ
+		//±¸ÇöÀÌ ¾ÖÇÃ¸®ÄÉÀÌ¼Ç°ú µ¿ÀÏÇÑ ÇÁ·ÎÁ§Æ®(ÄÄÆÄÀÏ ´ÜÀ§)¿¡ ÀÖÀ¸¹Ç·Î std::nullptr_t·Î ÃÊ±âÈ­ ÈÄ
+		//winrt::make·Î »ı¼ºÀÚ¿¡¼­ »ı¼ºÇÒ¼öÀÖÀ½
 		//AuthoringTool::BookstoreViewModel m_mainViewModel{ nullptr };
-		//ì•„ë‹ˆë©´ ê· ì¼í•œìƒì„±
+		//¾Æ´Ï¸é ±ÕÀÏÇÑ»ı¼º
 		//AuthoringTool::BookstoreViewModel m_mainViewModel;
-		AuthoringTool::ActorListViewModel worldViewModel_;
+		//AuthoringTool::ActorListViewModel worldViewModel_;
 	};
 }
 
-namespace winrt::AuthoringTool::factory_implementation
+namespace winrt::Editor::factory_implementation
 {
 	struct MainWindow : MainWindowT<MainWindow, implementation::MainWindow>
 	{

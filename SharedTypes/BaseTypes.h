@@ -1,9 +1,4 @@
 #pragma once
-
-/*외부에 제공되는 기본 c/c++, stl 관련 헤더
-*/
-
-//Common
 #include <algorithm>
 #include <cmath>
 #include <cstdint>
@@ -24,4 +19,16 @@
 #include <unordered_set>
 #include <unordered_map>
 
+#include "Math/Vector2.h"
+#include "Math/Vector3.h"
+#include "Math/Color.h"
+#include "Math/Plane.h"
+#include "Math/Quaternion.h"
+#include "Math/Matrix3x3.h"
+#include "Math/Matrix4x4.h"
+#include "CommonTypes.h"
+#include "UIInfoParams.h"
+#include "CommonDefine.h"
+
+using namespace SharedTypes;
 using namespace std;

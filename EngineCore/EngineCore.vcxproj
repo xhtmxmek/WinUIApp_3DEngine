@@ -72,7 +72,7 @@
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <OutDir>$(SolutionDir)Build_Output\$(Platform)\$(Configuration)\AuthoringTool (Package)\</OutDir>
+    <OutDir>$(SolutionDir)Build_Output\$(Platform)\$(Configuration)\Editor\</OutDir>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
@@ -154,6 +154,8 @@
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
     </ClInclude>
     <ClInclude Include="Common\EngineEnums.h" />
+    <ClInclude Include="EngineCoreBuild.h" />
+    <ClInclude Include="EngineInterface.h" />
     <ClInclude Include="EngineHeader_Used_Application.h" />
     <ClInclude Include="Common\EngineHelper.h" />
     <ClInclude Include="Common\EngineMath.h" />
@@ -209,6 +211,7 @@
     <ClCompile Include="EngineAsset\Material.cpp" />
     <ClCompile Include="EngineAsset\Texture.cpp" />
     <ClCompile Include="EngineCore.cpp" />
+    <ClCompile Include="EngineIntreface.cpp" />
     <ClCompile Include="Level\Actor\Actor.cpp" />
     <ClCompile Include="Level\Actor\ActorManager\ActorManager.cpp" />
     <ClCompile Include="Level\Actor\SpriteActor\Sprite.cpp" />

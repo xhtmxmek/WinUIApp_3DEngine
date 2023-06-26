@@ -143,6 +143,8 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="BaseTypes.h" />
+    <ClInclude Include="CommonDefine.h" />
     <ClInclude Include="CommonTypes.h" />
     <ClInclude Include="framework.h" />
     <ClInclude Include="Input\PointerButton.h" />

@@ -6,7 +6,7 @@
   <ItemDefinitionGroup>
     <Link>
       <AdditionalLibraryDirectories>$(SolutionDir)ExternalLibraries\Assimp\lib\x64\Debug\;$(SolutionDir)Build_Output\$(Platform)\$(Configuration)\</AdditionalLibraryDirectories>
-      <AdditionalDependencies>d2d1.lib;d3d11.lib;dxgi.lib;dxguid.lib;windowscodecs.lib;dwrite.lib;ole32.lib;assimp-vc143-mtd.lib;SharedTypesD.lib;</AdditionalDependencies>
+      <AdditionalDependencies>d2d1.lib;d3d11.lib;dxgi.lib;dxguid.lib;windowscodecs.lib;dwrite.lib;ole32.lib;assimp-vc143-mt.lib;SharedTypesD.lib;</AdditionalDependencies>
     </Link>
     <ClCompile>
       <AdditionalIncludeDirectories>$(ProjectDir);$(SolutionDir)ExternalLibraries\Assimp\Include;$(SolutionDir)SharedTypes;$(SolutionDir)EngineCore</AdditionalIncludeDirectories>

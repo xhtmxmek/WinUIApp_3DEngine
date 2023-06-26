@@ -1,6 +1,6 @@
 #pragma once
 
-struct IDXGISwapChain3;
+struct IDXGISwapChain;
 
 namespace SharedTypes
 {
@@ -10,6 +10,6 @@ namespace SharedTypes
 		Vector2f CompositionScale;
 		Size ActureSize;
 		double RasterizationScale;		
-		std::function<void(IDXGISwapChain3*)> RegisterSwapChainToUIPanel;		
+		std::function<void(IDXGISwapChain*)> RegisterSwapChainToUIPanel;		
 	};
 }

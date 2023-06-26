@@ -1,5 +1,6 @@
 #include "pch.h"
 #include "World.h"
+#include "Actor/ActorManager/ActorManager.h"
 #include "Actor/Actor.h"
 //#include "Actor/Sprite.h"
 #include "Renderer/LevelRenderer.h"
@@ -42,7 +43,7 @@ namespace Engine
 			//int k = 5;
 		}
 
-		const unordered_map<std::string, shared_ptr<Actor>> World::GetActorList()
+		const unordered_map<const wchar_t*, shared_ptr<Actor>> World::GetActorList()
 		{
 			return Actors;
 		}

@@ -1,8 +1,7 @@
 #include "pch.h"
 #include "GameMain.h"
 
-#include "Level/Level.h"
-#include "Level/World.h"
+#include "Level/Actor/ActorManager/ActorManager.h"
 //#include "Level/Actor/SpriteActor/Sprite.h"
 #include "Level/Actor/StaticMesh/StaticMesh.h"
 
@@ -17,8 +16,7 @@ void GameMain::Initialize()
 	//Engine::Type::shared_ptr<int> test;
 	//Engine::Type::TestClass test;	
 	//Engine::Level::AStaticMesh test("test");
-	//auto staticMesh = Engine::Level::ActorManager::GetInstance().CreateActor<Engine::Level::AStaticMesh>("MeshTest");
-	auto staticMesh = Engine::Level::SLevel::GetWorld()->SpwanActor<Engine::Level::AStaticMesh>("MeshTest", Vector3f(0,0,0));
+	auto staticMesh = Engine::Level::ActorManager::GetInstance().CreateActor<Engine::Level::AStaticMesh>("MeshTest");
 	//FVector2 test;
 	//test.Test();
 

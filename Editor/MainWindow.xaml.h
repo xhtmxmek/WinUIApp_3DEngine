@@ -127,9 +127,7 @@ namespace winrt::Editor::implementation
 		//	return (double(pixels) * 96.f / m_DPI);
 		//}
 
-		// XAML 페이지 백그라운드에서 DirectX 콘텐츠를 렌더링하는 데 사용되는 리소스입니다.		
-		//winrt::EngineInterface_WRC::EngineInterface renderingEngine_;
-		//Engine::EngineInterface* renderingEngine_;
+		Engine::EngineInterface* renderingEngine_;
 
 		bool					m_windowVisible;
 		float                   m_logicalWidth;

@@ -35,38 +35,14 @@ namespace winrt::Editor::implementation
         swapChainPanel().Loaded({ this, &MainWindow::OnSwapchainPanelLoaded });
         swapChainPanel().CompositionScaleChanged({ this, &MainWindow::OnSwapChainPanelCompositionScaleChanged });
 
-        //OnPointerPressedSwapChain
-        //swapChainPanel().key
-        //swapChainPanel().SizeChanged({ this, &MainWindow::OnSwapChainPanel_SizeChanged });
-
-
         // Retrieve the window handle (HWND) of the current WinUI 3 window.
         //auto windowNative{ this->try_as<::IWindowNative>() };
         //winrt::check_bool(windowNative);
         //HWND hWnd{ 0 };
         //windowNative->get_WindowHandle(&hWnd);        
 
-        //winrt::Microsoft::UI::Xaml::Interop::native            
-        //swapChainPanel().dragDragEnter({this, })
-        //currentDisplayInformation.OrientationChanged({ this, &MainPage::OnOrientationChanged });
-        //DisplayInformation::DisplayContentsInvalidated({ this, &MainPage::OnDisplayContentsInvalidated });
-
         m_logicalWidth = Bounds().Width;
         m_logicalHeight = Bounds().Height;
-
-        //xamlRoot.Content().rotation
-        //m_nativeOrientation = currentDisplayInformation.NativeOrientation();
-        //m_currentOrientation = currentDisplayInformation.CurrentOrientation();
-
-        //int outputWidth = ConvertDipsToPixels(m_logicalWidth);
-        //int outputHeight = ConvertDipsToPixels(m_logicalHeight);
-
-        //DXGI_MODE_ROTATION rotation = ComputeDisplayRotation();
-
-        //if (rotation == DXGI_MODE_ROTATION_ROTATE90 || rotation == DXGI_MODE_ROTATION_ROTATE270)
-        //{
-        //    std::swap(outputWidth, outputHeight);
-        //}                
     }
 
 #pragma region WindowEvent
@@ -75,10 +51,10 @@ namespace winrt::Editor::implementation
         if (swapChainPanel().IsLoaded())
         {
             m_windowVisible = args.Visible();
-            //if (m_windowVisible)
-            //    renderingEngine_->StartRenderLoop();
-            //else
-            //    renderingEngine_->StopRenderLoop();
+            if (m_windowVisible)
+                renderingEngine_->StartRenderLoop();
+            else
+                renderingEngine_->StopRenderLoop();
         }
     }
 
@@ -98,9 +74,9 @@ namespace winrt::Editor::implementation
 
     void MainWindow::OnClosed(IInspectable const& sender, Microsoft::UI::Xaml::WindowEventArgs const& args)
     {
-        //renderingEngine_->StopRenderLoop();
-        //renderingEngine_->UnInitialize();
-        //renderingEngine_ = { nullptr };
+        renderingEngine_->StopRenderLoop();
+        renderingEngine_->UnInitialize();
+        Engine::ReleaseEngine();
     }
 
     void MainWindow::OnSizeChanged(IInspectable const& sender, Microsoft::UI::Xaml::WindowSizeChangedEventArgs const& args)
@@ -114,21 +90,21 @@ namespace winrt::Editor::implementation
     {
         SharedTypes::SwapchainPanelInfo scPanelInfo;
         SetSwapchainPanelInfo(swapChainPanel(), scPanelInfo);
-/*        renderingEngine_->OnSwapchainXamlChanged(scPanelInfo)*/;
+        renderingEngine_->OnSwapchainXamlChanged(scPanelInfo);
     }
 
     void MainWindow::OnSwapChainPanelCompositionScaleChanged(Microsoft::UI::Xaml::Controls::SwapChainPanel const& sender, IInspectable const& args)
     {
         SharedTypes::SwapchainPanelInfo scPanelInfo;
         SetSwapchainPanelInfo(swapChainPanel(), scPanelInfo);
-        /*renderingEngine_->OnSwapchainXamlChanged(scPanelInfo);*/
+        renderingEngine_->OnSwapchainXamlChanged(scPanelInfo);
     }
 
     void MainWindow::OnSwapChainPanel_SizeChanged(Windows::Foundation::IInspectable const& sender, Microsoft::UI::Xaml::SizeChangedEventArgs const& args)
     {
         SharedTypes::SwapchainPanelInfo scPanelInfo;
         SetSwapchainPanelInfo(swapChainPanel(), scPanelInfo);
-        //renderingEngine_->OnSwapchainXamlChanged(scPanelInfo);
+        renderingEngine_->OnSwapchainXamlChanged(scPanelInfo);
     }
 
     void MainWindow::SetSwapchainPanelInfo(const Microsoft::UI::Xaml::Controls::SwapChainPanel& panel, 
@@ -160,7 +136,9 @@ namespace winrt::Editor::implementation
 
         SharedTypes::SwapchainPanelInfo scPanelInfo;
         SetSwapchainPanelInfo(swapChainPanel(), scPanelInfo);
-        //renderingEngine_->Initialize(scPanelInfo);
+        Engine::InitEngine();
+        renderingEngine_ = Engine::GetRenderingEngine();
+        renderingEngine_->Initialize(scPanelInfo);
         //RegisterDedicatedInputOnSwapchain();
 
         //winrt::Windows::Foundation::Numerics::float2        
@@ -172,7 +150,7 @@ namespace winrt::Editor::implementation
         swapChainPanel().KeyDown({ this, &MainWindow::OnKeyDown_SwapChain });
         swapChainPanel().KeyUp({ this, &MainWindow::OnKeyUp_SwapChain });
 
-        //renderingEngine_->StartRenderLoop();
+        renderingEngine_->StartRenderLoop();
         GetWorldInfo();
     }
 #pragma endregion

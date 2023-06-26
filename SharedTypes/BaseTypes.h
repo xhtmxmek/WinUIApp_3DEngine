@@ -31,3 +31,4 @@
 #include "CommonDefine.h"
 
 using namespace SharedTypes;
+using namespace std;

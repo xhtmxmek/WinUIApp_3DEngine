@@ -19,12 +19,29 @@ namespace Engine
 {
 	extern void ExitGame() noexcept;
 
+	shared_ptr<EngineCore> enginePtr_;
+
+	void InitEngine()
+	{
+		enginePtr_ = make_shared<EngineCore>();
+	}
+
+	void ReleaseEngine()
+	{
+		enginePtr_.reset();
+	}
+
+	EngineCore* GetRenderingEngine()
+	{
+		return enginePtr_.get();
+	}
+
 #pragma region Initialize
 	void EngineCore::InitializeGlobalObjects()
 	{
 		m_World = make_shared<Engine::Level::World>();
 		Engine::Level::SLevel::SetWorld(m_World);
-		Timer = make_unique<Engine::DX::StepTimer>();
+		Timer = make_shared<Engine::DX::StepTimer>();
 		// TODO: Change the timer settings if you want something other than the default variable timestep mode.
 		// e.g. for 60 FPS fixed timestep update logic, call:
 		/*
@@ -57,9 +74,9 @@ namespace Engine
 
 
 		DX::DeviceResourcesUtil::GetDeviceResources()->SetOption(DX::DeviceResources::c_UseXAML);
-		CreateDeviceDependentResources();
+		//CreateDeviceDependentResources();
 		DX::DeviceResourcesUtil::GetDeviceResources()->SetSwapChainPanel(swapchainPanelInfo_);
-		CreateWindowSizeDependentResources();
+		//CreateWindowSizeDependentResources();
 	}
 
 	void EngineCore::UnInitialize()
@@ -97,8 +114,8 @@ namespace Engine
 
 		// TODO: Add your game logic here.
 		// Input Update       
-		//¿ùµå°¡ ½ºÅ©¸³Æ®¸¦ °¡Áö°í ÀÖ³ª? ¿£ÁøÀÌ ½ºÅ©¸³Æ®¸¦ °¡Áö°í ÀÖ³ª. ¿ùµå°¡ ½ºÅ©¸³Æ®¸¦ °¡Áö°í ÀÖ´Â°Ô ¸Â´Â°Å°°À½.
-		//ÀÎÇ² - > ½ºÅ©¸³Æ® ¾÷µ¥ÀÌÆ®.
+		//ï¿½ï¿½ï¿½å°¡ ï¿½ï¿½Å©ï¿½ï¿½Æ®ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ö³ï¿½? ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Å©ï¿½ï¿½Æ®ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ö³ï¿½. ï¿½ï¿½ï¿½å°¡ ï¿½ï¿½Å©ï¿½ï¿½Æ®ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ö´Â°ï¿½ ï¿½Â´Â°Å°ï¿½ï¿½ï¿½.
+		//ï¿½ï¿½Ç² - > ï¿½ï¿½Å©ï¿½ï¿½Æ® ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ®.
 		m_World->Update(elapsedTime);
 
 		PIXEndEvent();
@@ -107,9 +124,9 @@ namespace Engine
 	void EngineCore::StartRenderLoop()
 	{
 		/*
-		¾²·¹µå°¡ ½ÃÀÛµÈ »óÅÂ¶ó¸é return
-		¾²·¹µå°¡ ÀÛ¾÷ÁßÀÌ¶ó¸é joinableÀº trueÀÌ´Ù. ¶ÇÇÑ ÀÛ¾÷À» ¸¶ÃÆ´õ¶óµµ joinÀÌ È£ÃâµÇÁö ¾Ê¾Ò´Ù¸é joinableÀº trueÀÌ´Ù.
-		ÃÖÃÊ : joinable false. ½ÇÇàµÇ°í ³ª¼­ true. ½ÇÇà Áß¿¡ join È£ÃâÇÏ¸é?
+		ï¿½ï¿½ï¿½ï¿½ï¿½å°¡ ï¿½ï¿½ï¿½Ûµï¿½ ï¿½ï¿½ï¿½Â¶ï¿½ï¿½ return
+		ï¿½ï¿½ï¿½ï¿½ï¿½å°¡ ï¿½Û¾ï¿½ï¿½ï¿½ï¿½Ì¶ï¿½ï¿½ joinableï¿½ï¿½ trueï¿½Ì´ï¿½. ï¿½ï¿½ï¿½ï¿½ ï¿½Û¾ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Æ´ï¿½ï¿½ï¿½ joinï¿½ï¿½ È£ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ê¾Ò´Ù¸ï¿½ joinableï¿½ï¿½ trueï¿½Ì´ï¿½.
+		ï¿½ï¿½ï¿½ï¿½ : joinable false. ï¿½ï¿½ï¿½ï¿½Ç°ï¿½ ï¿½ï¿½ï¿½ï¿½ true. ï¿½ï¿½ï¿½ï¿½ ï¿½ß¿ï¿½ join È£ï¿½ï¿½ï¿½Ï¸ï¿½?
 		*/
 		RenderLoopActivate = true;
 
@@ -137,7 +154,7 @@ namespace Engine
 		//        }
 		//    });
 
-		//// Àü¿ëÀÎ ¿ì¼± ¼øÀ§°¡ ³ôÀº ¹é±×¶ó¿îµå ½º·¹µå¿¡¼­ ÀÛ¾÷À» ½ÇÇàÇÕ´Ï´Ù.
+		//// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ì¼± ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½×¶ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½å¿¡ï¿½ï¿½ ï¿½Û¾ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Õ´Ï´ï¿½.
 		//m_renderLoopWorker = ThreadPool::RunAsync(workItemHandler, WorkItemPriority::High, WorkItemOptions::TimeSliced);
 	}
 
@@ -198,10 +215,11 @@ namespace Engine
 #pragma endregion 
 
 
-	// °ÔÀÓ »óÅÂ¸¦ ¾÷µ¥ÀÌÆ®ÇÏ±â Àü¿¡ »ç¿ëÀÚÀÇ ¸ðµç ÀÔ·Â Ã³¸®
+	//í…ŒìŠ¤íŠ¸
+	// ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Â¸ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ®ï¿½Ï±ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ ï¿½Ô·ï¿½ Ã³ï¿½ï¿½
 	void EngineCore::ProcessInput()
 	{
-		// TODO: ¿©±â¿¡ ÇÁ·¹ÀÓ ÀÔ·Â Ã³¸®º°·Î Ãß°¡ÇÕ´Ï´Ù.
+		// TODO: ï¿½ï¿½ï¿½â¿¡ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ô·ï¿½ Ã³ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ß°ï¿½ï¿½Õ´Ï´ï¿½.
 		//m_sceneRenderer->TrackingUpdate(m_pointerLocationX);
 	}
 
@@ -280,9 +298,6 @@ namespace Engine
 		{
 			FreeLibrary(ProjectHandle);
 		}
-		//·Îµå ½ÃÁ¡¿¡ ½ºÅ©¸³Æ® ÇÁ·ÎÁ§Æ®ÀÇ Å¬·¡½ºµéÀÌ µî·ÏµÊ.
-		//·±Å¸ÀÓ µî·ÏÀ» ÇßÀ¸´Ï, ÇÁ·ÎÁ§Æ® ÅøÀ» ÅëÇÏ¿© µî·ÏµÈ ¾×ÅÍ¸¦ »ý¼º.
-		//ÀÌÈÄ¿¡ ÇØ´ç ½ºÅ©¸³Æ®ÀÇ Actor¸¦ »ý¼ºÇÏ¸é InitÀÌ È£ÃâµÊ.
 	}
 
 	void EngineCore::PickCheck(Vector2i screenPos, shared_ptr<Level::Actor>& pickedActor)
@@ -311,12 +326,12 @@ namespace Engine
 		//winrt::hstring path = storageFolder.Path();
 		//path = winrt::Windows::ApplicationModel::Package::Current().InstalledLocation().Path();
 
-		//UWP´Â »÷µå¹Ú½º ½ÄÀÌ¶ó Á¤ÇØÁø Æú´õ¿¡¸¸ Á¢±Ù °¡´ÉÇÏÁö¸¸, ¿ìÈ¸ÀûÀÎ ¹æ¹ýÀ¸·Î ´Ù¸¥°÷¿¡µµ Á¢±Ù°¡´É.
+		//UWPï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Ú½ï¿½ ï¿½ï¿½ï¿½Ì¶ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½, ï¿½ï¿½È¸ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ù¸ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Ù°ï¿½ï¿½ï¿½.
 		//https://stackoverflow.com/questions/33082835/windows-10-universal-app-file-directory-access
-		//Å×½ºÆ® µÇ´Â ¸®¼Ò½ºµéÀº ¿£Áø¿¡¼­ Á¦°øµÇ´Â ±âº» binaries.
+		//ï¿½×½ï¿½Æ® ï¿½Ç´ï¿½ ï¿½ï¿½ï¿½Ò½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ç´ï¿½ ï¿½âº» binaries.
 		//
 
-		////WinUi3¿¡¼­´Â?
+		////WinUi3ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½?
 	   // winrt::hstring path = winrt::Windows::ApplicationModel::Package::Current().InstalledLocation().Path();
 		//winrt::hstring test = L"D:\\StudyDir\\DirectX11Engine_UWP\\cat.png";
 		//

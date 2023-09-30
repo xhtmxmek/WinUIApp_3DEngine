@@ -2,7 +2,7 @@
 #define WIN_APPS_SDK
 //#include "Common/StepTimer.h"
 #include "DLLDefine.h"
-#include "EngineInterface.h"
+
 /*
 EngineCore는 최대한 플랫폼 독립적인 코드로 가는것이 목표
 렌더링에 관련된 API는 사용하지만, 운영체제 관련된 코드는 최대한 배제할 예정
@@ -28,48 +28,48 @@ namespace Engine
         class Actor;
     }
 
-    class EngineCore : public EngineInterface     
+    class EngineCore
     {
     public:
-        EngineCore():RenderLoopActivate(false), ProjectHandle(nullptr) {}
-        ~EngineCore() = default;
+        ENGINE_API EngineCore():RenderLoopActivate(false), ProjectHandle(nullptr) {}
+        ENGINE_API ~EngineCore() = default;
 #ifdef WIN_APPS_SDK
         //void Initialize(Microsoft.UI.Xaml.Controls.SwapChainPanel panel);
-        void Initialize(const SwapchainPanelInfo& swapchainPanelInfo_) override;
+        ENGINE_API void Initialize(const SwapchainPanelInfo& swapchainPanelInfo_);
 #endif //WIN_APPS_SDK
-        void UnInitialize() override;
+        ENGINE_API void UnInitialize();
 
         // Basic game loop / inputs        
-        void StartRenderLoop() override;
-        void StopRenderLoop() override;
+        ENGINE_API void StartRenderLoop();
+        ENGINE_API void StopRenderLoop();
         
-        void OnDeviceLost() override;
-        void OnDeviceRestored() override;
+        ENGINE_API void OnDeviceLost();
+        ENGINE_API void OnDeviceRestored();
 
         // Messages
-        void OnActivated() override;
-        void OnDeactivated() override;
-        void OnSuspending() override;
-        void OnResuming() override;
-        void OnWindowSizeChanged(SharedTypes::Size windowSize) override;
-        void OnSwapchainXamlChanged(const SwapchainPanelInfo& swapchainPanelInfo) override;
+        ENGINE_API void OnActivated();
+        ENGINE_API void OnDeactivated();
+        ENGINE_API void OnSuspending();
+        ENGINE_API void OnResuming();
+        ENGINE_API void OnWindowSizeChanged(SharedTypes::Size windowSize);
+        ENGINE_API void OnSwapchainXamlChanged(const SwapchainPanelInfo& swapchainPanelInfo);
         //void OnOrientationChanged(Windows.Graphics.Display.DisplayOrientations orientation);
-        void ValidateDevice() override;
+        ENGINE_API void ValidateDevice();
 
-        void KeyProcess(SharedTypes::VirtualKey key, bool isPressed) override;
-        void PointerProcess(vector<bool> const& pointerState, float delta, Vector2i pos) override;
+        ENGINE_API void KeyProcess(SharedTypes::VirtualKey key, bool isPressed);
+        ENGINE_API void PointerProcess(vector<bool> const& pointerState, float delta, Vector2i pos);
 
         // Properties
-        SharedTypes::Size GetDefaultBackBufferSize() noexcept override
+        ENGINE_API SharedTypes::Size GetDefaultBackBufferSize() noexcept
         {
             return SharedTypes::Size(800.0f, 600.0f);
         }
 
         //common
-        void LoadScriptProject(std::wstring const& path) override;
-        void PickCheck(Vector2i screenPos, shared_ptr<Level::Actor>& pickedActor) override;
+        ENGINE_API void LoadScriptProject(std::wstring const& path);
+        ENGINE_API void PickCheck(Vector2i screenPos, shared_ptr<Level::Actor>& pickedActor);
 
-        const unordered_map<const wchar_t*, shared_ptr<Level::Actor>> GetActorList();
+        ENGINE_API const unordered_map<const wchar_t*, shared_ptr<Level::Actor>> GetActorList();
 
         // private
     private:
@@ -86,7 +86,7 @@ namespace Engine
         bool CreateDeviceDependentResources();
         void CreateWindowSizeDependentResources();
         
-        std::unique_ptr<Engine::DX::StepTimer> Timer;
+        std::shared_ptr<Engine::DX::StepTimer> Timer;
         std::shared_ptr<Engine::Level::World> m_World;
         
         bool RenderLoopActivate;
@@ -98,4 +98,8 @@ namespace Engine
 
         HMODULE ProjectHandle;
     };
+
+    ENGINE_API void InitEngine();
+    ENGINE_API void ReleaseEngine();
+    ENGINE_API EngineCore* GetRenderingEngine();
 }

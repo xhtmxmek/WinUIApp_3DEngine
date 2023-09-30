@@ -36,11 +36,9 @@ namespace Engine
 
 		void World::Render()
 		{
-			//ÄÃ¸µ µî...
 			CheckVisibilityActors();
 			size_t actorCount = ActorManager::GetInstance().GetNumActorList();
 			Engine::Renderer::LevelRenderer::GetInstance().Render(DrawComponentsThisFrame);
-			//int k = 5;
 		}
 
 		const unordered_map<const wchar_t*, shared_ptr<Actor>> World::GetActorList()

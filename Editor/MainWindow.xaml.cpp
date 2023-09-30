@@ -3,7 +3,7 @@
 
 #include "pch.h"
 #include "MainWindow.xaml.h"
-#include "EngineInterface.h"
+#include "EngineCore.h"
 #if __has_include("MainWindow.g.cpp")
 #include "MainWindow.g.cpp"
 #endif
@@ -46,7 +46,7 @@ namespace winrt::Editor::implementation
     }
 
 #pragma region WindowEvent
-    void MainWindow::OnVisibilityChanged(IInspectable const& sender, Microsoft::UI::Xaml::WindowVisibilityChangedEventArgs const& args)
+    void MainWindow::OnVisibilityChanged(IInspectable const&, Microsoft::UI::Xaml::WindowVisibilityChangedEventArgs const& args)
     {
         if (swapChainPanel().IsLoaded())
         {
@@ -58,7 +58,7 @@ namespace winrt::Editor::implementation
         }
     }
 
-    void MainWindow::OnActivated(IInspectable const& sender, Microsoft::UI::Xaml::WindowActivatedEventArgs const& args)
+    void MainWindow::OnActivated(IInspectable const&, Microsoft::UI::Xaml::WindowActivatedEventArgs const& args)
     {
         if (args.WindowActivationState() == Microsoft::UI::Xaml::WindowActivationState::PointerActivated)
         {
@@ -72,35 +72,35 @@ namespace winrt::Editor::implementation
         }
     }
 
-    void MainWindow::OnClosed(IInspectable const& sender, Microsoft::UI::Xaml::WindowEventArgs const& args)
+    void MainWindow::OnClosed(IInspectable const&, Microsoft::UI::Xaml::WindowEventArgs const&)
     {
         renderingEngine_->StopRenderLoop();
         renderingEngine_->UnInitialize();
         Engine::ReleaseEngine();
     }
 
-    void MainWindow::OnSizeChanged(IInspectable const& sender, Microsoft::UI::Xaml::WindowSizeChangedEventArgs const& args)
+    void MainWindow::OnSizeChanged(IInspectable const&, Microsoft::UI::Xaml::WindowSizeChangedEventArgs const&)
     {
     }
 #pragma endregion
 
 
 #pragma region SwapChainPanel Event
-    void MainWindow::OnSwapChainPanelXamlRootChanged(Microsoft::UI::Xaml::XamlRoot const& sender, Microsoft::UI::Xaml::XamlRootChangedEventArgs const& args)
+    void MainWindow::OnSwapChainPanelXamlRootChanged(Microsoft::UI::Xaml::XamlRoot const&, Microsoft::UI::Xaml::XamlRootChangedEventArgs const&)
     {
         SharedTypes::SwapchainPanelInfo scPanelInfo;
         SetSwapchainPanelInfo(swapChainPanel(), scPanelInfo);
         renderingEngine_->OnSwapchainXamlChanged(scPanelInfo);
     }
 
-    void MainWindow::OnSwapChainPanelCompositionScaleChanged(Microsoft::UI::Xaml::Controls::SwapChainPanel const& sender, IInspectable const& args)
+    void MainWindow::OnSwapChainPanelCompositionScaleChanged(Microsoft::UI::Xaml::Controls::SwapChainPanel const&, IInspectable const&)
     {
         SharedTypes::SwapchainPanelInfo scPanelInfo;
         SetSwapchainPanelInfo(swapChainPanel(), scPanelInfo);
         renderingEngine_->OnSwapchainXamlChanged(scPanelInfo);
     }
 
-    void MainWindow::OnSwapChainPanel_SizeChanged(Windows::Foundation::IInspectable const& sender, Microsoft::UI::Xaml::SizeChangedEventArgs const& args)
+    void MainWindow::OnSwapChainPanel_SizeChanged(Windows::Foundation::IInspectable const&, Microsoft::UI::Xaml::SizeChangedEventArgs const&)
     {
         SharedTypes::SwapchainPanelInfo scPanelInfo;
         SetSwapchainPanelInfo(swapChainPanel(), scPanelInfo);
@@ -119,17 +119,17 @@ namespace winrt::Editor::implementation
 
         swapchainInfo_.RegisterSwapChainToUIPanel = [&](IDXGISwapChain* engineSwapChain) {
 
-            panel.DispatcherQueue().TryEnqueue(winrt::Microsoft::UI::Dispatching::DispatcherQueuePriority::High, 
+            swapChainPanel().DispatcherQueue().TryEnqueue(winrt::Microsoft::UI::Dispatching::DispatcherQueuePriority::High,
                 [&]
                 {
-                    auto panelNative = panel.as<ISwapChainPanelNative>();
+                    auto panelNative = swapChainPanel().as<ISwapChainPanelNative>();
                     panelNative->SetSwapChain(engineSwapChain);
                     //이걸 호출하는 시점에 결국 둘다 알아야된다. 어떻게든 
                 });
         };
     }
 
-    void MainWindow::OnSwapchainPanelLoaded(IInspectable const& sender, Microsoft::UI::Xaml::RoutedEventArgs const& e)
+    void MainWindow::OnSwapchainPanelLoaded(IInspectable const&, Microsoft::UI::Xaml::RoutedEventArgs const&)
     {
         //swapChainPanel().XamlRoot().Changed({ this, &MainWindow::OnSwapChainPanelXamlRootChanged });        
         swapChainPanel().SizeChanged({ this, &MainWindow::OnSwapChainPanel_SizeChanged });
@@ -155,13 +155,13 @@ namespace winrt::Editor::implementation
     }
 #pragma endregion
 
-    void MainWindow::AppBarButton_Click(IInspectable const& sender, Microsoft::UI::Xaml::RoutedEventArgs const& e)
+    void MainWindow::AppBarButton_Click(IInspectable const&, Microsoft::UI::Xaml::RoutedEventArgs const&)
     {
         // 앱에 적합한 앱 바가 있으면 사용하세요. 앱 바를 디자인합니다.
         // 그리고 다음과 같이 이벤트 처리기를 채웁니다.
     }
 
-    void MainWindow::OnPointerPressedSwapChain(Windows::Foundation::IInspectable const& sender, Microsoft::UI::Xaml::Input::PointerRoutedEventArgs const& args)
+    void MainWindow::OnPointerPressedSwapChain(Windows::Foundation::IInspectable const&, Microsoft::UI::Xaml::Input::PointerRoutedEventArgs const&)
     {
 
         //TODO
@@ -179,7 +179,7 @@ namespace winrt::Editor::implementation
         //renderingEngine_.StartTracking(args);
     }
 
-    void MainWindow::OnPointerMovedSwapChain(Windows::Foundation::IInspectable const& sender, Microsoft::UI::Xaml::Input::PointerRoutedEventArgs const& args)
+    void MainWindow::OnPointerMovedSwapChain(Windows::Foundation::IInspectable const&, Microsoft::UI::Xaml::Input::PointerRoutedEventArgs const&)
     {
         // 포인터 추적 코드를 업데이트합니다.
         //if (m_Engine.IsTracking())
@@ -189,7 +189,7 @@ namespace winrt::Editor::implementation
         //renderingEngine_.TrackingUpdate(args);
     }
 
-    void MainWindow::OnPointerReleasedSwapChain(Windows::Foundation::IInspectable const& sender, Microsoft::UI::Xaml::Input::PointerRoutedEventArgs const& args)
+    void MainWindow::OnPointerReleasedSwapChain(Windows::Foundation::IInspectable const&, Microsoft::UI::Xaml::Input::PointerRoutedEventArgs const&)
     {
         //EngineInterface_WRC::PointerActionResult result = renderingEngine_.StopTracking(args);
         //EngineInterface_WRC::ActorProxy proxy;
@@ -199,7 +199,7 @@ namespace winrt::Editor::implementation
         //result.PickedActor()
     }
 
-    void MainWindow::OnPointerWheelChangedSwapChain(Windows::Foundation::IInspectable const& sender, Microsoft::UI::Xaml::Input::PointerRoutedEventArgs const& args)
+    void MainWindow::OnPointerWheelChangedSwapChain(Windows::Foundation::IInspectable const&, Microsoft::UI::Xaml::Input::PointerRoutedEventArgs const&)
     {
         // 포인터가 해제되는 경우 추적 포인터 이동이 중지됩니다.
         //m_main->StopTracking();
@@ -207,12 +207,12 @@ namespace winrt::Editor::implementation
         //renderingEngine_.PointerWheelChanged(args);
     }
 
-    void MainWindow::OnKeyDown_SwapChain(Windows::Foundation::IInspectable const& sender, Microsoft::UI::Xaml::Input::KeyRoutedEventArgs const& args)
+    void MainWindow::OnKeyDown_SwapChain(Windows::Foundation::IInspectable const&, Microsoft::UI::Xaml::Input::KeyRoutedEventArgs const&)
     {
         //renderingEngine_->KeyboardProcess(args);
     }
 
-    void MainWindow::OnKeyUp_SwapChain(Windows::Foundation::IInspectable const& sender, Microsoft::UI::Xaml::Input::KeyRoutedEventArgs const& args)
+    void MainWindow::OnKeyUp_SwapChain(Windows::Foundation::IInspectable const&, Microsoft::UI::Xaml::Input::KeyRoutedEventArgs const&)
     {
         //renderingEngine_.KeyboardProcess(args);
     }
@@ -251,8 +251,6 @@ namespace winrt::Editor::implementation
             //SelectedActorViewModel().Components().Append(component);
             //int size = SelectedActorViewModel().Components().Size();
         }
-
-        //renderingEngine_.
     }
 
     void MainWindow::GetWorldInfo()
@@ -261,6 +259,7 @@ namespace winrt::Editor::implementation
         //worldViewModel_.ActorInfos().Insert(L"firstActor", actor);
         ////worldViewModel_.ActorInfos().Lookup()
         //worldViewModel_.TestList().Append(actor);
+        //renderingEngine_->GetActorList();
     }
 
     //void MainPage::ClickHandler(IInspectable const&, RoutedEventArgs const&)

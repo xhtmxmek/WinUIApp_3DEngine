@@ -5,7 +5,7 @@
 
 namespace Engine
 {
-	class EngineInterface;
+	class EngineCore;
 }
 
 namespace SharedTypes
@@ -127,7 +127,7 @@ namespace winrt::Editor::implementation
 		//	return (double(pixels) * 96.f / m_DPI);
 		//}
 
-		Engine::EngineInterface* renderingEngine_;
+		Engine::EngineCore* renderingEngine_;
 
 		bool					m_windowVisible;
 		float                   m_logicalWidth;

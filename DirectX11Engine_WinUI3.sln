@@ -6,9 +6,6 @@ MinimumVisualStudioVersion = 10.0.40219.1
 Project("{C7167F0D-BC9F-4E6E-AFE1-012C56B48DB5}") = "AuthoringTool (Package)", "AuthoringTool\AuthoringTool (Package)\AuthoringTool (Package).wapproj", "{193AE09B-FE69-4166-AD06-2B234B47A8BC}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "AuthoringTool", "AuthoringTool\AuthoringTool\AuthoringTool.vcxproj", "{218720AB-4C86-4319-B25A-3E5B13EDAFB8}"
-	ProjectSection(ProjectDependencies) = postProject
-		{84904AC3-90A8-47D3-B7BE-E6AACB1D8C18} = {84904AC3-90A8-47D3-B7BE-E6AACB1D8C18}
-	EndProjectSection
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "TestProject", "TestProject\TestProject.vcxproj", "{10E2C058-EB10-4346-AF13-B0165C47DA6B}"
 	ProjectSection(ProjectDependencies) = postProject
@@ -22,9 +19,12 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "EngineCore", "EngineCore\En
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "SharedTypes", "SharedTypes\SharedTypes.vcxproj", "{A5A862CA-E1E0-416E-8074-1A5ED8093E96}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "EngineInterface_WRC", "EngineInterface_WRC\EngineInterface_WRC.vcxproj", "{84904AC3-90A8-47D3-B7BE-E6AACB1D8C18}"
-EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Editor", "Editor\Editor.vcxproj", "{C8595729-4D20-40FE-8A94-275B847457A4}"
+	ProjectSection(ProjectDependencies) = postProject
+		{10E2C058-EB10-4346-AF13-B0165C47DA6B} = {10E2C058-EB10-4346-AF13-B0165C47DA6B}
+		{2C0E3B6B-EDE0-4CA2-915B-B41357598295} = {2C0E3B6B-EDE0-4CA2-915B-B41357598295}
+		{A5A862CA-E1E0-416E-8074-1A5ED8093E96} = {A5A862CA-E1E0-416E-8074-1A5ED8093E96}
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -150,26 +150,6 @@ Global
 		{A5A862CA-E1E0-416E-8074-1A5ED8093E96}.Release|x64.Build.0 = Release|x64
 		{A5A862CA-E1E0-416E-8074-1A5ED8093E96}.Release|x86.ActiveCfg = Release|Win32
 		{A5A862CA-E1E0-416E-8074-1A5ED8093E96}.Release|x86.Build.0 = Release|Win32
-		{84904AC3-90A8-47D3-B7BE-E6AACB1D8C18}.Debug|Any CPU.ActiveCfg = Debug|x64
-		{84904AC3-90A8-47D3-B7BE-E6AACB1D8C18}.Debug|Any CPU.Build.0 = Debug|x64
-		{84904AC3-90A8-47D3-B7BE-E6AACB1D8C18}.Debug|ARM.ActiveCfg = Debug|x64
-		{84904AC3-90A8-47D3-B7BE-E6AACB1D8C18}.Debug|ARM.Build.0 = Debug|x64
-		{84904AC3-90A8-47D3-B7BE-E6AACB1D8C18}.Debug|ARM64.ActiveCfg = Debug|arm64
-		{84904AC3-90A8-47D3-B7BE-E6AACB1D8C18}.Debug|ARM64.Build.0 = Debug|arm64
-		{84904AC3-90A8-47D3-B7BE-E6AACB1D8C18}.Debug|x64.ActiveCfg = Debug|x64
-		{84904AC3-90A8-47D3-B7BE-E6AACB1D8C18}.Debug|x64.Build.0 = Debug|x64
-		{84904AC3-90A8-47D3-B7BE-E6AACB1D8C18}.Debug|x86.ActiveCfg = Debug|Win32
-		{84904AC3-90A8-47D3-B7BE-E6AACB1D8C18}.Debug|x86.Build.0 = Debug|Win32
-		{84904AC3-90A8-47D3-B7BE-E6AACB1D8C18}.Release|Any CPU.ActiveCfg = Release|x64
-		{84904AC3-90A8-47D3-B7BE-E6AACB1D8C18}.Release|Any CPU.Build.0 = Release|x64
-		{84904AC3-90A8-47D3-B7BE-E6AACB1D8C18}.Release|ARM.ActiveCfg = Release|x64
-		{84904AC3-90A8-47D3-B7BE-E6AACB1D8C18}.Release|ARM.Build.0 = Release|x64
-		{84904AC3-90A8-47D3-B7BE-E6AACB1D8C18}.Release|ARM64.ActiveCfg = Release|arm64
-		{84904AC3-90A8-47D3-B7BE-E6AACB1D8C18}.Release|ARM64.Build.0 = Release|arm64
-		{84904AC3-90A8-47D3-B7BE-E6AACB1D8C18}.Release|x64.ActiveCfg = Release|x64
-		{84904AC3-90A8-47D3-B7BE-E6AACB1D8C18}.Release|x64.Build.0 = Release|x64
-		{84904AC3-90A8-47D3-B7BE-E6AACB1D8C18}.Release|x86.ActiveCfg = Release|Win32
-		{84904AC3-90A8-47D3-B7BE-E6AACB1D8C18}.Release|x86.Build.0 = Release|Win32
 		{C8595729-4D20-40FE-8A94-275B847457A4}.Debug|Any CPU.ActiveCfg = Debug|x64
 		{C8595729-4D20-40FE-8A94-275B847457A4}.Debug|Any CPU.Build.0 = Debug|x64
 		{C8595729-4D20-40FE-8A94-275B847457A4}.Debug|Any CPU.Deploy.0 = Debug|x64

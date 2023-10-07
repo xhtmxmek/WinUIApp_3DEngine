@@ -10,6 +10,6 @@ namespace SharedTypes
 		Vector2f CompositionScale;
 		Size ActureSize;
 		double RasterizationScale;		
-		std::function<void(IDXGISwapChain*)> RegisterSwapChainToUIPanel;		
+		/*std::function<void(IDXGISwapChain1*)> RegisterSwapChainToUIPanel;*/		
 	};
 }

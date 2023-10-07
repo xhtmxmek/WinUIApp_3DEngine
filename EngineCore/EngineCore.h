@@ -38,6 +38,8 @@ namespace Engine
         ENGINE_API void Initialize(const SwapchainPanelInfo& swapchainPanelInfo_);
 #endif //WIN_APPS_SDK
         ENGINE_API void UnInitialize();
+        ENGINE_API IDXGISwapChain3* GetSwapChain();
+
 
         // Basic game loop / inputs        
         ENGINE_API void StartRenderLoop();

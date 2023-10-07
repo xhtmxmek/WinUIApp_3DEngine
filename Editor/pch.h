@@ -29,4 +29,12 @@
 #include <Microsoft.UI.xaml.media.dxinterop.h>
 #include <wil/cppwinrt_helpers.h>
 
+//DXToolKit
+#include <d3d11_4.h>
+#include <dxgi1_6.h>
+#include <d2d1_3.h>
+#include <d2d1effects_2.h>
+#include <dwrite_3.h>
+#include <d3d11shader.h>
+
 #include "BaseTypes.h"

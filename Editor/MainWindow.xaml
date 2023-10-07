@@ -1,79 +1,79 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8" ?>
 <Window
     x:Class="Editor.MainWindow"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:local="using:Editor"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:local="using:Editor"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d">
 
-	<SplitView
-	x:Name="splitView"
-	DisplayMode="CompactInline"
-	IsPaneOpen="True"
-	OpenPaneLength="296"
-	PanePlacement="Right">
-		<SwapChainPanel x:Name="swapChainPanel">
-			<StackPanel
+    <SplitView
+        x:Name="splitView"
+        DisplayMode="CompactInline"
+        IsPaneOpen="True"
+        OpenPaneLength="296"
+        PanePlacement="Right">
+        <SwapChainPanel x:Name="swapChainPanel">
+            <StackPanel
                 HorizontalAlignment="Center"
                 VerticalAlignment="Top"
                 Orientation="Vertical">
-				<!--            <TextBlock
+                <!--            <TextBlock
                 HorizontalAlignment="Left"
                 VerticalAlignment="Top"
                 FontSize="36"
                 Text="Hello WinUI3 World"
                 TextWrapping="Wrap" />
                 -->
-				<!--<TextBlock
+                <!--<TextBlock
                 x:Name="HelloGreetings"
                 HorizontalAlignment="Center"
                 FontSize="36"
                 Text="{Binding helloGreetings}" />-->
 
-			</StackPanel>
-		</SwapChainPanel>
-		<SplitView.Pane>
-			<StackPanel x:Name="worldOutlinerPanel" Background="#222222">
-				<Border
+            </StackPanel>
+        </SwapChainPanel>
+        <SplitView.Pane>
+            <StackPanel x:Name="worldOutlinerPanel" Background="#222222">
+                <Border
                     Width="auto"
                     Height="auto"
                     Margin="10,10,0,0"
                     HorizontalAlignment="Left"
                     Background="DarkGray"
                     CornerRadius="2.5">
-					<TextBlock
+                    <TextBlock
                         x:Name="worldOutlinerLabel"
                         Margin="5,5,5,5"
                         Text="World Outliner" />
-				</Border>
-				<TextBox
+                </Border>
+                <TextBox
                     Background="AntiqueWhite"
                     PlaceholderForeground="DarkGray"
                     PlaceholderText="Find.." />
-				<Grid HorizontalAlignment="Stretch">
-					<Grid.RowDefinitions>
-						<RowDefinition Height="Auto" />
-					</Grid.RowDefinitions>
-					<Grid.ColumnDefinitions>
-						<ColumnDefinition Width="*" />
-						<ColumnDefinition Width="*" />
-					</Grid.ColumnDefinitions>
-					<Button
+                <Grid HorizontalAlignment="Stretch">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+                    <Button
                         Grid.Row="0"
                         Grid.Column="0"
                         HorizontalAlignment="Stretch"
                         Background="#1A1A1A"
                         Content="Name" />
-					<Button
+                    <Button
                         Grid.Row="0"
                         Grid.Column="1"
                         HorizontalAlignment="Stretch"
                         Background="#1A1A1A"
                         Content="Type" />
-				</Grid>
-				<!--<TreeView ItemsSource="{x:Bind WorldInfoViewModel.ActorInfos}">
+                </Grid>
+                <!--<TreeView ItemsSource="{x:Bind WorldInfoViewModel.ActorInfos}">
                     <TreeView.ItemTemplate>
                         <DataTemplate x:DataType="map>
                             <TreeViewItem Content="{x:Bind Value.Name}" ItemsSource="{x:Bind Value.Components}" />
@@ -81,17 +81,16 @@
                     </TreeView.ItemTemplate>
                 </TreeView>-->
 
-				<!--<ListBox ItemsSource="{x:Bind WorldInfoViewModel.ActorInfos}">
+                <!--<ListBox ItemsSource="{x:Bind WorldInfoViewModel.ActorInfos}">
 					<ListBox.ItemTemplate>
 						<DataTemplate x:DataType="map">
 							<TextBlock Text="{x:Bind Key}" />
 						</DataTemplate>
 					</ListBox.ItemTemplate>
 				</ListBox-->
-
-			</StackPanel>
-		</SplitView.Pane>
-		<!--<SplitView.Pane>
+            </StackPanel>
+        </SplitView.Pane>
+        <!--<SplitView.Pane>
             <StackPanel
                 HorizontalAlignment="Center"
                 VerticalAlignment="Top"
@@ -108,8 +107,8 @@
                 </ListBox>
 
         -->
-		<!--  선택된 컴포넌트의 프로퍼티들 표시  -->
-		<!--
+        <!--  선택된 컴포넌트의 프로퍼티들 표시  -->
+        <!--
                 <GridView ItemsSource="{x:Bind SelectedActorViewModel.SelectedComponent.RenderingProperties}">
                     <ItemsControl.ItemTemplate>
                         <DataTemplate x:DataType="local:RenderingProperty">
@@ -117,8 +116,8 @@
                                 <TextBlock Text="Rendering" />
                                 <CheckBox Content="Visible" IsChecked="{x:Bind Visible}" />
         -->
-		<!--<Image Source="{x:Bind CurrentMeshImage}" />-->
-		<!--
+        <!--<Image Source="{x:Bind CurrentMeshImage}" />-->
+        <!--
                             </StackPanel>
                         </DataTemplate>
                     </ItemsControl.ItemTemplate>
@@ -135,7 +134,7 @@
 
                                 <TextBox Text="{x:Bind Position}" />
         -->
-		<!--<TextBox Text="{x:Bind Position.X}" />
+        <!--<TextBox Text="{x:Bind Position.X}" />
                                 <TextBox Text="{x:Bind Position.Y}" />
                                 <TextBox Text="{x:Bind Position.Z}" />
 
@@ -146,7 +145,7 @@
                                 <TextBox Text="{x:Bind Scale.X}" />
                                 <TextBox Text="{x:Bind Scale.Y}" />
                                 <TextBox Text="{x:Bind Scale.Z}" />-->
-		<!--
+        <!--
                             </StackPanel>
                         </DataTemplate>
                     </ItemsControl.ItemTemplate>
@@ -159,8 +158,8 @@
                                 <TextBlock Text="Static Mesh" />
                                 <ComboBox ItemsSource="{x:Bind StatcMeshTypes}" />
         -->
-		<!--<Image Source="{x:Bind CurrentMeshImage}" />-->
-		<!--
+        <!--<Image Source="{x:Bind CurrentMeshImage}" />-->
+        <!--
                             </StackPanel>
                         </DataTemplate>
                     </ItemsControl.ItemTemplate>
@@ -168,7 +167,7 @@
 
 
         -->
-		<!--<TextBlock
+        <!--<TextBlock
                     HorizontalAlignment="Center"
                     VerticalAlignment="Center"
                     FontSize="24"
@@ -177,9 +176,9 @@
                 <TextBox x:Name="myTextBox" />
                 <TextBlock Text="{x:Bind myTextBox.Text, Mode=OneWay}" />
                 <Button Click="ClickHandler" Content="{x:Bind MainViewModel.BookSku.Title, Mode=OneWay}" />-->
-		<!--
+        <!--
             </StackPanel>
         </SplitView.Pane>-->
-	</SplitView>
-	
+    </SplitView>
+
 </Window>

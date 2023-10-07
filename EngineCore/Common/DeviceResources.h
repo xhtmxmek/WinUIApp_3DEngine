@@ -197,7 +197,6 @@ namespace Engine
 
 			// The IDeviceNotify can be held directly as it owns the DeviceResources.
 			IDeviceNotify* m_deviceNotify;
-			std::function<void(IDXGISwapChain3*)>							RegisterSwapChainToUIPanelCallBack;			
 		};
 
 		class DeviceResourcesUtil

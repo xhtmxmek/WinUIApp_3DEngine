@@ -35,12 +35,6 @@ namespace winrt::Editor::implementation
         swapChainPanel().Loaded({ this, &MainWindow::OnSwapchainPanelLoaded });
         swapChainPanel().CompositionScaleChanged({ this, &MainWindow::OnSwapChainPanelCompositionScaleChanged });
 
-        // Retrieve the window handle (HWND) of the current WinUI 3 window.
-        //auto windowNative{ this->try_as<::IWindowNative>() };
-        //winrt::check_bool(windowNative);
-        //HWND hWnd{ 0 };
-        //windowNative->get_WindowHandle(&hWnd);        
-
         m_logicalWidth = Bounds().Width;
         m_logicalHeight = Bounds().Height;
     }
@@ -107,7 +101,7 @@ namespace winrt::Editor::implementation
         renderingEngine_->OnSwapchainXamlChanged(scPanelInfo);
     }
 
-    void MainWindow::SetSwapchainPanelInfo(const Microsoft::UI::Xaml::Controls::SwapChainPanel& panel, 
+    void MainWindow::SetSwapchainPanelInfo(const Microsoft::UI::Xaml::Controls::SwapChainPanel& panel,
         SharedTypes::SwapchainPanelInfo& swapchainInfo_)
     {
         SharedTypes::SwapchainPanelInfo swapchainpanelInfo;
@@ -117,16 +111,6 @@ namespace winrt::Editor::implementation
         swapchainInfo_.IsLoaded = panel.IsLoaded();
         swapchainInfo_.RasterizationScale = panel.RasterizationScale();
 
-        swapchainInfo_.RegisterSwapChainToUIPanel = [&](IDXGISwapChain* engineSwapChain) {
-
-            swapChainPanel().DispatcherQueue().TryEnqueue(winrt::Microsoft::UI::Dispatching::DispatcherQueuePriority::High,
-                [&]
-                {
-                    auto panelNative = swapChainPanel().as<ISwapChainPanelNative>();
-                    panelNative->SetSwapChain(engineSwapChain);
-                    //이걸 호출하는 시점에 결국 둘다 알아야된다. 어떻게든 
-                });
-        };
     }
 
     void MainWindow::OnSwapchainPanelLoaded(IInspectable const&, Microsoft::UI::Xaml::RoutedEventArgs const&)
@@ -139,6 +123,7 @@ namespace winrt::Editor::implementation
         Engine::InitEngine();
         renderingEngine_ = Engine::GetRenderingEngine();
         renderingEngine_->Initialize(scPanelInfo);
+        RegisterNativeSwapchain();
         //RegisterDedicatedInputOnSwapchain();
 
         //winrt::Windows::Foundation::Numerics::float2        
@@ -163,40 +148,15 @@ namespace winrt::Editor::implementation
 
     void MainWindow::OnPointerPressedSwapChain(Windows::Foundation::IInspectable const&, Microsoft::UI::Xaml::Input::PointerRoutedEventArgs const&)
     {
-
-        //TODO
-        //마우스 피킹시 동작
-        //마우스 스테이트 업데이트, 
-        /*
-        * -저작도구 동작
-        * 엔진 클릭시 피킹으로 오브젝트의 정보 뽑아옴. 오브젝트의 정보는 EngineInterface가 들고있음.
-        * EngineInterFace에서 검사해서 ActorProxy 생성함. 액터 피킹 성공하면 ActorProxy 반환해서 ActorViewModel에 넘겨줌.
-        * ViewModel에서
-        */
-        //m_Engine.StartTracking();        
-        //trackingOutput = renderingEngine_.startTracking();        
-        //renderingEngine_.startT
-        //renderingEngine_.StartTracking(args);
     }
 
     void MainWindow::OnPointerMovedSwapChain(Windows::Foundation::IInspectable const&, Microsoft::UI::Xaml::Input::PointerRoutedEventArgs const&)
     {
-        // 포인터 추적 코드를 업데이트합니다.
-        //if (m_Engine.IsTracking())
-        //{
-        //    m_Engine.TrackingUpdate(e.CurrentPoint().Position().X);
-        //}
-        //renderingEngine_.TrackingUpdate(args);
     }
 
     void MainWindow::OnPointerReleasedSwapChain(Windows::Foundation::IInspectable const&, Microsoft::UI::Xaml::Input::PointerRoutedEventArgs const&)
     {
-        //EngineInterface_WRC::PointerActionResult result = renderingEngine_.StopTracking(args);
-        //EngineInterface_WRC::ActorProxy proxy;
-
         GetPickedActor();
-        //proxy.Components().
-        //result.PickedActor()
     }
 
     void MainWindow::OnPointerWheelChangedSwapChain(Windows::Foundation::IInspectable const&, Microsoft::UI::Xaml::Input::PointerRoutedEventArgs const&)
@@ -221,23 +181,34 @@ namespace winrt::Editor::implementation
     {
         // 독립 입력 포인터 이벤트를 얻으려면 SwapChainPanel을 등록합니다.                
         auto controller = Microsoft::UI::Dispatching::DispatcherQueueController::CreateOnDedicatedThread();
-        bool result = controller.DispatcherQueue().TryEnqueue(Microsoft::UI::Dispatching::DispatcherQueuePriority::High, [this]
+        controller.DispatcherQueue().TryEnqueue(Microsoft::UI::Dispatching::DispatcherQueuePriority::High, [this]
             {
                 // CoreIndependentInputSource는 어떤 스레드가 만들어지던 특정 디바이스 유형에 대한 포인터 이벤트가 발생됩니다.  
                 uint32_t inputParam = (uint32_t)Microsoft::UI::Input::InputPointerSourceDeviceKinds::Mouse |
-                    (uint32_t)Microsoft::UI::Input::InputPointerSourceDeviceKinds::Touch |
-                    (uint32_t)Microsoft::UI::Input::InputPointerSourceDeviceKinds::Pen;
+                (uint32_t)Microsoft::UI::Input::InputPointerSourceDeviceKinds::Touch |
+            (uint32_t)Microsoft::UI::Input::InputPointerSourceDeviceKinds::Pen;
 
-                Microsoft::UI::Input::InputPointerSource coreInput = swapChainPanel().CreateCoreIndependentInputSource(
-                    static_cast<Microsoft::UI::Input::InputPointerSourceDeviceKinds>(inputParam)
-                );
+        Microsoft::UI::Input::InputPointerSource coreInput = swapChainPanel().CreateCoreIndependentInputSource(
+            static_cast<Microsoft::UI::Input::InputPointerSourceDeviceKinds>(inputParam)
+        );
 
-                // 백그라운드 스레드에서 발생할 포인터 이벤트를 등록합니다.
-                //coreInput.PointerPressed({ this, &MainWindow::OnPointerPressedSwapChain });
-                //coreInput.PointerMoved({ this, &MainWindow::OnPointerMovedSwapChain });
-                //coreInput.PointerReleased({ this, &MainWindow::OnPointerReleasedSwapChain });
-                //coreInput.PointerWheelChanged({ this, &MainWindow::OnPointerWheelChangedSwapChain });
+        // 백그라운드 스레드에서 발생할 포인터 이벤트를 등록합니다.
+        //coreInput.PointerPressed({ this, &MainWindow::OnPointerPressedSwapChain });
+        //coreInput.PointerMoved({ this, &MainWindow::OnPointerMovedSwapChain });
+        //coreInput.PointerReleased({ this, &MainWindow::OnPointerReleasedSwapChain });
+        //coreInput.PointerWheelChanged({ this, &MainWindow::OnPointerWheelChangedSwapChain });
 
+            });
+    }
+
+    void MainWindow::RegisterNativeSwapchain()
+    {
+        swapChainPanel().DispatcherQueue().TryEnqueue(winrt::Microsoft::UI::Dispatching::DispatcherQueuePriority::High,
+            [this]
+            {
+                auto panelNative = swapChainPanel().as<ISwapChainPanelNative>();
+            renderingEngine_->GetSwapChain();
+            panelNative->SetSwapChain(renderingEngine_->GetSwapChain());
             });
     }
 
@@ -247,59 +218,11 @@ namespace winrt::Editor::implementation
         for (int i = 0; i < 5; i++)
         {
             hstring componentName = L"TestComponent_" + to_hstring(i);
-            //AuthoringTool::ActorComponent component = winrt::make<AuthoringTool::implementation::ActorComponent>(componentName);            
-            //SelectedActorViewModel().Components().Append(component);
-            //int size = SelectedActorViewModel().Components().Size();
         }
     }
 
     void MainWindow::GetWorldInfo()
     {
-        //EngineInterface_WRC::ActorProxy actor(L"firstActor", L"actor");
-        //worldViewModel_.ActorInfos().Insert(L"firstActor", actor);
-        ////worldViewModel_.ActorInfos().Lookup()
-        //worldViewModel_.TestList().Append(actor);
-        //renderingEngine_->GetActorList();
     }
-
-    //void MainPage::ClickHandler(IInspectable const&, RoutedEventArgs const&)
-    //{
-    //    myButton().Content(box_value(L"Clicked"));
-    //}
-
-    //int32_t MainWindow::MyProperty()
-    //{
-    //    throw hresult_not_implemented();
-    //}
-
-    //void MainWindow::MyProperty(int32_t /* value */)
-    //{
-    //    throw hresult_not_implemented();
-    //}
-
-    void MainWindow::myButton_Click(IInspectable const&, RoutedEventArgs const&)
-    {
-        float width = 0.0f;
-        float height = 0.0f;
-        //Windows::Foundation::Size size = renderingEngine_.GetDefaultBackBufferSize();
-        //MainViewModel().BookSku().Title(std::to_wstring(width));
-        //myButton().Content(box_value(L"Clicked"));
-        //myButton().Content(box_value(std::to_wstring(width)));
-        //double test = myButton().XamlRoot().RasterizationScale();
-    }
-
-    //void MainWindow::ClickHandler(Windows::Foundation::IInspectable const& sender, Microsoft::UI::Xaml::RoutedEventArgs const& args)
-    //{
-    //    MainViewModel().BookSku().Title(L"To Kill a Mockingbird");
-    //}
-
-    //winrt::AuthoringTool::BookstoreViewModel MainWindow::MainViewModel()
-    //{
-    //    return m_mainViewModel;
-    //}
-    //AuthoringTool::ActorListViewModel MainWindow::WorldInfoViewModel()
-    //{
-    //    return worldViewModel_;
-    //}
-
 }
+  

@@ -87,6 +87,11 @@ namespace Engine
 		EngineAsset::TextureManager::GetInstance().ReleaseInstance();
 		FreeLibrary(ProjectHandle);
 	}
+
+	IDXGISwapChain3* EngineCore::GetSwapChain()
+	{
+		return DX::DeviceResourcesUtil::GetDeviceResources()->GetSwapChain();
+	}
 #pragma endregion
 
 

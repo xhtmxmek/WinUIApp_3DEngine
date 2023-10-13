@@ -41,7 +41,9 @@ namespace Engine
 				auto newComponent = std::static_pointer_cast<T>(CreateComponent(runTimeClassName, InstanceName));
 				//Component::ComponentLink<T>(newComponent);				
 				Component::ComponentDispatch(this, newComponent);
-				return std::shared_ptr<T>(newComponent);
+
+				return newComponent;
+			
 				//생성된 클래스를 월드에 넣어주면, 월드가 템플릿 기반으로 컴포넌트를 받으면 되지 않나? 아니면 특수화버전으로.
 				//컴포넌트 링커는 컴포넌트를 월드 뿐만 아니라 다른곳에도 연결해줄수도 있을듯.. 일단월드만.
 

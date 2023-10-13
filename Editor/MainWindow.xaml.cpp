@@ -240,9 +240,10 @@ namespace winrt::Editor::implementation
 		for (int index = 0; index < renderingEngine_->GetNumActorList(); index++)
 		{
 			auto nativeActor = renderingEngine_->GetActor(index);
-			winrt::Editor::ActorInfo actorProxy(winrt::to_hstring(nativeActor->Name()));
 			if (nativeActor == nullptr)
 				continue;
+
+			winrt::Editor::ActorInfo actorProxy(winrt::to_hstring(nativeActor->Name()));
 
 			//for (auto componentIter : nativeActor->Components())
 			for (int compIndex = 0; compIndex < nativeActor->NumComponent(); compIndex++)

@@ -15,7 +15,7 @@ namespace Engine
 			{
 				if (!ActorListResized)
 				{
-					unordered_map<const char*, shared_ptr<Actor>> tempActors;
+					unordered_map<string, shared_ptr<Actor>> tempActors;
 					tempActors.reserve(CurrentActorSizeFactor * ActorsSizeUnit);
 					tempActors.insert(Actors.begin(), Actors.end());
 					Actors.reserve(CurrentActorSizeFactor * ActorsSizeUnit);
@@ -36,7 +36,7 @@ namespace Engine
 			{
 				Level::Actor* runtimeActor = static_cast<Level::Actor*>(RuntimeContext::New(className, instanceName));
 				shared_ptr<Level::Actor> ptr(runtimeActor);
-				Actors.insert(std::make_pair(instanceName.c_str(), ptr));
+				Actors.insert(std::make_pair(instanceName, ptr));
 				actorNames_.push_back(instanceName);
 				return ptr;
 			}

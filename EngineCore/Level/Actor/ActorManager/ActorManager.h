@@ -64,7 +64,7 @@ namespace Engine
 
 			
 			vector<string> actorNames_;
-			std::unordered_map<const char*, std::shared_ptr<Actor>> Actors;
+			std::unordered_map<string, std::shared_ptr<Actor>> Actors;
 			//public으로 공개해서 외부에서 사용할일이 있을것같으면 그때 변경
 			const size_t	ActorsSizeUnit = 1000;
 			const size_t	ActorSizeBias = 5;

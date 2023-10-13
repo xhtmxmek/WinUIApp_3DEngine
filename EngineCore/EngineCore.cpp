@@ -71,8 +71,6 @@ namespace Engine
 		Path::InitBasePathes();
 		LoadDefaultProject();
 
-
-
 		DX::DeviceResourcesUtil::GetDeviceResources()->SetOption(DX::DeviceResources::c_UseXAML);
 		//CreateDeviceDependentResources();
 		DX::DeviceResourcesUtil::GetDeviceResources()->SetSwapChainPanel(swapchainPanelInfo_);
@@ -307,12 +305,22 @@ namespace Engine
 
 	void EngineCore::PickCheck(Vector2i screenPos, shared_ptr<Level::Actor>& pickedActor)
 	{
-		pickedActor = Level::ActorManager::GetInstance().GetActorByName("MeshTest");
+		//pickedActor = Level::ActorManager::GetInstance().GetActor("MeshTest");
 	}
 
-	const unordered_map<const wchar_t*, shared_ptr<Level::Actor>> EngineCore::GetActorList()
+	shared_ptr<Level::Actor> EngineCore::GetActor(int index)
 	{
-		return m_World->GetActorList();
+		return Level::SLevel::GetWorld()->GetActor(index);
+	}
+
+	shared_ptr<Level::Actor> EngineCore::GetActor(const string& name)
+	{
+		return Level::SLevel::GetWorld()->GetActor(name);
+	}
+
+	size_t EngineCore::GetNumActorList()
+	{
+		return Level::SLevel::GetWorld()->GetNumActorList();
 	}
 
 #pragma endregion

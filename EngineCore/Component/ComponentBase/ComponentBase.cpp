@@ -31,7 +31,7 @@ namespace Engine
 		{
 			return transform_.GetRotation();
 		}
-		const Math::TransformGroup& ComponentBase::GetComponentTransform()
+		Math::TransformGroup& ComponentBase::GetComponentTransform()
 		{
 			return transform_;
 		}

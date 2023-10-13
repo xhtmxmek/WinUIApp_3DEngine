@@ -9,13 +9,52 @@
   <ItemGroup>
     <Midl Include="App.idl" />
     <Midl Include="MainWindow.idl" />
+    <Midl Include="WorldInfoViewModel\WorldInfoViewModel.idl">
+      <Filter>WorldInfoViewModel</Filter>
+    </Midl>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="pch.cpp" />
     <ClCompile Include="$(GeneratedFilesDir)module.g.cpp" />
+    <ClCompile Include="WorldInfoViewModel\ActorInfo.cpp">
+      <Filter>WorldInfoViewModel</Filter>
+    </ClCompile>
+    <ClCompile Include="WorldInfoViewModel\ComponentInfo.cpp">
+      <Filter>WorldInfoViewModel</Filter>
+    </ClCompile>
+    <ClCompile Include="WorldInfoViewModel\WorldInfoViewModel.cpp">
+      <Filter>WorldInfoViewModel</Filter>
+    </ClCompile>
+    <ClCompile Include="WorldInfoViewModel\RenderingProperty.cpp">
+      <Filter>WorldInfoViewModel</Filter>
+    </ClCompile>
+    <ClCompile Include="WorldInfoViewModel\StaticMeshProperty.cpp">
+      <Filter>WorldInfoViewModel</Filter>
+    </ClCompile>
+    <ClCompile Include="WorldInfoViewModel\TransformProperty.cpp">
+      <Filter>WorldInfoViewModel</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="pch.h" />
+    <ClInclude Include="WorldInfoViewModel\ActorInfo.h">
+      <Filter>WorldInfoViewModel</Filter>
+    </ClInclude>
+    <ClInclude Include="WorldInfoViewModel\ComponentInfo.h">
+      <Filter>WorldInfoViewModel</Filter>
+    </ClInclude>
+    <ClInclude Include="WorldInfoViewModel\WorldInfoViewModel.h">
+      <Filter>WorldInfoViewModel</Filter>
+    </ClInclude>
+    <ClInclude Include="WorldInfoViewModel\RenderingProperty.h">
+      <Filter>WorldInfoViewModel</Filter>
+    </ClInclude>
+    <ClInclude Include="WorldInfoViewModel\StaticMeshProperty.h">
+      <Filter>WorldInfoViewModel</Filter>
+    </ClInclude>
+    <ClInclude Include="WorldInfoViewModel\TransformProperty.h">
+      <Filter>WorldInfoViewModel</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Image Include="Assets\Wide310x150Logo.scale-200.png">
@@ -43,6 +82,9 @@
   <ItemGroup>
     <Filter Include="Assets">
       <UniqueIdentifier>{c8595729-4d20-40fe-8a94-275b847457a4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="WorldInfoViewModel">
+      <UniqueIdentifier>{fc5c6016-5627-44aa-9512-c1b7763157cb}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>

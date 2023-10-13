@@ -17,8 +17,10 @@ namespace winrt::Editor::implementation
 {
 	struct MainWindow : MainWindowT<MainWindow>
 	{
-		MainWindow();
 
+	public:
+		MainWindow();
+		winrt::Editor::WorldInfoViewModel WorldInfo();
 	private:
 		//not projection
 		//void OnRendering(IInspectable const& sender, IInspectable const& args);
@@ -57,7 +59,11 @@ namespace winrt::Editor::implementation
 
 		//Scene
 		void GetPickedActor();
-		void GetWorldInfo();
+		void UpdateWorldInfoProxy();
+
+	private:
+		//Xaml Proxy
+		winrt::Editor::WorldInfoViewModel worldInfo_;
 
 		//inline int ConvertDipsToPixels(float dips) const noexcept
 		//{

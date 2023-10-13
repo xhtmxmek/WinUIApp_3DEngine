@@ -1,0 +1,70 @@
+
+namespace Editor
+{
+	//커스텀 런타임 클래스는 상속 불가
+	runtimeclass RenderingProperty : Microsoft.UI.Xaml.Data.INotifyPropertyChanged
+	{
+		RenderingProperty(String name);
+		String Name{ get; };
+		Boolean Visible;
+	}
+
+	runtimeclass StaticMeshProperty : Microsoft.UI.Xaml.Data.INotifyPropertyChanged
+	{
+		StaticMeshProperty(String name);
+		String Name{ get; };
+		String MeshAsset;
+	}
+
+	runtimeclass TransformProperty : Microsoft.UI.Xaml.Data.INotifyPropertyChanged
+	{
+		TransformProperty(String name);
+		String Name{ get; };
+		Windows.Foundation.Numerics.Vector3 Position;
+	}
+
+	runtimeclass ComponentInfo
+	{
+		ComponentInfo(String name);
+		String Name{ get; };
+
+		Boolean HasTransform{ get; };
+		TransformProperty Transform;
+
+		Boolean HasStaticMeshProperty{ get; };
+		StaticMeshProperty StaticMesh{ get; };
+
+		Boolean HasRenderingProperty{ get; };
+		RenderingProperty Rendering{ get; };
+//Windows.Foundation.Collections.IObservableVector<PropertyInfo> PropertyInfos{ get; };
+	}
+
+	runtimeclass ActorInfo
+	{
+		/*Detail 속성을 어떻게 바인딩 해야하는것일까?
+		* 컴포넌트 목록 / 트랜스폼 / 렌더링은 정해져있음
+		* 루트컴포넌트의 속성이 드러나도록
+		* 큐브 액터는 씬 컴포넌트 / 메쉬 컴포넌트
+		* 방법1.엔진 컴포넌트의 프로퍼티의 속성이름은 'Value'로 명시해 놓는다. 속성의 타입에 따라 UI를 다르게 붙여주고
+		* Value를 타입에 따라 다르게 갱신해주기 ex)vector면 textBox 세개 갱신. 이경우 c++에서 UI를 바인딩하는 것임
+		* 방법2.각각에 걸맞는 뷰모델 만들기
+		* 스태틱메쉬 컴포넌트의경우 transform, rendering, Mesh를 가질것임
+		* 컨트롤을 생성해서 들고있는 방법은 가이드에 나와있지 않아 현실적으로 어려울것 같다.
+		* 컴포넌트가 여러가지 프로퍼티 종류를 들고 있고 xaml에서 모든 컨트롤의 인스턴스를 선언해놓고
+		* 컴포넌트가 가지고있는 타입에 따라 컨트롤의 Visibile을 결정하기
+		*/
+	
+		ActorInfo(String name);
+		String Name{ get; };
+		Windows.Foundation.Collections.IObservableVector<ComponentInfo> ComponentInfos{ get; };
+	}
+	
+	runtimeclass WorldInfoViewModel
+	{
+		WorldInfoViewModel();
+		Windows.Foundation.Collections.IObservableVector<ActorInfo> ActorInfos{ get; };
+	}
+
+}
+
+

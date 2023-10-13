@@ -14,11 +14,11 @@ namespace Engine
 	{
 		World::World()
 		{
-			Actors.clear();
 			PushComponentFunc.reserve(static_cast<int>(Component::SceneComponentType::ComponentType_Max));
 			PushComponentFunc.resize(static_cast<int>(Component::SceneComponentType::ComponentType_Max));
 			PushComponentFunc[static_cast<int>(Component::SceneComponentType::Drawable)] = std::bind(&World::PushDrawableComponent, this, std::placeholders::_1);
 			PushComponentFunc[static_cast<int>(Component::SceneComponentType::Camera)] = std::bind(&World::PushCameraComponent, this, std::placeholders::_1);
+			actorManager_ = make_unique<ActorManager>();
 
 			//DrawComponent를 Maximum만큼 정해놓기...
 		}
@@ -29,22 +29,25 @@ namespace Engine
 			//스크립트는 일단 상속받는걸로 해보자. 아니면.. callBack을 등록시켜서 스크립트에서 callback을 호출하기.		
 			//스크립트에서는 input 정보를 가져옴. 스크립트에서 마우스 로테이션 만큼, 키보드 눌린거에 반응 하여 실행..
 			//특정 Value 값에 애니메이션을 줄수 있음.
-			//enable인 Actor만 Update.							
-			for (const auto& [key, value] : Actors)
-				value->Tick(elapsedTime);
+			//enable인 Actor만 Update.
+			//
+			for (int i = 0; i < GetNumActorList(); i++)
+			{
+				auto actor = GetActor(i);
+				if (actor != nullptr)
+					actor->Tick(elapsedTime);
+			}
+				
+			//for (const auto& [key, value] : Actors)
+			//	value->Tick(elapsedTime);
 		}
 
 		void World::Render()
 		{
 			CheckVisibilityActors();
-			size_t actorCount = ActorManager::GetInstance().GetNumActorList();
 			Engine::Renderer::LevelRenderer::GetInstance().Render(DrawComponentsThisFrame);
 		}
 
-		const unordered_map<const wchar_t*, shared_ptr<Actor>> World::GetActorList()
-		{
-			return Actors;
-		}
 
 		void World::CheckVisibilityActors()
 		{
@@ -56,7 +59,6 @@ namespace Engine
 			//액터는 여러개의 drawComponent를 가질수있음. 여기서 액터가 가지고있는 컴포넌틀를 전부 검사해야하나? 아니면
 			//
 
-			size_t test = ActorManager::GetInstance().GetNumActorList();
 			DrawComponentsThisFrame.clear();
 			DrawComponentsThisFrame.reserve(DrawComponents.size());
 			for (const auto& elements : DrawComponents)

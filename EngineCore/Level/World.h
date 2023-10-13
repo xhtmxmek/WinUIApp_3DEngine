@@ -1,6 +1,9 @@
 #pragma once
 #include <vector>
 #include <unordered_map>
+#include "Common/RuntimeContext.h"
+#include "Actor/ActorManager/ActorManager.h"
+
 
 /*
 Level의 가장 최상위 구조. Actor의 생산자인가?
@@ -19,6 +22,7 @@ namespace Engine
 
 	namespace Level
 	{
+		class ActorManager;
 		class Actor;		
 		//Uncopyable
 		class World
@@ -28,14 +32,45 @@ namespace Engine
 			void PushComponent(const shared_ptr<Component::ComponentBase>& component);
 			void Update(float elapsedTime);
 			void Render();
-			const unordered_map<const wchar_t*, shared_ptr<Actor>> GetActorList();
+
+			//순차적으로 액터의 이름을 가져와야함. 액터의 키값은 전혀 필요 없음.
+			/*
+			* 액터자체는 고유한 UID를 가져야한다. 중복된 ID를 가지면 노우.
+			* 사실 주소가 고유한 값이긴 하다.
+			*/
+			ENGINE_API shared_ptr<Actor> GetActor(const string& name)
+			{
+				return actorManager_->GetActor(name);
+			}
+
+			ENGINE_API shared_ptr<Actor> GetActor(unsigned int index)
+			{
+				return actorManager_->GetActor(index);
+			}
+
+			template<typename T>
+			std::shared_ptr<T> CreateActor(const std::string& name)
+			{
+				return actorManager_->CreateActor<T>(name);
+			}
+
+			ENGINE_API size_t GetNumActorList()
+			{
+				return actorManager_->GetNumActorList();
+			}
+
 
 		private:
 			void CheckVisibilityActors();	//가시성 판정			
 			void PushCameraComponent(const shared_ptr<Component::ComponentBase>& component);
 			void PushDrawableComponent(const shared_ptr<Component::ComponentBase>& component);
 
-			unordered_map<const wchar_t*, shared_ptr<Actor>> Actors; //world에는 수많은 액터들이 존재할것이고, 액터가 추가될때 재정렬을 피하기 위해 Hash를 사용헀음. 			
+		private:
+			unique_ptr<ActorManager> actorManager_;
+
+			//unordered_map<const wchar_t*, shared_ptr<Actor>> Actors; //world에는 수많은 액터들이 존재할것이고, 액터가 추가될때 재정렬을 피하기 위해 Hash를 사용헀음.
+			//vector<string> actorNames_; 
+
 			vector<shared_ptr<Component::DrawableComponent>> DrawComponents;
 			vector<shared_ptr<Component::DrawableComponent>> DrawComponentsThisFrame;
 			vector<shared_ptr<Component::CameraComponent>> CameraComponents;

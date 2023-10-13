@@ -71,7 +71,9 @@ namespace Engine
         ENGINE_API void LoadScriptProject(std::wstring const& path);
         ENGINE_API void PickCheck(Vector2i screenPos, shared_ptr<Level::Actor>& pickedActor);
 
-        ENGINE_API const unordered_map<const wchar_t*, shared_ptr<Level::Actor>> GetActorList();
+        ENGINE_API shared_ptr<Level::Actor> GetActor(int index);
+        ENGINE_API shared_ptr<Level::Actor> GetActor(const string& name);
+        ENGINE_API size_t GetNumActorList();
 
         // private
     private:

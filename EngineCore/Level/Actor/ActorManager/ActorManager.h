@@ -30,6 +30,9 @@ namespace Engine
 		class ActorManager : public Uncopyable
 		{
 		public:
+
+			ActorManager() : CurrentActorSizeFactor(1), ActorListResized(false) {}
+
 			ENGINE_API static ActorManager& GetInstance()
 			{
 				static ActorManager actor;
@@ -49,17 +52,18 @@ namespace Engine
 				return newActorPtr;
 			}
 
-			std::shared_ptr<Actor> GetActorByName(const std::string& actorName);
+			std::shared_ptr<Actor> GetActor(const std::string& actorName);
+			std::shared_ptr<Actor> GetActor(unsigned int index);
 
 			ENGINE_API size_t GetNumActorList();
-		private:			
-			//func
-			ActorManager() : CurrentActorSizeFactor(1), ActorListResized(false){}			
+
+		private:						
 			ENGINE_API void CheckActorListCapacity();
 			ENGINE_API std::shared_ptr<Actor> CreateActor(const std::string& className, const std::string& instanceName);
 			//Actor* CreateActor(const std::string& className, const std::string& instanceName);			
 
-			//멤버 변수
+			
+			vector<string> actorNames_;
 			std::unordered_map<const char*, std::shared_ptr<Actor>> Actors;
 			//public으로 공개해서 외부에서 사용할일이 있을것같으면 그때 변경
 			const size_t	ActorsSizeUnit = 1000;

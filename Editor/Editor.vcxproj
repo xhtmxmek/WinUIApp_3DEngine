@@ -122,6 +122,15 @@
     <ClInclude Include="MainWindow.xaml.h">
       <DependentUpon>MainWindow.xaml</DependentUpon>
     </ClInclude>
+    <ClInclude Include="WorldInfoViewModel\ActorInfo.h" />
+    <ClInclude Include="WorldInfoViewModel\ComponentInfo.h">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+      </ExcludedFromBuild>
+    </ClInclude>
+    <ClInclude Include="WorldInfoViewModel\RenderingProperty.h" />
+    <ClInclude Include="WorldInfoViewModel\StaticMeshProperty.h" />
+    <ClInclude Include="WorldInfoViewModel\TransformProperty.h" />
+    <ClInclude Include="WorldInfoViewModel\WorldInfoViewModel.h" />
   </ItemGroup>
   <ItemGroup>
     <ApplicationDefinition Include="App.xaml" />
@@ -138,6 +147,15 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
     </ClCompile>
     <ClCompile Include="$(GeneratedFilesDir)module.g.cpp" />
+    <ClCompile Include="WorldInfoViewModel\ActorInfo.cpp" />
+    <ClCompile Include="WorldInfoViewModel\ComponentInfo.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+      </ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="WorldInfoViewModel\RenderingProperty.cpp" />
+    <ClCompile Include="WorldInfoViewModel\StaticMeshProperty.cpp" />
+    <ClCompile Include="WorldInfoViewModel\TransformProperty.cpp" />
+    <ClCompile Include="WorldInfoViewModel\WorldInfoViewModel.cpp" />
   </ItemGroup>
   <ItemGroup>
     <Midl Include="App.idl">
@@ -147,7 +165,9 @@
     <Midl Include="MainWindow.idl">
       <SubType>Code</SubType>
       <DependentUpon>MainWindow.xaml</DependentUpon>
+      <AdditionalIncludeDirectories Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(ProjectDir)</AdditionalIncludeDirectories>
     </Midl>
+    <Midl Include="WorldInfoViewModel\WorldInfoViewModel.idl" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="readme.txt">

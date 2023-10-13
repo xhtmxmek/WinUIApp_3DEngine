@@ -35,7 +35,7 @@ namespace Engine
 			ENGINE_API void SetScale(Vector3f const& scale);
 			ENGINE_API void SetRotation(Vector3f const& rot);
 			ENGINE_API Vector3f GetRotation();
-			ENGINE_API const Math::TransformGroup& GetComponentTransform();
+			ENGINE_API Math::TransformGroup& GetComponentTransform();
 			ENGINE_API void UpdateComponentTransform(const Math::TransformGroup* parent);
 
 			ENGINE_API SceneComponentType ComponentType();

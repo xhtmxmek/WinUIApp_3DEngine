@@ -73,21 +73,21 @@
                         Background="#1A1A1A"
                         Content="Type" />
                 </Grid>
-                <!--<TreeView ItemsSource="{x:Bind WorldInfoViewModel.ActorInfos}">
+                <!--<TreeView ItemsSource="{x:Bind WorldInfo.ActorInfos}">
                     <TreeView.ItemTemplate>
-                        <DataTemplate x:DataType="map>
-                            <TreeViewItem Content="{x:Bind Value.Name}" ItemsSource="{x:Bind Value.Components}" />
+                        <DataTemplate x:DataType="local:ActorInfo">
+                            <TreeViewItem Content="{x:Bind Name}" />
                         </DataTemplate>
                     </TreeView.ItemTemplate>
                 </TreeView>-->
 
-                <!--<ListBox ItemsSource="{x:Bind WorldInfoViewModel.ActorInfos}">
-					<ListBox.ItemTemplate>
-						<DataTemplate x:DataType="map">
-							<TextBlock Text="{x:Bind Key}" />
-						</DataTemplate>
-					</ListBox.ItemTemplate>
-				</ListBox-->
+                <ListBox ItemsSource="{x:Bind WorldInfo.ActorInfos}">
+                    <ListBox.ItemTemplate>
+                        <DataTemplate x:DataType="local:ActorInfo">
+                            <TextBlock Text="{x:Bind Name}" />
+                        </DataTemplate>
+                    </ListBox.ItemTemplate>
+                </ListBox>
             </StackPanel>
         </SplitView.Pane>
         <!--<SplitView.Pane>

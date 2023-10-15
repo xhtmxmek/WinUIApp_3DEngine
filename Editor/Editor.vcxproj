@@ -122,7 +122,8 @@
     <ClInclude Include="MainWindow.xaml.h">
       <DependentUpon>MainWindow.xaml</DependentUpon>
     </ClInclude>
-    <ClInclude Include="WorldInfoViewModel\ActorInfo.h" />
+    <ClInclude Include="WorldInfoViewModel\ActorDetail.h" />
+    <ClInclude Include="WorldInfoViewModel\ActorLabel.h" />
     <ClInclude Include="WorldInfoViewModel\ComponentInfo.h">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
       </ExcludedFromBuild>
@@ -147,7 +148,8 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
     </ClCompile>
     <ClCompile Include="$(GeneratedFilesDir)module.g.cpp" />
-    <ClCompile Include="WorldInfoViewModel\ActorInfo.cpp" />
+    <ClCompile Include="WorldInfoViewModel\ActorDetail.cpp" />
+    <ClCompile Include="WorldInfoViewModel\ActorLabel.cpp" />
     <ClCompile Include="WorldInfoViewModel\ComponentInfo.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
       </ExcludedFromBuild>

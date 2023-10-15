@@ -21,6 +21,7 @@ namespace winrt::Editor::implementation
 	public:
 		MainWindow();
 		winrt::Editor::WorldInfoViewModel WorldInfo();
+		void TestFunc(Windows::Foundation::IInspectable const& sender, Microsoft::UI::Xaml::Controls::TreeViewItemInvokedEventArgs const& e);
 	private:
 		//not projection
 		//void OnRendering(IInspectable const& sender, IInspectable const& args);
@@ -59,8 +60,6 @@ namespace winrt::Editor::implementation
 
 		//Scene
 		void GetPickedActor();
-		void UpdateWorldInfoProxy();
-
 	private:
 		//Xaml Proxy
 		winrt::Editor::WorldInfoViewModel worldInfo_;

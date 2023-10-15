@@ -40,7 +40,7 @@ namespace winrt::Editor::implementation
 		// 스왑 체인 패널 이벤트(DX 렌더링용)     
 		swapChainPanel().Loaded({ this, &MainWindow::OnSwapchainPanelLoaded });
 		swapChainPanel().CompositionScaleChanged({ this, &MainWindow::OnSwapChainPanelCompositionScaleChanged });
-
+		worldOutlinerTree().ItemInvoked({this, &MainWindow::TestFunc });
 		m_logicalWidth = Bounds().Width;
 		m_logicalHeight = Bounds().Height;
 	}
@@ -147,7 +147,7 @@ namespace winrt::Editor::implementation
 		swapChainPanel().KeyUp({ this, &MainWindow::OnKeyUp_SwapChain });
 
 		renderingEngine_->StartRenderLoop();
-		UpdateWorldInfoProxy();
+		worldInfo_.UpdateWorldInfoProxy();
 	}
 #pragma endregion
 
@@ -186,6 +186,18 @@ namespace winrt::Editor::implementation
 	void MainWindow::OnKeyUp_SwapChain(Windows::Foundation::IInspectable const&, Microsoft::UI::Xaml::Input::KeyRoutedEventArgs const&)
 	{
 		//renderingEngine_.KeyboardProcess(args);
+	}
+
+	void MainWindow::TestFunc(Windows::Foundation::IInspectable const& sender, Microsoft::UI::Xaml::Controls::TreeViewItemInvokedEventArgs const& e)
+	{
+		auto item = e.InvokedItem();
+		//auto selectedItem = unbox_value_or<Microsoft::UI::Xaml::Controls::TreeViewItem>(e.InvokedItem(), nullptr);
+		auto selectedItem = unbox_value_or<Editor::ActorLabel>(item, nullptr);
+		if (selectedItem != nullptr)
+		{
+			worldInfo_.UpdateSelectedActorDetail(selectedItem.Name());
+		}
+		
 	}
 
 	void MainWindow::RegisterDedicatedInputOnSwapchain()
@@ -229,41 +241,6 @@ namespace winrt::Editor::implementation
 		for (int i = 0; i < 5; i++)
 		{
 			hstring componentName = L"TestComponent_" + to_hstring(i);
-		}
-	}
-
-	void MainWindow::UpdateWorldInfoProxy()
-	{
-		
-		//renderingEngine_->GetActor(index); 
-		//for (auto element : renderingEngine_->GetActorList())
-		for (int index = 0; index < renderingEngine_->GetNumActorList(); index++)
-		{
-			auto nativeActor = renderingEngine_->GetActor(index);
-			if (nativeActor == nullptr)
-				continue;
-
-			winrt::Editor::ActorInfo actorProxy(winrt::to_hstring(nativeActor->Name()));
-
-			//for (auto componentIter : nativeActor->Components())
-			for (int compIndex = 0; compIndex < nativeActor->NumComponent(); compIndex++)
-			{
-				shared_ptr<Engine::Component::ComponentBase> nativeComponent = nativeActor->GetComponentByIndex(compIndex);
-				if (nativeComponent == nullptr)
-					continue;
-
-				winrt::Editor::ComponentInfo componentProxy(winrt::to_hstring(nativeComponent->Name()));
-
-				winrt::Editor::TransformProperty transform = { nullptr };
-				transform = winrt::make<Editor::implementation::TransformProperty>(L"Transform");
-				Vector3f compPos = nativeComponent->GetComponentTransform().GetPosition();
-				Windows::Foundation::Numerics::float3 fPos(compPos.x, compPos.y, compPos.z);
-				transform.Position(fPos);
-
-				componentProxy.Transform(transform);
-				actorProxy.ComponentInfos().Append(componentProxy);
-				worldInfo_.ActorInfos().Append(actorProxy);
-			}
 		}
 	}
 

@@ -29,6 +29,9 @@
 #include <Microsoft.UI.xaml.media.dxinterop.h>
 #include <wil/cppwinrt_helpers.h>
 
+using namespace winrt;
+using namespace Microsoft::UI::Xaml;
+
 //DXToolKit
 #include <d3d11_4.h>
 #include <dxgi1_6.h>

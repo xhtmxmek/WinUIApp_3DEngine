@@ -16,7 +16,7 @@
   <ItemGroup>
     <ClCompile Include="pch.cpp" />
     <ClCompile Include="$(GeneratedFilesDir)module.g.cpp" />
-    <ClCompile Include="WorldInfoViewModel\ActorInfo.cpp">
+    <ClCompile Include="WorldInfoViewModel\ActorLabel.cpp">
       <Filter>WorldInfoViewModel</Filter>
     </ClCompile>
     <ClCompile Include="WorldInfoViewModel\ComponentInfo.cpp">
@@ -34,10 +34,13 @@
     <ClCompile Include="WorldInfoViewModel\TransformProperty.cpp">
       <Filter>WorldInfoViewModel</Filter>
     </ClCompile>
+    <ClCompile Include="WorldInfoViewModel\ActorDetail.cpp">
+      <Filter>WorldInfoViewModel</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="pch.h" />
-    <ClInclude Include="WorldInfoViewModel\ActorInfo.h">
+    <ClInclude Include="WorldInfoViewModel\ActorLabel.h">
       <Filter>WorldInfoViewModel</Filter>
     </ClInclude>
     <ClInclude Include="WorldInfoViewModel\ComponentInfo.h">
@@ -53,6 +56,9 @@
       <Filter>WorldInfoViewModel</Filter>
     </ClInclude>
     <ClInclude Include="WorldInfoViewModel\TransformProperty.h">
+      <Filter>WorldInfoViewModel</Filter>
+    </ClInclude>
+    <ClInclude Include="WorldInfoViewModel\ActorDetail.h">
       <Filter>WorldInfoViewModel</Filter>
     </ClInclude>
   </ItemGroup>

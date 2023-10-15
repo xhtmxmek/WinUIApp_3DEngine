@@ -39,7 +39,13 @@ namespace Editor
 //Windows.Foundation.Collections.IObservableVector<PropertyInfo> PropertyInfos{ get; };
 	}
 
-	runtimeclass ActorInfo
+	runtimeclass ActorLabel
+	{	
+		ActorLabel(String name);
+		String Name{ get; };
+	}
+
+	runtimeclass ActorDetail : Microsoft.UI.Xaml.Data.INotifyPropertyChanged
 	{
 		/*Detail 속성을 어떻게 바인딩 해야하는것일까?
 		* 컴포넌트 목록 / 트랜스폼 / 렌더링은 정해져있음
@@ -53,16 +59,24 @@ namespace Editor
 		* 컴포넌트가 여러가지 프로퍼티 종류를 들고 있고 xaml에서 모든 컨트롤의 인스턴스를 선언해놓고
 		* 컴포넌트가 가지고있는 타입에 따라 컨트롤의 Visibile을 결정하기
 		*/
-	
-		ActorInfo(String name);
-		String Name{ get; };
+
+		ActorDetail(String name);
+
+		String Name;
 		Windows.Foundation.Collections.IObservableVector<ComponentInfo> ComponentInfos{ get; };
+		Microsoft.UI.Xaml.Visibility Visible;
+
 	}
 	
 	runtimeclass WorldInfoViewModel
 	{
 		WorldInfoViewModel();
-		Windows.Foundation.Collections.IObservableVector<ActorInfo> ActorInfos{ get; };
+
+		Windows.Foundation.Collections.IObservableVector<ActorLabel> ActorLabels{ get; };
+
+		ActorDetail SelectedActorDetail{ get; };
+		void UpdateWorldInfoProxy();
+		void UpdateSelectedActorDetail(String actorName);
 	}
 
 }

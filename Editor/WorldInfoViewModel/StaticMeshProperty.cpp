@@ -6,7 +6,9 @@
 namespace winrt::Editor::implementation
 {
     StaticMeshProperty::StaticMeshProperty(hstring const& name)
-        :name_(name), meshAsset_(L"")
+        :name_(name),
+        meshAsset_(L""),
+        propertyVisible_(Visibility::Collapsed)
     {
     }
 
@@ -27,6 +29,21 @@ namespace winrt::Editor::implementation
             meshAsset_ = value;
             propertyChanged_(*this, Microsoft::UI::Xaml::Data::PropertyChangedEventArgs{ L"MeshAsset" });
         }
+    }
+
+    winrt::Microsoft::UI::Xaml::Visibility StaticMeshProperty::PropertyVisible()
+    {
+        return propertyVisible_;
+    }
+
+    void StaticMeshProperty::PropertyVisible(winrt::Microsoft::UI::Xaml::Visibility const& value)
+    {
+        if (propertyVisible_ != value)
+        {
+            propertyVisible_ = value;
+            propertyChanged_(*this, Microsoft::UI::Xaml::Data::PropertyChangedEventArgs{ L"PropertyVisible" });
+        }
+      
     }
 
     winrt::event_token StaticMeshProperty::PropertyChanged(winrt::Microsoft::UI::Xaml::Data::PropertyChangedEventHandler const& handler)

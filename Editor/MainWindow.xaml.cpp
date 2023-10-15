@@ -143,9 +143,8 @@ namespace winrt::Editor::implementation
 		swapChainPanel().PointerMoved({ this, &MainWindow::OnPointerMovedSwapChain });
 		swapChainPanel().PointerWheelChanged({ this, &MainWindow::OnPointerWheelChangedSwapChain });
 
-		swapChainPanel().KeyDown({ this, &MainWindow::OnKeyDown_SwapChain });
-		swapChainPanel().KeyUp({ this, &MainWindow::OnKeyUp_SwapChain });
-		
+		splitViewPage().KeyDown({ this, &MainWindow::OnKeyDown_MainSplitView });
+		splitViewPage().KeyUp({ this, &MainWindow::OnKeyDown_MainSplitView });
 
 		renderingEngine_->StartRenderLoop();
 		actorViewModel_.UpdateWorldInfoProxy();
@@ -179,7 +178,7 @@ namespace winrt::Editor::implementation
 		//renderingEngine_.PointerWheelChanged(args);
 	}
 
-	void MainWindow::OnKeyDown_SwapChain(Windows::Foundation::IInspectable const&, KeyRoutedEventArgs const& args)
+	void MainWindow::OnKeyDown_MainSplitView(Windows::Foundation::IInspectable const&, KeyRoutedEventArgs const& args)
 	{
 		//renderingEngine_->KeyboardProcess(args);
 		if (args.Key() == Windows::System::VirtualKey::Escape)
@@ -188,7 +187,7 @@ namespace winrt::Editor::implementation
 		}
 	}
 
-	void MainWindow::OnKeyUp_SwapChain(Windows::Foundation::IInspectable const&, KeyRoutedEventArgs const&)
+	void MainWindow::OnKeyUp_MainSplitView(Windows::Foundation::IInspectable const&, KeyRoutedEventArgs const&)
 	{
 		//renderingEngine_.KeyboardProcess(args);
 
@@ -201,6 +200,16 @@ namespace winrt::Editor::implementation
 		{
 			actorViewModel_.UpdateSelectedActorDetail(selectedItem.Name());
 		}		
+	}
+
+	void MainWindow::OnComponentTreeClicked(Windows::Foundation::IInspectable const& sender, Microsoft::UI::Xaml::Controls::TreeViewItemInvokedEventArgs const& e)
+	{
+		auto selectedItem = unbox_value_or<Editor::ComponentInfo>(e.InvokedItem(), nullptr);
+		if (selectedItem != nullptr)
+		{
+			actorViewModel_.UpdateSelectedActorDetail(selectedItem.Name());
+		}
+
 	}
 
 	void MainWindow::RegisterDedicatedInputOnSwapchain()

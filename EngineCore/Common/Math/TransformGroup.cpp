@@ -45,7 +45,7 @@ namespace Engine
 			return rotation_.Value();
 		}
 
-		void TransformGroup::UpdateTransform(TransformGroup* parent)
+		void TransformGroup::UpdateTransform(const TransformGroup* parent)
 		{						
 			localMatrix_ = Matrix4x4f(scale_.Value(), Quaterniont(rotation_.Value().y, rotation_.Value().x, rotation_.Value().z), position_.Value());
 

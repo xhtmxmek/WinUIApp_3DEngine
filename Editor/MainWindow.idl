@@ -10,6 +10,7 @@ namespace Editor
     {
         MainWindow();
         WorldInfoViewModel WorldInfo{ get; };
+        Microsoft.UI.Xaml.Controls.SplitView splitViewPage{ get; };
 
         //Int32 MyProperty;
     }

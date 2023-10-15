@@ -37,6 +37,9 @@
     <ClCompile Include="WorldInfoViewModel\ActorDetail.cpp">
       <Filter>WorldInfoViewModel</Filter>
     </ClCompile>
+    <ClCompile Include="WorldInfoViewModel\Vector3Single.cpp">
+      <Filter>WorldInfoViewModel</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="pch.h" />
@@ -59,6 +62,9 @@
       <Filter>WorldInfoViewModel</Filter>
     </ClInclude>
     <ClInclude Include="WorldInfoViewModel\ActorDetail.h">
+      <Filter>WorldInfoViewModel</Filter>
+    </ClInclude>
+    <ClInclude Include="WorldInfoViewModel\Vector3Single.h">
       <Filter>WorldInfoViewModel</Filter>
     </ClInclude>
   </ItemGroup>

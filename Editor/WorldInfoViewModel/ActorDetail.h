@@ -13,6 +13,9 @@ namespace winrt::Editor::implementation
         void Name(hstring const& value);
 
         winrt::Windows::Foundation::Collections::IObservableVector<winrt::Editor::ComponentInfo> ComponentInfos();
+        winrt::Editor::ComponentInfo SelectedComponent();
+        void UpdateSelectedComponent(hstring componentName);
+
 
         winrt::Microsoft::UI::Xaml::Visibility Visible();
         void Visible(winrt::Microsoft::UI::Xaml::Visibility const& value);
@@ -23,6 +26,7 @@ namespace winrt::Editor::implementation
         hstring name_;
         winrt::Microsoft::UI::Xaml::Visibility visible_;
         winrt::Windows::Foundation::Collections::IObservableVector<winrt::Editor::ComponentInfo> componentInfos_;
+        winrt::Editor::ComponentInfo selectedComponent_ = { nullptr };
         winrt::event<Microsoft::UI::Xaml::Data::PropertyChangedEventHandler>propertyChanged_;
 
     };

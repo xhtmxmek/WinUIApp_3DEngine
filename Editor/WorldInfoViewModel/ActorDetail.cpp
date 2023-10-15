@@ -1,6 +1,13 @@
 #include "pch.h"
 #include "ActorDetail.h"
+#include "Level/Actor/Actor.h"
 #include "ComponentInfo.h"
+#include "TransformProperty.h"
+#include "RenderingProperty.h"
+#include "EngineCore.h"
+#include "Component/ComponentBase/ComponentBase.h" 
+
+
 #include "ActorDetail.g.cpp"
 
 namespace winrt::Editor::implementation
@@ -9,6 +16,7 @@ namespace winrt::Editor::implementation
         :name_(name)
     {
         componentInfos_ = winrt::single_threaded_observable_vector<Editor::ComponentInfo>();
+        selectedComponent_ = winrt::make<Editor::implementation::ComponentInfo>(L"");
 
     }
 
@@ -29,6 +37,31 @@ namespace winrt::Editor::implementation
     winrt::Windows::Foundation::Collections::IObservableVector<winrt::Editor::ComponentInfo> ActorDetail::ComponentInfos()
     {
         return componentInfos_;
+    }
+
+    winrt::Editor::ComponentInfo ActorDetail::SelectedComponent()
+    {
+        return selectedComponent_;
+    }
+
+    void ActorDetail::UpdateSelectedComponent(hstring componentName)
+    {
+        auto engine = Engine::GetRenderingEngine();
+        auto nativeActor = engine->GetActor(winrt::to_string(name_));
+        if (nativeActor != nullptr)
+            return;
+
+        auto nativeComponent = nativeActor->GetComponentByName(winrt::to_string(componentName));
+        if (nativeComponent != nullptr)
+            return;
+
+        winrt::Editor::TransformProperty transform = { nullptr };
+        transform = winrt::make<Editor::implementation::TransformProperty>(L"Transform");
+        Vector3f compPos = nativeComponent->GetComponentTransform().GetPosition();
+        Vector3Single fPos(compPos.x, compPos.y, compPos.z);
+        transform.Position(fPos);
+
+        selectedComponent_.Transform(transform);
     }
 
     winrt::Microsoft::UI::Xaml::Visibility ActorDetail::Visible()

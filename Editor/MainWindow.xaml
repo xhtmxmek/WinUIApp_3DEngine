@@ -9,31 +9,12 @@
     mc:Ignorable="d">
 
     <SplitView
-        x:Name="splitView"
+        x:Name="splitViewPage"
         DisplayMode="CompactInline"
         IsPaneOpen="True"
-        OpenPaneLength="296"
+        OpenPaneLength="350"
         PanePlacement="Right">
-        <SwapChainPanel x:Name="swapChainPanel">
-            <StackPanel
-                HorizontalAlignment="Center"
-                VerticalAlignment="Top"
-                Orientation="Vertical">
-                <!--            <TextBlock
-                HorizontalAlignment="Left"
-                VerticalAlignment="Top"
-                FontSize="36"
-                Text="Hello WinUI3 World"
-                TextWrapping="Wrap" />
-                -->
-                <!--<TextBlock
-                x:Name="HelloGreetings"
-                HorizontalAlignment="Center"
-                FontSize="36"
-                Text="{Binding helloGreetings}" />-->
-
-            </StackPanel>
-        </SwapChainPanel>
+        <SwapChainPanel x:Name="swapChainPanel" />
         <SplitView.Pane>
             <StackPanel Background="#151515">
                 <StackPanel x:Name="WorldOutLiner" Background="#242424">
@@ -102,7 +83,61 @@
                 <StackPanel
                     x:Name="Detail"
                     Margin="0,0,0,0"
-                    Background="#242424" />
+                    Background="#242424"
+                    Visibility="{x:Bind WorldInfo.SelectedActorDetail.Visible, Mode=OneWay}">
+                    <TextBlock Margin="10,5,5,5" Text="{x:Bind WorldInfo.SelectedActorDetail.Name, Mode=OneWay}" />
+                    <Border
+                        Width="auto"
+                        Height="auto"
+                        Margin="0,5,0,0"
+                        Background="#1a1a1a">
+                        <TreeView x:Name="componentTree" ItemsSource="{x:Bind WorldInfo.SelectedActorDetail.ComponentInfos}">
+                            <TreeView.ItemTemplate>
+                                <DataTemplate x:DataType="local:ComponentInfo">
+                                    <TreeViewItem Content="{x:Bind Name, Mode=OneWay}" />
+                                </DataTemplate>
+                            </TreeView.ItemTemplate>
+                        </TreeView>
+                    </Border>
+
+                    <Expander
+                        Header="Transform"
+                        IsExpanded="True"
+                        Visibility="{x:Bind WorldInfo.SelectedActorDetail.SelectedComponent.Transform.PropertyVisible}">
+                        <RelativePanel Width="{x:Bind splitViewPage.OpenPaneLength}">
+                            <TextBlock
+                                x:Name="PosLabel"
+                                Margin="5"
+                                Foreground="#979797"
+                                RelativePanel.AlignVerticalCenterWithPanel="True"
+                                Text="Position" />
+                            <TextBox
+                                x:Name="Text0"
+                                Width="20"
+                                Margin="5"
+                                Foreground="#D8D8D8"
+                                RelativePanel.AlignVerticalCenterWithPanel="True"
+                                RelativePanel.RightOf="PosLabel"
+                                Text="{x:Bind WorldInfo.SelectedActorDetail.SelectedComponent.Transform.Position.X, Mode=TwoWay}" />
+                            <TextBox
+                                x:Name="Text1"
+                                Width="20"
+                                Margin="5"
+                                Foreground="#D8D8D8"
+                                RelativePanel.AlignVerticalCenterWithPanel="True"
+                                RelativePanel.RightOf="Text0"
+                                Text="{x:Bind WorldInfo.SelectedActorDetail.SelectedComponent.Transform.Position.Y, Mode=TwoWay}" />
+                            <TextBox
+                                x:Name="Text2"
+                                Width="20"
+                                Margin="5"
+                                Foreground="#D8D8D8"
+                                RelativePanel.AlignVerticalCenterWithPanel="True"
+                                RelativePanel.RightOf="Text1"
+                                Text="{x:Bind WorldInfo.SelectedActorDetail.SelectedComponent.Transform.Position.Z, Mode=TwoWay}" />
+                        </RelativePanel>
+                    </Expander>
+                </StackPanel>
             </StackPanel>
         </SplitView.Pane>
         <!--<SplitView.Pane>

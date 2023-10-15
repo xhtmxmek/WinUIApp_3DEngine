@@ -18,20 +18,18 @@ namespace winrt::Editor::implementation
         return name_;
     }
 
-    bool ComponentInfo::HasStaticMeshProperty()
+    void ComponentInfo::Name(hstring const& value)
     {
-        return (staticMesh_ != nullptr);
+        if (name_ != value)
+        {
+            name_ = value;
+            propertyChanged_(*this, Microsoft::UI::Xaml::Data::PropertyChangedEventArgs{ L"Name" });
+        }
     }
 
     winrt::Editor::StaticMeshProperty ComponentInfo::StaticMesh()
     {
         return staticMesh_;
-    }
-
-
-    bool ComponentInfo::HasTransform()
-    {
-        return (transform_ != nullptr);
     }
 
     void ComponentInfo::Transform(winrt::Editor::TransformProperty const& value)
@@ -44,13 +42,16 @@ namespace winrt::Editor::implementation
         return transform_;
     }
 
-    bool ComponentInfo::HasRenderingProperty()
-    {
-        return rendering_ != nullptr;
-    }
-
     winrt::Editor::RenderingProperty ComponentInfo::Rendering()
     {
         return rendering_;
+    }
+    winrt::event_token ComponentInfo::PropertyChanged(winrt::Microsoft::UI::Xaml::Data::PropertyChangedEventHandler const& handler)
+    {
+        return propertyChanged_.add(handler);
+    }
+    void ComponentInfo::PropertyChanged(winrt::event_token const& token) noexcept
+    {
+        propertyChanged_.remove(token);
     }
 }

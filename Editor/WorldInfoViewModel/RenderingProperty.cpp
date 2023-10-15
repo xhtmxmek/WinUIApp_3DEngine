@@ -7,7 +7,8 @@ namespace winrt::Editor::implementation
 {
     RenderingProperty::RenderingProperty(hstring const& name)
         :name_(name),
-        visible_(false)
+        visible_(false),
+        propertyVisible_(Visibility::Collapsed)
     {
     }
 
@@ -27,6 +28,20 @@ namespace winrt::Editor::implementation
         {
             visible_ = value;
             propertyChanged_(*this, Microsoft::UI::Xaml::Data::PropertyChangedEventArgs{ L"Visible" });
+        }
+    }
+
+    winrt::Microsoft::UI::Xaml::Visibility RenderingProperty::PropertyVisible()
+    {
+        return propertyVisible_;
+    }
+
+    void RenderingProperty::PropertyVisible(winrt::Microsoft::UI::Xaml::Visibility const& value)
+    {
+        if (propertyVisible_ != value)
+        {
+            propertyVisible_ = value;
+            propertyChanged_(*this, Microsoft::UI::Xaml::Data::PropertyChangedEventArgs{ L"PropertyVisible" });
         }
     }
 

@@ -36,7 +36,7 @@ namespace Engine
 			ENGINE_API void SetRotation(Vector3f const& rot);
 			ENGINE_API Vector3f GetRotation();
 			ENGINE_API Math::TransformGroup& GetComponentTransform();
-			ENGINE_API void UpdateComponentTransform(const Math::TransformGroup* parent);
+			ENGINE_API void UpdateComponentTransform(const Math::TransformGroup* parent = nullptr);
 
 			ENGINE_API SceneComponentType ComponentType();
 
@@ -51,7 +51,13 @@ namespace Engine
 			ENGINE_API const string& Name() 
 			{ 
 				return name_; 
-			}	
+			}
+
+			ENGINE_API const string& TypeName()
+			{
+				return typeName_;
+			}
+
 			ENGINE_API const vector<PropertyBase*>& Properties()
 			{ 
 				return properties_;
@@ -59,6 +65,7 @@ namespace Engine
 		protected:
 			void AddProperty(PropertyBase* newProperty);
 			Level::Actor* owner_;
+			string typeName_;
 		private:			
 			string name_;
 			shared_ptr<Component::ComponentBase> parent_;
@@ -74,7 +81,8 @@ namespace Engine
 		{
 		public:
 			//RUNTIME_ABSTRACT_SUB_CLASS(DrawableComponent, ComponentBase)
-			ENGINE_API DrawableComponent(const std::string& name) : visible_(true), ComponentBase(name, SceneComponentType::Drawable){}
+			ENGINE_API DrawableComponent(const std::string& name) 
+				: visible_(true), ComponentBase(name, SceneComponentType::Drawable){}
 			//DrawableComponent(const std::string& name);
 			virtual void Draw() = 0;
 			ENGINE_API void SetVisible(bool visible) { visible_ = visible; }

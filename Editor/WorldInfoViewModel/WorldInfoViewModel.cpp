@@ -51,19 +51,16 @@ namespace winrt::Editor::implementation
 
 		for (int compIndex = 0; compIndex < nativeActor->NumComponent(); compIndex++)
 		{
+			//auto nativeComponent = nativeActor->GetComponentByIndex(compIndex);
 			auto nativeComponent = nativeActor->GetComponentByIndex(compIndex);
 			if (nativeComponent == nullptr)
 				continue;
 
-			winrt::Editor::ComponentInfo componentProxy(winrt::to_hstring(nativeComponent->Name()));
+			auto componentLabel = winrt::to_hstring(nativeComponent->Name() + " (" 
+				+ nativeComponent->TypeName() + ")");
+			winrt::Editor::ComponentInfo componentProxy(winrt::to_hstring(componentLabel));
+			//Todo: Root검사해서 Rootcomponent라고 string붙여주기
 
-			winrt::Editor::TransformProperty transform = { nullptr };
-			transform = winrt::make<Editor::implementation::TransformProperty>(L"Transform");
-			Vector3f compPos = nativeComponent->GetComponentTransform().GetPosition();
-			Windows::Foundation::Numerics::float3 fPos(compPos.x, compPos.y, compPos.z);
-			transform.Position(fPos);
-
-			componentProxy.Transform(transform);
 			selectedActorDetail_.ComponentInfos().Append(componentProxy);
 			selectedActorDetail_.Name(actorName);
 			selectedActorDetail_.Visible(Microsoft::UI::Xaml::Visibility::Visible);

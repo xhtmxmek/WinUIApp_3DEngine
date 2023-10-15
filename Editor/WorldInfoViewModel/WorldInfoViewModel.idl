@@ -1,12 +1,22 @@
 
 namespace Editor
 {
+	runtimeclass Vector3Single : Microsoft.UI.Xaml.Data.INotifyPropertyChanged
+	{
+		Vector3Single(Single x, Single y, Single z);
+		Single X;
+		Single Y;
+		Single Z;
+	}
+
 	//커스텀 런타임 클래스는 상속 불가
 	runtimeclass RenderingProperty : Microsoft.UI.Xaml.Data.INotifyPropertyChanged
 	{
 		RenderingProperty(String name);
 		String Name{ get; };
+
 		Boolean Visible;
+		Microsoft.UI.Xaml.Visibility PropertyVisible;
 	}
 
 	runtimeclass StaticMeshProperty : Microsoft.UI.Xaml.Data.INotifyPropertyChanged
@@ -14,27 +24,24 @@ namespace Editor
 		StaticMeshProperty(String name);
 		String Name{ get; };
 		String MeshAsset;
+		Microsoft.UI.Xaml.Visibility PropertyVisible;
 	}
 
 	runtimeclass TransformProperty : Microsoft.UI.Xaml.Data.INotifyPropertyChanged
 	{
 		TransformProperty(String name);
 		String Name{ get; };
-		Windows.Foundation.Numerics.Vector3 Position;
+		Vector3Single Position;
+		Microsoft.UI.Xaml.Visibility PropertyVisible;
 	}
 
-	runtimeclass ComponentInfo
+	runtimeclass ComponentInfo : Microsoft.UI.Xaml.Data.INotifyPropertyChanged
 	{
 		ComponentInfo(String name);
-		String Name{ get; };
+		String Name;
 
-		Boolean HasTransform{ get; };
 		TransformProperty Transform;
-
-		Boolean HasStaticMeshProperty{ get; };
 		StaticMeshProperty StaticMesh{ get; };
-
-		Boolean HasRenderingProperty{ get; };
 		RenderingProperty Rendering{ get; };
 //Windows.Foundation.Collections.IObservableVector<PropertyInfo> PropertyInfos{ get; };
 	}
@@ -63,8 +70,11 @@ namespace Editor
 		ActorDetail(String name);
 
 		String Name;
-		Windows.Foundation.Collections.IObservableVector<ComponentInfo> ComponentInfos{ get; };
 		Microsoft.UI.Xaml.Visibility Visible;
+
+		Windows.Foundation.Collections.IObservableVector<ComponentInfo> ComponentInfos{ get; };
+		ComponentInfo SelectedComponent{ get; };
+		void UpdateSelectedComponent(String componentName);
 
 	}
 	

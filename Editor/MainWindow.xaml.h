@@ -50,10 +50,11 @@ namespace winrt::Editor::implementation
 
 		//void SetPickedActor(EngineInterface_WRC::ActorProxy const& pickedActor);
 
-		void OnKeyDown_SwapChain(Windows::Foundation::IInspectable const& sender, Microsoft::UI::Xaml::Input::KeyRoutedEventArgs const& args);
-		void OnKeyUp_SwapChain(Windows::Foundation::IInspectable const& sender, Microsoft::UI::Xaml::Input::KeyRoutedEventArgs const& args);
+		void OnKeyDown_MainSplitView(Windows::Foundation::IInspectable const& sender, Microsoft::UI::Xaml::Input::KeyRoutedEventArgs const& args);
+		void OnKeyUp_MainSplitView(Windows::Foundation::IInspectable const& sender, Microsoft::UI::Xaml::Input::KeyRoutedEventArgs const& args);
 
 		void OnActorTreeClicked(Windows::Foundation::IInspectable const& sender, Microsoft::UI::Xaml::Controls::TreeViewItemInvokedEventArgs const& e);
+		void OnComponentTreeClicked(Windows::Foundation::IInspectable const& sender, Microsoft::UI::Xaml::Controls::TreeViewItemInvokedEventArgs const& e);
 
 		//Control		
 		void RegisterDedicatedInputOnSwapchain();

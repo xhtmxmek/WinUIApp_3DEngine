@@ -12,7 +12,8 @@ namespace Engine
 			:DrawableComponent(name),
 			staticMeshShape_(nullptr),
 			meshType_("meshtype")
-		{						
+		{
+			typeName_ = "StaticMeshComponent";
 		}
 
 		StaticMeshComponent::~StaticMeshComponent()

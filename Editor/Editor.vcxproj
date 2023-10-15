@@ -131,6 +131,7 @@
     <ClInclude Include="WorldInfoViewModel\RenderingProperty.h" />
     <ClInclude Include="WorldInfoViewModel\StaticMeshProperty.h" />
     <ClInclude Include="WorldInfoViewModel\TransformProperty.h" />
+    <ClInclude Include="WorldInfoViewModel\Vector3Single.h" />
     <ClInclude Include="WorldInfoViewModel\WorldInfoViewModel.h" />
   </ItemGroup>
   <ItemGroup>
@@ -157,6 +158,7 @@
     <ClCompile Include="WorldInfoViewModel\RenderingProperty.cpp" />
     <ClCompile Include="WorldInfoViewModel\StaticMeshProperty.cpp" />
     <ClCompile Include="WorldInfoViewModel\TransformProperty.cpp" />
+    <ClCompile Include="WorldInfoViewModel\Vector3Single.cpp" />
     <ClCompile Include="WorldInfoViewModel\WorldInfoViewModel.cpp" />
   </ItemGroup>
   <ItemGroup>

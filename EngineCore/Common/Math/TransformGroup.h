@@ -28,6 +28,7 @@ namespace Engine
 		public:
 			ENGINE_API TransformGroup();
 			ENGINE_API ~TransformGroup();
+			void UpdateTransform(const TransformGroup* parent = nullptr);
 			ENGINE_API void SetPosition(const Vector3f& pos) { position_ = pos; UpdateTransform(); }
 			ENGINE_API void SetScale(const Vector3f& scale) { scale_ = scale; UpdateTransform(); }
 			ENGINE_API void SetRotation(const Vector3f& rotation) { rotation_ = rotation; UpdateTransform(); }
@@ -47,7 +48,6 @@ namespace Engine
 			Matrix4x4f localMatrix_;
 
 			//	//void OnChangeTransorm(EngineProperty* property);
-			void UpdateTransform(TransformGroup* parent = nullptr );
 			//static TransformGroup const Default();
 		};
 	}

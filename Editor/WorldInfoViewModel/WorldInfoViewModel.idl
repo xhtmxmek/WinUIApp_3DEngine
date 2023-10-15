@@ -77,6 +77,7 @@ namespace Editor
 		ActorDetail SelectedActorDetail{ get; };
 		void UpdateWorldInfoProxy();
 		void UpdateSelectedActorDetail(String actorName);
+		void ClearSelectedActor();
 	}
 
 }

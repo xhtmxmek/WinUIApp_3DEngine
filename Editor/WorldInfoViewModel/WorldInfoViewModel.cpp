@@ -69,4 +69,11 @@ namespace winrt::Editor::implementation
 			selectedActorDetail_.Visible(Microsoft::UI::Xaml::Visibility::Visible);
 		}
 	}
+
+	void WorldInfoViewModel::ClearSelectedActor()
+	{
+		selectedActorDetail_.ComponentInfos().Clear();
+		selectedActorDetail_.Name().clear();
+		selectedActorDetail_.Visible(Microsoft::UI::Xaml::Visibility::Collapsed);
+	}
 }

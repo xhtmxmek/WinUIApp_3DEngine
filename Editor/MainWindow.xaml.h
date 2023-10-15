@@ -21,7 +21,6 @@ namespace winrt::Editor::implementation
 	public:
 		MainWindow();
 		winrt::Editor::WorldInfoViewModel WorldInfo();
-		void TestFunc(Windows::Foundation::IInspectable const& sender, Microsoft::UI::Xaml::Controls::TreeViewItemInvokedEventArgs const& e);
 	private:
 		//not projection
 		//void OnRendering(IInspectable const& sender, IInspectable const& args);
@@ -54,6 +53,8 @@ namespace winrt::Editor::implementation
 		void OnKeyDown_SwapChain(Windows::Foundation::IInspectable const& sender, Microsoft::UI::Xaml::Input::KeyRoutedEventArgs const& args);
 		void OnKeyUp_SwapChain(Windows::Foundation::IInspectable const& sender, Microsoft::UI::Xaml::Input::KeyRoutedEventArgs const& args);
 
+		void OnActorTreeClicked(Windows::Foundation::IInspectable const& sender, Microsoft::UI::Xaml::Controls::TreeViewItemInvokedEventArgs const& e);
+
 		//Control		
 		void RegisterDedicatedInputOnSwapchain();
 		void RegisterNativeSwapchain();
@@ -62,7 +63,7 @@ namespace winrt::Editor::implementation
 		void GetPickedActor();
 	private:
 		//Xaml Proxy
-		winrt::Editor::WorldInfoViewModel worldInfo_;
+		winrt::Editor::WorldInfoViewModel actorViewModel_;
 
 		//inline int ConvertDipsToPixels(float dips) const noexcept
 		//{

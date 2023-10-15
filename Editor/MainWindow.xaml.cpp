@@ -40,14 +40,14 @@ namespace winrt::Editor::implementation
 		// 스왑 체인 패널 이벤트(DX 렌더링용)     
 		swapChainPanel().Loaded({ this, &MainWindow::OnSwapchainPanelLoaded });
 		swapChainPanel().CompositionScaleChanged({ this, &MainWindow::OnSwapChainPanelCompositionScaleChanged });
-		worldOutlinerTree().ItemInvoked({this, &MainWindow::TestFunc });
+		worldOutlinerTree().ItemInvoked({this, &MainWindow::OnActorTreeClicked });
 		m_logicalWidth = Bounds().Width;
 		m_logicalHeight = Bounds().Height;
 	}
 
 	winrt::Editor::WorldInfoViewModel MainWindow::WorldInfo()
 	{
-		return worldInfo_;
+		return actorViewModel_;
 	}
 
 #pragma region WindowEvent
@@ -145,9 +145,10 @@ namespace winrt::Editor::implementation
 
 		swapChainPanel().KeyDown({ this, &MainWindow::OnKeyDown_SwapChain });
 		swapChainPanel().KeyUp({ this, &MainWindow::OnKeyUp_SwapChain });
+		
 
 		renderingEngine_->StartRenderLoop();
-		worldInfo_.UpdateWorldInfoProxy();
+		actorViewModel_.UpdateWorldInfoProxy();
 	}
 #pragma endregion
 
@@ -178,26 +179,28 @@ namespace winrt::Editor::implementation
 		//renderingEngine_.PointerWheelChanged(args);
 	}
 
-	void MainWindow::OnKeyDown_SwapChain(Windows::Foundation::IInspectable const&, Microsoft::UI::Xaml::Input::KeyRoutedEventArgs const&)
+	void MainWindow::OnKeyDown_SwapChain(Windows::Foundation::IInspectable const&, KeyRoutedEventArgs const& args)
 	{
 		//renderingEngine_->KeyboardProcess(args);
+		if (args.Key() == Windows::System::VirtualKey::Escape)
+		{
+			actorViewModel_.ClearSelectedActor();
+		}
 	}
 
-	void MainWindow::OnKeyUp_SwapChain(Windows::Foundation::IInspectable const&, Microsoft::UI::Xaml::Input::KeyRoutedEventArgs const&)
+	void MainWindow::OnKeyUp_SwapChain(Windows::Foundation::IInspectable const&, KeyRoutedEventArgs const&)
 	{
 		//renderingEngine_.KeyboardProcess(args);
+
 	}
 
-	void MainWindow::TestFunc(Windows::Foundation::IInspectable const& sender, Microsoft::UI::Xaml::Controls::TreeViewItemInvokedEventArgs const& e)
+	void MainWindow::OnActorTreeClicked(Windows::Foundation::IInspectable const& sender, Microsoft::UI::Xaml::Controls::TreeViewItemInvokedEventArgs const& e)
 	{
-		auto item = e.InvokedItem();
-		//auto selectedItem = unbox_value_or<Microsoft::UI::Xaml::Controls::TreeViewItem>(e.InvokedItem(), nullptr);
-		auto selectedItem = unbox_value_or<Editor::ActorLabel>(item, nullptr);
+		auto selectedItem = unbox_value_or<Editor::ActorLabel>(e.InvokedItem(), nullptr);
 		if (selectedItem != nullptr)
 		{
-			worldInfo_.UpdateSelectedActorDetail(selectedItem.Name());
-		}
-		
+			actorViewModel_.UpdateSelectedActorDetail(selectedItem.Name());
+		}		
 	}
 
 	void MainWindow::RegisterDedicatedInputOnSwapchain()

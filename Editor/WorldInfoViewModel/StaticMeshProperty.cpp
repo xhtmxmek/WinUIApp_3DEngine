@@ -27,7 +27,9 @@ namespace winrt::Editor::implementation
         if (meshAsset_ != value)
         {
             meshAsset_ = value;
-            propertyChanged_(*this, Microsoft::UI::Xaml::Data::PropertyChangedEventArgs{ L"MeshAsset" });
+            //PropertyChanged([this] {
+            //    *this, Microsoft::UI::Xaml::Data::PropertyChangedEventArgs{ L"MeshAsset" }; 
+            //    });
         }
     }
 
@@ -41,18 +43,10 @@ namespace winrt::Editor::implementation
         if (propertyVisible_ != value)
         {
             propertyVisible_ = value;
-            propertyChanged_(*this, Microsoft::UI::Xaml::Data::PropertyChangedEventArgs{ L"PropertyVisible" });
+            //PropertyChanged([this] {
+            //    *this, Microsoft::UI::Xaml::Data::PropertyChangedEventArgs{ L"PropertyVisible" }; 
+            //    });
         }
       
-    }
-
-    winrt::event_token StaticMeshProperty::PropertyChanged(winrt::Microsoft::UI::Xaml::Data::PropertyChangedEventHandler const& handler)
-    {
-        return propertyChanged_.add(handler);
-    }
-
-    void StaticMeshProperty::PropertyChanged(winrt::event_token const& token) noexcept
-    {
-        propertyChanged_.remove(token);
     }
 }

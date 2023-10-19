@@ -39,6 +39,7 @@ namespace Engine
 
 		void StaticMeshComponent::Draw()
 		{
+			GetComponentTransform().SetPosition(Vector3f(2,0,0));
 			auto size = DX::DeviceResourcesUtil::GetDeviceResources()->GetOutputSize();
 			Matrix view = Matrix::CreateLookAt(Vector3(2.f, 2.f, 2.f),
 				Vector3::Zero, Vector3::UnitY);

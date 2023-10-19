@@ -41,6 +41,7 @@ namespace winrt::Editor::implementation
 		swapChainPanel().Loaded({ this, &MainWindow::OnSwapchainPanelLoaded });
 		swapChainPanel().CompositionScaleChanged({ this, &MainWindow::OnSwapChainPanelCompositionScaleChanged });
 		worldOutlinerTree().ItemInvoked({this, &MainWindow::OnActorTreeClicked });
+		componentTree().ItemInvoked({ this, &MainWindow::OnComponentTreeClicked });
 		m_logicalWidth = Bounds().Width;
 		m_logicalHeight = Bounds().Height;
 	}
@@ -207,9 +208,9 @@ namespace winrt::Editor::implementation
 		auto selectedItem = unbox_value_or<Editor::ComponentInfo>(e.InvokedItem(), nullptr);
 		if (selectedItem != nullptr)
 		{
-			actorViewModel_.UpdateSelectedActorDetail(selectedItem.Name());
+			//actorViewModel_.SelectedActorDetail().UpdateSelectedComponent(selectedItem.Name());
+			actorViewModel_.UpdateSelectedComponent(selectedItem.Name());
 		}
-
 	}
 
 	void MainWindow::RegisterDedicatedInputOnSwapchain()

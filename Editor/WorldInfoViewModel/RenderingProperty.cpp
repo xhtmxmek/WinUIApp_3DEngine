@@ -27,7 +27,9 @@ namespace winrt::Editor::implementation
         if (visible_ != value)
         {
             visible_ = value;
-            propertyChanged_(*this, Microsoft::UI::Xaml::Data::PropertyChangedEventArgs{ L"Visible" });
+            //PropertyChanged([this] {
+            //    *this, Microsoft::UI::Xaml::Data::PropertyChangedEventArgs{ L"Visible" }; 
+            //    });
         }
     }
 
@@ -41,17 +43,9 @@ namespace winrt::Editor::implementation
         if (propertyVisible_ != value)
         {
             propertyVisible_ = value;
-            propertyChanged_(*this, Microsoft::UI::Xaml::Data::PropertyChangedEventArgs{ L"PropertyVisible" });
+            //PropertyChanged([this] {
+            //    *this, Microsoft::UI::Xaml::Data::PropertyChangedEventArgs{ L"PropertyVisible" }; 
+            //    });
         }
-    }
-
-    winrt::event_token RenderingProperty::PropertyChanged(winrt::Microsoft::UI::Xaml::Data::PropertyChangedEventHandler const& handler)
-    {
-        return propertyChanged_.add(handler);
-    }
-
-    void RenderingProperty::PropertyChanged(winrt::event_token const& token) noexcept
-    {
-        propertyChanged_.remove(token);
     }
 }

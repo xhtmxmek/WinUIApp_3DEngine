@@ -1,5 +1,6 @@
 #include "pch.h"
 #include "TransformProperty.h"
+#include "Vector3Single.h"
 #include "TransformProperty.g.cpp"
 
 
@@ -27,8 +28,24 @@ namespace winrt::Editor::implementation
     {
         if (position_ != value)
         {
-            position_ = value;
-            propertyChanged_(*this, Microsoft::UI::Xaml::Data::PropertyChangedEventArgs{ L"Position" });
+            position_.SetValue(value.X(), value.Y(), value.Z());
+            //PropertyChanged([this] {
+            //    *this, Microsoft::UI::Xaml::Data::PropertyChangedEventArgs{ L"Position" }; 
+            //    });
+
+
+/*            position_.ValueChanged([]
+                {
+                    
+                })*/;
+            /*해당 property가 유효할때(새로생성되었을떄 말고 생성된 상태일떄 Property의 변경점을 반영한다.
+            * 1)valueChanged에서 PropertyChanged 호출. PropertyChanged호출시 Component에서 반영
+            * 
+            * 2)valueChanged 호출시 NativeTransform 변경. nativeTransform까지 가지고있어야하는지가 고민임.
+            */
+            //positionChangedToken =  position_.ValueChanged([] {
+            //    auto engine = Engine::GetRenderingEngine();
+            //    });
         }
     }
 
@@ -42,17 +59,9 @@ namespace winrt::Editor::implementation
         if (propertyVisible_ != value)
         {
             propertyVisible_ = value;
-            propertyChanged_(*this, Microsoft::UI::Xaml::Data::PropertyChangedEventArgs{ L"PropertyVisible" });
+            //PropertyChanged([this] {
+            //    *this, Microsoft::UI::Xaml::Data::PropertyChangedEventArgs{ L"PropertyVisible" };
+            //    });
         }
-    }
-
-    winrt::event_token TransformProperty::PropertyChanged(winrt::Microsoft::UI::Xaml::Data::PropertyChangedEventHandler const& handler)
-    {
-        return propertyChanged_.add(handler);
-    }
-
-    void TransformProperty::PropertyChanged(winrt::event_token const& token) noexcept
-    {
-        propertyChanged_.remove(token);
     }
 }

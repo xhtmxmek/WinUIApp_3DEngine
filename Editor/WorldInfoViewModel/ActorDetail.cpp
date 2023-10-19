@@ -30,7 +30,9 @@ namespace winrt::Editor::implementation
         if (name_ != value)
         {
             name_ = value;
-            propertyChanged_(*this, Microsoft::UI::Xaml::Data::PropertyChangedEventArgs{ L"Name" });
+            //PropertyChanged([this] {
+            //    *this, Microsoft::UI::Xaml::Data::PropertyChangedEventArgs{ L"Name" };
+            //    });
         }
     }
 
@@ -44,24 +46,50 @@ namespace winrt::Editor::implementation
         return selectedComponent_;
     }
 
+    void ActorDetail::UpdateActorDeail(hstring actorName)
+    {
+        if (visible_ == Microsoft::UI::Xaml::Visibility::Visible)
+            return;
+
+        auto engine = Engine::GetRenderingEngine();
+        nativeActor_ = weak_ptr<Engine::Level::Actor>(engine->GetActor(winrt::to_string(actorName)));
+        if (nativeActor_.lock() == nullptr)
+            return;
+
+        for (int compIndex = 0; compIndex < nativeActor_.lock()->NumComponent(); compIndex++)
+        {
+            //auto nativeComponent = nativeActor->GetComponentByIndex(compIndex);
+            auto nativeComponent = nativeActor_.lock()->GetComponentByIndex(compIndex);
+            if (nativeComponent == nullptr)
+                continue;
+
+            auto componentLabel = winrt::to_hstring(nativeComponent->Name() + " ("
+                + nativeComponent->TypeName() + ")");
+            winrt::Editor::ComponentInfo componentProxy(winrt::to_hstring(componentLabel));
+            //Todo: Root검사해서 Rootcomponent라고 string붙여주기
+
+            ComponentInfos().Append(componentProxy);
+            Name(actorName);
+            Visible(Microsoft::UI::Xaml::Visibility::Visible);
+        }
+
+        auto RootComponent = nativeActor_.lock()->GetComponentByIndex(0);
+        if (RootComponent)
+        {
+            UpdateSelectedComponent(winrt::to_hstring(RootComponent->Name()));
+        }
+    }
+
     void ActorDetail::UpdateSelectedComponent(hstring componentName)
     {
-        auto engine = Engine::GetRenderingEngine();
-        auto nativeActor = engine->GetActor(winrt::to_string(name_));
-        if (nativeActor != nullptr)
-            return;
+        selectedComponent_.UpdateComponentDetail(name_, componentName);
+    }
 
-        auto nativeComponent = nativeActor->GetComponentByName(winrt::to_string(componentName));
-        if (nativeComponent != nullptr)
-            return;
-
-        winrt::Editor::TransformProperty transform = { nullptr };
-        transform = winrt::make<Editor::implementation::TransformProperty>(L"Transform");
-        Vector3f compPos = nativeComponent->GetComponentTransform().GetPosition();
-        Vector3Single fPos(compPos.x, compPos.y, compPos.z);
-        transform.Position(fPos);
-
-        selectedComponent_.Transform(transform);
+    void ActorDetail::Clear()
+    {
+		ComponentInfos().Clear();
+		Name().clear();
+		Visible(Microsoft::UI::Xaml::Visibility::Collapsed);
     }
 
     winrt::Microsoft::UI::Xaml::Visibility ActorDetail::Visible()
@@ -76,14 +104,5 @@ namespace winrt::Editor::implementation
             visible_ = value;
             propertyChanged_(*this, Microsoft::UI::Xaml::Data::PropertyChangedEventArgs{ L"Visible" });
         }
-    }
-
-    winrt::event_token ActorDetail::PropertyChanged(winrt::Microsoft::UI::Xaml::Data::PropertyChangedEventHandler const& handler)
-    {
-        return propertyChanged_.add(handler);
-    }
-    void ActorDetail::PropertyChanged(winrt::event_token const& token) noexcept
-    {
-        propertyChanged_.remove(token);
     }
 }

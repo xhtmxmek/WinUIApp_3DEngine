@@ -40,9 +40,9 @@ namespace Engine
 			ENGINE_API const Matrix4x4f& GetWorldMatrix() const { return worldMatrix_; }
 			ENGINE_API static TransformGroup const Default() { return TransformGroup(); }
 		private:
-			Component::PropertyVector3 position_;
-			Component::PropertyVector3 scale_;			
-			Component::PropertyVector3 rotation_;
+			Vector3f position_;
+			Vector3f scale_;
+			Vector3f rotation_;
 
 			Matrix4x4f worldMatrix_;
 			Matrix4x4f localMatrix_;

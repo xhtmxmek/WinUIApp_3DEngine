@@ -1,10 +1,11 @@
 #pragma once
+#include "PropertyBase.h"
 #include "TransformProperty.g.h"
 
 
 namespace winrt::Editor::implementation
 {
-    struct TransformProperty : TransformPropertyT<TransformProperty>
+    struct TransformProperty : TransformPropertyT<TransformProperty, Editor::implementation::PropertyBase>
     {
         TransformProperty() = delete;
 
@@ -17,14 +18,14 @@ namespace winrt::Editor::implementation
 
         winrt::Microsoft::UI::Xaml::Visibility PropertyVisible();
         void PropertyVisible(winrt::Microsoft::UI::Xaml::Visibility const& value);
-
-        winrt::event_token PropertyChanged(winrt::Microsoft::UI::Xaml::Data::PropertyChangedEventHandler const& handler);
-        void PropertyChanged(winrt::event_token const& token) noexcept;
     private:
         hstring name_;
         winrt::Microsoft::UI::Xaml::Visibility propertyVisible_;
         Editor::Vector3Single position_;
-        winrt::event<Microsoft::UI::Xaml::Data::PropertyChangedEventHandler> propertyChanged_;
+
+        winrt::event_token positionChangedToken;
+        winrt::event_token rotationChangedToken;
+        winrt::event_token scaleChangedToken;
 
     };
 }

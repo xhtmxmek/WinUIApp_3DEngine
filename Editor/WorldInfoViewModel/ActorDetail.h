@@ -1,33 +1,44 @@
 #pragma once
+#include "ObservableObject.h"
 #include "ActorDetail.g.h"
 
-namespace winrt::Editor::implementation
+namespace Engine
 {
-    struct ActorDetail : ActorDetailT<ActorDetail>
+    namespace Level
+    {
+        class Actor;
+    }
+}
+
+namespace winrt::Editor::implementation
+{    
+    struct ActorDetail : ActorDetailT<ActorDetail, Editor::implementation::ObservableObject>
     {
         ActorDetail() = delete;
 
         ActorDetail(hstring const& name);
 
+
+        void UpdateActorDeail(hstring actorName);        
+        void UpdateSelectedComponent(hstring componentName);
+        void Clear();
+
+
         hstring Name();
         void Name(hstring const& value);
 
         winrt::Windows::Foundation::Collections::IObservableVector<winrt::Editor::ComponentInfo> ComponentInfos();
-        winrt::Editor::ComponentInfo SelectedComponent();
-        void UpdateSelectedComponent(hstring componentName);
-
+        winrt::Editor::ComponentInfo SelectedComponent();        
 
         winrt::Microsoft::UI::Xaml::Visibility Visible();
         void Visible(winrt::Microsoft::UI::Xaml::Visibility const& value);
 
-        winrt::event_token PropertyChanged(winrt::Microsoft::UI::Xaml::Data::PropertyChangedEventHandler const& handler);
-        void PropertyChanged(winrt::event_token const& token) noexcept;
     private:
         hstring name_;
         winrt::Microsoft::UI::Xaml::Visibility visible_;
         winrt::Windows::Foundation::Collections::IObservableVector<winrt::Editor::ComponentInfo> componentInfos_;
         winrt::Editor::ComponentInfo selectedComponent_ = { nullptr };
-        winrt::event<Microsoft::UI::Xaml::Data::PropertyChangedEventHandler>propertyChanged_;
+        std::weak_ptr<Engine::Level::Actor> nativeActor_;
 
     };
 }

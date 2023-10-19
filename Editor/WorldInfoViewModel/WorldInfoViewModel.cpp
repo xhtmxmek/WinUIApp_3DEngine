@@ -43,34 +43,16 @@ namespace winrt::Editor::implementation
 
 	void WorldInfoViewModel::UpdateSelectedActorDetail(hstring actorName)
 	{
-		auto engine = Engine::GetRenderingEngine();
-		auto nativeActor = engine->GetActor(winrt::to_string(actorName));
-
-		if (nativeActor == nullptr)
-			return;
-
-		for (int compIndex = 0; compIndex < nativeActor->NumComponent(); compIndex++)
-		{
-			//auto nativeComponent = nativeActor->GetComponentByIndex(compIndex);
-			auto nativeComponent = nativeActor->GetComponentByIndex(compIndex);
-			if (nativeComponent == nullptr)
-				continue;
-
-			auto componentLabel = winrt::to_hstring(nativeComponent->Name() + " (" 
-				+ nativeComponent->TypeName() + ")");
-			winrt::Editor::ComponentInfo componentProxy(winrt::to_hstring(componentLabel));
-			//Todo: Root검사해서 Rootcomponent라고 string붙여주기
-
-			selectedActorDetail_.ComponentInfos().Append(componentProxy);
-			selectedActorDetail_.Name(actorName);
-			selectedActorDetail_.Visible(Microsoft::UI::Xaml::Visibility::Visible);
-		}
+		selectedActorDetail_.UpdateActorDeail(actorName);
 	}
 
 	void WorldInfoViewModel::ClearSelectedActor()
 	{
-		selectedActorDetail_.ComponentInfos().Clear();
-		selectedActorDetail_.Name().clear();
-		selectedActorDetail_.Visible(Microsoft::UI::Xaml::Visibility::Collapsed);
+		selectedActorDetail_.Clear();
+	}
+
+	void WorldInfoViewModel::UpdateSelectedComponent(hstring componentName)
+	{
+		selectedActorDetail_.UpdateSelectedComponent(componentName);
 	}
 }

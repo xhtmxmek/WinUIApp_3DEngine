@@ -40,6 +40,15 @@
     <ClCompile Include="WorldInfoViewModel\Vector3Single.cpp">
       <Filter>WorldInfoViewModel</Filter>
     </ClCompile>
+    <ClCompile Include="WorldInfoViewModel\PropertyBase.cpp">
+      <Filter>WorldInfoViewModel</Filter>
+    </ClCompile>
+    <ClCompile Include="WorldInfoViewModel\ValueChangedCallbackObject.cpp">
+      <Filter>WorldInfoViewModel</Filter>
+    </ClCompile>
+    <ClCompile Include="WorldInfoViewModel\ObservableObject.cpp">
+      <Filter>WorldInfoViewModel</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="pch.h" />
@@ -65,6 +74,15 @@
       <Filter>WorldInfoViewModel</Filter>
     </ClInclude>
     <ClInclude Include="WorldInfoViewModel\Vector3Single.h">
+      <Filter>WorldInfoViewModel</Filter>
+    </ClInclude>
+    <ClInclude Include="WorldInfoViewModel\PropertyBase.h">
+      <Filter>WorldInfoViewModel</Filter>
+    </ClInclude>
+    <ClInclude Include="WorldInfoViewModel\ValueChangedCallbackObject.h">
+      <Filter>WorldInfoViewModel</Filter>
+    </ClInclude>
+    <ClInclude Include="WorldInfoViewModel\ObservableObject.h">
       <Filter>WorldInfoViewModel</Filter>
     </ClInclude>
   </ItemGroup>

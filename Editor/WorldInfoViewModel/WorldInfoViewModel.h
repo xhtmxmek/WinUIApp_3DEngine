@@ -14,6 +14,7 @@ namespace winrt::Editor::implementation
         winrt::Editor::ActorDetail SelectedActorDetail();
         void UpdateSelectedActorDetail(hstring actorName);
         void ClearSelectedActor();
+        void UpdateSelectedComponent(hstring componentName);
     private:
         winrt::Windows::Foundation::Collections::IObservableVector<winrt::Editor::ActorLabel> actorlabels_;
         winrt::Editor::ActorDetail selectedActorDetail_ = { nullptr };

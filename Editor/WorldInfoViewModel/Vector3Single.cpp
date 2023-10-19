@@ -11,6 +11,13 @@ namespace winrt::Editor::implementation
         value_.z = z;
     }
 
+    void Vector3Single::SetValue(float x, float y, float z)
+    {
+        X(x);
+        Y(y);
+        Z(z);
+    }
+
     float Vector3Single::X()
     {
         return value_.x;
@@ -19,8 +26,10 @@ namespace winrt::Editor::implementation
     {
         if (value_.x != value)
         {
-            value_.x = value;
-            propertyChanged_(*this, Microsoft::UI::Xaml::Data::PropertyChangedEventArgs{ L"X" });
+            value_.x = value;            
+            propertyChanged_(*this, Microsoft::UI::Xaml::Data::PropertyChangedEventArgs{ L"X" });            
+
+            //valueChanged_();
         }
     }
     float Vector3Single::Y()
@@ -45,14 +54,7 @@ namespace winrt::Editor::implementation
         {
             value_.z = value;
             propertyChanged_(*this, Microsoft::UI::Xaml::Data::PropertyChangedEventArgs{ L"Z" });
+            //valueChanged_();
         }
-    }
-    winrt::event_token Vector3Single::PropertyChanged(winrt::Microsoft::UI::Xaml::Data::PropertyChangedEventHandler const& handler)
-    {
-        return propertyChanged_.add(handler);
-    }
-    void Vector3Single::PropertyChanged(winrt::event_token const& token) noexcept
-    {
-        propertyChanged_.remove(token);
     }
 }

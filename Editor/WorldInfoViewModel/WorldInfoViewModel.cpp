@@ -3,7 +3,6 @@
 #include "EngineCore.h"
 #include "Level/Actor/Actor.h"
 #include "Component/ComponentBase/ComponentBase.h"
-#include "TransformProperty.h"
 #include "ActorDetail.h"
 #include "WorldInfoViewModel.g.cpp"
 
@@ -41,18 +40,23 @@ namespace winrt::Editor::implementation
 		}
     }
 
-	void WorldInfoViewModel::UpdateSelectedActorDetail(hstring actorName)
+	void WorldInfoViewModel::UpdateSelectedActorDetail(hstring actorName, Microsoft::UI::Xaml::Controls::StackPanel const& detailPanel)
 	{
-		selectedActorDetail_.UpdateActorDeail(actorName);
+		selectedActorDetail_.UpdateActorDeail(actorName, detailPanel);
 	}
 
-	void WorldInfoViewModel::ClearSelectedActor()
+	void WorldInfoViewModel::ClearSelectedActor(Microsoft::UI::Xaml::Controls::StackPanel const& detailPanel)
 	{
-		selectedActorDetail_.Clear();
+		selectedActorDetail_.Clear(detailPanel);
+		//selectedActorDetail_ = nullptr;
 	}
 
-	void WorldInfoViewModel::UpdateSelectedComponent(hstring componentName)
+	void WorldInfoViewModel::UpdateSelectedComponent(hstring componentName, Microsoft::UI::Xaml::Controls::StackPanel const& detailPanel)
 	{
-		selectedActorDetail_.UpdateSelectedComponent(componentName);
+		selectedActorDetail_.UpdateSelectedComponent(componentName, detailPanel);
+	}
+	hstring WorldInfoViewModel::OutlinerComment()
+	{
+		return actorlabels_.Size() +  L"Actor";
 	}
 }

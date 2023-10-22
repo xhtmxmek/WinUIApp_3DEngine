@@ -13,7 +13,8 @@ namespace Engine
 			TypeVector2,
 			TypeVector3,
 			TypeVector4,
-			TypeEnum
+			TypeEnum,
+			TypePath,
 		};
 
 		class PropertyBase
@@ -22,31 +23,43 @@ namespace Engine
 			//OnChanged 함수 포인터를 넣어주면될듯
 			//프로퍼티는 OnChanged 호출되면 Value를 넣어주어 Callback실행함
 			//OnChange 이벤트에 여러개 실행시키고싶다면, OnChange를 벡터로 만들고 해당 이벤트에 바인딩시키기.
-			PropertyBase(std::string const& name, PropertyType type)
-				:name_(name), type_(type)
+			PropertyBase(std::wstring const& name, PropertyType type, std::wstring const& category = L"Default")
+				:name_(name), type_(type), category_(category)
 			{
 			}
-			std::function<void(PropertyBase*)> OnChange;
+			
 			void ApplyChange() 
 			{ 
-				OnChange(this); 
+				OnChange_(this); 
 			}
-			virtual std::wstring PackedValue() = 0;
-			std::string Name()
+			ENGINE_API std::wstring& Name()
 			{
 				return name_;
 			}
+
+			ENGINE_API std::wstring& Category()
+			{
+				return category_;
+			}
+
+			ENGINE_API PropertyType Type()
+			{
+				return type_;
+			}
+
 		private:
-			std::string name_;
+			std::wstring name_;
+			std::wstring category_;
 			PropertyType type_;
+			std::function<void(PropertyBase*)> OnChange_;
 			//std::vector<EngineProperty> child는 나중에 생각
 		};
 
 		class PropertyInt : public PropertyBase
 		{
 		public:
-			PropertyInt(std::string const& name)
-				:PropertyBase(name, PropertyType::TypeInt),
+			PropertyInt(std::wstring const& name, std::wstring const& category)
+				:PropertyBase(name, PropertyType::TypeInt, category),
 				value_(0)
 			{
 			}
@@ -55,20 +68,19 @@ namespace Engine
 				value_ = value; return (*this);
 			}
 
-			virtual std::wstring PackedValue()
+			ENGINE_API int Value()
 			{
-				return L"0";
+				return value_;
 			}
 		private:
 			int value_;
-			//std::vector<EngineProperty> child는 나중에 생각
 		};
 
 		class PropertyFloat : public PropertyBase
 		{
 		public:
-			PropertyFloat(std::string const& name)
-				:PropertyBase(name, PropertyType::TypeFloat),
+			PropertyFloat(std::wstring const& name, std::wstring const& category)
+				:PropertyBase(name, PropertyType::TypeFloat, category),
 				value_(0.0f)
 			{
 			}
@@ -78,31 +90,30 @@ namespace Engine
 				value_ = value; return (*this);
 			}
 
-			virtual std::wstring PackedValue() 
+			ENGINE_API  float Value()
 			{
-				return L"0.0f";
+				return value_;
 			}
 		private:
 			float value_;
-			//std::vector<EngineProperty> child는 나중에 생각
 		};
 
-		class PropertBool : public PropertyBase
+		class PropertyBool : public PropertyBase
 		{
 		public:
-			PropertBool(std::string const& name)
-				:PropertyBase(name, PropertyType::TypeBool),
+			PropertyBool(std::wstring const& name, std::wstring const& category)
+				:PropertyBase(name, PropertyType::TypeBool, category),
 				value_(false)
 			{
 			}
-			PropertBool& operator=(bool value)
+			PropertyBool& operator=(bool value)
 			{
 				value_ = value; return (*this);
 			}
 
-			virtual std::wstring PackedValue() 
+			ENGINE_API bool Value()
 			{
-				return L"False";
+				return value_;
 			}
 		private:
 			bool value_;
@@ -112,50 +123,70 @@ namespace Engine
 		class PropertyEnum : public PropertyBase
 		{
 		public:
-			PropertyEnum(std::string const& name)
-				:PropertyBase(name, PropertyType::TypeEnum)
+			PropertyEnum(std::wstring const& name, std::wstring const& category)
+				:PropertyBase(name, PropertyType::TypeEnum, category)
 			{
 			}
 
-			void Register(const std::string& name, int value)
+			void Register(const std::wstring& name, int value)
 			{
 				selectList_[value] = name;
 			}
 
-
-			virtual std::wstring PackedValue()
-			{ 
-				return L"EnumBase";
-			}
 			PropertyEnum& operator=(int value)
 			{
 				value_ = value;
 				return *this;
 			}
+
 		private:
-			std::map<int, std::string> selectList_;
+			std::map<int, std::wstring> selectList_;
 			int value_;
+		};
+
+		class PropertyPath : public PropertyBase
+		{
+		public:
+			PropertyPath(std::wstring const& name, std::wstring const& category)
+				:PropertyBase(name, PropertyType::TypePath, category)
+			{
+			}
+
+			PropertyPath& operator=(const std::wstring& value)
+			{
+				value_ = value;
+				return *this;
+			}
+
+			ENGINE_API const std::wstring& Value()
+			{
+				return value_;
+			}
+
+		private:			
+			std::wstring value_;
 		};
 
 		class PropertyVector3 : public PropertyBase
 		{
 		public:
-			PropertyVector3(std::string const& name)
-				: PropertyBase(name, PropertyType::TypeVector3),
+			PropertyVector3(std::wstring const& name, std::wstring const& category)
+				: PropertyBase(name, PropertyType::TypeVector3, category),
 				value_(0.0f, 0.0f, 0.0f) 
 			{
 			}
 			const PropertyVector3& operator=(const Vector3f& value) { value_ = value; return *this; }
 
-			const Vector3f& Value()
+			ENGINE_API const Vector3f& Value() const
 			{
 				return value_;
 			}
 
-			virtual std::wstring PackedValue()
+			ENGINE_API const Vector3f& operator()()
 			{
-				return L"0.0f, 0.0f, 0.0f";
+				return value_;
 			}
+
 		private:
 			Vector3f value_;
 		};

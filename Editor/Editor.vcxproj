@@ -128,13 +128,9 @@
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
       </ExcludedFromBuild>
     </ClInclude>
+    <ClInclude Include="WorldInfoViewModel\nativeClasses\CategoryInfo.h" />
     <ClInclude Include="WorldInfoViewModel\ObservableObject.h" />
-    <ClInclude Include="WorldInfoViewModel\PropertyBase.h" />
-    <ClInclude Include="WorldInfoViewModel\RenderingProperty.h" />
-    <ClInclude Include="WorldInfoViewModel\StaticMeshProperty.h" />
-    <ClInclude Include="WorldInfoViewModel\TransformProperty.h" />
     <ClInclude Include="WorldInfoViewModel\ValueChangedCallbackObject.h" />
-    <ClInclude Include="WorldInfoViewModel\Vector3Single.h" />
     <ClInclude Include="WorldInfoViewModel\WorldInfoViewModel.h" />
   </ItemGroup>
   <ItemGroup>
@@ -158,13 +154,9 @@
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
       </ExcludedFromBuild>
     </ClCompile>
+    <ClCompile Include="WorldInfoViewModel\nativeClasses\CategoryInfo.cpp" />
     <ClCompile Include="WorldInfoViewModel\ObservableObject.cpp" />
-    <ClCompile Include="WorldInfoViewModel\PropertyBase.cpp" />
-    <ClCompile Include="WorldInfoViewModel\RenderingProperty.cpp" />
-    <ClCompile Include="WorldInfoViewModel\StaticMeshProperty.cpp" />
-    <ClCompile Include="WorldInfoViewModel\TransformProperty.cpp" />
     <ClCompile Include="WorldInfoViewModel\ValueChangedCallbackObject.cpp" />
-    <ClCompile Include="WorldInfoViewModel\Vector3Single.cpp" />
     <ClCompile Include="WorldInfoViewModel\WorldInfoViewModel.cpp" />
   </ItemGroup>
   <ItemGroup>

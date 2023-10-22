@@ -61,7 +61,6 @@ namespace winrt::Editor::implementation
 		void RegisterNativeSwapchain();
 
 		//Scene
-		void GetPickedActor();
 	private:
 		//Xaml Proxy
 		winrt::Editor::WorldInfoViewModel actorViewModel_;

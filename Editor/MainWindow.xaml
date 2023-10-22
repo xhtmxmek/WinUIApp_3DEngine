@@ -57,6 +57,7 @@
                     </Grid>
                     <TreeView
                         x:Name="worldOutlinerTree"
+                        Height="150"
                         Background="#1A1A1A"
                         ItemsSource="{x:Bind WorldInfo.ActorLabels}">
                         <TreeView.ItemTemplate>
@@ -65,20 +66,23 @@
                             </DataTemplate>
                         </TreeView.ItemTemplate>
                     </TreeView>
+                    <StackPanel x:Name="OutlinerCommentPanel">
+                        <Border Height="30" Background="#2F2F2F">
+                            <TextBlock Text="{x:Bind WorldInfo.OutlinerComment, Mode=OneWay}" />
+                        </Border>
+                    </StackPanel>
                 </StackPanel>
 
                 <Border
+                    x:Name="DetailLabel"
                     Width="auto"
-                    Height="auto"
+                    Height="30"
                     Margin="0,10,0,0"
                     HorizontalAlignment="Left"
                     Background="#242424"
                     CornerRadius="2.5"
                     Visibility="{x:Bind WorldInfo.SelectedActorDetail.Visible, Mode=OneWay}">
-                    <TextBlock
-                        x:Name="DetailLabel"
-                        Margin="5,5,5,5"
-                        Text="Detail" />
+                    <TextBlock Margin="5,5,5,5" Text="Detail" />
                 </Border>
                 <StackPanel
                     x:Name="Detail"
@@ -87,11 +91,12 @@
                     Visibility="{x:Bind WorldInfo.SelectedActorDetail.Visible, Mode=OneWay}">
                     <TextBlock Margin="10,5,5,5" Text="{x:Bind WorldInfo.SelectedActorDetail.Name, Mode=OneWay}" />
                     <Border
+                        x:Name="componentTreeBorder"
                         Width="auto"
-                        Height="auto"
+                        Height="100"
                         Margin="0,5,0,0"
                         Background="#1a1a1a">
-                        <TreeView x:Name="componentTree" ItemsSource="{x:Bind WorldInfo.SelectedActorDetail.ComponentInfos}">
+                        <TreeView x:Name="componentTree" ItemsSource="{x:Bind WorldInfo.SelectedActorDetail.ComponentInfos, Mode=OneWay}">
                             <TreeView.ItemTemplate>
                                 <DataTemplate x:DataType="local:ComponentInfo">
                                     <TreeViewItem Content="{x:Bind Name, Mode=OneWay}" />
@@ -99,124 +104,17 @@
                             </TreeView.ItemTemplate>
                         </TreeView>
                     </Border>
-
-                    <Expander
-                        Header="Transform"
-                        IsExpanded="True"
-                        Visibility="{x:Bind WorldInfo.SelectedActorDetail.SelectedComponent.Transform.PropertyVisible}">
-                        <RelativePanel Width="{x:Bind splitViewPage.OpenPaneLength}">
-                            <TextBlock
-                                x:Name="PosLabel"
-                                Margin="5"
-                                Foreground="#979797"
-                                RelativePanel.AlignVerticalCenterWithPanel="True"
-                                Text="Position" />
-                            <TextBox
-                                x:Name="Text0"
-                                Width="20"
-                                Margin="5"
-                                Foreground="#D8D8D8"
-                                RelativePanel.AlignVerticalCenterWithPanel="True"
-                                RelativePanel.RightOf="PosLabel"
-                                Text="{x:Bind WorldInfo.SelectedActorDetail.SelectedComponent.Transform.Position.X, Mode=TwoWay}" />
-                            <TextBox
-                                x:Name="Text1"
-                                Width="20"
-                                Margin="5"
-                                Foreground="#D8D8D8"
-                                RelativePanel.AlignVerticalCenterWithPanel="True"
-                                RelativePanel.RightOf="Text0"
-                                Text="{x:Bind WorldInfo.SelectedActorDetail.SelectedComponent.Transform.Position.Y, Mode=TwoWay}" />
-                            <TextBox
-                                x:Name="Text2"
-                                Width="20"
-                                Margin="5"
-                                Foreground="#D8D8D8"
-                                RelativePanel.AlignVerticalCenterWithPanel="True"
-                                RelativePanel.RightOf="Text1"
-                                Text="{x:Bind WorldInfo.SelectedActorDetail.SelectedComponent.Transform.Position.Z, Mode=TwoWay}" />
-                        </RelativePanel>
-                    </Expander>
+                    <ScrollViewer
+                        x:Name="PropertyScroll"
+                        HorizontalScrollMode="Disabled"
+                        VerticalScrollBarVisibility="Visible"
+                        VerticalScrollMode="Enabled">
+                        <StackPanel x:Name="PropertyPanel" />
+                    </ScrollViewer>
                 </StackPanel>
             </StackPanel>
         </SplitView.Pane>
-        <!--<SplitView.Pane>
-            <StackPanel
-                HorizontalAlignment="Center"
-                VerticalAlignment="Top"
-                Orientation="Vertical">
-                <TextBox Text="{x:Bind SelectedActorViewModel.Name, Mode=TwoWay}" />
-                <ListBox ItemsSource="{x:Bind SelectedActorViewModel.Components}">
-                    <ItemsControl.ItemTemplate>
-                        <DataTemplate x:DataType="local:ActorComponent">
-                            <StackPanel>
-                                <TextBlock Text="{x:Bind Name, Mode=OneWay}" />
-                            </StackPanel>
-                        </DataTemplate>
-                    </ItemsControl.ItemTemplate>
-                </ListBox>
 
-        -->
-        <!--  선택된 컴포넌트의 프로퍼티들 표시  -->
-        <!--
-                <GridView ItemsSource="{x:Bind SelectedActorViewModel.SelectedComponent.RenderingProperties}">
-                    <ItemsControl.ItemTemplate>
-                        <DataTemplate x:DataType="local:RenderingProperty">
-                            <StackPanel>
-                                <TextBlock Text="Rendering" />
-                                <CheckBox Content="Visible" IsChecked="{x:Bind Visible}" />
-        -->
-        <!--<Image Source="{x:Bind CurrentMeshImage}" />-->
-        <!--
-                            </StackPanel>
-                        </DataTemplate>
-                    </ItemsControl.ItemTemplate>
-                </GridView>
-
-                <GridView ItemsSource="{x:Bind SelectedActorViewModel.SelectedComponent.TransformGroupProperties}">
-                    <ItemsControl.ItemTemplate>
-                        <DataTemplate x:DataType="local:TransformGroupProperty">
-                            <StackPanel>
-                                <TextBlock Text="Transform" />
-                                <TextBlock Text="Position" />
-                                <TextBlock Text="Rotation" />
-                                <TextBlock Text="Scale" />
-
-                                <TextBox Text="{x:Bind Position}" />
-        -->
-        <!--<TextBox Text="{x:Bind Position.X}" />
-                                <TextBox Text="{x:Bind Position.Y}" />
-                                <TextBox Text="{x:Bind Position.Z}" />
-
-                                <TextBox Text="{x:Bind Rotation.X}" />
-                                <TextBox Text="{x:Bind Rotation.Y}" />
-                                <TextBox Text="{x:Bind Rotation.Z}" />
-
-                                <TextBox Text="{x:Bind Scale.X}" />
-                                <TextBox Text="{x:Bind Scale.Y}" />
-                                <TextBox Text="{x:Bind Scale.Z}" />-->
-        <!--
-                            </StackPanel>
-                        </DataTemplate>
-                    </ItemsControl.ItemTemplate>
-                </GridView>
-
-                <GridView ItemsSource="{x:Bind SelectedActorViewModel.SelectedComponent.StaticMeshProperties}">
-                    <ItemsControl.ItemTemplate>
-                        <DataTemplate x:DataType="local:StaticMeshProperty">
-                            <StackPanel>
-                                <TextBlock Text="Static Mesh" />
-                                <ComboBox ItemsSource="{x:Bind StatcMeshTypes}" />
-        -->
-        <!--<Image Source="{x:Bind CurrentMeshImage}" />-->
-        <!--
-                            </StackPanel>
-                        </DataTemplate>
-                    </ItemsControl.ItemTemplate>
-                </GridView>
-
-
-        -->
         <!--<TextBlock
                     HorizontalAlignment="Center"
                     VerticalAlignment="Center"

@@ -9,9 +9,9 @@ namespace Engine
 		//const TransformGroup TransformGroup::Identity;
 
 		TransformGroup::TransformGroup()
-			:position_(0.f),
-			rotation_(0.f),
-			scale_(1.f)
+			:position_(L"Position", L"Transform"),
+			rotation_(L"Rotation", L"Transform"),
+			scale_(L"Scale", L"Transform")
 		{
 			//내가원하는 동작은 바깥의 Positon property를 Onchange를 부르면 등록한 callback(이경우에는 
 
@@ -30,24 +30,24 @@ namespace Engine
 		{
 		}
 
-		const Vector3f& TransformGroup::GetPosition()
+		Component::PropertyVector3* TransformGroup::GetPosition()
 		{
-			return position_;
+			return &position_;
 		}
 
-		const Vector3f& TransformGroup::GetScale()
+		Component::PropertyVector3* TransformGroup::GetScale()
 		{
-			return scale_;
+			return &scale_;
 		}
 
-		const Vector3f& TransformGroup::GetRotation()
+		Component::PropertyVector3* TransformGroup::GetRotation()
 		{
-			return rotation_;
+			return &rotation_;
 		}
 
 		void TransformGroup::UpdateTransform(const TransformGroup* parent)
 		{
-			localMatrix_ = Matrix4x4f(scale_, Quaternionf(rotation_.y, rotation_.z, rotation_.x), position_);
+			localMatrix_ = Matrix4x4f(scale_(), Quaternionf(rotation_().y, rotation_().z, rotation_().x), position_());
 
 			if (parent)
 				worldMatrix_ = localMatrix_ * parent->GetWorldMatrix();

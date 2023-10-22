@@ -33,16 +33,16 @@ namespace Engine
 			ENGINE_API void SetScale(const Vector3f& scale) { scale_ = scale; UpdateTransform(); }
 			ENGINE_API void SetRotation(const Vector3f& rotation) { rotation_ = rotation; UpdateTransform(); }
 
-			ENGINE_API const Vector3f& GetPosition();
-			ENGINE_API const Vector3f& GetScale();
-			ENGINE_API const Vector3f& GetRotation();
+			ENGINE_API Component::PropertyVector3* GetPosition();
+			ENGINE_API Component::PropertyVector3* GetScale();
+			ENGINE_API Component::PropertyVector3* GetRotation();
 
 			ENGINE_API const Matrix4x4f& GetWorldMatrix() const { return worldMatrix_; }
 			ENGINE_API static TransformGroup const Default() { return TransformGroup(); }
 		private:
-			Vector3f position_;
-			Vector3f scale_;
-			Vector3f rotation_;
+			Component::PropertyVector3 position_;
+			Component::PropertyVector3 scale_;
+			Component::PropertyVector3 rotation_;
 
 			Matrix4x4f worldMatrix_;
 			Matrix4x4f localMatrix_;

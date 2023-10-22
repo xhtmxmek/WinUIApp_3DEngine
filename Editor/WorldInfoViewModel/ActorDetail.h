@@ -19,9 +19,9 @@ namespace winrt::Editor::implementation
         ActorDetail(hstring const& name);
 
 
-        void UpdateActorDeail(hstring actorName);        
-        void UpdateSelectedComponent(hstring componentName);
-        void Clear();
+        void UpdateActorDeail(hstring actorName, Microsoft::UI::Xaml::Controls::StackPanel const& detailPanel);
+        void UpdateSelectedComponent(hstring componentName, Microsoft::UI::Xaml::Controls::StackPanel const& detailPanel);
+        void Clear(Microsoft::UI::Xaml::Controls::StackPanel const& detailPanel);
 
 
         hstring Name();

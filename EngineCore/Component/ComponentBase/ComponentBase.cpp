@@ -32,9 +32,9 @@ namespace Engine
 			transform_.SetRotation(rot);
 			UpdateComponentTransform();
 		}
-		Vector3f ComponentBase::GetRotation()
+		const Vector3f ComponentBase::GetRotation()
 		{
-			return transform_.GetRotation();
+			return transform_.GetRotation()->Value();
 		}
 		Math::TransformGroup& ComponentBase::GetComponentTransform()
 		{
@@ -72,6 +72,12 @@ namespace Engine
 		//{
 
 		//}
+
+		DrawableComponent::DrawableComponent(const std::string& name)
+			:visible_(L"visible", L"Rendering"), ComponentBase(name, SceneComponentType::Drawable)
+		{	
+			AddProperty(&visible_);
+		}
 
 		//RUNTIME_CLASS_IMPL(DrawableComponent)
 	}

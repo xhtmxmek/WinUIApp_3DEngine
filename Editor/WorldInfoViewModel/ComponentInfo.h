@@ -1,5 +1,6 @@
 #pragma once
 #include "ObservableObject.h"
+#include "nativeClasses/CategoryInfo.h"
 #include "ComponentInfo.g.h"
 
 namespace Engine
@@ -8,6 +9,11 @@ namespace Engine
     {
         class ComponentBase;
     }
+}
+
+namespace EditorNativeClasses
+{
+    class CategoryInfo;
 }
 
 namespace winrt::Editor::implementation
@@ -19,26 +25,18 @@ namespace winrt::Editor::implementation
         ComponentInfo(hstring const& name);
 
     public:
-        void UpdateComponentDetail(hstring ownwerActorName, hstring componentName);
+        void UpdateComponentDetail(hstring ownwerActorName, hstring componentName, Microsoft::UI::Xaml::Controls::StackPanel const& detailPanel);
+    private:
+        void CreateCategoryProxy(Engine::Component::PropertyBase* nativeProperty, Microsoft::UI::Xaml::Controls::StackPanel const& detailPanel);
     public:
         hstring Name();
         void Name(hstring const& value);
 
-        Windows::Foundation::Collections::IObservableVector<winrt::Editor::PropertyBase> Properties();
-        
-        winrt::Editor::TransformProperty Transform();        
-        winrt::Editor::StaticMeshProperty StaticMesh();
-        winrt::Editor::RenderingProperty Rendering();
-
     private:
         hstring name_;
-        Windows::Foundation::Collections::IObservableVector<winrt::Editor::PropertyBase> properties_;
-
-        winrt::Editor::TransformProperty transform_;
-        winrt::Editor::StaticMeshProperty staticMesh_ = { nullptr };
-        winrt::Editor::RenderingProperty rendering_ = { nullptr };        
 
         std::weak_ptr<Engine::Component::ComponentBase> nativeComponent_;
+        std::map<std::wstring, std::shared_ptr<EditorNativeClasses::CategoryInfo>> categories_;
 
     };
 }

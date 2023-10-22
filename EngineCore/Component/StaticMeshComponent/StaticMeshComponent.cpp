@@ -11,9 +11,10 @@ namespace Engine
 		StaticMeshComponent::StaticMeshComponent(const std::string& name)
 			:DrawableComponent(name),
 			staticMeshShape_(nullptr),
-			meshType_("meshtype")
+			meshType_(L"MeshAsset")
 		{
-			typeName_ = "StaticMeshComponent";
+			//typeName_ = "StaticMeshComponent";
+			SetVisible(true);
 		}
 
 		StaticMeshComponent::~StaticMeshComponent()
@@ -25,10 +26,10 @@ namespace Engine
 			auto context = DX::DeviceResourcesUtil::GetDeviceResources()->GetD3DDeviceContext();
 			staticMeshShape_ = DirectX::GeometricPrimitive::CreateSphere(context);
 
-			meshType_.Register("Cube", PropertyStaticMesh::MeshType::Cube);
-			meshType_.Register("Sphere", PropertyStaticMesh::MeshType::Sphere);
-			meshType_.Register("Cylinder", PropertyStaticMesh::MeshType::Cylinder);
-			meshType_.Register("Cone", PropertyStaticMesh::MeshType::Cone);
+			//meshType_.Register(L"Cube", PropertyStaticMesh::MeshType::Cube);
+			//meshType_.Register(L"Sphere", PropertyStaticMesh::MeshType::Sphere);
+			//meshType_.Register(L"Cylinder", PropertyStaticMesh::MeshType::Cylinder);
+			//meshType_.Register(L"Cone", PropertyStaticMesh::MeshType::Cone);
 									
 			AddProperty(&meshType_);
 		}
@@ -39,7 +40,7 @@ namespace Engine
 
 		void StaticMeshComponent::Draw()
 		{
-			GetComponentTransform().SetPosition(Vector3f(2,0,0));
+			//GetComponentTransform().SetPosition(Vector3f(0,0,0));
 			auto size = DX::DeviceResourcesUtil::GetDeviceResources()->GetOutputSize();
 			Matrix view = Matrix::CreateLookAt(Vector3(2.f, 2.f, 2.f),
 				Vector3::Zero, Vector3::UnitY);

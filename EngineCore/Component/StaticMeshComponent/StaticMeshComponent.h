@@ -6,30 +6,28 @@ namespace Engine
 {
 	namespace Component
 	{			
-		class PropertyStaticMesh : public PropertyEnum
+		class PropertyStaticMesh : public PropertyPath
 		{
 		public:
-			enum MeshType
-			{
-				Cube = 0,
-				Sphere,
-				Cylinder,
-				Cone,
-			};
+			//enum MeshType
+			//{
+			//	Cube = 0,
+			//	Sphere,
+			//	Cylinder,
+			//	Cone,
+			//};
 
-			PropertyStaticMesh(std::string const& name)
-				:PropertyEnum(name)
+			PropertyStaticMesh(std::wstring const& name)
+				:PropertyPath(name, L"staticMesh")
 			{
 				//각 타입의 주소를 넘겨서, 컴포넌트 프로퍼티 부모에서 packedValue호출시키기. 
 			}
 
-			PropertyStaticMesh& operator=(MeshType type)
-			{
-				PropertyEnum::operator=(static_cast<int>(type));
-				return *this;
-			}
-
-			virtual std::wstring PackedValue() { return L"Cube"; }
+			//PropertyStaticMesh& operator=(MeshType type)
+			//{
+			//	PropertyEnum::operator=(static_cast<int>(type));
+			//	return *this;
+			//}
 		};
 
 		class StaticMeshComponent : public DrawableComponent
@@ -41,7 +39,7 @@ namespace Engine
 			void Init() final;
 			void Tick(float elapsedTime) final;
 			void Draw() final;
-			void meshType(PropertyStaticMesh::MeshType meshType);
+			//void meshType(PropertyStaticMesh::MeshType meshType);
 		private:			
 			std::unique_ptr<DirectX::GeometricPrimitive> staticMeshShape_;			
 			PropertyStaticMesh meshType_;

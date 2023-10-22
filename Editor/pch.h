@@ -32,6 +32,8 @@
 using namespace winrt;
 using namespace Microsoft::UI::Xaml;
 using namespace Microsoft::UI::Xaml::Input;
+using namespace Microsoft::UI::Xaml::Controls;
+
 
 //DXToolKit
 #include <d3d11_4.h>

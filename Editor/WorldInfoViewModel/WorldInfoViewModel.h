@@ -12,9 +12,10 @@ namespace winrt::Editor::implementation
         void UpdateWorldInfoProxy();
 
         winrt::Editor::ActorDetail SelectedActorDetail();
-        void UpdateSelectedActorDetail(hstring actorName);
-        void ClearSelectedActor();
-        void UpdateSelectedComponent(hstring componentName);
+        void UpdateSelectedActorDetail(hstring actorName, Microsoft::UI::Xaml::Controls::StackPanel const& detailPanel);
+        void ClearSelectedActor(Microsoft::UI::Xaml::Controls::StackPanel const& detailPanel);
+        void UpdateSelectedComponent(hstring componentName, Microsoft::UI::Xaml::Controls::StackPanel const& detailPanel);
+        hstring OutlinerComment();
     private:
         winrt::Windows::Foundation::Collections::IObservableVector<winrt::Editor::ActorLabel> actorlabels_;
         winrt::Editor::ActorDetail selectedActorDetail_ = { nullptr };

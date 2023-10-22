@@ -2,8 +2,8 @@
 #include "ActorDetail.h"
 #include "Level/Actor/Actor.h"
 #include "ComponentInfo.h"
-#include "TransformProperty.h"
-#include "RenderingProperty.h"
+//#include "TransformProperty.h"
+//#include "RenderingProperty.h"
 #include "EngineCore.h"
 #include "Component/ComponentBase/ComponentBase.h" 
 
@@ -16,7 +16,7 @@ namespace winrt::Editor::implementation
         :name_(name)
     {
         componentInfos_ = winrt::single_threaded_observable_vector<Editor::ComponentInfo>();
-        selectedComponent_ = winrt::make<Editor::implementation::ComponentInfo>(L"");
+        //selectedComponent_ = winrt::make<Editor::implementation::ComponentInfo>(L"");
 
     }
 
@@ -46,7 +46,7 @@ namespace winrt::Editor::implementation
         return selectedComponent_;
     }
 
-    void ActorDetail::UpdateActorDeail(hstring actorName)
+    void ActorDetail::UpdateActorDeail(hstring actorName, Microsoft::UI::Xaml::Controls::StackPanel const& detailPanel)
     {
         if (visible_ == Microsoft::UI::Xaml::Visibility::Visible)
             return;
@@ -76,19 +76,24 @@ namespace winrt::Editor::implementation
         auto RootComponent = nativeActor_.lock()->GetComponentByIndex(0);
         if (RootComponent)
         {
-            UpdateSelectedComponent(winrt::to_hstring(RootComponent->Name()));
+            UpdateSelectedComponent(winrt::to_hstring(RootComponent->Name()), detailPanel);
         }
     }
 
-    void ActorDetail::UpdateSelectedComponent(hstring componentName)
+    void ActorDetail::UpdateSelectedComponent(hstring componentName, Microsoft::UI::Xaml::Controls::StackPanel const& detailPanel)
     {
-        selectedComponent_.UpdateComponentDetail(name_, componentName);
+        selectedComponent_ = winrt::make<Editor::implementation::ComponentInfo>(L"");
+        //SelectedComponent의 Transform도 업데이트해야됨
+        selectedComponent_.UpdateComponentDetail(name_, componentName, detailPanel);
+
     }
 
-    void ActorDetail::Clear()
+    void ActorDetail::Clear(Microsoft::UI::Xaml::Controls::StackPanel const& detailPanel)
     {
 		ComponentInfos().Clear();
 		Name().clear();
+        detailPanel.Children().Clear();
+        selectedComponent_ = nullptr;
 		Visible(Microsoft::UI::Xaml::Visibility::Collapsed);
     }
 

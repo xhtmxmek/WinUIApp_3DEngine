@@ -34,7 +34,7 @@ namespace Engine
 			ENGINE_API void SetPosition(Vector3f const& pos);
 			ENGINE_API void SetScale(Vector3f const& scale);
 			ENGINE_API void SetRotation(Vector3f const& rot);
-			ENGINE_API Vector3f GetRotation();
+			ENGINE_API const Vector3f GetRotation();
 			ENGINE_API Math::TransformGroup& GetComponentTransform();
 			ENGINE_API void UpdateComponentTransform(const Math::TransformGroup* parent = nullptr);
 
@@ -58,9 +58,17 @@ namespace Engine
 				return typeName_;
 			}
 
-			ENGINE_API const vector<PropertyBase*>& Properties()
-			{ 
-				return properties_;
+			ENGINE_API PropertyBase* GetProperty(unsigned int index)
+			{
+				if ((size_t)index >= properties_.size())
+					return nullptr;
+
+				return properties_[index];
+			}
+
+			ENGINE_API const size_t NumProperty()
+			{
+				return properties_.size();
 			}
 		protected:
 			void AddProperty(PropertyBase* newProperty);
@@ -81,14 +89,13 @@ namespace Engine
 		{
 		public:
 			//RUNTIME_ABSTRACT_SUB_CLASS(DrawableComponent, ComponentBase)
-			ENGINE_API DrawableComponent(const std::string& name) 
-				: visible_(true), ComponentBase(name, SceneComponentType::Drawable){}
+			ENGINE_API DrawableComponent(const std::string& name);
 			//DrawableComponent(const std::string& name);
 			virtual void Draw() = 0;
 			ENGINE_API void SetVisible(bool visible) { visible_ = visible; }
-			ENGINE_API bool IsVisible() { return visible_; }
+			ENGINE_API bool IsVisible() { return visible_.Value(); }
 		private:			
-			bool		visible_;
+			PropertyBool visible_;
 			//DrawLayer	ComponentDrawLayer;
 		};
 	}	

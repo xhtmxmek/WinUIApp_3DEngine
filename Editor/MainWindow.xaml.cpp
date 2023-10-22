@@ -8,8 +8,6 @@
 #include "MainWindow.g.cpp"
 #endif
 
-
-#include "WorldInfoViewModel/TransformProperty.h"
 #include "Level/Actor/Actor.h"
 #include "Component/ComponentBase/ComponentBase.h"
 #include "Common/Math/TransformGroup.h"
@@ -168,7 +166,7 @@ namespace winrt::Editor::implementation
 
 	void MainWindow::OnPointerReleasedSwapChain(Windows::Foundation::IInspectable const&, Microsoft::UI::Xaml::Input::PointerRoutedEventArgs const&)
 	{
-		GetPickedActor();
+		//GetPickedActor();
 	}
 
 	void MainWindow::OnPointerWheelChangedSwapChain(Windows::Foundation::IInspectable const&, Microsoft::UI::Xaml::Input::PointerRoutedEventArgs const&)
@@ -184,7 +182,7 @@ namespace winrt::Editor::implementation
 		//renderingEngine_->KeyboardProcess(args);
 		if (args.Key() == Windows::System::VirtualKey::Escape)
 		{
-			actorViewModel_.ClearSelectedActor();
+			actorViewModel_.ClearSelectedActor(PropertyPanel());
 		}
 	}
 
@@ -199,7 +197,14 @@ namespace winrt::Editor::implementation
 		auto selectedItem = unbox_value_or<Editor::ActorLabel>(e.InvokedItem(), nullptr);
 		if (selectedItem != nullptr)
 		{
-			actorViewModel_.UpdateSelectedActorDetail(selectedItem.Name());
+			actorViewModel_.UpdateSelectedActorDetail(selectedItem.Name(), PropertyPanel());
+			auto height1 = splitViewPage().ActualHeight();
+			height1 = WorldOutLiner().ActualHeight();
+			height1 = DetailLabel().Height();
+			height1 = componentTreeBorder().Height();
+			double newScrollHeight = splitViewPage().ActualHeight() - WorldOutLiner().ActualHeight()
+				- DetailLabel().Height() - componentTreeBorder().Height() - OutlinerCommentPanel().ActualHeight();
+			PropertyScroll().Height(newScrollHeight);
 		}		
 	}
 
@@ -209,7 +214,8 @@ namespace winrt::Editor::implementation
 		if (selectedItem != nullptr)
 		{
 			//actorViewModel_.SelectedActorDetail().UpdateSelectedComponent(selectedItem.Name());
-			actorViewModel_.UpdateSelectedComponent(selectedItem.Name());
+			actorViewModel_.UpdateSelectedComponent(selectedItem.Name(), PropertyPanel());
+			//Detail()
 		}
 	}
 
@@ -247,15 +253,5 @@ namespace winrt::Editor::implementation
 			panelNative->SetSwapChain(renderingEngine_->GetSwapChain());
 			});
 	}
-
-	void MainWindow::GetPickedActor()
-	{
-		//Test Code
-		for (int i = 0; i < 5; i++)
-		{
-			hstring componentName = L"TestComponent_" + to_hstring(i);
-		}
-	}
-
 }
 

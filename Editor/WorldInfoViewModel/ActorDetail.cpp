@@ -64,16 +64,15 @@ namespace winrt::Editor::implementation
                 continue;
 
             auto componentLabel = winrt::to_hstring(nativeComponent->Name() + " ("
-                + nativeComponent->TypeName() + ")");
+                + nativeComponent->ImplClassName() + ")");
             winrt::Editor::ComponentInfo componentProxy(winrt::to_hstring(componentLabel));
-            //Todo: Root검사해서 Rootcomponent라고 string붙여주기
 
             ComponentInfos().Append(componentProxy);
             Name(actorName);
             Visible(Microsoft::UI::Xaml::Visibility::Visible);
         }
 
-        auto RootComponent = nativeActor_.lock()->GetComponentByIndex(0);
+        auto RootComponent = nativeActor_.lock()->GetRootComponent();        
         if (RootComponent)
         {
             UpdateSelectedComponent(winrt::to_hstring(RootComponent->Name()), detailPanel);

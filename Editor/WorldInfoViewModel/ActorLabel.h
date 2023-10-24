@@ -8,11 +8,12 @@ namespace winrt::Editor::implementation
     {
         ActorLabel() = delete;
 
-        ActorLabel(hstring const& name);
+        ActorLabel(hstring const& name, hstring const& classtype);
         hstring Name();
+        hstring ClassName();
     private:
         hstring name_;
-        //hstring type - enum을 찾아야함
+        hstring classType_;
     };
 }
 

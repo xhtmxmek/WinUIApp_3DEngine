@@ -3,6 +3,8 @@
 #include "CategoryInfo.h"
 #include "Component/ComponentBase/ComponentBase.h"
 
+using namespace winrt;
+using namespace winrt::Microsoft::UI;
 namespace EditorNativeClasses
 {
 	std::shared_ptr<CategoryInfo> CreateCategory(winrt::hstring const& categoryName, winrt::Microsoft::UI::Xaml::Controls::StackPanel const& detailPanel)
@@ -51,13 +53,13 @@ namespace EditorNativeClasses
 
 	void PropertyInfo::Init()
 	{
-		panel_.Orientation(Controls::Orientation::Horizontal);
+		panel_.Orientation(winrt::Microsoft::UI::Xaml::Controls::Orientation::Horizontal);
 		//layOut_.SetBinding(Microsoft::UI::Xaml::Controls::Expander::Visibility()
 //	winrt::Windows::UI::Xaml::Data::Binding{ L"IsExpanderVisible", winrt::Windows::UI::Xaml::Data::BindingMode::TwoWay })
 		if (nativeProperty_ == nullptr)
 			return;
 
-		Microsoft::UI::Xaml::Controls::TextBlock textBlock;
+		winrt::Microsoft::UI::Xaml::Controls::TextBlock textBlock;
 		textBlock.Text(nativeProperty_->Name());
 		panel_.Children().Append(textBlock);
 
@@ -67,8 +69,19 @@ namespace EditorNativeClasses
 		{
 			Engine::Component::PropertyBool* boolProp = static_cast<Engine::Component::PropertyBool*>(nativeProperty_);
 
-			Microsoft::UI::Xaml::Controls::CheckBox checkBox;
+			/*
+			* 체크 박스가 UI에서 체크되었을때 이벤트를 받아야함
+			* 엔진 속성이 변했을때 UI를 갱신시켜야함(이건 nativeProperty에 Delegate를 연결시켜줘야함. SetValue하도록.)
+			*/
+			winrt::Microsoft::UI::Xaml::Controls::CheckBox checkBox;
 			checkBox.IsChecked(boolProp->Value());
+			checkBox.Checked([boolProp](winrt::Windows::Foundation::IInspectable const& sender, winrt::Microsoft::UI::Xaml::RoutedEventArgs const& e) {
+				*boolProp = true;
+				});
+			checkBox.Unchecked([boolProp](winrt::Windows::Foundation::IInspectable const& sender, winrt::Microsoft::UI::Xaml::RoutedEventArgs const& e) {				
+				*boolProp = false;
+				});
+
 			panel_.Children().Append(checkBox);
 		}
 		break;
@@ -76,11 +89,11 @@ namespace EditorNativeClasses
 		{
 			Engine::Component::PropertyVector3* vectorProp = static_cast<Engine::Component::PropertyVector3*>(nativeProperty_);
 
-			Microsoft::UI::Xaml::Controls::TextBox xText;
+			winrt::Microsoft::UI::Xaml::Controls::TextBox xText;
 			xText.Text(winrt::to_hstring(vectorProp->Value().x));
-			Microsoft::UI::Xaml::Controls::TextBox yText;
+			winrt::Microsoft::UI::Xaml::Controls::TextBox yText;
 			yText.Text(winrt::to_hstring(vectorProp->Value().y));
-			Microsoft::UI::Xaml::Controls::TextBox zText;
+			winrt::Microsoft::UI::Xaml::Controls::TextBox zText;
 			zText.Text(winrt::to_hstring(vectorProp->Value().z));
 
 			panel_.Children().Append(xText);
@@ -91,7 +104,7 @@ namespace EditorNativeClasses
 		case Engine::Component::PropertyType::TypePath:
 		{
 			//nativeProperty의 stingArray에 담긴 요소들을 담아야함. enumType 참조하여 수정하기
-			Controls::ListBox box;
+			winrt::Microsoft::UI::Xaml::Controls::ListBox box;
 			//box.
 			box.Items().Append(winrt::box_value(L"test1"));
 			box.Items().Append(winrt::box_value(L"test2"));

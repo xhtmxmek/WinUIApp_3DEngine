@@ -26,6 +26,8 @@ namespace Engine
 		class ComponentBase
 		{
 		public:
+			RUNTIME_ABSTRACT()
+		public:
 			ENGINE_API ComponentBase(const std::string& name, SceneComponentType type);
 			ENGINE_API virtual ~ComponentBase();
 			virtual void Init() = 0;
@@ -51,11 +53,6 @@ namespace Engine
 			ENGINE_API const string& Name() 
 			{ 
 				return name_; 
-			}
-
-			ENGINE_API const string& TypeName()
-			{
-				return typeName_;
 			}
 
 			ENGINE_API PropertyBase* GetProperty(unsigned int index)

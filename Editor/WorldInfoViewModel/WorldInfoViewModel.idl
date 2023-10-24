@@ -24,8 +24,9 @@ namespace Editor
 
 	runtimeclass ActorLabel
 	{
-		ActorLabel(String name);
+		ActorLabel(String name, String classType);
 		String Name{ get; };
+		String ClassName{ get; };
 	}
 
 	runtimeclass ActorDetail : ObservableObject
@@ -42,7 +43,7 @@ namespace Editor
 		void UpdateSelectedComponent(String componentName, Microsoft.UI.Xaml.Controls.StackPanel detailPanel);
 	}
 
-	runtimeclass WorldInfoViewModel
+	runtimeclass WorldInfoViewModel : ObservableObject
 	{
 		WorldInfoViewModel();
 
@@ -53,7 +54,7 @@ namespace Editor
 		void UpdateSelectedActorDetail(String actorName, Microsoft.UI.Xaml.Controls.StackPanel detailPanel);
 		void UpdateSelectedComponent(String componentName, Microsoft.UI.Xaml.Controls.StackPanel detailPanel);
 		void ClearSelectedActor(Microsoft.UI.Xaml.Controls.StackPanel detailPanel);
-		String OutlinerComment{ get; };
+		String OutlinerComment;
 	}
 
 }

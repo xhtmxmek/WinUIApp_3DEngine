@@ -5,6 +5,7 @@ namespace Engine
 {
 	namespace Component
 	{
+//#typedef std::function<void(PropertyBase*)> ONCHANGED_EVENT;
 		enum class PropertyType
 		{
 			TypeBool,
@@ -47,6 +48,11 @@ namespace Engine
 				return type_;
 			}
 
+			void BindChangedEvent(std::function<void(PropertyBase*)> changeEvent)
+			{
+				OnChange_ = changeEvent;
+			}
+
 		private:
 			std::wstring name_;
 			std::wstring category_;
@@ -65,7 +71,9 @@ namespace Engine
 			}
 			PropertyInt& operator=(int value)
 			{
-				value_ = value; return (*this);
+				value_ = value;
+				ApplyChange();
+				return (*this);
 			}
 
 			ENGINE_API int Value()
@@ -87,7 +95,9 @@ namespace Engine
 
 			PropertyFloat& operator=(float value)
 			{
-				value_ = value; return (*this);
+				value_ = value;
+				ApplyChange();
+				return (*this);
 			}
 
 			ENGINE_API  float Value()
@@ -108,7 +118,9 @@ namespace Engine
 			}
 			PropertyBool& operator=(bool value)
 			{
-				value_ = value; return (*this);
+				value_ = value;
+				ApplyChange();
+				return (*this);
 			}
 
 			ENGINE_API bool Value()
@@ -136,6 +148,7 @@ namespace Engine
 			PropertyEnum& operator=(int value)
 			{
 				value_ = value;
+				ApplyChange();
 				return *this;
 			}
 
@@ -155,6 +168,7 @@ namespace Engine
 			PropertyPath& operator=(const std::wstring& value)
 			{
 				value_ = value;
+				ApplyChange();
 				return *this;
 			}
 
@@ -175,7 +189,12 @@ namespace Engine
 				value_(0.0f, 0.0f, 0.0f) 
 			{
 			}
-			const PropertyVector3& operator=(const Vector3f& value) { value_ = value; return *this; }
+			const PropertyVector3& operator=(const Vector3f& value) 
+			{ 
+				value_ = value; 
+				ApplyChange(); 
+				return *this; 
+			}
 
 			ENGINE_API const Vector3f& Value() const
 			{

@@ -3,8 +3,6 @@
 #include "Common/EngineHelper.h"
 #include "Common/DeviceResources.h"
 #include "EngineCoreBuild.h"
-//#include "Common/EngineCriticalSection.h"
-//#include "Common/Engine_Scoped_Lock.h"
 #include "Level/Level.h"
 #include "Level/World.h"
 #include "Renderer/LevelRenderer.h"

@@ -17,7 +17,7 @@ void GameMain::Initialize()
 	//Engine::Type::shared_ptr<int> test;
 	//Engine::Type::TestClass test;	
 	//Engine::Level::AStaticMesh test("test");
-	auto staticMesh = Engine::Level::SLevel::GetWorld()->CreateActor<Engine::Level::AStaticMesh>("MeshTest");
+	auto staticMesh = Engine::Level::SLevel::GetWorld()->CreateActor<Engine::Level::AStaticMesh>("MeshTest");	
 	//FVector2 test;
 	//test.Test();
 

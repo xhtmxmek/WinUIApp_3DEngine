@@ -35,6 +35,7 @@ namespace Engine
 			if (iter == Actors.end())
 			{
 				Level::Actor* runtimeActor = static_cast<Level::Actor*>(RuntimeContext::New(className, instanceName));
+				runtimeActor->ImplClassName(className);
 				shared_ptr<Level::Actor> ptr(runtimeActor);
 				Actors.insert(std::make_pair(instanceName, ptr));
 				actorNames_.push_back(instanceName);

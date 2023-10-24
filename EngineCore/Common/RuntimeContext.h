@@ -66,6 +66,20 @@ namespace Engine
 //		static const std::string ClassName(){ return std::string(#classtype); }\
 //		virtual bool KindOf(const std::string& className) { if (ClassName() == classtype) return true; return parent::KindOf(classtype); }
 
+
+#define RUNTIME_ABSTRACT() \
+private:\
+	std::string implClassName_; \
+public:\
+	void ImplClassName(const std::string& name) \
+	{ \
+		implClassName_ = name; \
+	}\
+	ENGINE_API const std::string& ImplClassName() \
+	{\
+		return implClassName_;\
+	}\
+
 #define RUNTIME_SUBCLASS(parent)\
 	private: \
 		static void *Constructor(const std::string& name); \

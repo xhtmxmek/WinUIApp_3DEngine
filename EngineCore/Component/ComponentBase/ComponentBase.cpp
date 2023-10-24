@@ -76,7 +76,12 @@ namespace Engine
 		DrawableComponent::DrawableComponent(const std::string& name)
 			:visible_(L"visible", L"Rendering"), ComponentBase(name, SceneComponentType::Drawable)
 		{	
+
 			AddProperty(&visible_);
+			visible_.BindChangedEvent([this](PropertyBase* base)
+				{
+					int k = 5;
+				});
 		}
 
 		//RUNTIME_CLASS_IMPL(DrawableComponent)

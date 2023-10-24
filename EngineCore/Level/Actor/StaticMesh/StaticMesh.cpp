@@ -28,7 +28,8 @@ namespace Engine
 
 
 
-			Mesh = CreateComponent<Component::StaticMeshComponent>("StaticMesh");			
+			Mesh = CreateComponent<Component::StaticMeshComponent>("StaticMesh");
+			SetRootComponent(Mesh);
 			//Sprite(CreateComponent<Component::SpriteComponent>("Sprite"));
 
 			//요거 두개 되고 나면, 화면에 렌더링 확인.

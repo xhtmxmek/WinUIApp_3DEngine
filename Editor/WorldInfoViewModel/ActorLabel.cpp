@@ -5,13 +5,18 @@
 
 namespace winrt::Editor::implementation
 {
-    ActorLabel::ActorLabel(hstring const& name)
-        :name_(name)
+    ActorLabel::ActorLabel(hstring const& name, hstring const& classtype)
+        :name_(name),
+        classType_(classtype)
     {
     }
 
     hstring ActorLabel::Name()
     {
         return name_;
+    }
+    hstring ActorLabel::ClassName()
+    {
+        return classType_;
     }
 }

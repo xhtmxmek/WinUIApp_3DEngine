@@ -4,6 +4,7 @@
 #include "Level/Actor/Actor.h"
 #include "Component/ComponentBase/ComponentBase.h"
 #include "ActorDetail.h"
+#include "Common/RuntimeContext.h"
 #include "WorldInfoViewModel.g.cpp"
 
 
@@ -35,14 +36,16 @@ namespace winrt::Editor::implementation
 			if (nativeActor == nullptr)
 				continue;
 
-			winrt::Editor::ActorLabel actorLabel(winrt::to_hstring(nativeActor->Name()));
-			actorlabels_.Append(actorLabel);
+			winrt::Editor::ActorLabel actorLabel(winrt::to_hstring(nativeActor->Name()), 
+				winrt::to_hstring(nativeActor->ImplClassName()));
+			actorlabels_.Append(actorLabel);			
+			OutlinerComment(to_hstring(actorlabels_.Size()) + L" Actors Loaded");
 		}
     }
 
 	void WorldInfoViewModel::UpdateSelectedActorDetail(hstring actorName, Microsoft::UI::Xaml::Controls::StackPanel const& detailPanel)
 	{
-		selectedActorDetail_.UpdateActorDeail(actorName, detailPanel);
+		selectedActorDetail_.UpdateActorDeail(actorName, detailPanel);		
 	}
 
 	void WorldInfoViewModel::ClearSelectedActor(Microsoft::UI::Xaml::Controls::StackPanel const& detailPanel)
@@ -57,6 +60,14 @@ namespace winrt::Editor::implementation
 	}
 	hstring WorldInfoViewModel::OutlinerComment()
 	{
-		return actorlabels_.Size() +  L"Actor";
+		return outlinerComment_;
+	}
+	void WorldInfoViewModel::OutlinerComment(hstring const& value)
+	{
+		if (outlinerComment_ != value)
+		{
+			outlinerComment_ = value;
+			propertyChanged_(*this, Microsoft::UI::Xaml::Data::PropertyChangedEventArgs{ L"OutlinerComment" });
+		}
 	}
 }

@@ -62,7 +62,33 @@
                         ItemsSource="{x:Bind WorldInfo.ActorLabels}">
                         <TreeView.ItemTemplate>
                             <DataTemplate x:DataType="local:ActorLabel">
-                                <TreeViewItem Content="{x:Bind Name}" Foreground="#b3b3b3" />
+                                <TreeViewItem>
+                                    <!--<StackPanel Orientation="Horizontal">
+                                        <TextBlock Foreground="#b3b3b3" Text="{x:Bind Name}" />
+                                        <TextBlock Foreground="#b3b3b3" Text="{x:Bind ClassName}" />
+                                    </StackPanel>-->
+                                    <Grid HorizontalAlignment="Stretch">
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition Height="Auto" />
+                                        </Grid.RowDefinitions>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="*" />
+                                            <ColumnDefinition Width="*" />
+                                        </Grid.ColumnDefinitions>
+                                        <TextBlock
+                                            Grid.Row="0"
+                                            Grid.Column="0"
+                                            HorizontalAlignment="Stretch"
+                                            Foreground="#b3b3b3"
+                                            Text="{x:Bind Name}" />
+                                        <TextBlock
+                                            Grid.Row="0"
+                                            Grid.Column="1"
+                                            HorizontalAlignment="Stretch"
+                                            Foreground="#b3b3b3"
+                                            Text="{x:Bind ClassName}" />
+                                    </Grid>
+                                </TreeViewItem>
                             </DataTemplate>
                         </TreeView.ItemTemplate>
                     </TreeView>

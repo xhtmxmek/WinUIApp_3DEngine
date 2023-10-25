@@ -75,10 +75,10 @@ namespace EditorNativeClasses
 			*/
 			winrt::Microsoft::UI::Xaml::Controls::CheckBox checkBox;
 			checkBox.IsChecked(boolProp->Value());
-			checkBox.Checked([boolProp](winrt::Windows::Foundation::IInspectable const& sender, winrt::Microsoft::UI::Xaml::RoutedEventArgs const& e) {
+			checkBox.Checked([boolProp](winrt::Windows::Foundation::IInspectable const&, Xaml::RoutedEventArgs const&) {
 				*boolProp = true;
 				});
-			checkBox.Unchecked([boolProp](winrt::Windows::Foundation::IInspectable const& sender, winrt::Microsoft::UI::Xaml::RoutedEventArgs const& e) {				
+			checkBox.Unchecked([boolProp](winrt::Windows::Foundation::IInspectable const&, Xaml::RoutedEventArgs const&) {				
 				*boolProp = false;
 				});
 
@@ -89,16 +89,40 @@ namespace EditorNativeClasses
 		{
 			Engine::Component::PropertyVector3* vectorProp = static_cast<Engine::Component::PropertyVector3*>(nativeProperty_);
 
-			winrt::Microsoft::UI::Xaml::Controls::TextBox xText;
+			Xaml::Controls::TextBox xText;
 			xText.Text(winrt::to_hstring(vectorProp->Value().x));
-			winrt::Microsoft::UI::Xaml::Controls::TextBox yText;
+			Xaml::Controls::TextBox yText;
 			yText.Text(winrt::to_hstring(vectorProp->Value().y));
-			winrt::Microsoft::UI::Xaml::Controls::TextBox zText;
+			Xaml::Controls::TextBox zText;
 			zText.Text(winrt::to_hstring(vectorProp->Value().z));
 
 			panel_.Children().Append(xText);
 			panel_.Children().Append(yText);
 			panel_.Children().Append(zText);
+
+
+			auto enterKeyCloser = [vectorProp, xText, yText, zText](winrt::Windows::Foundation::IInspectable const&, Xaml::Input::KeyRoutedEventArgs const& e) {
+				if (winrt::Windows::System::VirtualKey::Enter == e.Key())
+				{
+					float x = std::stof(winrt::to_string(xText.Text()));
+					float y = std::stof(winrt::to_string(yText.Text()));
+					float z = std::stof(winrt::to_string(zText.Text()));
+					*vectorProp = Vector3f(x, y, z);
+				}
+			};
+
+			xText.KeyDown(enterKeyCloser);
+			yText.KeyDown(enterKeyCloser);
+			zText.KeyDown(enterKeyCloser);
+			//FocusOut
+
+			auto lostFocusCloser = [vectorProp, xText, yText, zText](winrt::Windows::Foundation::IInspectable const&, Xaml::RoutedEventArgs const&) {
+					float x = std::stof(winrt::to_string(xText.Text()));
+					float y = std::stof(winrt::to_string(yText.Text()));
+					float z = std::stof(winrt::to_string(zText.Text()));
+					*vectorProp = Vector3f(x, y, z);
+			};
+			xText.LostFocus(lostFocusCloser);
 		}
 		break;
 		case Engine::Component::PropertyType::TypePath:

@@ -64,9 +64,9 @@ namespace Engine
 		class PropertyInt : public PropertyBase
 		{
 		public:
-			PropertyInt(std::wstring const& name, std::wstring const& category)
+			PropertyInt(std::wstring const& name, std::wstring const& category, int value = 0)
 				:PropertyBase(name, PropertyType::TypeInt, category),
-				value_(0)
+				value_(value)
 			{
 			}
 			PropertyInt& operator=(int value)
@@ -87,9 +87,9 @@ namespace Engine
 		class PropertyFloat : public PropertyBase
 		{
 		public:
-			PropertyFloat(std::wstring const& name, std::wstring const& category)
+			PropertyFloat(std::wstring const& name, std::wstring const& category, float value = 0.f)
 				:PropertyBase(name, PropertyType::TypeFloat, category),
-				value_(0.0f)
+				value_(value)
 			{
 			}
 
@@ -111,9 +111,9 @@ namespace Engine
 		class PropertyBool : public PropertyBase
 		{
 		public:
-			PropertyBool(std::wstring const& name, std::wstring const& category)
+			PropertyBool(std::wstring const& name, std::wstring const& category, bool value = false)
 				:PropertyBase(name, PropertyType::TypeBool, category),
-				value_(false)
+				value_(value)
 			{
 			}
 			PropertyBool& operator=(bool value)
@@ -160,8 +160,8 @@ namespace Engine
 		class PropertyPath : public PropertyBase
 		{
 		public:
-			PropertyPath(std::wstring const& name, std::wstring const& category)
-				:PropertyBase(name, PropertyType::TypePath, category)
+			PropertyPath(std::wstring const& name, std::wstring const& category, const wstring& value = L"")
+				:PropertyBase(name, PropertyType::TypePath, category), value_(value)
 			{
 			}
 
@@ -184,9 +184,9 @@ namespace Engine
 		class PropertyVector3 : public PropertyBase
 		{
 		public:
-			PropertyVector3(std::wstring const& name, std::wstring const& category)
+			PropertyVector3(std::wstring const& name, std::wstring const& category, const Vector3f& value = Vector3f(0.f, 0.f, 0.f))
 				: PropertyBase(name, PropertyType::TypeVector3, category),
-				value_(0.0f, 0.0f, 0.0f) 
+				value_(value)
 			{
 			}
 			const PropertyVector3& operator=(const Vector3f& value) 

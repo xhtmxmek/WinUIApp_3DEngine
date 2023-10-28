@@ -13,6 +13,7 @@
 #include "Common/Math/TransformGroup.h"
 #include <Input/VirtualKey.h>
 
+
 using namespace winrt;
 using namespace Microsoft::UI::Xaml;
 
@@ -209,27 +210,30 @@ namespace winrt::Editor::implementation
 
 	}
 
-	void MainWindow::OnActorTreeClicked(Windows::Foundation::IInspectable const&, Microsoft::UI::Xaml::Controls::TreeViewItemInvokedEventArgs const& e)
+	void MainWindow::OnActorTreeClicked(Windows::Foundation::IInspectable const& sender, Microsoft::UI::Xaml::Controls::TreeViewItemInvokedEventArgs const& e)
 	{
 		auto selectedItem = unbox_value_or<Editor::ActorLabel>(e.InvokedItem(), nullptr);
 		if (selectedItem != nullptr)
 		{
 			actorViewModel_.UpdateSelectedActorDetail(selectedItem.Name(), PropertyPanel());
+			auto height1 = splitViewPage().ActualHeight();
+			height1 = WorldOutLiner().ActualHeight();
+			height1 = DetailLabel().Height();
+			height1 = componentTreeBorder().Height();
 			double newScrollHeight = splitViewPage().ActualHeight() - WorldOutLiner().ActualHeight()
 				- DetailLabel().Height() - componentTreeBorder().Height() - OutlinerCommentPanel().ActualHeight();
 			PropertyScroll().Height(newScrollHeight);
 		}
 	}
 
-	void MainWindow::OnComponentTreeClicked(Windows::Foundation::IInspectable const&, Microsoft::UI::Xaml::Controls::TreeViewItemInvokedEventArgs const& e)
+	void MainWindow::OnComponentTreeClicked(Windows::Foundation::IInspectable const& sender, Microsoft::UI::Xaml::Controls::TreeViewItemInvokedEventArgs const& e)
 	{
 		auto selectedItem = unbox_value_or<Editor::ComponentInfo>(e.InvokedItem(), nullptr);
 		if (selectedItem != nullptr)
 		{
+			//actorViewModel_.SelectedActorDetail().UpdateSelectedComponent(selectedItem.Name());
 			actorViewModel_.UpdateSelectedComponent(selectedItem.Name(), PropertyPanel());
-			double newScrollHeight = splitViewPage().ActualHeight() - WorldOutLiner().ActualHeight()
-				- DetailLabel().Height() - componentTreeBorder().Height() - OutlinerCommentPanel().ActualHeight();
-			PropertyScroll().Height(newScrollHeight);
+			//Detail()
 		}
 	}
 

@@ -11,6 +11,7 @@
 #include "Level/Actor/Actor.h"
 #include "Component/ComponentBase/ComponentBase.h"
 #include "Common/Math/TransformGroup.h"
+#include <Input/VirtualKey.h>
 
 using namespace winrt;
 using namespace Microsoft::UI::Xaml;
@@ -38,7 +39,7 @@ namespace winrt::Editor::implementation
 		// 스왑 체인 패널 이벤트(DX 렌더링용)     
 		swapChainPanel().Loaded({ this, &MainWindow::OnSwapchainPanelLoaded });
 		swapChainPanel().CompositionScaleChanged({ this, &MainWindow::OnSwapChainPanelCompositionScaleChanged });
-		worldOutlinerTree().ItemInvoked({this, &MainWindow::OnActorTreeClicked });
+		worldOutlinerTree().ItemInvoked({ this, &MainWindow::OnActorTreeClicked });
 		componentTree().ItemInvoked({ this, &MainWindow::OnComponentTreeClicked });
 		m_logicalWidth = Bounds().Width;
 		m_logicalHeight = Bounds().Height;
@@ -156,21 +157,36 @@ namespace winrt::Editor::implementation
 		// 그리고 다음과 같이 이벤트 처리기를 채웁니다.
 	}
 
-	void MainWindow::OnPointerPressedSwapChain(Windows::Foundation::IInspectable const&, Microsoft::UI::Xaml::Input::PointerRoutedEventArgs const&)
+	void MainWindow::OnPointerPressedSwapChain(Windows::Foundation::IInspectable const&, Microsoft::UI::Xaml::Input::PointerRoutedEventArgs const& args)
 	{
+		Microsoft::UI::Input::PointerPoint pt = args.GetCurrentPoint(nullptr);
+		auto pointerProperties = pt.Properties();
+		vector<bool> buttonState = { pointerProperties.IsLeftButtonPressed(), pointerProperties.IsMiddleButtonPressed(), pointerProperties.IsRightButtonPressed() };
+		renderingEngine_->PointerProcess(buttonState);
 	}
 
-	void MainWindow::OnPointerMovedSwapChain(Windows::Foundation::IInspectable const&, Microsoft::UI::Xaml::Input::PointerRoutedEventArgs const&)
+	void MainWindow::OnPointerMovedSwapChain(Windows::Foundation::IInspectable const&, Microsoft::UI::Xaml::Input::PointerRoutedEventArgs const& args)
 	{
+		Microsoft::UI::Input::PointerPoint pt = args.GetCurrentPoint(nullptr);
+		Windows::Foundation::Point pos = pt.Position();
+		renderingEngine_->PointerProcess(Vector2i((int)pos.X, (int)pos.Y));
 	}
 
-	void MainWindow::OnPointerReleasedSwapChain(Windows::Foundation::IInspectable const&, Microsoft::UI::Xaml::Input::PointerRoutedEventArgs const&)
+	void MainWindow::OnPointerReleasedSwapChain(Windows::Foundation::IInspectable const&, Microsoft::UI::Xaml::Input::PointerRoutedEventArgs const& args)
 	{
+		Microsoft::UI::Input::PointerPoint pt = args.GetCurrentPoint(nullptr);
+		auto pointerProperties = pt.Properties();
+		vector<bool> buttonState = { pointerProperties.IsLeftButtonPressed(), pointerProperties.IsRightButtonPressed(), pointerProperties.IsMiddleButtonPressed() };
+		renderingEngine_->PointerProcess(buttonState);
 		//GetPickedActor();
 	}
 
-	void MainWindow::OnPointerWheelChangedSwapChain(Windows::Foundation::IInspectable const&, Microsoft::UI::Xaml::Input::PointerRoutedEventArgs const&)
+	void MainWindow::OnPointerWheelChangedSwapChain(Windows::Foundation::IInspectable const&, Microsoft::UI::Xaml::Input::PointerRoutedEventArgs const& args)
 	{
+		Microsoft::UI::Input::PointerPoint pt = args.GetCurrentPoint(nullptr);
+		auto pointerProperties = pt.Properties();
+		renderingEngine_->PointerProcess(pointerProperties.MouseWheelDelta());
+
 		// 포인터가 해제되는 경우 추적 포인터 이동이 중지됩니다.
 		//m_main->StopTracking();
 		//lbutton떄 피킹. buttonDown때와 위치가 같고 picking object 존재한다면 오브젝트보내버리기.
@@ -179,43 +195,41 @@ namespace winrt::Editor::implementation
 
 	void MainWindow::OnKeyDown_MainSplitView(Windows::Foundation::IInspectable const&, KeyRoutedEventArgs const& args)
 	{
-		//renderingEngine_->KeyboardProcess(args);
+		renderingEngine_->KeyProcess(static_cast<SharedTypes::VirtualKey>(args.Key()), true);
+
 		if (args.Key() == Windows::System::VirtualKey::Escape)
 		{
 			actorViewModel_.ClearSelectedActor(PropertyPanel());
 		}
 	}
 
-	void MainWindow::OnKeyUp_MainSplitView(Windows::Foundation::IInspectable const&, KeyRoutedEventArgs const&)
+	void MainWindow::OnKeyUp_MainSplitView(Windows::Foundation::IInspectable const&, KeyRoutedEventArgs const& args)
 	{
-		//renderingEngine_.KeyboardProcess(args);
+		renderingEngine_->KeyProcess(static_cast<SharedTypes::VirtualKey>(args.Key()), false);
 
 	}
 
-	void MainWindow::OnActorTreeClicked(Windows::Foundation::IInspectable const& sender, Microsoft::UI::Xaml::Controls::TreeViewItemInvokedEventArgs const& e)
+	void MainWindow::OnActorTreeClicked(Windows::Foundation::IInspectable const&, Microsoft::UI::Xaml::Controls::TreeViewItemInvokedEventArgs const& e)
 	{
 		auto selectedItem = unbox_value_or<Editor::ActorLabel>(e.InvokedItem(), nullptr);
 		if (selectedItem != nullptr)
 		{
 			actorViewModel_.UpdateSelectedActorDetail(selectedItem.Name(), PropertyPanel());
-			auto height1 = splitViewPage().ActualHeight();
-			height1 = WorldOutLiner().ActualHeight();
-			height1 = DetailLabel().Height();
-			height1 = componentTreeBorder().Height();
 			double newScrollHeight = splitViewPage().ActualHeight() - WorldOutLiner().ActualHeight()
 				- DetailLabel().Height() - componentTreeBorder().Height() - OutlinerCommentPanel().ActualHeight();
 			PropertyScroll().Height(newScrollHeight);
-		}		
+		}
 	}
 
-	void MainWindow::OnComponentTreeClicked(Windows::Foundation::IInspectable const& sender, Microsoft::UI::Xaml::Controls::TreeViewItemInvokedEventArgs const& e)
+	void MainWindow::OnComponentTreeClicked(Windows::Foundation::IInspectable const&, Microsoft::UI::Xaml::Controls::TreeViewItemInvokedEventArgs const& e)
 	{
 		auto selectedItem = unbox_value_or<Editor::ComponentInfo>(e.InvokedItem(), nullptr);
 		if (selectedItem != nullptr)
 		{
-			//actorViewModel_.SelectedActorDetail().UpdateSelectedComponent(selectedItem.Name());
 			actorViewModel_.UpdateSelectedComponent(selectedItem.Name(), PropertyPanel());
-			//Detail()
+			double newScrollHeight = splitViewPage().ActualHeight() - WorldOutLiner().ActualHeight()
+				- DetailLabel().Height() - componentTreeBorder().Height() - OutlinerCommentPanel().ActualHeight();
+			PropertyScroll().Height(newScrollHeight);
 		}
 	}
 

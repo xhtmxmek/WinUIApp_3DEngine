@@ -3,7 +3,7 @@
 #include "Input/PointerButton.h"
 
 namespace Engine
-{	
+{
 	namespace Input
 	{
 		void InputManager::Initialize()
@@ -13,7 +13,7 @@ namespace Engine
 		}
 
 		bool InputManager::GetKeyboardState(SharedTypes::VirtualKey key)
-		{	
+		{
 			return Keyboard->GetState(key);
 		}
 
@@ -22,13 +22,30 @@ namespace Engine
 			Keyboard->SetState(key, isPressed);
 		}
 
-		void InputManager::GetMouseState(SharedTypes::PointerButton button)
+		bool InputManager::GetMouseState(SharedTypes::PointerButton button)
 		{
+			return Mouse->GetState(button);
 		}
 
-		void InputManager::SetMouseState(vector<bool> const& pointerState, float delta, Vector2i pos)
-		{			
-			Mouse->SetState(pointerState, delta, pos);
+		void InputManager::SetMouseState(vector<bool> const& pointerState)
+		{
+			Mouse->SetState(pointerState);
+		}
+		Vector2i& InputManager::GetMousePos()
+		{
+			return Mouse->GetPointerPos();
+		}
+		void InputManager::SetMousePos(Vector2i pos)
+		{
+			Mouse->SetPointerPos(pos);
+		}
+		int InputManager::GetWheelDelta()
+		{
+			return Mouse->GetWheelDelta();
+		}
+		void InputManager::SetWheelDelta(int wheelDelta)
+		{
+			Mouse->SetWheelDelta(wheelDelta);
 		}
 	}
 }

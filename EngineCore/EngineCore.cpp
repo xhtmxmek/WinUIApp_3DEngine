@@ -115,8 +115,7 @@ namespace Engine
 
 		// TODO: Add your game logic here.
 		// Input Update       
-		//���尡 ��ũ��Ʈ�� ������ �ֳ�? ������ ��ũ��Ʈ�� ������ �ֳ�. ���尡 ��ũ��Ʈ�� ������ �ִ°� �´°Ű���.
-		//��ǲ - > ��ũ��Ʈ ������Ʈ.
+
 		m_World->Update(elapsedTime);
 
 		PIXEndEvent();
@@ -124,11 +123,6 @@ namespace Engine
 
 	void EngineCore::StartRenderLoop()
 	{
-		/*
-		�����尡 ���۵� ���¶�� return
-		�����尡 �۾����̶�� joinable�� true�̴�. ���� �۾��� ���ƴ��� join�� ȣ����� �ʾҴٸ� joinable�� true�̴�.
-		���� : joinable false. ����ǰ� ���� true. ���� �߿� join ȣ���ϸ�?
-		*/
 		RenderLoopActivate = true;
 
 		if (RenderLoopThread.joinable())
@@ -155,7 +149,6 @@ namespace Engine
 		//        }
 		//    });
 
-		//// ������ �켱 ������ ���� ��׶��� �����忡�� �۾��� �����մϴ�.
 		//m_renderLoopWorker = ThreadPool::RunAsync(workItemHandler, WorkItemPriority::High, WorkItemOptions::TimeSliced);
 	}
 
@@ -217,10 +210,8 @@ namespace Engine
 
 
 	//테스트
-	// ���� ���¸� ������Ʈ�ϱ� ���� ������� ��� �Է� ó��
 	void EngineCore::ProcessInput()
 	{
-		// TODO: ���⿡ ������ �Է� ó������ �߰��մϴ�.
 		//m_sceneRenderer->TrackingUpdate(m_pointerLocationX);
 	}
 
@@ -286,10 +277,20 @@ namespace Engine
 		Input::InputManager::GetInstance().SetKeyboardState(key, isPressed);
 	}
 
-	void EngineCore::PointerProcess(vector<bool> const& pointerState, float delta, Vector2i pos)
+	void EngineCore::PointerProcess(vector<bool> const& pointerState)
 	{
-		Input::InputManager::GetInstance().SetMouseState(pointerState, delta, pos);
+		Input::InputManager::GetInstance().SetMouseState(pointerState);
 		//pickingLogic
+	}
+
+	void EngineCore::PointerProcess(Vector2i pos)
+	{
+		Input::InputManager::GetInstance().SetMousePos(pos);
+	}
+
+	void EngineCore::PointerProcess(int wheelDelta)
+	{
+		Input::InputManager::GetInstance().SetWheelDelta(wheelDelta);
 	}
 
 	void EngineCore::LoadScriptProject(wstring const& path)
@@ -337,9 +338,7 @@ namespace Engine
 		//winrt::hstring path = storageFolder.Path();
 		//path = winrt::Windows::ApplicationModel::Package::Current().InstalledLocation().Path();
 
-		//UWP�� ����ڽ� ���̶� ������ �������� ���� ����������, ��ȸ���� ������� �ٸ������� ���ٰ���.
 		//https://stackoverflow.com/questions/33082835/windows-10-universal-app-file-directory-access
-		//�׽�Ʈ �Ǵ� ���ҽ����� �������� �����Ǵ� �⺻ binaries.
 		//
 
 		////WinUi3������?

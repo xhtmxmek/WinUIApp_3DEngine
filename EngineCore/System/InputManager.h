@@ -25,10 +25,14 @@ namespace Engine
 			}
 
 			void Initialize();
-			bool GetKeyboardState(SharedTypes::VirtualKey key);
+			ENGINE_API bool GetKeyboardState(SharedTypes::VirtualKey key);
 			void SetKeyboardState(SharedTypes::VirtualKey key, bool isPressed);
-			void GetMouseState(SharedTypes::PointerButton button);
-			void SetMouseState(vector<bool> const& pointerState, float delta, Vector2i pos);
+			ENGINE_API bool GetMouseState(SharedTypes::PointerButton button);
+			void SetMouseState(vector<bool> const& pointerState);
+			ENGINE_API Vector2i& GetMousePos();
+			void SetMousePos(Vector2i pos);
+			ENGINE_API int GetWheelDelta();
+			void SetWheelDelta(int wheelDelta);
 
 		private:
 			unique_ptr<KeyboardState> Keyboard;

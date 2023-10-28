@@ -26,6 +26,7 @@
 #include <winrt/Microsoft.UI.Xaml.Navigation.h>
 #include <winrt/Microsoft.UI.Xaml.Shapes.h>
 #include <winrt/Microsoft.UI.Dispatching.h>
+#include <winrt/Microsoft.UI.Input.h>
 #include <Microsoft.UI.xaml.media.dxinterop.h>
 #include <wil/cppwinrt_helpers.h>
 

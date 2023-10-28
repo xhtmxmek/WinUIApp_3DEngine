@@ -59,9 +59,7 @@ namespace Engine
         ENGINE_API void ValidateDevice();
 
         ENGINE_API void KeyProcess(SharedTypes::VirtualKey key, bool isPressed);
-        ENGINE_API void PointerProcess(vector<bool> const& pointerState);
-        ENGINE_API void PointerProcess(Vector2i pos);
-        ENGINE_API void PointerProcess(int wheelDelta);
+        ENGINE_API void PointerProcess(vector<bool> const& pointerState, float delta, Vector2i pos);
 
         // Properties
         ENGINE_API SharedTypes::Size GetDefaultBackBufferSize() noexcept

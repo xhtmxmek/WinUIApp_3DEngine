@@ -98,7 +98,7 @@ namespace Engine
 		Timer->Tick([&]()
 			{
 				ProcessInput();
-				Update();
+		Update();
 			});
 
 		Render();
@@ -209,7 +209,6 @@ namespace Engine
 #pragma endregion 
 
 
-	//테스트
 	void EngineCore::ProcessInput()
 	{
 		//m_sceneRenderer->TrackingUpdate(m_pointerLocationX);
@@ -251,7 +250,7 @@ namespace Engine
 			return;
 
 		CreateWindowSizeDependentResources();
-		
+
 	}
 
 	void EngineCore::OnSwapchainXamlChanged(const SwapchainPanelInfo& swapchainPanelInfo_)
@@ -341,7 +340,6 @@ namespace Engine
 		//https://stackoverflow.com/questions/33082835/windows-10-universal-app-file-directory-access
 		//
 
-		////WinUi3������?
 	   // winrt::hstring path = winrt::Windows::ApplicationModel::Package::Current().InstalledLocation().Path();
 		//winrt::hstring test = L"D:\\StudyDir\\DirectX11Engine_UWP\\cat.png";
 		//

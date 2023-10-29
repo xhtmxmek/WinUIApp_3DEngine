@@ -33,11 +33,14 @@ namespace winrt::Editor::implementation
 		for (int index = 0; index < engine->GetNumActorList(); index++)
 		{
 			auto nativeActor = engine->GetActor(index);
-			if (nativeActor == nullptr)
+			if (nativeActor.expired())
 				continue;
 
-			winrt::Editor::ActorLabel actorLabel(winrt::to_hstring(nativeActor->Name()), 
-				winrt::to_hstring(nativeActor->ImplClassName()));
+			if (nativeActor.lock() == nullptr)
+				continue;
+
+			winrt::Editor::ActorLabel actorLabel(winrt::to_hstring(nativeActor.lock()->Name()),
+				winrt::to_hstring(nativeActor.lock()->ImplClassName()));
 			actorlabels_.Append(actorLabel);			
 			OutlinerComment(to_hstring(actorlabels_.Size()) + L" Actors Loaded");
 		}

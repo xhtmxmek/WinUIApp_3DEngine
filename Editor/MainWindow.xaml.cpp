@@ -210,7 +210,7 @@ namespace winrt::Editor::implementation
 
 	}
 
-	void MainWindow::OnActorTreeClicked(Windows::Foundation::IInspectable const& sender, Microsoft::UI::Xaml::Controls::TreeViewItemInvokedEventArgs const& e)
+	void MainWindow::OnActorTreeClicked(Windows::Foundation::IInspectable const&, Microsoft::UI::Xaml::Controls::TreeViewItemInvokedEventArgs const& e)
 	{
 		auto selectedItem = unbox_value_or<Editor::ActorLabel>(e.InvokedItem(), nullptr);
 		if (selectedItem != nullptr)
@@ -226,7 +226,7 @@ namespace winrt::Editor::implementation
 		}
 	}
 
-	void MainWindow::OnComponentTreeClicked(Windows::Foundation::IInspectable const& sender, Microsoft::UI::Xaml::Controls::TreeViewItemInvokedEventArgs const& e)
+	void MainWindow::OnComponentTreeClicked(Windows::Foundation::IInspectable const&, Microsoft::UI::Xaml::Controls::TreeViewItemInvokedEventArgs const& e)
 	{
 		auto selectedItem = unbox_value_or<Editor::ComponentInfo>(e.InvokedItem(), nullptr);
 		if (selectedItem != nullptr)

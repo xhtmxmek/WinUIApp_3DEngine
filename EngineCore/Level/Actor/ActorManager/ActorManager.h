@@ -43,17 +43,17 @@ namespace Engine
 			void Init();
 
 			template<typename T>
-			std::shared_ptr<T> CreateActor(const std::string& name)
+			std::weak_ptr<T> CreateActor(const std::string& name)
 			{
 				CheckActorListCapacity();
 				//삽입할때 이름이 같을경우 처리하는 로직(ex-뒤에_#를 붙인다던가)도 생각해보기								
 				auto newActor = CreateActor(T::ClassName(), name);
-				std::shared_ptr<T> newActorPtr(std::static_pointer_cast<T>(newActor));
+				std::weak_ptr<T> newActorPtr(std::static_pointer_cast<T>(newActor));
 				return newActorPtr;
 			}
 
-			std::shared_ptr<Actor> GetActor(const std::string& actorName);
-			std::shared_ptr<Actor> GetActor(unsigned int index);
+			std::weak_ptr<Actor> GetActor(const std::string& actorName);
+			std::weak_ptr<Actor> GetActor(unsigned int index);
 
 			ENGINE_API size_t GetNumActorList();
 

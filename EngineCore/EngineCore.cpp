@@ -306,12 +306,12 @@ namespace Engine
 		//pickedActor = Level::ActorManager::GetInstance().GetActor("MeshTest");
 	}
 
-	shared_ptr<Level::Actor> EngineCore::GetActor(int index)
+	weak_ptr<Level::Actor> EngineCore::GetActor(int index)
 	{
 		return Level::SLevel::GetWorld()->GetActor(index);
 	}
 
-	shared_ptr<Level::Actor> EngineCore::GetActor(const string& name)
+	weak_ptr<Level::Actor> EngineCore::GetActor(const string& name)
 	{
 		return Level::SLevel::GetWorld()->GetActor(name);
 	}

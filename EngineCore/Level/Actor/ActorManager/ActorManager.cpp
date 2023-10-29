@@ -1,6 +1,7 @@
 #include "pch.h"
 #include "ActorManager.h"
 #include "../Actor.h"
+#include "../DefaultActor.h"
 
 namespace Engine
 {
@@ -45,21 +46,28 @@ namespace Engine
 				return iter->second;
 		}
 
-		shared_ptr<Actor> ActorManager::GetActor(const std::string& actorName)
+		weak_ptr<Actor> ActorManager::GetActor(const std::string& actorName)
 		{
 			auto iter = Actors.find(actorName.c_str());
 			if (iter != Actors.end())
 				return iter->second;
 
-			return nullptr;
+			auto ptr = make_shared<ADefaultActor>("Test");
+			ptr.reset();
+			return ptr;
 		}
 
-		shared_ptr<Actor> ActorManager::GetActor(unsigned int index)
+		weak_ptr<Actor> ActorManager::GetActor(unsigned int index)
 		{
-			if (index >= actorNames_.size())
-				return nullptr;
-
-			return GetActor(actorNames_[index]);
+			if (index < actorNames_.size())
+			{
+				auto iter = Actors.find(actorNames_[index]);
+				return iter->second;
+			}
+				
+			auto ptr = make_shared<ADefaultActor>("Test");
+			ptr.reset();
+			return ptr;
 		}
 
 		void ActorManager::ReleaseInstance()

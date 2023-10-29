@@ -48,6 +48,7 @@
     <ClInclude Include="System\MouseState.h" />
     <ClInclude Include="Component\Property\PropertyBase.h" />
     <ClInclude Include="EngineCoreBuild.h" />
+    <ClInclude Include="Level\Actor\DefaultActor.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="EngineCore.cpp" />
@@ -76,6 +77,7 @@
     <ClCompile Include="System\InputManager.cpp" />
     <ClCompile Include="System\KeyboardState.cpp" />
     <ClCompile Include="System\MouseState.cpp" />
+    <ClCompile Include="Level\Actor\DefaultActor.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

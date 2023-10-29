@@ -73,8 +73,8 @@ namespace Engine
         ENGINE_API void LoadScriptProject(std::wstring const& path);
         ENGINE_API void PickCheck(Vector2i screenPos, shared_ptr<Level::Actor>& pickedActor);
 
-        ENGINE_API shared_ptr<Level::Actor> GetActor(int index);
-        ENGINE_API shared_ptr<Level::Actor> GetActor(const string& name);
+        ENGINE_API weak_ptr<Level::Actor> GetActor(int index);
+        ENGINE_API weak_ptr<Level::Actor> GetActor(const string& name);
         ENGINE_API size_t GetNumActorList();
 
         // private

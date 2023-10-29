@@ -38,18 +38,18 @@ namespace Engine
 			* 액터자체는 고유한 UID를 가져야한다. 중복된 ID를 가지면 노우.
 			* 사실 주소가 고유한 값이긴 하다.
 			*/
-			ENGINE_API shared_ptr<Actor> GetActor(const string& name)
+			ENGINE_API weak_ptr<Actor> GetActor(const string& name)
 			{
 				return actorManager_->GetActor(name);
 			}
 
-			ENGINE_API shared_ptr<Actor> GetActor(unsigned int index)
+			ENGINE_API weak_ptr<Actor> GetActor(unsigned int index)
 			{
 				return actorManager_->GetActor(index);
 			}
 
 			template<typename T>
-			std::shared_ptr<T> CreateActor(const std::string& name)
+			std::weak_ptr<T> CreateActor(const std::string& name)
 			{
 				return actorManager_->CreateActor<T>(name);
 			}

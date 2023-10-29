@@ -34,8 +34,9 @@ namespace Engine
 			for (int i = 0; i < GetNumActorList(); i++)
 			{
 				auto actor = GetActor(i);
-				if (actor != nullptr)
-					actor->Tick(elapsedTime);
+				
+				if (actor.expired() == false && actor.lock() != nullptr)
+					actor.lock()->Tick(elapsedTime);
 			}
 				
 			//for (const auto& [key, value] : Actors)

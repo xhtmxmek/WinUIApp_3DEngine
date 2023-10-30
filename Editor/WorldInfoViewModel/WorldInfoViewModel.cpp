@@ -48,6 +48,7 @@ namespace winrt::Editor::implementation
 
 	void WorldInfoViewModel::UpdateSelectedActorDetail(hstring actorName, Microsoft::UI::Xaml::Controls::StackPanel const& detailPanel)
 	{
+		ClearSelectedActor(detailPanel);
 		selectedActorDetail_.UpdateActorDeail(actorName, detailPanel);		
 	}
 

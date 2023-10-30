@@ -23,12 +23,14 @@ namespace Engine
 	namespace Level
 	{
 		class ActorManager;
-		class Actor;		
-		//Uncopyable
+		class Actor;
+		class ACamera;
+
 		class World
 		{
 		public:				
 			World();
+			void Init();
 			void PushComponent(const shared_ptr<Component::ComponentBase>& component);
 			void Update(float elapsedTime);
 			void Render();
@@ -70,10 +72,11 @@ namespace Engine
 
 			//unordered_map<const wchar_t*, shared_ptr<Actor>> Actors; //world에는 수많은 액터들이 존재할것이고, 액터가 추가될때 재정렬을 피하기 위해 Hash를 사용헀음.
 			//vector<string> actorNames_; 
+			std::weak_ptr<ACamera> defaultCamera_;
 
 			vector<shared_ptr<Component::DrawableComponent>> DrawComponents;
 			vector<shared_ptr<Component::DrawableComponent>> DrawComponentsThisFrame;
-			vector<shared_ptr<Component::CameraComponent>> CameraComponents;
+			vector<shared_ptr<Component::CameraComponent>> cameraComponents_;
 
 			std::vector<std::function<void(const shared_ptr<Component::ComponentBase>&)>> PushComponentFunc;
 			//std::function<void(const shared_ptr<Component::ComponentBase>&)> PushComponentFunc[Component::SceneComponentType::ComponentType_Max];

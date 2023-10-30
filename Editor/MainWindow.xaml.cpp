@@ -145,7 +145,7 @@ namespace winrt::Editor::implementation
 		swapChainPanel().PointerWheelChanged({ this, &MainWindow::OnPointerWheelChangedSwapChain });
 
 		splitViewPage().KeyDown({ this, &MainWindow::OnKeyDown_MainSplitView });
-		splitViewPage().KeyUp({ this, &MainWindow::OnKeyDown_MainSplitView });
+		splitViewPage().KeyUp({ this, &MainWindow::OnKeyUp_MainSplitView });
 
 		renderingEngine_->StartRenderLoop();
 		actorViewModel_.UpdateWorldInfoProxy();

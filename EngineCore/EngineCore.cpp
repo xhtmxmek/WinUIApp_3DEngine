@@ -1,7 +1,7 @@
 #include "pch.h"
 #include "EngineCore.h"
 #include "Common/EngineHelper.h"
-#include "Common/DeviceResources.h"
+#include "Renderer/Resource/DeviceResources.h"
 #include "EngineCoreBuild.h"
 #include "Level/Level.h"
 #include "Level/World.h"
@@ -50,6 +50,8 @@ namespace Engine
 
 	void EngineCore::LoadDefaultProject()
 	{
+		m_World->Init();
+
 		wstring defaultProjFullPath = Path::ProjectDir + L"\\x64\\Debug\\" + Path::ProjectName;
 		HMODULE hDll = ::LoadLibrary(defaultProjFullPath.c_str());
 		if (hDll != NULL)

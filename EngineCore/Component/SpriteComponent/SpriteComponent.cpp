@@ -1,6 +1,6 @@
 #include "pch.h"
 #include "SpriteComponent.h"
-#include "Common/DeviceResources.h"
+#include "Renderer/Resource/DeviceResources.h"
 #include "EngineAsset/Texture.h"
 
 namespace Engine

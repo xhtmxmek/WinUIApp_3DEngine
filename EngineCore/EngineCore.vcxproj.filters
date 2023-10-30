@@ -26,11 +26,9 @@
     <ClInclude Include="Level\World.h" />
     <ClInclude Include="Renderer\LevelRenderer.h" />
     <ClInclude Include="Common\Math\TransformGroup.h" />
-    <ClInclude Include="Common\DeviceResources.h" />
-    <ClInclude Include="Common\Engine_Scoped_Lock.h" />
+    <ClInclude Include="Renderer\Resource\DeviceResources.h" />
     <ClInclude Include="Common\EngineBaseHeader.h" />
     <ClInclude Include="Common\EngineCommonHeader.h" />
-    <ClInclude Include="Common\EngineCriticalSection.h" />
     <ClInclude Include="Common\EngineHelper.h" />
     <ClInclude Include="Common\EngineMath.h" />
     <ClInclude Include="Common\Path.h" />
@@ -49,6 +47,9 @@
     <ClInclude Include="Component\Property\PropertyBase.h" />
     <ClInclude Include="EngineCoreBuild.h" />
     <ClInclude Include="Level\Actor\DefaultActor.h" />
+    <ClInclude Include="Level\Actor\Camera\Camera.h" />
+    <ClInclude Include="Renderer\Resource\ConstantBuffer.h" />
+    <ClInclude Include="Renderer\Resource\GraphicsLibraryResource.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="EngineCore.cpp" />
@@ -67,9 +68,7 @@
     <ClCompile Include="Level\World.cpp" />
     <ClCompile Include="Renderer\LevelRenderer.cpp" />
     <ClCompile Include="Common\Math\TransformGroup.cpp" />
-    <ClCompile Include="Common\DeviceResource.cpp" />
-    <ClCompile Include="Common\Engine_Scoped_Lock.cpp" />
-    <ClCompile Include="Common\EngineCriticalSection.cpp" />
+    <ClCompile Include="Renderer\Resource\DeviceResource.cpp" />
     <ClCompile Include="Common\Path.cpp" />
     <ClCompile Include="Common\RuntimeContext.cpp" />
     <ClCompile Include="EngineAsset\Material.cpp" />
@@ -78,6 +77,9 @@
     <ClCompile Include="System\KeyboardState.cpp" />
     <ClCompile Include="System\MouseState.cpp" />
     <ClCompile Include="Level\Actor\DefaultActor.cpp" />
+    <ClCompile Include="Level\Actor\Camera\Camera.cpp" />
+    <ClCompile Include="Renderer\Resource\ConstantBuffer.cpp" />
+    <ClCompile Include="Renderer\Resource\GraphicsLibraryResource.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

@@ -19,7 +19,6 @@ namespace Engine
 		public:
 			//ASprite() = default;
 			ENGINE_API AStaticMesh(const std::string& actorName);
-			ENGINE_API ~AStaticMesh();
 
 			virtual void Init() final;
 			virtual void Tick(float elasedTime) final;

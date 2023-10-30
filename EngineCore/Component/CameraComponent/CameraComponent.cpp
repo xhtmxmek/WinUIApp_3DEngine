@@ -1,10 +1,11 @@
 #include "pch.h"
 #include "CameraComponent.h"
-#include "Common/DeviceResources.h"
+#include "Renderer/Resource/DeviceResources.h"
 #include "System/KeyboardState.h"
 #include "System/InputManager.h"
 #include <Input/PointerButton.h>
 #include <Input/VirtualKey.h>
+#include "Renderer/Resource/ConstantBuffer.h"
 
 namespace Engine
 {
@@ -44,15 +45,7 @@ namespace Engine
 		void CameraComponent::Tick(float elapsedTime)
 		{
 			ProcessInput();
-
-			// 						
-			//여기서 엔진 입력에 따라서 카메라 Transform 값을 처리
-			/*
-			* 우클릭 상태에서 마우스 움직임 : 카메라 회전
-			* 우클릭 상태에서 WSAD : 카메라 이동
-			* 상수 버퍼 업데이트.
-			*/
-			//						
+			UpdateConstantBuffer();
 		}
 		void CameraComponent::ProcessInput()
 		{
@@ -144,6 +137,22 @@ namespace Engine
 			//{
 			//	cameraMoveLock = false;
 			//}
+		}
+		void CameraComponent::UpdateConstantBuffer()
+		{
+			//ID3D11Buffer* cameraBuff;
+			//cameraBuff = *ConstantBufferManager::GetInstance().GetBuffer(ConstantBufferManager::ConstBufferType::perCamera);
+			Renderer::GraphicsLibrary::ConstantBufferManager::CameraConstBuffFormat camBuffFormat;
+			camBuffFormat.View = viewMatrix_;
+			//camBuffFormat.Proj = 
+			//camBuffFormat.CamPos = Math::Vector4(Pos.x, Pos.y, Pos.z, 0);
+			//camBuffFormat.minMaxDistance = Math::Vector4(0.01, 4.1, 0, 0);
+			//camBuffFormat.minMaxLOD = Math::Vector4(1, 6, 0, 0);
+			////cam
+			//D3D11_MAPPED_SUBRESOURCE camMappedResource;
+			//DXUtility::GetInstance()->GetDeviceContext()->Map(cameraBuff, 0, D3D11_MAP_WRITE_DISCARD, 0, &camMappedResource);
+			//memcpy(camMappedResource.pData, &camBuffFormat, sizeof(ConstantBufferManager::CameraConstBuffFormat));
+			//DXUtility::GetInstance()->GetDeviceContext()->Unmap(cameraBuff, 0);
 		}
 	}
 }

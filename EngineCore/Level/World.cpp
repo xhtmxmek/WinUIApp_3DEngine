@@ -6,6 +6,7 @@
 #include "Renderer/LevelRenderer.h"
 #include "Component/ComponentBase/ComponentBase.h"
 #include "Component/CameraComponent/CameraComponent.h"
+#include "Actor/Camera/Camera.h"
 
 using namespace std;
 namespace Engine
@@ -19,8 +20,12 @@ namespace Engine
 			PushComponentFunc[static_cast<int>(Component::SceneComponentType::Drawable)] = std::bind(&World::PushDrawableComponent, this, std::placeholders::_1);
 			PushComponentFunc[static_cast<int>(Component::SceneComponentType::Camera)] = std::bind(&World::PushCameraComponent, this, std::placeholders::_1);
 			actorManager_ = make_unique<ActorManager>();
-
 			//DrawComponent를 Maximum만큼 정해놓기...
+		}
+
+		void World::Init()
+		{
+			defaultCamera_ = CreateActor<ACamera>("DefaultCamera");
 		}
 		
 		void World::Update(float elapsedTime)
@@ -31,6 +36,7 @@ namespace Engine
 			//특정 Value 값에 애니메이션을 줄수 있음.
 			//enable인 Actor만 Update.
 			//
+
 			for (int i = 0; i < GetNumActorList(); i++)
 			{
 				auto actor = GetActor(i);
@@ -74,7 +80,7 @@ namespace Engine
 		}
 		void World::PushCameraComponent(const shared_ptr<Component::ComponentBase>& component)
 		{			
-			//CameraComponents().push_back(shared_ptr(std::static_pointer_cast<Component::CameraComponent>(component())));
+			cameraComponents_.push_back(shared_ptr(std::static_pointer_cast<Component::CameraComponent>(component)));
 		}
 
 		void World::PushDrawableComponent(const shared_ptr<Component::ComponentBase>& component)

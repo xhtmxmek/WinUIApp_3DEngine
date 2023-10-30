@@ -10,6 +10,7 @@
 //#include "Level/Actor/SpriteActor/Sprite.h"
 #include "Level/Actor/StaticMesh/StaticMesh.h"
 #include "Level/Actor/DefaultActor.h"
+#include "Level/Actor/Camera/Camera.h"
 
 namespace Engine
 {
@@ -27,6 +28,7 @@ namespace Engine
 
 		//Actor
 		//REGISTER_RUNTIME_CLASS(ASprite);
+		REGISTER_RUNTIME_CLASS(ACamera);
 		REGISTER_RUNTIME_CLASS(AStaticMesh);
 		REGISTER_RUNTIME_CLASS(ADefaultActor);
 

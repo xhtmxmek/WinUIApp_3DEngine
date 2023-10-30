@@ -1,7 +1,7 @@
 #include "pch.h"
 #include "Texture.h"
 #include "Material.h"
-#include "Common/DeviceResources.h"
+#include "Renderer/Resource/DeviceResources.h"
 
 namespace Engine
 {

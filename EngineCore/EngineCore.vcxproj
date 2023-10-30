@@ -152,20 +152,14 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="Common\DeviceResources.h" />
+    <ClInclude Include="Renderer\Resource\DeviceResources.h" />
     <ClInclude Include="Common\EngineBaseHeader.h" />
     <ClInclude Include="Common\EngineCommonHeader.h" />
-    <ClInclude Include="Common\EngineCriticalSection.h">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
-    </ClInclude>
     <ClInclude Include="Common\EngineEnums.h" />
     <ClInclude Include="EngineCoreBuild.h" />
     <ClInclude Include="EngineHeader_Used_Application.h" />
     <ClInclude Include="Common\EngineHelper.h" />
     <ClInclude Include="Common\EngineMath.h" />
-    <ClInclude Include="Common\Engine_Scoped_Lock.h">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
-    </ClInclude>
     <ClInclude Include="Common\Math\TransformGroup.h" />
     <ClInclude Include="Common\Path.h" />
     <ClInclude Include="Common\pImplClassDefine.h" />
@@ -179,6 +173,7 @@
     <ClInclude Include="framework.h" />
     <ClInclude Include="Level\Actor\Actor.h" />
     <ClInclude Include="Level\Actor\ActorManager\ActorManager.h" />
+    <ClInclude Include="Level\Actor\Camera\Camera.h" />
     <ClInclude Include="Level\Actor\DefaultActor.h" />
     <ClInclude Include="Level\Actor\PropertyActor.h" />
     <ClInclude Include="Level\Actor\SpriteActor\Sprite.h" />
@@ -196,19 +191,15 @@
     <ClInclude Include="Component\Property\PropertyBase.h" />
     <ClInclude Include="Level\World.h" />
     <ClInclude Include="pch.h" />
+    <ClInclude Include="Renderer\Resource\ConstantBuffer.h" />
     <ClInclude Include="Renderer\LevelRenderer.h" />
+    <ClInclude Include="Renderer\Resource\GraphicsLibraryResource.h" />
     <ClInclude Include="System\InputManager.h" />
     <ClInclude Include="System\KeyboardState.h" />
     <ClInclude Include="System\MouseState.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Common\DeviceResource.cpp" />
-    <ClCompile Include="Common\EngineCriticalSection.cpp">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
-    </ClCompile>
-    <ClCompile Include="Common\Engine_Scoped_Lock.cpp">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
-    </ClCompile>
+    <ClCompile Include="Renderer\Resource\DeviceResource.cpp" />
     <ClCompile Include="Common\Math\TransformGroup.cpp" />
     <ClCompile Include="Common\Path.cpp" />
     <ClCompile Include="Common\RuntimeContext.cpp" />
@@ -218,6 +209,7 @@
     <ClCompile Include="EngineCore.cpp" />
     <ClCompile Include="Level\Actor\Actor.cpp" />
     <ClCompile Include="Level\Actor\ActorManager\ActorManager.cpp" />
+    <ClCompile Include="Level\Actor\Camera\Camera.cpp" />
     <ClCompile Include="Level\Actor\DefaultActor.cpp" />
     <ClCompile Include="Level\Actor\SpriteActor\Sprite.cpp" />
     <ClCompile Include="Level\Actor\StaticMesh\StaticMesh.cpp" />
@@ -234,7 +226,9 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
     </ClCompile>
+    <ClCompile Include="Renderer\Resource\ConstantBuffer.cpp" />
     <ClCompile Include="Renderer\LevelRenderer.cpp" />
+    <ClCompile Include="Renderer\Resource\GraphicsLibraryResource.cpp" />
     <ClCompile Include="System\InputManager.cpp" />
     <ClCompile Include="System\KeyboardState.cpp" />
     <ClCompile Include="System\MouseState.cpp" />

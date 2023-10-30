@@ -1,6 +1,6 @@
 #include "pch.h"
 #include "StaticMeshComponent.h"
-#include "Common/DeviceResources.h"
+#include "Renderer/Resource/DeviceResources.h"
 
 namespace Engine
 {

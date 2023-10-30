@@ -22,6 +22,7 @@ namespace Engine
 			void MoveFoward(float DirectionFactor = 1.f);
 			void MoveRight(float DirectionFactor = 1.f);
 			void LookAt();
+			void UpdateConstantBuffer();
 		private:
 			std::map<SharedTypes::VirtualKey, std::function<void()>> keyMap_;
 			Matrix4x4f viewMatrix_;

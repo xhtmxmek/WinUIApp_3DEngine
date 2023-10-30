@@ -159,6 +159,7 @@
     <ClInclude Include="pch.h" />
     <ClInclude Include="TypeBase.h" />
     <ClInclude Include="UIInfoParams.h" />
+    <ClInclude Include="Vector4.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="pch.cpp">

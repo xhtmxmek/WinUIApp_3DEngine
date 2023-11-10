@@ -36,9 +36,9 @@ namespace Engine
 			RUNTIME_SUBCLASS(DrawableComponent)
 			ENGINE_API StaticMeshComponent(const std::string& name = "StaticMeshComponent");
 			ENGINE_API ~StaticMeshComponent();
-			void Init() final;
-			void Tick(float elapsedTime) final;
-			void Draw() final;
+			virtual void Init() final;
+			virtual void Tick(float elapsedTime) final;
+			virtual void Draw() final;
 			//void meshType(PropertyStaticMesh::MeshType meshType);
 		private:			
 			std::unique_ptr<DirectX::GeometricPrimitive> staticMeshShape_;			

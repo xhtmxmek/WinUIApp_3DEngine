@@ -20,10 +20,10 @@ namespace Engine
 			:ComponentBase(name, SceneComponentType::Camera),
 			cameraMoveSwitch_(false),
 			focusPoint_(0.f, 0.f, 0.f),
-			upVector_(0.f, 1.f, 0.f)
+			upVector_(0.f, 1.f, 0.f),
+			useBlur_(L"Use Blur", L"PostProcess")
 		{			
 			GetComponentTransform().SetPosition(Vector3f(2.f, 2.f, 2.f));
-
 		}
 
 		void CameraComponent::Init()
@@ -47,6 +47,13 @@ namespace Engine
 				{
 					MoveRight(1.f);
 				}));
+
+			AddProperty(&useBlur_);
+
+			useBlur_.BindChangedEvent(std::bind(
+				[this](Component::PropertyBase*)
+				{					
+				}, std::placeholders::_1));
 		}
 
 		void CameraComponent::Tick(float elapsedTime)

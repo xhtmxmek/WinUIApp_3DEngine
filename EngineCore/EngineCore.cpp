@@ -2,6 +2,7 @@
 #include "EngineCore.h"
 #include "Common/EngineHelper.h"
 #include "Renderer/Resource/DeviceResources.h"
+#include "Renderer/Resource/ConstantBuffer.h"
 #include "EngineCoreBuild.h"
 #include "Level/Level.h"
 #include "Level/World.h"
@@ -80,9 +81,11 @@ namespace Engine
 	void EngineCore::UnInitialize()
 	{
 		DX::DeviceResourcesUtil::GetInstance().ReleaseInstance();
+		Renderer::GraphicsLibrary::ConstantBufferManager::GetInstance().Release();
 		Level::SLevel::GetInstance().ReleaseInstance();
 		Level::ActorManager::GetInstance().ReleaseInstance();
 		EngineAsset::TextureManager::GetInstance().ReleaseInstance();
+
 		FreeLibrary(ProjectHandle);
 	}
 

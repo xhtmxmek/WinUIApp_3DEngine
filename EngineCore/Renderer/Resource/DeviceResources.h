@@ -85,6 +85,7 @@ namespace Engine
 			// Direct3D Accessors.
 			auto                    GetD3DDevice() const noexcept { return m_d3dDevice.get(); }
 			auto                    GetD3DDeviceContext() const noexcept { return m_d3dContext.get(); }
+			auto					GetDeferredContext(unsigned int index) const noexcept { return deferredContexts_[index].get(); }
 			auto                    GetSwapChain() const noexcept { return m_swapChain.get(); }
 			auto                    GetDXGIFactory() const noexcept { return m_dxgiFactory.get(); }
 			D3D_FEATURE_LEVEL       GetDeviceFeatureLevel() const noexcept { return m_d3dFeatureLevel; }
@@ -138,6 +139,7 @@ namespace Engine
 			wil::com_ptr_nothrow<IDXGIFactory2>           m_dxgiFactory;
 			wil::com_ptr_nothrow<ID3D11Device3>           m_d3dDevice;
 			wil::com_ptr_nothrow<ID3D11DeviceContext2>    m_d3dContext;
+			std::vector<wil::com_ptr_nothrow<ID3D11DeviceContext2>> deferredContexts_;
 			wil::com_ptr_nothrow<IDXGISwapChain3>         m_swapChain;
 
 			// Direct3D rendering objects. Required for 3D.

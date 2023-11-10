@@ -31,6 +31,7 @@ namespace Engine
 			void SetMouseState(vector<bool> const& pointerState);
 			ENGINE_API Vector2i& GetMousePos();
 			void SetMousePos(Vector2i pos);
+			ENGINE_API Vector2i GetMouseDelta();
 			ENGINE_API int GetWheelDelta();
 			void SetWheelDelta(int wheelDelta);
 

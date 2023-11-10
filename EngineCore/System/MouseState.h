@@ -19,6 +19,7 @@ namespace Engine
             void SetPointerPos(SharedTypes::Vector2i pos)
             {
                 pointerPos_ = pos;
+                lastPos_ = pos;
             }
             Vector2i& GetPointerPos()
             {
@@ -34,9 +35,15 @@ namespace Engine
                 return wheelDelta_;
             }
 
+            Vector2i GetPointerDelta()
+            {
+                return lastPos_ - pointerPos_;
+            }
+
         private:
             std::vector<bool> state_;
             Vector2i pointerPos_;
+            Vector2i lastPos_;
             int wheelDelta_;
         };
     }

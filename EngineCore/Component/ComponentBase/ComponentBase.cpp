@@ -34,7 +34,7 @@ namespace Engine
 		}
 		const Vector3f ComponentBase::GetRotation()
 		{
-			return transform_.GetRotation()->Value();
+			return transform_.GetRotation();
 		}
 		Math::TransformGroup& ComponentBase::GetComponentTransform()
 		{

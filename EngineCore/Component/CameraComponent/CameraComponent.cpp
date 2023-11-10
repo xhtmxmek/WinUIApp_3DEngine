@@ -9,45 +9,53 @@
 
 namespace Engine
 {
+	using namespace Renderer;
+	using namespace Renderer::GraphicsLibrary;
+
 	namespace Component
 	{
 		RUNTIME_CLASS_IMPL(CameraComponent);
 
 		CameraComponent::CameraComponent(const std::string& name)
-			:ComponentBase(name, SceneComponentType::Camera)
-		{
-			cameraMoveSwitch_ = false;
+			:ComponentBase(name, SceneComponentType::Camera),
+			cameraMoveSwitch_(false),
+			focusPoint_(0.f, 0.f, 0.f),
+			upVector_(0.f, 1.f, 0.f)
+		{			
+			GetComponentTransform().SetPosition(Vector3f(2.f, 2.f, 2.f));
+
 		}
 
 		void CameraComponent::Init()
 		{
-			keyMap_.insert(make_pair(VirtualKey::W, [this]()
+			keyMap_.insert(make_pair(VirtualKey::W, [this](float elapsedTime)
 				{
-					MoveFoward();
+					MoveFoward(1.f);
 				}));
 
-			keyMap_.insert(make_pair(VirtualKey::S, [this]()
+			keyMap_.insert(make_pair(VirtualKey::S, [this](float elapsedTime)
 				{
 					MoveFoward(-1.f);
 				}));
 
-			keyMap_.insert(make_pair(VirtualKey::A, [this]()
+			keyMap_.insert(make_pair(VirtualKey::A, [this](float elapsedTime)
 				{
 					MoveRight(-1.f);
 				}));
 
-			keyMap_.insert(make_pair(VirtualKey::D, [this]()
+			keyMap_.insert(make_pair(VirtualKey::D, [this](float elapsedTime)
 				{
-					MoveRight();
+					MoveRight(1.f);
 				}));
 		}
 
 		void CameraComponent::Tick(float elapsedTime)
 		{
-			ProcessInput();
+			ProcessInput(elapsedTime);
 			UpdateConstantBuffer();
 		}
-		void CameraComponent::ProcessInput()
+
+		void CameraComponent::ProcessInput(float elapsedTime)
 		{
 			for (auto iter : keyMap_)
 			{
@@ -55,18 +63,29 @@ namespace Engine
 				if (Input::InputManager::GetInstance().GetKeyboardState(KeyValue))
 				{
 					auto bindFunc = iter.second;
-					bindFunc();
+					bindFunc(elapsedTime);
 				}
 			}
 
 			LookAt();
 		}
-		void CameraComponent::MoveFoward(float DirectionFactor)
+
+		void CameraComponent::MoveFoward(float directionFactor, float elapsedTime)
 		{
+			Vector3f foward = GetComponentTransform().GetFowardVector();
+			Vector3f currentPos = GetComponentTransform().GetPosition();
+			Vector3f newPos = currentPos + foward * directionFactor * elapsedTime;
+			GetComponentTransform().SetPosition(newPos);
 		}
-		void CameraComponent::MoveRight(float DirectionFactor)
+
+		void CameraComponent::MoveRight(float directionFactor, float elapsedTime)
 		{
+			Vector3f right = GetComponentTransform().GetRightVector();
+			Vector3f currentPos = GetComponentTransform().GetPosition();
+			Vector3f newPos = currentPos + right * directionFactor * elapsedTime;
+			GetComponentTransform().SetPosition(newPos);
 		}
+
 		void CameraComponent::LookAt()
 		{
 			//마우스 우클릭시
@@ -74,85 +93,64 @@ namespace Engine
 			{
 				cameraMoveSwitch_ = true;
 			}
+
 			auto mousePos = Input::InputManager::GetInstance().GetMousePos();
-			//if ()
-			//if (rButtonState.delta_)
-			//{
-			//	if (cameraMoveLock)
-			//	{
-			//		Math::Vector3 mouseDelta = InputCenter::GetInstance()->GetMouseMove();
-			//		int screenWidth = 0;
-			//		int screenHeight = 0;
-			//		DXUtility::GetInstance()->GetDeviceWidthHeight(screenWidth, screenHeight);
+			Vector2f mouseDelta = Input::InputManager::GetInstance().GetMouseDelta();
 
+			SharedTypes::Size viewportSize = DX::DeviceResourcesUtil::GetDeviceResources()->GetOutputSize();
 
-			//		float deltaX = mouseDelta.x / (float)screenWidth;
-			//		float deltaY = mouseDelta.y / (float)screenHeight;
+			float deltaX = mouseDelta.x / (float)viewportSize.Width;
+			float deltaY = mouseDelta.y / (float)viewportSize.Height;
+			//회전각에는 보정이 필요하다. 기본값은 마우스를 화면만큼 움직였을때를 180으로 두기.
 
-			//		//float deltaX = mouseDelta.x * 0.001f;
-			//		//float deltaY = mouseDelta.y * 0.001f;
+			float yawDegree = deltaX *= 360.f;
+			float pitchDegree = deltaY *= 360.f;
+			GetComponentTransform().SetRotation(Vector3f(pitchDegree, yawDegree, 0.f));
 
+			float radianYaw = SharedTypes::ConvertToRadian(deltaX);
+			float radianPitch = SharedTypes::ConvertToRadian(deltaY);			
 
-			//		//Matrix rMat = Matrix::MatrixRotationAxis(Right, deltaY * 0.4f);
-			//		//Look = Matrix::TransformCoord(Vector3(0, 0, 1), rMat);
-			//		//Look.Normalize();
-
-			//		//Matrix yRotMat = Matrix::MatrixRotationAxis(Vector3(0, 1, 0), deltaX);
-			//		//Matrix yRotMat = Matrix::MatrixRotationY(m_fYaw);
-			//		//Right = Matrix::TransformCoord(Vector3(1, 0, 0), yRotMat);
-			//		//Up = Matrix::TransformCoord(Up, yRotMat);
-			//		//Up.Normalize();
-
-
-			//		//Pos += moveLeftRight * camRight;
-			//		//camPosition += moveBackForward * camForward;
-
-			//		//Foward = Matrix::TransformCoord(Vector3(0, 0, 1), yRotMat);
-
-			//		//x축 회전
-
-			//		if (deltaY != 0)
-			//		{
-			//			Matrix xRotMat = Matrix::MatrixRotationAxis(Right, deltaY);
-			//			Up = Matrix::TransformNormal(Up, xRotMat);
-			//			Look = Matrix::TransformNormal(Look, xRotMat);
-			//		}
-
-			//		//y축 회전
-			//		if (deltaX != 0)
-			//		{
-			//			Matrix yRotMat = Matrix::MatrixRotationY(deltaX);
-
-			//			Right = Matrix::TransformNormal(Right, yRotMat);
-			//			Up = Matrix::TransformNormal(Up, yRotMat);
-			//			Look = Matrix::TransformNormal(Look, yRotMat);
-			//		}
-
-
-			//	}
-
-
-			//}
-			//if (InputCenter::GetInstance()->IsButtonUp(MOUSE_RIGHT))
-			//{
-			//	cameraMoveLock = false;
-			//}
+			
+			//fowardVector는 0,0,1에 회전 변환을 적용한것.
+						
+			//Tool Camera의 회전은 local 기준으로 적용되야 올바르게 볼 수 있다.
+			if (radianPitch != 0 || radianYaw != 0)
+			{
+				focusPoint_ *= GetComponentTransform().GetWorldMatrix();			
+			}
 		}
 		void CameraComponent::UpdateConstantBuffer()
 		{
-			//ID3D11Buffer* cameraBuff;
-			//cameraBuff = *ConstantBufferManager::GetInstance().GetBuffer(ConstantBufferManager::ConstBufferType::perCamera);
-			Renderer::GraphicsLibrary::ConstantBufferManager::CameraConstBuffFormat camBuffFormat;
-			camBuffFormat.View = viewMatrix_;
-			//camBuffFormat.Proj = 
-			//camBuffFormat.CamPos = Math::Vector4(Pos.x, Pos.y, Pos.z, 0);
-			//camBuffFormat.minMaxDistance = Math::Vector4(0.01, 4.1, 0, 0);
-			//camBuffFormat.minMaxLOD = Math::Vector4(1, 6, 0, 0);
-			////cam
-			//D3D11_MAPPED_SUBRESOURCE camMappedResource;
-			//DXUtility::GetInstance()->GetDeviceContext()->Map(cameraBuff, 0, D3D11_MAP_WRITE_DISCARD, 0, &camMappedResource);
-			//memcpy(camMappedResource.pData, &camBuffFormat, sizeof(ConstantBufferManager::CameraConstBuffFormat));
-			//DXUtility::GetInstance()->GetDeviceContext()->Unmap(cameraBuff, 0);
+			ConstantBufferManager::CameraConstBuffFormat camBuffFormat;
+			//camBuffFormat.Proj = Matrix4x4f::look
+			Vector3f pos = GetComponentTransform().GetPosition();
+			camBuffFormat.CamPos = Vector4f(pos.x, pos.y, pos.z, 0.f);
+			camBuffFormat.minMaxDistance = Vector4f(0.01f, 4.1f, 0.f, 0.f);
+			camBuffFormat.minMaxLOD = Vector4f(1.f, 6.f, 0.f, 0.f);
+
+			Vector3f upVector = GetComponentTransform().GetUpVector();
+			XMFLOAT3 f3CamPos = XMFLOAT3(pos.x, pos.y, pos.z);
+			XMFLOAT3 f3FocusPoint = XMFLOAT3(focusPoint_.x, focusPoint_.y, focusPoint_.z);			
+			XMFLOAT3 f3UpVector = XMFLOAT3(upVector.x, upVector.y, upVector.z);
+			XMFLOAT4X4 f4ViewMat;
+			XMStoreFloat4x4(&f4ViewMat, DirectX::XMMatrixLookAtLH(XMLoadFloat3(&f3CamPos), XMLoadFloat3(&f3FocusPoint), XMLoadFloat3(&f3UpVector)));
+
+			camBuffFormat.View = Matrix4x4f(f4ViewMat._11, f4ViewMat._12, f4ViewMat._13, f4ViewMat._14,
+				f4ViewMat._21, f4ViewMat._22, f4ViewMat._23, f4ViewMat._24,
+				f4ViewMat._31, f4ViewMat._32, f4ViewMat._33, f4ViewMat._34,
+				f4ViewMat._41, f4ViewMat._42, f4ViewMat._43, f4ViewMat._44);
+
+			SharedTypes::Size viewportSize = DX::DeviceResourcesUtil::GetDeviceResources()->GetOutputSize();
+			XMFLOAT4X4 f4ProjMat;
+			XMStoreFloat4x4(&f4ProjMat, XMMatrixPerspectiveFovLH(XM_PIDIV4, viewportSize.Width / viewportSize.Height, 0.01f, 100.0f));
+
+			camBuffFormat.Proj = Matrix4x4f(f4ProjMat._11, f4ProjMat._12, f4ProjMat._13, f4ProjMat._14,
+				f4ProjMat._21, f4ProjMat._22, f4ProjMat._23, f4ProjMat._24,
+				f4ProjMat._31, f4ProjMat._32, f4ProjMat._33, f4ProjMat._34,
+				f4ProjMat._41, f4ProjMat._42, f4ProjMat._43, f4ProjMat._44);
+
+			ConstantBufferManager::GetInstance().UpdateConstantBuffer(ConstantBufferManager::StaticConstBufferType::perCamera, &camBuffFormat, 
+				sizeof(ConstantBufferManager::CameraConstBuffFormat));
 		}
 	}
 }

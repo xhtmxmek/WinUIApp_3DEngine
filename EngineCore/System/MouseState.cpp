@@ -16,7 +16,7 @@ namespace Engine
 		{
 			for (int button = 0; button < pointerState.size(); button++)
 			{
-				state_[static_cast<unsigned int>(button)] = pointerState[button];
+				state_[static_cast<unsigned int>(button)] = pointerState[button];				
 			}
 		}
 

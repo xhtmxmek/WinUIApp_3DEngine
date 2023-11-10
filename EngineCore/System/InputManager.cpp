@@ -39,6 +39,10 @@ namespace Engine
 		{
 			Mouse->SetPointerPos(pos);
 		}
+		Vector2i InputManager::GetMouseDelta()
+		{
+			return Mouse->GetPointerDelta();
+		}
 		int InputManager::GetWheelDelta()
 		{
 			return Mouse->GetWheelDelta();

@@ -122,7 +122,10 @@ namespace EditorNativeClasses
 					float z = std::stof(winrt::to_string(zText.Text()));
 					*vectorProp = Vector3f(x, y, z);
 			};
+
 			xText.LostFocus(lostFocusCloser);
+			yText.LostFocus(lostFocusCloser);
+			zText.LostFocus(lostFocusCloser);
 		}
 		break;
 		case Engine::Component::PropertyType::TypePath:

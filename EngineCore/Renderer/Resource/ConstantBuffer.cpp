@@ -9,7 +9,10 @@ namespace Engine
 		namespace GraphicsLibrary
 		{
 			ConstantBufferManager::ConstantBufferManager()
-			{
+			{				
+				CreateConstantBuffer(StaticConstBufferType::perObject, sizeof(ObjectConstBuffFormat));
+				CreateConstantBuffer(StaticConstBufferType::perCamera, sizeof(CameraConstBuffFormat));
+				CreateConstantBuffer(StaticConstBufferType::perLight, sizeof(LightBuffFormat));				
 			}
 
 			void ConstantBufferManager::CreateConstantBuffer(StaticConstBufferType type, UINT size)

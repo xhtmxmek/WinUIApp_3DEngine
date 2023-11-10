@@ -263,6 +263,7 @@ namespace Engine
                 &context                     // Returns the device immediate context.
             );
         }
+
 #if defined(NDEBUG)
         else
         {
@@ -297,6 +298,17 @@ namespace Engine
 #endif
 
         ThrowIfFailed(hr);
+
+        
+        int numThread = std::thread::hardware_concurrency();
+        deferredContexts_.reserve(numThread);
+        deferredContexts_.resize(numThread);
+        for (auto deferredContext : deferredContexts_)
+        {
+            wil::com_ptr_nothrow<ID3D11DeviceContext> newContext;
+            ThrowIfFailed(device->CreateDeferredContext(0, newContext.addressof()));
+            newContext.query_to(deferredContext.addressof());
+        }
 
 #ifndef NDEBUG
         wil::com_ptr_nothrow<ID3D11Debug> d3dDebug;
@@ -376,7 +388,6 @@ namespace Engine
         //m_d3dRenderTargetSize.Height = swapDimensions ? m_outputSize.Width : m_outputSize.Height;
         m_d3dRenderTargetSize.Width = m_outputSize.Width;
         m_d3dRenderTargetSize.Height = m_outputSize.Height;
-        ;
 
         const DXGI_FORMAT backBufferFormat = NoSRGB(m_backBufferFormat);
         const UINT backBufferWidth = std::max<UINT>(static_cast<UINT>(m_d3dRenderTargetSize.Width), 1u);

@@ -27,6 +27,7 @@
 #include "Math/Quaternion.h"
 #include "Math/Matrix3x3.h"
 #include "Math/Matrix4x4.h"
+#include "Math/EngineMath.h"
 #include "CommonTypes.h"
 #include "UIInfoParams.h"
 #include "CommonDefine.h"

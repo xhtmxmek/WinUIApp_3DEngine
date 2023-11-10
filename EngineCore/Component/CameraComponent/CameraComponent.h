@@ -17,16 +17,30 @@ namespace Engine
 				ENGINE_API CameraComponent(const std::string& name = "CameraComponent");
 			ENGINE_API virtual void Init() override;
 			virtual void Tick(float elapsedTime) override;
+
+			const Matrix4x4f& GetViewMatrix()
+			{
+				return viewMatrix_;
+			}
+
+			const Matrix4x4f& GetProjMatrix()
+			{
+				return projMatrix_;
+			}
+
 		private:
-			void ProcessInput();
-			void MoveFoward(float DirectionFactor = 1.f);
-			void MoveRight(float DirectionFactor = 1.f);
+			void ProcessInput(float elapsedTime);
+			void MoveFoward(float directionFactor, float elapsedTime = 0.f);
+			void MoveRight(float directionFactor, float elapsedTime = 0.f);
 			void LookAt();
 			void UpdateConstantBuffer();
 		private:
-			std::map<SharedTypes::VirtualKey, std::function<void()>> keyMap_;
+			std::map<SharedTypes::VirtualKey, std::function<void(float)>> keyMap_;
 			Matrix4x4f viewMatrix_;
+			Matrix4x4f projMatrix_;
 			bool cameraMoveSwitch_;
+			Vector3f focusPoint_;
+			Vector3f upVector_;
 		};
 	}
 }

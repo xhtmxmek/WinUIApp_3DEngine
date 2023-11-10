@@ -213,9 +213,9 @@ namespace SharedTypes
 	template <typename TReal>
 	inline Vector3t<TReal> operator * (const Matrix3x3t<TReal>& pMatrix, const Matrix3x3t<TReal>& pVector) {
 		Vector3t<TReal> res;
-		res.x = pMatrix.a1 * pVector.x + pMatrix.a2 * pVector.y + pMatrix.a3 * pVector.z;
-		res.y = pMatrix.b1 * pVector.x + pMatrix.b2 * pVector.y + pMatrix.b3 * pVector.z;
-		res.z = pMatrix.c1 * pVector.x + pMatrix.c2 * pVector.y + pMatrix.c3 * pVector.z;
+		res.x = pMatrix._11 * pVector.x + pMatrix._12 * pVector.y + pMatrix._13 * pVector.z;
+		res.y = pMatrix._21 * pVector.x + pMatrix._22 * pVector.y + pMatrix._23 * pVector.z;
+		res.z = pMatrix._31 * pVector.x + pMatrix._32 * pVector.y + pMatrix._33 * pVector.z;
 		return res;
 	}
 
@@ -224,9 +224,9 @@ namespace SharedTypes
 	template <typename TReal>
 	inline Vector3t<TReal> operator * (const Matrix4x4t<TReal>& pMatrix, const Vector3t<TReal>& pVector) {
 		Vector3t<TReal> res;
-		res.x = pMatrix.a1 * pVector.x + pMatrix.a2 * pVector.y + pMatrix.a3 * pVector.z + pMatrix.a4;
-		res.y = pMatrix.b1 * pVector.x + pMatrix.b2 * pVector.y + pMatrix.b3 * pVector.z + pMatrix.b4;
-		res.z = pMatrix.c1 * pVector.x + pMatrix.c2 * pVector.y + pMatrix.c3 * pVector.z + pMatrix.c4;
+		res.x = pMatrix._11 * pVector.x + pMatrix._12 * pVector.y + pMatrix._13 * pVector.z + pMatrix._14;
+		res.y = pMatrix._21 * pVector.x + pMatrix._22 * pVector.y + pMatrix._23 * pVector.z + pMatrix._24;
+		res.z = pMatrix._31 * pVector.x + pMatrix._32 * pVector.y + pMatrix._33 * pVector.z + pMatrix._34;
 		return res;
 	}
 

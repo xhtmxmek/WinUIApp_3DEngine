@@ -21,6 +21,7 @@ namespace Engine
 				struct ObjectConstBuffFormat
 				{
 					Matrix4x4f World;
+					Matrix4x4f WorldViewProj;
 					Matrix4x4f InverseWorld;
 					Vector4 IsSkinned;
 					Matrix4x4f SkinMatrix[6];

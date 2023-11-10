@@ -33,9 +33,9 @@ namespace winrt::Editor::implementation
 		if (nativeComponent_.expired())
 			return;
 
-		auto pos = nativeComponent_.lock()->GetComponentTransform().GetPosition();
-		auto rot = nativeComponent_.lock()->GetComponentTransform().GetRotation();
-		auto scale = nativeComponent_.lock()->GetComponentTransform().GetScale();
+		auto pos = nativeComponent_.lock()->GetComponentTransform().GetPositionPtrToEditor();
+		auto rot = nativeComponent_.lock()->GetComponentTransform().GetRotationPtrToEditor();
+		auto scale = nativeComponent_.lock()->GetComponentTransform().GetScalePtrToEditor();
 
 		CreateCategoryProxy(pos, detailPanel);
 		CreateCategoryProxy(rot, detailPanel);

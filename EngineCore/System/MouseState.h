@@ -16,7 +16,7 @@ namespace Engine
             void SetState(vector<bool> const& pointerState);
             bool GetState(SharedTypes::PointerButton button);
 
-            void SetPointerPos(SharedTypes::Vector2i pos)
+            void SetPointerPos(Vector2i pos)
             {
                 pointerPos_ = pos;
                 lastPos_ = pos;

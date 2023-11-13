@@ -116,6 +116,7 @@
       <ConformanceMode>true</ConformanceMode>
       <PrecompiledHeader>Use</PrecompiledHeader>
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
+      <AdditionalIncludeDirectories>$(SolutionDir)ExternalLibraries\Assimp\Include</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>
@@ -150,17 +151,10 @@
     <ClInclude Include="Input\PointerButton.h" />
     <ClInclude Include="Input\VirtualKey.h" />
     <ClInclude Include="EngineMath.h" />
-    <ClInclude Include="Math\Color.h" />
-    <ClInclude Include="Math\Matrix3x3.h" />
-    <ClInclude Include="Math\Matrix4x4.h" />
     <ClInclude Include="Math\plane.h" />
-    <ClInclude Include="Math\Quaternion.h" />
-    <ClInclude Include="Math\Vector2.h" />
-    <ClInclude Include="Math\Vector3.h" />
     <ClInclude Include="pch.h" />
     <ClInclude Include="TypeBase.h" />
     <ClInclude Include="UIInfoParams.h" />
-    <ClInclude Include="Vector4.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="pch.cpp">

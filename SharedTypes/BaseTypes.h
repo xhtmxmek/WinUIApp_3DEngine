@@ -19,14 +19,18 @@
 #include <unordered_set>
 #include <unordered_map>
 
-#include "Math/Vector2.h"
-#include "Math/Vector3.h"
-#include "Math/Vector4.h"
-#include "Math/Color.h"
-#include "Math/Plane.h"
-#include "Math/Quaternion.h"
-#include "Math/Matrix3x3.h"
-#include "Math/Matrix4x4.h"
+#include <assimp/types.h>
+
+typedef aiVector2t<float> Vector2f;
+typedef aiVector2t<int> Vector2i;
+typedef aiVector3t<float> Vector3f;
+typedef aiColor4t<float> Vector4f;
+typedef aiColor4t<float> Color4f;
+typedef aiColor4t<int> Vector4i;
+typedef aiMatrix4x4t<float> Matrix4x4f;
+typedef aiQuaterniont<float> Quaternionf;
+
+
 #include "Math/EngineMath.h"
 #include "CommonTypes.h"
 #include "UIInfoParams.h"

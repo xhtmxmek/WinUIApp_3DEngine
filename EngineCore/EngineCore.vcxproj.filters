@@ -50,6 +50,8 @@
     <ClInclude Include="Level\Actor\Camera\Camera.h" />
     <ClInclude Include="Renderer\Resource\ConstantBuffer.h" />
     <ClInclude Include="Renderer\Resource\GraphicsLibraryResource.h" />
+    <ClInclude Include="EngineAsset\ModelAsset.h" />
+    <ClInclude Include="EngineAsset\Mesh.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="EngineCore.cpp" />
@@ -80,6 +82,7 @@
     <ClCompile Include="Level\Actor\Camera\Camera.cpp" />
     <ClCompile Include="Renderer\Resource\ConstantBuffer.cpp" />
     <ClCompile Include="Renderer\Resource\GraphicsLibraryResource.cpp" />
+    <ClCompile Include="EngineAsset\ModelAsset.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

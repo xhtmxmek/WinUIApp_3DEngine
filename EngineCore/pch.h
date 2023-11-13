@@ -8,9 +8,9 @@
 #define PCH_H
 
 // add headers that you want to pre-compile here
-#include "framework.h"
+#define NOMINMAX
 
-#pragma once
+#include "framework.h"
 
 //UI 관련 -> WinUI 헤더
 //#include <unknwn.h>
@@ -80,6 +80,7 @@
 //#include <winrt/Windows.Storage.FileProperties.h>
 //#include <winrt/Windows.Storage.AccessCache.h>
 
+#include <assimp\scene.h>
 
 #include "Common/EngineBaseHeader.h"
 

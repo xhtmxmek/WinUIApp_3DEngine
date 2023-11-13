@@ -1,10 +1,11 @@
 #include "pch.h"
 #include "GameMain.h"
-
+//
 #include "Level/Level.h"
 #include "Level/World.h"
-//#include "Level/Actor/SpriteActor/Sprite.h"
+////#include "Level/Actor/SpriteActor/Sprite.h"
 #include "Level/Actor/StaticMesh/StaticMesh.h"
+#include <iostream>
 
 
 //using namespace Engine;
@@ -13,13 +14,7 @@
 void GameMain::Initialize()
 {
 	//빌드 후 이벤트로 특정헤더파일에 포함시키기
-	//auto sprite = Engine::Level::ActorManager::GetInstance().CreateActor<Engine::Level::ASprite>("hello");
-	//Engine::Type::shared_ptr<int> test;
-	//Engine::Type::TestClass test;	
-	//Engine::Level::AStaticMesh test("test");
-	auto staticMesh = Engine::Level::SLevel::GetWorld()->CreateActor<Engine::Level::AStaticMesh>("MeshTest");	
-	//FVector2 test;
-	//test.Test();
+	auto staticMesh = Engine::Level::SLevel::GetWorld()->CreateActor<Engine::Level::AStaticMesh>("MeshTest");
 
 	/*
 	0. 텍스트 파싱해서 소스 코드를 만들기. 또는 스크립트의 클래스 등록하기.... 어쩔수없다.

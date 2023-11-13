@@ -8,7 +8,9 @@
 #define PCH_H
 
 // 여기에 미리 컴파일하려는 헤더 추가
+#define NOMINMAX
 #include "framework.h"
+#include "assimp/types.h"
 #include "Common/EngineBaseHeader.h"
 #include "Common/EngineCommonHeader.h"
 

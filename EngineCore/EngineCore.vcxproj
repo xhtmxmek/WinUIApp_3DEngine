@@ -152,6 +152,8 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="EngineAsset\Mesh.h" />
+    <ClInclude Include="EngineAsset\ModelAsset.h" />
     <ClInclude Include="Renderer\Resource\DeviceResources.h" />
     <ClInclude Include="Common\EngineBaseHeader.h" />
     <ClInclude Include="Common\EngineCommonHeader.h" />
@@ -199,6 +201,9 @@
     <ClInclude Include="System\MouseState.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="EngineAsset\ModelAsset.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Use</PrecompiledHeader>
+    </ClCompile>
     <ClCompile Include="Renderer\Resource\DeviceResource.cpp" />
     <ClCompile Include="Common\Math\TransformGroup.cpp" />
     <ClCompile Include="Common\Path.cpp" />

@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup Label="ProjectConfigurations">
     <ProjectConfiguration Include="Debug|Win32">
@@ -152,7 +152,11 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="EngineAsset\Mesh.h" />
+    <ClInclude Include="Animation\AnimEvaluator.h" />
+    <ClInclude Include="Animation\SceneAnimator.h" />
+    <ClInclude Include="Common\Utility.h" />
+    <ClInclude Include="Renderer\MaterialDrawer.h" />
+    <ClInclude Include="Renderer\MeshDrawer.h" />
     <ClInclude Include="EngineAsset\ModelAsset.h" />
     <ClInclude Include="Renderer\Resource\DeviceResources.h" />
     <ClInclude Include="Common\EngineBaseHeader.h" />
@@ -196,14 +200,17 @@
     <ClInclude Include="Renderer\Resource\ConstantBuffer.h" />
     <ClInclude Include="Renderer\LevelRenderer.h" />
     <ClInclude Include="Renderer\Resource\GraphicsLibraryResource.h" />
+    <ClInclude Include="Renderer\Resource\RenderStateObjectManager.h" />
     <ClInclude Include="System\InputManager.h" />
     <ClInclude Include="System\KeyboardState.h" />
     <ClInclude Include="System\MouseState.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="EngineAsset\ModelAsset.cpp">
-      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Use</PrecompiledHeader>
-    </ClCompile>
+    <ClCompile Include="Animation\AnimEvaluator.cpp" />
+    <ClCompile Include="Animation\SceneAnimator.cpp" />
+    <ClCompile Include="Renderer\MaterialDrawer.cpp" />
+    <ClCompile Include="Renderer\MeshDrawer.cpp" />
+    <ClCompile Include="EngineAsset\ModelAsset.cpp" />
     <ClCompile Include="Renderer\Resource\DeviceResource.cpp" />
     <ClCompile Include="Common\Math\TransformGroup.cpp" />
     <ClCompile Include="Common\Path.cpp" />
@@ -234,6 +241,7 @@
     <ClCompile Include="Renderer\Resource\ConstantBuffer.cpp" />
     <ClCompile Include="Renderer\LevelRenderer.cpp" />
     <ClCompile Include="Renderer\Resource\GraphicsLibraryResource.cpp" />
+    <ClCompile Include="Renderer\Resource\RenderStateObjectManager.cpp" />
     <ClCompile Include="System\InputManager.cpp" />
     <ClCompile Include="System\KeyboardState.cpp" />
     <ClCompile Include="System\MouseState.cpp" />

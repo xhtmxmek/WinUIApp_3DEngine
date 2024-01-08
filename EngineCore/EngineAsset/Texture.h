@@ -7,15 +7,17 @@ namespace Engine
 		class Texture
 		{
 		public:
-			Texture() : Name(L"") {};
+			Texture() : name_(L"") {};
 			bool Load(const wstring& textureName);
+			bool Load(const aiTexture* embeddedTexture);
 			const wil::com_ptr<ID3D11ShaderResourceView>& GetShaderResourceView()
 			{
-				return ShaderResourceView;
+				return shaderResourceView_;
 			}
 		private:
-			wil::com_ptr<ID3D11ShaderResourceView> ShaderResourceView;
-			std::wstring Name;
+			wil::com_ptr<ID3D11Texture2D> texture2D_;
+			wil::com_ptr<ID3D11ShaderResourceView> shaderResourceView_;
+			std::wstring name_;
 		};
 
 		class TextureManager
@@ -32,24 +34,8 @@ namespace Engine
 			TextureManager(const TextureManager&) = delete;
 			TextureManager& operator=(const TextureManager&) = delete;
 
-			const shared_ptr<Texture>& GetTexture(const wstring& textureName)
-			{	
-				wstring applicationPath = Path::EngineDir;				
-				wstring path = applicationPath + L"\\Assets\\" + textureName;
-
-				auto iter = Textures.find(path.c_str());
-				if (iter != Textures.end())
-				{
-					return iter->second;
-				}
-				else
-				{
-					auto newTexture = make_shared<Texture>();
-					newTexture->Load(path);
-					Textures.insert(make_pair(path.c_str(), newTexture));
-					return Textures[path.c_str()];
-				}
-			}
+			std::optional<weak_ptr<Texture>> LoadTexture(const wstring& textureName, const aiScene* scene);
+			std::optional<weak_ptr<Texture>> LoadTexture(const wstring& textureName);
 		private:
 			TextureManager(){}
 			map< const wchar_t*, shared_ptr<Texture>> Textures;

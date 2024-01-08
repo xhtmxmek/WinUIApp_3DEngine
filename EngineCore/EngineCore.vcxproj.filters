@@ -50,8 +50,13 @@
     <ClInclude Include="Level\Actor\Camera\Camera.h" />
     <ClInclude Include="Renderer\Resource\ConstantBuffer.h" />
     <ClInclude Include="Renderer\Resource\GraphicsLibraryResource.h" />
+    <ClInclude Include="Renderer\MeshDrawer.h" />
     <ClInclude Include="EngineAsset\ModelAsset.h" />
-    <ClInclude Include="EngineAsset\Mesh.h" />
+    <ClInclude Include="Common\Utility.h" />
+    <ClInclude Include="Animation\AnimEvaluator.h" />
+    <ClInclude Include="Animation\SceneAnimator.h" />
+    <ClInclude Include="Renderer\MaterialDrawer.h" />
+    <ClInclude Include="Renderer\Resource\RenderStateObjectManager.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="EngineCore.cpp" />
@@ -83,6 +88,11 @@
     <ClCompile Include="Renderer\Resource\ConstantBuffer.cpp" />
     <ClCompile Include="Renderer\Resource\GraphicsLibraryResource.cpp" />
     <ClCompile Include="EngineAsset\ModelAsset.cpp" />
+    <ClCompile Include="Renderer\MeshDrawer.cpp" />
+    <ClCompile Include="Animation\AnimEvaluator.cpp" />
+    <ClCompile Include="Animation\SceneAnimator.cpp" />
+    <ClCompile Include="Renderer\MaterialDrawer.cpp" />
+    <ClCompile Include="Renderer\Resource\RenderStateObjectManager.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

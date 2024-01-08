@@ -16,12 +16,14 @@
 #include <stdexcept>
 #include <concrt.h>
 #include <wincodec.h>
+#include <optional>
+#include <locale>
 
 #include <string>
-#include <memory>
 #include <map>
 #include <set>
 #include <unordered_set>
 #include <unordered_map>
+
 
 using namespace std;

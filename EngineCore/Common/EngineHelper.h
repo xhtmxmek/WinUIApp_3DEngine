@@ -90,7 +90,6 @@ namespace Engine
 			default:                                return fmt;
 			}
 		}
-
 	}
 }
 

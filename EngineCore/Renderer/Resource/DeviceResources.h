@@ -14,6 +14,16 @@ namespace Engine
 {
 	//UI와 연관있는 구조체들만 따로 모아놓는것도 있을듯
 
+	namespace Renderer
+	{
+		namespace GraphicsLibrary
+		{
+			struct RasterizerState;
+			struct SamplerState;
+			struct DepthStencilState;
+			struct BlendState;
+		}
+	}
 	namespace DX
 	{
 
@@ -119,6 +129,13 @@ namespace Engine
 			//	static winrt::Microsoft::UI::Xaml::Controls::SwapChainPanel swapchainPanel;
 			//	return swapchainPanel;
 			//}
+
+
+			//RenderState 관련
+			void SetRenderState(const Renderer::GraphicsLibrary::RasterizerState& rs = Renderer::GraphicsLibrary::DefaultRasterizerState,
+				const Renderer::GraphicsLibrary::SamplerState ss = Renderer::GraphicsLibrary::DefaultSamplerState,
+				const Renderer::GraphicsLibrary::DepthStencilState ds = Renderer::GraphicsLibrary::DefaultDepthStencilState,
+				const Renderer::GraphicsLibrary::BlendState bs = Renderer::GraphicsLibrary::DefaultBlendState);
 
 
 		private:

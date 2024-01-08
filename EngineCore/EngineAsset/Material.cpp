@@ -10,21 +10,27 @@ namespace Engine
 		Material::Material()
 		{			
 			textures_.reserve(TextureKey::Texture_Max);
-			textures_.resize(TextureKey::Texture_Max, nullptr);
+			textures_.resize(TextureKey::Texture_Max);
 		}
 
-		void Material::UpdateConstBuffers()
+		std::weak_ptr<Material> MaterialManager::CreateMaterial(const std::string& name)
 		{
-		}
-
-		void Material::DrawMaterial()
-		{
-			auto d3dContext = DX::DeviceResourcesUtil::GetDeviceResources()->GetD3DDeviceContext();
-			
-			for (UINT i = 0; i < TextureKey::Texture_Max; i++)
+			auto iter = Materials.find(name.c_str());
+			if (iter != Materials.end())
 			{
-				d3dContext->PSSetShaderResources(i, 1, textures_[i]->GetShaderResourceView().addressof());
+				return iter->second;
 			}
+			
+			return std::weak_ptr<Material>(make_shared<Material>());
+		}
+		std::optional<std::weak_ptr<Material>> MaterialManager::GetMaterial(const std::string& name)
+		{
+			auto iter = Materials.find(name.c_str());
+			if(iter != Materials.end())
+			{
+				return iter->second;
+			}
+			return nullopt;
 		}
 	}
 }

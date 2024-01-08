@@ -7,6 +7,7 @@
 #include "pch.h"
 #include "Common/EngineHelper.h"
 #include "DeviceResources.h"
+#include "Renderer/Resource/RenderStateObjectManager.h"
 #include "windows.h"
 
 using namespace D2D1;
@@ -624,6 +625,17 @@ namespace Engine
 
         // 모든 Microsoft Store 앱에 회색조 텍스트 앤티앨리어싱을 사용하는 것이 좋습니다.
         m_d2dContext->SetTextAntialiasMode(D2D1_TEXT_ANTIALIAS_MODE_GRAYSCALE);
+    }
+
+    void DX::DeviceResources::SetRenderState(const Renderer::GraphicsLibrary::RasterizerState& rs, const Renderer::GraphicsLibrary::SamplerState ss, 
+        const Renderer::GraphicsLibrary::DepthStencilState ds, const Renderer::GraphicsLibrary::BlendState bs)
+    {
+        m_d3dContext->RSSetState(rs.rasterizerState_.get());
+        m_d3dContext->PSSetSamplers(0, 1, ss.samplerState_.addressof());
+        m_d3dContext->OMSetDepthStencilState(ds.nativeState_.get(), 0);
+
+        float blendFactor[4] = { 1,1,1,1 };
+        m_d3dContext->OMSetBlendState(bs.blendState_.get(), blendFactor, 0);
     }
 
     // This method acquires the first available hardware adapter.

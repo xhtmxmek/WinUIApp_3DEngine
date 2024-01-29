@@ -142,6 +142,8 @@ namespace Engine
 				//ID3D11RasterizerState* RasterizerStates[(int)RasterizingType::MaxRasterzingType];
 				//ID3D11DepthStencilState* DepthStencilStates[(int)DepthStencilType::MaxDepthStencilType];
 				//ID3D11BlendState* BlendStates[(int)BlendingType::MaxBlendingType];
+				//basePass용 RenderState
+				//반투명 pass용 RenderState
 
 				static RasterizerState rasterizerState_;
 				static SamplerState samplerState_;

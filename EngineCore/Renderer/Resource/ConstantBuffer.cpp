@@ -12,7 +12,9 @@ namespace Engine
 			{				
 				CreateConstantBuffer(StaticConstBufferType::perObject, sizeof(ObjectConstBuffFormat));
 				CreateConstantBuffer(StaticConstBufferType::perCamera, sizeof(CameraConstBuffFormat));
-				CreateConstantBuffer(StaticConstBufferType::perLight, sizeof(LightBuffFormat));				
+				CreateConstantBuffer(StaticConstBufferType::perLight, sizeof(LightBuffFormat));
+				CreateConstantBuffer(StaticConstBufferType::perMaterial, sizeof(MaterialUniformBuffFormat));
+
 			}
 
 			void ConstantBufferManager::CreateConstantBuffer(StaticConstBufferType type, UINT size)
@@ -40,6 +42,20 @@ namespace Engine
 			{
 				return &ConstBuffer[(int)type];
 			}
+			void* ConstantBufferManager::LockUniformBuffer(StaticConstBufferType type)
+			{
+				D3D11_MAPPED_SUBRESOURCE mappedData;
+
+				auto deviceContext = DX::DeviceResourcesUtil::GetDeviceResources()->GetD3DDeviceContext();
+				deviceContext->Map(ConstBuffer[(int)type].get(), 0, D3D11_MAP_WRITE_DISCARD, 0, &mappedData);
+				return mappedData.pData;
+			}
+			void ConstantBufferManager::UnLock(StaticConstBufferType type)
+			{
+				auto deviceContext = DX::DeviceResourcesUtil::GetDeviceResources()->GetD3DDeviceContext();
+				deviceContext->Unmap(ConstBuffer[(int)type].get(), 0);
+			}
+
 			ConstantBufferManager& ConstantBufferManager::GetInstance()
 			{
 				static ConstantBufferManager instance;
@@ -50,6 +66,15 @@ namespace Engine
 			{
 				for (int i = 0; i < (int)StaticConstBufferType::bufferType_max; i++)
 					ConstBuffer[(int)i].reset();
+			}
+
+			MaterialUniformBuffFormat* LockMaterialUniformBuffer()
+			{
+				ConstantBufferManager::GetInstance().LockUniformBuffer(StaticConstBufferType::perMaterial);
+			}
+			void UnLockMaterialUniformBuffer()
+			{
+				ConstantBufferManager::GetInstance().UnLock(StaticConstBufferType::perMaterial);
 			}
 		}
 	}

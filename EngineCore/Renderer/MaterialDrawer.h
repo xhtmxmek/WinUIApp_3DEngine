@@ -10,8 +10,9 @@ namespace Engine
 		class MaterialDrawer
 		{
 		public:
-			static void DrawMaterial(const weak_ptr<EngineAsset::Material>& material);
+			void DrawMaterial(const weak_ptr<EngineAsset::Material>& material);
 		private:
+			std::shared_ptr<GraphicsLibrary::ShaderObject> drawShader_;
 			static void UpdateConstBuffers();
 		};
 	}

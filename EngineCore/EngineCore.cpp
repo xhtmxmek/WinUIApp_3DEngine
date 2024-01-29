@@ -13,6 +13,8 @@
 #include <fstream>
 #include <sstream>
 #include "Common/RuntimeContext.h"
+#include "Renderer/Shader/ShaderObjectManager.h"
+#include "Renderer/Resource/RenderStateObjectManager.h"
 
 namespace Engine
 {
@@ -66,6 +68,10 @@ namespace Engine
 		DX::DeviceResourcesUtil::GetInstance().CreateDeviceResources();
 		//DX::DeviceResourcesUtil::GetDeviceResources()->RegisterDeviceNotify(this);
 		RuntimeContext::InitialzeRuntimeTable();
+
+		Renderer::GraphicsLibrary::ShaderObjectManager::GetInstance().LoadShader();
+		//Renderer::GraphicsLibrary::RenderStateObjectManger::GetInstance().Init
+
 		InitializeGlobalObjects();
 		Input::InputManager::GetInstance().Initialize();
 

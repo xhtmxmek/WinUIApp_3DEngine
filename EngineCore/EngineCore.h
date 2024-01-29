@@ -92,6 +92,7 @@ namespace Engine
         bool CreateDeviceDependentResources();
         void CreateWindowSizeDependentResources();
         
+    private:
         std::shared_ptr<Engine::DX::StepTimer> Timer;
         std::shared_ptr<Engine::Level::World> m_World;
         
@@ -99,6 +100,8 @@ namespace Engine
         std::thread RenderLoopThread;
         std::mutex EngineTickMutex;
         //Windows::Foundation::IAsyncAction m_renderLoopWorker;
+        //IRenderer*를 통해서 Render. Mobile용과 DeferredRenderer가 따로 있음
+        //World가 Level을 물고 있는 것이다. World는 하나의 가상 세계이고 Level은 가상세계에 존재하는 장소(구역이다.)World는 Map안에 들어있다.
 
 
 

@@ -198,9 +198,12 @@
     <ClInclude Include="Level\World.h" />
     <ClInclude Include="pch.h" />
     <ClInclude Include="Renderer\Resource\ConstantBuffer.h" />
-    <ClInclude Include="Renderer\LevelRenderer.h" />
+    <ClInclude Include="Renderer\DeferredShadingRenderer.h" />
     <ClInclude Include="Renderer\Resource\GraphicsLibraryResource.h" />
     <ClInclude Include="Renderer\Resource\RenderStateObjectManager.h" />
+    <ClInclude Include="Renderer\Shader\DefaultShader.h" />
+    <ClInclude Include="Renderer\Shader\ShaderObject.h" />
+    <ClInclude Include="Renderer\Shader\ShaderObjectManager.h" />
     <ClInclude Include="System\InputManager.h" />
     <ClInclude Include="System\KeyboardState.h" />
     <ClInclude Include="System\MouseState.h" />
@@ -239,9 +242,11 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
     </ClCompile>
     <ClCompile Include="Renderer\Resource\ConstantBuffer.cpp" />
-    <ClCompile Include="Renderer\LevelRenderer.cpp" />
+    <ClCompile Include="Renderer\DeferredShadingRenderer.cpp" />
     <ClCompile Include="Renderer\Resource\GraphicsLibraryResource.cpp" />
     <ClCompile Include="Renderer\Resource\RenderStateObjectManager.cpp" />
+    <ClCompile Include="Renderer\Shader\ShaderObject.cpp" />
+    <ClCompile Include="Renderer\Shader\ShaderObjectManager.cpp" />
     <ClCompile Include="System\InputManager.cpp" />
     <ClCompile Include="System\KeyboardState.cpp" />
     <ClCompile Include="System\MouseState.cpp" />

@@ -24,7 +24,7 @@
     <ClInclude Include="Component\EngineProperty.h" />
     <ClInclude Include="Level\Level.h" />
     <ClInclude Include="Level\World.h" />
-    <ClInclude Include="Renderer\LevelRenderer.h" />
+    <ClInclude Include="Renderer\DeferredShadingRenderer.h" />
     <ClInclude Include="Common\Math\TransformGroup.h" />
     <ClInclude Include="Renderer\Resource\DeviceResources.h" />
     <ClInclude Include="Common\EngineBaseHeader.h" />
@@ -57,6 +57,9 @@
     <ClInclude Include="Animation\SceneAnimator.h" />
     <ClInclude Include="Renderer\MaterialDrawer.h" />
     <ClInclude Include="Renderer\Resource\RenderStateObjectManager.h" />
+    <ClInclude Include="Renderer\Shader\ShaderObjectManager.h" />
+    <ClInclude Include="Renderer\Shader\ShaderObject.h" />
+    <ClInclude Include="Renderer\Shader\DefaultShader.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="EngineCore.cpp" />
@@ -73,7 +76,7 @@
     <ClCompile Include="Component\ComponentLinker.cpp" />
     <ClCompile Include="Level\Level.cpp" />
     <ClCompile Include="Level\World.cpp" />
-    <ClCompile Include="Renderer\LevelRenderer.cpp" />
+    <ClCompile Include="Renderer\DeferredShadingRenderer.cpp" />
     <ClCompile Include="Common\Math\TransformGroup.cpp" />
     <ClCompile Include="Renderer\Resource\DeviceResource.cpp" />
     <ClCompile Include="Common\Path.cpp" />
@@ -93,6 +96,8 @@
     <ClCompile Include="Animation\SceneAnimator.cpp" />
     <ClCompile Include="Renderer\MaterialDrawer.cpp" />
     <ClCompile Include="Renderer\Resource\RenderStateObjectManager.cpp" />
+    <ClCompile Include="Renderer\Shader\ShaderObject.cpp" />
+    <ClCompile Include="Renderer\Shader\ShaderObjectManager.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

@@ -5,7 +5,7 @@ namespace Engine
 {
 	namespace Renderer
 	{
-		namespace GraphicsLibrary
+		namespace RLI
 		{
 			class DefaultShader : public ShaderObject
 			{

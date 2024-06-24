@@ -1,7 +1,7 @@
 #include "pch.h"
 #include "MeshDrawer.h"
 #include "Renderer/Resource/DeviceResources.h"
-#include "Renderer/Resource/GraphicsLibraryResource.h"
+#include "Renderer/Resource/RLIResource.h"
 #include "EngineAsset/Material.h"
 #include "Renderer/MaterialDrawer.h"
 
@@ -82,9 +82,9 @@ namespace Engine
 			}
 
 			UINT vertexSize = sizeof(VERTEX);
-			Renderer::GraphicsLibrary::CreateBufferFromData(&VertexBuffer_, D3D11_BIND_VERTEX_BUFFER, vertices_.data(), vertexSize * (UINT)vertices_.size(),
+			Renderer::RLI::CreateBufferFromData(&VertexBuffer_, D3D11_BIND_VERTEX_BUFFER, vertices_.data(), vertexSize * (UINT)vertices_.size(),
 				D3D11_USAGE_DEFAULT, 0);
-			Renderer::GraphicsLibrary::CreateBufferFromData(&VertexBuffer_, D3D11_BIND_INDEX_BUFFER, indices_.data(), sizeof(UINT) * (UINT)indices_.size(),
+			Renderer::RLI::CreateBufferFromData(&IndexBuffer_, D3D11_BIND_INDEX_BUFFER, indices_.data(), sizeof(UINT) * (UINT)indices_.size(),
 				D3D11_USAGE_DEFAULT, 0);
 		}
 
@@ -93,8 +93,8 @@ namespace Engine
 			//병렬 렌더링 일때와 병렬렌더링이 아닐때가 구분되어야 한다.
 			/*
 			* 병렬 렌더링 일떄 : 청크 단위로 쪼개서 finishCommandList로 명령 목록만든다.
-			* 렌더링 할때 머티리얼 별로 렌더링하되, 해당 패스에서 명령을 쪼갠다.
-			* 부모 머티리얼은 한번만 업데이트 된다. 머티리얼 인스턴스는 인스턴스 별로 업데이트 된다. 이건 병렬이든 아니든 무조건.
+			* 렌더링 할때 머티리얼 별로 렌더링하되(ex:mat0의 오브젝트 1, 2, 3, 4)..... 해당 패스에서 명령을 쪼갠다.
+			* 부모 머티리얼은 한번만 업데이트 된다. 여러번 될 필요가 없기 때문이다. 머티리얼 인스턴스는 인스턴스 별로 업데이트 된다. 이건 병렬이든 아니든 무조건.
 			*/
 
 			//패스마다 렌더스테이트가 다르고 머티리얼마다 렌더스테이트가 다르다.

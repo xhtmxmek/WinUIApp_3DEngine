@@ -7,7 +7,7 @@ namespace Engine
 {	
 	namespace Renderer
 	{
-		namespace GraphicsLibrary
+		namespace RLI
 		{
 			ShaderObjectManager::ShaderObjectManager()
 			{
@@ -55,7 +55,7 @@ namespace Engine
 			}
 
 
-			std::shared_ptr<ShaderObject> const ShaderObjectManager::GetShader(Engine::Renderer::GraphicsLibrary::ShaderType eShader)
+			std::shared_ptr<ShaderObject> const ShaderObjectManager::GetShader(Engine::Renderer::RLI::ShaderType eShader)
 			{
 				return ShaderVector[(int)eShader];
 			}

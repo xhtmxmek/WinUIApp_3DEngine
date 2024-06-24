@@ -6,7 +6,7 @@ namespace Engine
 {
 	namespace Renderer
 	{
-		namespace GraphicsLibrary
+		namespace RLI
 		{
 			RenderStateObjectManger::RenderStateObjectManger()
 			{

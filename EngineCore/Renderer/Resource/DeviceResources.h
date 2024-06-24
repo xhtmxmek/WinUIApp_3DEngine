@@ -16,7 +16,7 @@ namespace Engine
 
 	namespace Renderer
 	{
-		namespace GraphicsLibrary
+		namespace RLI
 		{
 			struct RasterizerState;
 			struct SamplerState;
@@ -132,10 +132,10 @@ namespace Engine
 
 
 			//RenderState ฐüทร
-			void SetRenderState(const Renderer::GraphicsLibrary::RasterizerState& rs = Renderer::GraphicsLibrary::DefaultRasterizerState,
-				const Renderer::GraphicsLibrary::SamplerState ss = Renderer::GraphicsLibrary::DefaultSamplerState,
-				const Renderer::GraphicsLibrary::DepthStencilState ds = Renderer::GraphicsLibrary::DefaultDepthStencilState,
-				const Renderer::GraphicsLibrary::BlendState bs = Renderer::GraphicsLibrary::DefaultBlendState);
+			void SetRenderState(const Renderer::RLI::RasterizerState& rs = Renderer::RLI::DefaultRasterizerState,
+				const Renderer::RLI::SamplerState ss = Renderer::RLI::DefaultSamplerState,
+				const Renderer::RLI::DepthStencilState ds = Renderer::RLI::DefaultDepthStencilState,
+				const Renderer::RLI::BlendState bs = Renderer::RLI::DefaultBlendState);
 
 
 		private:

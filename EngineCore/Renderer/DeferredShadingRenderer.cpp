@@ -30,6 +30,7 @@ namespace Engine
 			
 			RenderBasePass();
 
+			//deferred light, 반투명 볼륨 적용
 			RenderLights();
 
 			RenderTranslucencyPass();

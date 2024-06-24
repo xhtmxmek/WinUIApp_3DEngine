@@ -10,7 +10,7 @@
 namespace Engine
 {
 	using namespace Renderer;
-	using namespace Renderer::GraphicsLibrary;
+	using namespace Renderer::RLI;
 
 	namespace Component
 	{

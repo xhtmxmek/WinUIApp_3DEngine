@@ -12,7 +12,7 @@ namespace Engine
 		public:
 			void DrawMaterial(const weak_ptr<EngineAsset::Material>& material);
 		private:
-			std::shared_ptr<GraphicsLibrary::ShaderObject> drawShader_;
+			std::shared_ptr<RLI::ShaderObject> drawShader_;
 			static void UpdateConstBuffers();
 		};
 	}

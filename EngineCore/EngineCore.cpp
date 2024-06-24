@@ -69,8 +69,8 @@ namespace Engine
 		//DX::DeviceResourcesUtil::GetDeviceResources()->RegisterDeviceNotify(this);
 		RuntimeContext::InitialzeRuntimeTable();
 
-		Renderer::GraphicsLibrary::ShaderObjectManager::GetInstance().LoadShader();
-		//Renderer::GraphicsLibrary::RenderStateObjectManger::GetInstance().Init
+		Renderer::RLI::ShaderObjectManager::GetInstance().LoadShader();
+		//Renderer::RLI::RenderStateObjectManger::GetInstance().Init
 
 		InitializeGlobalObjects();
 		Input::InputManager::GetInstance().Initialize();
@@ -87,7 +87,7 @@ namespace Engine
 	void EngineCore::UnInitialize()
 	{
 		DX::DeviceResourcesUtil::GetInstance().ReleaseInstance();
-		Renderer::GraphicsLibrary::ConstantBufferManager::GetInstance().Release();
+		Renderer::RLI::ConstantBufferManager::GetInstance().Release();
 		Level::SLevel::GetInstance().ReleaseInstance();
 		Level::ActorManager::GetInstance().ReleaseInstance();
 		EngineAsset::TextureManager::GetInstance().ReleaseInstance();

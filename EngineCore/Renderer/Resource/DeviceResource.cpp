@@ -627,8 +627,8 @@ namespace Engine
         m_d2dContext->SetTextAntialiasMode(D2D1_TEXT_ANTIALIAS_MODE_GRAYSCALE);
     }
 
-    void DX::DeviceResources::SetRenderState(const Renderer::GraphicsLibrary::RasterizerState& rs, const Renderer::GraphicsLibrary::SamplerState ss, 
-        const Renderer::GraphicsLibrary::DepthStencilState ds, const Renderer::GraphicsLibrary::BlendState bs)
+    void DX::DeviceResources::SetRenderState(const Renderer::RLI::RasterizerState& rs, const Renderer::RLI::SamplerState ss, 
+        const Renderer::RLI::DepthStencilState ds, const Renderer::RLI::BlendState bs)
     {
         m_d3dContext->RSSetState(rs.rasterizerState_.get());
         m_d3dContext->PSSetSamplers(0, 1, ss.samplerState_.addressof());

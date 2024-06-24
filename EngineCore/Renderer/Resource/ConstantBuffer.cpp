@@ -1,12 +1,12 @@
 #include "pch.h"
 #include "Renderer/Resource/DeviceResources.h"
 #include "ConstantBuffer.h"
-#include "GraphicsLibraryResource.h"
+#include "RLIResource.h"
 namespace Engine
 {
 	namespace Renderer
 	{
-		namespace GraphicsLibrary
+		namespace RLI
 		{
 			ConstantBufferManager::ConstantBufferManager()
 			{				

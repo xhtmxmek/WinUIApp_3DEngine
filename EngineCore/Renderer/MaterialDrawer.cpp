@@ -14,7 +14,7 @@ namespace Engine
 
 	namespace Renderer
 	{
-		using namespace GraphicsLibrary;
+		using namespace RLI;
 
 		void MaterialDrawer::DrawMaterial(const weak_ptr<EngineAsset::Material>& material)
 		{
@@ -38,8 +38,8 @@ namespace Engine
 				return;
 
 
-			//auto RasterizerState = GraphicsLibrary::GetRasterizerState(GraphicsLibrary::RasterizerFillMode::Solid, GraphicsLibrary::RasterizerCullMode::Back);
-			auto stateManager = GraphicsLibrary::RenderStateObjectManger::GetInstance();
+			//auto RasterizerState = RLI::GetRasterizerState(RLI::RasterizerFillMode::Solid, RLI::RasterizerCullMode::Back);
+			auto stateManager = RLI::RenderStateObjectManger::GetInstance();
 			//stateManager.GetBlendState(materialPtr->GetBlendable())
 			DX::DeviceResourcesUtil::GetDeviceResources()->SetRenderState();
 

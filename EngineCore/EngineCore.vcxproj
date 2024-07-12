@@ -155,8 +155,7 @@
     <ClInclude Include="Animation\AnimEvaluator.h" />
     <ClInclude Include="Animation\SceneAnimator.h" />
     <ClInclude Include="Common\Utility.h" />
-    <ClInclude Include="Renderer\MaterialDrawer.h" />
-    <ClInclude Include="Renderer\MeshDrawer.h" />
+    <ClInclude Include="Renderer\MeshProcessor.h" />
     <ClInclude Include="EngineAsset\ModelAsset.h" />
     <ClInclude Include="Renderer\Resource\DeviceResources.h" />
     <ClInclude Include="Common\EngineBaseHeader.h" />
@@ -201,6 +200,7 @@
     <ClInclude Include="Renderer\DeferredShadingRenderer.h" />
     <ClInclude Include="Renderer\Resource\GraphicsLibraryResource.h" />
     <ClInclude Include="Renderer\Resource\RenderStateObjectManager.h" />
+    <ClInclude Include="Renderer\Resource\RLIresource.h" />
     <ClInclude Include="Renderer\Shader\DefaultShader.h" />
     <ClInclude Include="Renderer\Shader\ShaderObject.h" />
     <ClInclude Include="Renderer\Shader\ShaderObjectManager.h" />
@@ -211,8 +211,7 @@
   <ItemGroup>
     <ClCompile Include="Animation\AnimEvaluator.cpp" />
     <ClCompile Include="Animation\SceneAnimator.cpp" />
-    <ClCompile Include="Renderer\MaterialDrawer.cpp" />
-    <ClCompile Include="Renderer\MeshDrawer.cpp" />
+    <ClCompile Include="Renderer\MeshProcessor.cpp" />
     <ClCompile Include="EngineAsset\ModelAsset.cpp" />
     <ClCompile Include="Renderer\Resource\DeviceResource.cpp" />
     <ClCompile Include="Common\Math\TransformGroup.cpp" />
@@ -245,6 +244,8 @@
     <ClCompile Include="Renderer\DeferredShadingRenderer.cpp" />
     <ClCompile Include="Renderer\Resource\GraphicsLibraryResource.cpp" />
     <ClCompile Include="Renderer\Resource\RenderStateObjectManager.cpp" />
+    <ClCompile Include="Renderer\Resource\RLIResource.cpp" />
+    <ClCompile Include="Renderer\Scene.cpp" />
     <ClCompile Include="Renderer\Shader\ShaderObject.cpp" />
     <ClCompile Include="Renderer\Shader\ShaderObjectManager.cpp" />
     <ClCompile Include="System\InputManager.cpp" />

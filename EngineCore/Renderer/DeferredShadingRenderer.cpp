@@ -1,6 +1,8 @@
 #include "pch.h"
 #include "DeferredShadingRenderer.h"
 #include "Component/ComponentBase/ComponentBase.h"
+#include "Scene.h"
+#include "RendererBaseHeader.h"
 
 namespace Engine
 {
@@ -8,20 +10,20 @@ namespace Engine
 	{		
 		void DeferredShadingRenderer::Render( const vector<shared_ptr<Component::DrawableComponent>>& DrawList )
 		{
-			//3D ¾×ÅÍ ¸ÕÀú±×¸²(Æ÷¿öµå, µğÆÛµå ¸ğµå ¼±ÅÃÇØ¼­ ±×¸²)
-			//·»´õ·¯¿¡¼­ ¿ùµå ¼¼ÆÃÀ» ¹Ş¾Æ¼­ ±×¸². È¤Àº ¿ùµå°¡ ·»´õ·¯¸¦ ¹Ş¾Æ¼­ ±×¸².
-			//2D ¾×ÅÍ´Â ¾î¶»°Ô ±×¸®³ª? ¾îµğ¼Ò¼ÓÀÎ°¡. ÀÏ´Ü ¾×ÅÍ´Â ÀüºÎ ¿ùµå ¼Ò¼Ó.
-			//·»´õ·¯´Â drawComponent list¸¦ °¡Áö°í ¾ÀÀ» ±×¸°´Ù.
+			//3D ì•¡í„° ë¨¼ì €ê·¸ë¦¼(í¬ì›Œë“œ, ë””í¼ë“œ ëª¨ë“œ ì„ íƒí•´ì„œ ê·¸ë¦¼)
+			//ë Œë”ëŸ¬ì—ì„œ ì›”ë“œ ì„¸íŒ…ì„ ë°›ì•„ì„œ ê·¸ë¦¼. í˜¹ì€ ì›”ë“œê°€ ë Œë”ëŸ¬ë¥¼ ë°›ì•„ì„œ ê·¸ë¦¼.
+			//2D ì•¡í„°ëŠ” ì–´ë–»ê²Œ ê·¸ë¦¬ë‚˜? ì–´ë””ì†Œì†ì¸ê°€. ì¼ë‹¨ ì•¡í„°ëŠ” ì „ë¶€ ì›”ë“œ ì†Œì†.
+			//ë Œë”ëŸ¬ëŠ” drawComponent listë¥¼ ê°€ì§€ê³  ì”¬ì„ ê·¸ë¦°ë‹¤.
 
 
 			/*
-			* ue¿¡¼­ ÄÚµå¸¦ º»°ÍÀ» ±âÁØÀ¸·Î µû¶óÇØº¸ÀÚ.
-			* mesh·»´õ¸µÀº °¢ ÆĞ½º º°·Î meshProcessor°¡ ÀÖ´Ù.
-			* meshProcessor´Â primitiveÀÇ vertex, °¢ passÀÇ shader, °¢ passº°·Î ÁØºñµÇ¾îÀÖ´Â renderstateµîÀ»
-			* Á¶ÇÕÇÑ´Ù.
-			* ÀÏ¹İÀûÀ¸·Î static meshÀÇ drawcommand´Â Ä³½Ì µÈ´Ù. dynamic meshÀÇ drawcommand´Â ¸ÅÇÁ·¹ÀÓ »ı¼ºµÈ´Ù.
-			* dynamic mesh´Â skeletal meshºÎÅÍ ½ÃÀÛÇØ¼­,fog³ª ÆÄÆ¼Å¬ °°Àº °ÍµéÀÌ ÇØ´çµÈ´Ù. 
-			* 
+			* ueì—ì„œ ì½”ë“œë¥¼ ë³¸ê²ƒì„ ê¸°ì¤€ìœ¼ë¡œ ë”°ë¼í•´ë³´ì.
+			* meshë Œë”ë§ì€ ê° íŒ¨ìŠ¤ ë³„ë¡œ meshProcessorê°€ ìˆë‹¤.
+			* meshProcessorëŠ” primitiveì˜ vertex, ê° passì˜ shader, ê° passë³„ë¡œ ì¤€ë¹„ë˜ì–´ìˆëŠ” renderstateë“±ì„
+			* ì¡°í•©í•œë‹¤.
+			* ì¼ë°˜ì ìœ¼ë¡œ static meshì˜ drawcommandëŠ” ìºì‹± ëœë‹¤. dynamic meshì˜ drawcommandëŠ” ë§¤í”„ë ˆì„ ìƒì„±ëœë‹¤.
+			* dynamic meshëŠ” skeletal meshë¶€í„° ì‹œì‘í•´ì„œ,fogë‚˜ íŒŒí‹°í´ ê°™ì€ ê²ƒë“¤ì´ í•´ë‹¹ëœë‹¤.
+			*
 			*/
 
 			ComputeVisibility();
@@ -30,7 +32,7 @@ namespace Engine
 			
 			RenderBasePass();
 
-			//deferred light, ¹İÅõ¸í º¼·ı Àû¿ë
+			//deferred light, ë°˜íˆ¬ëª… ë³¼ë¥¨ ì ìš©
 			RenderLights();
 
 			RenderTranslucencyPass();
@@ -38,7 +40,7 @@ namespace Engine
 			//RenderFog..particle.. etc...
 			RenderVolumetricFog();
 
-			//¾ÈÂÊ¿¡¼­ translucency pass composit
+			//ì•ˆìª½ì—ì„œ translucency pass composit
 			RenderPostProcessingPass();
 
 			for (auto& drawComponent : DrawList )
@@ -57,26 +59,26 @@ namespace Engine
 		}
 		void DeferredShadingRenderer::ComputeVisibility()
 		{
-			//SceneÀÌ °¡Áö°íÀÖ´Â primitiveµéÀÇ visibility °Ë»ç
+			//Sceneì´ ê°€ì§€ê³ ìˆëŠ” primitiveë“¤ì˜ visibility ê²€ì‚¬
 
 			/*
 			* 1.frustomculling
 			* 2.occlusionculling
-			* 3.°¢ drawComponentÀÇ visibility °Ë»ç
-			* 4.¾²·¹µå ÀÌ¿ëÇÏ¿© º´·Ä·Î °Ë»ç
-			* 5.¸ğµç Primitive °Ë»çÇÏ¿©,°¡½Ã¼º Åë°úÇÑ PrimitiveÀÇ DrawCommand¸¸ VisibieCommandList¿¡ ÀúÀå.
-			* 6.À§´Â staticMesh¿¡ ´ëÇÑ °ÍÀÌ¸ç, SceneÀÇ dinamicMeshµµ °Ë»çÇÏ¿© ¿©±â¼­ ¸ÅÇÁ·¹ÀÓ »ı¼º. 
-			* VisibleDrawCommand´Â ¾ğ¸®¾ó¿¡¼± View°¡ °¡Áö°í ÀÖÀ½. ¿ì¸®µµ ±×³É View¶ó´Â ±¸Á¶Ã¼ ¸¸µé¾î¼­ µé°íÀÖ°Ô ÇÏÀÚ.
+			* 3.ê° drawComponentì˜ visibility ê²€ì‚¬
+			* 4.ì“°ë ˆë“œ ì´ìš©í•˜ì—¬ ë³‘ë ¬ë¡œ ê²€ì‚¬
+			* 5.ëª¨ë“  Primitive ê²€ì‚¬í•˜ì—¬,ê°€ì‹œì„± í†µê³¼í•œ Primitiveì˜ DrawCommandë§Œ VisibieCommandListì— ì €ì¥.
+			* 6.ìœ„ëŠ” staticMeshì— ëŒ€í•œ ê²ƒì´ë©°, Sceneì˜ dinamicMeshë„ ê²€ì‚¬í•˜ì—¬ ì—¬ê¸°ì„œ ë§¤í”„ë ˆì„ ìƒì„±.
+			* VisibleDrawCommandëŠ” ì–¸ë¦¬ì–¼ì—ì„  Viewê°€ ê°€ì§€ê³  ìˆìŒ. ìš°ë¦¬ë„ ê·¸ëƒ¥ Viewë¼ëŠ” êµ¬ì¡°ì²´ ë§Œë“¤ì–´ì„œ ë“¤ê³ ìˆê²Œ í•˜ì.
 			*/
 			OcclusionCull();
 			FrustomCull();
 		}
 		void DeferredShadingRenderer::GatherDynamicMesh()
 		{
-			//SceneÀÇ Dynamic MeshÀÇ drawCommand »ı¼º
-			//ViewÀÇ visibleDrawCommand¿¡ drawCommand Ãß°¡
-			//visibleDrawCommand´Â CachedDrawCommands¿Í ±×³É DrawcommandsÀÇ Á¶ÇÕÀÌ´Ù.
-			//visibleDrawCommand´Â °¢ passº°·Î ÀÖ´Ù.
+			//Sceneì˜ Dynamic Meshì˜ drawCommand ìƒì„±
+			//Viewì˜ visibleDrawCommandì— drawCommand ì¶”ê°€
+			//visibleDrawCommandëŠ” CachedDrawCommandsì™€ ê·¸ëƒ¥ Drawcommandsì˜ ì¡°í•©ì´ë‹¤.
+			//visibleDrawCommandëŠ” ê° passë³„ë¡œ ìˆë‹¤.
 		}
 		void DeferredShadingRenderer::OcclusionCull()
 		{
@@ -92,35 +94,37 @@ namespace Engine
 		}
 		void DeferredShadingRenderer::RenderBasePass()
 		{
-			/*VisibleDrawCommand¸¦ DrawÇÑ´Ù. ¾ÈÂÊ¿¡¼­ º´·Ä·Î DrawÇÑ´Ù.
-			*StaticMesh´Â ·»´õ¸í·ÉÀÌ º¯ÇÏÁö ¾Ê´Â ÇÑ Ä³½ÌÇØ¼­ ·»´õ¸í·ÉÀ» ¾´´Ù
-			* MeshProcessor°¡ staticMesh »ı¼º½Ã ¹öÅØ½º, passº° RenderState, passº° ShaderµîÀ» Á¶ÇÕÇÏ¿© DrawCommand¸¦ ¸¸µç´Ù.
-			* DynamicMesh´Â ¸ÅÇÁ·¹ÀÓ MeshProcessor¸¦ ÀÌ¿ëÇÏ¿© ·»´õ ¸í·ÉÀ» ¸¸µç´Ù.
+			/*VisibleDrawCommandë¥¼ Drawí•œë‹¤. ì•ˆìª½ì—ì„œ ë³‘ë ¬ë¡œ Drawí•œë‹¤.
+			*StaticMeshëŠ” ë Œë”ëª…ë ¹ì´ ë³€í•˜ì§€ ì•ŠëŠ” í•œ ìºì‹±í•´ì„œ ë Œë”ëª…ë ¹ì„ ì“´ë‹¤
+			* MeshProcessorê°€ staticMesh ìƒì„±ì‹œ ë²„í…ìŠ¤, passë³„ RenderState, passë³„ Shaderë“±ì„ ì¡°í•©í•˜ì—¬ DrawCommandë¥¼ ë§Œë“ ë‹¤.
+			* DynamicMeshëŠ” ë§¤í”„ë ˆì„ MeshProcessorë¥¼ ì´ìš©í•˜ì—¬ ë Œë” ëª…ë ¹ì„ ë§Œë“ ë‹¤.
 			*/
+
+			SceneInfo->DispatchVisibleDrawCommandList(MeshPass::Base);			
 		}
 		void DeferredShadingRenderer::RenderLights()
 		{
-			//¶óÀÌÆ®´Â ·ÎÄÃ¶óÀÌÆ®, µğ·º¼Å³Î ¶óÀÌÆ®, Å¸ÀÏ µîÀÌÀÖ´Ù.
-			//±Û·Î¹úÀÏ·ç¹Ì³×ÀÌ¼ÇÀº ÇĞ½À ÈÄ¿¡ Àû¿ëÇØº¸±â.
+			//ë¼ì´íŠ¸ëŠ” ë¡œì»¬ë¼ì´íŠ¸, ë””ë ‰ì…”ë„ ë¼ì´íŠ¸, ì—ì–´ë¦¬ì–´ë¼ì´íŠ¸(ë ‰íŠ¸ë¼ì´íŠ¸?), íƒ€ì¼ ë“±ì´ìˆë‹¤.
+			//ê¸€ë¡œë²Œì¼ë£¨ë¯¸ë„¤ì´ì…˜ì€ í•™ìŠµ í›„ì— ì ìš©í•´ë³´ê¸°.
 		}
 		void DeferredShadingRenderer::RenderTranslucencyPass()
 		{
 			/*Todo
-			* ¹İÅõ¸íÀº ¾ÀÄ®¶ó À§¿¡
-			* ppÀÇ ¿©·¯À§Ä¡¿¡ »ğÀÔµÉ¼ö ÀÖ´Â ¹İÅõ¸í ÆĞ½ºµéÀÌ ÀÖÀ½.ÀÌ°Ç ÃßÈÄ ÇÊ¿äÇÏ¸é ³Ö±â
-			* ¹İÅõ¸í º¼·ıÀº¾ÆÁ÷ Àß ¸ğ¸§. ½ºÅÍµğ ÇÊ¿ä.
+			* ë°˜íˆ¬ëª…ì€ ì”¬ì¹¼ë¼ ìœ„ì—
+			* ppì˜ ì—¬ëŸ¬ìœ„ì¹˜ì— ì‚½ì…ë ìˆ˜ ìˆëŠ” ë°˜íˆ¬ëª… íŒ¨ìŠ¤ë“¤ì´ ìˆìŒ.ì´ê±´ ì¶”í›„ í•„ìš”í•˜ë©´ ë„£ê¸°
+			* ë°˜íˆ¬ëª… ë³¼ë¥¨ì€ì•„ì§ ì˜ ëª¨ë¦„. ìŠ¤í„°ë”” í•„ìš”.
 			*/
 		}
 		void DeferredShadingRenderer::RenderVolumetricFog()
 		{
 			/*
-			* volume ·»´õ¸µ °øºÎ ÇÊ¿ä. Æ¯È÷ fog
+			* volume ë Œë”ë§ ê³µë¶€ í•„ìš”. íŠ¹íˆ fog
 			*/
 		}
 		void DeferredShadingRenderer::RenderPostProcessingPass()
 		{
 			/*
-			* UE¿¡¼­ post process´Â ¼ø¼­°¡ °íÁ¤µÇ¾îÀÖÀ½. ´ëºÎºĞÀº ÄÄÇ»Æ® ¼ÎÀÌ´õ¸¦ »ç¿ëÁßÀÓ.
+			* UEì—ì„œ post processëŠ” ìˆœì„œê°€ ê³ ì •ë˜ì–´ìˆìŒ. ëŒ€ë¶€ë¶„ì€ ì»´í“¨íŠ¸ ì…°ì´ë”ë¥¼ ì‚¬ìš©ì¤‘ì„.
 			*/
 		}
 	}

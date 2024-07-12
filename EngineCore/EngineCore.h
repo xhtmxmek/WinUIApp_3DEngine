@@ -4,9 +4,9 @@
 #include "DLLDefine.h"
 
 /*
-EngineCore´Â ÃÖ´ëÇÑ ÇÃ·§Æû µ¶¸³ÀûÀÎ ÄÚµå·Î °¡´Â°ÍÀÌ ¸ñÇ¥
-·»´õ¸µ¿¡ °ü·ÃµÈ API´Â »ç¿ëÇÏÁö¸¸, ¿î¿µÃ¼Á¦ °ü·ÃµÈ ÄÚµå´Â ÃÖ´ëÇÑ ¹èÁ¦ÇÒ ¿¹Á¤
-¿î¿µÃ¼Á¦ °ü·ÃµÈ ÄÚµå(Ex window: winrt)´Â ¿£Áø ÀÎÅÍÆäÀÌ½ºÂÊ¿¡¼­ Ã³¸®ÇÏ´Â°Ô ¸Â´Â°Å °°À½.
+EngineCoreëŠ” ìµœëŒ€í•œ í”Œë«í¼ ë…ë¦½ì ì¸ ì½”ë“œë¡œ ê°€ëŠ”ê²ƒì´ ëª©í‘œ
+ë Œë”ë§ì— ê´€ë ¨ëœ APIëŠ” ì‚¬ìš©í•˜ì§€ë§Œ, ìš´ì˜ì²´ì œ ê´€ë ¨ëœ ì½”ë“œëŠ” ìµœëŒ€í•œ ë°°ì œí•  ì˜ˆì •
+ìš´ì˜ì²´ì œ ê´€ë ¨ëœ ì½”ë“œ(Ex window: winrt)ëŠ” ì—”ì§„ ì¸í„°í˜ì´ìŠ¤ìª½ì—ì„œ ì²˜ë¦¬í•˜ëŠ”ê²Œ ë§ëŠ”ê±° ê°™ìŒ.
 */
 
 namespace SharedTypes
@@ -100,8 +100,8 @@ namespace Engine
         std::thread RenderLoopThread;
         std::mutex EngineTickMutex;
         //Windows::Foundation::IAsyncAction m_renderLoopWorker;
-        //IRenderer*¸¦ ÅëÇØ¼­ Render. Mobile¿ë°ú DeferredRenderer°¡ µû·Î ÀÖÀ½
-        //World°¡ LevelÀ» ¹°°í ÀÖ´Â °ÍÀÌ´Ù. World´Â ÇÏ³ªÀÇ °¡»ó ¼¼°èÀÌ°í LevelÀº °¡»ó¼¼°è¿¡ Á¸ÀçÇÏ´Â Àå¼Ò(±¸¿ªÀÌ´Ù.)World´Â Map¾È¿¡ µé¾îÀÖ´Ù.
+        //IRenderer*ë¥¼ í†µí•´ì„œ Render. Mobileìš©ê³¼ DeferredRendererê°€ ë”°ë¡œ ìˆìŒ
+        //Worldê°€ Levelì„ ë¬¼ê³  ìˆëŠ” ê²ƒì´ë‹¤. WorldëŠ” í•˜ë‚˜ì˜ ê°€ìƒ ì„¸ê³„ì´ê³  Levelì€ ê°€ìƒì„¸ê³„ì— ì¡´ì¬í•˜ëŠ” ì¥ì†Œ(êµ¬ì—­ì´ë‹¤.)WorldëŠ” Mapì•ˆì— ë“¤ì–´ìˆë‹¤.
 
 
 

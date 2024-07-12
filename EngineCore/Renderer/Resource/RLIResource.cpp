@@ -1,20 +1,21 @@
 #include "pch.h"
-#include "RLIResource.h"
 #include "Renderer/Resource/DeviceResources.h"
+#include <Windows.h>
+#include "RLIResource.h"
 
 namespace Engine
 {
 	namespace Renderer
 	{
 		namespace RLI
-		{
+		{			
 			HRESULT CreateBufferFromData(ID3D11Buffer** ppBuffer, D3D11_BIND_FLAG eBindFlag,
 				void* pData, UINT nDataSize, D3D11_USAGE eUsage, UINT CPUAccessFlags)
 			{
 				ID3D11Device* device = DX::DeviceResourcesUtil::GetDeviceResources()->GetD3DDevice();
 
-				//ÈÄ¿¡ ±¸Á¶Àû	¹öÆÛ, Ãß°¡/ ¼Òºñ ¹öÆÛ È¤Àº ¹ÙÀÌÆ® ¹öÆÛ¸¦ »ç¿ëÇÏ°Ô µÇ¸é miscflag¿Í structsizeµµ ÁöÁ¤ÇÏµµ·Ï ¸¸µé±â. 
-				D3D11_BUFFER_DESC bd = { nDataSize  , eUsage , (UINT)eBindFlag , CPUAccessFlags , 0 , 0 }; //2d,3dÅØ½ºÃÄ°¡ ¾Æ´Ï¸é pitch°ªµéÀº ÀÇ¹Ì ¾øÀ½
+				//ï¿½Ä¿ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½	ï¿½ï¿½ï¿½ï¿½, ï¿½ß°ï¿½/ ï¿½Òºï¿½ ï¿½ï¿½ï¿½ï¿½ È¤ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Æ® ï¿½ï¿½ï¿½Û¸ï¿½ ï¿½ï¿½ï¿½ï¿½Ï°ï¿½ ï¿½Ç¸ï¿½ miscflagï¿½ï¿½ structsizeï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ïµï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½. 
+				D3D11_BUFFER_DESC bd = { nDataSize  , eUsage , (UINT)eBindFlag , CPUAccessFlags , 0 , 0 }; //2d,3dï¿½Ø½ï¿½ï¿½Ä°ï¿½ ï¿½Æ´Ï¸ï¿½ pitchï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ç¹ï¿½ ï¿½ï¿½ï¿½ï¿½
 				D3D11_SUBRESOURCE_DATA subResourceData = { pData , 0 ,0 };
 				HRESULT hr = S_OK;
 				D3D11_SUBRESOURCE_DATA* pSubResourceData = nullptr;

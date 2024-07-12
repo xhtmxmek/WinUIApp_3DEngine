@@ -1,7 +1,8 @@
 #pragma once
-//·»´õ·¯´Â ¿ùµå¿¡ ´ëÇÑ ¾÷µ¥ÀÌÆ®¿Í ·»´õ¸µÀ» ´ã´çÇÏ´Â Å¬·¡½ºÀÌ´Ù. 
-//·»´õ¸µ ÆÄÀÌÇÁ¶óÀÎÀ» ´ã´çÇÏ°í ÀÖ´Ù.
-//¿ùµå°¡ ·»´õ·¯¸¦ ¼ÒÀ¯ÇÏ´Â°¡? ·»´õ·¯°¡ ¿ùµå¸¦ ¼ÒÀ¯ÇÏ´Â°¡?
+//ë Œë”ëŸ¬ëŠ” ì›”ë“œì— ëŒ€í•œ ì—…ë°ì´íŠ¸ì™€ ë Œë”ë§ì„ ë‹´ë‹¹í•˜ëŠ” í´ë˜ìŠ¤ì´ë‹¤. 
+//ë Œë”ë§ íŒŒì´í”„ë¼ì¸ì„ ë‹´ë‹¹í•˜ê³  ìˆë‹¤.
+//ì—”ì§„ì´ ë Œë”ëŸ¬ë¥¼ ì†Œìœ . ë Œë”ëŸ¬ëŠ” ì›”ë“œì˜ ë Œë”ëŸ¬ ëª¨ë“ˆ ë²„ì „ì¸ ì”¬ì„ ì†Œìœ .
+
 
 namespace Engine
 {
@@ -12,6 +13,8 @@ namespace Engine
 
 	namespace Renderer
 	{
+		class Scene;
+
 		class DeferredShadingRenderer
 		{
 		public:
@@ -20,11 +23,11 @@ namespace Engine
 				static DeferredShadingRenderer instance;
 				return instance;
 			}
-			
-			DeferredShadingRenderer(const DeferredShadingRenderer& ) = delete;
-			DeferredShadingRenderer& operator=(const DeferredShadingRenderer& ) = delete;
 
-			void Render(const vector<shared_ptr<Component::DrawableComponent>>& drawList );
+			DeferredShadingRenderer(const DeferredShadingRenderer&) = delete;
+			DeferredShadingRenderer& operator=(const DeferredShadingRenderer&) = delete;
+
+			void Render(const vector<shared_ptr<Component::DrawableComponent>>& drawList);
 		private:
 			DeferredShadingRenderer() = default;
 #pragma region Initialize View
@@ -34,12 +37,18 @@ namespace Engine
 			void OcclusionCull();
 			void FrustomCull();
 #pragma endregion
+
+#pragma region Render Scene
 			void RenderShadowDepth();
 			void RenderBasePass();
 			void RenderLights();
 			void RenderTranslucencyPass();
 			void RenderVolumetricFog();
 			void RenderPostProcessingPass();
+
+			unique_ptr<Scene> SceneInfo; 
+#pragma endregion
+
 		};
 	}
 }

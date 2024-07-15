@@ -3,7 +3,6 @@
 #include "Actor/ActorManager/ActorManager.h"
 #include "Actor/Actor.h"
 //#include "Actor/Sprite.h"
-#include "Renderer/LevelRenderer.h"
 #include "Component/ComponentBase/ComponentBase.h"
 #include "Component/CameraComponent/CameraComponent.h"
 #include "Actor/Camera/Camera.h"
@@ -20,7 +19,7 @@ namespace Engine
 			PushComponentFunc[static_cast<int>(Component::SceneComponentType::Drawable)] = std::bind(&World::PushDrawableComponent, this, std::placeholders::_1);
 			PushComponentFunc[static_cast<int>(Component::SceneComponentType::Camera)] = std::bind(&World::PushCameraComponent, this, std::placeholders::_1);
 			actorManager_ = make_unique<ActorManager>();
-			//DrawComponent¸¦ Maximum¸¸Å­ Á¤ÇØ³õ±â...
+			//DrawComponentï¿½ï¿½ Maximumï¿½ï¿½Å­ ï¿½ï¿½ï¿½Ø³ï¿½ï¿½ï¿½...
 		}
 
 		void World::Init()
@@ -30,11 +29,11 @@ namespace Engine
 		
 		void World::Update(float elapsedTime)
 		{
-			//½ºÅ©¸³Æ®°¡ initµÇ¾îÀÖÁö ¾Ê´Ù¸é Init. ÀÌ¹Ì init µÇ¾úÀ¸¸é update.	
-			//½ºÅ©¸³Æ®´Â ÀÏ´Ü »ó¼Ó¹Þ´Â°É·Î ÇØº¸ÀÚ. ¾Æ´Ï¸é.. callBackÀ» µî·Ï½ÃÄÑ¼­ ½ºÅ©¸³Æ®¿¡¼­ callbackÀ» È£ÃâÇÏ±â.		
-			//½ºÅ©¸³Æ®¿¡¼­´Â input Á¤º¸¸¦ °¡Á®¿È. ½ºÅ©¸³Æ®¿¡¼­ ¸¶¿ì½º ·ÎÅ×ÀÌ¼Ç ¸¸Å­, Å°º¸µå ´­¸°°Å¿¡ ¹ÝÀÀ ÇÏ¿© ½ÇÇà..
-			//Æ¯Á¤ Value °ª¿¡ ¾Ö´Ï¸ÞÀÌ¼ÇÀ» ÁÙ¼ö ÀÖÀ½.
-			//enableÀÎ Actor¸¸ Update.
+			//ï¿½ï¿½Å©ï¿½ï¿½Æ®ï¿½ï¿½ initï¿½Ç¾ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ê´Ù¸ï¿½ Init. ï¿½Ì¹ï¿½ init ï¿½Ç¾ï¿½ï¿½ï¿½ï¿½ï¿½ update.	
+			//ï¿½ï¿½Å©ï¿½ï¿½Æ®ï¿½ï¿½ ï¿½Ï´ï¿½ ï¿½ï¿½Ó¹Þ´Â°É·ï¿½ ï¿½Øºï¿½ï¿½ï¿½. ï¿½Æ´Ï¸ï¿½.. callBackï¿½ï¿½ ï¿½ï¿½Ï½ï¿½ï¿½Ñ¼ï¿½ ï¿½ï¿½Å©ï¿½ï¿½Æ®ï¿½ï¿½ï¿½ï¿½ callbackï¿½ï¿½ È£ï¿½ï¿½ï¿½Ï±ï¿½.		
+			//ï¿½ï¿½Å©ï¿½ï¿½Æ®ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ input ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½. ï¿½ï¿½Å©ï¿½ï¿½Æ®ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ì½º ï¿½ï¿½ï¿½ï¿½ï¿½Ì¼ï¿½ ï¿½ï¿½Å­, Å°ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Å¿ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ï¿ï¿½ ï¿½ï¿½ï¿½ï¿½..
+			//Æ¯ï¿½ï¿½ Value ï¿½ï¿½ï¿½ï¿½ ï¿½Ö´Ï¸ï¿½ï¿½Ì¼ï¿½ï¿½ï¿½ ï¿½Ù¼ï¿½ ï¿½ï¿½ï¿½ï¿½.
+			//enableï¿½ï¿½ Actorï¿½ï¿½ Update.
 			//
 
 			for (int i = 0; i < GetNumActorList(); i++)
@@ -51,19 +50,18 @@ namespace Engine
 
 		void World::Render()
 		{
-			CheckVisibilityActors();
-			Engine::Renderer::LevelRenderer::GetInstance().Render(DrawComponentsThisFrame);
+			CheckVisibilityActors();			
 		}
 
 
 		void World::CheckVisibilityActors()
 		{
-			//¾×ÅÍ°¡ °¡Áö°í ÀÖ´Â DrawComponentµéÀ» ³Ñ°ÜÁÖ¾î¾ßÇÔ
-			//1. ÀÌ°÷¿¡¼­ ¾×ÅÍ¾È¿¡ ÀÖ´Â DrawComponentµéÀ» °¡Á®¿Í¼­ °Ë»çÇØ¼­ vector¿¡ Áý¾î³Ö±â
-			//2. DrawComponent°¡ »ý¼ºµÇ´Â Áï½Ã DrawComponent·Î ³Ñ±â±â
+			//ï¿½ï¿½ï¿½Í°ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ö´ï¿½ DrawComponentï¿½ï¿½ï¿½ï¿½ ï¿½Ñ°ï¿½ï¿½Ö¾ï¿½ï¿½ï¿½ï¿½
+			//1. ï¿½Ì°ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Í¾È¿ï¿½ ï¿½Ö´ï¿½ DrawComponentï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Í¼ï¿½ ï¿½Ë»ï¿½ï¿½Ø¼ï¿½ vectorï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Ö±ï¿½
+			//2. DrawComponentï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ç´ï¿½ ï¿½ï¿½ï¿½ DrawComponentï¿½ï¿½ ï¿½Ñ±ï¿½ï¿½
 			//DrawActors.clear();
 			//DrawActors.reserve(Actors.size());			
-			//¾×ÅÍ´Â ¿©·¯°³ÀÇ drawComponent¸¦ °¡Áú¼öÀÖÀ½. ¿©±â¼­ ¾×ÅÍ°¡ °¡Áö°íÀÖ´Â ÄÄÆ÷³ÍÆ²¸¦ ÀüºÎ °Ë»çÇØ¾ßÇÏ³ª? ¾Æ´Ï¸é
+			//ï¿½ï¿½ï¿½Í´ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ drawComponentï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½. ï¿½ï¿½ï¿½â¼­ ï¿½ï¿½ï¿½Í°ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ö´ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ²ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ë»ï¿½ï¿½Ø¾ï¿½ï¿½Ï³ï¿½? ï¿½Æ´Ï¸ï¿½
 			//
 
 			DrawComponentsThisFrame.clear();

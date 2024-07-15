@@ -60,6 +60,11 @@
     <ClInclude Include="Renderer\Shader\ShaderObject.h" />
     <ClInclude Include="Renderer\Shader\DefaultShader.h" />
     <ClInclude Include="Renderer\Resource\RLIresource.h" />
+    <ClInclude Include="Renderer\RenderThread.h" />
+    <ClInclude Include="GameThread.h" />
+    <ClInclude Include="Animation\AnimationThread.h" />
+    <ClInclude Include="PhysicsThread.h" />
+    <ClInclude Include="Common\AsyncWorker.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="EngineCore.cpp" />
@@ -99,6 +104,8 @@
     <ClCompile Include="Renderer\Shader\ShaderObjectManager.cpp" />
     <ClCompile Include="Renderer\Resource\RLIResource.cpp" />
     <ClCompile Include="Renderer\Scene.cpp" />
+    <ClCompile Include="GameThread.cpp" />
+    <ClCompile Include="Renderer\RenderThread.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

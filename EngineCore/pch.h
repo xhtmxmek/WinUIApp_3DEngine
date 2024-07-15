@@ -12,7 +12,7 @@
 
 #include "framework.h"
 
-//UI °ü·Ã -> WinUI Çì´õ
+//UI ï¿½ï¿½ï¿½ï¿½ -> WinUI ï¿½ï¿½ï¿½
 //#include <unknwn.h>
 //#include <winrt/Windows.Foundation.h>
 //#include <winrt/Windows.Foundation.Collections.h>
@@ -26,12 +26,12 @@
 //#include <winrt/Microsoft.UI.Dispatching.h>
 //#include <Microsoft.UI.xaml.media.dxinterop.h>
 //
-////UWP ½ÃÀý winRT Çì´õ.. ÇÊ¿ä¾ø´Â°ÍµéÀº Á¦ÇØµµ µÉµí
+////UWP ï¿½ï¿½ï¿½ï¿½ winRT ï¿½ï¿½ï¿½.. ï¿½Ê¿ï¿½ï¿½ï¿½Â°Íµï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Øµï¿½ ï¿½Éµï¿½
 //#include "winrt/Windows.ApplicationModel.Activation.h"
 //#include "winrt/Windows.System.Threading.Core.h"
 
-//Dx °ü·Ã Çì´õ
-//comPtr °ü·Ã
+//Dx ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½
+//comPtr ï¿½ï¿½ï¿½ï¿½
 #include <wrl/client.h>
 //#include <wil/cppwinrt.h>
 //#include <wil/cppwinrt_wrl.h>
@@ -74,7 +74,7 @@
 #include "VertexTypes.h"
 #include "WICTextureLoader.h"
 
-////Storage °ü·Ã 
+////Storage ï¿½ï¿½ï¿½ï¿½ 
 //#include <winrt/Windows.Storage.h>
 //#include <winrt/Windows.Storage.Pickers.h>
 //#include <winrt/Windows.Storage.FileProperties.h>
@@ -84,7 +84,7 @@
 
 #include "Common/EngineBaseHeader.h"
 
-//¿£Áø ÄÚµåµé
+//ï¿½ï¿½ï¿½ï¿½ ï¿½Úµï¿½ï¿½
 #include "Common/EngineCommonHeader.h"
 
 using namespace std;

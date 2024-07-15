@@ -1,4 +1,5 @@
 #include "pch.h"
+#include "GameThread.h"
 #include "EngineCore.h"
 #include "Common/EngineHelper.h"
 #include "Renderer/Resource/DeviceResources.h"
@@ -6,7 +7,6 @@
 #include "EngineCoreBuild.h"
 #include "Level/Level.h"
 #include "Level/World.h"
-#include "Renderer/LevelRenderer.h"
 #include "Level/Actor/ActorManager/ActorManager.h"
 #include "System/InputManager.h"
 #include "EngineAsset/Texture.h"
@@ -49,6 +49,10 @@ namespace Engine
 		m_timer.SetFixedTimeStep(true);
 		m_timer.SetTargetElapsedSeconds(1.0 / 60);
 		*/
+
+		game_thread = make_unique<GameThread>();
+		game_thread->Init();
+		//render_thread = make_u
 	}
 
 	void EngineCore::LoadDefaultProject()
@@ -132,21 +136,23 @@ namespace Engine
 		PIXEndEvent();
 	}
 
-	void EngineCore::StartRenderLoop()
+	void EngineCore::Run()
 	{
-		RenderLoopActivate = true;
+		game_thread->Run();
+		render_thread->Run();
 
-		if (RenderLoopThread.joinable())
-			return;
+		//RenderLoopActivate = true;
+		//if (RenderLoopThread.joinable())
+		//	return;
 
-		RenderLoopThread = thread([this]()
-			{
-				while (RenderLoopActivate)
-				{
-					std::scoped_lock<std::mutex> lock(EngineTickMutex);
-					Tick();
-				}
-			});
+		//RenderLoopThread = thread([this]()
+		//	{
+		//		while (RenderLoopActivate)
+		//		{
+		//			std::scoped_lock<std::mutex> lock(EngineTickMutex);
+		//			Tick();
+		//		}
+		//	});
 
 		//if (m_renderLoopWorker != nullptr && m_renderLoopWorker.Status() == winrt::Windows::Foundation::AsyncStatus::Started)
 		//    return;
@@ -163,12 +169,15 @@ namespace Engine
 		//m_renderLoopWorker = ThreadPool::RunAsync(workItemHandler, WorkItemPriority::High, WorkItemOptions::TimeSliced);
 	}
 
-	void EngineCore::StopRenderLoop()
+	void EngineCore::Stop()
 	{
 		DX::DeviceResourcesUtil::GetDeviceResources()->Trim();
 		RenderLoopActivate = false;
-		RenderLoopThread.join();
+		//RenderLoopThread.join();
 		//m_renderLoopWorker.Cancel();
+
+		game_thread->Stop();
+		render_thread->Stop();
 	}
 #pragma endregion
 
@@ -176,18 +185,18 @@ namespace Engine
 	// Draws the scene.
 	void EngineCore::Render()
 	{
-		// Don't try to render anything before the first Update.
-		if (Timer->GetFrameCount() == 0)
-		{
-			return;
-		}
+		//// Don't try to render anything before the first Update.
+		//if (Timer->GetFrameCount() == 0)
+		//{
+		//	return;
+		//}
 
 		Clear();
 
 		auto context = DX::DeviceResourcesUtil::GetDeviceResources()->GetD3DDeviceContext();
 		PIXBeginEvent(context, PIX_COLOR_DEFAULT, L"Render");
 
-		m_World->Render();
+		//m_World->Render();
 
 		PIXEndEvent(context);
 
@@ -256,6 +265,7 @@ namespace Engine
 
 	void EngineCore::OnWindowSizeChanged(SharedTypes::Size windowSize)
 	{
+	
 		std::scoped_lock<std::mutex> lock(EngineTickMutex);
 		if (!DX::DeviceResourcesUtil::GetDeviceResources()->SetLogicalSize(Size(windowSize.Width, windowSize.Height)))
 			return;

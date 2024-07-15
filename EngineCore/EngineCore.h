@@ -27,7 +27,7 @@ namespace Engine
         class World;
         class Actor;
     }
-
+    
     class EngineCore
     {
     public:
@@ -42,8 +42,8 @@ namespace Engine
 
 
         // Basic game loop / inputs        
-        ENGINE_API void StartRenderLoop();
-        ENGINE_API void StopRenderLoop();
+        ENGINE_API void Run();
+        ENGINE_API void Stop();
         
         ENGINE_API void OnDeviceLost();
         ENGINE_API void OnDeviceRestored();
@@ -79,8 +79,10 @@ namespace Engine
 
         // private
     private:
+        //Tick은 엔진(게임 쓰레드)에서 실행
         void Tick();
         void Update();
+        //Render는 렌더 쓰레드에서 실행. 렌더링 쓰레드는 초기화시 발행
         void Render();
 
         void ProcessInput();
@@ -97,8 +99,9 @@ namespace Engine
         std::shared_ptr<Engine::Level::World> m_World;
         
         bool RenderLoopActivate;
-        std::thread RenderLoopThread;
-        std::mutex EngineTickMutex;
+        unique_ptr<AsyncWorker> game_thread;
+        unique_ptr<AsyncWorker> render_thread;
+        std::mutex EngineTickMutex;        
         //Windows::Foundation::IAsyncAction m_renderLoopWorker;
         //IRenderer*를 통해서 Render. Mobile용과 DeferredRenderer가 따로 있음
         //World가 Level을 물고 있는 것이다. World는 하나의 가상 세계이고 Level은 가상세계에 존재하는 장소(구역이다.)World는 Map안에 들어있다.

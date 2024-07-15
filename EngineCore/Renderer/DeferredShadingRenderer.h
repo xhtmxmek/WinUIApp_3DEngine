@@ -27,7 +27,7 @@ namespace Engine
 			DeferredShadingRenderer(const DeferredShadingRenderer&) = delete;
 			DeferredShadingRenderer& operator=(const DeferredShadingRenderer&) = delete;
 
-			void Render(const vector<shared_ptr<Component::DrawableComponent>>& drawList);
+			void Render();
 		private:
 			DeferredShadingRenderer() = default;
 #pragma region Initialize View

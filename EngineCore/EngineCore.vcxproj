@@ -152,9 +152,13 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="Animation\AnimationThread.h" />
     <ClInclude Include="Animation\AnimEvaluator.h" />
     <ClInclude Include="Animation\SceneAnimator.h" />
+    <ClInclude Include="Common\AsyncWorker.h" />
     <ClInclude Include="Common\Utility.h" />
+    <ClInclude Include="GameThread.h" />
+    <ClInclude Include="PhysicsThread.h" />
     <ClInclude Include="Renderer\MeshProcessor.h" />
     <ClInclude Include="EngineAsset\ModelAsset.h" />
     <ClInclude Include="Renderer\Resource\DeviceResources.h" />
@@ -204,6 +208,7 @@
     <ClInclude Include="Renderer\Shader\DefaultShader.h" />
     <ClInclude Include="Renderer\Shader\ShaderObject.h" />
     <ClInclude Include="Renderer\Shader\ShaderObjectManager.h" />
+    <ClInclude Include="Renderer\RenderThread.h" />
     <ClInclude Include="System\InputManager.h" />
     <ClInclude Include="System\KeyboardState.h" />
     <ClInclude Include="System\MouseState.h" />
@@ -211,8 +216,10 @@
   <ItemGroup>
     <ClCompile Include="Animation\AnimEvaluator.cpp" />
     <ClCompile Include="Animation\SceneAnimator.cpp" />
+    <ClCompile Include="GameThread.cpp" />
     <ClCompile Include="Renderer\MeshProcessor.cpp" />
     <ClCompile Include="EngineAsset\ModelAsset.cpp" />
+    <ClCompile Include="Renderer\RenderThread.cpp" />
     <ClCompile Include="Renderer\Resource\DeviceResource.cpp" />
     <ClCompile Include="Common\Math\TransformGroup.cpp" />
     <ClCompile Include="Common\Path.cpp" />

@@ -28,16 +28,16 @@ namespace winrt::Editor::implementation
 		//m_mainViewModel = winrt::make<AuthoringTool::implementation::BookstoreViewModel>();
 		InitializeComponent();
 
-		//InitÇÔ¼ö·Î »©¼­ App¿¡¼­ È£ÃâÇÏ´Â ÇüÅÂ·Î ÇÏÀÚ
-		//// ÆäÀÌÁö ¼ö¸í ÁÖ±âÀÇ ÀÌº¥Æ® Ã³¸®±â¸¦ µî·ÏÇÕ´Ï´Ù.
+		//Initï¿½Ô¼ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ Appï¿½ï¿½ï¿½ï¿½ È£ï¿½ï¿½ï¿½Ï´ï¿½ ï¿½ï¿½ï¿½Â·ï¿½ ï¿½ï¿½ï¿½ï¿½
+		//// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ö±ï¿½ï¿½ï¿½ ï¿½Ìºï¿½Æ® Ã³ï¿½ï¿½ï¿½â¸¦ ï¿½ï¿½ï¿½ï¿½Õ´Ï´ï¿½.
 
-		// À©µµ¿ì ÀÌº¥Æ®
+		// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ìºï¿½Æ®
 		VisibilityChanged({ this, &MainWindow::OnVisibilityChanged });
 		Activated({ this, &MainWindow::OnActivated });
 		Closed({ this, &MainWindow::OnClosed });
 		SizeChanged({ this, &MainWindow::OnSizeChanged });
 
-		// ½º¿Ò Ã¼ÀÎ ÆÐ³Î ÀÌº¥Æ®(DX ·»´õ¸µ¿ë)     
+		// ï¿½ï¿½ï¿½ï¿½ Ã¼ï¿½ï¿½ ï¿½Ð³ï¿½ ï¿½Ìºï¿½Æ®(DX ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½)     
 		swapChainPanel().Loaded({ this, &MainWindow::OnSwapchainPanelLoaded });
 		swapChainPanel().CompositionScaleChanged({ this, &MainWindow::OnSwapChainPanelCompositionScaleChanged });
 		worldOutlinerTree().ItemInvoked({ this, &MainWindow::OnActorTreeClicked });
@@ -154,8 +154,8 @@ namespace winrt::Editor::implementation
 
 	void MainWindow::AppBarButton_Click(IInspectable const&, Microsoft::UI::Xaml::RoutedEventArgs const&)
 	{
-		// ¾Û¿¡ ÀûÇÕÇÑ ¾Û ¹Ù°¡ ÀÖÀ¸¸é »ç¿ëÇÏ¼¼¿ä. ¾Û ¹Ù¸¦ µðÀÚÀÎÇÕ´Ï´Ù.
-		// ±×¸®°í ´ÙÀ½°ú °°ÀÌ ÀÌº¥Æ® Ã³¸®±â¸¦ Ã¤¿ó´Ï´Ù.
+		// ï¿½Û¿ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½Ù°ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Ï¼ï¿½ï¿½ï¿½. ï¿½ï¿½ ï¿½Ù¸ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Õ´Ï´ï¿½.
+		// ï¿½×¸ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ìºï¿½Æ® Ã³ï¿½ï¿½ï¿½â¸¦ Ã¤ï¿½ï¿½Ï´ï¿½.
 	}
 
 	void MainWindow::OnPointerPressedSwapChain(Windows::Foundation::IInspectable const&, Microsoft::UI::Xaml::Input::PointerRoutedEventArgs const& args)
@@ -188,9 +188,9 @@ namespace winrt::Editor::implementation
 		auto pointerProperties = pt.Properties();
 		renderingEngine_->PointerProcess(pointerProperties.MouseWheelDelta());
 
-		// Æ÷ÀÎÅÍ°¡ ÇØÁ¦µÇ´Â °æ¿ì ÃßÀû Æ÷ÀÎÅÍ ÀÌµ¿ÀÌ ÁßÁöµË´Ï´Ù.
+		// ï¿½ï¿½ï¿½ï¿½ï¿½Í°ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ç´ï¿½ ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ìµï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ë´Ï´ï¿½.
 		//m_main->StopTracking();
-		//lbutton‹š ÇÇÅ·. buttonDown¶§¿Í À§Ä¡°¡ °°°í picking object Á¸ÀçÇÑ´Ù¸é ¿ÀºêÁ§Æ®º¸³»¹ö¸®±â.
+		//lbuttonï¿½ï¿½ ï¿½ï¿½Å·. buttonDownï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Ä¡ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ picking object ï¿½ï¿½ï¿½ï¿½ï¿½Ñ´Ù¸ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ®ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½.
 		//renderingEngine_.PointerWheelChanged(args);
 	}
 
@@ -239,11 +239,11 @@ namespace winrt::Editor::implementation
 
 	void MainWindow::RegisterDedicatedInputOnSwapchain()
 	{
-		// µ¶¸³ ÀÔ·Â Æ÷ÀÎÅÍ ÀÌº¥Æ®¸¦ ¾òÀ¸·Á¸é SwapChainPanelÀ» µî·ÏÇÕ´Ï´Ù.                
+		// ï¿½ï¿½ï¿½ï¿½ ï¿½Ô·ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ìºï¿½Æ®ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ SwapChainPanelï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Õ´Ï´ï¿½.                
 		auto controller = Microsoft::UI::Dispatching::DispatcherQueueController::CreateOnDedicatedThread();
 		controller.DispatcherQueue().TryEnqueue(Microsoft::UI::Dispatching::DispatcherQueuePriority::High, [this]
 			{
-				// CoreIndependentInputSource´Â ¾î¶² ½º·¹µå°¡ ¸¸µé¾îÁö´ø Æ¯Á¤ µð¹ÙÀÌ½º À¯Çü¿¡ ´ëÇÑ Æ÷ÀÎÅÍ ÀÌº¥Æ®°¡ ¹ß»ýµË´Ï´Ù.  
+				// CoreIndependentInputSourceï¿½ï¿½ ï¿½î¶² ï¿½ï¿½ï¿½ï¿½ï¿½å°¡ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ Æ¯ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Ì½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ìºï¿½Æ®ï¿½ï¿½ ï¿½ß»ï¿½ï¿½Ë´Ï´ï¿½.  
 				uint32_t inputParam = (uint32_t)Microsoft::UI::Input::InputPointerSourceDeviceKinds::Mouse |
 				(uint32_t)Microsoft::UI::Input::InputPointerSourceDeviceKinds::Touch |
 			(uint32_t)Microsoft::UI::Input::InputPointerSourceDeviceKinds::Pen;
@@ -252,7 +252,7 @@ namespace winrt::Editor::implementation
 			static_cast<Microsoft::UI::Input::InputPointerSourceDeviceKinds>(inputParam)
 		);
 
-		// ¹é±×¶ó¿îµå ½º·¹µå¿¡¼­ ¹ß»ýÇÒ Æ÷ÀÎÅÍ ÀÌº¥Æ®¸¦ µî·ÏÇÕ´Ï´Ù.
+		// ï¿½ï¿½×¶ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½å¿¡ï¿½ï¿½ ï¿½ß»ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ìºï¿½Æ®ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Õ´Ï´ï¿½.
 		//coreInput.PointerPressed({ this, &MainWindow::OnPointerPressedSwapChain });
 		//coreInput.PointerMoved({ this, &MainWindow::OnPointerMovedSwapChain });
 		//coreInput.PointerReleased({ this, &MainWindow::OnPointerReleasedSwapChain });

@@ -8,7 +8,7 @@ namespace Engine
 {
 	namespace Renderer
 	{		
-		void DeferredShadingRenderer::Render( const vector<shared_ptr<Component::DrawableComponent>>& DrawList )
+		void DeferredShadingRenderer::Render()
 		{
 			//3D 액터 먼저그림(포워드, 디퍼드 모드 선택해서 그림)
 			//렌더러에서 월드 세팅을 받아서 그림. 혹은 월드가 렌더러를 받아서 그림.
@@ -43,11 +43,11 @@ namespace Engine
 			//안쪽에서 translucency pass composit
 			RenderPostProcessingPass();
 
-			for (auto& drawComponent : DrawList )
-			{
-				if (drawComponent != nullptr)
-					drawComponent->Draw();
-			}
+			//for (auto& drawComponent : DrawList )
+			//{
+			//	if (drawComponent != nullptr)
+			//		drawComponent->Draw();
+			//}
 		}
 
 #pragma region Visibility Check

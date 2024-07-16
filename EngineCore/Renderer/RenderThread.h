@@ -16,10 +16,12 @@ namespace Engine
 			virtual void Stop();
 			virtual void Exit();
 
-			const mutex& GetMutex()
-			{
-				return renderMutex;
-			}
+#pragma region Windows OS dedicated
+			void SetSwapChainPanel(const SwapchainPanelInfo& swapchainPanelInfo_);
+			void OnSwapchainXamlChanged(const SwapchainPanelInfo& swapchainPanelInfo_);
+			IDXGISwapChain3* GetSwapChain();
+#pragma endregion
+			void OnWindowSizeChanged(SharedTypes::Size windowSize);
 		private:
 			std::thread worker;
 			bool activate;

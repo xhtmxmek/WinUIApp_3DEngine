@@ -1,20 +1,16 @@
 #include "pch.h"
 #include "GameThread.h"
+#include "Renderer/RenderThread.h"
 #include "EngineCore.h"
 #include "Common/EngineHelper.h"
-#include "Renderer/Resource/DeviceResources.h"
-#include "Renderer/Resource/ConstantBuffer.h"
 #include "EngineCoreBuild.h"
 #include "Level/Level.h"
 #include "Level/World.h"
 #include "Level/Actor/ActorManager/ActorManager.h"
 #include "System/InputManager.h"
-#include "EngineAsset/Texture.h"
 #include <fstream>
 #include <sstream>
 #include "Common/RuntimeContext.h"
-#include "Renderer/Shader/ShaderObjectManager.h"
-#include "Renderer/Resource/RenderStateObjectManager.h"
 
 namespace Engine
 {
@@ -38,201 +34,51 @@ namespace Engine
 	}
 
 #pragma region Initialize
-	void EngineCore::InitializeGlobalObjects()
+	void EngineCore::InitializeCoreThread(const SwapchainPanelInfo& swapchainPanelInfo_)
 	{
-		m_World = make_shared<Engine::Level::World>();
-		Engine::Level::SLevel::SetWorld(m_World);
-		Timer = make_shared<Engine::DX::StepTimer>();
-		// TODO: Change the timer settings if you want something other than the default variable timestep mode.
-		// e.g. for 60 FPS fixed timestep update logic, call:
-		/*
-		m_timer.SetFixedTimeStep(true);
-		m_timer.SetTargetElapsedSeconds(1.0 / 60);
-		*/
-
 		game_thread = make_unique<GameThread>();
 		game_thread->Init();
-		//render_thread = make_u
-	}
-
-	void EngineCore::LoadDefaultProject()
-	{
-		m_World->Init();
-
-		wstring defaultProjFullPath = Path::ProjectDir + L"\\x64\\Debug\\" + Path::ProjectName;
-		HMODULE hDll = ::LoadLibrary(defaultProjFullPath.c_str());
-		if (hDll != NULL)
-		{
-			FreeLibrary(hDll);
-		}
+		render_thread = make_unique<Renderer::RenderThread>();
+		render_thread->Init();
+		render_thread->SetSwapChainPanel(swapchainPanelInfo_);
 	}
 
 	void EngineCore::Initialize(const SwapchainPanelInfo& swapchainPanelInfo_)
-	{
-		DX::DeviceResourcesUtil::GetInstance().CreateDeviceResources();
-		//DX::DeviceResourcesUtil::GetDeviceResources()->RegisterDeviceNotify(this);
+	{						
 		RuntimeContext::InitialzeRuntimeTable();
-
-		Renderer::RLI::ShaderObjectManager::GetInstance().LoadShader();
-		//Renderer::RLI::RenderStateObjectManger::GetInstance().Init
-
-		InitializeGlobalObjects();
-		Input::InputManager::GetInstance().Initialize();
-
-		Path::InitBasePathes();
-		LoadDefaultProject();
-
-		DX::DeviceResourcesUtil::GetDeviceResources()->SetOption(DX::DeviceResources::c_UseXAML);
-		//CreateDeviceDependentResources();
-		DX::DeviceResourcesUtil::GetDeviceResources()->SetSwapChainPanel(swapchainPanelInfo_);
-		//CreateWindowSizeDependentResources();
+		InitializeCoreThread(swapchainPanelInfo_);		
+		game_thread->LoadDefaultProject();		
 	}
 
 	void EngineCore::UnInitialize()
 	{
-		DX::DeviceResourcesUtil::GetInstance().ReleaseInstance();
-		Renderer::RLI::ConstantBufferManager::GetInstance().Release();
-		Level::SLevel::GetInstance().ReleaseInstance();
-		Level::ActorManager::GetInstance().ReleaseInstance();
-		EngineAsset::TextureManager::GetInstance().ReleaseInstance();
+		game_thread->Exit();
+		render_thread->Exit();
 
 		FreeLibrary(ProjectHandle);
 	}
 
 	IDXGISwapChain3* EngineCore::GetSwapChain()
 	{
-		return DX::DeviceResourcesUtil::GetDeviceResources()->GetSwapChain();
+		return render_thread->GetSwapChain();
 	}
 #pragma endregion
 
 
 #pragma region Frame Update
-	// Executes the basic game loop.
-	void EngineCore::Tick()
-	{
-		Timer->Tick([&]()
-			{
-				ProcessInput();
-		Update();
-			});
-
-		Render();
-
-
-	}
-
-	// Updates the world.
-	void EngineCore::Update()
-	{
-		PIXBeginEvent(PIX_COLOR_DEFAULT, L"Update");
-
-		float elapsedTime = float(Timer->GetElapsedSeconds());
-
-		// TODO: Add your game logic here.
-		// Input Update       
-
-		m_World->Update(elapsedTime);
-
-		PIXEndEvent();
-	}
-
 	void EngineCore::Run()
 	{
 		game_thread->Run();
 		render_thread->Run();
-
-		//RenderLoopActivate = true;
-		//if (RenderLoopThread.joinable())
-		//	return;
-
-		//RenderLoopThread = thread([this]()
-		//	{
-		//		while (RenderLoopActivate)
-		//		{
-		//			std::scoped_lock<std::mutex> lock(EngineTickMutex);
-		//			Tick();
-		//		}
-		//	});
-
-		//if (m_renderLoopWorker != nullptr && m_renderLoopWorker.Status() == winrt::Windows::Foundation::AsyncStatus::Started)
-		//    return;
-
-		//auto workItemHandler = WorkItemHandler([this, strong_this{ get_strong() }](winrt::Windows::Foundation::IAsyncAction action)
-		//    {
-		//        while (action.Status() == winrt::Windows::Foundation::AsyncStatus::Started)
-		//        {
-		//            winrt::DX11Engine_WinUI3_WRC::Engine_Scoped_Lock lock{ m_criticalSection };
-		//            Tick();
-		//        }
-		//    });
-
-		//m_renderLoopWorker = ThreadPool::RunAsync(workItemHandler, WorkItemPriority::High, WorkItemOptions::TimeSliced);
 	}
 
 	void EngineCore::Stop()
 	{
-		DX::DeviceResourcesUtil::GetDeviceResources()->Trim();
-		RenderLoopActivate = false;
-		//RenderLoopThread.join();
-		//m_renderLoopWorker.Cancel();
 
 		game_thread->Stop();
 		render_thread->Stop();
 	}
 #pragma endregion
-
-#pragma region Frame Render
-	// Draws the scene.
-	void EngineCore::Render()
-	{
-		//// Don't try to render anything before the first Update.
-		//if (Timer->GetFrameCount() == 0)
-		//{
-		//	return;
-		//}
-
-		Clear();
-
-		auto context = DX::DeviceResourcesUtil::GetDeviceResources()->GetD3DDeviceContext();
-		PIXBeginEvent(context, PIX_COLOR_DEFAULT, L"Render");
-
-		//m_World->Render();
-
-		PIXEndEvent(context);
-
-		// Show the new frame.
-		PIXBeginEvent(PIX_COLOR_DEFAULT, L"Present");
-		DX::DeviceResourcesUtil::GetDeviceResources()->Present();
-		PIXEndEvent();
-	}
-
-	// Helper method to clear the back buffers.
-	void EngineCore::Clear()
-	{
-		auto context = DX::DeviceResourcesUtil::GetDeviceResources()->GetD3DDeviceContext();
-		PIXBeginEvent(context, PIX_COLOR_DEFAULT, L"Clear");
-
-		// Clear the views.
-		auto renderTarget = DX::DeviceResourcesUtil::GetDeviceResources()->GetRenderTargetView();
-		auto depthStencil = DX::DeviceResourcesUtil::GetDeviceResources()->GetDepthStencilView();
-
-		context->ClearRenderTargetView(renderTarget, Colors::CornflowerBlue);
-		context->ClearDepthStencilView(depthStencil, D3D11_CLEAR_DEPTH | D3D11_CLEAR_STENCIL, 1.0f, 0);
-		context->OMSetRenderTargets(1, &renderTarget, depthStencil);
-
-		// Set the viewport.
-		auto viewport = DX::DeviceResourcesUtil::GetDeviceResources()->GetScreenViewport();
-		context->RSSetViewports(1, &viewport);
-
-		PIXEndEvent(context);
-	}
-#pragma endregion 
-
-
-	void EngineCore::ProcessInput()
-	{
-		//m_sceneRenderer->TrackingUpdate(m_pointerLocationX);
-	}
 
 #pragma region Message Handlers
 	// Message handlers
@@ -248,48 +94,24 @@ namespace Engine
 
 	void EngineCore::OnSuspending()
 	{
-		auto context = DX::DeviceResourcesUtil::GetDeviceResources()->GetD3DDeviceContext();
-		context->ClearState();
-
-		DX::DeviceResourcesUtil::GetDeviceResources()->Trim();
-
-		// TODO: Game is being power-suspended.
+		//gameThread->stop
+		render_thread->Stop();
 	}
 
 	void EngineCore::OnResuming()
-	{
-		Timer->ResetElapsedTime();
-
-		// TODO: Game is being power-resumed.
+	{		
+		game_thread->Run();
+		render_thread->Run();
 	}
 
 	void EngineCore::OnWindowSizeChanged(SharedTypes::Size windowSize)
 	{
-	
-		std::scoped_lock<std::mutex> lock(EngineTickMutex);
-		if (!DX::DeviceResourcesUtil::GetDeviceResources()->SetLogicalSize(Size(windowSize.Width, windowSize.Height)))
-			return;
-
-		CreateWindowSizeDependentResources();
-
+		render_thread->OnWindowSizeChanged(windowSize);
 	}
 
 	void EngineCore::OnSwapchainXamlChanged(const SwapchainPanelInfo& swapchainPanelInfo_)
-	{
-		std::scoped_lock<std::mutex> lock(EngineTickMutex);
-		if (DX::DeviceResourcesUtil::GetDeviceResources()->SetSwapchainXamlChanged(swapchainPanelInfo_))
-			CreateWindowSizeDependentResources();
-	}
-
-	//void EngineCore::OnOrientationChanged(winrt::Windows::Graphics::Display::DisplayOrientations const& orientation)
-	//{
-	//    DX::DeviceResourcesUtil::GetDeviceResources()->SetCurrentOrientation(orientation);
-	//    CreateWindowSizeDependentResources();
-	//}
-
-	void EngineCore::ValidateDevice()
-	{
-		DX::DeviceResourcesUtil::GetDeviceResources()->ValidateDevice();
+	{		
+		render_thread->OnSwapchainXamlChanged(swapchainPanelInfo_);
 	}
 
 	void EngineCore::KeyProcess(SharedTypes::VirtualKey key, bool isPressed)
@@ -402,30 +224,6 @@ namespace Engine
 		//m_origin.y = float(catDesc.Height / 2);
 
 		return true;
-	}
-
-	// Allocate all memory resources that change on a window SizeChanged event.
-	void EngineCore::CreateWindowSizeDependentResources()
-	{
-		// TODO: Initialize windows-size dependent objects here.
-		Size outputSize = DX::DeviceResourcesUtil::GetDeviceResources()->GetOutputSize();
-		float aspectRatio = outputSize.Width / outputSize.Height;
-		float fovAngleY = 70.0f * XM_PI / 180.0f;
-		//auto size = DX::DeviceResourcesUtil::GetDeviceResources()->GetOutputSize();
-		//m_screenPos.x = float(outputSize.Width) / 2.f;
-		//m_screenPos.y = float(outputSize.Height) / 2.f;
-	}
-
-	void EngineCore::OnDeviceLost()
-	{
-		// TODO: Add Direct3D resource cleanup here.
-		//m_spriteBatch.reset();
-	}
-
-	void EngineCore::OnDeviceRestored()
-	{
-		CreateDeviceDependentResources();
-		CreateWindowSizeDependentResources();
 	}
 #pragma endregion
 

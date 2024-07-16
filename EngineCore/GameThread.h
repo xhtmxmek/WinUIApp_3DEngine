@@ -9,5 +9,7 @@ namespace Engine
 		virtual void Run();
 		virtual void Stop();
 		virtual void Exit();
+
+		void LoadDefaultProject();
 	};
 }

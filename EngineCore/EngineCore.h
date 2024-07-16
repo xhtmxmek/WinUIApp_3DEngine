@@ -27,6 +27,11 @@ namespace Engine
         class World;
         class Actor;
     }
+
+    namespace Renderer
+    {
+        class RenderThread;
+    }
     
     class EngineCore
     {
@@ -38,7 +43,10 @@ namespace Engine
         ENGINE_API void Initialize(const SwapchainPanelInfo& swapchainPanelInfo_);
 #endif //WIN_APPS_SDK
         ENGINE_API void UnInitialize();
+
+#pragma region Windows OS
         ENGINE_API IDXGISwapChain3* GetSwapChain();
+#pragma endregion
 
 
         // Basic game loop / inputs        
@@ -86,11 +94,8 @@ namespace Engine
         void Render();
 
         void ProcessInput();
-
-        void Clear();
-
-        void InitializeGlobalObjects();
-        void LoadDefaultProject();
+        
+        void InitializeCoreThread(const SwapchainPanelInfo& swapchainPanelInfo_);
         bool CreateDeviceDependentResources();
         void CreateWindowSizeDependentResources();
         
@@ -99,8 +104,8 @@ namespace Engine
         std::shared_ptr<Engine::Level::World> m_World;
         
         bool RenderLoopActivate;
-        unique_ptr<AsyncWorker> game_thread;
-        unique_ptr<AsyncWorker> render_thread;
+        unique_ptr<GameThread> game_thread;
+        unique_ptr<Renderer::RenderThread> render_thread;
         std::mutex EngineTickMutex;        
         //Windows::Foundation::IAsyncAction m_renderLoopWorker;
         //IRenderer*를 통해서 Render. Mobile용과 DeferredRenderer가 따로 있음

@@ -95,7 +95,7 @@ namespace Engine
 
 		void CameraComponent::LookAt()
 		{
-			//¸¶¿ì½º ¿ìÅ¬¸¯½Ã
+			//ï¿½ï¿½ï¿½ì½º ï¿½ï¿½Å¬ï¿½ï¿½ï¿½ï¿½
 			if (Input::InputManager::GetInstance().GetMouseState(PointerButton::RightButton))
 			{
 				cameraMoveSwitch_ = true;
@@ -108,7 +108,7 @@ namespace Engine
 
 			float deltaX = mouseDelta.x / (float)viewportSize.Width;
 			float deltaY = mouseDelta.y / (float)viewportSize.Height;
-			//È¸Àü°¢¿¡´Â º¸Á¤ÀÌ ÇÊ¿äÇÏ´Ù. ±âº»°ªÀº ¸¶¿ì½º¸¦ È­¸é¸¸Å­ ¿òÁ÷¿´À»¶§¸¦ 180À¸·Î µÎ±â.
+			//È¸ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ê¿ï¿½ï¿½Ï´ï¿½. ï¿½âº»ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ì½ºï¿½ï¿½ È­ï¿½é¸¸Å­ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ 180ï¿½ï¿½ï¿½ï¿½ ï¿½Î±ï¿½.
 
 			float yawDegree = deltaX *= 360.f;
 			float pitchDegree = deltaY *= 360.f;
@@ -118,9 +118,9 @@ namespace Engine
 			float radianPitch = SharedTypes::ConvertToRadian(deltaY);			
 
 			
-			//fowardVector´Â 0,0,1¿¡ È¸Àü º¯È¯À» Àû¿ëÇÑ°Í.
+			//fowardVectorï¿½ï¿½ 0,0,1ï¿½ï¿½ È¸ï¿½ï¿½ ï¿½ï¿½È¯ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ñ°ï¿½.
 						
-			//Tool CameraÀÇ È¸ÀüÀº local ±âÁØÀ¸·Î Àû¿ëµÇ¾ß ¿Ã¹Ù¸£°Ô º¼ ¼ö ÀÖ´Ù.
+			//Tool Cameraï¿½ï¿½ È¸ï¿½ï¿½ï¿½ï¿½ local ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Ç¾ï¿½ ï¿½Ã¹Ù¸ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ ï¿½Ö´ï¿½.
 			if (radianPitch != 0 || radianYaw != 0)
 			{
 				focusPoint_ *= GetComponentTransform().GetWorldMatrix();			

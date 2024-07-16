@@ -28,6 +28,7 @@ namespace Engine
 			DeferredShadingRenderer& operator=(const DeferredShadingRenderer&) = delete;
 
 			void Render();
+			void Stop();
 		private:
 			DeferredShadingRenderer() = default;
 #pragma region Initialize View
@@ -39,6 +40,7 @@ namespace Engine
 #pragma endregion
 
 #pragma region Render Scene
+			void Clear();
 			void RenderShadowDepth();
 			void RenderBasePass();
 			void RenderLights();

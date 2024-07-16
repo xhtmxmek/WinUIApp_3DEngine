@@ -26,6 +26,10 @@ namespace Engine
 			*
 			*/
 
+
+			auto context = DX::DeviceResourcesUtil::GetDeviceResources()->GetD3DDeviceContext();
+			PIXBeginEvent(context, PIX_COLOR_DEFAULT, L"Render");
+
 			ComputeVisibility();
 
 			RenderShadowDepth();
@@ -43,14 +47,20 @@ namespace Engine
 			//안쪽에서 translucency pass composit
 			RenderPostProcessingPass();
 
-			//for (auto& drawComponent : DrawList )
-			//{
-			//	if (drawComponent != nullptr)
-			//		drawComponent->Draw();
-			//}
+			PIXEndEvent(context);
+
+			// Show the new frame.
+			PIXBeginEvent(PIX_COLOR_DEFAULT, L"Present");
+			DX::DeviceResourcesUtil::GetDeviceResources()->Present();
+			PIXEndEvent();
 		}
 
-#pragma region Visibility Check
+		void DeferredShadingRenderer::Stop()
+		{
+
+		}
+
+#pragma region Initialize View
 		void DeferredShadingRenderer::InitView()
 		{
 			ComputeVisibility();
@@ -88,6 +98,28 @@ namespace Engine
 		}
 #pragma endregion
 
+
+#pragma region Render Scene
+		void DeferredShadingRenderer::Clear()
+		{
+		//추후 pass 형태로 빠질것임
+			auto context = DX::DeviceResourcesUtil::GetDeviceResources()->GetD3DDeviceContext();
+			PIXBeginEvent(context, PIX_COLOR_DEFAULT, L"Clear");
+
+			// Clear the views.
+			auto renderTarget = DX::DeviceResourcesUtil::GetDeviceResources()->GetRenderTargetView();
+			auto depthStencil = DX::DeviceResourcesUtil::GetDeviceResources()->GetDepthStencilView();
+
+			context->ClearRenderTargetView(renderTarget, Colors::CornflowerBlue);
+			context->ClearDepthStencilView(depthStencil, D3D11_CLEAR_DEPTH | D3D11_CLEAR_STENCIL, 1.0f, 0);
+			context->OMSetRenderTargets(1, &renderTarget, depthStencil);
+
+			// Set the viewport.
+			auto viewport = DX::DeviceResourcesUtil::GetDeviceResources()->GetScreenViewport();
+			context->RSSetViewports(1, &viewport);
+
+			PIXEndEvent(context);
+		}
 
 		void DeferredShadingRenderer::RenderShadowDepth()
 		{
@@ -127,6 +159,7 @@ namespace Engine
 			* UE에서 post process는 순서가 고정되어있음. 대부분은 컴퓨트 셰이더를 사용중임.
 			*/
 		}
+#pragma endregion
 	}
 }
 

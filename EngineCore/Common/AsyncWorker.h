@@ -8,6 +8,6 @@ namespace Engine
 		virtual void Init() = 0;
 		virtual void Run() = 0;
 		virtual void Stop() = 0;
-		virtual void Pause() = 0;
+		virtual void Exit() = 0;
 	};
 }

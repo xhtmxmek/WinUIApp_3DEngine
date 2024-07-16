@@ -24,19 +24,19 @@ using namespace std;
 
 namespace DisplayMetrics
 {
-    // °íÇØ»óµµ µð½ºÇÃ·¹ÀÌ´Â ·»´õ¸µÇÏ´Â µ¥ ¸¹Àº GPU ¹× ¹èÅÍ¸® Àü¿øÀÌ ÇÊ¿äÇÒ ¼ö ÀÖ½À´Ï´Ù.
-    // ¿¹¸¦ µé¾î °íÇØ»óµµ ÈÞ´ëÆùÀÇ °ÔÀÓ¿¡¼­ °íÈ­Áú·Î ÃÊ´ç 60ÇÁ·¹ÀÓÀ» ·»´õ¸µÇÏ·Á´Â
-    // °æ¿ì ÂªÀº ¹èÅÍ¸® ¼ö¸íÀ¸·Î ÀÎÇØ ¹®Á¦°¡ ¹ß»ýÇÒ ¼ö ÀÖ½À´Ï´Ù.
-    // ¸ðµç ÇÃ·§Æû ¹× Æû ÆÑÅÍ¿¡¼­ °íÈ­Áú·Î ·»´õ¸µÇÏ´Â °áÁ¤Àº
-    // ½ÅÁßÇÏ°Ô ³»·Á¾ß ÇÕ´Ï´Ù.
+    // ï¿½ï¿½ï¿½Ø»ï¿½ ï¿½ï¿½ï¿½Ã·ï¿½ï¿½Ì´ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ï´ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ GPU ï¿½ï¿½ ï¿½ï¿½ï¿½Í¸ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ê¿ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½Ö½ï¿½ï¿½Ï´ï¿½.
+    // ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Ø»ï¿½ ï¿½Þ´ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Ó¿ï¿½ï¿½ï¿½ ï¿½ï¿½È­ï¿½ï¿½ï¿½ï¿½ ï¿½Ê´ï¿½ 60ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ï·ï¿½ï¿½ï¿½
+    // ï¿½ï¿½ï¿½ Âªï¿½ï¿½ ï¿½ï¿½ï¿½Í¸ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ß»ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½Ö½ï¿½ï¿½Ï´ï¿½.
+    // ï¿½ï¿½ï¿½ ï¿½Ã·ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½Í¿ï¿½ï¿½ï¿½ ï¿½ï¿½È­ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ï´ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+    // ï¿½ï¿½ï¿½ï¿½ï¿½Ï°ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Õ´Ï´ï¿½.
     static const bool SupportHighResolutions = false;
 
-    // ¡°°íÇØ»óµµ¡± µð½ºÇÃ·¹ÀÌ¸¦ Á¤ÀÇÇÏ´Â ±âº» ÀÓ°è°ªÀÔ´Ï´Ù. ÀÓ°è°ªÀ» ÃÊ°úÇÏ°Å³ª
-    // SupportHighResolutions°¡ falseÀÎ °æ¿ì Å©±â°¡ 50%·Î
-    //ÁÙ¾îµì´Ï´Ù.
-    static const float DpiThreshold = 192.0f;		// Ç¥ÁØ µ¥½ºÅ©Åé µð½ºÇÃ·¹ÀÌÀÇ 200%ÀÔ´Ï´Ù.
-    static const float WidthThreshold = 1920.0f;	// ³Êºñ°¡ 1080pÀÔ´Ï´Ù.
-    static const float HeightThreshold = 1080.0f;	// ³ôÀÌ°¡ 1080pÀÔ´Ï´Ù.
+    // ï¿½ï¿½ï¿½ï¿½ï¿½Ø»óµµ¡ï¿½ ï¿½ï¿½ï¿½Ã·ï¿½ï¿½Ì¸ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï´ï¿½ ï¿½âº» ï¿½Ó°è°ªï¿½Ô´Ï´ï¿½. ï¿½Ó°è°ªï¿½ï¿½ ï¿½Ê°ï¿½ï¿½Ï°Å³ï¿½
+    // SupportHighResolutionsï¿½ï¿½ falseï¿½ï¿½ ï¿½ï¿½ï¿½ Å©ï¿½â°¡ 50%ï¿½ï¿½
+    //ï¿½Ù¾ï¿½ï¿½Ï´ï¿½.
+    static const float DpiThreshold = 192.0f;		// Ç¥ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Å©ï¿½ï¿½ ï¿½ï¿½ï¿½Ã·ï¿½ï¿½ï¿½ï¿½ï¿½ 200%ï¿½Ô´Ï´ï¿½.
+    static const float WidthThreshold = 1920.0f;	// ï¿½Êºï¿½ 1080pï¿½Ô´Ï´ï¿½.
+    static const float HeightThreshold = 1080.0f;	// ï¿½ï¿½ï¿½Ì°ï¿½ 1080pï¿½Ô´Ï´ï¿½.
 };
 
 // Constants used to calculate screen rotations
@@ -109,16 +109,16 @@ namespace Engine
 #pragma region CreateResources
     void DX::DeviceResources::CreateDeviceIndependentResources()
     {
-        // Direct2D ¸®¼Ò½º¸¦ ÃÊ±âÈ­ÇÕ´Ï´Ù.
+        // Direct2D ï¿½ï¿½ï¿½Ò½ï¿½ï¿½ï¿½ ï¿½Ê±ï¿½È­ï¿½Õ´Ï´ï¿½.
         D2D1_FACTORY_OPTIONS options;
         ZeroMemory(&options, sizeof(D2D1_FACTORY_OPTIONS));
 
 #if defined(_DEBUG)
-        // ÇÁ·ÎÁ§Æ®°¡ µð¹ö±× ºôµå ÁßÀÎ °æ¿ì SDK ·¹ÀÌ¾î¸¦ ÅëÇØ Direct2D µð¹ö±ëÀ» »ç¿ëÇÕ´Ï´Ù.
+        // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ®ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ SDK ï¿½ï¿½ï¿½Ì¾î¸¦ ï¿½ï¿½ï¿½ï¿½ Direct2D ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Õ´Ï´ï¿½.
         options.debugLevel = D2D1_DEBUG_LEVEL_INFORMATION;
 #endif
 
-        // DirectWrite ÆÑÅÍ¸®¸¦ ÃÊ±âÈ­ÇÕ´Ï´Ù.
+        // DirectWrite ï¿½ï¿½ï¿½Í¸ï¿½ï¿½ï¿½ ï¿½Ê±ï¿½È­ï¿½Õ´Ï´ï¿½.
         DX::ThrowIfFailed(
             DWriteCreateFactory(
                 DWRITE_FACTORY_TYPE_SHARED,
@@ -127,7 +127,7 @@ namespace Engine
             )
         );
 
-        // Direct2D ÆÑÅÍ¸®¸¦ ÃÊ±âÈ­ÇÕ´Ï´Ù.
+        // Direct2D ï¿½ï¿½ï¿½Í¸ï¿½ï¿½ï¿½ ï¿½Ê±ï¿½È­ï¿½Õ´Ï´ï¿½.
         DX::ThrowIfFailed(
             D2D1CreateFactory(
                 D2D1_FACTORY_TYPE_SINGLE_THREADED,
@@ -137,7 +137,7 @@ namespace Engine
             )
         );
 
-        //WIC(Windows Imaging Component) ÆÑÅÍ¸®¸¦ ÃÊ±âÈ­ÇÕ´Ï´Ù.
+        //WIC(Windows Imaging Component) ï¿½ï¿½ï¿½Í¸ï¿½ï¿½ï¿½ ï¿½Ê±ï¿½È­ï¿½Õ´Ï´ï¿½.
 
         DX::ThrowIfFailed(
             CoCreateInstance(
@@ -337,7 +337,7 @@ namespace Engine
         ThrowIfFailed(device.query_to(&m_d3dDevice));
         ThrowIfFailed(context.query_to(&m_d3dContext));
 
-        // Direct2D µð¹ÙÀÌ½º °³Ã¼ ¹× ÇØ´ç ÄÁÅØ½ºÆ®¸¦ ¸¸µì´Ï´Ù.
+        // Direct2D ï¿½ï¿½ï¿½ï¿½Ì½ï¿½ ï¿½ï¿½Ã¼ ï¿½ï¿½ ï¿½Ø´ï¿½ ï¿½ï¿½ï¿½Ø½ï¿½Æ®ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Ï´ï¿½.
         com_ptr_nothrow<IDXGIDevice3> dxgiDevice;
         DX::ThrowIfFailed(
             m_d3dDevice.query_to(dxgiDevice.addressof())
@@ -379,9 +379,9 @@ namespace Engine
         UpdateRenderTargetSize();
 
 
-        // ½º¿Ò Ã¼ÀÎÀÇ ³Êºñ¿Í ³ôÀÌ´Â Ã¢ÀÇ °¡·Î ¹æÇâ ³Êºñ ¹× ³ôÀÌ¸¦
-        // ±âÁØÀ¸·Î ÇØ¾ß ÇÕ´Ï´Ù. Ã¢ÀÌ ±âÁØ ¹æÇâÀÌ ¾Æ´Ñ °æ¿ì¿¡´Â
-        // Ä¡¼ö¸¦ ¹Ý´ë·Î ÇØ¾ß ÇÕ´Ï´Ù.
+        // ï¿½ï¿½ï¿½ï¿½ Ã¼ï¿½ï¿½ï¿½ï¿½ ï¿½Êºï¿½ï¿½ ï¿½ï¿½ï¿½Ì´ï¿½ Ã¢ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Êºï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½Ì¸ï¿½
+        // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ø¾ï¿½ ï¿½Õ´Ï´ï¿½. Ã¢ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Æ´ï¿½ ï¿½ï¿½ì¿¡ï¿½ï¿½
+        // Ä¡ï¿½ï¿½ï¿½ï¿½ ï¿½Ý´ï¿½ï¿½ ï¿½Ø¾ï¿½ ï¿½Õ´Ï´ï¿½.
         //DXGI_MODE_ROTATION displayRotation = ComputeDisplayRotation();
         // Determine the render target size in pixels.        
         //bool swapDimensions = displayRotation == DXGI_MODE_ROTATION_ROTATE90 || displayRotation == DXGI_MODE_ROTATION_ROTATE270;
@@ -442,16 +442,16 @@ namespace Engine
             swapChainDesc.SampleDesc.Count = 1;
             swapChainDesc.SampleDesc.Quality = 0;
             swapChainDesc.Scaling = scaling;
-            swapChainDesc.SwapEffect = DXGI_SWAP_EFFECT_FLIP_SEQUENTIAL;       //DXGI_SWAP_EFFECT_FLIP_SEQUENTIAL;	// ¸ðµç Microsoft Store ¾ÛÀº _FLIP_ SwapEffects¸¦ »ç¿ëÇØ¾ß ÇÕ´Ï´Ù.
+            swapChainDesc.SwapEffect = DXGI_SWAP_EFFECT_FLIP_SEQUENTIAL;       //DXGI_SWAP_EFFECT_FLIP_SEQUENTIAL;	// ï¿½ï¿½ï¿½ Microsoft Store ï¿½ï¿½ï¿½ï¿½ _FLIP_ SwapEffectsï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Ø¾ï¿½ ï¿½Õ´Ï´ï¿½.
             swapChainDesc.AlphaMode = DXGI_ALPHA_MODE_IGNORE;
             swapChainDesc.Flags = (m_options & c_AllowTearing) ? DXGI_SWAP_CHAIN_FLAG_ALLOW_TEARING : 0u;
 
-            // XAML interopÀ» »ç¿ëÇÏ´Â °æ¿ì ½º¿Ò Ã¼ÀÎÀº ÄÄÆÛÁö¼Ç¿ëÀ¸·Î ¸¸µé¾î¾ß ÇÕ´Ï´Ù.
+            // XAML interopï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Ï´ï¿½ ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ Ã¼ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ç¿ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Õ´Ï´ï¿½.
 
             com_ptr_nothrow<IDXGISwapChain1> swapChain;
             if (m_options & c_UseXAML)
             {
-                // XAML interopÀ» »ç¿ëÇÏ´Â °æ¿ì ½º¿Ò Ã¼ÀÎÀº ÄÄÆÛÁö¼Ç¿ëÀ¸·Î ¸¸µé¾î¾ß ÇÕ´Ï´Ù.            
+                // XAML interopï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Ï´ï¿½ ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ Ã¼ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ç¿ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Õ´Ï´ï¿½.            
                 DX::ThrowIfFailed(
                     m_dxgiFactory->CreateSwapChainForComposition(
                         m_d3dDevice.get(),
@@ -537,7 +537,7 @@ namespace Engine
 
         ThrowIfFailed(m_swapChain->SetRotation(m_rotation));
 
-        // ½º¿Ò Ã¼ÀÎ¿¡¼­ ¿ªºñÀ² ¼³Á¤ ??
+        // ï¿½ï¿½ï¿½ï¿½ Ã¼ï¿½Î¿ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ??
         if (m_options & c_UseXAML)
         {
             DXGI_MATRIX_3X2_F inverseScale = { 0 };
@@ -597,8 +597,8 @@ namespace Engine
             static_cast<float>(backBufferHeight)
         );
 
-        // ½º¿Ò Ã¼ÀÎ ¹é ¹öÆÛ¿¡ ¿¬°áµÈ Direct2D ´ë»ó
-        // ºñÆ®¸ÊÀ» ¸¸µé°í ÀÌ¸¦ ÇöÀç ´ë»óÀ¸·Î ¼³Á¤ÇÕ´Ï´Ù.
+        // ï¿½ï¿½ï¿½ï¿½ Ã¼ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½Û¿ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ Direct2D ï¿½ï¿½ï¿½
+        // ï¿½ï¿½Æ®ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ì¸ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Õ´Ï´ï¿½.
         D2D1_BITMAP_PROPERTIES1 bitmapProperties =
             D2D1::BitmapProperties1(
                 D2D1_BITMAP_OPTIONS_TARGET | D2D1_BITMAP_OPTIONS_CANNOT_DRAW,
@@ -623,7 +623,7 @@ namespace Engine
         m_d2dContext->SetTarget(m_d2dTargetBitmap.get());
         m_d2dContext->SetDpi(m_dpi * m_effectiveRasterizationScale, m_dpi * m_effectiveRasterizationScale);
 
-        // ¸ðµç Microsoft Store ¾Û¿¡ È¸»öÁ¶ ÅØ½ºÆ® ¾ØÆ¼¾Ù¸®¾î½ÌÀ» »ç¿ëÇÏ´Â °ÍÀÌ ÁÁ½À´Ï´Ù.
+        // ï¿½ï¿½ï¿½ Microsoft Store ï¿½Û¿ï¿½ È¸ï¿½ï¿½ï¿½ï¿½ ï¿½Ø½ï¿½Æ® ï¿½ï¿½Æ¼ï¿½Ù¸ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Ï´ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï´ï¿½.
         m_d2dContext->SetTextAntialiasMode(D2D1_TEXT_ANTIALIAS_MODE_GRAYSCALE);
     }
 
@@ -764,13 +764,13 @@ namespace Engine
 #pragma endregion
 
 #pragma region WindowSet
-    // ÀÌ ¸Þ¼­µå´Â XAML ÄÁÆ®·ÑÀÌ »ý¼º ¶Ç´Â Àç»ý¼ºµÉ ¶§ È£ÃâµË´Ï´Ù.
+    // ï¿½ï¿½ ï¿½Þ¼ï¿½ï¿½ï¿½ï¿½ XAML ï¿½ï¿½Æ®ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ç´ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ È£ï¿½ï¿½Ë´Ï´ï¿½.
     void DX::DeviceResources::SetSwapChainPanel(SwapchainPanelInfo const& panelInfo)
     {
         if (!panelInfo.IsLoaded)
             return;
 
-        //UI·¹ÀÌ¾î        
+        //UIï¿½ï¿½ï¿½Ì¾ï¿½        
         m_logicalSize = panelInfo.ActureSize;
         //m_nativeOrientation = currentDisplayInformation.NativeOrientation();
         //m_currentOrientation = currentDisplayInformation.CurrentOrientation();
@@ -1008,7 +1008,7 @@ namespace Engine
         }
     }
 
-    // ÀÌ ¸Þ¼­µå´Â CompositionScaleChanged ÀÌº¥Æ®ÀÇ ÀÌº¥Æ® Ã³¸®±â¿¡¼­ È£ÃâµË´Ï´Ù.
+    // ï¿½ï¿½ ï¿½Þ¼ï¿½ï¿½ï¿½ï¿½ CompositionScaleChanged ï¿½Ìºï¿½Æ®ï¿½ï¿½ ï¿½Ìºï¿½Æ® Ã³ï¿½ï¿½ï¿½â¿¡ï¿½ï¿½ È£ï¿½ï¿½Ë´Ï´ï¿½.
     void DX::DeviceResources::SetCompositionScale(float compositionScaleX, float compositionScaleY)
     {
         if (m_options & c_UseXAML)
@@ -1027,8 +1027,8 @@ namespace Engine
     {
         DXGI_MODE_ROTATION rotation = DXGI_MODE_ROTATION_UNSPECIFIED;
 
-        // Âü°í: NativeOrientationÀº DisplayOrientations ¿­°ÅÇüÀÌ ´Ù¸¥ °ªÀ» Æ÷ÇÔÇÏ´õ¶óµµ
-        // Landscape ¶Ç´Â Portrait¸¸ µÉ ¼ö ÀÖ½À´Ï´Ù.
+        // ï¿½ï¿½ï¿½ï¿½: NativeOrientationï¿½ï¿½ DisplayOrientations ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ù¸ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï´ï¿½ï¿½ï¿½
+        // Landscape ï¿½Ç´ï¿½ Portraitï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ ï¿½Ö½ï¿½ï¿½Ï´ï¿½.
         //switch (m_nativeOrientation)
         //{
         //case DisplayOrientations::Landscape:
@@ -1085,19 +1085,19 @@ namespace Engine
             m_effectiveCompositionScaleY = m_compositionScaleY;
         }
 
-        // °íÇØ»óµµ µð¹ÙÀÌ½º¿¡¼­ ¹èÅÍ¸® ¼ö¸íÀ» °³¼±ÇÏ·Á¸é ´õ ÀÛÀº ·»´õ¸µ ´ë»óÀ¸·Î ·»´õ¸µÇÏ°í
-        // Ãâ·ÂÀÌ Ç¥ÇöµÉ ¶§ GPU¿¡¼­ Ãâ·ÂÀÇ Å©±â¸¦ Á¶Á¤ÇÒ ¼ö ÀÖµµ·Ï Çã¿ëÇÕ´Ï´Ù.
+        // ï¿½ï¿½ï¿½Ø»ï¿½ ï¿½ï¿½ï¿½ï¿½Ì½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Í¸ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï·ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ï°ï¿½
+        // ï¿½ï¿½ï¿½ï¿½ï¿½ Ç¥ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ GPUï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ Å©ï¿½â¸¦ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½Öµï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Õ´Ï´ï¿½.
         if (!DisplayMetrics::SupportHighResolutions && m_RasterizationScale > DisplayMetrics::DpiThreshold)
         {
             float width = m_logicalSize.Width * m_RasterizationScale;
             float height = m_logicalSize.Height * m_RasterizationScale;
 
-            // µð¹ÙÀÌ½º°¡ ¼¼·Î ¹æÇâÀÌ¸é ³ôÀÌ°¡ ³Êºñº¸´Ù Å®´Ï´Ù. Å« Ä¡¼ö´Â
-            // ³Êºñ ÀÓ°è°ª°ú ºñ±³ÇÏ°í ÀÛÀº Ä¡¼ö´Â
-            // ³ôÀÌ ÀÓ°è°ª°ú ºñ±³ÇÕ´Ï´Ù.
+            // ï¿½ï¿½ï¿½ï¿½Ì½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ì¸ï¿½ ï¿½ï¿½ï¿½Ì°ï¿½ ï¿½Êºñº¸´ï¿½ Å®ï¿½Ï´ï¿½. Å« Ä¡ï¿½ï¿½ï¿½ï¿½
+            // ï¿½Êºï¿½ ï¿½Ó°è°ªï¿½ï¿½ ï¿½ï¿½ï¿½Ï°ï¿½ ï¿½ï¿½ï¿½ï¿½ Ä¡ï¿½ï¿½ï¿½ï¿½
+            // ï¿½ï¿½ï¿½ï¿½ ï¿½Ó°è°ªï¿½ï¿½ ï¿½ï¿½ï¿½Õ´Ï´ï¿½.
             if (max(width, height) > DisplayMetrics::WidthThreshold && min(width, height) > DisplayMetrics::HeightThreshold)
             {
-                // ¾ÛÀÇ Å©±â¸¦ Á¶Á¤ÇÏ±â À§ÇØ À¯È¿ DPI¸¦ º¯°æÇÕ´Ï´Ù. ³í¸® Å©±â´Â º¯°æµÇÁö ¾Ê½À´Ï´Ù.
+                // ï¿½ï¿½ï¿½ï¿½ Å©ï¿½â¸¦ ï¿½ï¿½ï¿½ï¿½ï¿½Ï±ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½È¿ DPIï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Õ´Ï´ï¿½. ï¿½ï¿½ï¿½ Å©ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ê½ï¿½ï¿½Ï´ï¿½.
                 m_effectiveRasterizationScale /= 2.0f;
                 if (m_options & c_UseXAML)
                 {
@@ -1107,11 +1107,11 @@ namespace Engine
             }
         }
 
-        // ÇÊ¿äÇÑ ·»´õ¸µ ´ë»ó Å©±â¸¦ ÇÈ¼¿ ´ÜÀ§·Î °è»êÇÕ´Ï´Ù.
+        // ï¿½Ê¿ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ Å©ï¿½â¸¦ ï¿½È¼ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Õ´Ï´ï¿½.
         m_outputSize.Width = m_logicalSize.Width * m_effectiveRasterizationScale;
         m_outputSize.Height = m_logicalSize.Height * m_effectiveRasterizationScale;
 
-        // DirectX ÄÜÅÙÃ÷ Å©±â¸¦ 0À¸·Î ¸¸µéÁö ¾Ê½À´Ï´Ù.
+        // DirectX ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ Å©ï¿½â¸¦ 0ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ê½ï¿½ï¿½Ï´ï¿½.
         m_outputSize.Width = max(m_outputSize.Width, 1.0f);
         m_outputSize.Height = max(m_outputSize.Height, 1.0f);
     }

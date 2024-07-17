@@ -1,7 +1,7 @@
 #pragma once
 //렌더러는 월드에 대한 업데이트와 렌더링을 담당하는 클래스이다. 
 //렌더링 파이프라인을 담당하고 있다.
-//엔진이 렌더러를 소유. 렌더러는 월드의 렌더러 모듈 버전인 씬을 소유.
+//unique 포인터를 가지고 있으므로, pImpl로 구현하여 상위구조에서 헤더를 알 필요 없도록 해얗
 
 
 namespace Engine
@@ -18,19 +18,12 @@ namespace Engine
 		class DeferredShadingRenderer
 		{
 		public:
-			static DeferredShadingRenderer& GetInstance()
-			{
-				static DeferredShadingRenderer instance;
-				return instance;
-			}
-
+			DeferredShadingRenderer() = default;			
 			DeferredShadingRenderer(const DeferredShadingRenderer&) = delete;
 			DeferredShadingRenderer& operator=(const DeferredShadingRenderer&) = delete;
 
 			void Render();
-			void Stop();
-		private:
-			DeferredShadingRenderer() = default;
+			void Stop();		
 #pragma region Initialize View
 			void InitView();
 			void ComputeVisibility();
@@ -48,7 +41,7 @@ namespace Engine
 			void RenderVolumetricFog();
 			void RenderPostProcessingPass();
 
-			unique_ptr<Scene> SceneInfo; 
+			weak_ptr<Scene> SceneInfo; 
 #pragma endregion
 
 		};

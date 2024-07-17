@@ -161,6 +161,7 @@
     <ClInclude Include="PhysicsThread.h" />
     <ClInclude Include="Renderer\MeshProcessor.h" />
     <ClInclude Include="EngineAsset\ModelAsset.h" />
+    <ClInclude Include="Renderer\PrimitiveInfo.h" />
     <ClInclude Include="Renderer\Resource\DeviceResources.h" />
     <ClInclude Include="Common\EngineBaseHeader.h" />
     <ClInclude Include="Common\EngineCommonHeader.h" />
@@ -180,13 +181,14 @@
     <ClInclude Include="EngineAsset\Texture.h" />
     <ClInclude Include="EngineCore.h" />
     <ClInclude Include="framework.h" />
-    <ClInclude Include="Level\Actor\Actor.h" />
-    <ClInclude Include="Level\Actor\ActorManager\ActorManager.h" />
-    <ClInclude Include="Level\Actor\Camera\Camera.h" />
-    <ClInclude Include="Level\Actor\DefaultActor.h" />
-    <ClInclude Include="Level\Actor\PropertyActor.h" />
-    <ClInclude Include="Level\Actor\SpriteActor\Sprite.h" />
-    <ClInclude Include="Level\Actor\StaticMesh\StaticMesh.h" />
+    <ClInclude Include="Renderer\Scene.h" />
+    <ClInclude Include="World\Actor\Actor.h" />
+    <ClInclude Include="World\Actor\ActorManager\ActorManager.h" />
+    <ClInclude Include="World\Actor\Camera\Camera.h" />
+    <ClInclude Include="World\Actor\DefaultActor.h" />
+    <ClInclude Include="World\Actor\PropertyActor.h" />
+    <ClInclude Include="World\Actor\SpriteActor\Sprite.h" />
+    <ClInclude Include="World\Actor\StaticMesh\StaticMesh.h" />
     <ClInclude Include="Component\CameraComponent\CameraComponent.h" />
     <ClInclude Include="Component\ComponentBase\ComponentBase.h" />
     <ClInclude Include="Component\ComponentLinker.h" />
@@ -196,9 +198,9 @@
     </ClInclude>
     <ClInclude Include="Component\SpriteComponent\SpriteComponent.h" />
     <ClInclude Include="Component\StaticMeshComponent\StaticMeshComponent.h" />
-    <ClInclude Include="Level\Level.h" />
+    <ClInclude Include="World\Level.h" />
     <ClInclude Include="Component\Property\PropertyBase.h" />
-    <ClInclude Include="Level\World.h" />
+    <ClInclude Include="World\World.h" />
     <ClInclude Include="pch.h" />
     <ClInclude Include="Renderer\Resource\ConstantBuffer.h" />
     <ClInclude Include="Renderer\DeferredShadingRenderer.h" />
@@ -228,19 +230,19 @@
     <ClCompile Include="EngineAsset\Material.cpp" />
     <ClCompile Include="EngineAsset\Texture.cpp" />
     <ClCompile Include="EngineCore.cpp" />
-    <ClCompile Include="Level\Actor\Actor.cpp" />
-    <ClCompile Include="Level\Actor\ActorManager\ActorManager.cpp" />
-    <ClCompile Include="Level\Actor\Camera\Camera.cpp" />
-    <ClCompile Include="Level\Actor\DefaultActor.cpp" />
-    <ClCompile Include="Level\Actor\SpriteActor\Sprite.cpp" />
-    <ClCompile Include="Level\Actor\StaticMesh\StaticMesh.cpp" />
+    <ClCompile Include="World\Actor\Actor.cpp" />
+    <ClCompile Include="World\Actor\ActorManager\ActorManager.cpp" />
+    <ClCompile Include="World\Actor\Camera\Camera.cpp" />
+    <ClCompile Include="World\Actor\DefaultActor.cpp" />
+    <ClCompile Include="World\Actor\SpriteActor\Sprite.cpp" />
+    <ClCompile Include="World\Actor\StaticMesh\StaticMesh.cpp" />
     <ClCompile Include="Component\CameraComponent\CameraComponent.cpp" />
     <ClCompile Include="Component\ComponentBase\ComponentBase.cpp" />
     <ClCompile Include="Component\ComponentLinker.cpp" />
     <ClCompile Include="Component\SpriteComponent\SpriteComponent.cpp" />
     <ClCompile Include="Component\StaticMeshComponent\StaticMeshComponent.cpp" />
-    <ClCompile Include="Level\Level.cpp" />
-    <ClCompile Include="Level\World.cpp" />
+    <ClCompile Include="World\Level.cpp" />
+    <ClCompile Include="World\World.cpp" />
     <ClCompile Include="pch.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>

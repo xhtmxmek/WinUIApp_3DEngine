@@ -1,5 +1,6 @@
 #include "pch.h"
 #include "RendererBaseHeader.h"
+#include "PrimitiveInfo.h"
 #include "MeshProcessor.h"
 #include "Scene.h"
 

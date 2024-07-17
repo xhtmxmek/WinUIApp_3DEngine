@@ -3,8 +3,11 @@
 //Scene은 World의 렌더러 버전. World와 각종 DrawableComponent 정보로 렌더링.
 namespace Engine
 {
-	class World;
-
+	namespace World
+	{
+		class WorldObject;
+	}
+	
 	namespace Renderer	
 	{
 		class StaticPrimitiveInfo;
@@ -20,8 +23,10 @@ namespace Engine
 		
 		class Scene
 		{
+		public:			
+			~Scene();
 		private:
-			std::shared_ptr<World> world_ptr;
+			std::shared_ptr<World::WorldObject> world_ptr;
 
 			//생성되거나 visible 정보 바뀔떄 Scene의 DrawableComponentList에 추가됨. Visiblity 검사 통과한 Primitive에 대해서만.
 			std::vector<shared_ptr<StaticPrimitiveInfo>> static_primitives;

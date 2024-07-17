@@ -42,7 +42,7 @@ namespace Engine
 			Vector3f focusPoint_;
 			Vector3f upVector_;
 
-			PropertyBool useBlur_; //Æ÷½ºÆ® ÇÁ·Î¼¼½º ÇÃ·¡±×´Â ÃßÈÄ¿¡ PropertyBitmask Å¸ÀÔ ¸¸µé¾î¼­ ±×°É·Î ¹Ù²Ü²¨ÀÓ
+			PropertyBool useBlur_; //ï¿½ï¿½ï¿½ï¿½Æ® ï¿½ï¿½ï¿½Î¼ï¿½ï¿½ï¿½ ï¿½Ã·ï¿½ï¿½×´ï¿½ ï¿½ï¿½ï¿½Ä¿ï¿½ PropertyBitmask Å¸ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½î¼­ ï¿½×°É·ï¿½ ï¿½Ù²Ü²ï¿½ï¿½ï¿½
 		};
 	}
 }

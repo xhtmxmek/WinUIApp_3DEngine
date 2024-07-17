@@ -3,7 +3,7 @@
 //#include "World.h"
 namespace Engine
 {
-	namespace Level
+	namespace World
 	{
 		class World;		
 

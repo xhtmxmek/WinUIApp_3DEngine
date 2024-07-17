@@ -11,112 +11,87 @@ EngineCore는 최대한 플랫폼 독립적인 코드로 가는것이 목표
 
 namespace SharedTypes
 {
-    enum class VirtualKey;
-    enum class PointerButton;
+	enum class VirtualKey;
+	enum class PointerButton;
 }
 
 namespace Engine
-{    
-    namespace DX
-    {
-        class StepTimer;
-    }
+{
+	namespace World
+	{
+		class WorldObject;
+		class Actor;
+	}
 
-    namespace Level
-    {
-        class World;
-        class Actor;
-    }
+	namespace Renderer
+	{
+		class RenderThread;
+	}
 
-    namespace Renderer
-    {
-        class RenderThread;
-    }
-    
-    class EngineCore
-    {
-    public:
-        ENGINE_API EngineCore():RenderLoopActivate(false), ProjectHandle(nullptr) {}
-        ENGINE_API ~EngineCore() = default;
+	class EngineCore
+	{
+	public:
+		ENGINE_API EngineCore() : ProjectHandle(nullptr) {}
+		ENGINE_API ~EngineCore() = default;
+
+#pragma region Initialize
 #ifdef WIN_APPS_SDK
-        //void Initialize(Microsoft.UI.Xaml.Controls.SwapChainPanel panel);
-        ENGINE_API void Initialize(const SwapchainPanelInfo& swapchainPanelInfo_);
+	public:
+		ENGINE_API void Initialize(const SwapchainPanelInfo& swapchainPanelInfo_);
+	private:
+		void InitializeCoreThread(const SwapchainPanelInfo& swapchainPanelInfo_);
 #endif //WIN_APPS_SDK
-        ENGINE_API void UnInitialize();
-
-#pragma region Windows OS
-        ENGINE_API IDXGISwapChain3* GetSwapChain();
 #pragma endregion
 
+#pragma region Uninitialize
+	public:
+		ENGINE_API void UnInitialize();
+#pragma endregion        
 
-        // Basic game loop / inputs        
-        ENGINE_API void Run();
-        ENGINE_API void Stop();
-        
-        ENGINE_API void OnDeviceLost();
-        ENGINE_API void OnDeviceRestored();
+#pragma region Windows Dedicated
+	public:
+		ENGINE_API IDXGISwapChain3* GetSwapChain();
+#pragma endregion
 
-        // Messages
-        ENGINE_API void OnActivated();
-        ENGINE_API void OnDeactivated();
-        ENGINE_API void OnSuspending();
-        ENGINE_API void OnResuming();
-        ENGINE_API void OnWindowSizeChanged(SharedTypes::Size windowSize);
-        ENGINE_API void OnSwapchainXamlChanged(const SwapchainPanelInfo& swapchainPanelInfo);
-        //void OnOrientationChanged(Windows.Graphics.Display.DisplayOrientations orientation);
-        ENGINE_API void ValidateDevice();
+#pragma region Active Control
+		ENGINE_API void Run();
+		ENGINE_API void Stop();
+#pragma endregion
 
-        ENGINE_API void KeyProcess(SharedTypes::VirtualKey key, bool isPressed);
-        ENGINE_API void PointerProcess(vector<bool> const& pointerState);
-        ENGINE_API void PointerProcess(Vector2i pos);
-        ENGINE_API void PointerProcess(int wheelDelta);
+#pragma region Window Message Handlers
+	public:
+		ENGINE_API void OnActivated();
+		ENGINE_API void OnDeactivated();
+		ENGINE_API void OnSuspending();
+		ENGINE_API void OnResuming();
+		ENGINE_API void OnWindowSizeChanged(SharedTypes::Size windowSize);
+		ENGINE_API void OnSwapchainXamlChanged(const SwapchainPanelInfo& swapchainPanelInfo);
 
-        // Properties
-        ENGINE_API SharedTypes::Size GetDefaultBackBufferSize() noexcept
-        {
-            return SharedTypes::Size(800.0f, 600.0f);
-        }
+		ENGINE_API void KeyProcess(SharedTypes::VirtualKey key, bool isPressed);
+		ENGINE_API void PointerProcess(vector<bool> const& pointerState);
+		ENGINE_API void PointerProcess(Vector2i pos);
+		ENGINE_API void PointerProcess(int wheelDelta);
 
-        //common
-        ENGINE_API void LoadScriptProject(std::wstring const& path);
-        ENGINE_API void PickCheck(Vector2i screenPos, shared_ptr<Level::Actor>& pickedActor);
+		ENGINE_API void PickCheck(Vector2i screenPos, shared_ptr<World::Actor>& pickedActor);
+		ENGINE_API weak_ptr<World::Actor> GetActor(int index);
+		ENGINE_API weak_ptr<World::Actor> GetActor(const string& name);
+		ENGINE_API size_t GetNumActorList();
+#pragma endregion
 
-        ENGINE_API weak_ptr<Level::Actor> GetActor(int index);
-        ENGINE_API weak_ptr<Level::Actor> GetActor(const string& name);
-        ENGINE_API size_t GetNumActorList();
+#pragma region ProjectLoad
+	public:
+		ENGINE_API void LoadScriptProject(std::wstring const& path);
+		HMODULE ProjectHandle;
+#pragma endregion
 
-        // private
-    private:
-        //Tick은 엔진(게임 쓰레드)에서 실행
-        void Tick();
-        void Update();
-        //Render는 렌더 쓰레드에서 실행. 렌더링 쓰레드는 초기화시 발행
-        void Render();
+#pragma region WorkerThread
+	private:
+		unique_ptr<GameThread> gameThread;
+		unique_ptr<Renderer::RenderThread> renderThread;
+#pragma endregion
+	};
 
-        void ProcessInput();
-        
-        void InitializeCoreThread(const SwapchainPanelInfo& swapchainPanelInfo_);
-        bool CreateDeviceDependentResources();
-        void CreateWindowSizeDependentResources();
-        
-    private:
-        std::shared_ptr<Engine::DX::StepTimer> Timer;
-        std::shared_ptr<Engine::Level::World> m_World;
-        
-        bool RenderLoopActivate;
-        unique_ptr<GameThread> game_thread;
-        unique_ptr<Renderer::RenderThread> render_thread;
-        std::mutex EngineTickMutex;        
-        //Windows::Foundation::IAsyncAction m_renderLoopWorker;
-        //IRenderer*를 통해서 Render. Mobile용과 DeferredRenderer가 따로 있음
-        //World가 Level을 물고 있는 것이다. World는 하나의 가상 세계이고 Level은 가상세계에 존재하는 장소(구역이다.)World는 Map안에 들어있다.
-
-
-
-        HMODULE ProjectHandle;
-    };
-
-    ENGINE_API void InitEngine();
-    ENGINE_API void ReleaseEngine();
-    ENGINE_API EngineCore* GetRenderingEngine();
+	ENGINE_API void InitEngine();
+	ENGINE_API void ReleaseEngine();
+	ENGINE_API EngineCore* GetRenderingEngine();
 }

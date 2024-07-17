@@ -5,7 +5,7 @@
 
 namespace Engine
 {
-	namespace Level
+	namespace World
 	{
 		RUNTIME_CLASS_IMPL(AStaticMesh)
 
@@ -20,7 +20,7 @@ namespace Engine
 		void AStaticMesh::Init()
 		{
 			//Batch = std::make_unique<Component::SpriteComponent>("");
-			//¾À ·»´õ·¯¿¡ ÄÄÆ÷³ÍÆ® µî·ÏÇÏ±â			
+			//ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ® ï¿½ï¿½ï¿½ï¿½Ï±ï¿½			
 			//pImpl->Init();
 		}
 

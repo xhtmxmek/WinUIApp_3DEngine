@@ -18,7 +18,7 @@ namespace Engine
 				rasterizerDesc.FillMode = static_cast<D3D11_FILL_MODE>(fillMode);
 				rasterizerDesc.CullMode = static_cast<D3D11_CULL_MODE>(cull);
 				rasterizerDesc.FrontCounterClockwise = FALSE;
-				rasterizerDesc.DepthBias = 0;		//±×¸²ÀÚ  ¾µ °æ¿ì ´Ù½Ã ¼­¼úÇÏ±â
+				rasterizerDesc.DepthBias = 0;		//ï¿½×¸ï¿½ï¿½ï¿½  ï¿½ï¿½ ï¿½ï¿½ï¿½ ï¿½Ù½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï±ï¿½
 				rasterizerDesc.SlopeScaledDepthBias = 0.0f;
 				rasterizerDesc.DepthBiasClamp = 0.0f;
 				rasterizerDesc.ScissorEnable = false;

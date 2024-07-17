@@ -1,4 +1,5 @@
 #include "pch.h"
+#include "World/World.h"
 #include "GameThread.h"
 
 namespace Engine
@@ -59,16 +60,5 @@ namespace Engine
 		Level::SLevel::GetInstance().ReleaseInstance();
 		Level::ActorManager::GetInstance().ReleaseInstance();
 		EngineAsset::TextureManager::GetInstance().ReleaseInstance();
-	}
-	void GameThread::LoadDefaultProject()
-	{
-		m_World->Init();
-
-		wstring defaultProjFullPath = Path::ProjectDir + L"\\x64\\Debug\\" + Path::ProjectName;
-		HMODULE hDll = ::LoadLibrary(defaultProjFullPath.c_str());
-		if (hDll != NULL)
-		{
-			FreeLibrary(hDll);
-		}
 	}
 }

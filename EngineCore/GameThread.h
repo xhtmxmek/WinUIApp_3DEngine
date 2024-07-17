@@ -2,6 +2,11 @@
 #include "Common/AsyncWorker.h"
 namespace Engine
 {
+	namespace World
+	{
+		class WorldObject;
+	}
+	class StepTimer;
 	class GameThread : public AsyncWorker
 	{
 	public:
@@ -10,6 +15,14 @@ namespace Engine
 		virtual void Stop();
 		virtual void Exit();
 
-		void LoadDefaultProject();
+	public:
+		const std::shared_ptr<World::WorldObject>& GetWorld()
+		{
+			return world;
+		}
+	private:		
+		std::shared_ptr<StepTimer> timer;
+		std::shared_ptr<World::WorldObject> world;
+
 	};
 }

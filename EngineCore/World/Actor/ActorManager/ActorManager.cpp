@@ -5,11 +5,11 @@
 
 namespace Engine
 {
-	namespace Level
+	namespace World
 	{
 		void ActorManager::CheckActorListCapacity()
 		{
-			//Actor░б └╧┴д └╙░ш░к └╠╗є ╕╕┼н ╗¤╝║┐ф├╗└╠ ┐├░ц┐ь┐б┤┬ Actorlist└╟ ╗ч└╠┴ю╕ж ┤├╖┴┴╪ ╚─┐б Copy╟╤┤┘
+			//Actorя┐╜я┐╜ я┐╜я┐╜я┐╜я┐╜ я┐╜╙░ш░к я┐╜╠╗я┐╜ я┐╜я┐╜┼н я┐╜я┐╜я┐╜я┐╜я┐╜я┐╜├╗я┐╜я┐╜ я┐╜├░я┐╜ь┐бя┐╜я┐╜ Actorlistя┐╜я┐╜ я┐╜я┐╜я┐╜я┐╜я┐╜ю╕ж я┐╜├╖я┐╜я┐╜я┐╜ я┐╜─┐я┐╜ Copyя┐╜╤┤я┐╜
 			if (Actors.size() % ActorsSizeUnit < (ActorsSizeUnit - ActorSizeBias))
 				ActorListResized = false;
 			else

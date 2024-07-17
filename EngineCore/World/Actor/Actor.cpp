@@ -6,7 +6,7 @@
 
 namespace Engine
 {
-    namespace Level
+    namespace World
     {        
         shared_ptr<World> Actor::GetWorld()
         {
@@ -15,11 +15,11 @@ namespace Engine
 
         std::shared_ptr<Component::ComponentBase> Actor::CreateComponent(const string& className, const string& instanceName)
         {            
-            //·±Å¸ÀÓ Å¬·¡½ºÀÇ Å¬·¡½º¸í Áý¾î³Ö±â            
+            //ï¿½ï¿½Å¸ï¿½ï¿½ Å¬ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ Å¬ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Ö±ï¿½            
             auto iter = components_.find(className.c_str());
             if (iter == components_.end())
             {
-                //new componentÀÇ Æ÷ÀÎÅÍ¿Í componentÀÇ Å¸ÀÔ(drawableÀÎÁö, ¹¹ÀÎÁö...¸¦) ¸®ÅÏÇØ¼­ ¿ùµå¿¡ ³Ö¾îÁÖ°Å³ª, ÃÖÃÊ¿¡ ÅÛÇÃ¸´À¸·ÎºÎÅÍ ¹ÞÀº ÀÌ³ÑÅ¸ÀÔÀ» ¿ùµå¿¡ ³Ö¾îÁÖ±â.                 
+                //new componentï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Í¿ï¿½ componentï¿½ï¿½ Å¸ï¿½ï¿½(drawableï¿½ï¿½ï¿½ï¿½, ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½...ï¿½ï¿½) ï¿½ï¿½ï¿½ï¿½ï¿½Ø¼ï¿½ ï¿½ï¿½ï¿½å¿¡ ï¿½Ö¾ï¿½ï¿½Ö°Å³ï¿½, ï¿½ï¿½ï¿½Ê¿ï¿½ ï¿½ï¿½ï¿½Ã¸ï¿½ï¿½ï¿½ï¿½Îºï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ì³ï¿½Å¸ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½å¿¡ ï¿½Ö¾ï¿½ï¿½Ö±ï¿½.                 
                 Component::ComponentBase* runtimeComponent = (Component::ComponentBase*)RuntimeContext::New(className, instanceName);
                 runtimeComponent->ImplClassName(className);
                 std::shared_ptr<Component::ComponentBase> ptr(runtimeComponent);

@@ -9,6 +9,7 @@ namespace Engine
 		static std::wstring EngineDir;
 		static std::wstring ProjectDir;
 		static std::wstring ProjectName;
-		static void InitBasePathes();					
+		static std::wstring DefaultProjectPath;
+		static void InitDefaultPathes();					
 	};
 }

@@ -10,7 +10,9 @@ namespace Engine
 
 		class RenderThread : public AsyncWorker
 		{
-		public:
+		public:			
+			RenderThread() = default;			
+
 			virtual void Init();
 			virtual void Run();
 			virtual void Stop();
@@ -27,7 +29,7 @@ namespace Engine
 			bool activate;
 			mutex renderMutex;
 
-			unique_ptr<DeferredShadingRenderer> scene_renderer;
+			unique_ptr<DeferredShadingRenderer> sceneRenderer;
 		};
 	}
 }

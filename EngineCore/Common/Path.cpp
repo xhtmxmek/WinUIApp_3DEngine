@@ -7,12 +7,15 @@ namespace Engine
 	std::wstring Path::ProjectDir;
 	std::wstring Path::ProjectName;
 
-	void Path::InitBasePathes()
+	std::wstring Path::DefaultProjectPath;
+
+	void Path::InitDefaultPathes()
 	{		
 		//EngineDir = winrt::Windows::ApplicationModel::Package::Current().InstalledLocation().Path();
-		//ÃßÈÄ ¿É¼ÇÆÄÀÏ¿¡¼­ ·ÎµåÇÏ´Â°É·Î ¹Ù²ãÁÖ±â
+		//ï¿½ï¿½ï¿½ï¿½ ï¿½É¼ï¿½ï¿½ï¿½ï¿½Ï¿ï¿½ï¿½ï¿½ ï¿½Îµï¿½ï¿½Ï´Â°É·ï¿½ ï¿½Ù²ï¿½ï¿½Ö±ï¿½
 		ProjectDir = L"D:\\StudyDir\\WinUI_3DEngine\\TestProject";
 		//ProjectDir = L"D:\\DX11Engine\\TestProject";
 		ProjectName = L"TestProject.DLL";
+		DefaultProjectPath = ProjectDir + L"\\x64\\Debug\\" + ProjectName;
 	}
 }

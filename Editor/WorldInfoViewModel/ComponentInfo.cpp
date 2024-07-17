@@ -41,8 +41,8 @@ namespace winrt::Editor::implementation
 		CreateCategoryProxy(rot, detailPanel);
 		CreateCategoryProxy(scale, detailPanel);
 
-		//nativeÀÇ TypeÀ» ÆÇº°ÇÏ¿© ÇØ´çÇÏ´Â Å¸ÀÔÀÇ Property »ý¼ºÇÏ¿© properties¿¡ ³Ö±â
-		//°¢ Property´Â °ªÀÌ º¯°æµÇ¸é ¿¬°áµÈ nativePropertyÀÇ OnChangedEvent¸¦ È£ÃâÇÑ´Ù.
+		//nativeï¿½ï¿½ Typeï¿½ï¿½ ï¿½Çºï¿½ï¿½Ï¿ï¿½ ï¿½Ø´ï¿½ï¿½Ï´ï¿½ Å¸ï¿½ï¿½ï¿½ï¿½ Property ï¿½ï¿½ï¿½ï¿½ï¿½Ï¿ï¿½ propertiesï¿½ï¿½ ï¿½Ö±ï¿½
+		//ï¿½ï¿½ Propertyï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Ç¸ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ nativePropertyï¿½ï¿½ OnChangedEventï¿½ï¿½ È£ï¿½ï¿½ï¿½Ñ´ï¿½.
 		for (auto i = 0; i < nativeComponent_.lock()->NumProperty(); i++)
 		{
 			CreateCategoryProxy(nativeComponent_.lock()->GetProperty(i), detailPanel);

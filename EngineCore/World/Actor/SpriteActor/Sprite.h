@@ -10,7 +10,7 @@ namespace Engine
 		class SpriteComponent;
 	}
 
-	namespace Level
+	namespace World
 	{		
 		class SpriteImpl;
 

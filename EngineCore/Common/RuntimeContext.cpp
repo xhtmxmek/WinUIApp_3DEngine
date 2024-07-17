@@ -15,7 +15,7 @@
 namespace Engine
 {
 	using namespace Component;
-	using namespace Level;
+	using namespace World;
 
 	std::map<std::string, RuntimeClass*> RuntimeContext::RuntimeClassTable;
 

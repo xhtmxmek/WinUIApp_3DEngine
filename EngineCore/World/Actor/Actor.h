@@ -2,7 +2,7 @@
 
 #include "DLLDefine.h"
 #include "PropertyActor.h"
-#include "Common/RuntimeContext.h"	//Class ÀÌ¸§ Á¤º¸¸¦ ¾ò±âÀ§ÇØ RunTimeContext Çì´õ¸¦ Æ÷ÇÔÇßÀ½. RuntimeContext´Â ¾îÂ÷ÇÇ °ÅÀÇ º¯ÇÏÁö ¾ÊÀ½.
+#include "Common/RuntimeContext.h"	//Class ï¿½Ì¸ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ RunTimeContext ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½. RuntimeContextï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½.
 #include "Component/ComponentLinker.h"
 
 namespace Engine
@@ -14,7 +14,7 @@ namespace Engine
 		class TransformGroup;
 	}
 
-	namespace Level
+	namespace World
 	{
 		class World;
 		class ActorImpl;
@@ -33,7 +33,7 @@ namespace Engine
 
 			ENGINE_API virtual void Init() = 0;
 
-			//Draw °ü·Ã ÇÔ¼ö
+			//Draw ï¿½ï¿½ï¿½ï¿½ ï¿½Ô¼ï¿½
 			ENGINE_API virtual void Tick(float elasedTime) = 0;
 		public:
 			template<typename T>
@@ -42,13 +42,13 @@ namespace Engine
 				std::string runTimeClassName = T::ClassName();
 				auto newComponent = std::static_pointer_cast<T>(CreateComponent(runTimeClassName, InstanceName));
 				//Component::ComponentLink<T>(newComponent);
-				//»ó¼Ó¹ÞÀº Å¬·¡½º¿¡¼­ ÀçÁ¤ÀÇ ÇÏ´Â°Ô ¸Â´Âµí
+				//ï¿½ï¿½Ó¹ï¿½ï¿½ï¿½ Å¬ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ï´Â°ï¿½ ï¿½Â´Âµï¿½
 				Component::ComponentDispatch(this, newComponent);
 
 				return newComponent;
 
-				//»ý¼ºµÈ Å¬·¡½º¸¦ ¿ùµå¿¡ ³Ö¾îÁÖ¸é, ¿ùµå°¡ ÅÛÇÃ¸´ ±â¹ÝÀ¸·Î ÄÄÆ÷³ÍÆ®¸¦ ¹ÞÀ¸¸é µÇÁö ¾Ê³ª? ¾Æ´Ï¸é Æ¯¼öÈ­¹öÀüÀ¸·Î.
-				//ÄÄÆ÷³ÍÆ® ¸µÄ¿´Â ÄÄÆ÷³ÍÆ®¸¦ ¿ùµå »Ó¸¸ ¾Æ´Ï¶ó ´Ù¸¥°÷¿¡µµ ¿¬°áÇØÁÙ¼öµµ ÀÖÀ»µí.. ÀÏ´Ü¿ùµå¸¸.
+				//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ Å¬ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½å¿¡ ï¿½Ö¾ï¿½ï¿½Ö¸ï¿½, ï¿½ï¿½ï¿½å°¡ ï¿½ï¿½ï¿½Ã¸ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ®ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ê³ï¿½? ï¿½Æ´Ï¸ï¿½ Æ¯ï¿½ï¿½È­ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½.
+				//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ® ï¿½ï¿½Ä¿ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ®ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ó¸ï¿½ ï¿½Æ´Ï¶ï¿½ ï¿½Ù¸ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ù¼ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½.. ï¿½Ï´Ü¿ï¿½ï¿½å¸¸.
 
 			}
 
@@ -95,7 +95,7 @@ namespace Engine
 			}
 		private:
 			std::shared_ptr<Component::ComponentBase> CreateComponent(const std::string& className, const std::string& instanceName);
-			//·çÆ® ÄÄÆ÷³ÍÆ® : ¾×ÅÍ¸¦ ´ëÇ¥ÇÏ´Â ÄÄÆ÷³ÍÆ®. ÄÄÆ÷³ÍÆ® ¸®½ºÆ®Áß¿¡ ÇÏ³ª¸¦ °¡¸®Å´
+			//ï¿½ï¿½Æ® ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ® : ï¿½ï¿½ï¿½Í¸ï¿½ ï¿½ï¿½Ç¥ï¿½Ï´ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ®. ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ® ï¿½ï¿½ï¿½ï¿½Æ®ï¿½ß¿ï¿½ ï¿½Ï³ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Å´
 			std::shared_ptr<Component::ComponentBase> rootComponent_;
 			std::unordered_map<string, std::shared_ptr<Component::ComponentBase>> components_;
 			std::vector<string> componentNames_;

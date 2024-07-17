@@ -9,7 +9,7 @@ namespace Engine
 		class CameraComponent;
 	}
 
-	namespace Level
+	namespace World
 	{
 		class ACamera : public Actor
 		{

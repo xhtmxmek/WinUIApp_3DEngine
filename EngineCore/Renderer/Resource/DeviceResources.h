@@ -12,7 +12,7 @@ using namespace wil;
 
 namespace Engine
 {
-	//UI¿Í ¿¬°üÀÖ´Â ±¸Á¶Ã¼µé¸¸ µû·Î ¸ð¾Æ³õ´Â°Íµµ ÀÖÀ»µí
+	//UIï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ö´ï¿½ ï¿½ï¿½ï¿½ï¿½Ã¼ï¿½é¸¸ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Æ³ï¿½ï¿½Â°Íµï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 
 	namespace Renderer
 	{
@@ -61,19 +61,19 @@ namespace Engine
 			DeviceResources& operator= (DeviceResources const&) = delete;
 
 			//Window Set
-			//xaml Àü¿ë						
+			//xaml ï¿½ï¿½ï¿½ï¿½						
 			void SetSwapChainPanel(SwapchainPanelInfo const& panel);
-			//corewindow Àü¿ë
+			//corewindow ï¿½ï¿½ï¿½ï¿½
 			//void SetWindow(winrt::Windows::UI::Core::CoreWindow const& window) noexcept;
 			void SetWindow(HWND window, float width, float height) noexcept;
 
 			//Validate Device
 			void ValidateDevice();
 			void HandleDeviceLost();
-			void RegisterDeviceNotify(IDeviceNotify* deviceNotify) noexcept { m_deviceNotify = deviceNotify; }  //IdeviceNotiFyÀÇ ÇÔ¼ö È£Ãâ(ÀÌ°æ¿ì¿¡´Â Engine)
+			void RegisterDeviceNotify(IDeviceNotify* deviceNotify) noexcept { m_deviceNotify = deviceNotify; }  //IdeviceNotiFyï¿½ï¿½ ï¿½Ô¼ï¿½ È£ï¿½ï¿½(ï¿½Ì°ï¿½ì¿¡ï¿½ï¿½ Engine)
 
-			//App È°¼ºÈ­ °ü·Ã(Suspend | Rendring) 
-			//deviceÀÇ TrimÀº DXDevice°¡ ¿¬¼ÓÀûÀÎ ·»´õ¸µÀ» À§ÇØ ÇÒ´çÇØ³õ´Â ÀÓ½Ã¹öÆÛµéÀ» Àß¶ó†Y¾î ¸Þ¸ð¸® È®º¸(¾ÛÀÌ ÁßÁöµÉ¶§¸¸ ½á¸Ô¾î¾ßÇÔ)
+			//App È°ï¿½ï¿½È­ ï¿½ï¿½ï¿½ï¿½(Suspend | Rendring) 
+			//deviceï¿½ï¿½ Trimï¿½ï¿½ DXDeviceï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ò´ï¿½ï¿½Ø³ï¿½ï¿½ï¿½ ï¿½Ó½Ã¹ï¿½ï¿½Ûµï¿½ï¿½ï¿½ ï¿½ß¶ï¿½Yï¿½ï¿½ ï¿½Þ¸ï¿½ È®ï¿½ï¿½(ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½É¶ï¿½ï¿½ï¿½ ï¿½ï¿½Ô¾ï¿½ï¿½ï¿½ï¿½)
 			void Trim() noexcept;
 			void Present();
 
@@ -87,7 +87,7 @@ namespace Engine
 			//RECT GetOutputSize() const noexcept { return m_outputSize; }				
 			SharedTypes::Size GetOutputSize() const { return m_outputSize; }
 			DXGI_MODE_ROTATION GetRotation() const noexcept { return m_rotation; }
-			//// ·»´õ¸µ ´ë»óÀÇ Å©±â(DIP)ÀÔ´Ï´Ù.
+			//// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ Å©ï¿½ï¿½(DIP)ï¿½Ô´Ï´ï¿½.
 			SharedTypes::Size GetLogicalSize() const { return m_logicalSize; }
 			//float						GetDpi() const { return m_effectiveDpi; }
 
@@ -111,7 +111,7 @@ namespace Engine
 			DXGI_COLOR_SPACE_TYPE   GetColorSpace() const noexcept { return m_colorSpace; }
 			unsigned int            GetDeviceOptions() const noexcept { return m_options; }
 
-			// D2D Á¢±ÙÀÚÀÔ´Ï´Ù.
+			// D2D ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ô´Ï´ï¿½.
 			ID2D1Factory3* GetD2DFactory() const { return m_d2dFactory.Get(); }
 			ID2D1Device2* GetD2DDevice() const { return m_d2dDevice.get(); }
 			ID2D1DeviceContext2* GetD2DDeviceContext() const { return m_d2dContext.get(); }
@@ -123,7 +123,7 @@ namespace Engine
 
 			//Option Set
 			void                    SetOption(unsigned int option) { m_options |= option; }
-			// XAML ÆÐ³Î¿¡ ´ëÇÑ Ä³½ÃµÈ ÂüÁ¶ÀÔ´Ï´Ù.
+			// XAML ï¿½Ð³Î¿ï¿½ ï¿½ï¿½ï¿½ï¿½ Ä³ï¿½Ãµï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ô´Ï´ï¿½.
 			//winrt::Microsoft::UI::Xaml::Controls::SwapChainPanel& GetSwapchainPanel()
 			//{
 			//	static winrt::Microsoft::UI::Xaml::Controls::SwapChainPanel swapchainPanel;
@@ -131,7 +131,7 @@ namespace Engine
 			//}
 
 
-			//RenderState °ü·Ã
+			//RenderState ï¿½ï¿½ï¿½ï¿½
 			void SetRenderState(const Renderer::RLI::RasterizerState& rs = Renderer::RLI::DefaultRasterizerState,
 				const Renderer::RLI::SamplerState ss = Renderer::RLI::DefaultSamplerState,
 				const Renderer::RLI::DepthStencilState ds = Renderer::RLI::DefaultDepthStencilState,
@@ -139,13 +139,13 @@ namespace Engine
 
 
 		private:
-			//Resource »ý¼º½Ã helper
-			void                    GetHardwareAdapter(IDXGIAdapter1** ppAdapter);  //DeviceResource »ý¼º¿¡ ÇÊ¿äÇÑ hardware adapter get ÇÔ¼ö
-			void                    UpdateColorSpace();                             //HDR ¿©ºÎ °Ë»çÇÏ¿© swapChain¿¡ colorSpace Set
+			//Resource ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ helper
+			void                    GetHardwareAdapter(IDXGIAdapter1** ppAdapter);  //DeviceResource ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ê¿ï¿½ï¿½ï¿½ hardware adapter get ï¿½Ô¼ï¿½
+			void                    UpdateColorSpace();                             //HDR ï¿½ï¿½ï¿½ï¿½ ï¿½Ë»ï¿½ï¿½Ï¿ï¿½ swapChainï¿½ï¿½ colorSpace Set
 
 			//Window Transform Helper
-			void                    UpdateRenderTargetSize();                       //Render Target Size °è»ê
-			DXGI_MODE_ROTATION      ComputeDisplayRotation();                       //Device¿¡ µû¶ó Rotation °è»ê
+			void                    UpdateRenderTargetSize();                       //Render Target Size ï¿½ï¿½ï¿½
+			DXGI_MODE_ROTATION      ComputeDisplayRotation();                       //Deviceï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ Rotation ï¿½ï¿½ï¿½
 
 			//CreateResource
 			void CreateDeviceIndependentResources();
@@ -199,7 +199,7 @@ namespace Engine
 			float											                m_compositionScaleX;
 			float											                m_compositionScaleY;
 
-			//// ¾Û¿¡¼­ °íÇØ»óµµ È­¸éÀ» Áö¿øÇÏ´ÂÁö ¿©ºÎ¸¦ °í·ÁÇÏ´Â º¯¼öÀÔ´Ï´Ù.
+			//// ï¿½Û¿ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Ø»ï¿½ È­ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï´ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Î¸ï¿½ ï¿½ï¿½ï¿½ï¿½Ï´ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ô´Ï´ï¿½.
 			float											                m_effectiveRasterizationScale;
 			float											                m_effectiveCompositionScaleX;
 			float											                m_effectiveCompositionScaleY;

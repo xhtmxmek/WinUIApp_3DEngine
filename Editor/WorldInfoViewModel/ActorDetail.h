@@ -4,7 +4,7 @@
 
 namespace Engine
 {
-    namespace Level
+    namespace World
     {
         class Actor;
     }

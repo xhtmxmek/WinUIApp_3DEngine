@@ -9,7 +9,7 @@ namespace Engine
 		class StaticMeshComponent;
 	}
 
-	namespace Level
+	namespace World
 	{
 		class ADefaultActor : public Actor
 		{

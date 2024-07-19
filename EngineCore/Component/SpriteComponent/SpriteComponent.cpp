@@ -12,7 +12,7 @@ namespace Engine
 		SpriteComponent::SpriteComponent(const std::string& name)
 			:DrawableComponent(name)			
 		{
-			auto deviceContext = DX::DeviceResourcesUtil::GetDeviceResources()->GetD3DDeviceContext();
+			auto deviceContext = DeviceResourcesUtil::GetDeviceResources()->GetD3DDeviceContext();
 			SpriteBatch = make_unique<DirectX::SpriteBatch>(deviceContext);
 			//BasicTexture = EngineAsset::TextureManager::GetInstance().GetTexture(L"D:\\StudyDir\\WinUIApp_3DEngine\\TestProject\\Assets\\cat.png");
 			//const std::shared_ptr<EngineAsset::Texture> hello;
@@ -31,7 +31,7 @@ namespace Engine
 		void SpriteComponent::Draw()
 		{
 			SpriteBatch->Begin();
-			////Sprite°¡ ÇÊ¿äÇÑ°Í.
+			////Spriteï¿½ï¿½ ï¿½Ê¿ï¿½ï¿½Ñ°ï¿½.
 			////screenPos, originpos, color, rotation			
 			//ScreenPos = Vector2(200.0f, 200.0f);
 			//SpriteBatch->Draw(BasicTexture->GetShaderResourceView().get(), ScreenPos, nullptr,

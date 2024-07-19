@@ -104,7 +104,7 @@ namespace Engine
 			auto mousePos = Input::InputManager::GetInstance().GetMousePos();
 			Vector2f mouseDelta = Input::InputManager::GetInstance().GetMouseDelta();
 
-			SharedTypes::Size viewportSize = DX::DeviceResourcesUtil::GetDeviceResources()->GetOutputSize();
+			SharedTypes::Size viewportSize = DeviceResourcesUtil::GetDeviceResources()->GetOutputSize();
 
 			float deltaX = mouseDelta.x / (float)viewportSize.Width;
 			float deltaY = mouseDelta.y / (float)viewportSize.Height;
@@ -147,7 +147,7 @@ namespace Engine
 				f4ViewMat._31, f4ViewMat._32, f4ViewMat._33, f4ViewMat._34,
 				f4ViewMat._41, f4ViewMat._42, f4ViewMat._43, f4ViewMat._44);
 
-			SharedTypes::Size viewportSize = DX::DeviceResourcesUtil::GetDeviceResources()->GetOutputSize();
+			SharedTypes::Size viewportSize = DeviceResourcesUtil::GetDeviceResources()->GetOutputSize();
 			XMFLOAT4X4 f4ProjMat;
 			XMStoreFloat4x4(&f4ProjMat, XMMatrixPerspectiveFovLH(XM_PIDIV4, viewportSize.Width / viewportSize.Height, 0.01f, 100.0f));
 

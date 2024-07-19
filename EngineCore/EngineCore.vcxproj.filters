@@ -67,6 +67,7 @@
     <ClInclude Include="Common\AsyncWorker.h" />
     <ClInclude Include="Renderer\Scene.h" />
     <ClInclude Include="Renderer\PrimitiveInfo.h" />
+    <ClInclude Include="Renderer\RendererBaseHeader.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="EngineCore.cpp" />

@@ -25,7 +25,7 @@ namespace Engine
 				rasterizerDesc.DepthClipEnable = true;
 				rasterizerDesc.AntialiasedLineEnable = false;
 
-				auto d3dDevice = DX::DeviceResourcesUtil::GetDeviceResources()->GetD3DDevice();
+				auto d3dDevice = DeviceResourcesUtil::GetDeviceResources()->GetD3DDevice();
 				d3dDevice->CreateRasterizerState(&rasterizerDesc, outState.nativeState_.put());
 			}
 
@@ -45,7 +45,7 @@ namespace Engine
 				samplerDesc.MinLOD = 0;
 				samplerDesc.MaxLOD = D3D11_FLOAT32_MAX;			//<---- no upperLimit
 
-				auto device = DX::DeviceResourcesUtil::GetDeviceResources()->GetD3DDevice();
+				auto device = DeviceResourcesUtil::GetDeviceResources()->GetD3DDevice();
 				device->CreateSamplerState(&samplerDesc, outState.nativeState_.put());
 			}
 
@@ -73,7 +73,7 @@ namespace Engine
 				depthStencilDesc.BackFace.StencilPassOp = D3D11_STENCIL_OP_KEEP;
 				depthStencilDesc.BackFace.StencilFunc = D3D11_COMPARISON_ALWAYS;
 
-				auto d3dDevice = DX::DeviceResourcesUtil::GetDeviceResources()->GetD3DDevice();
+				auto d3dDevice = DeviceResourcesUtil::GetDeviceResources()->GetD3DDevice();
 				d3dDevice->CreateDepthStencilState(&depthStencilDesc, outState.nativeState_.put());
 			}
 
@@ -92,7 +92,7 @@ namespace Engine
 				blendDesc.RenderTarget[0].DestBlendAlpha = D3D11_BLEND_ZERO;
 				blendDesc.RenderTarget[0].BlendOpAlpha = D3D11_BLEND_OP_ADD;
 				blendDesc.RenderTarget[0].RenderTargetWriteMask = 0x0f;
-				auto device = DX::DeviceResourcesUtil::GetDeviceResources()->GetD3DDevice();
+				auto device = DeviceResourcesUtil::GetDeviceResources()->GetD3DDevice();
 				device->CreateBlendState(&blendDesc, outState.nativeState_.put());
 			}
 

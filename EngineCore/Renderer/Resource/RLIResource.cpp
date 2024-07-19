@@ -12,7 +12,7 @@ namespace Engine
 			HRESULT CreateBufferFromData(ID3D11Buffer** ppBuffer, D3D11_BIND_FLAG eBindFlag,
 				void* pData, UINT nDataSize, D3D11_USAGE eUsage, UINT CPUAccessFlags)
 			{
-				ID3D11Device* device = DX::DeviceResourcesUtil::GetDeviceResources()->GetD3DDevice();
+				ID3D11Device* device = DeviceResourcesUtil::GetDeviceResources()->GetD3DDevice();
 
 				//�Ŀ� ������	����, �߰�/ �Һ� ���� Ȥ�� ����Ʈ ���۸� ����ϰ� �Ǹ� miscflag�� structsize�� �����ϵ��� �����. 
 				D3D11_BUFFER_DESC bd = { nDataSize  , eUsage , (UINT)eBindFlag , CPUAccessFlags , 0 , 0 }; //2d,3d�ؽ��İ� �ƴϸ� pitch������ �ǹ� ����

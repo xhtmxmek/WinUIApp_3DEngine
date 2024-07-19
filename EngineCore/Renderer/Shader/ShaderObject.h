@@ -21,7 +21,7 @@ namespace Engine
 				ShaderObject() {}
 				ShaderObject(const ShaderObject&) = delete;
 
-				virtual bool CompileShader() = 0;	//ÀÌ¸§À¸·Î Shader¸¦ ¹Þ¾Æ¼­ ÄÄÆÄÀÏ ÇÏ´Â ºÎºÐÀº °°À½. CompileShader·Î ¹Ù²ã¾ß°Ú´ç
+				virtual bool CompileShader() = 0;	//ï¿½Ì¸ï¿½ï¿½ï¿½ï¿½ï¿½ Shaderï¿½ï¿½ ï¿½Þ¾Æ¼ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ï´ï¿½ ï¿½Îºï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½. CompileShaderï¿½ï¿½ ï¿½Ù²ï¿½ß°Ú´ï¿½
 				//void Release();
 
 				virtual void SetShaderOnPipeline() = 0;

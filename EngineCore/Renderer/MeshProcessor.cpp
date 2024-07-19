@@ -1,9 +1,6 @@
 #include "pch.h"
+#include "RendererBaseHeader.h"
 #include "MeshProcessor.h"
-#include "Renderer/Resource/DeviceResources.h"
-#include "Renderer/Resource/RLIResource.h"
-#include "EngineAsset/Material.h"
-#include "Renderer/MaterialDrawer.h"
 
 namespace Engine
 {
@@ -104,7 +101,7 @@ namespace Engine
 			* 	//			//Todo : instanced material ����
 	////Todo : �н� �����Ͽ� override�ϱ� (basepass, ������ pass)
 
-	//			auto d3dContext = DX::DeviceResourcesUtil::GetDeviceResources()->GetD3DDeviceContext();
+	//			auto d3dContext = DeviceResourcesUtil::GetDeviceResources()->GetD3DDeviceContext();
 
 
 	//			//renderState setting
@@ -124,7 +121,7 @@ namespace Engine
 	//			//auto RasterizerState = RLI::GetRasterizerState(RLI::RasterizerFillMode::Solid, RLI::RasterizerCullMode::Back);
 	//			auto stateManager = RLI::RenderStateObjectManger::GetInstance();
 	//			//stateManager.GetBlendState(materialPtr->GetBlendable())
-	//			DX::DeviceResourcesUtil::GetDeviceResources()->SetRenderState();
+	//			DeviceResourcesUtil::GetDeviceResources()->SetRenderState();
 
 	//			/*
 	//			* ���̴� ������۴� ���Ŀ� ��ũ�η� ����Ʈ �迭 ���� ���̴��� �ѱ��. ������ �׳� ����ü�� �ϱ�.
@@ -160,7 +157,7 @@ namespace Engine
 				//Shader
 				//PSO
 				
-				//	auto context = DX::DeviceResourcesUtil::GetDeviceResources()->GetD3DDeviceContext();
+				//	auto context = DeviceResourcesUtil::GetDeviceResources()->GetD3DDeviceContext();
 				//	context->IASetVertexBuffers(0, 1, &VertexBuffer_, &stride, &offset);
 				//	context->IASetIndexBuffer(IndexBuffer_, DXGI_FORMAT_R16_UINT, 0);
 				//	//context->IASetPrimitiveTopology(D3D11_PRIMITIVE_TOPOLOGY::D3D11_PRIMITIVE_TOPOLOGY_3_CONTROL_POINT_PATCHLIST);
@@ -171,5 +168,14 @@ namespace Engine
 				//context->DrawIndexed(indices_.size(), 0, 0);
 			}
 		}
-	}
+		void MeshProcessor::BuildMeshDrawCommand()
+		{
+			/*
+			* primitive가 scene에 add될때 메시 패스와 머티리얼의 정보를 참조하여 등록되어있는 MeshProcessor 생성함수를 호출. 렌더스테이트 조립.
+			렌더 스테이트는 템플릿으로 호출. Initializer로 RHIState를 만듬. 이미 템플릿 인스턴스가
+			* 이후 이 함수가 호출되고 여기서 meshdrawcommand 조립. 버퍼정보와 셰이더바인딩오브젝트정보 조립. pso 테이블 검색해서 pso 객체 등록.
+		
+			*/
+		}
+}
 }

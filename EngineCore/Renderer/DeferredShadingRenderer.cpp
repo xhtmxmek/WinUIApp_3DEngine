@@ -1,17 +1,20 @@
 #include "pch.h"
 #include "RendererBaseHeader.h"
-#include "PrimitiveInfo.h"
 #include "Scene.h"
+#include "Resource/DeviceResources.h"
 #include "DeferredShadingRenderer.h"
 
 namespace Engine
 {
 	namespace Renderer
 	{		
-		//DeferredShadingRenderer::~DeferredShadingRenderer()
-		//{
-		//}
 
+		void DeferredShadingRenderer::Stop()
+		{
+
+		}
+
+#pragma region Render Scene
 		void DeferredShadingRenderer::Render()
 		{
 			//3D 액터 먼저그림(포워드, 디퍼드 모드 선택해서 그림)
@@ -31,38 +34,33 @@ namespace Engine
 			*/
 
 
-			//auto context = DeviceResourcesUtil::GetDeviceResources()->GetD3DDeviceContext();
-			//PIXBeginEvent(context, PIX_COLOR_DEFAULT, L"Render");
+			auto context = RLI::DeviceResourcesUtil::GetDeviceResources()->GetD3DDeviceContext();
+			PIXBeginEvent(context, PIX_COLOR_DEFAULT, L"Render");
 
-			//ComputeVisibility();
+			ComputeVisibility();
 
-			//RenderShadowDepth();
-			//
-			//RenderBasePass();
+			RenderShadowDepth();			
+			RenderBasePass();
 
-			////deferred light, 반투명 볼륨 적용
-			//RenderLights();
+			//deferred light, 반투명 볼륨 적용
+			RenderLights();
 
-			//RenderTranslucencyPass();
+			RenderTranslucencyPass();
 
-			////RenderFog..particle.. etc...
-			//RenderVolumetricFog();
+			//RenderFog..particle.. etc...
+			RenderVolumetricFog();
 
-			////안쪽에서 translucency pass composit
-			//RenderPostProcessingPass();
+			//안쪽에서 translucency pass composit
+			RenderPostProcessingPass();
 
-			//PIXEndEvent(context);
+			PIXEndEvent(context);
 
-			//// Show the new frame.
-			//PIXBeginEvent(PIX_COLOR_DEFAULT, L"Present");
-			//DeviceResourcesUtil::GetDeviceResources()->Present();
-			//PIXEndEvent();
+			// Show the new frame.
+			PIXBeginEvent(PIX_COLOR_DEFAULT, L"Present");
+			RLI::DeviceResourcesUtil::GetDeviceResources()->Present();
+			PIXEndEvent();
 		}
-
-		void DeferredShadingRenderer::Stop()
-		{
-
-		}
+#pragma endregion		
 
 #pragma region Initialize View
 		void DeferredShadingRenderer::InitView()
@@ -102,27 +100,25 @@ namespace Engine
 		}
 #pragma endregion
 
-
-#pragma region Render Scene
+#pragma region RenderPasses
 		void DeferredShadingRenderer::Clear()
 		{
-		////추후 pass 형태로 빠질것임
-		//	auto context = DeviceResourcesUtil::GetDeviceResources()->GetD3DDeviceContext();
-		//	PIXBeginEvent(context, PIX_COLOR_DEFAULT, L"Clear");
+			//추후 pass 형태로 빠질것임			
+			auto context = RLI::DeviceResourcesUtil::GetDeviceResources()->GetD3DDeviceContext();
+			auto deviceResource = RLI::DeviceResourcesUtil::GetDeviceResources();
+			PIXBeginEvent(context, PIX_COLOR_DEFAULT, L"Clear");
+		
+			auto renderTarget = deviceResource->GetRenderTargetView();
+			auto depthStencil = deviceResource->GetDepthStencilView();
 
-		//	// Clear the views.
-		//	auto renderTarget = DeviceResourcesUtil::GetDeviceResources()->GetRenderTargetView();
-		//	auto depthStencil = DeviceResourcesUtil::GetDeviceResources()->GetDepthStencilView();
+			context->ClearRenderTargetView(renderTarget, Colors::CornflowerBlue);
+			context->ClearDepthStencilView(depthStencil, D3D11_CLEAR_DEPTH | D3D11_CLEAR_STENCIL, 1.0f, 0);
+			context->OMSetRenderTargets(1, &renderTarget, depthStencil);
+		
+			auto viewport = deviceResource->GetScreenViewport();
+			context->RSSetViewports(1, &viewport);
 
-		//	context->ClearRenderTargetView(renderTarget, Colors::CornflowerBlue);
-		//	context->ClearDepthStencilView(depthStencil, D3D11_CLEAR_DEPTH | D3D11_CLEAR_STENCIL, 1.0f, 0);
-		//	context->OMSetRenderTargets(1, &renderTarget, depthStencil);
-
-		//	// Set the viewport.
-		//	auto viewport = DeviceResourcesUtil::GetDeviceResources()->GetScreenViewport();
-		//	context->RSSetViewports(1, &viewport);
-
-		//	PIXEndEvent(context);
+			PIXEndEvent(context);
 		}
 
 		void DeferredShadingRenderer::RenderShadowDepth()
@@ -136,7 +132,7 @@ namespace Engine
 			* DynamicMesh는 매프레임 MeshProcessor를 이용하여 렌더 명령을 만든다.
 			*/
 
-			//SceneInfo->DispatchVisibleDrawCommandList(MeshPass::Base);			
+			SceneInfo.lock()->DispatchVisibleDrawCommandList(MeshPass::Base);
 		}
 		void DeferredShadingRenderer::RenderLights()
 		{

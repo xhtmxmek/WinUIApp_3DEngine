@@ -8,12 +8,12 @@ namespace Engine
 	{
 		bool Texture::Load(const wstring& textureName)
 		{
-			auto device = DX::DeviceResourcesUtil::GetDeviceResources()->GetD3DDevice();			
+			auto device = DeviceResourcesUtil::GetDeviceResources()->GetD3DDevice();			
 			/*
-			¸®¼Ò½ºÀÇ °æ·Î.
-			1. Àý´ë°æ·Î ÁöÁ¤À¸·Î °¡´É
-			2. »ó´ë°æ·Î ÁöÁ¤Àº Assets ±âÁØÀ¸·Î µÊ.
-			3. ÆÐÅ·ÇÒ‹š´Â AssetsÀ¸·Î º¹»ç ½ÃÅ°µµ·Ï ÇØ¾ßÇÒµí.
+			ï¿½ï¿½ï¿½Ò½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½.
+			1. ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
+			2. ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ Assets ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½.
+			3. ï¿½ï¿½Å·ï¿½Ò‹ï¿½ï¿½ï¿½ Assetsï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Å°ï¿½ï¿½ï¿½ï¿½ ï¿½Ø¾ï¿½ï¿½Òµï¿½.
 			*/						
 			//path = L"Assets/Textures/cat.png";			
 			wil::com_ptr_nothrow<ID3D11Resource> resource;
@@ -51,11 +51,11 @@ namespace Engine
 				subresourceData.SysMemSlicePitch = embeddedTexture->mWidth * embeddedTexture->mHeight * 4;
 
 				ID3D11Texture2D* texture2D = nullptr;
-				hr = DX::DeviceResourcesUtil::GetDeviceResources()->GetD3DDevice()->CreateTexture2D(&desc, &subresourceData, &texture2D_);
+				hr = DeviceResourcesUtil::GetDeviceResources()->GetD3DDevice()->CreateTexture2D(&desc, &subresourceData, &texture2D_);
 				//if (FAILED(hr))
 				//	MessageBox(hwnd_, "CreateTexture2D failed!", "Error!", MB_ICONERROR | MB_OK);
 
-				hr = DX::DeviceResourcesUtil::GetDeviceResources()->GetD3DDevice()->CreateShaderResourceView(texture2D, nullptr, &texture);
+				hr = DeviceResourcesUtil::GetDeviceResources()->GetD3DDevice()->CreateShaderResourceView(texture2D, nullptr, &texture);
 				//if (FAILED(hr))
 				//	MessageBox(hwnd_, "CreateShaderResourceView failed!", "Error!", MB_ICONERROR | MB_OK);
 			}

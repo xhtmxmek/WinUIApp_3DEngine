@@ -18,13 +18,16 @@ namespace Engine
 		class DeferredShadingRenderer
 		{
 		public:
-			DeferredShadingRenderer() = default;			
+			DeferredShadingRenderer() = default;
 			DeferredShadingRenderer(const DeferredShadingRenderer&) = delete;
 			DeferredShadingRenderer& operator=(const DeferredShadingRenderer&) = delete;
+			void Stop();
 
-			void Render();
-			void Stop();		
+#pragma region Render Scene			
+			void Render();			
+#pragma endregion
 #pragma region Initialize View
+		private:
 			void InitView();
 			void ComputeVisibility();
 			void GatherDynamicMesh();
@@ -32,7 +35,7 @@ namespace Engine
 			void FrustomCull();
 #pragma endregion
 
-#pragma region Render Scene
+#pragma region RenderPasses
 			void Clear();
 			void RenderShadowDepth();
 			void RenderBasePass();
@@ -40,8 +43,8 @@ namespace Engine
 			void RenderTranslucencyPass();
 			void RenderVolumetricFog();
 			void RenderPostProcessingPass();
-
-			weak_ptr<Scene> SceneInfo; 
+		private:
+			weak_ptr<Scene> SceneInfo;
 #pragma endregion
 
 		};

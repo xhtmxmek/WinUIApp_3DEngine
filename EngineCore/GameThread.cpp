@@ -9,7 +9,7 @@ namespace Engine
 		//system
 		Input::InputManager::GetInstance().Initialize();
 		Path::InitBasePathes();
-		Timer = make_shared<Engine::DX::StepTimer>();
+		Timer = make_shared<Engine::StepTimer>();
 
 		//object
 		m_World = make_shared<Engine::Level::World>();

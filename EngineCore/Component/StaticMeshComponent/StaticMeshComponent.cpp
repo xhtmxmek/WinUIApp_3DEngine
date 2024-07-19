@@ -23,7 +23,7 @@ namespace Engine
 
 		void StaticMeshComponent::Init()
 		{
-			auto context = DX::DeviceResourcesUtil::GetDeviceResources()->GetD3DDeviceContext();
+			auto context = DeviceResourcesUtil::GetDeviceResources()->GetD3DDeviceContext();
 			staticMeshShape_ = DirectX::GeometricPrimitive::CreateSphere(context);
 
 			//meshType_.Register(L"Cube", PropertyStaticMesh::MeshType::Cube);
@@ -41,13 +41,13 @@ namespace Engine
 		void StaticMeshComponent::Draw()
 		{
 			//GetComponentTransform().SetPosition(Vector3f(0,0,0));
-			auto size = DX::DeviceResourcesUtil::GetDeviceResources()->GetOutputSize();
+			auto size = DeviceResourcesUtil::GetDeviceResources()->GetOutputSize();
 			Matrix view = Matrix::CreateLookAt(Vector3(2.f, 2.f, 2.f),
 				Vector3::Zero, Vector3::UnitY);
 			Matrix proj = Matrix::CreatePerspectiveFieldOfView(DirectX::XM_PI / 4.f,
 				float(size.Width) / float(size.Height), 0.1f, 10.f);
 
-			//TODO : ¿ä°Å´Â... ¹Ù²ÙÀÚ. Á÷Á¢ ÆÄÀÌÇÁ¶óÀÎ¿¡ ¼¼ÆÃÇØ¼­ ·»´õ¸µÇÏ´Â°É·Î
+			//TODO : ï¿½ï¿½Å´ï¿½... ï¿½Ù²ï¿½ï¿½ï¿½. ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Î¿ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ø¼ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ï´Â°É·ï¿½
 			DirectX::SimpleMath::Matrix tempMat = DirectX::SimpleMath::Matrix(&GetComponentTransform().GetWorldMatrix().a1);			
 			staticMeshShape_->Draw(tempMat.Transpose(), view, proj);
 		}

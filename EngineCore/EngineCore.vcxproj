@@ -162,6 +162,7 @@
     <ClInclude Include="Renderer\MeshProcessor.h" />
     <ClInclude Include="EngineAsset\ModelAsset.h" />
     <ClInclude Include="Renderer\PrimitiveInfo.h" />
+    <ClInclude Include="Renderer\RendererBaseHeader.h" />
     <ClInclude Include="Renderer\Resource\DeviceResources.h" />
     <ClInclude Include="Common\EngineBaseHeader.h" />
     <ClInclude Include="Common\EngineCommonHeader.h" />

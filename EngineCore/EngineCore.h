@@ -1,5 +1,4 @@
 #pragma once
-#define WIN_APPS_SDK
 //#include "Common/StepTimer.h"
 #include "DLLDefine.h"
 
@@ -75,7 +74,7 @@ namespace Engine
 		ENGINE_API void PickCheck(Vector2i screenPos, shared_ptr<World::Actor>& pickedActor);
 		ENGINE_API weak_ptr<World::Actor> GetActor(int index);
 		ENGINE_API weak_ptr<World::Actor> GetActor(const string& name);
-		ENGINE_API size_t GetNumActorList();
+		ENGINE_API size_t GetNumActoRHIst();
 #pragma endregion
 
 #pragma region ProjectLoad

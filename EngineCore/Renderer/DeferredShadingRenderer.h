@@ -39,7 +39,7 @@ namespace Engine
 			void Clear();
 			void RenderShadowDepth();
 			void RenderBasePass();
-			void RenderLights();
+			void RendeRHIghts();
 			void RenderTranslucencyPass();
 			void RenderVolumetricFog();
 			void RenderPostProcessingPass();

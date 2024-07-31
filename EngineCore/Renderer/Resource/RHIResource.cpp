@@ -1,13 +1,13 @@
 #include "pch.h"
 #include "Renderer/Resource/DeviceResources.h"
 #include <Windows.h>
-#include "RLIResource.h"
+#include "RHIResource.h"
 
 namespace Engine
 {
 	namespace Renderer
 	{
-		namespace RLI
+		namespace RHI
 		{			
 			HRESULT CreateBufferFromData(ID3D11Buffer** ppBuffer, D3D11_BIND_FLAG eBindFlag,
 				void* pData, UINT nDataSize, D3D11_USAGE eUsage, UINT CPUAccessFlags)

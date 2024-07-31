@@ -8,7 +8,7 @@ namespace Engine
 	}
 	namespace Renderer
 	{
-		namespace RLI
+		namespace RHI
 		{
 			class VertexInput;
 			class Buffer;
@@ -20,8 +20,8 @@ namespace Engine
 		};
 		struct MeshDrawCommand
 		{
-			RLI::VertexInput VertexStream;
-			RLI::Buffer IndexBuffer;
+			RHI::VertexInput VertexStream;
+			RHI::Buffer IndexBuffer;
 			MeshDrawShaderBindings ShaderBindings;
 
 			unsigned int cached_pipeline_id;

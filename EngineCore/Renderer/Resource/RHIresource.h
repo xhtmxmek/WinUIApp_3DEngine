@@ -4,8 +4,28 @@ namespace Engine
 {
 	namespace Renderer
 	{
-		namespace RLI
+		namespace RHI
 		{
+			enum class SceneColorFormat
+			{
+				b8r8g8a8_unorm,
+				d24_s8_uint,
+			};
+			
+			//enum class min
+
+			class RHIResource
+			{
+				virtual void CreateRHI() = 0;
+				virtual void ReleaseRHI() = 0;
+				//virtual void GetRHI();
+			};
+
+			class RHIDepthStencilState : public RHIResource
+			{
+			};
+
+
 			class Buffer
 			{				
 				//virtual void 

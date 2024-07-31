@@ -1,4 +1,4 @@
-#include "Renderer/Resource/RLIresource.h"
+#include "Renderer/Resource/RHIresource.h"
 #include "Renderer/Resource/RenderStateObjectManager.h"
 #include "Renderer/Resource/ConstantBuffer.h"
 #include "Renderer/Shader/ShaderObjectManager.h"

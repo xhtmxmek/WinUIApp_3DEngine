@@ -31,7 +31,7 @@ namespace Engine
 			//enable�� Actor�� Update.
 			//
 
-			for (int i = 0; i < GetNumActorList(); i++)
+			for (int i = 0; i < GetNumActoRHIst(); i++)
 			{
 				auto actor = GetActor(i);
 				

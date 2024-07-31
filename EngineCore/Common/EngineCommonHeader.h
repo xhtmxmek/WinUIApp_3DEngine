@@ -1,15 +1,15 @@
 #pragma once
-//Å¸ÀÔ
+//Å¸ï¿½ï¿½
 #include "../SharedTypes/BaseTypes.h"
 
 #include "EngineEnums.h"
 
-//ÇÁ·ÎÆÛÆ¼
+//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ¼
 #include "Common/Path.h"
 #include "Common/Math/TransformGroup.h"
 
 #include "Common/Utility.h"
 
-#pragma region Common RLI header
-#include "Renderer/Resource/RLIresource.h"
+#pragma region Common RHI header
+#include "Renderer/Resource/RHIresource.h"
 #pragma endregion

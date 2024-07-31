@@ -57,9 +57,9 @@ namespace Engine
 				return actorManager_->CreateActor<T>(name);
 			}
 
-			ENGINE_API size_t GetNumActorList()
+			ENGINE_API size_t GetNumActoRHIst()
 			{
-				return actorManager_->GetNumActorList();
+				return actorManager_->GetNumActoRHIst();
 			}
 		private:
 			unique_ptr<ActorManager> actorManager_;

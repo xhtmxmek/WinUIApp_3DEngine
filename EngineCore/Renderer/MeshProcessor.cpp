@@ -79,9 +79,9 @@ namespace Engine
 		//	}
 
 		//	UINT vertexSize = sizeof(VERTEX);
-		//	Renderer::RLI::CreateBufferFromData(&VertexBuffer_, D3D11_BIND_VERTEX_BUFFER, vertices_.data(), vertexSize * (UINT)vertices_.size(),
+		//	Renderer::RHI::CreateBufferFromData(&VertexBuffer_, D3D11_BIND_VERTEX_BUFFER, vertices_.data(), vertexSize * (UINT)vertices_.size(),
 		//		D3D11_USAGE_DEFAULT, 0);
-		//	Renderer::RLI::CreateBufferFromData(&IndexBuffer_, D3D11_BIND_INDEX_BUFFER, indices_.data(), sizeof(UINT) * (UINT)indices_.size(),
+		//	Renderer::RHI::CreateBufferFromData(&IndexBuffer_, D3D11_BIND_INDEX_BUFFER, indices_.data(), sizeof(UINT) * (UINT)indices_.size(),
 		//		D3D11_USAGE_DEFAULT, 0);
 		//}
 
@@ -118,8 +118,8 @@ namespace Engine
 	//				return;
 
 
-	//			//auto RasterizerState = RLI::GetRasterizerState(RLI::RasterizerFillMode::Solid, RLI::RasterizerCullMode::Back);
-	//			auto stateManager = RLI::RenderStateObjectManger::GetInstance();
+	//			//auto RasterizerState = RHI::GetRasterizerState(RHI::RasterizerFillMode::Solid, RHI::RasterizerCullMode::Back);
+	//			auto stateManager = RHI::RenderStateObjectManger::GetInstance();
 	//			//stateManager.GetBlendState(materialPtr->GetBlendable())
 	//			DeviceResourcesUtil::GetDeviceResources()->SetRenderState();
 

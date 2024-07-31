@@ -155,10 +155,10 @@ namespace Engine
 		return world->GetActor(name);
 	}
 
-	size_t EngineCore::GetNumActorList()
+	size_t EngineCore::GetNumActoRHIst()
 	{
 		auto world = gameThread->GetWorld();
-		return world->GetNumActorList();
+		return world->GetNumActoRHIst();
 	}
 #pragma endregion
 

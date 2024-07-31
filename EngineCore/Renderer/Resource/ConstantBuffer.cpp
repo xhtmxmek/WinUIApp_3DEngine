@@ -1,18 +1,18 @@
 #include "pch.h"
 #include "Renderer/Resource/DeviceResources.h"
 #include "ConstantBuffer.h"
-#include "RLIResource.h"
+#include "RHIResource.h"
 namespace Engine
 {
 	namespace Renderer
 	{
-		namespace RLI
+		namespace RHI
 		{
 			ConstantBufferManager::ConstantBufferManager()
 			{				
 				CreateConstantBuffer(StaticConstBufferType::perObject, sizeof(ObjectConstBuffFormat));
 				CreateConstantBuffer(StaticConstBufferType::perCamera, sizeof(CameraConstBuffFormat));
-				CreateConstantBuffer(StaticConstBufferType::perLight, sizeof(LightBuffFormat));
+				CreateConstantBuffer(StaticConstBufferType::peRHIght, sizeof(LightBuffFormat));
 				CreateConstantBuffer(StaticConstBufferType::perMaterial, sizeof(MaterialUniformBuffFormat));
 
 			}

@@ -10,6 +10,7 @@
     </Link>
     <ClCompile>
       <AdditionalIncludeDirectories>$(ProjectDir);$(SolutionDir)ExternalLibraries\Assimp\Include;$(SolutionDir)SharedTypes;$(SolutionDir)EngineCore</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>_WINDLL;WIN_APPS_SDK;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
   </ItemDefinitionGroup>
   <ItemGroup />

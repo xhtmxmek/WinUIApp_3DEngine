@@ -182,6 +182,8 @@
     <ClInclude Include="EngineAsset\Texture.h" />
     <ClInclude Include="EngineCore.h" />
     <ClInclude Include="framework.h" />
+    <ClInclude Include="Renderer\Resource\DX11DeviceResources.h" />
+    <ClInclude Include="Renderer\Resource\RenderResource.h" />
     <ClInclude Include="Renderer\Scene.h" />
     <ClInclude Include="World\Actor\Actor.h" />
     <ClInclude Include="World\Actor\ActorManager\ActorManager.h" />
@@ -206,8 +208,8 @@
     <ClInclude Include="Renderer\Resource\ConstantBuffer.h" />
     <ClInclude Include="Renderer\DeferredShadingRenderer.h" />
     <ClInclude Include="Renderer\Resource\GraphicsLibraryResource.h" />
-    <ClInclude Include="Renderer\Resource\RenderStateObjectManager.h" />
-    <ClInclude Include="Renderer\Resource\RLIresource.h" />
+    <ClInclude Include="Renderer\Resource\RenderStates.h" />
+    <ClInclude Include="Renderer\Resource\RHIresource.h" />
     <ClInclude Include="Renderer\Shader\DefaultShader.h" />
     <ClInclude Include="Renderer\Shader\ShaderObject.h" />
     <ClInclude Include="Renderer\Shader\ShaderObjectManager.h" />
@@ -231,6 +233,7 @@
     <ClCompile Include="EngineAsset\Material.cpp" />
     <ClCompile Include="EngineAsset\Texture.cpp" />
     <ClCompile Include="EngineCore.cpp" />
+    <ClCompile Include="Renderer\Resource\RenderResource.cpp" />
     <ClCompile Include="World\Actor\Actor.cpp" />
     <ClCompile Include="World\Actor\ActorManager\ActorManager.cpp" />
     <ClCompile Include="World\Actor\Camera\Camera.cpp" />
@@ -253,8 +256,8 @@
     <ClCompile Include="Renderer\Resource\ConstantBuffer.cpp" />
     <ClCompile Include="Renderer\DeferredShadingRenderer.cpp" />
     <ClCompile Include="Renderer\Resource\GraphicsLibraryResource.cpp" />
-    <ClCompile Include="Renderer\Resource\RenderStateObjectManager.cpp" />
-    <ClCompile Include="Renderer\Resource\RLIResource.cpp" />
+    <ClCompile Include="Renderer\Resource\RenderStaes.cpp" />
+    <ClCompile Include="Renderer\Resource\RHIResource.cpp" />
     <ClCompile Include="Renderer\Scene.cpp" />
     <ClCompile Include="Renderer\Shader\ShaderObject.cpp" />
     <ClCompile Include="Renderer\Shader\ShaderObjectManager.cpp" />

@@ -11,9 +11,9 @@ namespace Engine
 		{
 			sceneRenderer = make_unique<DeferredShadingRenderer>();
 
-			RLI::DeviceResourcesUtil::GetInstance().CreateDeviceResources();
-			RLI::ShaderObjectManager::GetInstance().LoadShader();
-			RLI::DeviceResourcesUtil::GetDeviceResources()->SetOption(RLI::DeviceResources::c_UseXAML);
+			RHI::DeviceResourcesUtil::GetInstance().CreateDeviceResources();
+			RHI::ShaderObjectManager::GetInstance().LoadShader();
+			RHI::DeviceResourcesUtil::GetDeviceResources()->SetOption(RHI::DeviceResources::c_UseXAML);
 		}
 
 		void RenderThread::Run()
@@ -40,37 +40,37 @@ namespace Engine
 			activate = false;
 			worker.join();
 
-			auto context = RLI::DeviceResourcesUtil::GetDeviceResources()->GetD3DDeviceContext();
+			auto context = RHI::DeviceResourcesUtil::GetDeviceResources()->GetD3DDeviceContext();
 			context->ClearState();			
-			RLI::DeviceResourcesUtil::GetDeviceResources()->Trim();
+			RHI::DeviceResourcesUtil::GetDeviceResources()->Trim();
 		}
 
 		void RenderThread::Exit()
 		{
-			RLI::DeviceResourcesUtil::GetInstance().ReleaseInstance();
-			RLI::ConstantBufferManager::GetInstance().Release();
+			RHI::DeviceResourcesUtil::GetInstance().ReleaseInstance();
+			RHI::ConstantBufferManager::GetInstance().Release();
 		}
 
 #pragma region Windows OS dedicated
 		void RenderThread::SetSwapChainPanel(const SwapchainPanelInfo& swapchainPanelInfo_)
 		{
-			RLI::DeviceResourcesUtil::GetDeviceResources()->SetSwapChainPanel(swapchainPanelInfo_);
+			RHI::DeviceResourcesUtil::GetDeviceResources()->SetSwapChainPanel(swapchainPanelInfo_);
 		}
 		void RenderThread::OnSwapchainXamlChanged(const SwapchainPanelInfo& swapchainPanelInfo_)
 		{
 			std::scoped_lock<std::mutex> lock(renderMutex);
-			RLI::DeviceResourcesUtil::GetDeviceResources()->SetSwapchainXamlChanged(swapchainPanelInfo_);				
+			RHI::DeviceResourcesUtil::GetDeviceResources()->SetSwapchainXamlChanged(swapchainPanelInfo_);				
 		}
 		IDXGISwapChain3* RenderThread::GetSwapChain()
 		{			
-			return RLI::DeviceResourcesUtil::GetDeviceResources()->GetSwapChain();
+			return RHI::DeviceResourcesUtil::GetDeviceResources()->GetSwapChain();
 		}
 #pragma endregion
 
 		void RenderThread::OnWindowSizeChanged(SharedTypes::Size windowSize)
 		{			
 			std::scoped_lock<std::mutex> lock(renderMutex);
-			if (!RLI::DeviceResourcesUtil::GetDeviceResources()->SetLogicalSize(Size(windowSize.Width, windowSize.Height)))
+			if (!RHI::DeviceResourcesUtil::GetDeviceResources()->SetLogicalSize(Size(windowSize.Width, windowSize.Height)))
 				return;			
 		}
 	}

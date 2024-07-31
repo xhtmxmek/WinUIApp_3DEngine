@@ -34,7 +34,7 @@ namespace Engine
 			*/
 
 
-			auto context = RLI::DeviceResourcesUtil::GetDeviceResources()->GetD3DDeviceContext();
+			auto context = RHI::DeviceResourcesUtil::GetDeviceResources()->GetD3DDeviceContext();
 			PIXBeginEvent(context, PIX_COLOR_DEFAULT, L"Render");
 
 			ComputeVisibility();
@@ -43,7 +43,7 @@ namespace Engine
 			RenderBasePass();
 
 			//deferred light, 반투명 볼륨 적용
-			RenderLights();
+			RendeRHIghts();
 
 			RenderTranslucencyPass();
 
@@ -57,7 +57,7 @@ namespace Engine
 
 			// Show the new frame.
 			PIXBeginEvent(PIX_COLOR_DEFAULT, L"Present");
-			RLI::DeviceResourcesUtil::GetDeviceResources()->Present();
+			RHI::DeviceResourcesUtil::GetDeviceResources()->Present();
 			PIXEndEvent();
 		}
 #pragma endregion		
@@ -104,8 +104,8 @@ namespace Engine
 		void DeferredShadingRenderer::Clear()
 		{
 			//추후 pass 형태로 빠질것임			
-			auto context = RLI::DeviceResourcesUtil::GetDeviceResources()->GetD3DDeviceContext();
-			auto deviceResource = RLI::DeviceResourcesUtil::GetDeviceResources();
+			auto context = RHI::DeviceResourcesUtil::GetDeviceResources()->GetD3DDeviceContext();
+			auto deviceResource = RHI::DeviceResourcesUtil::GetDeviceResources();
 			PIXBeginEvent(context, PIX_COLOR_DEFAULT, L"Clear");
 		
 			auto renderTarget = deviceResource->GetRenderTargetView();
@@ -134,7 +134,7 @@ namespace Engine
 
 			SceneInfo.lock()->DispatchVisibleDrawCommandList(MeshPass::Base);
 		}
-		void DeferredShadingRenderer::RenderLights()
+		void DeferredShadingRenderer::RendeRHIghts()
 		{
 			//라이트는 로컬라이트, 디렉셔널 라이트, 에어리어라이트(렉트라이트?), 타일 등이있다.
 			//글로벌일루미네이션은 학습 후에 적용해보기.

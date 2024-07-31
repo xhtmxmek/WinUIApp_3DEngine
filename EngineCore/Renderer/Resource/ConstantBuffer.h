@@ -4,13 +4,13 @@ namespace Engine
 {
 	namespace Renderer
 	{
-		namespace RLI
+		namespace RHI
 		{
 			enum class StaticConstBufferType
 			{
 				perObject,
 				perCamera,
-				perLight,
+				peRHIght,
 				perMaterial,
 				bufferType_max,
 			};

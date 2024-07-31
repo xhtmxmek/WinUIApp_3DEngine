@@ -5,7 +5,7 @@ namespace Engine
 {
 	namespace Renderer
 	{
-		namespace RLI
+		namespace RHI
 		{
 
 		}

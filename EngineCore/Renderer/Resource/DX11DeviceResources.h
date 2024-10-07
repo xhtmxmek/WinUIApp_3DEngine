@@ -7,6 +7,54 @@ namespace Engine
 	{
 		namespace RHI
 		{
+			// Helper class for COM exceptions
+			class com_exception : public std::exception
+			{
+			public:
+				com_exception(HRESULT hr) noexcept : result(hr) {}
+
+				const char* what() const override
+				{
+					static char s_str[64] = {};
+					sprintf_s(s_str, "Failure with HRESULT of %08X", static_cast<unsigned int>(result));
+					return s_str;
+				}
+
+			private:
+				HRESULT result;
+			};
+
+			inline void ThrowIfFailed(HRESULT hr)
+			{
+				if (FAILED(hr))
+				{					
+					throw com_exception(hr);
+				}
+			}
+
+#if defined(_DEBUG)
+			// SDK ���̾� ������ Ȯ���ϼ���.
+			inline bool SdkLayersAvailable()
+			{
+				HRESULT hr = D3D11CreateDevice(
+					nullptr,
+					D3D_DRIVER_TYPE_NULL,       // ���� �ϵ���� ����̽��� ���� �ʿ䰡 �����ϴ�.
+					0,
+					D3D11_CREATE_DEVICE_DEBUG,  // SDK ���̾ Ȯ���ϼ���.
+					nullptr,                    // ��� ��� ������ ����˴ϴ�.
+					0,
+					D3D11_SDK_VERSION,          // Microsoft Store ���� ��� �׻� �� ���� D3D11_SDK_VERSION���� �����մϴ�.
+					nullptr,                    // D3D ����̽� ������ ������ �ʿ䰡 �����ϴ�.
+					nullptr,                    // ��� ������ �� �ʿ䰡 �����ϴ�.
+					nullptr                     // D3D ����̽� ���ؽ�Ʈ ������ ������ �ʿ䰡 �����ϴ�.
+				);
+
+				return SUCCEEDED(hr);
+			}
+#endif
+
+
+
 			class DX11DeviceResources : public DeviceResources
 			{
 
@@ -63,12 +111,30 @@ namespace Engine
 				virtual void Present() final;
 #pragma endregion
 
+				virtual void ClearContext();
+
+#pragma region WindowTransform
+#ifdef WIN_APPS_SDK
+				//Window Set										
+				virtual void SetSwapChainPanel(SwapchainPanelInfo const& panel);
+
+				//void SetWindow(HWND window, float width, float height) noexcept;
+				virtual bool SetSwapchainXamlChanged(const SwapchainPanelInfo& swapChainPanelInfo) override;				
+				virtual void SetCompositionScale(float compositionScaleX, float compositionScaleY) override;
+#endif
+#pragma endregion
+
+
+#pragma region PipelineStateObject
+				virtual shared_ptr<RHIDepthStencilState> CreateRHIDepthStencilState();
+#pragma endregion
+
 			private:
 				virtual void GetHardwareAdapter(IDXGIAdapter1** ppAdapter);  
 				virtual void UpdateColorSpace();                             
 
 				//Window Transform Helper
-				void                    UpdateRenderTargetSize();                       //Render Target Size ���
+				void                    UpdateBackBufferSize();                       //Render Target Size ���
 				DXGI_MODE_ROTATION      ComputeDisplayRotation();                       //Device�� ���� Rotation ���
 
 			private:
@@ -92,8 +158,8 @@ namespace Engine
 				UINT              _backBufferCount;
 				D3D_FEATURE_LEVEL _d3dMinFeatureLevel;
 
-				// Direct2D rendering object
-				Microsoft::WRL::ComPtr<ID2D1Factory3>	_dFactory;
+				// Direct2D rendering object				
+				Microsoft::WRL::ComPtr<ID2D1Factory3>	_d2dFactory;
 				wil::com_ptr_nothrow<ID2D1Device2>		_d2dDevice;
 				wil::com_ptr<ID2D1DeviceContext2>	    _d2dContext;
 				wil::com_ptr_nothrow<ID2D1Bitmap1>		_d2dTargetBitmap;

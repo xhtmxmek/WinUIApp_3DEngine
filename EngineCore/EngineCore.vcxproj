@@ -163,6 +163,7 @@
     <ClInclude Include="EngineAsset\ModelAsset.h" />
     <ClInclude Include="Renderer\PrimitiveInfo.h" />
     <ClInclude Include="Renderer\RendererBaseHeader.h" />
+    <ClInclude Include="Renderer\Resource\DeviceContext.h" />
     <ClInclude Include="Renderer\Resource\DeviceResources.h" />
     <ClInclude Include="Common\EngineBaseHeader.h" />
     <ClInclude Include="Common\EngineCommonHeader.h" />
@@ -225,7 +226,8 @@
     <ClCompile Include="Renderer\MeshProcessor.cpp" />
     <ClCompile Include="EngineAsset\ModelAsset.cpp" />
     <ClCompile Include="Renderer\RenderThread.cpp" />
-    <ClCompile Include="Renderer\Resource\DeviceResource.cpp" />
+    <ClCompile Include="Renderer\Resource\DeviceContext.cpp" />
+    <ClCompile Include="Renderer\Resource\DeviceResources.cpp" />
     <ClCompile Include="Common\Math\TransformGroup.cpp" />
     <ClCompile Include="Common\Path.cpp" />
     <ClCompile Include="Common\RuntimeContext.cpp" />
@@ -233,6 +235,7 @@
     <ClCompile Include="EngineAsset\Material.cpp" />
     <ClCompile Include="EngineAsset\Texture.cpp" />
     <ClCompile Include="EngineCore.cpp" />
+    <ClCompile Include="Renderer\Resource\DX11DeviceResources.cpp" />
     <ClCompile Include="Renderer\Resource\RenderResource.cpp" />
     <ClCompile Include="World\Actor\Actor.cpp" />
     <ClCompile Include="World\Actor\ActorManager\ActorManager.cpp" />

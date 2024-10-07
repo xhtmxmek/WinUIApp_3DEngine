@@ -1,5 +1,6 @@
 #pragma once
 #include "RenderResource.h"
+#include "RHIresource.h"
 
 namespace Engine
 {
@@ -176,6 +177,7 @@ namespace Engine
 				unsigned char stencilReadMask = 0xFF,
 				unsigned char stencilWriteMask = 0xFF>
 			class DepthStencilState : public StaticState<
+				DepthStencilState<
 			enableDepthWrite, 
 			depthTest,
 			enableFrontFaceStencil,
@@ -190,10 +192,10 @@ namespace Engine
 			stencilReadMask,
 			stencilWriteMask
 			>,
-			RHIDepthStencilState
+			shared_ptr<RHIDepthStencilState>&>
 			{
 			public:
-				static shared_ptr<DepthStencilStateRHI>& CreateRHI() override
+				static shared_ptr<RHIDepthStencilState>& CreateRHI()
 				{
 					DepthStencilDesc depthDesc(enableDepthWrite,
 						depthTest,
@@ -297,7 +299,7 @@ namespace Engine
 			//	static void InitSamplerState(textureAdressMode textureAdress, SamplerFilter filter, SamplerState& outState);
 			//	static void InitDepthStencilState(ComparisonFunc DepthTest, bool depthWrite, DepthStencilState& outState);
 			//	static void InitBlendState(bool blendEnable, BlendFactor srcFactor, BlendFactor destFactor, BlendState& outState);
-			};
+			//};
 		}
 	}
 }

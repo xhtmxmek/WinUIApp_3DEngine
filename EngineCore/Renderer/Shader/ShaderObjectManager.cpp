@@ -59,6 +59,9 @@ namespace Engine
 			{
 				return ShaderVector[(int)eShader];
 			}
+			void ShaderObjectManager::ReleaseShader()
+			{
+			}
 		}
 	}
 }

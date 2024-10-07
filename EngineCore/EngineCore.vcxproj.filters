@@ -70,6 +70,7 @@
     <ClInclude Include="Renderer\RendererBaseHeader.h" />
     <ClInclude Include="Renderer\Resource\DX11DeviceResources.h" />
     <ClInclude Include="Renderer\Resource\RenderResource.h" />
+    <ClInclude Include="Renderer\Resource\DeviceContext.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="EngineCore.cpp" />
@@ -88,7 +89,7 @@
     <ClCompile Include="World\World.cpp" />
     <ClCompile Include="Renderer\DeferredShadingRenderer.cpp" />
     <ClCompile Include="Common\Math\TransformGroup.cpp" />
-    <ClCompile Include="Renderer\Resource\DeviceResource.cpp" />
+    <ClCompile Include="Renderer\Resource\DeviceResources.cpp" />
     <ClCompile Include="Common\Path.cpp" />
     <ClCompile Include="Common\RuntimeContext.cpp" />
     <ClCompile Include="EngineAsset\Material.cpp" />
@@ -112,6 +113,8 @@
     <ClCompile Include="GameThread.cpp" />
     <ClCompile Include="Renderer\RenderThread.cpp" />
     <ClCompile Include="Renderer\Resource\RenderResource.cpp" />
+    <ClCompile Include="Renderer\Resource\DX11DeviceResources.cpp" />
+    <ClCompile Include="Renderer\Resource\DeviceContext.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

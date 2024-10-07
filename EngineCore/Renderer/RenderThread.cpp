@@ -10,10 +10,7 @@ namespace Engine
 		void RenderThread::Init()
 		{
 			sceneRenderer = make_unique<DeferredShadingRenderer>();
-
-			RHI::DeviceResourcesUtil::GetInstance().CreateDeviceResources();
-			RHI::ShaderObjectManager::GetInstance().LoadShader();
-			RHI::DeviceResourcesUtil::GetDeviceResources()->SetOption(RHI::DeviceResources::c_UseXAML);
+			RHI::InitRenderResources();
 		}
 
 		void RenderThread::Run()
@@ -39,16 +36,12 @@ namespace Engine
 		{
 			activate = false;
 			worker.join();
-
-			auto context = RHI::DeviceResourcesUtil::GetDeviceResources()->GetD3DDeviceContext();
-			context->ClearState();			
-			RHI::DeviceResourcesUtil::GetDeviceResources()->Trim();
+			RHI::ClearRenderResources();
 		}
 
 		void RenderThread::Exit()
-		{
-			RHI::DeviceResourcesUtil::GetInstance().ReleaseInstance();
-			RHI::ConstantBufferManager::GetInstance().Release();
+		{			
+			RHI::ReleaseRenderResources();
 		}
 
 #pragma region Windows OS dedicated

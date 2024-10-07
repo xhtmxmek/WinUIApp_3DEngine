@@ -58,10 +58,10 @@ namespace Engine
 				std::unordered_map<string, wil::com_ptr_nothrow<ID3D11Buffer>> localBuffer;
 
 				//DefaultShadingValueFormat ShadingValueFormat;
-				ConstantBufferManager();
-
-			public:
+				ConstantBufferManager() = default;
 				void CreateConstantBuffer(StaticConstBufferType type, UINT size);
+			public:
+				void Init();				
 				void UpdateConstantBuffer(StaticConstBufferType type, void* rowData, UINT size);
 				ID3D11Buffer** GetBuffer(StaticConstBufferType type);
 				void* LockUniformBuffer(StaticConstBufferType type);

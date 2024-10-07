@@ -5,26 +5,23 @@ namespace Engine
 {
 	namespace Renderer
 	{
-		namespace RLI
+		namespace RHI
 		{
 #pragma region Initialize
             void DX11DeviceResources::CreateDeviceIndependentResources()
-            {
-                // Direct2D ���ҽ��� �ʱ�ȭ�մϴ�.
+            {                
                 D2D1_FACTORY_OPTIONS options;
                 ZeroMemory(&options, sizeof(D2D1_FACTORY_OPTIONS));
 
-#if defined(_DEBUG)
-                // ������Ʈ�� ����� ��� ���� ��� SDK ���̾ ���� Direct2D ������� ����մϴ�.
+#if defined(_DEBUG)                
                 options.debugLevel = D2D1_DEBUG_LEVEL_INFORMATION;
 #endif
-
-                // DirectWrite ���͸��� �ʱ�ȭ�մϴ�.
+                
                 ThrowIfFailed(
                     DWriteCreateFactory(
                         DWRITE_FACTORY_TYPE_SHARED,
                         __uuidof(IDWriteFactory3),
-                        (::IUnknown**)&m_dwriteFactory
+                        (::IUnknown**)&_dwriteFactory
                     )
                 );
 
@@ -34,7 +31,7 @@ namespace Engine
                         D2D1_FACTORY_TYPE_SINGLE_THREADED,
                         __uuidof(ID2D1Factory3),
                         &options,
-                        (void**)m_d2dFactory.ReleaseAndGetAddressOf()
+                        (void**)_d2dFactory.ReleaseAndGetAddressOf()
                     )
                 );
 
@@ -45,7 +42,7 @@ namespace Engine
                         CLSID_WICImagingFactory2,
                         nullptr,
                         CLSCTX_INPROC_SERVER,
-                        IID_PPV_ARGS(m_wicFactory.addressof())
+                        IID_PPV_ARGS(_wicFactory.addressof())
                     )
                 );
             }
@@ -73,7 +70,7 @@ namespace Engine
                     wil::com_ptr<IDXGIInfoQueue> dxgiInfoQueue;
                     if (SUCCEEDED(DXGIGetDebugInterface1(0, IID_PPV_ARGS(dxgiInfoQueue.addressof()))))
                     {
-                        m_dxgiFactoryFlags = DXGI_CREATE_FACTORY_DEBUG;
+                        _dxgiFactoryFlags = DXGI_CREATE_FACTORY_DEBUG;
 
                         dxgiInfoQueue->SetBreakOnSeverity(DXGI_DEBUG_ALL, DXGI_INFO_QUEUE_MESSAGE_SEVERITY_ERROR, true);
                         dxgiInfoQueue->SetBreakOnSeverity(DXGI_DEBUG_ALL, DXGI_INFO_QUEUE_MESSAGE_SEVERITY_CORRUPTION, true);
@@ -90,15 +87,15 @@ namespace Engine
                 }
 #endif
 
-                ThrowIfFailed(CreateDXGIFactory2(m_dxgiFactoryFlags, IID_PPV_ARGS(m_dxgiFactory.put())));
+                ThrowIfFailed(CreateDXGIFactory2(_dxgiFactoryFlags, IID_PPV_ARGS(_dxgiFactory.put())));
 
                 // Determines whether tearing support is available for fullscreen borderless windows.
-                if (m_options & c_AllowTearing)
+                if (GetOptions() & c_AllowTearing)
                 {
                     BOOL allowTearing = FALSE;
 
                     wil::com_ptr<IDXGIFactory5> factory5;
-                    m_dxgiFactory.query_to(factory5.addressof());
+                    _dxgiFactory.query_to(factory5.addressof());
 
                     //HRESULT hr = m_dxgiFactory.as(&factory5);
                     if (!factory5)
@@ -108,7 +105,7 @@ namespace Engine
 
                     if (FAILED(hr) || !allowTearing)
                     {
-                        m_options &= ~c_AllowTearing;
+                        RemoveOption(c_AllowTearing);
 #ifdef _DEBUG
                         //OutputDebugstringA("WARNING: Variable refresh rate displays not supported");
 #endif
@@ -132,7 +129,7 @@ namespace Engine
                 UINT featLevelCount = 0;
                 for (; featLevelCount < static_cast<UINT>(std::size(s_featureLevels)); ++featLevelCount)
                 {
-                    if (s_featureLevels[featLevelCount] < m_d3dMinFeatureLevel)
+                    if (s_featureLevels[featLevelCount] < _d3dMinFeatureLevel)
                         break;
                 }
 
@@ -160,7 +157,7 @@ namespace Engine
                         featLevelCount,
                         D3D11_SDK_VERSION,
                         &device,                    // Returns the Direct3D device created.
-                        &m_d3dFeatureLevel,         // Returns feature level of device created.
+                        &_d3dFeatureLevel,         // Returns feature level of device created.
                         &context                     // Returns the device immediate context.
                     );
                 }
@@ -187,7 +184,7 @@ namespace Engine
                         featLevelCount,
                         D3D11_SDK_VERSION,
                         device.addressof(),
-                        &m_d3dFeatureLevel,
+                        &_d3dFeatureLevel,
                         context.addressof()
                     );
 
@@ -234,69 +231,61 @@ namespace Engine
                 }
 #endif
 
-                ThrowIfFailed(device.query_to(&m_d3dDevice));
-                ThrowIfFailed(context.query_to(&m_d3dContext));
+                ThrowIfFailed(device.query_to(&_d3dDevice));
+                ThrowIfFailed(context.query_to(&_d3dContext));
 
                 // Direct2D ����̽� ��ü �� �ش� ���ؽ�Ʈ�� ����ϴ�.
-                com_ptr_nothrow<IDXGIDevice3> dxgiDevice;
+                wil::com_ptr_nothrow<IDXGIDevice3> dxgiDevice;
                 ThrowIfFailed(
-                    m_d3dDevice.query_to(dxgiDevice.addressof())
+                    _d3dDevice.query_to(dxgiDevice.addressof())
                 );
 
                 ThrowIfFailed(
-                    m_d2dFactory->CreateDevice(dxgiDevice.get(), &m_d2dDevice)
+                    _d2dFactory->CreateDevice(dxgiDevice.get(), &_d2dDevice)
                 );
 
                 ThrowIfFailed(
-                    m_d2dDevice->CreateDeviceContext(
+                    _d2dDevice->CreateDeviceContext(
                         D2D1_DEVICE_CONTEXT_OPTIONS_NONE,
-                        &m_d2dContext
+                        &_d2dContext
                     )
                 );
 
-                m_d2dContext->GetDpi(&m_dpi, &m_dpi);
+                float dpi;
+                _d2dContext->GetDpi(&dpi, &dpi);
+                SetDpi(dpi);
         }
 
             void DX11DeviceResources::CreateWindowSizeDependentResources()
             {
-                //if (!m_window)
-    //{
-    //    throw std::logic_error("Call SetWindow with a valid CoreWindow pointer");
-    //}
-
-    // Clear the previous window size specific context.
                 ID3D11RenderTargetView* nullViews[] = { nullptr };
-                m_d3dContext->OMSetRenderTargets(static_cast<UINT>(std::size(nullViews)), nullViews, nullptr);
-                m_d3dRenderTargetView = nullptr;
-                m_d3dDepthStencilView = nullptr;
-                m_renderTarget = nullptr;
-                m_depthStencil = nullptr;
-                m_d3dContext->Flush();
-                m_d2dContext->SetTarget(nullptr);
-                m_d2dTargetBitmap = nullptr;
+                _d3dContext->OMSetRenderTargets(static_cast<UINT>(std::size(nullViews)), nullViews, nullptr);
+                _d3dRenderTargetView = nullptr;
+                _d3dDepthStencilView = nullptr;
+                _backBufferTarget = nullptr;
+                _depthStencil = nullptr;
+                _d3dContext->Flush();
+                _d2dContext->SetTarget(nullptr);
+                _d2dTargetBitmap = nullptr;
 
-                UpdateRenderTargetSize();
+                UpdateBackBufferSize();
 
-
-                // ���� ü���� �ʺ�� ���̴� â�� ���� ���� �ʺ� �� ���̸�
-                // �������� �ؾ� �մϴ�. â�� ���� ������ �ƴ� ��쿡��
-                // ġ���� �ݴ�� �ؾ� �մϴ�.
                 //DXGI_MODE_ROTATION displayRotation = ComputeDisplayRotation();
                 // Determine the render target size in pixels.        
                 //bool swapDimensions = displayRotation == DXGI_MODE_ROTATION_ROTATE90 || displayRotation == DXGI_MODE_ROTATION_ROTATE270;
                 //m_d3dRenderTargetSize.Width = swapDimensions ? m_outputSize.Height : m_outputSize.Width;
                 //m_d3dRenderTargetSize.Height = swapDimensions ? m_outputSize.Width : m_outputSize.Height;
-                m_d3dRenderTargetSize.Width = m_outputSize.Width;
-                m_d3dRenderTargetSize.Height = m_outputSize.Height;
+                //_d3dRenderTargetSize.Width = m_outputSize.Width;
+                //_d3dRenderTargetSize.Height = m_outputSize.Height;
 
-                const DXGI_FORMAT backBufferFormat = NoSRGB(m_backBufferFormat);
-                const UINT backBufferWidth = std::max<UINT>(static_cast<UINT>(m_d3dRenderTargetSize.Width), 1u);
-                const UINT backBufferHeight = std::max<UINT>(static_cast<UINT>(m_d3dRenderTargetSize.Height), 1u);
+                //const DXGI_FORMAT backBufferFormat = NoSRGB(m_backBufferFormat);
+                //const UINT backBufferWidth = std::max<UINT>(static_cast<UINT>(m_d3dRenderTargetSize.Width), 1u);
+                //const UINT backBufferHeight = std::max<UINT>(static_cast<UINT>(m_d3dRenderTargetSize.Height), 1u);
 
-                if (m_swapChain)
+                if (_swapChain)
                 {
                     // If the swap chain already exists, resize it.
-                    HRESULT hr = m_swapChain->ResizeBuffers(
+                    HRESULT hr = _swapChain->ResizeBuffers(
                         m_backBufferCount,
                         lround(m_d3dRenderTargetSize.Width),
                         lround(m_d3dRenderTargetSize.Height),
@@ -691,6 +680,113 @@ namespace Engine
                 }
             }
 
+            void DX11DeviceResources::ClearContext()
+            {
+                auto context = RHI::DeviceResourcesUtil::GetDeviceResources()->GetD3DDeviceContext();
+                context->ClearState();
+                RHI::DeviceResourcesUtil::GetDeviceResources()->Trim();
+            }
+
+            bool DX11DeviceResources::SetSwapchainXamlChanged(const SwapchainPanelInfo& swapChainPanelInfo)
+            {
+                bool needChange = false;
+                if (static_cast<float>(swapChainPanelInfo.RasterizationScale) != _rasterizationScale)
+                {
+                    _rasterizationScale = static_cast<float>(swapChainPanelInfo.RasterizationScale);
+                    _dpi *= _rasterizationScale;
+                    _d2dContext->SetDpi(m_dpi, m_dpi);
+                    needChange = true;
+                }
+
+                if (_logicalResolution != swapChainPanelInfo.ActureSize)
+                {
+                    _logicalResolution = SharedTypes::Size(swapChainPanelInfo.ActureSize.Width, swapChainPanelInfo.ActureSize.Height);
+                    needChange = true;
+                }
+
+                if (_compositionScaleX != swapChainPanelInfo.CompositionScale.x ||
+                    _compositionScaleY != swapChainPanelInfo.CompositionScale.y)
+                {
+                    _compositionScaleX = swapChainPanelInfo.CompositionScale.x;
+                    _compositionScaleY = swapChainPanelInfo.CompositionScale.y;
+                    needChange = true;
+                }
+
+                if (needChange)
+                    CreateWindowSizeDependentResources();
+
+                return needChange;
+            }
+
+            shared_ptr<RHIDepthStencilState> DX11DeviceResources::CreateRHIDepthStencilState()
+            {
+                return shared_ptr<RHIDepthStencilState>();
+            }
+
+            void DX11DeviceResources::UpdateBackBufferSize()
+            {
+                m_effectiveRasterizationScale = m_RasterizationScale;
+                if (m_options & c_UseXAML)
+                {
+                    m_effectiveCompositionScaleX = m_compositionScaleX;
+                    m_effectiveCompositionScaleY = m_compositionScaleY;
+                }
+
+                // ���ػ� ����̽����� ���͸� ������ �����Ϸ��� �� ���� ������ ������� �������ϰ�
+                // ����� ǥ���� �� GPU���� ����� ũ�⸦ ������ �� �ֵ��� ����մϴ�.
+                if (!DisplayMetrics::SupportHighResolutions && m_RasterizationScale > DisplayMetrics::DpiThreshold)
+                {
+                    float width = m_logicalSize.Width * m_RasterizationScale;
+                    float height = m_logicalSize.Height * m_RasterizationScale;
+
+                    // ����̽��� ���� �����̸� ���̰� �ʺ񺸴� Ů�ϴ�. ū ġ����
+                    // �ʺ� �Ӱ谪�� ���ϰ� ���� ġ����
+                    // ���� �Ӱ谪�� ���մϴ�.
+                    if (max(width, height) > DisplayMetrics::WidthThreshold && min(width, height) > DisplayMetrics::HeightThreshold)
+                    {
+                        // ���� ũ�⸦ �����ϱ� ���� ��ȿ DPI�� �����մϴ�. ��� ũ��� ������� �ʽ��ϴ�.
+                        m_effectiveRasterizationScale /= 2.0f;
+                        if (m_options & c_UseXAML)
+                        {
+                            m_effectiveCompositionScaleX /= 2.0f;
+                            m_effectiveCompositionScaleY /= 2.0f;
+                        }
+                    }
+                }
+
+                // �ʿ��� ������ ��� ũ�⸦ �ȼ� ������ ����մϴ�.
+                m_outputSize.Width = m_logicalSize.Width * m_effectiveRasterizationScale;
+                m_outputSize.Height = m_logicalSize.Height * m_effectiveRasterizationScale;
+
+                // DirectX ������ ũ�⸦ 0���� ������ �ʽ��ϴ�.
+                m_outputSize.Width = max(m_outputSize.Width, 1.0f);
+                m_outputSize.Height = max(m_outputSize.Height, 1.0f);
+            }
+
+            void DeviceResources::SetCurrentOrientation(Engine::DisplayOrientation currentOrientation)
+            {
+                if (m_currentOrientation != currentOrientation)
+                {
+                    m_currentOrientation = currentOrientation;
+                    CreateWindowSizeDependentResources();
+                }
+            }
+
+            // �� �޼���� CompositionScaleChanged �̺�Ʈ�� �̺�Ʈ ó���⿡�� ȣ��˴ϴ�.
+            void DeviceResources::SetCompositionScale(float compositionScaleX, float compositionScaleY)
+            {
+                if (m_options & c_UseXAML)
+                {
+                    if (m_compositionScaleX != compositionScaleX ||
+                        m_compositionScaleY != compositionScaleY)
+                    {
+                        m_compositionScaleX = compositionScaleX;
+                        m_compositionScaleY = compositionScaleY;
+                        CreateWindowSizeDependentResources();
+                    }
+                }
+            }
+
             void DeviceResources::GetHardwareAdapter(IDXGIAdapter1** ppAdapter)
             {
                 *ppAdapter = nullptr;
@@ -811,7 +907,7 @@ namespace Engine
                     ThrowIfFailed(m_swapChain->SetColorSpace1(colorSpace));
                 }
             }
-
+           
             void DeviceResources::SetSwapChainPanel(SwapchainPanelInfo const& panelInfo)
             {
                 if (!panelInfo.IsLoaded)

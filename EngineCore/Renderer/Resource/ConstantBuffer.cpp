@@ -8,15 +8,6 @@ namespace Engine
 	{
 		namespace RHI
 		{
-			ConstantBufferManager::ConstantBufferManager()
-			{				
-				CreateConstantBuffer(StaticConstBufferType::perObject, sizeof(ObjectConstBuffFormat));
-				CreateConstantBuffer(StaticConstBufferType::perCamera, sizeof(CameraConstBuffFormat));
-				CreateConstantBuffer(StaticConstBufferType::peRHIght, sizeof(LightBuffFormat));
-				CreateConstantBuffer(StaticConstBufferType::perMaterial, sizeof(MaterialUniformBuffFormat));
-
-			}
-
 			void ConstantBufferManager::CreateConstantBuffer(StaticConstBufferType type, UINT size)
 
 			{
@@ -26,6 +17,14 @@ namespace Engine
 					CreateBufferFromData(&ConstBuffer[(int)type], D3D11_BIND_CONSTANT_BUFFER, nullptr,
 						size, D3D11_USAGE_DYNAMIC, D3D11_CPU_ACCESS_WRITE);
 				}
+			}
+
+			void ConstantBufferManager::Init()
+			{
+				CreateConstantBuffer(StaticConstBufferType::perObject, sizeof(ObjectConstBuffFormat));
+				CreateConstantBuffer(StaticConstBufferType::perCamera, sizeof(CameraConstBuffFormat));
+				CreateConstantBuffer(StaticConstBufferType::peRHIght, sizeof(LightBuffFormat));
+				CreateConstantBuffer(StaticConstBufferType::perMaterial, sizeof(MaterialUniformBuffFormat));
 			}
 
 			void ConstantBufferManager::UpdateConstantBuffer(StaticConstBufferType type, void* rowData, UINT size)

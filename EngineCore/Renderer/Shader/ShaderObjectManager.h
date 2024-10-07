@@ -35,6 +35,7 @@ namespace Engine
 				}
 				void LoadShader();
 				std::shared_ptr<ShaderObject> const GetShader(ShaderType eShader);
+				void ReleaseShader();
 			};
 		}
 	}

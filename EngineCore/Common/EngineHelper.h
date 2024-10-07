@@ -1,94 +1,54 @@
 #pragma once
 
-#include <ppltasks.h>	// create_taskÀÇ °æ¿ì
+#include <ppltasks.h>	// create_taskï¿½ï¿½ ï¿½ï¿½ï¿½
 //#include "winrt/Windows.Storage.Streams.h"
 
 namespace Engine
 {
-	namespace DX
+	inline float ConvertDipsToPixels(float dips, float dpi)
 	{
-		// Helper class for COM exceptions
-		class com_exception : public std::exception
+		static const float dipsPerInch = 96.0f;
+		return floorf(dips * dpi / dipsPerInch + 0.5f); // ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ý¿Ã¸ï¿½ï¿½Õ´Ï´ï¿½.
+	}
+
+	namespace Renderer
+	{
+		namespace RHI
 		{
-		public:
-			com_exception(HRESULT hr) noexcept : result(hr) {}
-
-			const char* what() const override
-			{
-				static char s_str[64] = {};
-				sprintf_s(s_str, "Failure with HRESULT of %08X", static_cast<unsigned int>(result));
-				return s_str;
-			}
-
-		private:
-			HRESULT result;
-		};
-
-		inline void ThrowIfFailed(HRESULT hr)
-		{
-			if (FAILED(hr))
-			{
-				// ÀÌ ÁÙ¿¡ Win32 API ¿À·ù¸¦ catchÇÏ±â À§ÇÑ Áß´ÜÁ¡À» ¼³Á¤ÇÕ´Ï´Ù.
-				throw com_exception(hr);
-			}
 		}
+	}
 
-		// ÀÌÁø ÆÄÀÏ¿¡¼­ ºñµ¿±âÀûÀ¸·Î ÀÐ´Â ÇÔ¼öÀÔ´Ï´Ù.
-		//inline Concurrency::task<std::vector<byte>> ReadDataAsync(const std::wstring& filename)
-		//{
-		//	using namespace winrt::Windows::Storage;
-		//	using namespace Concurrency;
 
-		//	auto folder = winrt::Windows::ApplicationModel::Package::Current().InstalledLocation();						
-		//	return create_task(folder.GetFileAsync(winrt::param::hstring(filename.c_str()))).then([](StorageFile const& file)
-		//		{
-		//			return FileIO::ReadBufferAsync(file);
-		//		}).then([](winrt::Windows::Storage::Streams::IBuffer const& fileBuffer) -> std::vector<byte>
-		//			{
-		//				std::vector<byte> returnBuffer;
-		//				returnBuffer.resize(fileBuffer.Length());
-		//				winrt::Windows::Storage::Streams::DataReader::FromBuffer(fileBuffer).ReadBytes(winrt::array_view<byte>(returnBuffer.data(), fileBuffer.Length()));
-		//				return returnBuffer;
-		//			});
-		//}
+	// ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Ï¿ï¿½ï¿½ï¿½ ï¿½ñµ¿±ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ð´ï¿½ ï¿½Ô¼ï¿½ï¿½Ô´Ï´ï¿½.
+	//inline Concurrency::task<std::vector<byte>> ReadDataAsync(const std::wstring& filename)
+	//{
+	//	using namespace winrt::Windows::Storage;
+	//	using namespace Concurrency;
 
-		// DIP(µð¹ÙÀÌ½º µ¶¸³Àû ÇÈ¼¿) ±æÀÌ¸¦ ¹°¸®Àû ÇÈ¼¿ ±æÀÌ·Î º¯È¯ÇÕ´Ï´Ù.
-		inline float ConvertDipsToPixels(float dips, float dpi)
+	//	auto folder = winrt::Windows::ApplicationModel::Package::Current().InstalledLocation();						
+	//	return create_task(folder.GetFileAsync(winrt::param::hstring(filename.c_str()))).then([](StorageFile const& file)
+	//		{
+	//			return FileIO::ReadBufferAsync(file);
+	//		}).then([](winrt::Windows::Storage::Streams::IBuffer const& fileBuffer) -> std::vector<byte>
+	//			{
+	//				std::vector<byte> returnBuffer;
+	//				returnBuffer.resize(fileBuffer.Length());
+	//				winrt::Windows::Storage::Streams::DataReader::FromBuffer(fileBuffer).ReadBytes(winrt::array_view<byte>(returnBuffer.data(), fileBuffer.Length()));
+	//				return returnBuffer;
+	//			});
+	//}
+
+	// DIP(ï¿½ï¿½ï¿½ï¿½Ì½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½È¼ï¿½) ï¿½ï¿½ï¿½Ì¸ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½È¼ï¿½ ï¿½ï¿½ï¿½Ì·ï¿½ ï¿½ï¿½È¯ï¿½Õ´Ï´ï¿½.
+
+
+	inline DXGI_FORMAT NoSRGB(DXGI_FORMAT fmt) noexcept
+	{
+		switch (fmt)
 		{
-			static const float dipsPerInch = 96.0f;
-			return floorf(dips * dpi / dipsPerInch + 0.5f); // °¡Àå ±ÙÁ¢ÇÑ Á¤¼ö·Î ¹Ý¿Ã¸²ÇÕ´Ï´Ù.
-		}
-
-#if defined(_DEBUG)
-		// SDK ·¹ÀÌ¾î Áö¿øÀ» È®ÀÎÇÏ¼¼¿ä.
-		inline bool SdkLayersAvailable()
-		{
-			HRESULT hr = D3D11CreateDevice(
-				nullptr,
-				D3D_DRIVER_TYPE_NULL,       // ½ÇÁ¦ ÇÏµå¿þ¾î µð¹ÙÀÌ½º¸¦ ¸¸µé ÇÊ¿ä°¡ ¾ø½À´Ï´Ù.
-				0,
-				D3D11_CREATE_DEVICE_DEBUG,  // SDK ·¹ÀÌ¾î¸¦ È®ÀÎÇÏ¼¼¿ä.
-				nullptr,                    // ¸ðµç ±â´É ¼öÁØÀÌ Àû¿ëµË´Ï´Ù.
-				0,
-				D3D11_SDK_VERSION,          // Microsoft Store ¾ÛÀÇ °æ¿ì Ç×»ó ÀÌ °ªÀ» D3D11_SDK_VERSIONÀ¸·Î ¼³Á¤ÇÕ´Ï´Ù.
-				nullptr,                    // D3D µð¹ÙÀÌ½º ÂüÁ¶¸¦ º¸°üÇÒ ÇÊ¿ä°¡ ¾ø½À´Ï´Ù.
-				nullptr,                    // ±â´É ¼öÁØÀ» ¾Ë ÇÊ¿ä°¡ ¾ø½À´Ï´Ù.
-				nullptr                     // D3D µð¹ÙÀÌ½º ÄÁÅØ½ºÆ® ÂüÁ¶¸¦ º¸°üÇÒ ÇÊ¿ä°¡ ¾ø½À´Ï´Ù.
-			);
-
-			return SUCCEEDED(hr);
-		}
-#endif
-
-		inline DXGI_FORMAT NoSRGB(DXGI_FORMAT fmt) noexcept
-		{
-			switch (fmt)
-			{
-			case DXGI_FORMAT_R8G8B8A8_UNORM_SRGB:   return DXGI_FORMAT_R8G8B8A8_UNORM;
-			case DXGI_FORMAT_B8G8R8A8_UNORM_SRGB:   return DXGI_FORMAT_B8G8R8A8_UNORM;
-			case DXGI_FORMAT_B8G8R8X8_UNORM_SRGB:   return DXGI_FORMAT_B8G8R8X8_UNORM;
-			default:                                return fmt;
-			}
+		case DXGI_FORMAT_R8G8B8A8_UNORM_SRGB:   return DXGI_FORMAT_R8G8B8A8_UNORM;
+		case DXGI_FORMAT_B8G8R8A8_UNORM_SRGB:   return DXGI_FORMAT_B8G8R8A8_UNORM;
+		case DXGI_FORMAT_B8G8R8X8_UNORM_SRGB:   return DXGI_FORMAT_B8G8R8X8_UNORM;
+		default:                                return fmt;
 		}
 	}
 }

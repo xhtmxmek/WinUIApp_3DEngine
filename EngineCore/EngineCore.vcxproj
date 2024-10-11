@@ -384,6 +384,7 @@
     <ClInclude Include="Renderer\Resource\DX11Context.h" />
     <ClInclude Include="Renderer\Resource\DX12Context.h" />
     <ClInclude Include="Renderer\Resource\RenderResource.h" />
+    <ClInclude Include="Renderer\Resource\SceneTextures.h" />
     <ClInclude Include="Renderer\Scene.h" />
     <ClInclude Include="Renderer\Resource\VulkanContext.h" />
     <ClInclude Include="World\Actor\Actor.h" />

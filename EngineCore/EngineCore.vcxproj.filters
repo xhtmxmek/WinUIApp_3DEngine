@@ -73,6 +73,7 @@
     <ClInclude Include="Renderer\Resource\DeviceContext.h" />
     <ClInclude Include="Renderer\Resource\DX12Context.h" />
     <ClInclude Include="Renderer\Resource\VulkanContext.h" />
+    <ClInclude Include="Renderer\Resource\SceneTextures.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="EngineCore.cpp" />

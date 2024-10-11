@@ -1,6 +1,6 @@
 #pragma once
 
-#include <ppltasks.h>	// create_task�� ���
+#include <ppltasks.h>
 //#include "winrt/Windows.Storage.Streams.h"
 
 namespace Engine
@@ -18,8 +18,7 @@ namespace Engine
 		}
 	}
 
-
-	// ���� ���Ͽ��� �񵿱������� �д� �Լ��Դϴ�.
+	
 	//inline Concurrency::task<std::vector<byte>> ReadDataAsync(const std::wstring& filename)
 	//{
 	//	using namespace winrt::Windows::Storage;
@@ -37,9 +36,6 @@ namespace Engine
 	//				return returnBuffer;
 	//			});
 	//}
-
-	// DIP(����̽� ������ �ȼ�) ���̸� ������ �ȼ� ���̷� ��ȯ�մϴ�.
-
 
 	inline DXGI_FORMAT NoSRGB(DXGI_FORMAT fmt) noexcept
 	{

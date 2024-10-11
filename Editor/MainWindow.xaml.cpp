@@ -8,7 +8,7 @@
 #include "MainWindow.g.cpp"
 #endif
 
-#include "Level/Actor/Actor.h"
+#include "World/Actor/Actor.h"
 #include "Component/ComponentBase/ComponentBase.h"
 #include "Common/Math/TransformGroup.h"
 #include <Input/VirtualKey.h>
@@ -94,29 +94,29 @@ namespace winrt::Editor::implementation
 #pragma region SwapChainPanel Event
 	void MainWindow::OnSwapChainPanelXamlRootChanged(Microsoft::UI::Xaml::XamlRoot const&, Microsoft::UI::Xaml::XamlRootChangedEventArgs const&)
 	{
-		SharedTypes::SwapchainPanelInfo scPanelInfo;
-		SetSwapchainPanelInfo(swapChainPanel(), scPanelInfo);
+		SharedTypes::WindowParam scPanelInfo;
+		SetWindowParam(swapChainPanel(), scPanelInfo);
 		renderingEngine_->OnSwapchainXamlChanged(scPanelInfo);
 	}
 
 	void MainWindow::OnSwapChainPanelCompositionScaleChanged(Microsoft::UI::Xaml::Controls::SwapChainPanel const&, IInspectable const&)
 	{
-		SharedTypes::SwapchainPanelInfo scPanelInfo;
-		SetSwapchainPanelInfo(swapChainPanel(), scPanelInfo);
+		SharedTypes::WindowParam scPanelInfo;
+		SetWindowParam(swapChainPanel(), scPanelInfo);
 		renderingEngine_->OnSwapchainXamlChanged(scPanelInfo);
 	}
 
 	void MainWindow::OnSwapChainPanel_SizeChanged(Windows::Foundation::IInspectable const&, Microsoft::UI::Xaml::SizeChangedEventArgs const&)
 	{
-		SharedTypes::SwapchainPanelInfo scPanelInfo;
-		SetSwapchainPanelInfo(swapChainPanel(), scPanelInfo);
+		SharedTypes::WindowParam scPanelInfo;
+		SetWindowParam(swapChainPanel(), scPanelInfo);
 		renderingEngine_->OnSwapchainXamlChanged(scPanelInfo);
 	}
 
-	void MainWindow::SetSwapchainPanelInfo(const Microsoft::UI::Xaml::Controls::SwapChainPanel& panel,
-		SharedTypes::SwapchainPanelInfo& swapchainInfo_)
+	void MainWindow::SetWindowParam(const Microsoft::UI::Xaml::Controls::SwapChainPanel& panel,
+		SharedTypes::WindowParam& swapchainInfo_)
 	{
-		SharedTypes::SwapchainPanelInfo swapchainpanelInfo;
+		SharedTypes::WindowParam WindowParam;
 
 		swapchainInfo_.ActureSize = SharedTypes::Size(panel.ActualSize().x, panel.ActualSize().y);
 		swapchainInfo_.CompositionScale = Vector2f(panel.CompositionScaleX(), panel.CompositionScaleY());
@@ -130,12 +130,12 @@ namespace winrt::Editor::implementation
 		//swapChainPanel().XamlRoot().Changed({ this, &MainWindow::OnSwapChainPanelXamlRootChanged });        
 		swapChainPanel().SizeChanged({ this, &MainWindow::OnSwapChainPanel_SizeChanged });
 
-		SharedTypes::SwapchainPanelInfo scPanelInfo;
-		SetSwapchainPanelInfo(swapChainPanel(), scPanelInfo);
+		SharedTypes::WindowParam scPanelInfo;
+		SetWindowParam(swapChainPanel(), scPanelInfo);
 		Engine::InitEngine();
 		renderingEngine_ = Engine::GetRenderingEngine();
 		renderingEngine_->Initialize(scPanelInfo);
-		RegisterNativeSwapchain();
+		RegisterNativeSwapchain();		
 		//RegisterDedicatedInputOnSwapchain();
 
 		//winrt::Windows::Foundation::Numerics::float2        
@@ -263,6 +263,15 @@ namespace winrt::Editor::implementation
 
 	void MainWindow::RegisterNativeSwapchain()
 	{
+		auto registerFunction = [this](IDXGISwapChain3* SwapChain)
+			{
+				auto panelNative = swapChainPanel().as<ISwapChainPanelNative>();				
+				panelNative->SetSwapChain(SwapChain);
+			}
+
+		//엔진에 해당 람다를 등록시켜주기.				
+
+
 		swapChainPanel().DispatcherQueue().TryEnqueue(winrt::Microsoft::UI::Dispatching::DispatcherQueuePriority::High,
 			[this]
 			{
@@ -270,6 +279,9 @@ namespace winrt::Editor::implementation
 			renderingEngine_->GetSwapChain();
 			panelNative->SetSwapChain(renderingEngine_->GetSwapChain());
 			});
+			/*
+			* engine에서 람다 호출. 람다는 템플릿을 받음. 스왑체인넘겨주기.
+			*/
 	}
 }
 

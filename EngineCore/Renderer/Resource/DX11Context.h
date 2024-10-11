@@ -1,5 +1,7 @@
 #pragma once
 
+#ifdef DX11_RHI
+
 #include "Renderer/Resource/DeviceResources.h"
 namespace Engine
 {
@@ -33,20 +35,19 @@ namespace Engine
 			}
 
 #if defined(_DEBUG)
-			// SDK ���̾� ������ Ȯ���ϼ���.
 			inline bool SdkLayersAvailable()
 			{
 				HRESULT hr = D3D11CreateDevice(
 					nullptr,
-					D3D_DRIVER_TYPE_NULL,       // ���� �ϵ���� ����̽��� ���� �ʿ䰡 �����ϴ�.
+					D3D_DRIVER_TYPE_NULL,       
 					0,
-					D3D11_CREATE_DEVICE_DEBUG,  // SDK ���̾ Ȯ���ϼ���.
-					nullptr,                    // ��� ��� ������ ����˴ϴ�.
+					D3D11_CREATE_DEVICE_DEBUG,  
+					nullptr,                    
 					0,
-					D3D11_SDK_VERSION,          // Microsoft Store ���� ��� �׻� �� ���� D3D11_SDK_VERSION���� �����մϴ�.
-					nullptr,                    // D3D ����̽� ������ ������ �ʿ䰡 �����ϴ�.
-					nullptr,                    // ��� ������ �� �ʿ䰡 �����ϴ�.
-					nullptr                     // D3D ����̽� ���ؽ�Ʈ ������ ������ �ʿ䰡 �����ϴ�.
+					D3D11_SDK_VERSION,          
+					nullptr,                    
+					nullptr,                    
+					nullptr                     
 				);
 
 				return SUCCEEDED(hr);
@@ -55,17 +56,19 @@ namespace Engine
 
 
 
-			class DX11DeviceResources : public DeviceResources
-			{
-
-				DX11DeviceResources(DX11DeviceResources&&) = delete;
-				DX11DeviceResources& operator= (DX11DeviceResources&&) = delete;
-
-				DX11DeviceResources(DX11DeviceResources const&) = delete;
-				DX11DeviceResources& operator= (DX11DeviceResources const&) = delete;
-
+			class DX11Context : public DeviceResources
+			{				
 			public:
+				DX11Context() = default;
+
+				DX11Context(DX11Context&&) = delete;
+				DX11Context& operator= (DX11Context&&) = delete;
+
+				DX11Context(DX11Context const&) = delete;
+				DX11Context& operator= (DX11Context const&) = delete;
 #pragma region Initialize
+			public:
+				virtual void PostInitialize() override;
 				virtual void CreateDeviceIndependentResources() override;
 				virtual void CreateDeviceResources() override;
 				virtual void CreateWindowSizeDependentResources() override;
@@ -116,11 +119,14 @@ namespace Engine
 #pragma region WindowTransform
 #ifdef WIN_APPS_SDK
 				//Window Set										
-				virtual void SetSwapChainPanel(SwapchainPanelInfo const& panel);
+				virtual void SetSwapChainPanel(WindowParam const& panel);
 
 				//void SetWindow(HWND window, float width, float height) noexcept;
-				virtual bool SetSwapchainXamlChanged(const SwapchainPanelInfo& swapChainPanelInfo) override;				
+				//virtual bool SetSwapchainXamlChanged(const WindowParam& WindowParam) override;				
 				virtual void SetCompositionScale(float compositionScaleX, float compositionScaleY) override;
+
+				virtual void WindowTransformChanged_Internal(const WindowParam& WindowParam) override;
+				virtual void SetCurrentOrientation(Engine::DisplayOrientation currentOrientation) {};
 #endif
 #pragma endregion
 
@@ -134,8 +140,8 @@ namespace Engine
 				virtual void UpdateColorSpace();                             
 
 				//Window Transform Helper
-				void                    UpdateBackBufferSize();                       //Render Target Size ���
-				DXGI_MODE_ROTATION      ComputeDisplayRotation();                       //Device�� ���� Rotation ���
+				void                    UpdateBackBufferSize();                       
+				DXGI_MODE_ROTATION      ComputeDisplayRotation();                       
 
 			private:
 				// Direct3D objects.                
@@ -185,3 +191,4 @@ namespace Engine
 		}
 	}
 }
+#endif

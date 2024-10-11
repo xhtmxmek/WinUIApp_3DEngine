@@ -34,20 +34,18 @@ namespace Engine
 	}
 
 #pragma region Initialize
-	void EngineCore::InitializeCoreThread(const SwapchainPanelInfo& swapchainPanelInfo_)
+	void EngineCore::Initialize_Inner()
+	{
+		RuntimeContext::InitialzeRuntimeTable();
+		LoadScriptProject(Path::DefaultProjectPath);
+	}
+
+	void EngineCore::InitializeCoreThread()
 	{
 		gameThread = make_unique<GameThread>();
 		gameThread->Init();
 		renderThread = make_unique<Renderer::RenderThread>();
 		renderThread->Init();
-		renderThread->SetSwapChainPanel(swapchainPanelInfo_);
-	}
-
-	void EngineCore::Initialize(const SwapchainPanelInfo& swapchainPanelInfo_)
-	{						
-		RuntimeContext::InitialzeRuntimeTable();
-		InitializeCoreThread(swapchainPanelInfo_);		
-		LoadScriptProject(Path::DefaultProjectPath);
 	}
 #pragma endregion
 
@@ -61,12 +59,6 @@ namespace Engine
 	}
 #pragma endregion
 
-#pragma region Windows dedicated
-	IDXGISwapChain3* EngineCore::GetSwapChain()
-	{
-		return renderThread->GetSwapChain();
-	}
-#pragma endregion
 
 #pragma region Active Control
 	void EngineCore::Run()
@@ -107,14 +99,9 @@ namespace Engine
 		renderThread->Run();
 	}
 
-	void EngineCore::OnWindowSizeChanged(SharedTypes::Size windowSize)
-	{
-		renderThread->OnWindowSizeChanged(windowSize);
-	}
-
-	void EngineCore::OnSwapchainXamlChanged(const SwapchainPanelInfo& swapchainPanelInfo_)
+	void EngineCore::OnWindowTransformChanged(const WindowParam& WindowParam_)
 	{		
-		renderThread->OnSwapchainXamlChanged(swapchainPanelInfo_);
+		renderThread->OnWindowTransformChanged(WindowParam_);
 	}
 
 	void EngineCore::KeyProcess(SharedTypes::VirtualKey key, bool isPressed)

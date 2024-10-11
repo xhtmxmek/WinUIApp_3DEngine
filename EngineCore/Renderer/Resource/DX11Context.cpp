@@ -1,5 +1,7 @@
 #include "pch.h"
-#include "DX11DeviceResources.h"
+#include "DX11Context.h"
+
+#ifdef DX11_RHI
 
 namespace Engine
 {
@@ -7,8 +9,25 @@ namespace Engine
 	{
 		namespace RHI
 		{
+
+            DXGI_FORMAT GetDxgiFormat(SceneColorFormat format)
+            {
+                
+                switch (format)
+                {
+                    case SceneColorFormat::b8r8g8a8_unorm:
+                    {
+                        return DXGI_FORMAT_B8G8R8A8_UNORM;
+                    }
+                    case SceneColorFormat::d24_s8_uint:
+                    {
+                        return DXGI_FORMAT_D24_UNORM_S8_UINT;
+                    }
+                }
+            }
+
 #pragma region Initialize
-            void DX11DeviceResources::CreateDeviceIndependentResources()
+            void DX11Context::CreateDeviceIndependentResources()
             {                
                 D2D1_FACTORY_OPTIONS options;
                 ZeroMemory(&options, sizeof(D2D1_FACTORY_OPTIONS));
@@ -47,7 +66,7 @@ namespace Engine
                 );
             }
 
-            void DX11DeviceResources::CreateDeviceResources()
+            void DX11Context::CreateDeviceResources()
             {
                 HRESULT hr = S_OK;
 
@@ -256,7 +275,7 @@ namespace Engine
                 SetDpi(dpi);
         }
 
-            void DX11DeviceResources::CreateWindowSizeDependentResources()
+            void DX11Context::CreateWindowSizeDependentResources()
             {
                 ID3D11RenderTargetView* nullViews[] = { nullptr };
                 _d3dContext->OMSetRenderTargets(static_cast<UINT>(std::size(nullViews)), nullViews, nullptr);
@@ -286,11 +305,11 @@ namespace Engine
                 {
                     // If the swap chain already exists, resize it.
                     HRESULT hr = _swapChain->ResizeBuffers(
-                        m_backBufferCount,
-                        lround(m_d3dRenderTargetSize.Width),
-                        lround(m_d3dRenderTargetSize.Height),
-                        backBufferFormat,
-                        (m_options & c_AllowTearing) ? DXGI_SWAP_CHAIN_FLAG_ALLOW_TEARING : 0u
+                        BackBufferCount(),
+                        lround(GetLogicalResolution().Width),
+                        lround(GetLogicalResolution().Height),
+                        GetDxgiFormat(BackBufferFormat()),
+                        (GetOptions() & c_AllowTearing) ? DXGI_SWAP_CHAIN_FLAG_ALLOW_TEARING : 0u
                     );
 
                     if (hr == DXGI_ERROR_DEVICE_REMOVED || hr == DXGI_ERROR_DEVICE_RESET)
@@ -298,7 +317,7 @@ namespace Engine
 #ifdef _DEBUG
                         char buff[64] = {};
                         sprintf_s(buff, "Device Lost on ResizeBuffers: Reason code 0x%08X\n",
-                            static_cast<unsigned int>((hr == DXGI_ERROR_DEVICE_REMOVED) ? m_d3dDevice->GetDeviceRemovedReason() : hr));
+                            static_cast<unsigned int>((hr == DXGI_ERROR_DEVICE_REMOVED) ? _d3dDevice->GetDeviceRemovedReason() : hr));
                         //OutputDebugstringA(buff);
 #endif
             // If the device was removed for any reason, a new device and swap chain will need to be created.
@@ -317,32 +336,31 @@ namespace Engine
                 {
                     // Create a descriptor for the swap chain.
                     DXGI_SCALING scaling;
-                    if (m_options & c_UseXAML)
-                        scaling = DisplayMetrics::SupportHighResolutions ? DXGI_SCALING_NONE : DXGI_SCALING_STRETCH;
-                    else
-                        scaling = DisplayMetrics::SupportHighResolutions ? DXGI_SCALING_NONE : DXGI_SCALING_ASPECT_RATIO_STRETCH;
+                    //if (GetOptions() & c_UseXAML)
+                    //    scaling = DisplayMetrics::SupportHighResolutions ? DXGI_SCALING_NONE : DXGI_SCALING_STRETCH;
+                    //else
+                    //    scaling = DisplayMetrics::SupportHighResolutions ? DXGI_SCALING_NONE : DXGI_SCALING_ASPECT_RATIO_STRETCH;
                     DXGI_SWAP_CHAIN_DESC1 swapChainDesc = {};
-                    swapChainDesc.Width = backBufferWidth;
-                    swapChainDesc.Height = backBufferHeight;
-                    swapChainDesc.Format = backBufferFormat;
+                    swapChainDesc.Width = (UINT)GetLogicalResolution().Width;
+                    swapChainDesc.Height = (UINT)GetLogicalResolution().Height;
+                    swapChainDesc.Format = GetDxgiFormat(BackBufferFormat());
                     swapChainDesc.BufferUsage = DXGI_USAGE_RENDER_TARGET_OUTPUT;
-                    swapChainDesc.BufferCount = m_backBufferCount;
+                    swapChainDesc.BufferCount = BackBufferCount();
                     swapChainDesc.SampleDesc.Count = 1;
                     swapChainDesc.SampleDesc.Quality = 0;
                     swapChainDesc.Scaling = scaling;
-                    swapChainDesc.SwapEffect = DXGI_SWAP_EFFECT_FLIP_SEQUENTIAL;       //DXGI_SWAP_EFFECT_FLIP_SEQUENTIAL;	// ��� Microsoft Store ���� _FLIP_ SwapEffects�� ����ؾ� �մϴ�.
+                    swapChainDesc.SwapEffect = DXGI_SWAP_EFFECT_FLIP_SEQUENTIAL;       //DXGI_SWAP_EFFECT_FLIP_SEQUENTIAL;
                     swapChainDesc.AlphaMode = DXGI_ALPHA_MODE_IGNORE;
-                    swapChainDesc.Flags = (m_options & c_AllowTearing) ? DXGI_SWAP_CHAIN_FLAG_ALLOW_TEARING : 0u;
+                    swapChainDesc.Flags = (GetOptions() & c_AllowTearing) ? DXGI_SWAP_CHAIN_FLAG_ALLOW_TEARING : 0u;
+                    
 
-                    // XAML interop�� ����ϴ� ��� ���� ü���� �������ǿ����� ������ �մϴ�.
-
-                    com_ptr_nothrow<IDXGISwapChain1> swapChain;
-                    if (m_options & c_UseXAML)
+                    wil::com_ptr_nothrow<IDXGISwapChain1> swapChain;
+                    if (GetOptions() & c_UseXAML)
                     {
-                        // XAML interop�� ����ϴ� ��� ���� ü���� �������ǿ����� ������ �մϴ�.            
+                        // XAML interop
                         ThrowIfFailed(
-                            m_dxgiFactory->CreateSwapChainForComposition(
-                                m_d3dDevice.get(),
+                            _dxgiFactory->CreateSwapChainForComposition(
+                                _d3dDevice.get(),
                                 &swapChainDesc,
                                 nullptr,
                                 swapChain.addressof()
@@ -360,9 +378,9 @@ namespace Engine
                         //    &swapChainDesc,
                         //    nullptr,
                         //    swapChain.GetAddressOf()
-                        ThrowIfFailed(m_dxgiFactory->CreateSwapChainForHwnd(
-                            m_d3dDevice.get(),
-                            m_window,
+                        ThrowIfFailed(_dxgiFactory->CreateSwapChainForHwnd(
+                            _d3dDevice.get(),
+                            _window,
                             &swapChainDesc,
                             &fsSwapChainDesc,
                             nullptr,
@@ -370,18 +388,18 @@ namespace Engine
                         ));
                     }
 
-                    ThrowIfFailed(swapChain.query_to(&m_swapChain));
+                    ThrowIfFailed(swapChain.query_to(&_swapChain));
 
                     //auto panelNative = m_swapchainPanel.as<ISwapChainPanelNative>();
                     //panelNative->SetSwapChain(m_swapChain.Get());
 
 
-                    if (m_options & c_UseXAML)
+                    if (GetOptions() & c_UseXAML)
                     {
                         // Ensure that DXGI does not queue more than one frame at a time. This both reduces latency and
                         // ensures that the application will only render after each VSync, minimizing power consumption.
-                        com_ptr_nothrow<IDXGIDevice3> dxgiDevice;
-                        ThrowIfFailed(m_d3dDevice.query_to(&dxgiDevice));
+                        wil::com_ptr_nothrow<IDXGIDevice3> dxgiDevice;
+                        ThrowIfFailed(_d3dDevice.query_to(&dxgiDevice));
                         ThrowIfFailed(dxgiDevice->SetMaximumFrameLatency(1));
                     }
 
@@ -423,26 +441,25 @@ namespace Engine
                 //    break;
                 //}
 
-                ThrowIfFailed(m_swapChain->SetRotation(m_rotation));
+                ThrowIfFailed(_swapChain->SetRotation(_rotation));
+                
+                //if (GetOptions() & c_UseXAML)
+                //{
+                //    DXGI_MATRIX_3X2_F inverseScale = { 0 };
+                //    inverseScale._11 = 1.0f / m_effectiveCompositionScaleX;
+                //    inverseScale._22 = 1.0f / m_effectiveCompositionScaleY;
+                //    wil::com_ptr_nothrow<IDXGISwapChain2> spSwapChain2;
+                //    ThrowIfFailed(
+                //        _swapChain.query_to(spSwapChain2.addressof())
+                //    );
 
-                // ���� ü�ο��� ������ ���� ??
-                if (m_options & c_UseXAML)
-                {
-                    DXGI_MATRIX_3X2_F inverseScale = { 0 };
-                    inverseScale._11 = 1.0f / m_effectiveCompositionScaleX;
-                    inverseScale._22 = 1.0f / m_effectiveCompositionScaleY;
-                    com_ptr_nothrow<IDXGISwapChain2> spSwapChain2;
-                    ThrowIfFailed(
-                        m_swapChain.query_to(spSwapChain2.addressof())
-                    );
-
-                    ThrowIfFailed(
-                        spSwapChain2->SetMatrixTransform(&inverseScale)
-                    );
-                }
+                //    ThrowIfFailed(
+                //        spSwapChain2->SetMatrixTransform(&inverseScale)
+                //    );
+                //}
 
                 // Create a render target view of the swap chain back buffer.
-                ThrowIfFailed(m_swapChain->GetBuffer(0, IID_PPV_ARGS(m_renderTarget.put())));
+                ThrowIfFailed(_swapChain->GetBuffer(0, IID_PPV_ARGS(_renderTarget.put())));
 
                 CD3D11_RENDER_TARGET_VIEW_DESC renderTargetViewDesc(D3D11_RTV_DIMENSION_TEXTURE2D, m_backBufferFormat);
                 ThrowIfFailed(m_d3dDevice->CreateRenderTargetView(
@@ -517,7 +534,7 @@ namespace Engine
 #pragma endregion
 
 #pragma region ValidateDevice
-            void DX11DeviceResources::ValidateDevice()
+            void DX11Context::ValidateDevice()
             {
                 // The D3D Device is no longer valid if the default adapter changed since the device
     // was created or if the device has been removed.
@@ -557,7 +574,7 @@ namespace Engine
                 }
             }
 
-            void DX11DeviceResources::HandleDeviceLost()
+            void DX11Context::HandleDeviceLost()
             {
                 if (m_deviceNotify)
                 {
@@ -619,7 +636,7 @@ namespace Engine
             }
 #pragma endregion
 
-            void DX11DeviceResources::Trim()
+            void DX11Context::Trim()
             {
                 com_ptr_nothrow<IDXGIDevice3> dxgiDevice;
                 if (SUCCEEDED(m_d3dDevice.query_to(dxgiDevice.addressof())))
@@ -628,7 +645,7 @@ namespace Engine
                 }
             }
 
-            void DX11DeviceResources::Present()
+            void DX11Context::Present()
             {
                 HRESULT hr = E_FAIL;
                 if (m_options & c_AllowTearing)
@@ -680,35 +697,35 @@ namespace Engine
                 }
             }
 
-            void DX11DeviceResources::ClearContext()
+            void DX11Context::ClearContext()
             {
                 auto context = RHI::DeviceResourcesUtil::GetDeviceResources()->GetD3DDeviceContext();
                 context->ClearState();
                 RHI::DeviceResourcesUtil::GetDeviceResources()->Trim();
             }
 
-            bool DX11DeviceResources::SetSwapchainXamlChanged(const SwapchainPanelInfo& swapChainPanelInfo)
+            bool DX11Context::SetSwapchainXamlChanged(const WindowParam& WindowParam)
             {
                 bool needChange = false;
-                if (static_cast<float>(swapChainPanelInfo.RasterizationScale) != _rasterizationScale)
+                if (static_cast<float>(WindowParam.RasterizationScale) != _rasterizationScale)
                 {
-                    _rasterizationScale = static_cast<float>(swapChainPanelInfo.RasterizationScale);
+                    _rasterizationScale = static_cast<float>(WindowParam.RasterizationScale);
                     _dpi *= _rasterizationScale;
                     _d2dContext->SetDpi(m_dpi, m_dpi);
                     needChange = true;
                 }
 
-                if (_logicalResolution != swapChainPanelInfo.ActureSize)
+                if (_logicalResolution != WindowParam.ActureSize)
                 {
-                    _logicalResolution = SharedTypes::Size(swapChainPanelInfo.ActureSize.Width, swapChainPanelInfo.ActureSize.Height);
+                    _logicalResolution = SharedTypes::Size(WindowParam.ActureSize.Width, WindowParam.ActureSize.Height);
                     needChange = true;
                 }
 
-                if (_compositionScaleX != swapChainPanelInfo.CompositionScale.x ||
-                    _compositionScaleY != swapChainPanelInfo.CompositionScale.y)
+                if (_compositionScaleX != WindowParam.CompositionScale.x ||
+                    _compositionScaleY != WindowParam.CompositionScale.y)
                 {
-                    _compositionScaleX = swapChainPanelInfo.CompositionScale.x;
-                    _compositionScaleY = swapChainPanelInfo.CompositionScale.y;
+                    _compositionScaleX = WindowParam.CompositionScale.x;
+                    _compositionScaleY = WindowParam.CompositionScale.y;
                     needChange = true;
                 }
 
@@ -718,12 +735,12 @@ namespace Engine
                 return needChange;
             }
 
-            shared_ptr<RHIDepthStencilState> DX11DeviceResources::CreateRHIDepthStencilState()
+            shared_ptr<RHIDepthStencilState> DX11Context::CreateRHIDepthStencilState()
             {
                 return shared_ptr<RHIDepthStencilState>();
             }
 
-            void DX11DeviceResources::UpdateBackBufferSize()
+            void DX11Context::UpdateBackBufferSize()
             {
                 m_effectiveRasterizationScale = m_RasterizationScale;
                 if (m_options & c_UseXAML)
@@ -785,6 +802,11 @@ namespace Engine
                         CreateWindowSizeDependentResources();
                     }
                 }
+            }
+
+            void DeviceResources::PostInitialize()
+            {
+                CreateWindowSizeDependentResources();
             }
 
             void DeviceResources::GetHardwareAdapter(IDXGIAdapter1** ppAdapter)
@@ -908,7 +930,7 @@ namespace Engine
                 }
             }
            
-            void DeviceResources::SetSwapChainPanel(SwapchainPanelInfo const& panelInfo)
+            void DeviceResources::SetSwapChainPanel(WindowParam const& panelInfo)
             {
                 if (!panelInfo.IsLoaded)
                     return;
@@ -941,6 +963,11 @@ namespace Engine
 
                 CreateWindowSizeDependentResources();
             }
-		}
+            void Renderer::RHI::DX11Context::PostInitialize()
+            {
+            }
+}
 	}
 }
+
+#endif

@@ -13,13 +13,18 @@ namespace Engine
 		{
 
 #pragma region Initialize
-			void Renderer::RHI::InitRenderResources()
+			void InitRenderResources()
 			{
 				DeviceResourcesUtil::GetInstance().CreateDeviceResources();
 				DeviceResourcesUtil::GetDeviceResources().lock()->AddOption(RHI::DeviceResources::c_UseXAML);
 
 				ShaderObjectManager::GetInstance().LoadShader();
 				ConstantBufferManager::GetInstance().Init();
+			}
+
+			void PostInitialize()
+			{
+				DeviceResourcesUtil::GetDeviceResources().lock()->PostInitialize();
 			}
 #pragma endregion
 
@@ -48,6 +53,11 @@ namespace Engine
 			{
 				auto deviceResources = DeviceResourcesUtil::GetDeviceResources().lock();
 				return deviceResources->CreateRHIDepthStencilState();
+			}
+			void ApplyWindowTransform(const WindowParam& param)
+			{
+				auto deviceContext = RHI::DeviceResourcesUtil::GetDeviceResources().lock();
+				deviceContext->OnWindowTransformChanged(param);				
 			}
 #pragma endregion 
 		}

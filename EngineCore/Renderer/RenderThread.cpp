@@ -20,14 +20,15 @@ namespace Engine
 			if (worker.joinable())
 				return;
 
-			/*게임 쓰레드의 이전 프레임 결과로 렌더링하기. 이전 프레임이 끝나지 않았으면 기다려야함. 해당 조건 통과시에만 렌더링하기.*/
+
+			//if(Pre Frame GameThread Is still Working, pause for sync)
 
 			worker = thread([this]()
 				{
 					while (activate)
 					{
 						std::scoped_lock<std::mutex> lock(renderMutex);
-						sceneRenderer->Render();												
+						sceneRenderer->Render();
 					}
 				});
 		}
@@ -40,31 +41,20 @@ namespace Engine
 		}
 
 		void RenderThread::Exit()
-		{			
+		{
 			RHI::ReleaseRenderResources();
 		}
 
-#pragma region Windows OS dedicated
-		void RenderThread::SetSwapChainPanel(const SwapchainPanelInfo& swapchainPanelInfo_)
-		{
-			RHI::DeviceResourcesUtil::GetDeviceResources()->SetSwapChainPanel(swapchainPanelInfo_);
-		}
-		void RenderThread::OnSwapchainXamlChanged(const SwapchainPanelInfo& swapchainPanelInfo_)
+		void RenderThread::OnWindowTransformChanged(const WindowParam& param)
 		{
 			std::scoped_lock<std::mutex> lock(renderMutex);
-			RHI::DeviceResourcesUtil::GetDeviceResources()->SetSwapchainXamlChanged(swapchainPanelInfo_);				
+			RHI::ApplyWindowTransform(param);
 		}
-		IDXGISwapChain3* RenderThread::GetSwapChain()
-		{			
-			return RHI::DeviceResourcesUtil::GetDeviceResources()->GetSwapChain();
-		}
-#pragma endregion
 
-		void RenderThread::OnWindowSizeChanged(SharedTypes::Size windowSize)
-		{			
-			std::scoped_lock<std::mutex> lock(renderMutex);
-			if (!RHI::DeviceResourcesUtil::GetDeviceResources()->SetLogicalSize(Size(windowSize.Width, windowSize.Height)))
-				return;			
+		void RenderThread::PostInitialize_Inner()
+		{
+			RHI::PostInitialize();
 		}
 	}
 }
+

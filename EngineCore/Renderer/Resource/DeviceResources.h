@@ -1,7 +1,3 @@
-//
-// DeviceResources.h - A wrapper for the Direct3D 11 device and swapchain
-//
-
 #pragma once
 
 namespace Engine
@@ -10,17 +6,6 @@ namespace Engine
 	{
 		namespace RHI
 		{
-			//// Provides an interface for an application that owns DeviceResources to be notified of the device being lost or created.
-			//interface IDeviceNotify
-			//{
-			//	virtual void OnDeviceLost() = 0;
-			//	virtual void OnDeviceRestored() = 0;
-
-			//protected:
-			//	~IDeviceNotify() = default;
-			//};
-
-			// Controls all the DirectX device resources.
 			class DeviceResources
 			{
 			public:
@@ -67,7 +52,7 @@ namespace Engine
 
 
 #pragma region WindowTransform
-				bool SetLogicalResolution(SharedTypes::Size logicalSize);
+				void SetLogicalResolution(SharedTypes::Size logicalSize);
 				SharedTypes::Size GetResoulution() const { return _finalResolution; }
 				//DXGI_MODE_ROTATION GetRotation() const noexcept { return m_rotation; }
 				SharedTypes::Size GetLogicalResolution() const { return _logicalResolution; }
@@ -76,15 +61,12 @@ namespace Engine
 					_dpi = dpi;
 				}
 
-				void SetBackBufferSize(const Vector2f& size);
-#ifdef WIN_APPS_SDK
-				//Window Set										
-				virtual void SetSwapChainPanel(SwapchainPanelInfo const& panel);
-
-				//void SetWindow(HWND window, float width, float height) noexcept;
-				virtual bool SetSwapchainXamlChanged(const SwapchainPanelInfo& swapChainPanelInfo) = 0;
+				void OnWindowTransformChanged(const WindowParam& param);
+				virtual void WindowTransformChanged_Internal(const WindowParam& WindowParam) = 0;
 				virtual void SetCurrentOrientation(Engine::DisplayOrientation currentOrientation) = 0;
 				virtual void SetCompositionScale(float compositionScaleX, float compositionScaleY) = 0;
+#ifdef WIN_APPS_SDK				
+				//void SetWindow(HWND window, float width, float height) noexcept;
 #endif
 #pragma endregion
 
@@ -97,7 +79,7 @@ namespace Engine
 				unsigned int BackBufferCount()
 				{
 					return _backBufferCount;
-				}
+				}				
 #pragma endregion
 
 #pragma region deviceAccesors
@@ -122,10 +104,14 @@ namespace Engine
 #pragma endregion
 
 
+#pragma region Initialize
+			public:
+				virtual void PostInitialize() = 0;
 			private:
 				virtual void CreateDeviceIndependentResources() = 0;
 				virtual void CreateDeviceResources() = 0;
 				virtual void CreateWindowSizeDependentResources() = 0;
+#pragma endregion
 
 			private:
 				unsigned int _backBufferCount;
@@ -157,7 +143,7 @@ namespace Engine
 					static DeviceResourcesUtil instance;
 					return instance;
 				}
-				void CreateDeviceResources() { if (!_deviceResources) _deviceResources = std::make_shared<DeviceResources>(); }
+				void CreateDeviceResources();
 				void ReleaseInstance() { _deviceResources.reset(); }
 
 				static std::weak_ptr<DeviceResources> GetDeviceResources()

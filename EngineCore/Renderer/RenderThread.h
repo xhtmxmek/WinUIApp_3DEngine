@@ -10,20 +10,24 @@ namespace Engine
 
 		class RenderThread : public AsyncWorker
 		{
-		public:			
-			RenderThread() = default;			
+		public:
+			RenderThread() = default;
 
 			virtual void Init();
 			virtual void Run();
 			virtual void Stop();
 			virtual void Exit();
 
-#pragma region Windows OS dedicated
-			void SetSwapChainPanel(const SwapchainPanelInfo& swapchainPanelInfo_);
-			void OnSwapchainXamlChanged(const SwapchainPanelInfo& swapchainPanelInfo_);
-			IDXGISwapChain3* GetSwapChain();
-#pragma endregion
-			void OnWindowSizeChanged(SharedTypes::Size windowSize);
+			void OnWindowTransformChanged(const WindowParam& param);
+
+			template<typename AppWindowType>
+			void PostInitialize(const WindowInitParam<AppWindowType>& initParam)
+			{
+				AppWindowType::SetWindowInfoToDevice();
+				PostInitialize_Inner();
+			}
+		private:
+			void PostInitialize_Inner();
 		private:
 			std::thread worker;
 			bool activate;

@@ -5,7 +5,7 @@ namespace Engine
 	namespace Renderer
 	{
 		namespace RHI
-		{
+		{						
 			enum class SceneColorFormat
 			{
 				b8r8g8a8_unorm,
@@ -36,8 +36,8 @@ namespace Engine
 				Buffer vertexbuffer;
 				/*
 				* VertexDeclation
-				* -InputVertexElements(D3D11_Input_Element_Desc의 Array)
-				* -geometry buffer를 위한 stream?steram?
+				* -InputVertexElements(D3D11_Input_Element_Desc Array)
+				* -for geometry buffer stream?steram?
 				*/								
 				//layoutPointer?
 			};

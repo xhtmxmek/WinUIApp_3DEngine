@@ -12,7 +12,7 @@
 
 #include "framework.h"
 
-//UI ���� -> WinUI ���
+//UI -> WinUI
 //#include <unknwn.h>
 //#include <winrt/Windows.Foundation.h>
 //#include <winrt/Windows.Foundation.Collections.h>
@@ -26,12 +26,12 @@
 //#include <winrt/Microsoft.UI.Dispatching.h>
 //#include <Microsoft.UI.xaml.media.dxinterop.h>
 //
-////UWP ���� winRT ���.. �ʿ���°͵��� ���ص� �ɵ�
+
 //#include "winrt/Windows.ApplicationModel.Activation.h"
 //#include "winrt/Windows.System.Threading.Core.h"
 
-//Dx ���� ���
-//comPtr ����
+//Dx 
+//comPtr
 #include <wrl/client.h>
 //#include <wil/cppwinrt.h>
 //#include <wil/cppwinrt_wrl.h>
@@ -74,7 +74,7 @@
 #include "VertexTypes.h"
 #include "WICTextureLoader.h"
 
-////Storage ���� 
+////Storage 
 //#include <winrt/Windows.Storage.h>
 //#include <winrt/Windows.Storage.Pickers.h>
 //#include <winrt/Windows.Storage.FileProperties.h>
@@ -84,7 +84,6 @@
 
 #include "Common/EngineBaseHeader.h"
 
-//���� �ڵ��
 #include "Common/EngineCommonHeader.h"
 
 using namespace std;

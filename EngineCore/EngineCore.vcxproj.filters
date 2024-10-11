@@ -68,9 +68,11 @@
     <ClInclude Include="Renderer\Scene.h" />
     <ClInclude Include="Renderer\PrimitiveInfo.h" />
     <ClInclude Include="Renderer\RendererBaseHeader.h" />
-    <ClInclude Include="Renderer\Resource\DX11DeviceResources.h" />
+    <ClInclude Include="Renderer\Resource\DX11Context.h" />
     <ClInclude Include="Renderer\Resource\RenderResource.h" />
     <ClInclude Include="Renderer\Resource\DeviceContext.h" />
+    <ClInclude Include="Renderer\Resource\DX12Context.h" />
+    <ClInclude Include="Renderer\Resource\VulkanContext.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="EngineCore.cpp" />
@@ -113,7 +115,7 @@
     <ClCompile Include="GameThread.cpp" />
     <ClCompile Include="Renderer\RenderThread.cpp" />
     <ClCompile Include="Renderer\Resource\RenderResource.cpp" />
-    <ClCompile Include="Renderer\Resource\DX11DeviceResources.cpp" />
+    <ClCompile Include="Renderer\Resource\DX11Context.cpp" />
     <ClCompile Include="Renderer\Resource\DeviceContext.cpp" />
   </ItemGroup>
   <ItemGroup>

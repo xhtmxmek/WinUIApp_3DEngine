@@ -5,9 +5,10 @@
 
 
 #include "pch.h"
-#include "Common/EngineHelper.h"
 #include "DeviceResources.h"
-#include "Renderer/Resource/RenderStates.h"
+#include "DX11Context.h"
+#include "DX12Context.h"
+#include "VulkanContext.h"
 #include "windows.h"
 
 using namespace std;
@@ -92,26 +93,40 @@ namespace Engine
                 CreateDeviceResources();
             }
 
-#pragma region CreateResources
-            //void DeviceResources::SetRenderState(const Renderer::RHI::RasterizerState& rs, const Renderer::RHI::SamplerState ss,
-            //    const Renderer::RHI::DepthStencilState ds, const Renderer::RHI::BlendState bs)
-            //{
-            //    m_d3dContext->RSSetState(rs.nativeState_.get());
-            //    m_d3dContext->PSSetSamplers(0, 1, ss.nativeState_.addressof());
-            //    m_d3dContext->OMSetDepthStencilState(ds.nativeState_.get(), 0);
+#pragma region Initialize
+            void DeviceResourcesUtil::CreateDeviceResources()
+            {
+                if (!_deviceResources)
+                {
+#ifdef DX11_RHI                    
+                    _deviceResources = std::make_shared<DX11Context>();
+#elif DX12_RHI
+                    _deviceResources = std::make_shared<DX12Context>();
+#elif VULKAN_RHI
+                    _deviceResources = std::make_shared<VulkanContext>();
+#endif						
+                }
+            }
+#pragma endregion   
 
-            //    float blendFactor[4] = { 1,1,1,1 };
-            //    m_d3dContext->OMSetBlendState(bs.nativeState_.get(), blendFactor, 0);
-            //}
-
-            // This method acquires the first available hardware adapter.
-            // If no such adapter can be found, *ppAdapter will be set to nullptr.
-
-
-            // Sets the color space for the swap chain in order to handle HDR output.
-#pragma endregion
-
-#pragma region ValidateDevice
+#pragma region WindowTransform
+            void DeviceResources::SetLogicalResolution(SharedTypes::Size logicalSize)
+            {
+                if (_logicalResolution == logicalSize)
+                {
+                    // Handle color space settings for HDR
+                    //UpdateColorSpace();
+                    return;
+                }
+                _logicalResolution = logicalSize;
+                CreateWindowSizeDependentResources();
+            }
+            
+            void DeviceResources::OnWindowTransformChanged(const WindowParam& param)
+            {
+                SetLogicalResolution(param.ActureSize);
+                WindowTransformChanged_Internal(param);
+            }
 #pragma endregion
 
         }

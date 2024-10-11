@@ -213,7 +213,7 @@ namespace Engine
 						stencilWriteMask
 					);
 
-					//RHI 리소스가 초기화 될때 호출됨. 같은 템플릿에 대해 static State는 하나임.
+					//Called When Rhi resources initiailize. there is only one static state at same template.
 					return RHI::CreateRHIDepthStencilState();
 				}
 			};
@@ -267,12 +267,15 @@ namespace Engine
 			//	//basePass�� RenderState
 			//	//������ pass�� RenderState
 
-			//	/*
-			//	* 머티리얼 옵션이나 pass에 따른 MeshPropassor 세팅은 정해져있음. meshPass나 material pass에 따라서 함수로 패턴화 해놓고
-			//	* 각 pass를 key로 삼아서 테이블에 등록해놓기.
-			//	* 이후 각 pass에서 meshProcessor를 만들때는 해당 키를 참조한다.
-			//	* 메시 드로우 커맨드 생성 과정에서 렌더스테이트 만들때 pso테이블에 해당 객체 등록하기.
-			//	* 드로우 커맨드 서밋할때 테이블에서 커맨드의 psoID가 테이블에 존재하면 가져다 쓰기. 아니면
+
+			/*MeshProcessor settings are determined according to material options or pass. Pattern it into a function according to meshPass or material pass and register it in the table using each pass as a key.
+			*Afterwards, refer to the key when creating a meshProcessor in each pass.
+			*Register the corresponding object in the PSO table when creating a render state during the mesh draw command creation process.
+			When submitting a draw command, if the psoID of the command exists in the table, write it.
+			*/
+
+			// 
+			//	
 			//	*/
 			//	//
 			//public:
@@ -292,7 +295,6 @@ namespace Engine
 			//	//ID3D11DepthStencilState* const GetDepthStencilState(RenderStateObjectManger::DepthStencilType type);
 			//	void Release();
 			//private:
-			//	//���� ���̴���ü.cpp���� ���ٿ��� ����ؾ� �ϱ⿡ �̱�������!
 			//	RenderStateObjectManger();
 
 			//	static void InitRasterizerState(RasterizerFillMode fillMode, RasterizerCullMode cull, RasterizerState& outState);

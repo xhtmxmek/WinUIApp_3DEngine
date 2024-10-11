@@ -8,6 +8,7 @@ namespace Engine
 		{
 #pragma region Initialize
 			void InitRenderResources();
+			void PostInitialize();
 			void InitPipelineStateObject();
 #pragma endregion
 
@@ -16,9 +17,13 @@ namespace Engine
 			void ReleaseRenderResources();
 #pragma endregion
 
-#pragma RenderStateObject
+#pragma region RenderStateObject
 			std::weak_ptr<RHIDepthStencilState> CreateRHIDepthStencilState();
-#pragma endregion			
+#pragma endregion
+
+#pragma region AppWindowTransform
+			void ApplyWindowTransform(const WindowParam& param);
+#pragma endregion
 		}
 	}
 }

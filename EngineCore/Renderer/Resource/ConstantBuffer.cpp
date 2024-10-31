@@ -1,5 +1,5 @@
 #include "pch.h"
-#include "Renderer/Resource/DeviceResources.h"
+#include "Renderer/Resource/DeviceContext.h"
 #include "ConstantBuffer.h"
 #include "RHIResource.h"
 namespace Engine
@@ -13,7 +13,7 @@ namespace Engine
 			{
 				if (!ConstBuffer[(int)type])
 				{
-					auto device = DeviceResourcesUtil::GetDeviceResources()->GetD3DDevice();
+					auto device = DeviceContextWrapper::GetDeviceContext()->GetD3DDevice();
 					CreateBufferFromData(&ConstBuffer[(int)type], D3D11_BIND_CONSTANT_BUFFER, nullptr,
 						size, D3D11_USAGE_DYNAMIC, D3D11_CPU_ACCESS_WRITE);
 				}
@@ -31,7 +31,7 @@ namespace Engine
 			{
 				D3D11_MAPPED_SUBRESOURCE mappedData;
 
-				auto deviceContext = DeviceResourcesUtil::GetDeviceResources()->GetD3DDeviceContext();
+				auto deviceContext = DeviceContextWrapper::GetDeviceContext()->GetD3DDeviceContext();
 				deviceContext->Map(ConstBuffer[(int)type].get(), 0, D3D11_MAP_WRITE_DISCARD, 0, &mappedData);
 				memcpy(mappedData.pData, rowData, size);
 				deviceContext->Unmap(ConstBuffer[(int)type].get(), 0);
@@ -45,13 +45,13 @@ namespace Engine
 			{
 				D3D11_MAPPED_SUBRESOURCE mappedData;
 
-				auto deviceContext = DeviceResourcesUtil::GetDeviceResources()->GetD3DDeviceContext();
+				auto deviceContext = DeviceContextWrapper::GetDeviceContext()->GetD3DDeviceContext();
 				deviceContext->Map(ConstBuffer[(int)type].get(), 0, D3D11_MAP_WRITE_DISCARD, 0, &mappedData);
 				return mappedData.pData;
 			}
 			void ConstantBufferManager::UnLock(StaticConstBufferType type)
 			{
-				auto deviceContext = DeviceResourcesUtil::GetDeviceResources()->GetD3DDeviceContext();
+				auto deviceContext = DeviceContextWrapper::GetDeviceContext()->GetD3DDeviceContext();
 				deviceContext->Unmap(ConstBuffer[(int)type].get(), 0);
 			}
 

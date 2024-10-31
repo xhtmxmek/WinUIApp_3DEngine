@@ -2,14 +2,14 @@
 
 #ifdef VULKAN_RHI
 
-#include "Renderer/Resource/DeviceResources.h"
+#include "Renderer/Resource/DeviceContext.h"
 namespace Engine
 {
 	namespace Renderer
 	{
 		namespace RHI
 		{
-			class VulkanContext : public DeviceResources
+			class VulkanContext : public DeviceContext
 			{
 
 			};

@@ -101,7 +101,7 @@ namespace Engine
 			* 	//			//Todo : instanced material ����
 	////Todo : �н� �����Ͽ� override�ϱ� (basepass, ������ pass)
 
-	//			auto d3dContext = DeviceResourcesUtil::GetDeviceResources()->GetD3DDeviceContext();
+	//			auto d3dContext = DeviceContextWrapper::GetDeviceContext()->GetD3DDeviceContext();
 
 
 	//			//renderState setting
@@ -121,7 +121,7 @@ namespace Engine
 	//			//auto RasterizerState = RHI::GetRasterizerState(RHI::RasterizerFillMode::Solid, RHI::RasterizerCullMode::Back);
 	//			auto stateManager = RHI::RenderStateObjectManger::GetInstance();
 	//			//stateManager.GetBlendState(materialPtr->GetBlendable())
-	//			DeviceResourcesUtil::GetDeviceResources()->SetRenderState();
+	//			DeviceContextWrapper::GetDeviceContext()->SetRenderState();
 
 	//			/*
 	//			* ���̴� ������۴� ���Ŀ� ��ũ�η� ����Ʈ �迭 ���� ���̴��� �ѱ��. ������ �׳� ����ü�� �ϱ�.
@@ -157,7 +157,7 @@ namespace Engine
 				//Shader
 				//PSO
 				
-				//	auto context = DeviceResourcesUtil::GetDeviceResources()->GetD3DDeviceContext();
+				//	auto context = DeviceContextWrapper::GetDeviceContext()->GetD3DDeviceContext();
 				//	context->IASetVertexBuffers(0, 1, &VertexBuffer_, &stride, &offset);
 				//	context->IASetIndexBuffer(IndexBuffer_, DXGI_FORMAT_R16_UINT, 0);
 				//	//context->IASetPrimitiveTopology(D3D11_PRIMITIVE_TOPOLOGY::D3D11_PRIMITIVE_TOPOLOGY_3_CONTROL_POINT_PATCHLIST);

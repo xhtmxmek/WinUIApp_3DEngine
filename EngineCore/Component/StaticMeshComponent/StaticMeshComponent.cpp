@@ -1,6 +1,6 @@
 #include "pch.h"
 #include "StaticMeshComponent.h"
-#include "Renderer/Resource/DeviceResources.h"
+#include "Renderer/Resource/DeviceContext.h"
 
 namespace Engine
 {
@@ -23,7 +23,7 @@ namespace Engine
 
 		void StaticMeshComponent::Init()
 		{
-			auto context = DeviceResourcesUtil::GetDeviceResources()->GetD3DDeviceContext();
+			auto context = DeviceContextWrapper::GetDeviceContext()->GetD3DDeviceContext();
 			staticMeshShape_ = DirectX::GeometricPrimitive::CreateSphere(context);
 
 			//meshType_.Register(L"Cube", PropertyStaticMesh::MeshType::Cube);
@@ -41,7 +41,7 @@ namespace Engine
 		void StaticMeshComponent::Draw()
 		{
 			//GetComponentTransform().SetPosition(Vector3f(0,0,0));
-			auto size = DeviceResourcesUtil::GetDeviceResources()->GetOutputSize();
+			auto size = DeviceContextWrapper::GetDeviceContext()->GetOutputSize();
 			Matrix view = Matrix::CreateLookAt(Vector3(2.f, 2.f, 2.f),
 				Vector3::Zero, Vector3::UnitY);
 			Matrix proj = Matrix::CreatePerspectiveFieldOfView(DirectX::XM_PI / 4.f,

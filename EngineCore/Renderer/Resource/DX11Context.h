@@ -2,7 +2,7 @@
 
 #ifdef DX11_RHI
 
-#include "Renderer/Resource/DeviceResources.h"
+#include "Renderer/Resource/DeviceContext.h"
 namespace Engine
 {
 	namespace Renderer
@@ -56,7 +56,7 @@ namespace Engine
 
 
 
-			class DX11Context : public DeviceResources
+			class DX11Context : public DeviceContext
 			{				
 			public:
 				DX11Context() = default;
@@ -70,7 +70,7 @@ namespace Engine
 			public:
 				virtual void PostInitialize() override;
 				virtual void CreateDeviceIndependentResources() override;
-				virtual void CreateDeviceResources() override;
+				virtual void CreateDeviceContext() override;
 				virtual void CreateWindowSizeDependentResources() override;
 #pragma endregion				
 
@@ -116,23 +116,13 @@ namespace Engine
 
 				virtual void ClearContext();
 
-#pragma region WindowTransform
-#ifdef WIN_APPS_SDK
-				//Window Set										
-				virtual void SetSwapChainPanel(WindowParam const& panel);
-
-				//void SetWindow(HWND window, float width, float height) noexcept;
-				//virtual bool SetSwapchainXamlChanged(const WindowParam& WindowParam) override;				
-				virtual void SetCompositionScale(float compositionScaleX, float compositionScaleY) override;
-
-				virtual void WindowTransformChanged_Internal(const WindowParam& WindowParam) override;
+#pragma region WindowTransform				
 				virtual void SetCurrentOrientation(Engine::DisplayOrientation currentOrientation) {};
-#endif
 #pragma endregion
 
 
 #pragma region PipelineStateObject
-				virtual shared_ptr<RHIDepthStencilState> CreateRHIDepthStencilState();
+				virtual shared_ptr<RHIDepthStencilState> CreateRHIDepthStencilState(const DepthStencilDesc& Desc);
 #pragma endregion
 
 			private:
@@ -152,10 +142,10 @@ namespace Engine
 				wil::com_ptr_nothrow<IDXGISwapChain3> _swapChain;
 
 				// Direct3D rendering objects. Required for 3D.
-				wil::com_ptr_nothrow<ID3D11Texture2D> _backBufferTarget;
-				wil::com_ptr_nothrow<ID3D11Texture2D>  _depthStencil;
-				wil::com_ptr_nothrow<ID3D11RenderTargetView> _d3dRenderTargetView;
-				wil::com_ptr_nothrow<ID3D11DepthStencilView> _d3dDepthStencilView;
+				wil::com_ptr_nothrow<ID3D11Texture2D> _backBufferTexture;
+				wil::com_ptr_nothrow<ID3D11Texture2D>  _backBufferDepthStencilTexture;
+				wil::com_ptr_nothrow<ID3D11RenderTargetView> _backBufferRenderTargetView;
+				wil::com_ptr_nothrow<ID3D11DepthStencilView> _backBufferDepthStencilView;
 				D3D11_VIEWPORT _screenViewport;
 
 				// Direct3D properties.

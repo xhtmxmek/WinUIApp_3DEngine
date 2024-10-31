@@ -1,7 +1,6 @@
 #include "pch.h"
 #include "RendererBaseHeader.h"
 #include "Scene.h"
-#include "Resource/DeviceResources.h"
 #include "DeferredShadingRenderer.h"
 
 namespace Engine
@@ -34,30 +33,30 @@ namespace Engine
 			*/
 
 
-			auto context = RHI::DeviceResourcesUtil::GetDeviceResources()->GetD3DDeviceContext();
-			PIXBeginEvent(context, PIX_COLOR_DEFAULT, L"Render");
+			//auto context = RHI::DeviceContextWrapper::GetDeviceContext().GetD3DDeviceContext();
+			//PIXBeginEvent(context, PIX_COLOR_DEFAULT, L"Render");
 
 			ComputeVisibility();
 
 			RenderShadowDepth();			
 			RenderBasePass();
 
-			//deferred light, 반투명 볼륨 적용
-			RendeRHIghts();
+			ComputeParticle();
+			//deferred light, 반투명 볼륨 적용			
 
 			RenderTranslucencyPass();
 
 			//RenderFog..particle.. etc...
-			RenderVolumetricFog();
+			RenderHeterogenousVolumes();
 
 			//안쪽에서 translucency pass composit
 			RenderPostProcessingPass();
 
-			PIXEndEvent(context);
+			//PIXEndEvent(context);
 
 			// Show the new frame.
 			PIXBeginEvent(PIX_COLOR_DEFAULT, L"Present");
-			RHI::DeviceResourcesUtil::GetDeviceResources()->Present();
+			//RHI::DeviceContextWrapper::GetDeviceContext()->Present();
 			PIXEndEvent();
 		}
 #pragma endregion		
@@ -103,22 +102,22 @@ namespace Engine
 #pragma region RenderPasses
 		void DeferredShadingRenderer::Clear()
 		{
-			//추후 pass 형태로 빠질것임			
-			auto context = RHI::DeviceResourcesUtil::GetDeviceResources()->GetD3DDeviceContext();
-			auto deviceResource = RHI::DeviceResourcesUtil::GetDeviceResources();
-			PIXBeginEvent(context, PIX_COLOR_DEFAULT, L"Clear");
+			//need inesert to pass or make pass
+			//auto context = RHI::DeviceContextWrapper::GetDeviceContext()->GetD3DDeviceContext();
+			auto deviceResource = RHI::DeviceContextWrapper::GetDeviceContext();
+			//PIXBeginEvent(context, PIX_COLOR_DEFAULT, L"Clear");
 		
-			auto renderTarget = deviceResource->GetRenderTargetView();
-			auto depthStencil = deviceResource->GetDepthStencilView();
+			//auto renderTarget = deviceResource->GetRenderTargetView();
+			//auto depthStencil = deviceResource->GetDepthStencilView();
 
-			context->ClearRenderTargetView(renderTarget, Colors::CornflowerBlue);
-			context->ClearDepthStencilView(depthStencil, D3D11_CLEAR_DEPTH | D3D11_CLEAR_STENCIL, 1.0f, 0);
-			context->OMSetRenderTargets(1, &renderTarget, depthStencil);
+			//context->ClearRenderTargetView(renderTarget, Colors::CornflowerBlue);
+			//context->ClearDepthStencilView(depthStencil, D3D11_CLEAR_DEPTH | D3D11_CLEAR_STENCIL, 1.0f, 0);
+			//context->OMSetRenderTargets(1, &renderTarget, depthStencil);
 		
-			auto viewport = deviceResource->GetScreenViewport();
-			context->RSSetViewports(1, &viewport);
+			//auto viewport = deviceResource->GetScreenViewport();
+			//context->RSSetViewports(1, &viewport);
 
-			PIXEndEvent(context);
+			//PIXEndEvent(context);
 		}
 
 		void DeferredShadingRenderer::RenderShadowDepth()
@@ -126,6 +125,7 @@ namespace Engine
 		}
 		void DeferredShadingRenderer::RenderBasePass()
 		{
+			/**/
 			/*VisibleDrawCommand를 Draw한다. 안쪽에서 병렬로 Draw한다.
 			*StaticMesh는 렌더명령이 변하지 않는 한 캐싱해서 렌더명령을 쓴다
 			* MeshProcessor가 staticMesh 생성시 버텍스, pass별 RenderState, pass별 Shader등을 조합하여 DrawCommand를 만든다.
@@ -134,7 +134,10 @@ namespace Engine
 
 			SceneInfo.lock()->DispatchVisibleDrawCommandList(MeshPass::Base);
 		}
-		void DeferredShadingRenderer::RendeRHIghts()
+		void DeferredShadingRenderer::ComputeParticle()
+		{
+		}
+		void DeferredShadingRenderer::RendeLights()
 		{
 			//라이트는 로컬라이트, 디렉셔널 라이트, 에어리어라이트(렉트라이트?), 타일 등이있다.
 			//글로벌일루미네이션은 학습 후에 적용해보기.
@@ -147,7 +150,7 @@ namespace Engine
 			* 반투명 볼륨은아직 잘 모름. 스터디 필요.
 			*/
 		}
-		void DeferredShadingRenderer::RenderVolumetricFog()
+		void DeferredShadingRenderer::RenderHeterogenousVolumes()
 		{
 			/*
 			* volume 렌더링 공부 필요. 특히 fog
@@ -158,6 +161,9 @@ namespace Engine
 			/*
 			* UE에서 post process는 순서가 고정되어있음. 대부분은 컴퓨트 셰이더를 사용중임.
 			*/
+		}
+		void DeferredShadingRenderer::RenderHairStrands()
+		{
 		}
 #pragma endregion
 	}

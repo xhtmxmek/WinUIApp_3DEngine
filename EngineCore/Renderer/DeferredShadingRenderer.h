@@ -35,10 +35,12 @@ namespace Engine
 			void Clear();
 			void RenderShadowDepth();
 			void RenderBasePass();
-			void RendeRHIghts();
+			void ComputeParticle();
+			void RendeLights();
 			void RenderTranslucencyPass();
-			void RenderVolumetricFog();
+			void RenderHeterogenousVolumes();					
 			void RenderPostProcessingPass();
+			void RenderHairStrands();
 		private:
 			weak_ptr<Scene> SceneInfo;
 #pragma endregion

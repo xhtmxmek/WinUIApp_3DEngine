@@ -2,14 +2,14 @@
 
 #ifdef DX12_RHI
 
-#include "Renderer/Resource/DeviceResources.h"
+#include "Renderer/Resource/DeviceContext.h"
 namespace Engine
 {
 	namespace Renderer
 	{
 		namespace RHI
 		{
-			class DX12Context : public DeviceResources
+			class DX12Context : public DeviceContext
 			{
 
 			};

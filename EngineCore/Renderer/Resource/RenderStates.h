@@ -1,6 +1,7 @@
 #pragma once
-#include "RenderResource.h"
-#include "RHIresource.h"
+
+#include "RenderResources.h"
+#include "RHIUtilities.h"
 
 namespace Engine
 {
@@ -8,6 +9,8 @@ namespace Engine
 	{
 		namespace RHI
 		{
+			class RHIDepthStencilState;
+
 			enum class RasterizerCullMode
 			{
 				None = 1,
@@ -43,7 +46,8 @@ namespace Engine
 				LessEqual = 4,
 				Greater = 5,
 				NotEqual = 6,
-				Always = 7
+				GreaterEqual = 7,
+				Always = 8
 			};
 
 			enum class BlendOperator
@@ -87,19 +91,26 @@ namespace Engine
 				Decrement,
 			};
 
-			template<typename StateType, typename RHIRenderState>
+
+			template<typename StateType, typename RHIStatePrivate, typename RHIRenderStatePtr>
 			class StaticState
 			{
 			public:
-				static RHIRenderState GetRHI()
+				static RHIRenderStatePtr GetRHI()
 				{
 					return StaticResource._rhiState;
 				}
 			private:
 				class StaticStateResource : public RenderResource
-				{					
+				{
 				public:
-					RHIRenderState _rhiState;
+					RHIStatePrivate _rhiState;
+
+					StaticStateResource()
+					{
+						//enqueRamda? a
+						InitResource();
+					}
 
 					virtual void CreateRHI()
 					{
@@ -114,18 +125,21 @@ namespace Engine
 				static StaticStateResource StaticResource;
 			};
 
+			template<typename StateType, typename RHIStatePrivate, typename RHIRenderStatePtr>
+			typename StaticState<StateType, RHIStatePrivate, RHIRenderStatePtr>::StaticStateResource StaticState<StateType, RHIStatePrivate, RHIRenderStatePtr>::StaticResource = StaticState<StateType, RHIStatePrivate, RHIRenderStatePtr>::StaticStateResource();
+
 			struct DepthStencilDesc
 			{
 				bool enableDepthWrite;
 				ComparisonFunc depthTest;
 				bool enableFrontFaceStencil;
 				ComparisonFunc frontFaceStencilTest;
-				StencilOperator frontFaceStenilFailStencilOp;
+				StencilOperator frontFaceFailStencilOp;
 				StencilOperator frontFaceDepthFailStencilOp;
 				StencilOperator frontFacePassStencilOp;
 				bool enableBackFaceStencil;
 				ComparisonFunc backFaceStencilTest;
-				StencilOperator backFaceStenilFailStencilOp;
+				StencilOperator backFaceFailStencilOp;
 				StencilOperator backFaceDepthFailStencilOp;
 				StencilOperator backFacePassStencilOp;
 				unsigned char stencilReadMask = 0xFF;
@@ -149,12 +163,13 @@ namespace Engine
 					depthTest(inDepthTest),
 					enableFrontFaceStencil(inEnableFrontFaceStencil),
 					frontFaceStencilTest(inFrontFaceStencilTest),
-					frontFaceStenilFailStencilOp(inFrontFaceStenilFailStencilOp),
+					frontFaceFailStencilOp(inFrontFaceStenilFailStencilOp),
 					frontFaceDepthFailStencilOp(inFrontFaceDepthFailStencilOp),
 					frontFacePassStencilOp(inFrontFacePassStencilOp),
 					enableBackFaceStencil(inEnableBackFaceStencil),
 					backFaceStencilTest(inBackFaceStencilTest),
-					backFaceStenilFailStencilOp(inBackFaceDepthFailStencilOp),
+					backFaceFailStencilOp(inBackFaceDepthFailStencilOp),
+					backFaceDepthFailStencilOp(inBackFaceDepthFailStencilOp),
 					backFacePassStencilOp(inBackFacePassStencilOp),
 					stencilReadMask(inStencilReadMask),
 					stencilWriteMask(inStencilWriteMask)
@@ -178,21 +193,22 @@ namespace Engine
 				unsigned char stencilWriteMask = 0xFF>
 			class DepthStencilState : public StaticState<
 				DepthStencilState<
-			enableDepthWrite, 
-			depthTest,
-			enableFrontFaceStencil,
-			frontFaceStencilTest,
-			frontFaceStenilFailStencilOp,
-			frontFaceDepthFailStencilOp,
-			enableBackFaceStencil,
-			backFaceStencilTest,
-			backFaceStenilFailStencilOp,
-			backFaceDepthFailStencilOp,
-			backFacePassStencilOp,
-			stencilReadMask,
-			stencilWriteMask
-			>,
-			shared_ptr<RHIDepthStencilState>&>
+				enableDepthWrite,
+				depthTest,
+				enableFrontFaceStencil,
+				frontFaceStencilTest,
+				frontFaceStenilFailStencilOp,
+				frontFaceDepthFailStencilOp,
+				enableBackFaceStencil,
+				backFaceStencilTest,
+				backFaceStenilFailStencilOp,
+				backFaceDepthFailStencilOp,
+				backFacePassStencilOp,
+				stencilReadMask,
+				stencilWriteMask
+				>,
+				shared_ptr<RHIDepthStencilState>,
+				weak_ptr<RHIDepthStencilState>>
 			{
 			public:
 				static shared_ptr<RHIDepthStencilState>& CreateRHI()
@@ -217,91 +233,90 @@ namespace Engine
 					return RHI::CreateRHIDepthStencilState();
 				}
 			};
-
-			//struct RasterizerState
-			//{
-			//	wil::com_ptr_nothrow<ID3D11RasterizerState> nativeState_;
-			//};
-
-			//class RenderStateObjectManger
-			//{
-			//public:
-			//	enum class RasterizingType
-			//	{
-			//		Default,		//solid, cull_backface,
-			//		Default_CullFront,
-			//		Default_CullNone,
-			//		Wire,	//cull_backface,
-			//		WireCullFront,
-			//		WireCullNone,
-			//		MaxRasterzingType,
-			//	};
-
-			//	enum class SamplerType
-			//	{
-			//		Default,
-			//		Anisotropic,
-			//		Clamp,
-			//		MaxSamplerType,
-			//	};
-
-			//	enum class BlendingType
-			//	{
-			//		Default,	//none
-			//		AlphaBlend,
-			//		MaxBlendingType,
-			//	};
-
-			//	enum class DepthStencilType
-			//	{
-			//		Default,
-			//		NoWrite,
-			//		MaxDepthStencilType
-			//	};
-
-			//private:
-			//	//ID3D11SamplerState* SamplerState[D3D11_COMMONSHADER_SAMPLER_SLOT_COUNT];	
-			//	//ID3D11RasterizerState* RasterizerStates[(int)RasterizingType::MaxRasterzingType];
-			//	//ID3D11DepthStencilState* DepthStencilStates[(int)DepthStencilType::MaxDepthStencilType];
-			//	//ID3D11BlendState* BlendStates[(int)BlendingType::MaxBlendingType];
-			//	//basePass�� RenderState
-			//	//������ pass�� RenderState
-
-
-			/*MeshProcessor settings are determined according to material options or pass. Pattern it into a function according to meshPass or material pass and register it in the table using each pass as a key.
-			*Afterwards, refer to the key when creating a meshProcessor in each pass.
-			*Register the corresponding object in the PSO table when creating a render state during the mesh draw command creation process.
-			When submitting a draw command, if the psoID of the command exists in the table, write it.
-			*/
-
-			// 
-			//	
-			//	*/
-			//	//
-			//public:
-			//	static RenderStateObjectManger& const GetInstance()
-			//	{
-
-			//	}
-			//	void Init();
-
-			//	static RasterizerState GetRasterizerState(RasterizerFillMode fillMode, RasterizerCullMode cull);
-			//	static SamplerState GetSamplerState(textureAdressMode textureAdress, SamplerFilter filter);
-			//	static BlendState GetBlendState(bool blendEnable, BlendFactor srcFactor, BlendFactor destFactor);
-			//	static DepthStencilState GetDepthStencilState(ComparisonFunc DepthTest, bool depthWrite);
-			//	//ID3D11SamplerState* const* const GetSamplerStates();
-			//	//ID3D11BlendState* const GetBlendState(RenderStateObjectManger::BlendingType type);
-			//	//ID3D11RasterizerState* const GetRasterizerSate(RenderStateObjectManger::RasterizingType type);
-			//	//ID3D11DepthStencilState* const GetDepthStencilState(RenderStateObjectManger::DepthStencilType type);
-			//	void Release();
-			//private:
-			//	RenderStateObjectManger();
-
-			//	static void InitRasterizerState(RasterizerFillMode fillMode, RasterizerCullMode cull, RasterizerState& outState);
-			//	static void InitSamplerState(textureAdressMode textureAdress, SamplerFilter filter, SamplerState& outState);
-			//	static void InitDepthStencilState(ComparisonFunc DepthTest, bool depthWrite, DepthStencilState& outState);
-			//	static void InitBlendState(bool blendEnable, BlendFactor srcFactor, BlendFactor destFactor, BlendState& outState);
-			//};
 		}
+
+
+		//struct RasterizerState
+		//{
+		//	wil::com_ptr_nothrow<ID3D11RasterizerState> nativeState_;
+		//};
+
+		//class RenderStateObjectManger
+		//{
+		//public:
+		//	enum class RasterizingType
+		//	{
+		//		Default,		//solid, cull_backface,
+		//		Default_CullFront,
+		//		Default_CullNone,
+		//		Wire,	//cull_backface,
+		//		WireCullFront,
+		//		WireCullNone,
+		//		MaxRasterzingType,
+		//	};
+
+		//	enum class SamplerType
+		//	{
+		//		Default,
+		//		Anisotropic,
+		//		Clamp,
+		//		MaxSamplerType,
+		//	};
+
+		//	enum class BlendingType
+		//	{
+		//		Default,	//none
+		//		AlphaBlend,
+		//		MaxBlendingType,
+		//	};
+
+		//	enum class DepthStencilType
+		//	{
+		//		Default,
+		//		NoWrite,
+		//		MaxDepthStencilType
+		//	};
+
+		//private:
+		//	//ID3D11SamplerState* SamplerState[D3D11_COMMONSHADER_SAMPLER_SLOT_COUNT];	
+		//	//ID3D11RasterizerState* RasterizerStates[(int)RasterizingType::MaxRasterzingType];
+		//	//ID3D11DepthStencilState* DepthStencilStates[(int)DepthStencilType::MaxDepthStencilType];
+		//	//ID3D11BlendState* BlendStates[(int)BlendingType::MaxBlendingType];
+
+
+		/*MeshProcessor settings are determined according to material options or pass. Pattern it into a function according to meshPass or material pass and register it in the table using each pass as a key.
+		*Afterwards, refer to the key when creating a meshProcessor in each pass.
+		*Register the corresponding object in the PSO table when creating a render state during the mesh draw command creation process.
+		When submitting a draw command, if the psoID of the command exists in the table, write it.
+		*/
+
+		// 
+		//	
+		//	*/
+		//	//
+		//public:
+		//	static RenderStateObjectManger& const GetInstance()
+		//	{
+
+		//	}
+		//	void Init();
+
+		//	static RasterizerState GetRasterizerState(RasterizerFillMode fillMode, RasterizerCullMode cull);
+		//	static SamplerState GetSamplerState(textureAdressMode textureAdress, SamplerFilter filter);
+		//	static BlendState GetBlendState(bool blendEnable, BlendFactor srcFactor, BlendFactor destFactor);
+		//	static DepthStencilState GetDepthStencilState(ComparisonFunc DepthTest, bool depthWrite);
+		//	//ID3D11SamplerState* const* const GetSamplerStates();
+		//	//ID3D11BlendState* const GetBlendState(RenderStateObjectManger::BlendingType type);
+		//	//ID3D11RasterizerState* const GetRasterizerSate(RenderStateObjectManger::RasterizingType type);
+		//	//ID3D11DepthStencilState* const GetDepthStencilState(RenderStateObjectManger::DepthStencilType type);
+		//	void Release();
+		//private:
+		//	RenderStateObjectManger();
+
+		//	static void InitRasterizerState(RasterizerFillMode fillMode, RasterizerCullMode cull, RasterizerState& outState);
+		//	static void InitSamplerState(textureAdressMode textureAdress, SamplerFilter filter, SamplerState& outState);
+		//	static void InitDepthStencilState(ComparisonFunc DepthTest, bool depthWrite, DepthStencilState& outState);
+		//	static void InitBlendState(bool blendEnable, BlendFactor srcFactor, BlendFactor destFactor, BlendState& outState);
+		//};		
 	}
 }

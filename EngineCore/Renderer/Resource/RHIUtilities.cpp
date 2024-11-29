@@ -11,13 +11,13 @@ namespace Engine
 		{
 
 #pragma region Initialize
-			void Init()
+			void InitRenderResources()
 			{
 				DeviceContextWrapper::GetInstance().CreateDeviceContext();
 				DeviceContextWrapper::GetDeviceContext().lock()->AddOption(RHI::DeviceContext::c_UseXAML);
 
 				StaticRenderResources::GetInstance().InitRenderResources();
-				//RenderResourceManager::CreateResource
+				//StaticRenderResource의 종류				
 				/*ConstantBufferes
 				* CommonTextures
 				* SceneTextures
@@ -49,9 +49,10 @@ namespace Engine
 			}
 			void ReleaseRenderResources()
 			{
-				ShaderObjectManager::GetInstance().ReleaseShader();
-				RHI::ConstantBufferManager::GetInstance().Release();
-				RHI::ShaderObjectManager::GetInstance().ReleaseShader();
+				StaticRenderResources::GetInstance().ReleaseResources();
+				//ShaderObjectManager::GetInstance().ReleaseShader();
+				//RHI::ConstantBufferManager::GetInstance().Release();
+				//RHI::ShaderObjectManager::GetInstance().ReleaseShader();
 
 				DeviceContextWrapper::GetInstance().ReleaseInstance();
 			}

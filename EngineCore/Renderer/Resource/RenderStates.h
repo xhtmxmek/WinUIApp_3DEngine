@@ -107,8 +107,7 @@ namespace Engine
 					RHIStatePrivate _rhiState;
 
 					StaticStateResource()
-					{
-						//enqueRamda? a
+					{						
 						InitResource();
 					}
 
@@ -211,7 +210,7 @@ namespace Engine
 				weak_ptr<RHIDepthStencilState>>
 			{
 			public:
-				static shared_ptr<RHIDepthStencilState>& CreateRHI()
+				static weak_ptr<RHIDepthStencilState>& CreateRHI()
 				{
 					DepthStencilDesc depthDesc(enableDepthWrite,
 						depthTest,

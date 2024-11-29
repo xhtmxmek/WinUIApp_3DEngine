@@ -15,9 +15,14 @@ namespace Engine
 		}
 
 		struct MeshDrawShaderBindings
-		{
-			//상수버퍼와 리소스 바인딩. 어떻게?
+		{			
+			//ConstantBuffer			
+			//상수버퍼
+			//셰이더
+
 		};
+
+		//MeshInfo로부터 정해진 최종 렌더링될 Primitive의 형태
 		struct MeshDrawCommand
 		{
 			RHI::VertexInput VertexStream;
@@ -29,6 +34,17 @@ namespace Engine
 			unsigned int num_primitives;
 			unsigned int num_instances;
 			//IndirectArgs
+		};
+
+
+		//Primitive가 들고 있는 렌더링을 위한 모든 정보
+		struct MeshInfo
+		{			
+			//MaterialInfo
+			//LOD
+			//WireFrame
+			//Dithered
+			//VertexInput(VertexLayOut, VertexBuffer)
 		};
 
 		const int Num_Bone_PerVertex = 4;
@@ -48,7 +64,7 @@ namespace Engine
 		private:
 			MeshPass passType;
 		public:
-			void BuildMeshDrawCommand();
+			void BuildMeshDrawCommand(const MeshInfo& Info);
 			//const FScene* RESTRICT Scene;
 			//ERHIFeatureLevel::Type FeatureLevel;
 			//const FSceneView* ViewIfDynamicMeshCommand;			
@@ -57,8 +73,10 @@ namespace Engine
 
 		class BasePassMeshProcessor
 		{
-
-
+			//BasePass에 사용할 Shader는 정해져 있음. 이 셰이더가 템플릿인가? 퍼뮤테이션에 따라 Skinned와 아닌것으로 나뉨/
+			//BasePassShader<skinned>* shader;
+			//BasePassRenderState<skinned>
+			//ConstantBuffer<BasePass<skinned>>
 		};
 
 		namespace DrawUtil

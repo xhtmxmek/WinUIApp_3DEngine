@@ -27,7 +27,7 @@ namespace Engine
 			}
 			else
 			{
-				index = _freeIndexList.size();
+				index = *_freeIndexList.rbegin();
 				_freeIndexList.pop_back();
 				_renderResourceList[index] = resource;
 			}

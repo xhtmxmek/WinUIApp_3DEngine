@@ -9,9 +9,9 @@ namespace Engine
 			struct DepthStencilDesc;
 
 #pragma region Initialize
-			void Init();
+			void InitRenderResources();
 			void PostInitialize();
-			void InitPipelineStateObject();
+			//void InitPipelineStateObject();
 #pragma endregion
 
 #pragma region Pause/Relase

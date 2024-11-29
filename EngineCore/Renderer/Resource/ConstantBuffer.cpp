@@ -1,7 +1,7 @@
 #include "pch.h"
-#include "Renderer/Resource/DeviceContext.h"
+#include "RendererBaseHeader.h"
 #include "ConstantBuffer.h"
-#include "RHIResource.h"
+
 namespace Engine
 {
 	namespace Renderer

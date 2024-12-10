@@ -1,5 +1,7 @@
 #include "pch.h"
 #include "StaticMeshComponent.h"
+#include "EngineAsset/Mesh.h"
+#include "Renderer/MeshRendering.h"
 #include "Renderer/Resource/DeviceContext.h"
 
 namespace Engine
@@ -8,10 +10,9 @@ namespace Engine
 	{
 		RUNTIME_CLASS_IMPL(StaticMeshComponent)
 
-		StaticMeshComponent::StaticMeshComponent(const std::string& name)
+		StaticMeshComponent::StaticMeshComponent(const std::string& name, const std::string& assetDirectory)
 			:DrawableComponent(name),
-			staticMeshShape_(nullptr),
-			meshType_(L"MeshAsset")
+			_assetDirectory(assetDirectory)
 		{
 			//typeName_ = "StaticMeshComponent";
 			SetVisible(true);
@@ -34,25 +35,31 @@ namespace Engine
 			//meshType_.Register(L"Cone", PropertyStaticMesh::MeshType::Cone);
 									
 			//AddProperty(&meshType_);
+			_staticMesh = make_shared<Asset::Mesh>();
+			_staticMesh->Load(_assetDirectory);
+		}
+
+		void StaticMeshComponent::finalize()
+		{
+			_staticMesh->Unload();
+			_staticMesh.reset();
 		}
 
 		void StaticMeshComponent::Tick(float elapsedTime)
 		{			
 		}
 
-		//void StaticMeshComponent::Draw()
-		//{
-		//	//GetComponentTransform().SetPosition(Vector3f(0,0,0));
-		//	auto size = DeviceContextWrapper::GetDeviceContext()->GetOutputSize();
-		//	Matrix view = Matrix::CreateLookAt(Vector3(2.f, 2.f, 2.f),
-		//		Vector3::Zero, Vector3::UnitY);
-		//	Matrix proj = Matrix::CreatePerspectiveFieldOfView(DirectX::XM_PI / 4.f,
-		//		float(size.Width) / float(size.Height), 0.1f, 10.f);
+		void StaticMeshComponent::AddPrimitiveToScene()
+		{
+			//Create Mesh Info. Rendering Info.(vertex,index, material...)
+			//In RenderingThread, MeshProcessor is created by MeshInfo. Meshprocessor just making drawCommand function's wrapper.
+			Renderer::MeshInfo meshInfo;
+		}
 
-		//	//TODO : ��Ŵ�... �ٲ���. ���� ���������ο� �����ؼ� �������ϴ°ɷ�
-		//	DirectX::SimpleMath::Matrix tempMat = DirectX::SimpleMath::Matrix(&GetComponentTransform().GetWorldMatrix().a1);			
-		//	staticMeshShape_->Draw(tempMat.Transpose(), view, proj);
-		//}
+		void StaticMeshComponent::PostInitialize()
+		{
+			AddPrimitiveToScene();
+		}
 	}
 }
 

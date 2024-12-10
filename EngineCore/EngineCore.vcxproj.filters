@@ -49,8 +49,8 @@
     <ClInclude Include="World\Actor\Camera\Camera.h" />
     <ClInclude Include="Renderer\Resource\ConstantBuffer.h" />
     <ClInclude Include="Renderer\Resource\GraphicsLibraryResource.h" />
-    <ClInclude Include="Renderer\MeshProcessor.h" />
-    <ClInclude Include="EngineAsset\ModelAsset.h" />
+    <ClInclude Include="Renderer\MeshRendering.h" />
+    <ClInclude Include="EngineAsset\Mesh.h" />
     <ClInclude Include="Common\Utility.h" />
     <ClInclude Include="Animation\AnimEvaluator.h" />
     <ClInclude Include="Animation\SceneAnimator.h" />
@@ -104,8 +104,8 @@
     <ClCompile Include="World\Actor\Camera\Camera.cpp" />
     <ClCompile Include="Renderer\Resource\ConstantBuffer.cpp" />
     <ClCompile Include="Renderer\Resource\GraphicsLibraryResource.cpp" />
-    <ClCompile Include="EngineAsset\ModelAsset.cpp" />
-    <ClCompile Include="Renderer\MeshProcessor.cpp" />
+    <ClCompile Include="EngineAsset\Mesh.cpp" />
+    <ClCompile Include="Renderer\MeshRendering.cpp" />
     <ClCompile Include="Animation\AnimEvaluator.cpp" />
     <ClCompile Include="Animation\SceneAnimator.cpp" />
     <ClCompile Include="Renderer\Resource\RenderStaes.cpp" />

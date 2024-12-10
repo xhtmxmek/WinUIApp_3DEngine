@@ -4,6 +4,14 @@
 #include "Component/Property/PropertyBase.h"
 namespace Engine
 {
+	namespace Asset
+	{
+		//class StaticMesh : 
+		//{
+
+		//};
+		class Mesh;
+	}
 	namespace Component
 	{			
 		class PropertyStaticMesh : public PropertyPath
@@ -20,7 +28,6 @@ namespace Engine
 			PropertyStaticMesh(std::wstring const& name)
 				:PropertyPath(name, L"staticMesh")
 			{
-				//�� Ÿ���� �ּҸ� �Ѱܼ�, ������Ʈ ������Ƽ �θ𿡼� packedValueȣ���Ű��. 
 			}
 
 			//PropertyStaticMesh& operator=(MeshType type)
@@ -34,15 +41,16 @@ namespace Engine
 		{			
 		public:
 			RUNTIME_SUBCLASS(DrawableComponent)
-			ENGINE_API StaticMeshComponent(const std::string& name = "StaticMeshComponent");
+			ENGINE_API StaticMeshComponent(const std::string& name = "StaticMeshComponent", const std::string& assetDirectory = "");
 			ENGINE_API ~StaticMeshComponent();
 			virtual void Init() final;
+			virtual void finalize();
 			virtual void Tick(float elapsedTime) final;
-			virtual void Draw() final;
-			//void meshType(PropertyStaticMesh::MeshType meshType);
+			virtual void AddPrimitiveToScene() override;
+			virtual void PostInitialize() override;
 		private:			
-			std::unique_ptr<DirectX::GeometricPrimitive> staticMeshShape_;			
-			PropertyStaticMesh meshType_;
+			shared_ptr<Asset::Mesh> _staticMesh;
+			std::string _assetDirectory;
 		};
 	}
 }

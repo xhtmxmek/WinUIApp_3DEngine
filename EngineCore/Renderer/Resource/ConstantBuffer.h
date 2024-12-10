@@ -154,9 +154,6 @@ namespace Engine
 				//	BasePassParameters.IndirectOcclusionTexture = SystemTextures.White;
 				//	BasePassParameters.ResolvedSceneDepthTexture = SystemTextures.White;
 			};
-		}
-
-
 			//class ConstantBufferManager
 			//{
 			//private:

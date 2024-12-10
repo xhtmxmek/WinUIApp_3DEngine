@@ -83,8 +83,6 @@ namespace Engine
 					int k = 5;
 				});
 		}
-
-		//RUNTIME_CLASS_IMPL(DrawableComponent)
 	}
 }
 

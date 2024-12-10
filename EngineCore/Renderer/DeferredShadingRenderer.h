@@ -1,8 +1,4 @@
 #pragma once
-//렌더러는 월드에 대한 업데이트와 렌더링을 담당하는 클래스이다. 
-//렌더링 파이프라인을 담당하고 있다.
-//unique 포인터를 가지고 있으므로, pImpl로 구현하여 상위구조에서 헤더를 알 필요 없도록 해얗
-
 
 namespace Engine
 {
@@ -39,10 +35,12 @@ namespace Engine
 			void Clear();
 			void RenderShadowDepth();
 			void RenderBasePass();
-			void RenderLights();
+			void ComputeParticle();
+			void RendeLights();
 			void RenderTranslucencyPass();
-			void RenderVolumetricFog();
+			void RenderHeterogenousVolumes();					
 			void RenderPostProcessingPass();
+			void RenderHairStrands();
 		private:
 			weak_ptr<Scene> SceneInfo;
 #pragma endregion

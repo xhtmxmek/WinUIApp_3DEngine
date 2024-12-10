@@ -7,14 +7,14 @@ namespace Engine
 {
 	namespace World
 	{
-		void ActorManager::CheckActorListCapacity()
+		void ActorManager::CheckActoRHIstCapacity()
 		{
-			//Actor�� ���� �Ӱ谪 �̻� ��ŭ ������û�� �ð�쿡�� Actorlist�� ����� �÷��� �Ŀ� Copy�Ѵ�
+			//Actor�� ���� �Ӱ谪 �̻� ��ŭ ������û�� �ð�쿡�� ActoRHIst�� ����� �÷��� �Ŀ� Copy�Ѵ�
 			if (Actors.size() % ActorsSizeUnit < (ActorsSizeUnit - ActorSizeBias))
-				ActorListResized = false;
+				ActoRHIstResized = false;
 			else
 			{
-				if (!ActorListResized)
+				if (!ActoRHIstResized)
 				{
 					unordered_map<string, shared_ptr<Actor>> tempActors;
 					tempActors.reserve(CurrentActorSizeFactor * ActorsSizeUnit);
@@ -24,7 +24,7 @@ namespace Engine
 					
 					actorNames_.reserve(CurrentActorSizeFactor * ActorsSizeUnit);
 
-					ActorListResized = true;
+					ActoRHIstResized = true;
 					CurrentActorSizeFactor++;
 				}
 			}
@@ -79,7 +79,7 @@ namespace Engine
 		{
 		}
 
-		size_t ActorManager::GetNumActorList()
+		size_t ActorManager::GetNumActoRHIst()
 		{
 			return Actors.size();
 		}

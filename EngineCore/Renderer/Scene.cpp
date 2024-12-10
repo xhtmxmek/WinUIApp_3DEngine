@@ -16,7 +16,7 @@ namespace Engine
 		{
 			if (use_parallel_rendering)
 			{				
-				//make parallel RLICommand by MeshDrawCommand
+				//make parallel RHICommand by MeshDrawCommand
 				//std::thread
 				//draw Count를 쓰레드 갯수로 적절히 나눔.
 			}

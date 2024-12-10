@@ -7,7 +7,7 @@ namespace Engine
 {	
 	namespace Renderer
 	{
-		namespace RLI
+		namespace RHI
 		{
 			ShaderObjectManager::ShaderObjectManager()
 			{
@@ -38,7 +38,7 @@ namespace Engine
 				ShaderVector.reserve(static_cast<int>(ShaderType::Max_Type));
 				ShaderVector.resize(static_cast<int>(ShaderType::Max_Type));
 	
-				//Todo : ShaderObjectµµ RuntimeÅ¬·¡½º·Î µî·Ï½ÃÅ°±â
+				//Todo : ShaderObjectï¿½ï¿½ RuntimeÅ¬ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Ï½ï¿½Å°ï¿½ï¿½
 				ShaderVector[(int)ShaderType::Lit] = std::shared_ptr<ShaderObject>(new DefaultShader());
 				ShaderVector[(int)ShaderType::Unlit] = std::shared_ptr<ShaderObject>(new DefaultShader());
 				
@@ -55,9 +55,12 @@ namespace Engine
 			}
 
 
-			std::shared_ptr<ShaderObject> const ShaderObjectManager::GetShader(Engine::Renderer::RLI::ShaderType eShader)
+			std::shared_ptr<ShaderObject> const ShaderObjectManager::GetShader(Engine::Renderer::RHI::ShaderType eShader)
 			{
 				return ShaderVector[(int)eShader];
+			}
+			void ShaderObjectManager::ReleaseShader()
+			{
 			}
 		}
 	}

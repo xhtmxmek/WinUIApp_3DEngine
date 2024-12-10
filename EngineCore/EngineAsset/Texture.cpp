@@ -1,5 +1,5 @@
 #include "pch.h"
-#include "Renderer/Resource/DeviceResources.h"
+#include "Renderer/Resource/DeviceContext.h"
 #include "Texture.h"
 
 namespace Engine
@@ -8,7 +8,7 @@ namespace Engine
 	{
 		bool Texture::Load(const wstring& textureName)
 		{
-			auto device = DeviceResourcesUtil::GetDeviceResources()->GetD3DDevice();			
+			auto device = DeviceContextWrapper::GetDeviceContext()->GetD3DDevice();			
 			/*
 			���ҽ��� ���.
 			1. ������ �������� ����
@@ -51,11 +51,11 @@ namespace Engine
 				subresourceData.SysMemSlicePitch = embeddedTexture->mWidth * embeddedTexture->mHeight * 4;
 
 				ID3D11Texture2D* texture2D = nullptr;
-				hr = DeviceResourcesUtil::GetDeviceResources()->GetD3DDevice()->CreateTexture2D(&desc, &subresourceData, &texture2D_);
+				hr = DeviceContextWrapper::GetDeviceContext()->GetD3DDevice()->CreateTexture2D(&desc, &subresourceData, &texture2D_);
 				//if (FAILED(hr))
 				//	MessageBox(hwnd_, "CreateTexture2D failed!", "Error!", MB_ICONERROR | MB_OK);
 
-				hr = DeviceResourcesUtil::GetDeviceResources()->GetD3DDevice()->CreateShaderResourceView(texture2D, nullptr, &texture);
+				hr = DeviceContextWrapper::GetDeviceContext()->GetD3DDevice()->CreateShaderResourceView(texture2D, nullptr, &texture);
 				//if (FAILED(hr))
 				//	MessageBox(hwnd_, "CreateShaderResourceView failed!", "Error!", MB_ICONERROR | MB_OK);
 			}

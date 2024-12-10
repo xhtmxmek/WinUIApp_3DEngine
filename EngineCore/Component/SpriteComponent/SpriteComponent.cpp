@@ -1,6 +1,6 @@
 #include "pch.h"
 #include "SpriteComponent.h"
-#include "Renderer/Resource/DeviceResources.h"
+#include "Renderer/Resource/DeviceContext.h"
 #include "EngineAsset/Texture.h"
 
 namespace Engine
@@ -12,7 +12,7 @@ namespace Engine
 		SpriteComponent::SpriteComponent(const std::string& name)
 			:DrawableComponent(name)			
 		{
-			auto deviceContext = DeviceResourcesUtil::GetDeviceResources()->GetD3DDeviceContext();
+			auto deviceContext = DeviceContextWrapper::GetDeviceContext()->GetD3DDeviceContext();
 			SpriteBatch = make_unique<DirectX::SpriteBatch>(deviceContext);
 			//BasicTexture = EngineAsset::TextureManager::GetInstance().GetTexture(L"D:\\StudyDir\\WinUIApp_3DEngine\\TestProject\\Assets\\cat.png");
 			//const std::shared_ptr<EngineAsset::Texture> hello;

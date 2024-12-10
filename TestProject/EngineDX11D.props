@@ -2,7 +2,9 @@
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ImportGroup Label="PropertySheets" />
   <PropertyGroup Label="UserMacros" />
-  <PropertyGroup />
+  <PropertyGroup>
+    <_PropertySheetDisplayName>EngineDX11D</_PropertySheetDisplayName>
+  </PropertyGroup>
   <ItemDefinitionGroup>
     <Link>
       <AdditionalLibraryDirectories>$(SolutionDir)ExternalLibraries\Assimp\lib\x64\Debug\;$(SolutionDir)Build_Output\$(Platform)\$(Configuration)\</AdditionalLibraryDirectories>
@@ -10,6 +12,7 @@
     </Link>
     <ClCompile>
       <AdditionalIncludeDirectories>$(ProjectDir);$(SolutionDir)ExternalLibraries\Assimp\Include;$(SolutionDir)SharedTypes;$(SolutionDir)EngineCore</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>_WINDLL;WIN_APPS_SDK;DX11;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
   </ItemDefinitionGroup>
   <ItemGroup />

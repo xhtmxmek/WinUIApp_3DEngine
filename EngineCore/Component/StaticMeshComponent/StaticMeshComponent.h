@@ -20,7 +20,7 @@ namespace Engine
 			PropertyStaticMesh(std::wstring const& name)
 				:PropertyPath(name, L"staticMesh")
 			{
-				//°¢ Å¸ÀÔÀÇ ÁÖ¼Ò¸¦ ³Ñ°Ü¼­, ÄÄÆ÷³ÍÆ® ÇÁ·ÎÆÛÆ¼ ºÎ¸ð¿¡¼­ packedValueÈ£Ãâ½ÃÅ°±â. 
+				//ï¿½ï¿½ Å¸ï¿½ï¿½ï¿½ï¿½ ï¿½Ö¼Ò¸ï¿½ ï¿½Ñ°Ü¼ï¿½, ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ® ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ¼ ï¿½Î¸ð¿¡¼ï¿½ packedValueÈ£ï¿½ï¿½ï¿½Å°ï¿½ï¿½. 
 			}
 
 			//PropertyStaticMesh& operator=(MeshType type)

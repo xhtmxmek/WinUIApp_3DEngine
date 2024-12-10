@@ -26,7 +26,6 @@
     <ClInclude Include="World\World.h" />
     <ClInclude Include="Renderer\DeferredShadingRenderer.h" />
     <ClInclude Include="Common\Math\TransformGroup.h" />
-    <ClInclude Include="Renderer\Resource\DeviceResources.h" />
     <ClInclude Include="Common\EngineBaseHeader.h" />
     <ClInclude Include="Common\EngineCommonHeader.h" />
     <ClInclude Include="Common\EngineHelper.h" />
@@ -55,11 +54,11 @@
     <ClInclude Include="Common\Utility.h" />
     <ClInclude Include="Animation\AnimEvaluator.h" />
     <ClInclude Include="Animation\SceneAnimator.h" />
-    <ClInclude Include="Renderer\Resource\RenderStateObjectManager.h" />
+    <ClInclude Include="Renderer\Resource\RenderStates.h" />
     <ClInclude Include="Renderer\Shader\ShaderObjectManager.h" />
     <ClInclude Include="Renderer\Shader\ShaderObject.h" />
     <ClInclude Include="Renderer\Shader\DefaultShader.h" />
-    <ClInclude Include="Renderer\Resource\RLIresource.h" />
+    <ClInclude Include="Renderer\Resource\RHIresource.h" />
     <ClInclude Include="Renderer\RenderThread.h" />
     <ClInclude Include="GameThread.h" />
     <ClInclude Include="Animation\AnimationThread.h" />
@@ -68,6 +67,14 @@
     <ClInclude Include="Renderer\Scene.h" />
     <ClInclude Include="Renderer\PrimitiveInfo.h" />
     <ClInclude Include="Renderer\RendererBaseHeader.h" />
+    <ClInclude Include="Renderer\Resource\DX11Context.h" />
+    <ClInclude Include="Renderer\Resource\DeviceContext.h" />
+    <ClInclude Include="Renderer\Resource\DX12Context.h" />
+    <ClInclude Include="Renderer\Resource\VulkanContext.h" />
+    <ClInclude Include="Renderer\Resource\SceneTextures.h" />
+    <ClInclude Include="Renderer\Resource\D3D11State.h" />
+    <ClInclude Include="Renderer\Resource\RenderResources.h" />
+    <ClInclude Include="Renderer\Resource\RHIUtilities.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="EngineCore.cpp" />
@@ -86,7 +93,6 @@
     <ClCompile Include="World\World.cpp" />
     <ClCompile Include="Renderer\DeferredShadingRenderer.cpp" />
     <ClCompile Include="Common\Math\TransformGroup.cpp" />
-    <ClCompile Include="Renderer\Resource\DeviceResource.cpp" />
     <ClCompile Include="Common\Path.cpp" />
     <ClCompile Include="Common\RuntimeContext.cpp" />
     <ClCompile Include="EngineAsset\Material.cpp" />
@@ -102,13 +108,18 @@
     <ClCompile Include="Renderer\MeshProcessor.cpp" />
     <ClCompile Include="Animation\AnimEvaluator.cpp" />
     <ClCompile Include="Animation\SceneAnimator.cpp" />
-    <ClCompile Include="Renderer\Resource\RenderStateObjectManager.cpp" />
+    <ClCompile Include="Renderer\Resource\RenderStaes.cpp" />
     <ClCompile Include="Renderer\Shader\ShaderObject.cpp" />
     <ClCompile Include="Renderer\Shader\ShaderObjectManager.cpp" />
-    <ClCompile Include="Renderer\Resource\RLIResource.cpp" />
+    <ClCompile Include="Renderer\Resource\RHIResource.cpp" />
     <ClCompile Include="Renderer\Scene.cpp" />
     <ClCompile Include="GameThread.cpp" />
     <ClCompile Include="Renderer\RenderThread.cpp" />
+    <ClCompile Include="Renderer\Resource\DX11Context.cpp" />
+    <ClCompile Include="Renderer\Resource\DeviceContext.cpp" />
+    <ClCompile Include="Renderer\Resource\D3D11State.cpp" />
+    <ClCompile Include="Renderer\Resource\RHIUtilities.cpp" />
+    <ClCompile Include="Renderer\Resource\RenderResources.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

@@ -29,10 +29,6 @@
       <Configuration>VulkanD</Configuration>
       <Platform>Win32</Platform>
     </ProjectConfiguration>
-    <ProjectConfiguration Include="VulkanD|x64">
-      <Configuration>VulkanD</Configuration>
-      <Platform>x64</Platform>
-    </ProjectConfiguration>
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>
@@ -126,18 +122,19 @@
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='DX11D|x64'">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
-    <Import Project="EngineDX11D.props" />
+    <Import Project="..\EngineDX11D.props" />
   </ImportGroup>
   <ImportGroup Condition="'$(Configuration)|$(Platform)'=='DX12D|x64'" Label="PropertySheets">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
-    <Import Project="EngineDX12D.props" />
+    <Import Project="..\EngineDX11D.props" />
   </ImportGroup>
   <ImportGroup Condition="'$(Configuration)|$(Platform)'=='VulkanD|x64'" Label="PropertySheets">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="..\EngineDX11D.props" />
   </ImportGroup>
   <ImportGroup Condition="'$(Configuration)|$(Platform)'=='VulkanD|x64'" Label="PropertySheets">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
-    <Import Project="EngineVulkanD.props" />
+    <Import Project="..\EngineDX11D.props" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
@@ -238,7 +235,7 @@
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
       <SDLCheck>true</SDLCheck>
-      <PreprocessorDefinitions>_DEBUG;ENGINECORE_EXPORTS;_WINDOWS;_USRDLL;_DX11;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>_DEBUG;ENGINECORE_EXPORTS;_WINDOWS;_USRDLL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <PrecompiledHeader>Use</PrecompiledHeader>
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
@@ -361,10 +358,8 @@
     <ClInclude Include="EngineAsset\ModelAsset.h" />
     <ClInclude Include="Renderer\PrimitiveInfo.h" />
     <ClInclude Include="Renderer\RendererBaseHeader.h" />
-    <ClInclude Include="Renderer\Resource\D3D11State.h" />
-    <ClInclude Include="Renderer\Resource\RenderResources.h" />
-    <ClInclude Include="Renderer\Resource\RHIUtilities.h" />
     <ClInclude Include="Renderer\Resource\DeviceContext.h" />
+    <ClInclude Include="Renderer\Resource\DeviceResources.h" />
     <ClInclude Include="Common\EngineBaseHeader.h" />
     <ClInclude Include="Common\EngineCommonHeader.h" />
     <ClInclude Include="Common\EngineEnums.h" />
@@ -385,7 +380,7 @@
     <ClInclude Include="framework.h" />
     <ClInclude Include="Renderer\Resource\DX11Context.h" />
     <ClInclude Include="Renderer\Resource\DX12Context.h" />
-    <ClInclude Include="Renderer\Resource\SceneTextures.h" />
+    <ClInclude Include="Renderer\Resource\RenderResource.h" />
     <ClInclude Include="Renderer\Scene.h" />
     <ClInclude Include="Renderer\Resource\VulkanContext.h" />
     <ClInclude Include="World\Actor\Actor.h" />
@@ -431,10 +426,8 @@
     <ClCompile Include="Renderer\MeshProcessor.cpp" />
     <ClCompile Include="EngineAsset\ModelAsset.cpp" />
     <ClCompile Include="Renderer\RenderThread.cpp" />
-    <ClCompile Include="Renderer\Resource\D3D11State.cpp" />
-    <ClCompile Include="Renderer\Resource\RenderResources.cpp" />
-    <ClCompile Include="Renderer\Resource\RHIUtilities.cpp" />
     <ClCompile Include="Renderer\Resource\DeviceContext.cpp" />
+    <ClCompile Include="Renderer\Resource\DeviceResources.cpp" />
     <ClCompile Include="Common\Math\TransformGroup.cpp" />
     <ClCompile Include="Common\Path.cpp" />
     <ClCompile Include="Common\RuntimeContext.cpp" />
@@ -443,6 +436,7 @@
     <ClCompile Include="EngineAsset\Texture.cpp" />
     <ClCompile Include="EngineCore.cpp" />
     <ClCompile Include="Renderer\Resource\DX11Context.cpp" />
+    <ClCompile Include="Renderer\Resource\RenderResource.cpp" />
     <ClCompile Include="World\Actor\Actor.cpp" />
     <ClCompile Include="World\Actor\ActorManager\ActorManager.cpp" />
     <ClCompile Include="World\Actor\Camera\Camera.cpp" />
@@ -486,14 +480,14 @@
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
+    <Import Project="..\packages\directxtk_desktop_win10.2023.9.6.1\build\native\directxtk_desktop_win10.targets" Condition="Exists('..\packages\directxtk_desktop_win10.2023.9.6.1\build\native\directxtk_desktop_win10.targets')" />
     <Import Project="..\packages\Microsoft.Windows.ImplementationLibrary.1.0.230824.2\build\native\Microsoft.Windows.ImplementationLibrary.targets" Condition="Exists('..\packages\Microsoft.Windows.ImplementationLibrary.1.0.230824.2\build\native\Microsoft.Windows.ImplementationLibrary.targets')" />
-    <Import Project="..\packages\directxtk_desktop_win10.2024.10.29.1\build\native\directxtk_desktop_win10.targets" Condition="Exists('..\packages\directxtk_desktop_win10.2024.10.29.1\build\native\directxtk_desktop_win10.targets')" />
   </ImportGroup>
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>
       <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
     </PropertyGroup>
+    <Error Condition="!Exists('..\packages\directxtk_desktop_win10.2023.9.6.1\build\native\directxtk_desktop_win10.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\directxtk_desktop_win10.2023.9.6.1\build\native\directxtk_desktop_win10.targets'))" />
     <Error Condition="!Exists('..\packages\Microsoft.Windows.ImplementationLibrary.1.0.230824.2\build\native\Microsoft.Windows.ImplementationLibrary.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.Windows.ImplementationLibrary.1.0.230824.2\build\native\Microsoft.Windows.ImplementationLibrary.targets'))" />
-    <Error Condition="!Exists('..\packages\directxtk_desktop_win10.2024.10.29.1\build\native\directxtk_desktop_win10.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\directxtk_desktop_win10.2024.10.29.1\build\native\directxtk_desktop_win10.targets'))" />
   </Target>
 </Project>

@@ -91,6 +91,7 @@ namespace Engine
 			virtual void Draw() = 0;
 			ENGINE_API void SetVisible(bool visible) { visible_ = visible; }
 			ENGINE_API bool IsVisible() { return visible_.Value(); }
+			void AddToScene();
 		private:			
 			PropertyBool visible_;
 			//DrawLayer	ComponentDrawLayer;

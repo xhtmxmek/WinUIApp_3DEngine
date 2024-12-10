@@ -30,7 +30,7 @@ namespace winrt::Editor::implementation
     void WorldInfoViewModel::UpdateWorldInfoProxy()
     {
 		auto engine = Engine::GetRenderingEngine();
-		for (int index = 0; index < engine->GetNumActorList(); index++)
+		for (int index = 0; index < engine->GetNumActoRHIst(); index++)
 		{
 			auto nativeActor = engine->GetActor(index);
 			if (nativeActor.expired())

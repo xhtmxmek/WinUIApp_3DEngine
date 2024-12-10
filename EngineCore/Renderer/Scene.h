@@ -16,9 +16,9 @@ namespace Engine
 
 		struct MeshDrawCommand;
 
-		namespace RLI
+		namespace RHI
 		{
-			class RLICommand;
+			class RHICommand;
 		}
 		
 		class Scene

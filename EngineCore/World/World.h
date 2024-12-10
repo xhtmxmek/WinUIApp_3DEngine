@@ -4,11 +4,10 @@
 #include "Common/RuntimeContext.h"
 #include "Actor/ActorManager/ActorManager.h"
 
-
-/*
-Level�� ���� �ֻ��� ����. Actor�� �������ΰ�?
-�ϴ� �����ڷ� �ϰ� Create�� �༮�� ���� �� �پ������� ���丮 Ŭ������ ���� �����
+/*A level is a kind of stage concept. For example, you can think of a world called Yeouido as having 
+a level called IFC Mall and a level called National Assembly Building.
 */
+
 
 namespace Engine
 {
@@ -36,11 +35,6 @@ namespace Engine
 			void Update(float elapsedTime);
 			void Render();
 
-			//���������� ������ �̸��� �����;���. ������ Ű���� ���� �ʿ� ����.
-			/*
-			* ������ü�� ������ UID�� �������Ѵ�. �ߺ��� ID�� ������ ���.
-			* ��� �ּҰ� ������ ���̱� �ϴ�.
-			*/
 			ENGINE_API weak_ptr<Actor> GetActor(const string& name)
 			{
 				return actorManager_->GetActor(name);
@@ -57,14 +51,14 @@ namespace Engine
 				return actorManager_->CreateActor<T>(name);
 			}
 
-			ENGINE_API size_t GetNumActorList()
+			ENGINE_API size_t GetNumActoRHIst()
 			{
-				return actorManager_->GetNumActorList();
+				return actorManager_->GetNumActoRHIst();
 			}
 		private:
 			unique_ptr<ActorManager> actorManager_;
 
-			//unordered_map<const wchar_t*, shared_ptr<Actor>> Actors; //world���� ������ ���͵��� �����Ұ��̰�, ���Ͱ� �߰��ɶ� �������� ���ϱ� ���� Hash�� �������.
+			//unordered_map<const wchar_t*, shared_ptr<Actor>> Actors; 
 			//vector<string> actorNames_; 
 			std::weak_ptr<ACamera> defaultCamera_;
 			

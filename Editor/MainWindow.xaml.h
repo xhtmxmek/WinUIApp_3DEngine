@@ -10,7 +10,7 @@ namespace Engine
 
 namespace SharedTypes
 {
-	struct SwapchainPanelInfo;
+	struct WindowParam;
 }
 
 namespace winrt::Editor::implementation
@@ -33,8 +33,8 @@ namespace winrt::Editor::implementation
 		void OnSwapChainPanelXamlRootChanged(Microsoft::UI::Xaml::XamlRoot const& sender, Microsoft::UI::Xaml::XamlRootChangedEventArgs const& args);
 		void OnSwapChainPanelCompositionScaleChanged(Microsoft::UI::Xaml::Controls::SwapChainPanel const& sender, IInspectable const& args);
 		void OnSwapChainPanel_SizeChanged(Windows::Foundation::IInspectable const& sender, Microsoft::UI::Xaml::SizeChangedEventArgs const& args);
-		void SetSwapchainPanelInfo(const Microsoft::UI::Xaml::Controls::SwapChainPanel& panel, 
-			SharedTypes::SwapchainPanelInfo& swapchainInfo_);
+		void SetWindowParam(const Microsoft::UI::Xaml::Controls::SwapChainPanel& panel, 
+			SharedTypes::WindowParam& swapchainInfo_);
 
 		//void OnSwapChainPanelSizeChanged(IInspectable const& sender, Microsoft::UI::Xaml::SizeChangedEventArgs const& e);
 		//void OnOrientationChanged(Windows::Graphics::Display::DisplayInformation const& sender, IInspectable const& args);

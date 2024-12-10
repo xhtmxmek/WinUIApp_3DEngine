@@ -1,12 +1,10 @@
 #pragma once
-#define WIN_APPS_SDK
-//#include "Common/StepTimer.h"
 #include "DLLDefine.h"
 
 /*
-EngineCore는 최대한 플랫폼 독립적인 코드로 가는것이 목표
-렌더링에 관련된 API는 사용하지만, 운영체제 관련된 코드는 최대한 배제할 예정
-운영체제 관련된 코드(Ex window: winrt)는 엔진 인터페이스쪽에서 처리하는게 맞는거 같음.
+* 
+EngineCore's goal is to make the code as platform-independent as possible.
+APIs related to rendering will be used, but operating system-related code((Ex window: winrt) will be excluded as much as possible.
 */
 
 namespace SharedTypes
@@ -37,9 +35,22 @@ namespace Engine
 #pragma region Initialize
 #ifdef WIN_APPS_SDK
 	public:
-		ENGINE_API void Initialize(const SwapchainPanelInfo& swapchainPanelInfo_);
+		template<typename AppWindowType>
+		ENGINE_API void Initialize(const WindowInitParam<AppWindowType>& initParam)
+		{
+			Initialize_Inner();
+			InitializeCoreThread(initParam);	
+			PostInitialize();
+		}
 	private:
-		void InitializeCoreThread(const SwapchainPanelInfo& swapchainPanelInfo_);
+		void Initialize_Inner();		
+		void InitializeCoreThread();
+
+		template<typename AppWindowType>
+		void PostInitialize(const WindowInitParam<AppWindowType>& initParam)
+		{
+			renderThread->PostInitialize(initParam);
+		}		
 #endif //WIN_APPS_SDK
 #pragma endregion
 
@@ -47,11 +58,6 @@ namespace Engine
 	public:
 		ENGINE_API void UnInitialize();
 #pragma endregion        
-
-#pragma region Windows Dedicated
-	public:
-		ENGINE_API IDXGISwapChain3* GetSwapChain();
-#pragma endregion
 
 #pragma region Active Control
 		ENGINE_API void Run();
@@ -64,8 +70,7 @@ namespace Engine
 		ENGINE_API void OnDeactivated();
 		ENGINE_API void OnSuspending();
 		ENGINE_API void OnResuming();
-		ENGINE_API void OnWindowSizeChanged(SharedTypes::Size windowSize);
-		ENGINE_API void OnSwapchainXamlChanged(const SwapchainPanelInfo& swapchainPanelInfo);
+		ENGINE_API void OnWindowTransformChanged(const WindowParam& WindowParam);		
 
 		ENGINE_API void KeyProcess(SharedTypes::VirtualKey key, bool isPressed);
 		ENGINE_API void PointerProcess(vector<bool> const& pointerState);
@@ -75,7 +80,7 @@ namespace Engine
 		ENGINE_API void PickCheck(Vector2i screenPos, shared_ptr<World::Actor>& pickedActor);
 		ENGINE_API weak_ptr<World::Actor> GetActor(int index);
 		ENGINE_API weak_ptr<World::Actor> GetActor(const string& name);
-		ENGINE_API size_t GetNumActorList();
+		ENGINE_API size_t GetNumActoRHIst();
 #pragma endregion
 
 #pragma region ProjectLoad

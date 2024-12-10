@@ -26,14 +26,14 @@ namespace Engine
 			};
 
 
-			class Buffer
+			class ConstantBuffer : public RHIResource
 			{				
 				//virtual void 
 			};
 
 			class VertexInput
 			{
-				Buffer vertexbuffer;
+				//ConstantBuffer* vertexbuffer;
 				/*
 				* VertexDeclation
 				* -InputVertexElements(D3D11_Input_Element_Desc Array)
@@ -42,7 +42,7 @@ namespace Engine
 				//layoutPointer?
 			};
 
-			class DX11Buffer : public Buffer
+			class DX11ConstnantBuffer : public ConstantBuffer
 			{
 				wil::com_ptr<ID3D11Buffer> rawBuffer;
 			};

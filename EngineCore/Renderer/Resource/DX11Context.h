@@ -133,7 +133,7 @@ namespace Engine
 				void                    UpdateBackBufferSize();                       
 				DXGI_MODE_ROTATION      ComputeDisplayRotation();                       
 
-			private:
+			private:			
 				// Direct3D objects.                
 				wil::com_ptr_nothrow<IDXGIFactory2> _dxgiFactory;
 				wil::com_ptr_nothrow<ID3D11Device3> _d3dDevice;

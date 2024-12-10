@@ -170,13 +170,20 @@ namespace Engine
 		}
 		void MeshProcessor::BuildMeshDrawCommand()
 		{
-			MeshDrawCommand command;
-			command.VertexStream = 
+			//MeshDrawCommand command;
+			//command.VertexStream = 
 			/*
 			* primitive가 scene에 add될때 메시 패스와 머티리얼의 정보를 참조하여 등록되어있는 MeshProcessor 생성함수를 호출. 렌더스테이트 조립.
 			렌더 스테이트는 템플릿으로 호출. Initializer로 RHIState를 만듬. 이미 템플릿 인스턴스가
 			* 이후 이 함수가 호출되고 여기서 meshdrawcommand 조립. 버퍼정보와 셰이더바인딩오브젝트정보 조립. pso 테이블 검색해서 pso 객체 등록.
 			*/			
+
+
+			//RenerState 세팅
+
+			//머티리얼 참조하여 Shader 지정
+
+			//
 		}
 }
 }

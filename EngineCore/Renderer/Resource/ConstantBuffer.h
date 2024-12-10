@@ -9,7 +9,7 @@ namespace Engine
 	{
 		namespace RHI
 		{
-			enum class StaticConstBufferType
+			enum class StaticConstantBufferType
 			{
 				perObject,
 				perCamera,
@@ -18,7 +18,7 @@ namespace Engine
 				bufferType_max,
 			};
 
-			struct ObjectConstBuffFormat
+			struct OpaqueBasePassConstantFormat
 			{
 				Matrix4x4f World;
 				Matrix4x4f WorldViewProj;
@@ -29,7 +29,7 @@ namespace Engine
 				Vector4i TessellationFactor;
 			};
 
-			struct CameraConstBuffFormat
+			struct CameraConstanttBufferFormat
 			{
 				Matrix4x4f View;
 				Matrix4x4f Proj;
@@ -39,7 +39,7 @@ namespace Engine
 				Vector4f minMaxLOD;
 			};
 
-			struct MaterialUniformBuffFormat
+			struct MaterialConstantBufferFormat
 			{
 				Color4f DiffuseColor;
 				Color4f AmbientColor;
@@ -47,7 +47,7 @@ namespace Engine
 				Vector4f HeightMapInfo;
 			};
 
-			struct LightBuffFormat
+			struct LightConstantBufferFormat
 			{
 				Vector4f LightPos[100];
 				Vector4f LightDir[100];
@@ -61,6 +61,8 @@ namespace Engine
 			* depthstencilState는 desc에 따라서 State가 나뉜다. 같은 파라메터 목록을 가지고 있지만 인자값에 따라서 새로운 객체가 생성.
 			* 상수버퍼는 구조체 멤버 자체에 따라서 버퍼를 새로 만드는것. 심지어 내용은 동적으로 업데이트 가능.
 			* Static Resource로 만들어야 되는것은 맞음. 하나의 버퍼를 바인딩해놓고 필요할때 교체하는것이 여러개의 버퍼를 갈아끼는 것보다 저렴함.
+			* 상수버퍼의 사용 시나리오.
+			* TRDGUniformBufferRef<FOpaqueBasePassUniformParameters> CreateOpaqueBasePassUniformBuffer(
 			*/
 
 			template<typename BufferType, typename RHIBufferPrivate, typename RHIBufferPtr>
@@ -71,15 +73,8 @@ namespace Engine
 				{
 					return StaticResource._rhiBuffer;
 				}
-
-				void UpdateConstantBuffer(BufferType* src)
-				{
-					StaticResource._rhiBuffer->Update(src); //안쪽에서 mapping.
-										
-					//RHI::UpdateConstantBuffer()
-				}
 			private:
-				class StaticConstantBuffer : public RenderResource
+				class StaticConstantBufferResource : public RenderResource
 				{
 				public:
 					RHIBufferPrivate _rhiBuffer;
@@ -99,15 +94,67 @@ namespace Engine
 					}
 					
 					BufferType* LockBuffer();
-					void UnLockBuffer();
+					void UnLockBuffer(); 
 				};
 
-				static StaticConstantBuffer StaticResource;
+				static StaticConstantBufferResource StaticResource;
 			};
 
 
+			template<typename BufferType, typename RHIBufferPrivate, typename RHIBufferPtr>
+			typename StaticConstantBuffer<BufferType, RHIBufferPrivate, RHIBufferPtr>::StaticConstantBufferResource StaticConstantBuffer<BufferType, RHIBufferPrivate, RHIBufferPtr>::StaticResource = 
+			StaticConstantBuffer<BufferType, RHIBufferPrivate, RHIBufferPtr>::StaticConstantBufferResource::StaticConstantBufferResource();
 
+			//class ObjectConstantBuffer : public StaticConstantBuffer<
+			//	ObjectConstantBufferFormat,
+			//	shared_ptr<DX11Buffer>,
+			//	weak_ptr<DX11Buffer>>
+			//{
+			//public:
+			//	static weak_ptr<RHIDepthStencilState>& CreateRHI()
+			//	{
+			//		DepthStencilDesc depthDesc(enableDepthWrite,
+			//			depthTest,
+			//			enableFrontFaceStencil,
+			//			frontFaceStencilTest,
+			//			frontFaceStenilFailStencilOp,
+			//			frontFaceDepthFailStencilOp,
+			//			frontFacePassStencilOp,
+			//			enableBackFaceStencil,
+			//			backFaceStencilTest,
+			//			backFaceStenilFailStencilOp,
+			//			backFaceDepthFailStencilOp,
+			//			backFacePassStencilOp,
+			//			stencilReadMask,
+			//			stencilWriteMask
+			//		);
 
+			//		//Called When Rhi resources initiailize. there is only one static state at same template.
+			//		return RHI::CreateRHIDepthStencilState(depthDesc);
+			//	}
+			//};
+
+			weak_ptr<ConstantBuffer> CreateOpaqueBasePassConstantBuffer()
+			{
+				//OpaqueBasePassConstantFormat& basePassFormat = *GraphBuilder.AllocParameters<FOpaqueBasePassUniformParameters>();
+				//OpaqueBasePassConstantFormat& basePassFormat = //RHICreateOrGetOpaqueBaseConstantBuffer();or
+				OpaqueBasePassConstantFormat& basePassFormat = GetUniformBuffer<OpaqueBasePassConstantFormat>(); //안쪽에서 context->map까지 호출
+				//basePassFormat.InverseWorld = world;
+				basePassFormat.IsSkinned = Vector4f(false, false, false, false);
+				
+
+				//const FRDGSystemTextures& SystemTextures = FRDGSystemTextures::Get(GraphBuilder);
+
+				//UniformBuffer 구조체를 채운뒤에 deviceResource에 memcpy 하는게 낫나? 아니면 다이렉트로 rhiresourceHandle을 얻어온뒤에 변경하는게 낫나?
+
+				//// Forward shading
+				//{
+				//	BasePassParameters.UseForwardScreenSpaceShadowMask = 0;
+				//	BasePassParameters.ForwardScreenSpaceShadowMaskTexture = SystemTextures.White;
+				//	BasePassParameters.IndirectOcclusionTexture = SystemTextures.White;
+				//	BasePassParameters.ResolvedSceneDepthTexture = SystemTextures.White;
+			};
+		}
 
 
 			//class ConstantBufferManager

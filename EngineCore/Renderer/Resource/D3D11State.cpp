@@ -11,7 +11,7 @@ namespace Engine
 		namespace RHI
 		{
 			shared_ptr<RHIDepthStencilState> DX11Context::CreateRHIDepthStencilState(const DepthStencilDesc& desc)
-			{
+			{			
 				D3D11_DEPTH_STENCIL_DESC d3d11Desc;
 				d3d11Desc.DepthEnable = desc.depthTest != ComparisonFunc::Always || desc.enableDepthWrite;
 				d3d11Desc.DepthWriteMask = desc.enableDepthWrite ? D3D11_DEPTH_WRITE_MASK_ALL : D3D11_DEPTH_WRITE_MASK_ZERO;
@@ -31,7 +31,8 @@ namespace Engine
 				d3d11Desc.BackFace.StencilDepthFailOp = GetD3D11Description(desc.backFaceDepthFailStencilOp);
 
 				shared_ptr<D3D11DepthStencilState> depthstencilState = make_shared<D3D11DepthStencilState>();				
-				_d3dDevice->CreateDepthStencilState(&d3d11Desc, depthstencilState->_nativeResource.put());
+				_d3dDevice->CreateDepthStencilState(&d3d11Desc, depthstencilState->_nativeResource.put());				
+				
 				return depthstencilState;
 			}
 		}

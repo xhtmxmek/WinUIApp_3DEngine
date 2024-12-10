@@ -92,6 +92,11 @@ namespace Engine
 			};
 
 
+			
+			/*template is instanced where it used, when compile time. so we don need call any creator, it is already enough initilize static resource below.
+			* 
+			*/
+
 			template<typename StateType, typename RHIStatePrivate, typename RHIRenderStatePtr>
 			class StaticState
 			{
@@ -229,7 +234,7 @@ namespace Engine
 					);
 
 					//Called When Rhi resources initiailize. there is only one static state at same template.
-					return RHI::CreateRHIDepthStencilState();
+					return RHI::CreateRHIDepthStencilState(depthDesc);
 				}
 			};
 		}

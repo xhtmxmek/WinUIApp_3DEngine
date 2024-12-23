@@ -67,6 +67,8 @@ namespace Engine
 			{
 				return properties_.size();
 			}
+
+			virtual void PostInitialize() = 0;
 		protected:
 			void AddProperty(PropertyBase* newProperty);
 			Level::Actor* owner_;
@@ -90,8 +92,7 @@ namespace Engine
 			//DrawableComponent(const std::string& name);
 			virtual void Draw() = 0;
 			ENGINE_API void SetVisible(bool visible) { visible_ = visible; }
-			ENGINE_API bool IsVisible() { return visible_.Value(); }
-			void AddToScene();
+			ENGINE_API bool IsVisible() { return visible_.Value(); }			
 		private:			
 			PropertyBool visible_;
 			//DrawLayer	ComponentDrawLayer;

@@ -40,6 +40,7 @@ namespace Engine
 			virtual void Tick(float elapsedTime) final;
 			virtual void Draw() final;
 			//void meshType(PropertyStaticMesh::MeshType meshType);
+			virtual void PostInitialize() override;
 		private:			
 			std::unique_ptr<DirectX::GeometricPrimitive> staticMeshShape_;			
 			PropertyStaticMesh meshType_;

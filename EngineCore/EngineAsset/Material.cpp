@@ -5,7 +5,7 @@
 
 namespace Engine
 {
-	namespace EngineAsset
+	namespace Asset
 	{
 		Material::Material()
 		{			

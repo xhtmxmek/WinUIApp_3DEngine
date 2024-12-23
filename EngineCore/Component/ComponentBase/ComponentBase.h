@@ -4,8 +4,6 @@
 #include "Common/Math/TransformGroup.h"
 #include "../ComponentTypes.h"
 
-//Component�� �̸��� �߰��Ǵ°��� �������� �ƴϱ⿡, �����ϰ��ִ� ��� ����� ���Ǵ°� ��¿�����°Ͱ���
-//Component���� type�� �ʿ� ������ ���ֱ�. �ʿ��ϸ� �߰��ϱ�.
 namespace Engine
 {
 	namespace World
@@ -42,7 +40,7 @@ namespace Engine
 
 			ENGINE_API SceneComponentType ComponentType();
 
-			ENGINE_API shared_ptr<ComponentBase> GetParent() 
+			ENGINE_API weak_ptr<ComponentBase> GetParent() 
 			{ 
 				return parent_; 
 			}
@@ -71,11 +69,11 @@ namespace Engine
 			virtual void PostInitialize() = 0;
 		protected:
 			void AddProperty(PropertyBase* newProperty);
-			Level::Actor* owner_;
+			weak_ptr<World::Actor> owner_;
 			string typeName_;
 		private:			
 			string name_;
-			shared_ptr<Component::ComponentBase> parent_;
+			weak_ptr<Component::ComponentBase> parent_;
 			list<shared_ptr<ComponentBase>> children_;
 			Math::TransformGroup transform_;
 			bool enable_;
@@ -90,9 +88,9 @@ namespace Engine
 			//RUNTIME_ABSTRACT_SUB_CLASS(DrawableComponent, ComponentBase)
 			ENGINE_API DrawableComponent(const std::string& name);
 			//DrawableComponent(const std::string& name);
-			virtual void Draw() = 0;
 			ENGINE_API void SetVisible(bool visible) { visible_ = visible; }
-			ENGINE_API bool IsVisible() { return visible_.Value(); }			
+			ENGINE_API bool IsVisible() { return visible_.Value(); }
+			virtual void AddPrimitiveToScene() = 0;
 		private:			
 			PropertyBool visible_;
 			//DrawLayer	ComponentDrawLayer;

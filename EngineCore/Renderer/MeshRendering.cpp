@@ -1,6 +1,6 @@
 #include "pch.h"
 #include "RendererBaseHeader.h"
-#include "MeshProcessor.h"
+#include "MeshRendering.h"
 
 namespace Engine
 {
@@ -170,20 +170,14 @@ namespace Engine
 		}
 		void MeshProcessor::BuildMeshDrawCommand()
 		{
-			//MeshDrawCommand command;
-			//command.VertexStream = 
 			/*
-			* primitive가 scene에 add될때 메시 패스와 머티리얼의 정보를 참조하여 등록되어있는 MeshProcessor 생성함수를 호출. 렌더스테이트 조립.
-			렌더 스테이트는 템플릿으로 호출. Initializer로 RHIState를 만듬. 이미 템플릿 인스턴스가
-			* 이후 이 함수가 호출되고 여기서 meshdrawcommand 조립. 버퍼정보와 셰이더바인딩오브젝트정보 조립. pso 테이블 검색해서 pso 객체 등록.
-			*/			
-
-
-			//RenerState 세팅
-
-			//머티리얼 참조하여 Shader 지정
-
-			//
+			* primitive가 scene에 add될때 메시 패스와 머티리얼의 정보를 참조하여 테이블에 등록되어있는 MeshProcessor 생성함수를 호출. 렌더스테이트 조립.
+			-렌더 스테이트는 템플릿으로 호출. 프로그램 시작시 클래스 템플릿의 static rhi를 통해 글로벌 테이블에 리소스 정보를 등록. rliResource vector에 등록
+			-이후 프로그램 초기화시 resourceVector 돌면서 rli Initialize.
+			-static 멤버이기때문에 최초 초기화 될때 비용만 존재. 동일한 클래스 템플릿들은 동일한 RLI 리소스 공유하고 있다.
+			* 이후 이 함수가 호출되고 여기서 meshdrawcommand 조립. 버퍼정보와 셰이더바인딩오브젝트정보(VertexShader PixelShader, uniform 정보 등) 조립. pso 테이블 검색해서 pso 객체 등록.
+		
+			*/
 		}
 }
 }

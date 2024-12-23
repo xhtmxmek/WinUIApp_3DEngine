@@ -6,29 +6,29 @@ namespace Engine
 	{
 		class MeshDrawer;
 	}
-	namespace EngineAsset
+	namespace Asset
 	{
 		class Texture;
 
 		/*
-		* assetÀÌ animationÀ» °¡Áö°í ÀÖÀ» ¼ö ÀÖÀ½.
-		* µ¿ÀÏÇÑ º»±¸Á¶¸¦ °¡Áø ¾Ö´Ï¸ŞÀÌ¼Ç¿¡ ´ëÇØ ¿©·¯ ¾Ö´Ï¸ŞÀÌ¼Ç ¸ÅÇÎ °¡´É.
-		* ±×·¯³ª ±×·± ±â´É Â¥±â¿¡´Â ³Ê¹« ¿À·¡°É¸². ±×³É ¾Ö¼Âº°·Î ·ÎµåÇÏ´Â°É·Î.
-		* Áö±İ ±¸Á¶´Â ¾Ö´Ï¸ŞÀÌ¼ÇÀÌ¶û ¸Ş½¬ ÀüºÎ´Ù ÀÓÆ÷Æ®ÇÏ´Â ±¸Á¶. ¿ø·¡´Â ¼±ÅÃÀûÀ¸·Î ·ÎµåÇÒ¼öÀÖ¾î¾ßÇÏ´Âµ¥
-		* ±×·± ±â´É ±¸ÇöÇÏ±â¿¡´Â Ã¼·ÂÀÌ¾ÈµÊ
-		* aiMesh¿Í aiMaterialÀ» ±×´ë·Î »ç¿ëÇÒ¼ö´Â ¾øÀ½. Mesh´Â dx/opengl ¸®¼Ò½º¸¦ Æ÷ÇÔÇØ¾ßÇÔ
-		* material ¿ª½Ã ¸¶Âù°¡Áö. aiMesh¸¦ Æ÷ÀÎÅÍ·Î °¡Áö°í ÀÖ°Å³ª 
+		* assetì´ animationì„ ê°€ì§€ê³  ìˆì„ ìˆ˜ ìˆìŒ.
+		* ë™ì¼í•œ ë³¸êµ¬ì¡°ë¥¼ ê°€ì§„ ì• ë‹ˆë©”ì´ì…˜ì— ëŒ€í•´ ì—¬ëŸ¬ ì• ë‹ˆë©”ì´ì…˜ ë§¤í•‘ ê°€ëŠ¥.
+		* ê·¸ëŸ¬ë‚˜ ê·¸ëŸ° ê¸°ëŠ¥ ì§œê¸°ì—ëŠ” ë„ˆë¬´ ì˜¤ë˜ê±¸ë¦¼. ê·¸ëƒ¥ ì• ì…‹ë³„ë¡œ ë¡œë“œí•˜ëŠ”ê±¸ë¡œ.
+		* ì§€ê¸ˆ êµ¬ì¡°ëŠ” ì• ë‹ˆë©”ì´ì…˜ì´ë‘ ë©”ì‰¬ ì „ë¶€ë‹¤ ì„í¬íŠ¸í•˜ëŠ” êµ¬ì¡°. ì›ë˜ëŠ” ì„ íƒì ìœ¼ë¡œ ë¡œë“œí• ìˆ˜ìˆì–´ì•¼í•˜ëŠ”ë°
+		* ê·¸ëŸ° ê¸°ëŠ¥ êµ¬í˜„í•˜ê¸°ì—ëŠ” ì²´ë ¥ì´ì•ˆë¨
+		* aiMeshì™€ aiMaterialì„ ê·¸ëŒ€ë¡œ ì‚¬ìš©í• ìˆ˜ëŠ” ì—†ìŒ. MeshëŠ” dx/opengl ë¦¬ì†ŒìŠ¤ë¥¼ í¬í•¨í•´ì•¼í•¨
+		* material ì—­ì‹œ ë§ˆì°¬ê°€ì§€. aiMeshë¥¼ í¬ì¸í„°ë¡œ ê°€ì§€ê³  ìˆê±°ë‚˜ 
 		*/
-		class ModelAsset
+		class Mesh
 		{
 		public:
-			ModelAsset();
-			~ModelAsset();
+			Mesh();
+			~Mesh();
 
 			bool Load(const string& fileName);
 			void DrawNode();
 			void DrawNodeInternal(aiNode* piNode, const aiMatrix4x4& piMatrix);
-			void Close();
+			void Unload();
 		private:
 			void UpdateAnimByTime();
 			void processNode(aiNode* node, const aiScene* scene);

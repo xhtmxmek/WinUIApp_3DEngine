@@ -3,23 +3,23 @@
 #include "Material.h"
 #include "Texture.h"
 #include "Animation/SceneAnimator.h"
-#include "ModelAsset.h"
+#include "Mesh.h"
 #include <assimp\Importer.hpp>
 #include <assimp\postprocess.h>
 
 namespace Engine
 {
-	namespace EngineAsset
+	namespace Asset
 	{
-		ModelAsset::ModelAsset()
+		Mesh::Mesh()
 		{
 		}
 
-		ModelAsset::~ModelAsset()
+		Mesh::~Mesh()
 		{
 		}
 
-		bool ModelAsset::Load(const string& fileName)
+		bool Mesh::Load(const string& fileName)
 		{
 			Assimp::Importer importer;
 
@@ -43,10 +43,10 @@ namespace Engine
 			return false;
 		}
 
-		void ModelAsset::UpdateAnimByTime()
+		void Mesh::UpdateAnimByTime()
 		{
 			//anim update
-//time¿ª æÓ∂ª∞‘ «“∞Õ¿Œ∞°? ΩÃ±€≈Ê¿ª ∏∏µÈæÓº≠ Ω√∞£¿ª æÚæÓøÕæﬂ«“∞Õ ∞∞¥Ÿ.
+//timeÏùÑ Ïñ¥ÎñªÍ≤å Ìï†Í≤ÉÏù∏Í∞Ä? Ïã±Í∏ÄÌÜ§ÏùÑ ÎßåÎì§Ïñ¥ÏÑú ÏãúÍ∞ÑÏùÑ ÏñªÏñ¥ÏôÄÏïºÌï†Í≤É Í∞ôÎã§.
 			static double lastPlaying = 0.;
 			//g_dCurrent += clock() / double(CLOCKS_PER_SEC) - lastPlaying;
 
@@ -64,11 +64,11 @@ namespace Engine
 			//lastPlaying = g_dCurrent;
 		}
 
-		void ModelAsset::DrawNode()
+		void Mesh::DrawNode()
 		{
 			/*
-			* primitiveComponent.Draw∑Œ ∏Ì∑…¿Ã µÈæÓø¿∏È, ¿⁄Ω≈¿Ã ∞°¡ˆ∞Ì ¿÷¥¬ modelAsset¿ª draw«—¥Ÿ.
-			* ∫¥∑ƒ ∑ª¥ı∏µ¿Ã on¿œ∂ßøÕ off¿œ∂ß∏¶ ±∏∫–«—¥Ÿ.(ƒø∏«µÂ ∏ÆΩ∫∆Æ ∏∏µÈ±‚¿« ø©∫Œ)
+			* primitiveComponent.DrawÎ°ú Î™ÖÎ†πÏù¥ Îì§Ïñ¥Ïò§Î©¥, ÏûêÏã†Ïù¥ Í∞ÄÏßÄÍ≥† ÏûàÎäî MeshÏùÑ drawÌïúÎã§.
+			* Î≥ëÎ†¨ Î†åÎçîÎßÅÏù¥ onÏùºÎïåÏôÄ offÏùºÎïåÎ•º Íµ¨Î∂ÑÌïúÎã§.(Ïª§Îß®Îìú Î¶¨Ïä§Ìä∏ ÎßåÎì§Í∏∞Ïùò Ïó¨Î∂Ä)
 			* 
 			*/
 
@@ -78,13 +78,13 @@ namespace Engine
 				DrawNodeInternal(importedScene_->mRootNode, importedScene_->mRootNode->mTransformation);
 		}
 
-		void ModelAsset::DrawNodeInternal(aiNode* piNode, const aiMatrix4x4& piMatrix)
+		void Mesh::DrawNodeInternal(aiNode* piNode, const aiMatrix4x4& piMatrix)
 		{
 			aiMatrix4x4 aiMe = animator_->GetGlobalTransform(piNode);
 
 			aiMe.Transpose();
 			aiMe *= piMatrix;
-			//WorldMatrix∑Œ ºº∆√
+			//WorldMatrixÎ°ú ÏÑ∏ÌåÖ
 
 			for (unsigned int i = 0; i < piNode->mNumMeshes; ++i)
 			{
@@ -97,7 +97,7 @@ namespace Engine
 				DrawNodeInternal(piNode->mChildren[i], piMatrix);
 		}
 
-		void ModelAsset::processNode(aiNode* srcNode, const aiScene* scene)
+		void Mesh::processNode(aiNode* srcNode, const aiScene* scene)
 		{
 			for (UINT i = 0; i < srcNode->mNumMeshes; i++) {
 				aiMesh* srcMesh = scene->mMeshes[srcNode->mMeshes[i]];
@@ -110,9 +110,9 @@ namespace Engine
 			}
 		}
 
-		shared_ptr<Renderer::MeshDrawer> ModelAsset::processMesh(aiMesh* srcMesh, const aiScene* scene)
+		shared_ptr<Renderer::MeshDrawer> Mesh::processMesh(aiMesh* srcMesh, const aiScene* scene)
 		{
-			//ai skeleton¿Ã ¡∏¿Á«œ∏È ∞¬∏¶ Ω·∫∏±‚.
+			//ai skeletonÏù¥ Ï°¥Ïû¨ÌïòÎ©¥ Í±îÎ•º Ïç®Î≥¥Í∏∞.
 			auto out = make_shared<Renderer::MeshDrawer>();
 			out->SetupMesh(srcMesh);
 
@@ -187,7 +187,7 @@ namespace Engine
 			return out;
 		}
 
-		std::weak_ptr<Texture> ModelAsset::LoadMaterialTexture(aiMaterial* mat, aiTextureType type, const aiScene* scene)
+		std::weak_ptr<Texture> Mesh::LoadMaterialTexture(aiMaterial* mat, aiTextureType type, const aiScene* scene)
 		{
 			aiString textureName;
 			mat->GetTexture(type, 0, &textureName);

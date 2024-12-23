@@ -357,8 +357,8 @@
     <ClInclude Include="Common\Utility.h" />
     <ClInclude Include="GameThread.h" />
     <ClInclude Include="PhysicsThread.h" />
-    <ClInclude Include="Renderer\MeshProcessor.h" />
-    <ClInclude Include="EngineAsset\ModelAsset.h" />
+    <ClInclude Include="Renderer\MeshRendering.h" />
+    <ClInclude Include="EngineAsset\Mesh.h" />
     <ClInclude Include="Renderer\PrimitiveInfo.h" />
     <ClInclude Include="Renderer\RendererBaseHeader.h" />
     <ClInclude Include="Renderer\Resource\D3D11State.h" />
@@ -428,8 +428,8 @@
     <ClCompile Include="Animation\AnimEvaluator.cpp" />
     <ClCompile Include="Animation\SceneAnimator.cpp" />
     <ClCompile Include="GameThread.cpp" />
-    <ClCompile Include="Renderer\MeshProcessor.cpp" />
-    <ClCompile Include="EngineAsset\ModelAsset.cpp" />
+    <ClCompile Include="Renderer\MeshRendering.cpp" />
+    <ClCompile Include="EngineAsset\Mesh.cpp" />
     <ClCompile Include="Renderer\RenderThread.cpp" />
     <ClCompile Include="Renderer\Resource\D3D11State.cpp" />
     <ClCompile Include="Renderer\Resource\RenderResources.cpp" />

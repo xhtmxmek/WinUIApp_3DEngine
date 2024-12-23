@@ -2,7 +2,7 @@
 
 namespace Engine
 {
-	namespace EngineAsset
+	namespace Asset
 	{
 		class Texture;
 

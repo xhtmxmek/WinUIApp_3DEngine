@@ -25,6 +25,14 @@ namespace Engine
 			Mesh();
 			~Mesh();
 
+			/*
+			* mesh를 로드하면 aiScene에 기본적인 메시 정보들이 들어가 있다. submesh부터 vertex와 index, material, texture등 갖가지 정보 다 들어있음.
+			* 1) aiScene을 들고 있고 이거에 맞춰서 리소스 클래스를 생성할 것인가? 이렇게 되면 머티리얼 매니저에서도 aiScene의 material을 참조, Mesh Table에서도 aiScene의 Mesh를 참조. 
+			* 여러가지 리소스 매니저가 aiScene의 서브 리소스를  참조해야 됨. 이런 형태를 가져가고 싶지는 않음.
+			* 2)자체 리소스 포맷을 어차피 만들거임. Mesh든 texture든. 그렇다면 scene을 자체 리소스 포맷에 맞게 한번더 정리하면됨. 이렇게 되면 리소스를 두번 읽어들이는 형태가 되기 때문에
+			* 로딩 성능면에서는 떨어질지라도 관리와 코딩 측면에서는 더 유리함.
+			*/
+
 			bool Load(const string& fileName);
 			void DrawNode();
 			void DrawNodeInternal(aiNode* piNode, const aiMatrix4x4& piMatrix);

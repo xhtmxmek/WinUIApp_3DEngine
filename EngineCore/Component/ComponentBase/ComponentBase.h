@@ -85,15 +85,12 @@ namespace Engine
 		class DrawableComponent : public ComponentBase
 		{
 		public:
-			//RUNTIME_ABSTRACT_SUB_CLASS(DrawableComponent, ComponentBase)
 			ENGINE_API DrawableComponent(const std::string& name);
-			//DrawableComponent(const std::string& name);
 			ENGINE_API void SetVisible(bool visible) { visible_ = visible; }
 			ENGINE_API bool IsVisible() { return visible_.Value(); }
 			virtual void AddPrimitiveToScene() = 0;
 		private:			
 			PropertyBool visible_;
-			//DrawLayer	ComponentDrawLayer;
 		};
 	}	
 }

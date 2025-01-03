@@ -25,11 +25,14 @@ namespace Engine
 			{
 			};
 
-
-			class ConstantBuffer : public RHIResource
-			{				
-				//virtual void 
+			class RHIBuffer : public RHIResource
+			{
 			};
+
+			class VertexLayout : public RHIResource
+			{
+			};
+
 
 			class VertexInput
 			{

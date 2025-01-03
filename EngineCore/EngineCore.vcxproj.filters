@@ -75,6 +75,7 @@
     <ClInclude Include="Renderer\Resource\D3D11State.h" />
     <ClInclude Include="Renderer\Resource\RenderResources.h" />
     <ClInclude Include="Renderer\Resource\RHIUtilities.h" />
+    <ClInclude Include="Renderer\Resource\VertexBuffers.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="EngineCore.cpp" />
@@ -120,6 +121,7 @@
     <ClCompile Include="Renderer\Resource\D3D11State.cpp" />
     <ClCompile Include="Renderer\Resource\RHIUtilities.cpp" />
     <ClCompile Include="Renderer\Resource\RenderResources.cpp" />
+    <ClCompile Include="Renderer\Resource\VertexBuffers.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

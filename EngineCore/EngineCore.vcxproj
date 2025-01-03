@@ -386,6 +386,7 @@
     <ClInclude Include="Renderer\Resource\DX11Context.h" />
     <ClInclude Include="Renderer\Resource\DX12Context.h" />
     <ClInclude Include="Renderer\Resource\SceneTextures.h" />
+    <ClInclude Include="Renderer\Resource\VertexBuffers.h" />
     <ClInclude Include="Renderer\Scene.h" />
     <ClInclude Include="Renderer\Resource\VulkanContext.h" />
     <ClInclude Include="World\Actor\Actor.h" />
@@ -443,6 +444,7 @@
     <ClCompile Include="EngineAsset\Texture.cpp" />
     <ClCompile Include="EngineCore.cpp" />
     <ClCompile Include="Renderer\Resource\DX11Context.cpp" />
+    <ClCompile Include="Renderer\Resource\VertexBuffers.cpp" />
     <ClCompile Include="World\Actor\Actor.cpp" />
     <ClCompile Include="World\Actor\ActorManager\ActorManager.cpp" />
     <ClCompile Include="World\Actor\Camera\Camera.cpp" />

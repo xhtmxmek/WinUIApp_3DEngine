@@ -6,10 +6,6 @@ namespace Engine
 {
 	namespace Asset
 	{
-		//class StaticMesh : 
-		//{
-
-		//};
 		class Mesh;
 	}
 	namespace Component
@@ -17,24 +13,10 @@ namespace Engine
 		class PropertyStaticMesh : public PropertyPath
 		{
 		public:
-			//enum MeshType
-			//{
-			//	Cube = 0,
-			//	Sphere,
-			//	Cylinder,
-			//	Cone,
-			//};
-
 			PropertyStaticMesh(std::wstring const& name)
 				:PropertyPath(name, L"staticMesh")
 			{
 			}
-
-			//PropertyStaticMesh& operator=(MeshType type)
-			//{
-			//	PropertyEnum::operator=(static_cast<int>(type));
-			//	return *this;
-			//}
 		};
 
 		class StaticMeshComponent : public DrawableComponent
@@ -51,6 +33,7 @@ namespace Engine
 		private:			
 			shared_ptr<Asset::Mesh> _staticMesh;
 			std::string _assetDirectory;
+			bool deformable;
 		};
 	}
 }

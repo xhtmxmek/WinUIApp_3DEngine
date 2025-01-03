@@ -1,5 +1,4 @@
 #include "pch.h"
-#include "Renderer/MeshDrawer.h"
 #include "Material.h"
 #include "Texture.h"
 #include "Animation/SceneAnimator.h"
@@ -112,7 +111,6 @@ namespace Engine
 
 		shared_ptr<Renderer::MeshDrawer> Mesh::processMesh(aiMesh* srcMesh, const aiScene* scene)
 		{
-			//ai skeleton이 존재하면 걔를 써보기.
 			auto out = make_shared<Renderer::MeshDrawer>();
 			out->SetupMesh(srcMesh);
 
@@ -124,10 +122,9 @@ namespace Engine
 			if (scene->HasMaterials())
 			{
 				auto srcMat = scene->mMaterials[srcMesh->mMaterialIndex];
-				//property get
+
 				if (!srcMat)
-				{
-					//error log
+				{					
 					return nullptr;
 				}
 								

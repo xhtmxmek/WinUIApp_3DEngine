@@ -80,7 +80,6 @@ namespace Engine
 			AddProperty(&visible_);
 			visible_.BindChangedEvent([this](PropertyBase* base)
 				{
-					int k = 5;
 				});
 		}
 	}
